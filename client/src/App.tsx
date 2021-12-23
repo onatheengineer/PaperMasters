@@ -17,14 +17,15 @@ import GetMinted from "./pages/GetMinted";
 import ArtistWork from "./pages/ArtistWork";
 import AboutUs from "./pages/AboutUs";
 
-const web3 = new Web3(Web3.givenProvider || "http://localhost:8545");
-web3.eth.getAccounts().then(console.log);
-
 const { SubMenu } = Menu;
 const { Header, Content, Footer, Sider } = Layout;
 
 const App:FunctionComponent=()=>{
+    console.log("WEB3 Test");
+    console.log(Web3.givenProvider)
 
+    const web3 = new Web3(Web3.givenProvider || "http://localhost:8545");
+    console.log(web3);
     return (
     <BrowserRouter>
         <Layout>
