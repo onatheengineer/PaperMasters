@@ -1,4 +1,4 @@
 # MintIdentityTPM
 Establishing legitimacy on the Blockchain
 
-Let's go this
+Let's do this
