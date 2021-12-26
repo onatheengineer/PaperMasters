@@ -1,4 +1,4 @@
- {
+{
   "name": "truffletruffle",
   "version": "1.0.0",
   "description": "",
@@ -7,7 +7,10 @@
     "test": "test"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "./node_modules/.bin/truffle test || True",
+    "compile": "./node_modules/.bin/truffle compile",
+    "migrate": "./node_modules/.bin/truffle migrate",
+    "migrate-reset": "./node_modules/.bin/truffle migrate --reset"
   },
   "author": "",
   "license": "ISC",
