@@ -6,31 +6,33 @@ const MintIdentity = artifacts.require("MintIdentity");
  */
 contract("MintIdentity", (accounts) => {
     //console.log(accounts);
-    it("should be the same name", () => {
-        //console.log("is this working?");
-        return MintIdentity.deployed()
-            .then(instance => {
-                //console.log(instance);
-                return instance.name();
-            })
-            .then((namename) => {
-                //console.log(namename)
-                assert.equal(
-                    namename, "andrew", "not the correct name");
-            })
-    })
+    describe("Testing Constructor",() => {
+        it("should be the same name", () => {
+            //console.log("is this working?");
+            return MintIdentity.deployed()
+                .then(instance => {
+                    //console.log(instance);
+                    return instance.name();
+                })
+                .then((namename) => {
+                    //console.log(namename)
+                    assert.equal(
+                        namename, "andrew", "not the correct name");
+                })
+        })
 
-    it("should be the same description", () => {
-        //console.log("is this working?");
-        return MintIdentity.deployed()
-            .then(instance => {
-                //console.log(instance);
-                return instance.descr();
-            })
-            .then((descrdescr) => {
-                //console.log(descrdescr)
-                assert.equal(
-                    descrdescr, "descr with andy", "not the correct name");
-            })
+        it("should be the same description", () => {
+            //console.log("is this working?");
+            return MintIdentity.deployed()
+                .then(instance => {
+                    //console.log(instance);
+                    return instance.descr();
+                })
+                .then((descrdescr) => {
+                    //console.log(descrdescr)
+                    assert.equal(
+                        descrdescr, "descr with andy", "not the correct name");
+                })
+        })
     })
 });

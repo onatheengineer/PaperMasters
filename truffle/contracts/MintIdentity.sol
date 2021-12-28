@@ -1,4 +1,3 @@
-8 l // SPDX-License-Identifier: MIT
 pragma solidity >=0.4.22 <0.9.0;
 
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
@@ -6,11 +5,12 @@ import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 contract MintIdentity {
 
     struct  Identity  {
-        string dna;
+        string identity;
         string firstname;
         string lastname;
         string organization;
         string slogan;
+        string alias;
         string description;
         string url;
         string bio;
@@ -19,7 +19,6 @@ contract MintIdentity {
         bool valid;
         uint validdate;
         uint validationscore;
-
     }
 
     constructor() {
@@ -40,10 +39,19 @@ contract MintIdentity {
         string memory descr,
         string memory url,
         string memory bio) internal {
-
-        // Create the Token and get the Id
-        dna = abi.encode();
-        uint256 tokenId = Identity(first, last, org, slogan, descr, url, bio, block.timestamp, block.timestamp, false, 0,0 );
+            uint256 tokenId = Identity('test',
+                first,
+                last,
+                org,
+                slogan,
+                descr,
+                url,
+                bio,
+                block.timestamp,
+                block.timestamp,
+                false,
+                0,
+                0 );
     }
 
 }
