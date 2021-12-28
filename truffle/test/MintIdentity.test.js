@@ -1,10 +1,11 @@
 const MintIdentity = artifacts.require("MintIdentity");
-contract("MintIdentity", async accounts => {
+
+contract("MintIdentity",  accounts => {
     it("Name should be a value failed force",async () => {
         return MintIdentity.deployed()
             .then(instance => {return instance.name()})
             .then(name => {
-                assert.equal(name,"this test test one","Name Failed to Set");
+                assert.equal(name,"this test test two","Name Failed to Set");
             })
     })
 
