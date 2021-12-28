@@ -15,6 +15,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "truffle": "^5.4.26"
+    "@openzeppelin/contracts": "^4.4.1",
+    "chai": "^4.3.4",
+    "truffle": "^5.1.65"
   }
 }
