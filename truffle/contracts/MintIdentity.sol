@@ -1,16 +1,17 @@
 // SPDX-License-Identifier: MIT
 pragma solidity >=0.4.22 <0.9.0;
 
-import "@openzeppelin/contracts/access/Ownable.sol";
-import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
-import "@openzeppelin/contracts/utils/Counters.sol";
+import "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol";
+import "@openzeppelin/contracts-upgradeable/token/ERC721/ERC721Upgradeable.sol";
+import "@openzeppelin/contracts-upgradeable/utils/CountersUpgradeable.sol";
 
-contract MintIdentity is ERC721, Ownable {
-    using Counters for Counters.Counter;
-    Counters.Counter private _tokenIds;
+
+contract MintIdentity is ERC721Upgradeable , OwnableUpgradeable  {
+    using CountersUpgradeable for CountersUpgradeable.Counter;
+    CountersUpgradeable.Counter private _tokenIds;
 
     struct Identity {
-        bytes32 identity;
+        bytes32 uniqueid;
         string firstname;
         string lastname;
         string aka;
@@ -30,11 +31,20 @@ contract MintIdentity is ERC721, Ownable {
 
     string private _currentBaseURI;
 
-    constructor() ERC721("MintIdentity", "MINTIDENTITY") {
-        setBaseURI("https://papermasters.io/mintidentity/");
 
+
+
+    function initialize() public initializer {
+        __ERC721_init("MintIdentity", "IDENT");
+        setBaseURI("https://papermasters.io/mintidentity/");
         //mint Ramona Andrew and kids
+        mintIdentity("Ramona","Niederhausern","Aka Awesome","Awesome", "All Things Wave", "CEO", "pm", "Engineer");
+        mintIdentity("Andrew","Niederhausern","Aka Super","Super", "All Things Wave", "CTO", "pm", "Software");
+        mintIdentity("Nautica","Niederhausern","Aka Nothing","little", "Girl Power", "", "", "Engineer");
+        mintIdentity("Nautica","Niederhausern","Aka Nothing","little", "Girl Power", "", "", "Engineer");
     }
+
+
 
     function setBaseURI(string memory baseURI) public onlyOwner() {
         _currentBaseURI = baseURI;
@@ -44,7 +54,7 @@ contract MintIdentity is ERC721, Ownable {
         return _currentBaseURI;
     }
 
-    function createIdentity(
+    function createUniqueId(
         string memory first,
         string memory last,
         string memory aka,
@@ -57,7 +67,7 @@ contract MintIdentity is ERC721, Ownable {
     }
 
     function mintIdentity (
-        string storage first,
+        string memory first,
         string memory last,
         string memory aka,
         string memory org,
@@ -66,10 +76,28 @@ contract MintIdentity is ERC721, Ownable {
         string memory url,
         string memory bio) internal {
             uint256 tokenId =  _tokenIds.current();
-            bytes32 identity = createIdentity(first, last, aka, org, slogan, description, url, bio);
-            id_to_identity[tokenId] = Identity(identity,first, last, aka, org, slogan, description,
+            bytes32 uniqueId = createUniqueId(first, last, aka, org, slogan, description, url, bio);
+            id_to_identity[tokenId] = Identity(uniqueId,first, last, aka, org, slogan, description,
                 url, bio, block.timestamp, block.timestamp, false, 0, 0);
+            _safeMint(msg.sender,tokenId);
             _tokenIds.increment();
 
+    }
+
+    function getTokenIdFromUniqueIdentifier(byte32 uniqueId) private returns(uint256) {
+        // This should return the tokenId given the uniqueId
+    }
+
+    function changeFirstName(uint256 tokenId, string memory newFirstName)  public {
+        require(_exists(tokenId), "token not minted");
+        require(ownerOf(tokenId) == msg.sender, "only the owner of this date can change its title");
+        id_to_identity[tokenId].firstname = newFirstName;
+        changeLastUpdated(tokenId);
+    }
+
+    function changeLastUpdated(uint256 tokenId) private {
+        require(_exists(tokenId), "token not minted");
+        require(ownerOf(tokenId) == msg.sender, "only the owner of this date can change its title");
+        id_to_identity[tokenId].lastupdated = block.timestamp;
     }
 }

@@ -16,6 +16,7 @@
   "license": "ISC",
   "dependencies": {
     "@openzeppelin/contracts": "^4.4.1",
+    "@openzeppelin/contracts-upgradeable": "^4.4.1",
     "chai": "^4.3.4",
     "solc": "^0.8.10",
     "truffle": "^5.4.26"
