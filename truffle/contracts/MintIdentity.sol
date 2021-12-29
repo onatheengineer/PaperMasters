@@ -1,14 +1,13 @@
 // SPDX-License-Identifier: MIT
 pragma solidity >=0.4.22 <0.9.0;
 
-import "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol";
-import "@openzeppelin/contracts-upgradeable/token/ERC721/ERC721Upgradeable.sol";
-import "@openzeppelin/contracts-upgradeable/utils/CountersUpgradeable.sol";
+import "@openzeppelin/contracts/access/Ownable.sol";
+import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
+import "@openzeppelin/contracts/utils/Counters.sol";
 
-
-contract MintIdentity is ERC721Upgradeable , OwnableUpgradeable  {
-    using CountersUpgradeable for CountersUpgradeable.Counter;
-    CountersUpgradeable.Counter private _tokenIds;
+contract MintIdentity is ERC721, Ownable {
+    using Counters for Counters.Counter;
+    Counters.Counter private _tokenIds;
 
     struct Identity {
         bytes32 uniqueid;
@@ -31,11 +30,7 @@ contract MintIdentity is ERC721Upgradeable , OwnableUpgradeable  {
 
     string private _currentBaseURI;
 
-
-
-
-    function initialize() public initializer {
-        __ERC721_init("MintIdentity", "IDENT");
+    constructor() ERC721("MintIdentity", "IDENT") {
         setBaseURI("https://papermasters.io/mintidentity/");
         //mint Ramona Andrew and kids
         mintIdentity("Ramona","Niederhausern","Aka Awesome","Awesome", "All Things Wave", "CEO", "pm", "Engineer");
@@ -84,9 +79,7 @@ contract MintIdentity is ERC721Upgradeable , OwnableUpgradeable  {
 
     }
 
-    function getTokenIdFromUniqueIdentifier(byte32 uniqueId) private returns(uint256) {
-        // This should return the tokenId given the uniqueId
-    }
+
 
     function changeFirstName(uint256 tokenId, string memory newFirstName)  public {
         require(_exists(tokenId), "token not minted");
