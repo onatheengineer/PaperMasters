@@ -3,9 +3,10 @@ pragma solidity >=0.4.22 <0.9.0;
 
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
+import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol";
 import "@openzeppelin/contracts/utils/Counters.sol";
 
-contract MintIdentity is ERC721, Ownable {
+contract MintIdentity is ERC721Enumerable, Ownable {
     using Counters for Counters.Counter;
     Counters.Counter private _tokenIds;
 
@@ -61,6 +62,10 @@ contract MintIdentity is ERC721, Ownable {
         return keccak256(abi.encodePacked(name, aka, org, slogan, description, url, bio, block.timestamp));
     }
 
+    function getTokenIdentity(uint256 tokenId) public view returns(Identity memory ident) {
+        ident = id_to_identity[tokenId];
+    }
+
     function mintIdentity (
         string memory name,
         string memory aka,
@@ -69,11 +74,10 @@ contract MintIdentity is ERC721, Ownable {
         string memory description,
         string memory url,
         string memory bio) internal {
-            uint256 tokenId =  _tokenIds.current();
             bytes32 uniqueId = createUniqueId(name, aka, org, slogan, description, url, bio);
-            id_to_identity[tokenId] = Identity(uniqueId, name, aka, org, slogan, description,
+            id_to_identity[_tokenIds.current()] = Identity(uniqueId,name, aka, org, slogan, description,
                 url, bio, block.timestamp, block.timestamp, false, 0, 0);
-            _safeMint(msg.sender, tokenId);
+            _safeMint(msg.sender,_tokenIds.current());
             _tokenIds.increment();
     }
 
