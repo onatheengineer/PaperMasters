@@ -3,16 +3,16 @@ pragma solidity >=0.4.22 <0.9.0;
 
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
+import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol";
 import "@openzeppelin/contracts/utils/Counters.sol";
 
-contract MintIdentity is ERC721, Ownable {
+contract MintIdentity is ERC721Enumerable, Ownable {
     using Counters for Counters.Counter;
     Counters.Counter private _tokenIds;
 
     struct Identity {
         bytes32 uniqueid;
-        string firstname;
-        string lastname;
+        string name;
         string aka;
         string organization;
         string slogan;
@@ -33,12 +33,11 @@ contract MintIdentity is ERC721, Ownable {
     constructor() ERC721("MintIdentity", "IDENT") {
         setBaseURI("https://papermasters.io/mintidentity/");
         //mint Ramona Andrew and kids
-        mintIdentity("Ramona","Niederhausern","Aka Awesome","Awesome", "All Things Wave", "CEO", "pm", "Engineer");
-        mintIdentity("Andrew","Niederhausern","Aka Super","Super", "All Things Wave", "CTO", "pm", "Software");
-        mintIdentity("Nautica","Niederhausern","Aka Nothing","little", "Girl Power", "", "", "Engineer");
-        mintIdentity("Nautica","Niederhausern","Aka Nothing","little", "Girl Power", "", "", "Engineer");
+        mintIdentity("Ramona","Aka Awesome","Awesome", "All Things Wave", "CEO", "pm", "Engineer");
+        mintIdentity("Andrew","Aka Super","Super", "All Things Wave", "CTO", "pm", "Software");
+        mintIdentity("Nautica","Aka Nothing","little", "Girl Power", "", "", "Engineer");
+        mintIdentity("Ammon","Arm Chopper","boy", "Pokemon", "", "", "Trainer");
     }
-
 
 
     function setBaseURI(string memory baseURI) public onlyOwner() {
@@ -50,41 +49,43 @@ contract MintIdentity is ERC721, Ownable {
     }
 
     function createUniqueId(
-        string memory first,
-        string memory last,
+        string memory name,
         string memory aka,
         string memory org,
         string memory slogan,
         string memory description,
         string memory url,
         string memory bio) private view returns(bytes32) {
-        return keccak256(abi.encodePacked(first, last, aka, org, slogan, description, url, bio, block.timestamp));
+        return keccak256(abi.encodePacked(name, aka, org, slogan, description, url, bio, block.timestamp));
+    }
+
+    function getTokenIdentity(uint256 tokenId) public view returns(Identity memory ident) {
+        ident = id_to_identity[tokenId];
     }
 
     function mintIdentity (
-        string memory first,
-        string memory last,
+        string memory name,
         string memory aka,
         string memory org,
         string memory slogan,
         string memory description,
         string memory url,
         string memory bio) internal {
-            uint256 tokenId =  _tokenIds.current();
-            bytes32 uniqueId = createUniqueId(first, last, aka, org, slogan, description, url, bio);
-            id_to_identity[tokenId] = Identity(uniqueId,first, last, aka, org, slogan, description,
+            bytes32 uniqueId = createUniqueId(name, aka, org, slogan, description, url, bio);
+            id_to_identity[_tokenIds.current()] = Identity(uniqueId,name, aka, org, slogan, description,
                 url, bio, block.timestamp, block.timestamp, false, 0, 0);
-            _safeMint(msg.sender,tokenId);
+            _safeMint(msg.sender,_tokenIds.current());
             _tokenIds.increment();
 
     }
 
 
 
-    function changeFirstName(uint256 tokenId, string memory newFirstName)  public {
+
+    function changeFirstName(uint256 tokenId, string memory newName)  public {
         require(_exists(tokenId), "token not minted");
         require(ownerOf(tokenId) == msg.sender, "only the owner of this date can change its title");
-        id_to_identity[tokenId].firstname = newFirstName;
+        id_to_identity[tokenId].name = newName;
         changeLastUpdated(tokenId);
     }
 
