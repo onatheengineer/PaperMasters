@@ -10,16 +10,15 @@ contract MintIdentity is ERC721, Ownable {
     Counters.Counter private _tokenIds;
 
     struct Identity {
-        bytes32 identity;
-        string firstname;
-        string lastname;
+        bytes32 uniqueid;
+        string name;
         string aka;
         string organization;
         string slogan;
         string description;
         string url;
         string bio;
-        uint create;
+        uint created;
         uint lastupdated;
         bool valid;
         uint validdate;
@@ -30,10 +29,17 @@ contract MintIdentity is ERC721, Ownable {
 
     string private _currentBaseURI;
 
-    constructor() ERC721("MintIdentity", "MINTIDENTITY") {
+    constructor() ERC721("MintIdentity", "IDENT") {
         setBaseURI("https://papermasters.io/mintidentity/");
 
-        //mint Ramona Andrew and kids
+        mintIdentity("Andrew",
+            "ramonajenny",
+            "PaperMasters",
+            "All things Wave",
+            "",
+            "http://ramonajenny.com",
+            "Engineer");
+
     }
 
     function setBaseURI(string memory baseURI) public onlyOwner() {
@@ -44,21 +50,19 @@ contract MintIdentity is ERC721, Ownable {
         return _currentBaseURI;
     }
 
-    function createIdentity(
-        string memory first,
-        string memory last,
+    function createUniqueId(
+        string memory name,
         string memory aka,
         string memory org,
         string memory slogan,
         string memory description,
         string memory url,
         string memory bio) private view returns(bytes32) {
-        return keccak256(abi.encodePacked(first, last, aka, org, slogan, description, url, bio, block.timestamp));
+        return keccak256(abi.encodePacked(name, aka, org, slogan, description, url, bio, block.timestamp));
     }
 
     function mintIdentity (
-        string storage first,
-        string memory last,
+        string memory name,
         string memory aka,
         string memory org,
         string memory slogan,
@@ -66,10 +70,58 @@ contract MintIdentity is ERC721, Ownable {
         string memory url,
         string memory bio) internal {
             uint256 tokenId =  _tokenIds.current();
-            bytes32 identity = createIdentity(first, last, aka, org, slogan, description, url, bio);
-            id_to_identity[tokenId] = Identity(identity,first, last, aka, org, slogan, description,
+            bytes32 uniqueId = createUniqueId(name, aka, org, slogan, description, url, bio);
+            id_to_identity[tokenId] = Identity(uniqueId, name, aka, org, slogan, description,
                 url, bio, block.timestamp, block.timestamp, false, 0, 0);
+            _safeMint(msg.sender, tokenId);
             _tokenIds.increment();
+    }
+
+    function changeName(uint256 tokenId, string memory newName)  public {
+        require(_exists(tokenId), "token not minted");
+        require(ownerOf(tokenId) == msg.sender, "only the owner of this unique ID can change its title");
+        id_to_identity[tokenId].name = newName;
 
     }
+
+    function changeAKA(uint256 tokenId, string memory newAKA)  public {
+        require(_exists(tokenId), "token not minted");
+        require(ownerOf(tokenId) == msg.sender, "only the owner of this unique ID can change its title");
+        id_to_identity[tokenId].aka = newAKA;
+
+    }
+
+    function changeSlogan(uint256 tokenId, string memory newSlogan)  public {
+        require(_exists(tokenId), "token not minted");
+        require(ownerOf(tokenId) == msg.sender, "only the owner of this unique ID can change its title");
+        id_to_identity[tokenId].slogan = newSlogan;
+
+    }
+
+    function changeDescription(uint256 tokenId, string memory newDescription)  public {
+        require(_exists(tokenId), "token not minted");
+        require(ownerOf(tokenId) == msg.sender, "only the owner of this unique ID can change its title");
+        id_to_identity[tokenId].description = newDescription;
+
+    }
+
+    function changeURL(uint256 tokenId, string memory newURL)  public {
+        require(_exists(tokenId), "token not minted");
+        require(ownerOf(tokenId) == msg.sender, "only the owner of this unique ID can change its title");
+        id_to_identity[tokenId].url = newURL;
+
+        }
+
+    function changeBio(uint256 tokenId, string memory newBio)  public {
+        require(_exists(tokenId), "token not minted");
+        require(ownerOf(tokenId) == msg.sender, "only the owner of this unique ID can change its title");
+        id_to_identity[tokenId].bio = newBio;
+
+    }
+
+
+//changeLastUpdated(tokenId);
+    //we need transfer ownership for companies
+    //id_to_identity[tokenId].lastupdated = block.timestamp;
+
 }
