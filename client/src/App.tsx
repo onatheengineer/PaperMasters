@@ -1,5 +1,5 @@
 import React, {FunctionComponent, useEffect} from 'react';
-import Web3 from 'web3';
+import {useSelector,  useDispatch} from "react-redux";
 
 import logo from './legoLavendarheadercroped.png';
 import {
@@ -19,48 +19,41 @@ import ArtistWork from "./pages/ArtistWork";
 import AboutUs from "./pages/AboutUs";
 import Identities from "./pages/Identities";
 import MintIdentity from "./contracts/MintIdentity.json";
+import {asyncGetConnectedAccounts, selectAccounts, selectTotalSupply} from "./store/slices";
+
 const { SubMenu } = Menu;
 const { Header, Content, Footer, Sider } = Layout;
 
+
 const App:FunctionComponent=()=>{
 
-    const [accounts, setAccounts] = useState<string[]>([]);
-    const [contract, setContract] = useState<any>(undefined);
-    const [totalSupply, setTotalSupply] = useState<any>(undefined);
-    const [balance, setBalanceOf] = useState<any>(undefined);
-    console.log("WEB3 Test");
-    console.log(Web3.givenProvider)
+    const dispatch = useDispatch();
 
-    const web3 = new Web3(Web3.givenProvider || "http://localhost:7545");
-    console.log(web3);
+   // const [accounts, setAccounts] = useState<string[]>([]);
+   // const [contract, setContract] = useState<any>(undefined);
+   // const [totalSupply, setTotalSupply] = useState<any>(undefined);
+   // const [balance, setBalanceOf] = useState<any>(undefined);
+
+
+    // Redux Global Slice State - see store/slice/Web3
+    const accounts = useSelector(selectAccounts);
+
+    // Redux Global SLice State for Total Supply - see store/slice/Web3
+    const totalSupply = useSelector(selectTotalSupply);
+
+    // Initial Load of the Page, we dispatch to get the connected Meta Mask Accounts
+    // If no Account is linked, this will fail or be 0.. It will prompt the user
+    // to select an account to link
     useEffect(() => {
-        web3.eth.requestAccounts().then((acc) => {
-            console.log("ACCOUNTS");
-            console.log(acc)
-            setAccounts(acc)
-        });
+        dispatch(asyncGetConnectedAccounts());
     },[]);
 
-    useEffect(() => {
-        if (accounts.length > 0) {
-            const contract = new web3.eth.Contract(MintIdentity.abi as any, "0x1549f9e9FB6e5437f1855CF31B4B029D3C87f767");
-
-            setContract(contract);
-            console.log(contract)
-        }
-    },[accounts])
-
-    useEffect(() => {
+    /* useEffect(() => {
         if (contract !== undefined) {
+            console.log("GET TS and BALANCE")
            contract.methods.totalSupply().call().then((ts: any) => {
                 setTotalSupply(ts);
             });
-           contract.methods.balanceOf(accounts[0]).call().then((balance: any) => {
-               console.log("BALANCE!");
-               console.log(balance);
-               setBalanceOf(balance);
-           })
-
         }
     },[contract]);
     useEffect(() => {
@@ -87,21 +80,21 @@ const App:FunctionComponent=()=>{
 
         }
     },[balance]);
-
-    return (<BrowserRouter>
+    */
+    return (
         <Layout>
             <Header className="header" >
                 <div className="logo" />
-                <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['2']}>
+                <Menu theme="dark" mode="horizontal">
                     <Menu.Item key="1"><Link to='/Legitimacy'>Blockchain Legitimacy</Link> </Menu.Item>
-                    <Menu.Item key="2"><Link to='/GetMinted'>Get Minted</Link> </Menu.Item>
+                    <Menu.Item key="2"><Link to='/GetMinted'>Get Minted -  Total Minted: {totalSupply}</Link> </Menu.Item>
                     <Menu.Item key="3"><Link to='/ArtistWork'>Artist Portfolios and Artwork</Link> </Menu.Item>
                     <Menu.Item key="4"><Link to='/AboutUs'>About Us</Link> </Menu.Item>
-                    <Menu.Item key="5" style={{backgroundColor:"green"}}><Link to='/Identities'>My Identities {accounts.length} {balance}</Link> </Menu.Item>
+                    <Menu.Item key="5" style={{backgroundColor:"green"}}><Link to='/Identities'>My Identities {accounts.length}</Link> </Menu.Item>
+
                 </Menu>
             </Header>
             <Content style={{ padding: '0 50px' }}>
-
                 <Routes>
                     <Route path="/" element={<div>home page</div>} />
                     <Route path="/Legitimacy" element={<Legitimacy/>} />
@@ -113,7 +106,6 @@ const App:FunctionComponent=()=>{
                 </Content>
             <Footer style={{ textAlign: 'center' }}>Veil Research, Corp. ©2019 Created by The PaperMasters - Establishing Legitimacy on the Blockchain </Footer>
         </Layout>
-    </BrowserRouter>
     );
 
 }
