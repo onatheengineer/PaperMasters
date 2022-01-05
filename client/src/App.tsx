@@ -19,7 +19,7 @@ import ArtistWork from "./pages/ArtistWork";
 import AboutUs from "./pages/AboutUs";
 import Identities from "./pages/Identities";
 import MintIdentity from "./contracts/MintIdentity.json";
-import {asyncGetConnectedAccounts, selectAccounts, selectTotalSupply} from "./store/slices";
+import {asyncGetConnectedAccounts, selectAccounts, selectIdentities, selectTotalSupply} from "./store/slices";
 
 const { SubMenu } = Menu;
 const { Header, Content, Footer, Sider } = Layout;
@@ -41,6 +41,10 @@ const App:FunctionComponent=()=>{
     // Redux Global SLice State for Total Supply - see store/slice/Web3
     const totalSupply = useSelector(selectTotalSupply);
 
+
+    // Redux Global Slice of the Users Identities
+    const identities = useSelector(selectIdentities);
+
     // Initial Load of the Page, we dispatch to get the connected Meta Mask Accounts
     // If no Account is linked, this will fail or be 0.. It will prompt the user
     // to select an account to link
@@ -48,55 +52,26 @@ const App:FunctionComponent=()=>{
         dispatch(asyncGetConnectedAccounts());
     },[]);
 
-    /* useEffect(() => {
-        if (contract !== undefined) {
-            console.log("GET TS and BALANCE")
-           contract.methods.totalSupply().call().then((ts: any) => {
-                setTotalSupply(ts);
-            });
-        }
-    },[contract]);
-    useEffect(() => {
-        if (balance !== undefined) {
-            const tokenPromises = []
-            for (let i = 0; i < balance; i++) {
-                tokenPromises.push( contract.methods.tokenOfOwnerByIndex(accounts[0],i).call());
-            }
 
-            Promise.all(tokenPromises).then((values) => {
-                console.log("VALUES");
-                console.log(values);
-                const identityPromises: any[] = [];
-                for (let i = 0; i < values.length; i++) {
-                    console.log("PUSH ",i)
-                    identityPromises.push(contract.methods.getTokenIdentity(values[i]).call());
-                }
-                Promise.all(identityPromises).then((identities) => {
-                    console.log("IDENTITIES");
-                    console.log(identities);
-                })
-            })
-
-
-        }
-    },[balance]);
-    */
     return (
         <Layout>
             <Header className="header" >
                 <div className="logo" />
                 <Menu theme="dark" mode="horizontal">
                     <Menu.Item key="1"><Link to='/Legitimacy'>Blockchain Legitimacy</Link> </Menu.Item>
-                    <Menu.Item key="2"><Link to='/GetMinted'>Get Minted -  Total Minted: {totalSupply}</Link> </Menu.Item>
+
                     <Menu.Item key="3"><Link to='/ArtistWork'>Artist Portfolios and Artwork</Link> </Menu.Item>
                     <Menu.Item key="4"><Link to='/AboutUs'>About Us</Link> </Menu.Item>
+                    <Menu.Item key="2"><Link to='/GetMinted'>Get Minted</Link> </Menu.Item>
                     <Menu.Item key="5" style={{backgroundColor:"green"}}><Link to='/Identities'>My Identities {accounts.length}</Link> </Menu.Item>
 
                 </Menu>
+
             </Header>
             <Content style={{ padding: '0 50px' }}>
+
                 <Routes>
-                    <Route path="/" element={<div>home page</div>} />
+                    <Route path="/" element={<div>HomePage</div>} />
                     <Route path="/Legitimacy" element={<Legitimacy/>} />
                     <Route path="/GetMinted" element={<GetMinted/>} />
                     <Route path="/ArtistWork" element={<ArtistWork/>} />

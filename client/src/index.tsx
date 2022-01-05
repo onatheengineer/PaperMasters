@@ -11,7 +11,7 @@ import { createBrowserHistory } from 'history'
 import configureAppStore from "./store"
 import './index.css';
 import App from './App';
-const { Router } = require("react-router-dom");
+const { BrowserRouter  } = require("react-router-dom");
 
 const history = createBrowserHistory() as any;
 const { store, persistor } = configureAppStore(history);
@@ -27,10 +27,9 @@ ReactDOM.render(
     <HistoryContext.Provider value={{ history }}>
         <Provider store={store}>
             <PersistGate persistor={persistor}>
-                <Router location={history.location} navigator={history}>
-
+                <BrowserRouter location={history.location} navigator={history}>
                     <App />
-                </Router>
+                </BrowserRouter>
             </PersistGate>
         </Provider>
     </HistoryContext.Provider>,
