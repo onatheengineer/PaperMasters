@@ -10,7 +10,8 @@
     "test": "./node_modules/.bin/truffle test || True",
     "compile": "./node_modules/.bin/truffle compile --all",
     "migrate": "./node_modules/.bin/truffle migrate",
-    "migrate-reset": "./node_modules/.bin/truffle migrate --reset"
+    "migrate-reset": "./node_modules/.bin/truffle migrate --reset",
+    "deploy": "cp ./build/contracts/* ../client/src/contracts/"
   },
   "author": "",
   "license": "ISC",

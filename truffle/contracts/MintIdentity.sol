@@ -33,14 +33,21 @@ contract MintIdentity is ERC721Enumerable, Ownable {
     constructor() ERC721("MintIdentity", "IDENT") {
         setBaseURI("https://papermasters.io/mintidentity/");
 
-        mintIdentity("Andrew",
+        mintIdentity("Andrew N.",
+            "H-street",
+            "PaperMasters",
+            "Oh Yeah!",
+            "",
+            "http://ramonajenny.com",
+            "Software");
+
+        mintIdentity("Ramona",
             "ramonajenny",
             "PaperMasters",
             "All things Wave",
             "",
             "http://ramonajenny.com",
             "Engineer");
-
     }
 
     function setBaseURI(string memory baseURI) public onlyOwner() {

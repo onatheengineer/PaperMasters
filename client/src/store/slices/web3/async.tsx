@@ -23,25 +23,29 @@ export const asyncGetConnectedAccounts = () => (dispatch: Dispatch<any>) => {
     if (web3) {
         web3.eth.requestAccounts().then((acc) => {
             // Account successfully linked in metamask or accounts already linked;
+            const accountIdents: any = {};
+            const accountPromises = [];
             dispatch(setAccounts(acc));
             dispatch(asyncGetTotalSupply())
-            const accountPromises: any[] = [];
             const contract = getContract();
-            acc.map((account) => {
-                console.log("RETRIEVE ACCOUNTS");
-                console.log(account);
-               // accountPromises.push(contract?.methods.balanceOf(account).call());
-            })
-            console.log(accountPromises);
-            Promise.all(accountPromises).then(result=>{
-                console.log("RESULTS!")
-                console.log(result);
-               // dispatch(setIdentities([...result]))
-            }, error=>{
-                console.log("ERROR");
-                console.log(error);
-            });
-            console.log(Promise.all(accountPromises));
+
+            if (contract !== undefined) {
+                acc.map((account) => {
+                    contract.methods.balanceOf(account).call().then((values: any) => {
+                        const identityPromises: any[] = [];
+                        for (let i = 0; i < values; i++) {
+                            console.log("PUSH ", i)
+                            identityPromises.push(contract.methods.getTokenIdentity(i).call());
+                        }
+
+                        Promise.all(identityPromises).then((identities) => {
+                            accountIdents[account] = identities;
+                            dispatch(setIdentities(accountIdents));
+                        })
+                    });
+                })
+            }
+
 
         }, (error) => {
             // Meta Mask Error, or User rejects the request

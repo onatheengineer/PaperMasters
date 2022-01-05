@@ -19,7 +19,7 @@ import ArtistWork from "./pages/ArtistWork";
 import AboutUs from "./pages/AboutUs";
 import Identities from "./pages/Identities";
 import MintIdentity from "./contracts/MintIdentity.json";
-import {asyncGetConnectedAccounts, selectAccounts, selectTotalSupply} from "./store/slices";
+import {asyncGetConnectedAccounts, selectAccounts, selectIdentities, selectTotalSupply} from "./store/slices";
 
 const { SubMenu } = Menu;
 const { Header, Footer, Content, Sider } = Layout;
@@ -41,12 +41,17 @@ const App:FunctionComponent=()=>{
     // Redux Global SLice State for Total Supply - see store/slice/Web3
     const totalSupply = useSelector(selectTotalSupply);
 
+
+    // Redux Global Slice of the Users Identities
+    const identities = useSelector(selectIdentities);
+
     // Initial Load of the Page, we dispatch to get the connected Meta Mask Accounts
     // If no Account is linked, this will fail or be 0.. It will prompt the user
     // to select an account to link
     useEffect(() => {
         dispatch(asyncGetConnectedAccounts());
     },[]);
+
 
     /* useEffect(() => {
         if (contract !== undefined) {
@@ -79,6 +84,7 @@ const App:FunctionComponent=()=>{
         }
     },[balance]);
     */
+
     return (
         <>
         <Layout>
@@ -96,16 +102,20 @@ const App:FunctionComponent=()=>{
 
                 <Menu theme="dark" mode="horizontal">
                     <Menu.Item key="1"><Link to='/Legitimacy'>Blockchain Legitimacy</Link> </Menu.Item>
+
                     <Menu.Item key="2" style={{backgroundColor:"green"}}><Link to='/Identities'>My Identities {accounts.length}</Link> </Menu.Item>
                     <Menu.Item key="3"><Link to='/GetMinted'>Get Minted -  Total Minted: {totalSupply}</Link> </Menu.Item>
                     <Menu.Item key="4"><Link to='/ArtistWork'>Artist Portfolios and Artwork</Link> </Menu.Item>
                     <Menu.Item key="5"><Link to='/AboutUs'>About Us</Link> </Menu.Item>
 
+
                 </Menu>
+
             </Header>
             <Content style={{ padding: '0 50px' }}>
+
                 <Routes>
-                    <Route path="/" element={<div>home page</div>} />
+                    <Route path="/" element={<div>HomePage</div>} />
                     <Route path="/Legitimacy" element={<Legitimacy/>} />
                     <Route path="/Identities" element={<Identities/>} />
                     <Route path="/GetMinted" element={<GetMinted/>} />
