@@ -11,3 +11,33 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.purple-header{
+  background-color: #d1d1dc !important;
+}
+
+.purple-content{
+  background-color: #2a2a48 !important;
+}
+
+.white-footer{
+  color: #c8c8d0 !important;
+}
+.site-layout-content {
+  min-height: 380px !important;
+  padding: 24px;
+}
+.site-layout-banner {
+  min-height: 310px !important;
+  padding: 24px;
+}
+
+.hero .container {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  padding: 25px 2rem;
+  z-index: 1;
+}

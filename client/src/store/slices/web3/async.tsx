@@ -13,12 +13,9 @@ import {
 } from "./index";
 import {getContract, getWeb3} from "../../../components/PaperMastersWeb3"
 import {Dispatch} from "react";
-import Web3 from "web3";
+import Web3 from 'web3';
 import MintIdentity from "../../../contracts/MintIdentity.json";
 import {useSelector} from "react-redux";
-
-
-
 // Async method to retrieve the metamask connect accounts, it will prompt for an account if one is not selected;
 // If the user rejects the request an error is given (4001)
 export const asyncGetConnectedAccounts = () => (dispatch: Dispatch<any>) => {
@@ -31,6 +28,7 @@ export const asyncGetConnectedAccounts = () => (dispatch: Dispatch<any>) => {
             dispatch(setAccounts(acc));
             dispatch(asyncGetTotalSupply())
             const contract = getContract();
+
             if (contract !== undefined) {
                 acc.map((account) => {
                     contract.methods.balanceOf(account).call().then((values: any) => {
@@ -47,6 +45,7 @@ export const asyncGetConnectedAccounts = () => (dispatch: Dispatch<any>) => {
                     });
                 })
             }
+
 
         }, (error) => {
             // Meta Mask Error, or User rejects the request

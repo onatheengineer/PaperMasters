@@ -23,9 +23,9 @@ const Legitimacy:FunctionComponent=()=>{
                     <Menu.Item key="3">Protection</Menu.Item>
                     <Menu.Item key="4">Punishment</Menu.Item>
                 </SubMenu>
-                <SubMenu key="sub4" icon={<NotificationOutlined />} title="Fraudulent Artists">
-                    <Menu.Item key="10">Reporting</Menu.Item>
-                    <Menu.Item key="11">List</Menu.Item>
+                <SubMenu key="sub3" icon={<NotificationOutlined />} title="Fraudulent Artists">
+                    <Menu.Item key="5">Reporting</Menu.Item>
+                    <Menu.Item key="6">List</Menu.Item>
                 </SubMenu>
             </Menu>
         </Sider>
