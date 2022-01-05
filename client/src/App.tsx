@@ -1,7 +1,7 @@
 import React, {FunctionComponent, useEffect} from 'react';
 import {useSelector,  useDispatch} from "react-redux";
 
-import logo from './legoLavendarheadercroped.png';
+import logo from './papermasterslogo.png';
 import {
     BrowserRouter,
     Routes,
@@ -22,7 +22,7 @@ import MintIdentity from "./contracts/MintIdentity.json";
 import {asyncGetConnectedAccounts, selectAccounts, selectTotalSupply} from "./store/slices";
 
 const { SubMenu } = Menu;
-const { Header, Content, Footer, Sider } = Layout;
+const { Header, Footer, Content, Sider } = Layout;
 
 
 const App:FunctionComponent=()=>{
@@ -76,21 +76,30 @@ const App:FunctionComponent=()=>{
                     console.log(identities);
                 })
             })
-
-
         }
     },[balance]);
     */
     return (
+        <>
+        <Layout>
+            <Header className="purple-header"> <img src={logo}/> header changed</Header>
+            <Header className="purple-content white-footer site-layout-banner" style={{ textAlign: 'center' }}> Establishing Legitimacy on the Blockchain</Header>
+                <Content className="site-layout-content"> content</Content>
+                    <Footer className="purple-content white-footer" style={{ textAlign: 'center' }}> ©2019 Produced by The PaperMasters </Footer>
+                    <Footer className="purple-content white-footer" style={{ textAlign: 'center' }} > Veil Research, Corp. - Establishing Legitimacy on the Blockchain </Footer>
+
+        </Layout>
+
+
         <Layout>
             <Header className="header" >
-                <div className="logo" />
+
                 <Menu theme="dark" mode="horizontal">
                     <Menu.Item key="1"><Link to='/Legitimacy'>Blockchain Legitimacy</Link> </Menu.Item>
-                    <Menu.Item key="2"><Link to='/GetMinted'>Get Minted -  Total Minted: {totalSupply}</Link> </Menu.Item>
-                    <Menu.Item key="3"><Link to='/ArtistWork'>Artist Portfolios and Artwork</Link> </Menu.Item>
-                    <Menu.Item key="4"><Link to='/AboutUs'>About Us</Link> </Menu.Item>
-                    <Menu.Item key="5" style={{backgroundColor:"green"}}><Link to='/Identities'>My Identities {accounts.length}</Link> </Menu.Item>
+                    <Menu.Item key="2" style={{backgroundColor:"green"}}><Link to='/Identities'>My Identities {accounts.length}</Link> </Menu.Item>
+                    <Menu.Item key="3"><Link to='/GetMinted'>Get Minted -  Total Minted: {totalSupply}</Link> </Menu.Item>
+                    <Menu.Item key="4"><Link to='/ArtistWork'>Artist Portfolios and Artwork</Link> </Menu.Item>
+                    <Menu.Item key="5"><Link to='/AboutUs'>About Us</Link> </Menu.Item>
 
                 </Menu>
             </Header>
@@ -98,14 +107,16 @@ const App:FunctionComponent=()=>{
                 <Routes>
                     <Route path="/" element={<div>home page</div>} />
                     <Route path="/Legitimacy" element={<Legitimacy/>} />
+                    <Route path="/Identities" element={<Identities/>} />
                     <Route path="/GetMinted" element={<GetMinted/>} />
                     <Route path="/ArtistWork" element={<ArtistWork/>} />
                     <Route path="/AboutUs" element={<AboutUs/>} />
-                    <Route path="/Identities" element={<Identities/>} />
                 </Routes>
                 </Content>
-            <Footer style={{ textAlign: 'center' }}>Veil Research, Corp. ©2019 Created by The PaperMasters - Establishing Legitimacy on the Blockchain </Footer>
+            <Footer style={{ textAlign: 'center' }}> </Footer>
+
         </Layout>
+        </>
     );
 
 }
