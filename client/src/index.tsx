@@ -1,17 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import {BrowserRouter} from "react-router-dom";
+import { Provider } from 'react-redux'
 import './index.css';
+import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { PersistGate } from 'redux-persist/integration/react';
-import { Provider } from 'react-redux'
 import { ConnectedRouter } from 'connected-react-router';
 import { History } from 'history';
 import { createBrowserHistory } from 'history'
 //import configureStore from './store';
+import store from './store';
 import configureAppStore from "./store"
 import './index.css';
-import App from './App';
-const { BrowserRouter  } = require("react-router-dom");
+
 
 const history = createBrowserHistory() as any;
 const { store, persistor } = configureAppStore(history);

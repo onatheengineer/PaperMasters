@@ -15,7 +15,7 @@ const Legitimacy:FunctionComponent=()=>{
                 defaultOpenKeys={['sub1']}
                 style={{ height: '100%' }}
             >
-                <SubMenu key="sub1" icon={<UserOutlined />} title="Blockchain Legitimacy">
+                <SubMenu key="sub1" icon={<UserOutlined />} title="Blockchain LegitimacyCard">
                     <Menu.Item key="1">Protocol</Menu.Item>
                     <Menu.Item key="2">DeRegulation</Menu.Item>
                 </SubMenu>

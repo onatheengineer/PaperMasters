@@ -90,42 +90,42 @@ contract MintIdentity is ERC721Enumerable, Ownable {
 
     function changeName(uint256 tokenId, string memory newName)  public {
         require(_exists(tokenId), "token not minted");
-        require(ownerOf(tokenId) == msg.sender, "only the owner of this unique ID can change its title");
+        require(ownerOf(tokenId) == msg.sender, "only the owner of this unique ID can change its Name");
         id_to_identity[tokenId].name = newName;
 
     }
 
     function changeAKA(uint256 tokenId, string memory newAKA)  public {
         require(_exists(tokenId), "token not minted");
-        require(ownerOf(tokenId) == msg.sender, "only the owner of this unique ID can change its title");
+        require(ownerOf(tokenId) == msg.sender, "only the owner of this unique ID can change its Also Known As (AKA)");
         id_to_identity[tokenId].aka = newAKA;
 
     }
 
     function changeSlogan(uint256 tokenId, string memory newSlogan)  public {
         require(_exists(tokenId), "token not minted");
-        require(ownerOf(tokenId) == msg.sender, "only the owner of this unique ID can change its title");
+        require(ownerOf(tokenId) == msg.sender, "only the owner of this unique ID can change its Slogan");
         id_to_identity[tokenId].slogan = newSlogan;
 
     }
 
     function changeDescription(uint256 tokenId, string memory newDescription)  public {
         require(_exists(tokenId), "token not minted");
-        require(ownerOf(tokenId) == msg.sender, "only the owner of this unique ID can change its title");
+        require(ownerOf(tokenId) == msg.sender, "only the owner of this unique ID can change its Description");
         id_to_identity[tokenId].description = newDescription;
 
     }
 
     function changeURL(uint256 tokenId, string memory newURL)  public {
         require(_exists(tokenId), "token not minted");
-        require(ownerOf(tokenId) == msg.sender, "only the owner of this unique ID can change its title");
+        require(ownerOf(tokenId) == msg.sender, "only the owner of this unique ID can change its URL");
         id_to_identity[tokenId].url = newURL;
 
         }
 
     function changeBio(uint256 tokenId, string memory newBio)  public {
         require(_exists(tokenId), "token not minted");
-        require(ownerOf(tokenId) == msg.sender, "only the owner of this unique ID can change its title");
+        require(ownerOf(tokenId) == msg.sender, "only the owner of this unique ID can change its Biography");
         id_to_identity[tokenId].bio = newBio;
 
     }

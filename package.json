@@ -1,5 +1,8 @@
 {
   "dependencies": {
+    "react-redux": "^7.2.6",
+    "redux": "^4.1.2",
+    "redux-logger": "^3.0.6",
     "solc": "^0.8.11",
     "soljs": "^6.0.0"
   }

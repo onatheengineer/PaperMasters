@@ -1,46 +1,43 @@
 import React, {FunctionComponent, useEffect} from 'react';
 import {useSelector,  useDispatch} from "react-redux";
-
-import logo from './papermasterslogo.png';
+import HomePage from "./pages/homePage/homepage.component";
+import Header from "./components/header/header.component";
+import logo from '../../dapp/src/assets/PaperMastersLogo.png';
 import {
     BrowserRouter,
     Routes,
     Route,
-    Link
+    Link,
+    useRouteMatch,
+    useParams
 } from "react-router-dom";
 import 'antd/dist/antd.css';
 import './App.css';
 import {useState} from "react";
 import { Layout, Menu, Breadcrumb } from 'antd';
+import { AppstoreOutlined, MailOutlined, SettingOutlined } from '@ant-design/icons';
 import { UserOutlined, LaptopOutlined, NotificationOutlined } from '@ant-design/icons';
-import Legitimacy from "./pages/Legitimacy";
-import GetMinted from "./pages/GetMinted";
-import ArtistWork from "./pages/ArtistWork";
-import AboutUs from "./pages/AboutUs";
-import Identities from "./pages/Identities";
+
 import MintIdentity from "./contracts/MintIdentity.json";
 import {asyncGetConnectedAccounts, selectAccounts, selectIdentities, selectTotalSupply} from "./store/slices";
 
 const { SubMenu } = Menu;
 const { Header, Footer, Content, Sider } = Layout;
 
-
-const App:FunctionComponent=()=>{
+const App:FunctionComponent=()=> {
 
     const dispatch = useDispatch();
 
-   // const [accounts, setAccounts] = useState<string[]>([]);
-   // const [contract, setContract] = useState<any>(undefined);
-   // const [totalSupply, setTotalSupply] = useState<any>(undefined);
-   // const [balance, setBalanceOf] = useState<any>(undefined);
-
+    // const [accounts, setAccounts] = useState<string[]>([]);
+    // const [contract, setContract] = useState<any>(undefined);
+    // const [totalSupply, setTotalSupply] = useState<any>(undefined);
+    // const [balance, setBalanceOf] = useState<any>(undefined);
 
     // Redux Global Slice State - see store/slice/Web3
     const accounts = useSelector(selectAccounts);
 
     // Redux Global SLice State for Total Supply - see store/slice/Web3
     const totalSupply = useSelector(selectTotalSupply);
-
 
     // Redux Global Slice of the Users Identities
     const identities = useSelector(selectIdentities);
@@ -50,8 +47,7 @@ const App:FunctionComponent=()=>{
     // to select an account to link
     useEffect(() => {
         dispatch(asyncGetConnectedAccounts());
-    },[]);
-
+    }, []);
 
     /* useEffect(() => {
         if (contract !== undefined) {
@@ -76,59 +72,107 @@ const App:FunctionComponent=()=>{
                     console.log("PUSH ",i)
                     identityPromises.push(contract.methods.getTokenIdentity(values[i]).call());
                 }
-                Promise.all(identityPromises).then((identities) => {
+                Promise.all(identityPromises).then((manageIdentities) => {
                     console.log("IDENTITIES");
-                    console.log(identities);
+                    console.log(manageIdentities);
                 })
             })
         }
     },[balance]);
     */
 
-    return (
+
+    return(
         <>
-        <Layout>
-            <Header className="purple-header"> <img src={logo}/> header changed</Header>
-            <Header className="purple-content white-footer site-layout-banner" style={{ textAlign: 'center' }}> Establishing Legitimacy on the Blockchain</Header>
-                <Content className="site-layout-content"> content</Content>
-                    <Footer className="purple-content white-footer" style={{ textAlign: 'center' }}> ©2019 Produced by The PaperMasters </Footer>
-                    <Footer className="purple-content white-footer" style={{ textAlign: 'center' }} > Veil Research, Corp. - Establishing Legitimacy on the Blockchain </Footer>
+            <Layout>
+                <Header className="purple-header">
+                    <Menu className="purple-header" mode="horizontal">
+                        <Menu.Item key="1"><Link to='/'><img src={logo}/></Link> </Menu.Item>
 
-        </Layout>
+                        <SubMenu key="2" style={{ marginLeft: 'auto' }} icon={<MailOutlined />} title={<Link to='/Legitimacy'>Blockchain Legitimacy</Link>}>
+                            <Menu.ItemGroup key="g1" title="Item 1">
+                                <SubMenu key="sub1" icon={<UserOutlined />} title="Legitimacy">
+                                    <Menu.Item key="1">Protocol</Menu.Item>
+                                    <Menu.Item key="2">DeRegulation</Menu.Item>
+                                </SubMenu>
+                                <SubMenu key="sub2" icon={<LaptopOutlined />} title="Intellectual Property">
+                                    <Menu.Item key="3">Protection</Menu.Item>
+                                    <Menu.Item key="4">Punishment</Menu.Item>
+                                </SubMenu>
+                                <SubMenu key="sub3" icon={<NotificationOutlined />} title="Fraudulent Artists">
+                                    <Menu.Item key="5">Reporting</Menu.Item>
+                                    <Menu.Item key="6">List</Menu.Item>
+                                </SubMenu>
+                            </Menu.ItemGroup>
+                            <Menu.ItemGroup key="g2" title="Item 2">
+                                <Menu.Item key="3">Option 3</Menu.Item>
+                                <Menu.Item key="4">Option 4</Menu.Item>
+                            </Menu.ItemGroup>
+                        </SubMenu>
 
 
-        <Layout>
-            <Header className="header" >
+                        <SubMenu key="3" icon={<MailOutlined />} title={<Link to='/Identities'>Identities {accounts.length}</Link>}>
+                            <Menu.ItemGroup key="g1" title="Item 1">
+                                <Menu.Item key="1">Option 1</Menu.Item>
+                                <Menu.Item key="2">Option 2</Menu.Item>
+                            </Menu.ItemGroup>
+                            <Menu.ItemGroup key="g2" title="Item 2">
+                                <Menu.Item key="3">Option 3</Menu.Item>
+                                <Menu.Item key="4">Option 4</Menu.Item>
+                            </Menu.ItemGroup>
+                        </SubMenu>
 
-                <Menu theme="dark" mode="horizontal">
-                    <Menu.Item key="1"><Link to='/Legitimacy'>Blockchain Legitimacy</Link> </Menu.Item>
+                        <SubMenu key="4" icon={<MailOutlined />} title={<Link to='/GetMinted'>Get Minted - Total Minted: {totalSupply}</Link>}>
+                            <Menu.ItemGroup key="g1" title="Item 1">
+                                <Menu.Item key="1">Option 1</Menu.Item>
+                                <Menu.Item key="2">Option 2</Menu.Item>
+                            </Menu.ItemGroup>
+                            <Menu.ItemGroup key="g2" title="Item 2">
+                                <Menu.Item key="3">Option 3</Menu.Item>
+                                <Menu.Item key="4">Option 4</Menu.Item>
+                            </Menu.ItemGroup>
+                        </SubMenu>
 
-                    <Menu.Item key="2" style={{backgroundColor:"green"}}><Link to='/Identities'>My Identities {accounts.length}</Link> </Menu.Item>
-                    <Menu.Item key="3"><Link to='/GetMinted'>Get Minted -  Total Minted: {totalSupply}</Link> </Menu.Item>
-                    <Menu.Item key="4"><Link to='/ArtistWork'>Artist Portfolios and Artwork</Link> </Menu.Item>
-                    <Menu.Item key="5"><Link to='/AboutUs'>About Us</Link> </Menu.Item>
+                        <SubMenu key="5" icon={<MailOutlined />} title={<Link to='/ArtistWork'>Artist Portfolios and Artwork</Link>}>
+                            <Menu.ItemGroup key="g1" title="Item 1">
+                                <Menu.Item key="1">Option 1</Menu.Item>
+                                <Menu.Item key="2">Option 2</Menu.Item>
+                            </Menu.ItemGroup>
+                            <Menu.ItemGroup key="g2" title="Item 2">
+                                <Menu.Item key="3">Option 3</Menu.Item>
+                                <Menu.Item key="4">Option 4</Menu.Item>
+                            </Menu.ItemGroup>
+                        </SubMenu>
 
+                        <SubMenu key="6" icon={<MailOutlined />} title={<Link to='/AboutUs'>About Us</Link>}>
+                            <Menu.ItemGroup key="g1" title="Item 1">
+                                <Menu.Item key="1">Option 1</Menu.Item>
+                                <Menu.Item key="2">Option 2</Menu.Item>
+                            </Menu.ItemGroup>
+                            <Menu.ItemGroup key="g2" title="Item 2">
+                                <Menu.Item key="3">Option 3</Menu.Item>
+                                <Menu.Item key="4">Option 4</Menu.Item>
+                            </Menu.ItemGroup>
+                        </SubMenu>
 
-                </Menu>
+                    </Menu>
+                </Header>
+                <Header className="purple-content white-footer site-layout-banner" style={{ textAlign: 'center' }}> The Standard for Legitimate Blockchain Identities</Header>
+                <Content className="purple-header site-layout-content">
 
-            </Header>
-            <Content style={{ padding: '0 50px' }}>
-
-                <Routes>
-                    <Route path="/" element={<div>HomePage</div>} />
-                    <Route path="/Legitimacy" element={<Legitimacy/>} />
-                    <Route path="/Identities" element={<Identities/>} />
-                    <Route path="/GetMinted" element={<GetMinted/>} />
-                    <Route path="/ArtistWork" element={<ArtistWork/>} />
-                    <Route path="/AboutUs" element={<AboutUs/>} />
-                </Routes>
+                    <Routes>
+                        <Route path="/" element={<div>HomePage</div>} />
+                        <Route path="/Legitimacy" element={<Legitimacy/>} />
+                        <Route path="/Identities" element={<Identities/>} />
+                        <Route path="/Mint" element={<Mint/>} />
+                        <Route path="/Manage" element={<Manage/>} />
+                    </Routes>
                 </Content>
-            <Footer style={{ textAlign: 'center' }}> </Footer>
 
-        </Layout>
+                <Footer className="purple-content white-footer" style={{ textAlign: 'center' }}> ©2019 Veil Research, Corp. ~ Produced by The PaperMasters <br/> Establishing Legitimacy on the Blockchain</Footer>
+            </Layout>
         </>
     );
+};
 
-}
-
-export default App;
+export default function App()

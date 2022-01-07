@@ -21,7 +21,7 @@ code {
 }
 
 .white-footer{
-  color: #c8c8d0 !important;
+  color: #d1d1dc !important;
 }
 .site-layout-content {
   min-height: 380px !important;
@@ -40,4 +40,14 @@ code {
   align-items: center;
   padding: 25px 2rem;
   z-index: 1;
+}
+
+.description {
+  font-size: 1.0825rem;
+  color: #2a2a47;
+  text-align: center;
+  line-height: 1.8;
+  font-weight: 400;
+  animation-delay: .7s;
+  max-width: 663px;
 }

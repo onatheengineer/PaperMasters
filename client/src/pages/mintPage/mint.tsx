@@ -10,5 +10,3 @@ const GetMinted:FunctionComponent=()=>{
 };
 
 export default GetMinted;
-
-
