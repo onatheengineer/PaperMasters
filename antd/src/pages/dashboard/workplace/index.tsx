@@ -12,7 +12,7 @@ import { queryProjectNotice, queryActivities, fakeChartData } from './service';
 
 const links = [
   {
-    title: '操作一',
+    title: 'tryTHIS',
     href: '',
   },
   {

@@ -1,4 +1,4 @@
-import { Card, message } from 'antd';
+import { Card, message, Row, Col } from 'antd';
 import ProForm, {
   ProFormDateRangePicker,
   ProFormDependency,
@@ -9,12 +9,31 @@ import ProForm, {
   ProFormTextArea,
 } from '@ant-design/pro-form';
 import { useRequest } from 'umi';
-import type { FC } from 'react';
+import type { FC} from 'react';
+import {useState} from 'react';
 import { PageContainer } from '@ant-design/pro-layout';
 import { fakeSubmitForm } from './service';
 import styles from './style.less';
+import Avatar from '../../components/PaperMasters/Avatar';
+
+const fieldLabels = {
+  name: 'Identity Name',
+  aka: 'Familiar Name',
+  slogan: 'Slogan',
+  organization: 'Organization',
+  description: 'Description',
+  url: 'Webpage'
+};
 
 const BasicForm: FC<Record<string, any>> = () => {
+  const [name, setName] = useState<string | null>(null);
+  const [familiarName, setFamiliarName] = useState<string | null>(null);
+  const [slogan, setSlogan] = useState<string | null>(null);
+  const [org, setOrg] = useState<string | null>(null);
+  const [desc, setDesc] = useState<string | null>(null);
+  const [url, setUrl] = useState<string | null>(null);
+
+
   const { run } = useRequest(fakeSubmitForm, {
     manual: true,
     onSuccess: () => {
@@ -26,11 +45,21 @@ const BasicForm: FC<Record<string, any>> = () => {
     run(values);
   };
 
+  const nameChange = (evt) => {setName(evt.target.value);};
+  const familiarNameChange = (evt) => {setFamiliarName(evt.target.value);};
+  const sloganChange = (evt) => {setSlogan(evt.target.value);};
+  const orgChange = (evt) => {setOrg(evt.target.value);};
+  const descChange = (evt) => {setDesc(evt.target.value);};
+  const urlChange = (evt) => {setUrl(evt.target.value);};
+
   return (
     <PageContainer content="表单页用于向用户收集或验证信息，基础表单常见于数据项较少的表单场景。">
+     <Row gutter={6}>
+
+       <Col span={12}>
       <Card bordered={false}>
         <ProForm
-          hideRequiredMark
+          hideRequiredMark={false}
           style={{ margin: 'auto', marginTop: 8, maxWidth: 600 }}
           name="basic"
           layout="vertical"
@@ -38,149 +67,96 @@ const BasicForm: FC<Record<string, any>> = () => {
           onFinish={onFinish}
         >
           <ProFormText
+            onChange={nameChange}
             width="md"
-            label="NameName"
-            name="title"
+            label={fieldLabels.name}
+            name="name"
             rules={[
               {
                 required: true,
-                message: 'Type Tpye',
+                message: 'Name',
               },
             ]}
-            placeholder="Please type name"
+            placeholder="First and Last/Surname name/Company Name"
           />
-          <ProFormDateRangePicker
-            label="Select Date Range"
+
+          <ProFormText
+            onChange={familiarNameChange}
             width="md"
-            name="date"
+            label={fieldLabels.aka}
+            name="AKA"
             rules={[
               {
-                required: true,
-                message: '请选择起止日期',
+                required: false,
+                message: 'known by',
               },
             ]}
-            placeholder={['开始日期', '结束日期']}
+            placeholder="Also Known As, informal name"
+          />
+          <ProFormText
+            onChange={orgChange}
+            width="md"
+            label={fieldLabels.organization}
+            name="Organization"
+            rules={[
+              {
+                required: false,
+                message: 'Organization',
+              },
+            ]}
+            placeholder="Organization"
+          />
+          <ProFormText
+            onChange={sloganChange}
+            width="md"
+            label={fieldLabels.slogan}
+            name="Slogan"
+            rules={[
+              {
+                required: false,
+                message: 'Tagline',
+              },
+            ]}
+            placeholder="Moto"
+          />
+          <ProFormText
+            onChange={urlChange}
+            label={fieldLabels.url}
+            name="url"
+            rules={[{ required: false, message: '请选择' }]}
+            fieldProps={{
+              style: { width: '100%' },
+              //addonBefore: 'http://',
+              //addonAfter: '.com',
+            }}
+            placeholder="personal or company webpage"
           />
           <ProFormTextArea
-            label="Autobiography"
-            width="xl"
+            onChange={descChange}
+            //onChange = {maxLength}
+            width="lg"
+            label={fieldLabels.description}
             name="goal"
             rules={[
               {
                 required: true,
-                message: '请输入目标描述',
+                message: 'What you want people to know',
               },
             ]}
-            placeholder="请输入你的阶段性工作目标"
+            placeholder="What you want people to know"
+            //maxLengh={50}//add max number of characters
           />
-
-          <ProFormTextArea
-            label="衡量标准"
-            name="standard"
-            width="xl"
-            rules={[
-              {
-                required: true,
-                message: '请输入衡量标准',
-              },
-            ]}
-            placeholder="请输入衡量标准"
-          />
-
-          <ProFormText
-            width="md"
-            label={
-              <span>
-                客户
-                <em className={styles.optional}>（选填）</em>
-              </span>
-            }
-            tooltip="目标的服务对象"
-            name="client"
-            placeholder="请描述你服务的客户，内部客户直接 @姓名／工号"
-          />
-
-          <ProFormText
-            width="md"
-            label={
-              <span>
-                邀评人
-                <em className={styles.optional}>（选填）</em>
-              </span>
-            }
-            name="invites"
-            placeholder="请直接 @姓名／工号，最多可邀请 5 人"
-          />
-
-          <ProFormDigit
-            label={
-              <span>
-                权重
-                <em className={styles.optional}>（选填）</em>
-              </span>
-            }
-            name="weight"
-            placeholder="请输入"
-            min={0}
-            max={100}
-            width="xs"
-            fieldProps={{
-              formatter: (value) => `${value || 0}%`,
-              parser: (value) => (value ? value.replace('%', '') : '0'),
-            }}
-          />
-
-          <ProFormRadio.Group
-            options={[
-              {
-                value: '1',
-                label: '公开',
-              },
-              {
-                value: '2',
-                label: '部分公开',
-              },
-              {
-                value: '3',
-                label: '不公开',
-              },
-            ]}
-            label="目标公开"
-            help="客户、邀评人默认被分享"
-            name="publicType"
-          />
-          <ProFormDependency name={['publicType']}>
-            {({ publicType }) => {
-              return (
-                <ProFormSelect
-                  width="md"
-                  name="publicUsers"
-                  fieldProps={{
-                    style: {
-                      margin: '8px 0',
-                      display: publicType && publicType === '2' ? 'block' : 'none',
-                    },
-                  }}
-                  options={[
-                    {
-                      value: '1',
-                      label: '同事甲',
-                    },
-                    {
-                      value: '2',
-                      label: '同事乙',
-                    },
-                    {
-                      value: '3',
-                      label: '同事丙',
-                    },
-                  ]}
-                />
-              );
-            }}
-          </ProFormDependency>
         </ProForm>
       </Card>
+       </Col>
+
+       <Col span={12}>
+
+           <Avatar name={name} familiarName={familiarName} slogan={slogan} organization={org} url={url} description={desc}/>
+
+       </Col>
+     </Row>
+
     </PageContainer>
   );
 };

@@ -27,7 +27,7 @@ type InternalNamePath = (string | number)[];
 
 const fieldLabels = {
   name: '仓库名',
-  url: '仓库域名',
+  url: 'webpage',
   owner: '仓库管理员',
   approver: '审批人',
   dateRange: '生效日期',
