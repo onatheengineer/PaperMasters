@@ -86,18 +86,18 @@ export default defineConfig({
           path: '/dashboard/monitor',
           component: './dashboard/monitor',
         },
-        // {
-        //   name: 'workplace',
-        //   icon: 'smile',
-        //   path: '/dashboard/workplace',
-        //   component: './dashboard/workplace',
-        // },
+        {
+          name: 'workplace',
+          icon: 'smile',
+          path: '/dashboard/workplace',
+          component: './dashboard/workplace',
+        },
       ],
     },
     {
       name: 'Mint',
       icon: 'form',
-      path: '/mintform',
+      path: '/mint',
       component: './mintform',
     },
     {
@@ -106,11 +106,11 @@ export default defineConfig({
       path: '/identities',
       component: './identities',
     },
-    {
-      path: '/form',
-      icon: 'form',
-      name: 'forms',
-      routes: [
+    // {
+    //   path: '/form',
+    //   icon: 'form',
+    //   name: 'forms',
+    //   routes: [
         // {
         //   path: '/form',
         //   redirect: '/form/basic-form',
@@ -133,42 +133,42 @@ export default defineConfig({
         //   path: '/form/advanced-form',
         //   component: './form/advanced-form',
         // },
-      ],
-    },
-    {
-      path: '/list',
-      icon: 'table',
-      name: 'list',
-      routes: [
-        {
-          path: '/list/search',
-          name: 'search-list',
-          component: './list/search',
-          routes: [
-            {
-              path: '/list/search',
-              redirect: '/list/search/articles',
-            },
+    //   ],
+    // },
+    // {
+    //   path: '/list',
+    //   icon: 'table',
+    //   name: 'list',
+    //   routes: [
+    //     {
+    //       path: '/list/search',
+    //       name: 'search-list',
+    //       component: './list/search',
+    //       routes: [
+    //         {
+    //           path: '/list/search',
+    //           redirect: '/list/search/articles',
+    //         },
         //     {
         //       name: 'articles',
         //       icon: 'smile',
         //       path: '/list/search/articles',
         //       component: './list/search/articles',
         //     },
-            {
-              name: 'projects',
-              icon: 'smile',
-              path: '/list/search/projects',
-              component: './list/search/projects',
-            },
+        //     {
+        //       name: 'projects',
+        //       icon: 'smile',
+        //       path: '/list/search/projects',
+        //       component: './list/search/projects',
+        //     },
         //     {
         //       name: 'applications',
         //       icon: 'smile',
         //       path: '/list/search/applications',
         //       component: './list/search/applications',
         //     },
-           ],
-         },
+        //    ],
+        //  },
         // {
         //   path: '/list',
         //   redirect: '/list/table-list',
@@ -191,8 +191,8 @@ export default defineConfig({
         //   path: '/list/card-list',
         //   component: './list/card-list',
         // },
-      ],
-     },
+     //  ],
+     // },
     // {
     //   path: '/profile',
     //   name: 'profile',

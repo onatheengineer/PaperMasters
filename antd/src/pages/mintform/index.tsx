@@ -9,12 +9,14 @@ import ProForm, {
   ProFormTextArea,
 } from '@ant-design/pro-form';
 import { useRequest } from 'umi';
-import type { FC} from 'react';
-import {useState} from 'react';
+import type {FC} from 'react';
+import {useState, useEffect} from 'react';
 import { PageContainer } from '@ant-design/pro-layout';
 import { fakeSubmitForm } from './service';
 import styles from './style.less';
 import Avatar from '../../components/PaperMasters/Avatar';
+import Web3 from "web3";
+import MintIdentity from "../../contracts/MintIdentity.json"
 
 const fieldLabels = {
   name: 'Identity Name',
@@ -32,6 +34,39 @@ const BasicForm: FC<Record<string, any>> = () => {
   const [org, setOrg] = useState<string | null>(null);
   const [desc, setDesc] = useState<string | null>(null);
   const [url, setUrl] = useState<string | null>(null);
+  const [account, setAccount] = useState([]);
+  const [identities, setIdentities] = useState({});
+
+  const web3 = new Web3(Web3.givenProvider || "http://localhost:7545");
+  const contract = new web3.eth.Contract(MintIdentity.abi as any, MintIdentity.networks['5777'].address);
+  console.log(MintIdentity);
+
+  useEffect(()=> {
+    web3.eth.requestAccounts().then((acc) => {setAccount(acc)});
+    contract.methods.totalSupply().call().then((ts: any) => {
+      console.log(ts);
+     }, (error)=>{console.log(error)})
+  }, []);
+
+  useEffect(()=>{
+    console.log("accoutn use effect");
+    console.log(account);
+    account.map((eachAcc)=>{
+      console.log(eachAcc);
+      contract.methods.balanceOf(eachAcc).call().then((values: any) => {
+        console.log(values);
+        for (let i = 0; i < values; i++) {
+          console.log(i)
+         contract.methods.getTokenIdentity(i).call().then((ident: any) => {
+            console.log(ident);
+         });
+        }
+      }, (error)=>{
+        console.log(error);
+      })
+    })
+
+  }, [account]);
 
 
   const { run } = useRequest(fakeSubmitForm, {
@@ -40,6 +75,7 @@ const BasicForm: FC<Record<string, any>> = () => {
       message.success('Submitted Successfully');
     },
   });
+
 
   const onFinish = async (values: Record<string, any>) => {
     run(values);
@@ -52,10 +88,10 @@ const BasicForm: FC<Record<string, any>> = () => {
   const descChange = (evt) => {setDesc(evt.target.value);};
   const urlChange = (evt) => {setUrl(evt.target.value);};
 
-  return (
-    <PageContainer content="Mint yourself or your company and become a legitimate Artist on the Blockchain">
-     <Row gutter={6}>
 
+  return (
+    <PageContainer content="Mint yourself or your company and use your unique NFT Identification Number to become a legitimate Artist on the Blockchain.">
+     <Row gutter={6}>
        <Col span={12}>
       <Card bordered={false} title={"Identity Identification Number (NFT ID)"}>
         <ProForm
@@ -79,7 +115,6 @@ const BasicForm: FC<Record<string, any>> = () => {
             ]}
             placeholder="First and Last/Surname name/Company Name"
           />
-
           <ProFormText
             onChange={familiarNameChange}
             width="md"
@@ -149,14 +184,15 @@ const BasicForm: FC<Record<string, any>> = () => {
         </ProForm>
       </Card>
        </Col>
-
        <Col span={12}>
-
+         <Card bordered={false} title={"Minted Non-Fungable Token Identification"}>
+          <div style={{borderStyle:"double"}} >
+            {JSON.stringify(account, null, 3)}
            <Avatar name={name} familiarName={familiarName} slogan={slogan} organization={org} url={url} description={desc}/>
-
+         </div>
+         </Card>
        </Col>
      </Row>
-
     </PageContainer>
   );
 };
