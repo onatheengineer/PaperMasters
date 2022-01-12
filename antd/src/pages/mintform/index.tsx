@@ -37,7 +37,7 @@ const BasicForm: FC<Record<string, any>> = () => {
   const { run } = useRequest(fakeSubmitForm, {
     manual: true,
     onSuccess: () => {
-      message.success('提交成功');
+      message.success('Submitted Successfully');
     },
   });
 
@@ -53,11 +53,11 @@ const BasicForm: FC<Record<string, any>> = () => {
   const urlChange = (evt) => {setUrl(evt.target.value);};
 
   return (
-    <PageContainer content="表单页用于向用户收集或验证信息，基础表单常见于数据项较少的表单场景。">
+    <PageContainer content="Mint yourself or your company and become a legitimate Artist on the Blockchain">
      <Row gutter={6}>
 
        <Col span={12}>
-      <Card bordered={false}>
+      <Card bordered={false} title={"Identity Identification Number (NFT ID)"}>
         <ProForm
           hideRequiredMark={false}
           style={{ margin: 'auto', marginTop: 8, maxWidth: 600 }}
@@ -125,11 +125,11 @@ const BasicForm: FC<Record<string, any>> = () => {
             name="url"
             rules={[{ required: false, message: '请选择' }]}
             fieldProps={{
-              style: { width: '100%' },
+              style: { width: '75%' },
               //addonBefore: 'http://',
               //addonAfter: '.com',
             }}
-            placeholder="personal or company webpage"
+            placeholder="personal or company url"
           />
           <ProFormTextArea
             onChange={descChange}
