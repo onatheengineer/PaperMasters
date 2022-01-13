@@ -11,7 +11,7 @@
     "compile": "./node_modules/.bin/truffle compile --all",
     "migrate": "./node_modules/.bin/truffle migrate",
     "migrate-reset": "./node_modules/.bin/truffle migrate --reset",
-    "deploy": "cp ./build/contracts/* ../client/src/contracts/"
+    "deploy": "cp ./build/contracts/* ../dapp/src/contracts/"
   },
   "author": "",
   "license": "ISC",
