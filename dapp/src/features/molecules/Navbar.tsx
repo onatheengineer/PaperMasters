@@ -113,8 +113,11 @@ export default function Navbar() {
                                 minW={0}> Company
                             </MenuButton>
                             <MenuList>
-                                <MenuItem as={ReachLink} to='/mint' >About Us</MenuItem>
-                                <MenuItem as={ReachLink} to='/authenticate' >Contact Us</MenuItem>
+                                <MenuItem as={ReachLink} to='/Analytics' >Analytics</MenuItem>
+                                <MenuItem as={ReachLink} to='/AboutUs' >About Us</MenuItem>
+                                <MenuItem as={ReachLink} to='/ContactUs' >Contact Us</MenuItem>
+                                <MenuItem as={ReachLink} to='/SupportUs' >Support Us</MenuItem>
+                                <MenuItem as={ReachLink} to='/News' >News</MenuItem>
                             </MenuList>
                         </Menu>
                         <Menu >
@@ -129,7 +132,7 @@ export default function Navbar() {
                                 <MenuItem as={ReachLink} to='/mint' >Create a PM Identity</MenuItem>
                                 <MenuItem as={ReachLink} to='/authenticate' >Validation of PM Identities</MenuItem>
                                 <MenuDivider />
-                                <MenuItem as={ReachLink} to='/catalog'> Catalog of PM Identities'</MenuItem>
+                                <MenuItem as={ReachLink} to='/catalog'>Catalog of PM Identities</MenuItem>
                             </MenuList>
                         </Menu>
                         <Menu >
@@ -144,7 +147,7 @@ export default function Navbar() {
                                 <MenuItem as={ReachLink} to='/mint' >Create a PM Identity</MenuItem>
                                 <MenuItem as={ReachLink} to='/authenticate' >Validation of PM Identities</MenuItem>
                                 <MenuDivider />
-                                <MenuItem as={ReachLink} to='/catalog'> Catalog of PM Identities'</MenuItem>
+                                <MenuItem as={ReachLink} to='/catalog'>Catalog of PM Identities</MenuItem>
                             </MenuList>
                         </Menu>
 

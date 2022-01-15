@@ -13,6 +13,9 @@ import WithAction from "../molecules/Navbar";
 import SimpleSidebar from "../molecules/Sidebar";
 import BackgroundLogo from '../../legoLavendarheadercroped.png'
 import LargeWithAppLinksAndSocial from "../molecules/Footer";
+import GridListHome from "../molecules/GridListHome"
+
+
 
 
 export default function Home() {
@@ -62,5 +65,6 @@ export default function Home() {
                 </Stack>
             </VStack>
         </Flex>
+
     );
 }

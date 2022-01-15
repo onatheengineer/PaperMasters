@@ -160,3 +160,4 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
         </Flex>
     );
 };
+

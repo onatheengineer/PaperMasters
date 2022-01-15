@@ -13,12 +13,13 @@ import AttachToPM from "./features/pages/AttachToPM";
 import ContactUs from "./features/pages/ContactUs";
 import ProofConcept from "./features/pages/ProofConcept";
 import News from "./features/pages/News";
-
+import GridListHome from "../src/features/molecules/GridListHome";
+import SupportUs from "../src/features/pages/SupportUs"
 import {
   Routes,
   Route
 } from "react-router-dom";
-
+import Web3 from "web3";
 
 function App() {
   return (
@@ -33,9 +34,11 @@ function App() {
             <Route path="/Attach" element={  <AttachToPM/> }/>
             <Route path="/AboutUs" element={  <AboutUs/> }/>
             <Route path="/ContactUs" element={  <ContactUs/> }/>
+            <Route path="/SupportUs" element={  <SupportUs/> }/>
             <Route path="/ProofConcept" element={  <ProofConcept/> }/>
             <Route path="/News" element={  <News/> }/>
         </Routes>
+          <GridListHome/>
         <Footer/>
       </div>
 
