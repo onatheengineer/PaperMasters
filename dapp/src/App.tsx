@@ -9,12 +9,16 @@ import CreatePM from "./features/pages/CreatePM";
 import ValidatePM from "./features/pages/ValidatePM";
 import SearchPM from "./features/pages/SearchPM";
 import AboutUs from "./features/pages/AboutUs";
+import AttachToPM from "./features/pages/AttachToPM";
+import ContactUs from "./features/pages/ContactUs";
+import ProofConcept from "./features/pages/ProofConcept";
+import News from "./features/pages/News";
 
 import {
   Routes,
   Route
 } from "react-router-dom";
-import AttachToPM from "./features/pages/AttachToPM";
+
 
 function App() {
   return (
@@ -28,6 +32,9 @@ function App() {
             <Route path="/Search" element={  <SearchPM/> }/>
             <Route path="/Attach" element={  <AttachToPM/> }/>
             <Route path="/AboutUs" element={  <AboutUs/> }/>
+            <Route path="/ContactUs" element={  <ContactUs/> }/>
+            <Route path="/ProofConcept" element={  <ProofConcept/> }/>
+            <Route path="/News" element={  <News/> }/>
         </Routes>
         <Footer/>
       </div>

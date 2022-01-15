@@ -73,28 +73,25 @@ export default function Footer() {
 
                     <Stack align={'flex-start'}>
                         <ListHeader>Security</ListHeader>
-                        <Link href={'#'}>Cookies Policy</Link>
                         <Link href={'#'}>Privacy Policy</Link>
                         <Link href={'#'}>Terms of Service</Link>
-                        <Link href={'#'}>Community Guidelines</Link>
-                    </Stack>
-                    <Stack align={'flex-start'}>
-                        <ListHeader>Products</ListHeader>
-                        <Link href={'#'}>Analytics</Link>
-                        <Link href={'#'}>Authentic PM Identities</Link>
-                        <Link href={'#'}>Minting NFTs</Link>
-                        <Link href={'#'}>Validation</Link>
-                        <Link href={'#'}>Token Cataloging</Link>
+                        {/*<Link href={'#'}>Community Guidelines</Link>*/}
                     </Stack>
                     <Stack align={'flex-start'}>
                         <ListHeader>Support</ListHeader>
-                        <Link href={'#'}>Proof of Concept</Link>
                         <Link href={'#'}>Learning Center</Link>
-                        <Link href={'#'}>Help Center</Link>
                         <Link href={'#'}>Community Forum</Link>
                     </Stack>
                     <Stack align={'flex-start'}>
+                        <ListHeader>Products</ListHeader>
+                        <Link href={'#'}>Authentic PM Identities</Link>
+                        <Link href={'#'}>Minting NFTs</Link>
+                        <Link href={'#'}>Validation</Link>
+                        <Link href={'#'}>PM Identity Cataloging</Link>
+                    </Stack>
+                    <Stack align={'flex-start'}>
                         <ListHeader>Company</ListHeader>
+                        <Link href={'#'}>Analytics</Link>
                         <Link as={ReachLink} to="/AboutUs" href={'#'}>About Us</Link>
                         {/*<Link href={'#'}>Careers</Link>*/}
                         <Link href={'#'}>Contact Us</Link>
