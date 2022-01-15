@@ -10,7 +10,10 @@ import {
     chakra,
     useColorModeValue,
 } from '@chakra-ui/react';
-import { FaTwitter, FaYoutube, FaInstagram } from 'react-icons/fa';
+import {FaTwitter, FaYoutube, FaInstagram, FaLinkedin} from 'react-icons/fa';
+import PMLogo from "../../../src/PaperMastersLogoGIMP.png"
+import Logo from "../../PaperMastersLogoGIMP.png";
+import {Link as ReachLink} from "react-router-dom";
 
 //import AppStoreBadge from '@/components/AppStoreBadge';
 //import PlayStoreBadge from '@/components/PlayStoreBadge';
@@ -59,36 +62,46 @@ export default function Footer() {
         <Box
             bg={useColorModeValue('#EEEEF6', 'gray.900')}
             color={useColorModeValue('gray.700', 'gray.200')}>
-            <Container as={Stack} maxW={'6xl'} py={10}>
-                <SimpleGrid columns={{ base: 1, sm: 2, md: 4 }} spacing={8}>
+            <Container as={Stack} maxW={'7xl'} py={8}>
+                <SimpleGrid columns={{ base: 1, sm: 2, md: 6 }} spacing={9}>
+                    <Stack></Stack>
                     <Stack align={'flex-start'}>
-                        <ListHeader>Company</ListHeader>
-                        <Link href={'#'}>About Us</Link>
-                        <Link href={'#'}>Blog</Link>
-                        <Link href={'#'}>Careers</Link>
-                        <Link href={'#'}>Contact Us</Link>
-                    </Stack>
-
-                    <Stack align={'flex-start'}>
-                        <ListHeader>Support</ListHeader>
-                        <Link href={'#'}>Help Center</Link>
-                        <Link href={'#'}>Safety Center</Link>
-                        <Link href={'#'}>Community Guidelines</Link>
-                    </Stack>
-
-                    <Stack align={'flex-start'}>
-                        <ListHeader>Legal</ListHeader>
-                        <Link href={'#'}>Cookies Policy</Link>
-                        <Link href={'#'}>Privacy Policy</Link>
-                        <Link href={'#'}>Terms of Service</Link>
-                        <Link href={'#'}>Law Enforcement</Link>
-                    </Stack>
-
-                    <Stack align={'flex-start'}>
-                        <ListHeader>Install App</ListHeader>
+                        <ListHeader><img src={PMLogo}/></ListHeader>
                         {/*<AppStoreBadge />*/}
                         {/*<PlayStoreBadge />*/}
                     </Stack>
+
+                    <Stack align={'flex-start'}>
+                        <ListHeader>Security</ListHeader>
+                        <Link href={'#'}>Cookies Policy</Link>
+                        <Link href={'#'}>Privacy Policy</Link>
+                        <Link href={'#'}>Terms of Service</Link>
+                        <Link href={'#'}>Community Guidelines</Link>
+                    </Stack>
+                    <Stack align={'flex-start'}>
+                        <ListHeader>Products</ListHeader>
+                        <Link href={'#'}>Analytics</Link>
+                        <Link href={'#'}>Authentic PM Identities</Link>
+                        <Link href={'#'}>Minting NFTs</Link>
+                        <Link href={'#'}>Validation</Link>
+                        <Link href={'#'}>Token Cataloging</Link>
+                    </Stack>
+                    <Stack align={'flex-start'}>
+                        <ListHeader>Support</ListHeader>
+                        <Link href={'#'}>Proof of Concept</Link>
+                        <Link href={'#'}>Learning Center</Link>
+                        <Link href={'#'}>Help Center</Link>
+                        <Link href={'#'}>Community Forum</Link>
+                    </Stack>
+                    <Stack align={'flex-start'}>
+                        <ListHeader>Company</ListHeader>
+                        <Link as={ReachLink} to="/AboutUs" href={'#'}>About Us</Link>
+                        {/*<Link href={'#'}>Careers</Link>*/}
+                        <Link href={'#'}>Contact Us</Link>
+                        <Link href={'#'}>Logo Kit</Link>
+                        <Link href={'#'}>News and Events</Link>
+                    </Stack>
+
                 </SimpleGrid>
             </Container>
 
@@ -104,16 +117,23 @@ export default function Footer() {
                     spacing={4}
                     justify={{ md: 'space-between' }}
                     align={{ md: 'center' }}>
-                    <Text>© 2020 Chakra Templates. All rights reserved</Text>
-                    <Stack direction={'row'} spacing={6}>
-                        <SocialButton label={'Twitter'} href={'#'}>
+                    {/*    copyright={`${currentYear} ${defaultMessage}`}*/}
+                    <Text>© 2022 The PaperMasters. Bringing Legitimacy to the Blockchain.</Text>
+                    <Stack direction={'row'} spacing={7}>
+                        <SocialButton label={'Twitter'} href={'https://twitter.com/ramonajenny_n'}>
                             <FaTwitter />
                         </SocialButton>
-                        <SocialButton label={'YouTube'} href={'#'}>
+                        <SocialButton label={'YouTube'} href={'https://www.youtube.com/channel/UC-w92fylwBTYGK--jse0jeQ'}>
                             <FaYoutube />
                         </SocialButton>
-                        <SocialButton label={'Instagram'} href={'#'}>
+                        <SocialButton label={'Instagram'} href={'https://www.instagram.com/ramonaandrew_niederhausern/'}>
                             <FaInstagram />
+                        </SocialButton>
+                        <SocialButton label={'Linkedin'} href={'https://www.linkedin.com/in/ramonajenny/'}>
+                            <FaLinkedin />
+                        </SocialButton>
+                        <SocialButton label={'Linkedin'} href={'https://www.linkedin.com/in/andrew-nieder/'}>
+                            <FaLinkedin />
                         </SocialButton>
                     </Stack>
                 </Container>

@@ -1,4 +1,5 @@
 import React, { ReactNode } from 'react';
+import PMLogo from '../../PMGIMPResized.png';
 import {
     IconButton,
     Box,
@@ -25,6 +26,7 @@ import {
 import { IconType } from 'react-icons';
 import { ReactText } from 'react';
 
+
 interface LinkItemProps {
     name: string;
     icon: IconType;
@@ -40,7 +42,7 @@ const LinkItems: Array<LinkItemProps> = [
 export default function SimpleSidebar({ children }: { children: ReactNode }) {
     const { isOpen, onOpen, onClose } = useDisclosure();
     return (
-        <Box minH="100vh" bg={useColorModeValue('gray.100', 'gray.900')}>
+        <Box boarderLeft='1px' borderTop='1px' borderBottom='1px' borderColor='gray.200' minH="70vh" bg={useColorModeValue('#EEEEF6', 'gray.900')}>
             <SidebarContent
                 onClose={() => onClose}
                 display={{ base: 'none', md: 'block' }}
@@ -73,7 +75,7 @@ interface SidebarProps extends BoxProps {
 const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
     return (
         <Box
-            bg={useColorModeValue('white', 'gray.900')}
+            bg={useColorModeValue('whitesmoke', 'gray.900')}
             borderRight="1px"
             borderRightColor={useColorModeValue('gray.200', 'gray.700')}
             w={{ base: 'full', md: 60 }}
@@ -82,7 +84,7 @@ const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
             {...rest}>
             <Flex h="20" alignItems="center" mx="8" justifyContent="space-between">
                 <Text fontSize="2xl" fontFamily="monospace" fontWeight="bold">
-                    Logo
+                  <img src={PMLogo}/>
                 </Text>
                 <CloseButton display={{ base: 'flex', md: 'none' }} onClick={onClose} />
             </Flex>
@@ -153,7 +155,7 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
             />
 
             <Text fontSize="2xl" ml="8" fontFamily="monospace" fontWeight="bold">
-                Logo
+                <img src={PMLogo}/>
             </Text>
         </Flex>
     );

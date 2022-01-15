@@ -16,19 +16,19 @@ import {
     useColorModeValue,
     Stack,
 } from '@chakra-ui/react';
+import { extendTheme } from '@chakra-ui/react';
 import {Link as ReachLink} from "react-router-dom";
-import { HamburgerIcon, CloseIcon, AddIcon } from '@chakra-ui/icons';
+import {HamburgerIcon, CloseIcon, AddIcon, EditIcon, LinkIcon} from '@chakra-ui/icons';
+import { Icon } from '@chakra-ui/react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSearch, faFileAlt, faLink, faChartLine, faBookmark, faPaperclip, faScroll, faUserCheck } from '@fortawesome/free-solid-svg-icons'
 import Logo from '../../PaperMastersLogoGIMP.png';
-import Lego from '../../legoLavendar.png';
+import PMLogo from '../../legoLavendar.png';
 
-const Links = {
-    Dashboard: "/dashboard",
-    Mint: "/mint",
-    PMIdentities: "/pmidentities"
-};
 
 const NavLink = (props: any) => (
-    <Link as={ReachLink} to='/mint'
+
+    <Link
         px={2}
         py={1}
         rounded={'md'}
@@ -39,7 +39,9 @@ const NavLink = (props: any) => (
         href={'#'}>
         {props.children}
     </Link>
+
 );
+
 
 export default function Navbar() {
     const { isOpen, onOpen, onClose } = useDisclosure();
@@ -57,15 +59,97 @@ export default function Navbar() {
                     />
                     <HStack spacing={8} alignItems={'center'}>
                         <Box><Link as={ReachLink} to="/"><img src={Logo}/></Link></Box>
-                        <HStack
-                            as={'nav'}
-                            spacing={4}
-                            display={{ base: 'none', md: 'flex' }}>
-                            {Object.keys(Links).map((link) => (
-                                <NavLink key={link} >{link}</NavLink>
-                            ))}
-                        </HStack>
+                        <Menu >
+                            <MenuButton
+                                as={Button}
+                                square={'full'}
+                                variant={'link'}
+                                cursor={'pointer'}
+                                colorful={'color'}
+                                minW={0}> Products
+                            </MenuButton>
+                            <MenuList >
+                                <MenuItem as={ReachLink} to='/Analytics'  icon={<FontAwesomeIcon icon={faChartLine} />} >PM Identity</MenuItem>
+                                <MenuDivider />
+                                <MenuItem as={ReachLink} to='/Create'   icon={<FontAwesomeIcon icon={faBookmark} />} > Create</MenuItem>
+                                <MenuItem as={ReachLink} to='/Validate'   icon={<FontAwesomeIcon icon={faUserCheck} />} >Validate</MenuItem>
+                                <MenuItem as={ReachLink} to='/Attach'  icon={<FontAwesomeIcon icon={faScroll} />} >Attach</MenuItem>
+                                <MenuItem as={ReachLink} to='/Search'  icon={<FontAwesomeIcon icon={faSearch} />} >Search</MenuItem>
+                            </MenuList>
+                        </Menu>
+                        <Menu >
+                            <MenuButton
+                                as={Button}
+                                square={'full'}
+                                variant={'link'}
+                                cursor={'pointer'}
+                                minW={0}> Analytics
+                            </MenuButton>
+                            <MenuList >
+                                <MenuItem as={ReachLink} to='/Analytics'  icon={<FontAwesomeIcon icon={faChartLine} />} >Analytics</MenuItem>
+                            </MenuList>
+                        </Menu>
+                        <Menu>
+                            <MenuButton
+                                as={Button}
+                                rounded={'full'}
+                                variant={'link'}
+                                cursor={'pointer'}
+                                minW={0}> Learn
+                            </MenuButton>
+                            <MenuList>
+                                <MenuItem as={ReachLink} to='/mint' >Catalog of PM Identities</MenuItem>
+                                <MenuDivider />
+                                <MenuItem as={ReachLink} to='/catalog'> Create a PM Identity</MenuItem>
+                                <MenuItem as={ReachLink} to='/authenticate' >Validation of PM Identities</MenuItem>
+                            </MenuList>
+                        </Menu>
+                        <Menu >
+                            <MenuButton
+                                as={Button}
+                                rounded={'full'}
+                                variant={'link'}
+                                cursor={'pointer'}
+                                minW={0}> Company
+                            </MenuButton>
+                            <MenuList>
+                                <MenuItem as={ReachLink} to='/mint' >About Us</MenuItem>
+                                <MenuItem as={ReachLink} to='/authenticate' >Contact Us</MenuItem>
+                            </MenuList>
+                        </Menu>
+                        <Menu >
+                            <MenuButton
+                                as={Button}
+                                rounded={'full'}
+                                variant={'link'}
+                                cursor={'pointer'}
+                                minW={0}> Security
+                            </MenuButton>
+                            <MenuList>
+                                <MenuItem as={ReachLink} to='/mint' >Create a PM Identity</MenuItem>
+                                <MenuItem as={ReachLink} to='/authenticate' >Validation of PM Identities</MenuItem>
+                                <MenuDivider />
+                                <MenuItem as={ReachLink} to='/catalog'> Catalog of PM Identities'</MenuItem>
+                            </MenuList>
+                        </Menu>
+                        <Menu >
+                            <MenuButton
+                                as={Button}
+                                rounded={'full'}
+                                variant={'link'}
+                                cursor={'pointer'}
+                                minW={0}> News and Events
+                            </MenuButton>
+                            <MenuList>
+                                <MenuItem as={ReachLink} to='/mint' >Create a PM Identity</MenuItem>
+                                <MenuItem as={ReachLink} to='/authenticate' >Validation of PM Identities</MenuItem>
+                                <MenuDivider />
+                                <MenuItem as={ReachLink} to='/catalog'> Catalog of PM Identities'</MenuItem>
+                            </MenuList>
+                        </Menu>
+
                     </HStack>
+
                     <Flex alignItems={'center'}>
                         {/*<Button*/}
                         {/*    variant={'solid'}*/}
@@ -75,7 +159,7 @@ export default function Navbar() {
                         {/*    leftIcon={<AddIcon />}>*/}
                         {/*    Needs to connect to Wallet?*/}
                         {/*</Button>*/}
-                        <Menu>
+                        <Menu >
                             <MenuButton
                                 as={Button}
                                 rounded={'full'}
@@ -84,7 +168,7 @@ export default function Navbar() {
                                 minW={0}>
                                 <Avatar
                                     size={'sm'}
-                                    src={Lego}
+                                    src={PMLogo}
                                 />
                             </MenuButton>
                             <MenuList>
@@ -97,15 +181,7 @@ export default function Navbar() {
                     </Flex>
                 </Flex>
 
-                {isOpen ? (
-                    <Box pb={4} display={{ md: 'none' }}>
-                        <Stack as={'nav'} spacing={4}>
-                            {Object.keys(Links).map((link)=> (
-                                <NavLink key={link}>{link}</NavLink>
-                            ))}
-                        </Stack>
-                    </Box>
-                ) : null}
+
             </Box>
         </>
     );

@@ -8,12 +8,14 @@ import * as serviceWorker from './serviceWorker';
 import {
     BrowserRouter
 } from "react-router-dom";
-import { ChakraProvider } from '@chakra-ui/react'
+import {ChakraProvider} from '@chakra-ui/react'
+import theme from "../src/customTheme"
+
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-        <ChakraProvider>
+        <ChakraProvider theme={theme}>
         <BrowserRouter>
       <App />
         </BrowserRouter>,
