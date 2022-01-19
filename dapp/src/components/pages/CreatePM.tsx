@@ -3,9 +3,8 @@ import {useState, useEffect} from "react"
 import Web3 from "web3";
 import type {FC} from 'react';
 import {Button, FormControl, FormLabel, Grid, GridItem, Input, Stack} from '@chakra-ui/react';
-import MintIdentity from "../../../src/contracts/MintIdentity.json"
+import MintIdentity from '../../contracts/MintIdentity.json';
 import SimpleSidebar from "../molecules/Sidebar";
-
 
 
 interface Interface {
@@ -31,8 +30,8 @@ export const CreatePM:FC<Interface>=()=> {
     const [account, setAccount] = useState<string[]>([]);
     const [identities, setIdentities] = useState({});
 
-
-
+    // const contract = new web3.eth.Contract(MintIdentity.abi as any, MintIdentity.networks['5777'].address);
+    // console.log(MintIdentity);
 
     return(
         <SimpleSidebar>

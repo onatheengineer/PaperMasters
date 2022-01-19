@@ -35,3 +35,31 @@ export const Search:FC<Interface>=()=>{
 };
 
 export default Search;
+
+
+// useEffect(() => {
+//     console.log("accoutn use effect");
+//     console.log(account);
+//     account.map((eachAcc) => {
+//         console.log(eachAcc);
+//         contract.methods.balanceOf(eachAcc).call().then((values: any) => {
+//             console.log(values);
+//             for (let i = 0; i < values; i++) {
+//                 console.log(i)
+//                 contract.methods.getTokenIdentity(i).call().then((ident: any) => {
+//                     console.log(ident);
+//                 });
+//             }
+//         }, (error: any) => {
+//             console.log(error);
+//         })
+//     })
+//
+// }, [account]);
+
+// contract.methods.totalSupply().call().then((ts: any) => {
+//     console.log(ts);
+// }, (error: any) => {
+//     console.log(error)
+// })
+//
