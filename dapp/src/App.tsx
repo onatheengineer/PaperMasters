@@ -1,29 +1,35 @@
 import React from 'react';
 import './App.css';
-import Navbar from "./features/molecules/Navbar";
-import Footer from "./features/molecules/Footer";
+import Navbar from "./components/molecules/Navbar";
+import Footer from "./components/molecules/Footer";
 
-import Home from "./features/pages/Home";
-import Analytics from "./features/pages/Analytics";
-import CreatePM from "./features/pages/CreatePM";
-import ValidatePM from "./features/pages/ValidatePM";
-import SearchPM from "./features/pages/SearchPM";
-import AboutUs from "./features/pages/AboutUs";
-import AttachToPM from "./features/pages/AttachToPM";
-import ContactUs from "./features/pages/ContactUs";
-import ProofConcept from "./features/pages/ProofConcept";
-import News from "./features/pages/News";
-import GridListHome from "../src/features/molecules/GridListHome";
-import SupportUs from "../src/features/pages/SupportUs"
+import Home from "./components/pages/Home";
+import Analytics from "./components/pages/Analytics";
+import CreatePM from "./components/pages/CreatePM";
+import ValidatePM from "./components/pages/ValidatePM";
+import SearchPM from "./components/pages/SearchPM";
+import AboutUs from "./components/pages/AboutUs";
+import AttachToPM from "./components/pages/AttachToPM";
+import ContactUs from "./components/pages/ContactUs";
+import ProofConcept from "./components/pages/ProofConcept";
+import News from "./components/pages/News";
+import GridListHome from "./components/molecules/GridListHome";
+import SupportUs from "./components/pages/SupportUs"
 import {
   Routes,
   Route
 } from "react-router-dom";
+import {produce} from 'immer';
 import Web3 from "web3";
 
+
 function App() {
+    // const Example = () => (
+    //         <Planet size={200} mood="blissful" color="#FDA7DC" />
+    //     )
+
   return (
-      <div>
+        <div>
         <Navbar/>
         <Routes>
           <Route path="/" element={<Home/>}/>

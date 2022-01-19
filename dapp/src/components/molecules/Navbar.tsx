@@ -24,7 +24,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch, faFileAlt, faLink, faChartLine, faBookmark, faPaperclip, faScroll, faUserCheck } from '@fortawesome/free-solid-svg-icons'
 import Logo from '../../PaperMastersLogoGIMP.png';
 import PMLogo from '../../legoLavendar.png';
-
+// import {Folder} from 'react-kawaii';
 
 const NavLink = (props: any) => (
 

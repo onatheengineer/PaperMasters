@@ -5,7 +5,6 @@ import {Button, FormControl, FormLabel, Grid, GridItem, Input, Stack} from '@cha
 import SimpleSidebar from "../molecules/Sidebar";
 
 
-
 interface Interface {
 
 }

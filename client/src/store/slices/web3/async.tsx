@@ -8,7 +8,6 @@ import {
     setWeb3Contract,
     setWeb3ContractAddress,
     setWeb3Error,
-
     setWeb3ErrorMessage
 } from "./index";
 import {getContract, getWeb3} from "../../../components/PaperMastersWeb3"

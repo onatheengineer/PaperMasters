@@ -33,10 +33,14 @@ interface LinkItemProps {
 }
 const LinkItems: Array<LinkItemProps> = [
     { name: 'Home', icon: FiHome },
-    { name: 'Trending', icon: FiTrendingUp },
-    { name: 'Explore', icon: FiCompass },
-    { name: 'Favourites', icon: FiStar },
-    { name: 'Settings', icon: FiSettings },
+    { name: 'Analytics', icon: FiTrendingUp },
+    { name: 'Create PM Identity', icon: FiCompass },
+    { name: 'Validate PM Identity', icon: FiStar },
+    { name: 'Search PM Identity', icon: FiStar },
+    { name: 'Attach NFTs to PM Identity', icon: FiStar },
+
+    { name: 'Search Identities', icon: FiStar },
+    { name: 'Manage Account', icon: FiSettings },
 ];
 
 export default function SimpleSidebar({ children }: { children: ReactNode }) {
@@ -59,7 +63,7 @@ export default function SimpleSidebar({ children }: { children: ReactNode }) {
                     <SidebarContent onClose={onClose} />
                 </DrawerContent>
             </Drawer>
-            {/* mobilenav */}
+             {/*mobilenav*/}
             <MobileNav display={{ base: 'flex', md: 'none' }} onOpen={onOpen} />
             <Box ml={{ base: 0, md: 60 }} p="4">
                 {children}
@@ -82,9 +86,10 @@ const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
             pos="fixed"
             h="full"
             {...rest}>
-            <Flex h="20" alignItems="center" mx="8" justifyContent="space-between">
+            <Flex h="24" alignItems="center" mx="14" justifyContent="space-between">
                 <Text fontSize="2xl" fontFamily="monospace" fontWeight="bold">
-                  <img src={PMLogo}/>
+
+                    <img src={PMLogo}/>
                 </Text>
                 <CloseButton display={{ base: 'flex', md: 'none' }} onClick={onClose} />
             </Flex>

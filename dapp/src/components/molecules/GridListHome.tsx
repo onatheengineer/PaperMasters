@@ -66,19 +66,19 @@ export default function gridListHome() {
                 gap={{ base: '8', sm: '12', md: '16' }}>
                 <Feature
                     heading={'Authentic PM Identities'}
-                    text={'Short text describing one of you features/service'}
+                    text={'Short text describing one of you components/service'}
                 />
                 <Feature
                     heading={'Minting NFTs'}
-                    text={'Short text describing one of you features/service'}
+                    text={'Short text describing one of you components/service'}
                 />
                 <Feature
                     heading={'Validation'}
-                    text={'Short text describing one of you features/service'}
+                    text={'Short text describing one of you components/service'}
                 />
                 <Feature
                     heading={'PM Identity Cataloging'}
-                    text={'Short text describing one of you features/service'}
+                    text={'Short text describing one of you components/service'}
                 />
             </Grid>
         </Box>
