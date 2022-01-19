@@ -2,12 +2,10 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface PMIState {
     accounts: string[];
-    pmIdentities: any[];
 }
 
 const initialState: PMIState = {
     accounts: [],
-    pmIdentities: [],
 
 };
 

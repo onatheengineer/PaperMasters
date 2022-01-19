@@ -1,5 +1,7 @@
 import React from 'react';
 import './App.css';
+import {useAppDispatch, useAppSelector} from './app/hooks';
+
 import Navbar from "./components/molecules/Navbar";
 import Footer from "./components/molecules/Footer";
 
@@ -24,6 +26,7 @@ import Web3 from "web3";
 
 
 function App() {
+
     // const Example = () => (
     //         <Planet size={200} mood="blissful" color="#FDA7DC" />
     //     )
