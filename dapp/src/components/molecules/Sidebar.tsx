@@ -46,7 +46,7 @@ const LinkItems: Array<LinkItemProps> = [
 export default function SimpleSidebar({ children }: { children: ReactNode }) {
     const { isOpen, onOpen, onClose } = useDisclosure();
     return (
-        <Box boarderLeft='1px' borderTop='1px' borderBottom='1px' borderColor='gray.200' minH="70vh" bg={useColorModeValue('#EEEEF6', 'gray.900')}>
+        <Box boarderLeft='1px' borderTop='1px' borderBottom='1px' borderColor='gray.200' minH="70vh" bg={useColorModeValue('#9c7e9c', 'gray.900')}>
             <SidebarContent
                 onClose={() => onClose}
                 display={{ base: 'none', md: 'block' }}
@@ -79,20 +79,20 @@ interface SidebarProps extends BoxProps {
 const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
     return (
         <Box
-            bg={useColorModeValue('#F8F8FA', 'gray.900')}
+            bg={useColorModeValue('#f2eef2', 'gray.900')}
             borderRight="1px"
             borderRightColor={useColorModeValue('gray.200', 'gray.700')}
             w={{ base: 'full', md: 60 }}
             pos="fixed"
             h="full"
             {...rest}>
-            <Flex h="24" alignItems="center" mx="14" justifyContent="space-between">
-                <Text fontSize="2xl" fontFamily="monospace" fontWeight="bold">
+            {/*<Flex h="24" alignItems="center" mx="14" justifyContent="space-between">*/}
+            {/*    <Text fontSize="2xl" fontFamily="monospace" fontWeight="bold">*/}
 
-                    <img src={PMLogo}/>
-                </Text>
-                <CloseButton display={{ base: 'flex', md: 'none' }} onClick={onClose} />
-            </Flex>
+            {/*        /!*<img src={PMLogo}/>*!/*/}
+            {/*    </Text>*/}
+            {/*    <CloseButton display={{ base: 'flex', md: 'none' }} onClick={onClose} />*/}
+            {/*</Flex>*/}
             {LinkItems.map((link) => (
                 <NavItem key={link.name} icon={link.icon}>
                     {link.name}
@@ -117,8 +117,8 @@ const NavItem = ({ icon, children, ...rest }: NavItemProps) => {
                 role="group"
                 cursor="pointer"
                 _hover={{
-                    bg: 'cyan.400',
-                    color: 'white',
+                    //bg: '#c1aec1',
+                    color: '#694b69',
                 }}
                 {...rest}>
                 {icon && (
@@ -126,7 +126,7 @@ const NavItem = ({ icon, children, ...rest }: NavItemProps) => {
                         mr="4"
                         fontSize="16"
                         _groupHover={{
-                            color: 'white',
+                            color: '#694b69',
                         }}
                         as={icon}
                     />

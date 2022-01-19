@@ -35,7 +35,7 @@ const NavLink = (props: any) => (
         rounded={'md'}
         _hover={{
             textDecoration: 'none',
-            bg: useColorModeValue('gray.200', 'gray.700'),
+          //  bg: useColorModeValue('gray.200', 'gray.700'),
         }}
         href={'#'}>
         {props.children}
@@ -49,7 +49,7 @@ export default function Navbar() {
 
     return (
         <>
-            <Box bg={useColorModeValue('#EEEEF6', 'gray.900')} px={4}>
+            <Box bg={useColorModeValue('#f2eef2', 'gray.900')} px={4}>
                 <Flex h={16} alignItems={'center'} justifyContent={'space-between'}>
                     <IconButton
                         size={'md'}
@@ -66,7 +66,7 @@ export default function Navbar() {
                                 square={'full'}
                                 variant={'link'}
                                 cursor={'pointer'}
-                                colorful={'color'}
+                                colorful={'#c1aec1'}
                                 minW={0}> Products
                             </MenuButton>
                             <MenuList >

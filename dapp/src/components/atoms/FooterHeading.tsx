@@ -17,7 +17,7 @@ const ListHeader = ({ children }: { children: ReactNode }) => {
 export default function FooterHeading() {
     return (
         <Box
-            bg={useColorModeValue('#EEEEF6', 'gray.900')}
+            bg={useColorModeValue('#f2eef2', 'gray.900')}
             color={useColorModeValue('gray.700', 'gray.200')}>
             <Container as={Stack} maxW={'7xl'} py={8}>
                 <SimpleGrid columns={{ base: 1, sm: 2, md: 6 }} spacing={9}>

@@ -24,7 +24,7 @@ const theme = extendTheme({
                 },
                 colorful: {
                     item: {
-                        color: 'orange.600'
+                        color: '#694b69'
                     },
                     // 4. We can override existing variants
                     solid: (props: any) => ({
@@ -69,7 +69,7 @@ const theme = extendTheme({
                 },
             },
             defaultProps: {
-                variant: 'colorful'
+                variant: '#9c7e9c'
             },
         },
 
@@ -115,7 +115,7 @@ const theme = extendTheme({
                 },
                 colorful: {
                     item: {
-                        color: 'purple',
+                        color: '#694b69',
                     },
                     menu: {
                         bg: 'orange.100',
