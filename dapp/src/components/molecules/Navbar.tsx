@@ -24,6 +24,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch, faFileAlt, faLink, faChartLine, faBookmark, faPaperclip, faScroll, faUserCheck } from '@fortawesome/free-solid-svg-icons'
 import Logo from '../../PaperMastersLogoGIMP.png';
 import PMLogo from '../../legoLavendar.png';
+import ConnectAccounts from "../atoms/ConnectAccounts";
 // import {Folder} from 'react-kawaii';
 
 const NavLink = (props: any) => (
@@ -162,25 +163,8 @@ export default function Navbar() {
                         {/*    leftIcon={<AddIcon />}>*/}
                         {/*    Needs to connect to Wallet?*/}
                         {/*</Button>*/}
-                        <Menu >
-                            <MenuButton
-                                as={Button}
-                                rounded={'full'}
-                                variant={'link'}
-                                cursor={'pointer'}
-                                minW={0}>
-                                <Avatar
-                                    size={'sm'}
-                                    src={PMLogo}
-                                />
-                            </MenuButton>
-                            <MenuList>
-                                <MenuItem>Connect Wallet</MenuItem>
-                                <MenuItem>Manage Account</MenuItem>
-                                <MenuDivider />
-                                <MenuItem>Add Tokens to your PM Identity</MenuItem>
-                            </MenuList>
-                        </Menu>
+                        <ConnectAccounts/>
+
                     </Flex>
                 </Flex>
 

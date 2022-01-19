@@ -19,9 +19,6 @@ const SearchSlice = createSlice ({
             state.searchExistingPMIdentities = action.payload;
         },
 
-        //update state of accounts/wallet to include/showing PMI token after created action fires
-        //update state of accounts page to include new PMI token added
-        //update state of accounts page to make TRANSFER, mint new NFT, and add a personal description to the page after PMI token after created action fires
     }
 });
 

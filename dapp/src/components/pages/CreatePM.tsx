@@ -35,13 +35,10 @@ export const CreatePM:FC<Interface>=()=> {
 
     return(
         <SimpleSidebar>
-
-
-            <Grid templateColumns='repeat(5, 1fr)' gap={1}>
-                <GridItem rowSpan={2} colSpan={2} w='100%' h='1200' bg='#F8F8FA' />
+            <Grid templateColumns='repeat(2, 1fr)' gap={9}>
+                <GridItem rowSpan={2} colSpan={1} w='100%' bg='#F8F8FA' >
 
                 <FormControl isRequired>
-
                     <FormLabel htmlFor='first-name'>First name</FormLabel>
                     <Input id='first-name' placeholder='First name' />
 
@@ -58,10 +55,11 @@ export const CreatePM:FC<Interface>=()=> {
                             Submit
                         </Button>
                     </Stack>
-
                 </FormControl>
-
-                <GridItem colStart={4} colEnd={6} h='1200' bg='#F8F8FA' />
+                </GridItem>
+                <GridItem colSpan={1} bg='#F8F8FA' >
+                PMI here
+                </GridItem>
             </Grid>
 
         </SimpleSidebar>
