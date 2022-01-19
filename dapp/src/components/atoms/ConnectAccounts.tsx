@@ -4,8 +4,10 @@ import Web3 from "web3";
 import MintIdentity from "../../contracts/MintIdentity.json"
 
 
-export const ConnectWallet=()=> {
+export const ConnectAccounts=()=> {
 
+    //entry into web3 API, communicating with blockchain.
+    // find out how to use givenProvider and who it currently is set to...ie. ethernet, one, etc.
     const web3 = new Web3(Web3.givenProvider || "http://localhost:7545");
 
     const [account, setAccount] = useState<string[]>([]);
@@ -20,4 +22,4 @@ export const ConnectWallet=()=> {
 
 };
 
-export default ConnectWallet;
+export default ConnectAccounts;
