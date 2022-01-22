@@ -9,9 +9,9 @@ import {
     BrowserRouter
 } from "react-router-dom";
 import {ChakraProvider} from '@chakra-ui/react';
-import theme from "../src/customTheme";
+import theme from "../src/theme";
 
-
+console.log(theme)
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
