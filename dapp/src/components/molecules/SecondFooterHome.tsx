@@ -8,8 +8,11 @@ import {
     Grid,
     GridItem,
     Container,
+    Link
 } from '@chakra-ui/react';
 import {} from '@chakra-ui/react';
+import {Link as ReachLink} from "react-router-dom";
+import * as React from "react";
 
 interface FeatureProps {
     heading: string;
@@ -29,7 +32,7 @@ const Feature = ({ heading, text }: FeatureProps) => {
 
 export default function gridListHome() {
     return (
-        <Box as={Container} maxW="7xl" mt={14} p={4}>
+        <Box as={Container} maxW="7xl" mt={4} p={8}>
             <Grid
                 templateColumns={{
                     base: 'repeat(1, 1fr)',
@@ -42,8 +45,8 @@ export default function gridListHome() {
                         <chakra.h2 fontSize="3xl" fontWeight="700">
                             Become a PaperMaster
                         </chakra.h2>
-                        <Button colorScheme="purple" size="md">
-                            Create a PM Identity
+                        <Button size="md">
+                            <Link  as={ReachLink} to="/Create" href={'#'}>Create a PM Identity</Link>
                         </Button>
                     </VStack>
                 </GridItem>
@@ -65,6 +68,7 @@ export default function gridListHome() {
                 }}
                 gap={{ base: '8', sm: '12', md: '16' }}>
                 <Feature
+
                     heading={'Authentic PM Identities'}
                     text={'Short text describing one of you components/service'}
                 />
