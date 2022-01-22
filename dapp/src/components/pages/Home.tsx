@@ -6,20 +6,16 @@ import {
     VStack,
     useBreakpointValue,
 } from '@chakra-ui/react';
-
+import React from "react";
 import {} from '@chakra-ui/react';
-import GridListWithCTA from "../molecules/Footer";
 import WithAction from "../molecules/Navbar";
-import SimpleSidebar from "../molecules/Sidebar";
-import BackgroundLogo from '../../legoLavendarheadercroped.png'
-import LargeWithAppLinksAndSocial from "../molecules/Footer";
-import GridListHome from "../molecules/GridListHome"
 
-
-
+import BackgroundLogo from '../../legoLavendarheadercroped.png';
+import SecondFooterHome from '../molecules/SecondFooterHome';
 
 export default function Home() {
     return (
+       <div>
         <Flex
             w={'full'}
             h={'71vh'}
@@ -65,6 +61,9 @@ export default function Home() {
                 </Stack>
             </VStack>
         </Flex>
-
+           <Flex>
+               <SecondFooterHome/>
+           </Flex>
+       </div>
     );
 }

@@ -1,8 +1,30 @@
 import {ChakraProvider, extendTheme} from '@chakra-ui/react'
 
 
+const colors = {
+    primary: {
+        100: "#ffffff",
+        200: "#e6dee6",
+        300: "#cdbecd",
+        400: "#b59eb5",
+        500: "#9c7e9c",
+        600: "#845e84",
+        700: "#694b69",
+        800: "#4f384f",
+        900: "#342534"
+    }
+};
+
+const customTheme = extendTheme({ colors });
+
 const theme = extendTheme({
     components: {
+        Box: {
+            borderColor: '#e6dee6',
+
+
+        },
+
         Button: {
             // 1. We can update the base styles
             baseStyle: {

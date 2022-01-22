@@ -6,10 +6,13 @@ import {
     IconButton,
     Stack,
     Text,
-    useColorModeValue, VisuallyHidden
+    useColorModeValue,
+    VisuallyHidden,
+    Icon,
 } from '@chakra-ui/react'
 import * as React from 'react'
-import {FaGithub, FaInstagram, FaLinkedin, FaTwitter, FaYoutube} from 'react-icons/fa'
+import {FaGithub, FaInstagram, FaLinkedin, FaTwitter, FaYoutube} from 'react-icons/fa';
+import {BsHeartFill} from 'react-icons/bs';
 import {ReactNode} from "react";
 
 export const SocialButton = ({
@@ -48,10 +51,10 @@ export const SocialMediaLinks = (props: ButtonGroupProps) => (
     <Box
         borderTopWidth={1}
         borderStyle={'solid'}
-        borderColor={useColorModeValue('gray.200', 'gray.700')}>
+        borderColor={useColorModeValue('#e6dee6', 'gray.700')}>
         <Container
             as={Stack}
-            maxW={'6xl'}
+            maxW={'7xl'}
             py={4}
             direction={{ base: 'column', md: 'row' }}
             spacing={4}
@@ -59,8 +62,8 @@ export const SocialMediaLinks = (props: ButtonGroupProps) => (
             align={{ md: 'center' }}>
             {/*<Copyright />*/}
             {/*    copyright={`${currentYear} ${defaultMessage}`}*/}
-            <Text>© 2022 The PaperMasters. Bringing Legitimacy to the Blockchain.</Text>
-            <Stack direction={'row'} spacing={7}>
+            <Text>© 2022 Made with <Icon as={BsHeartFill} style={{marginRight:"5px", marginLeft:"5px"}}/> by The PaperMasters ~ working to bring protection and legitimacy to the Blockchain.</Text>
+            <Stack direction={'row'} spacing={8}>
                 <SocialButton label={'Twitter'} href={'https://twitter.com/ramonajenny_n'}>
                     <FaTwitter />
                 </SocialButton>

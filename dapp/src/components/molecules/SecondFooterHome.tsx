@@ -30,9 +30,9 @@ const Feature = ({ heading, text }: FeatureProps) => {
     );
 };
 
-export default function gridListHome() {
+export default function secondFooterHome() {
     return (
-        <Box as={Container} maxW="7xl" mt={4} p={8}>
+        <Box as={Container} maxW="7xl" mt={4} p={8} my={'28px'}>
             <Grid
                 templateColumns={{
                     base: 'repeat(1, 1fr)',

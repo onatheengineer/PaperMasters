@@ -22,7 +22,7 @@ export default function Footer() {
             color={useColorModeValue('#5c415c', 'gray.200')}
             borderTopWidth={1}
             borderStyle={'solid'}
-            borderColor={useColorModeValue('#e6dee6', 'gray.700')}>
+            borderColor={useColorModeValue('#daceda', 'gray.700')}>
             <Container as={Stack} maxW={'7xl'} py={8}>
                 <SimpleGrid columns={{ base: 1, sm: 2, md: 6 }} spacing={9}>
 

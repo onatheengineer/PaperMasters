@@ -1,10 +1,8 @@
 import React from 'react';
 import './App.css';
 import {useAppDispatch, useAppSelector} from './app/hooks';
-
 import Navbar from "./components/molecules/Navbar";
 import Footer from "./components/molecules/Footer";
-
 import Home from "./components/pages/Home";
 import Analytics from "./components/pages/Analytics";
 import CreatePM from "./components/pages/CreatePM";
@@ -15,14 +13,15 @@ import AttachToPM from "./components/pages/AttachToPM";
 import ContactUs from "./components/pages/ContactUs";
 import ProofConcept from "./components/pages/ProofConcept";
 import News from "./components/pages/News";
-import GridListHome from "./components/molecules/GridListHome";
-import SupportUs from "./components/pages/SupportUs"
+import SupportUs from "./components/pages/SupportUs";
+import Profile from "./components/pages/Profile";
 import {
   Routes,
   Route
 } from "react-router-dom";
 import {produce} from 'immer';
 import Web3 from "web3";
+import SocialMediaLinks from "./components/atoms/SocialMediaLinks";
 
 
 function App() {
@@ -46,9 +45,10 @@ function App() {
             <Route path="/SupportUs" element={  <SupportUs/> }/>
             <Route path="/ProofConcept" element={  <ProofConcept/> }/>
             <Route path="/News" element={  <News/> }/>
+            <Route path="/Profile" element={  <Profile/> }/>
         </Routes>
-          <GridListHome/>
         <Footer/>
+            <SocialMediaLinks/>
       </div>
 
   );

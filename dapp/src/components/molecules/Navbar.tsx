@@ -49,7 +49,7 @@ export default function Navbar() {
 
     return (
         <>
-            <Box bg={useColorModeValue('#f2eef2', 'gray.900')} px={4}>
+            <Box border={'1px solid #daceda'} bg={useColorModeValue('#f2eef2', 'gray.900')} px={4}>
                 <Flex h={16} alignItems={'center'} justifyContent={'space-between'}>
                     <IconButton
                         size={'md'}
@@ -60,98 +60,143 @@ export default function Navbar() {
                     />
                     <HStack spacing={8} alignItems={'center'}>
                         <Box><Link as={ReachLink} to="/"><img src={Logo}/></Link></Box>
-                        <Menu >
-                            <MenuButton
-                                as={Button}
-                                square={'full'}
-                                variant={'link'}
-                                cursor={'pointer'}
-                                colorful={'#c1aec1'}
-                                minW={0}> Products
-                            </MenuButton>
-                            <MenuList >
-                                <MenuItem as={ReachLink} to='/Analytics'  icon={<FontAwesomeIcon icon={faChartLine} />} >PM Identity</MenuItem>
-                                <MenuDivider />
-                                <MenuItem as={ReachLink} to='/Create'   icon={<FontAwesomeIcon icon={faBookmark} />} > Create</MenuItem>
-                                <MenuItem as={ReachLink} to='/Validate'   icon={<FontAwesomeIcon icon={faUserCheck} />} >Validate</MenuItem>
-                                <MenuItem as={ReachLink} to='/Attach'  icon={<FontAwesomeIcon icon={faScroll} />} >Attach</MenuItem>
-                                <MenuItem as={ReachLink} to='/Search'  icon={<FontAwesomeIcon icon={faSearch} />} >Search</MenuItem>
-                            </MenuList>
-                        </Menu>
-                        <Menu >
-                            <MenuButton
-                                as={Button}
-                                square={'full'}
-                                variant={'link'}
-                                cursor={'pointer'}
-                                minW={0}> Analytics
-                            </MenuButton>
-                            <MenuList >
-                                <MenuItem as={ReachLink} to='/Analytics'  icon={<FontAwesomeIcon icon={faChartLine} />} >Analytics</MenuItem>
-                            </MenuList>
-                        </Menu>
-                        <Menu>
-                            <MenuButton
-                                as={Button}
-                                rounded={'full'}
-                                variant={'link'}
-                                cursor={'pointer'}
-                                minW={0}> Learn
-                            </MenuButton>
-                            <MenuList>
-                                <MenuItem as={ReachLink} to='/mint' >Catalog of PM Identities</MenuItem>
-                                <MenuDivider />
-                                <MenuItem as={ReachLink} to='/catalog'> Create a PM Identity</MenuItem>
-                                <MenuItem as={ReachLink} to='/authenticate' >Validation of PM Identities</MenuItem>
-                            </MenuList>
-                        </Menu>
-                        <Menu >
-                            <MenuButton
-                                as={Button}
-                                rounded={'full'}
-                                variant={'link'}
-                                cursor={'pointer'}
-                                minW={0}> Company
-                            </MenuButton>
-                            <MenuList>
-                                <MenuItem as={ReachLink} to='/Analytics' >Analytics</MenuItem>
-                                <MenuItem as={ReachLink} to='/AboutUs' >About Us</MenuItem>
-                                <MenuItem as={ReachLink} to='/ContactUs' >Contact Us</MenuItem>
-                                <MenuItem as={ReachLink} to='/SupportUs' >Support Us</MenuItem>
-                                <MenuItem as={ReachLink} to='/News' >News</MenuItem>
-                            </MenuList>
-                        </Menu>
-                        <Menu >
-                            <MenuButton
-                                as={Button}
-                                rounded={'full'}
-                                variant={'link'}
-                                cursor={'pointer'}
-                                minW={0}> Security
-                            </MenuButton>
-                            <MenuList>
-                                <MenuItem as={ReachLink} to='/mint' >Create a PM Identity</MenuItem>
-                                <MenuItem as={ReachLink} to='/authenticate' >Validation of PM Identities</MenuItem>
-                                <MenuDivider />
-                                <MenuItem as={ReachLink} to='/catalog'>Catalog of PM Identities</MenuItem>
-                            </MenuList>
-                        </Menu>
-                        <Menu >
-                            <MenuButton
-                                as={Button}
-                                rounded={'full'}
-                                variant={'link'}
-                                cursor={'pointer'}
-                                minW={0}> News and Events
-                            </MenuButton>
-                            <MenuList>
-                                <MenuItem as={ReachLink} to='/mint' >Create a PM Identity</MenuItem>
-                                <MenuItem as={ReachLink} to='/authenticate' >Validation of PM Identities</MenuItem>
-                                <MenuDivider />
-                                <MenuItem as={ReachLink} to='/catalog'>Catalog of PM Identities</MenuItem>
-                            </MenuList>
-                        </Menu>
 
+                        <HStack spacing={12} alignItems={'right'}>
+                            <Menu >
+                                <Menu >
+                                    <MenuButton
+                                        as={Button}
+                                        color='#5c415c'
+                                        size='md'
+                                        square={'full'}
+                                        variant={'link'}
+                                        cursor={'pointer'}
+                                        _hover={{ color: '#906e90' }}
+                                        _active={{
+                                            color: '#906e90',
+                                            transform: 'scale(1.08)'
+                                        }}
+                                        minW={0}> Products
+                                    </MenuButton>
+                                    <MenuList >
+                                        <MenuItem as={ReachLink} to='/Analytics'  icon={<FontAwesomeIcon icon={faChartLine} />} >PM Identity</MenuItem>
+                                        <MenuDivider />
+                                        <MenuItem as={ReachLink} to='/Create'   icon={<FontAwesomeIcon icon={faBookmark} />} > Create</MenuItem>
+                                        <MenuItem as={ReachLink} to='/Validate'   icon={<FontAwesomeIcon icon={faUserCheck} />} >Validate</MenuItem>
+                                        <MenuItem as={ReachLink} to='/Attach'  icon={<FontAwesomeIcon icon={faScroll} />} >Attach</MenuItem>
+                                        <MenuItem as={ReachLink} to='/Search'  icon={<FontAwesomeIcon icon={faSearch} />} >Search</MenuItem>
+                                    </MenuList>
+                                </Menu>
+                                <Menu >
+                                    <MenuButton
+                                        as={Button}
+                                        color='#5c415c'
+                                        size='md'
+                                        square={'full'}
+                                        variant={'link'}
+                                        cursor={'pointer'}
+                                        _hover={{ color: '#906e90' }}
+                                        _active={{
+                                            color: '#906e90',
+                                            transform: 'scale(1.08)'
+                                        }}
+                                        minW={0}> Analytics
+                                    </MenuButton>
+                                    <MenuList >
+                                        <MenuItem as={ReachLink} to='/Analytics'  icon={<FontAwesomeIcon icon={faChartLine} />} >Analytics</MenuItem>
+                                    </MenuList>
+                                </Menu>
+                                <Menu>
+                                    <MenuButton
+                                        as={Button}
+                                        color='#5c415c'
+                                        size='md'
+                                        square={'full'}
+                                        variant={'link'}
+                                        cursor={'pointer'}
+                                        _hover={{ color: '#906e90' }}
+                                        _active={{
+                                            color: '#906e90',
+                                            transform: 'scale(1.08)'
+                                        }}
+                                        minW={0}> Learn
+                                    </MenuButton>
+                                    <MenuList>
+                                        <MenuItem as={ReachLink} to='/mint' >Catalog of PM Identities</MenuItem>
+                                        <MenuDivider />
+                                        <MenuItem as={ReachLink} to='/catalog'> Create a PM Identity</MenuItem>
+                                        <MenuItem as={ReachLink} to='/authenticate' >Validation of PM Identities</MenuItem>
+                                    </MenuList>
+                                </Menu>
+                                <Menu >
+                                    <MenuButton
+                                        as={Button}
+                                        color='#5c415c'
+                                        size='md'
+                                        square={'full'}
+                                        variant={'link'}
+                                        cursor={'pointer'}
+                                        _hover={{ color: '#906e90' }}
+                                        _active={{
+                                            color: '#906e90',
+                                            transform: 'scale(1.08)'
+                                        }}
+                                        minW={0}> Company
+                                    </MenuButton>
+                                    <MenuList>
+                                        <MenuItem as={ReachLink} to='/Analytics' >Analytics</MenuItem>
+                                        <MenuItem as={ReachLink} to='/AboutUs' >About Us</MenuItem>
+                                        <MenuItem as={ReachLink} to='/ContactUs' >Contact Us</MenuItem>
+                                        <MenuItem as={ReachLink} to='/SupportUs' >Support Us</MenuItem>
+                                        <MenuItem as={ReachLink} to='/News' >News</MenuItem>
+                                    </MenuList>
+                                </Menu>
+                                <Menu >
+                                    <MenuButton
+                                        as={Button}
+                                        color='#5c415c'
+                                        size='md'
+                                        square={'full'}
+                                        variant={'link'}
+                                        cursor={'pointer'}
+                                        _hover={{ color: '#906e90' }}
+                                        _active={{
+                                            color: '#906e90',
+                                            transform: 'scale(1.08)'
+                                        }}
+                                        minW={0}> Security
+                                    </MenuButton>
+                                    <MenuList>
+                                        <MenuItem as={ReachLink} to='/mint' >Create a PM Identity</MenuItem>
+                                        <MenuItem as={ReachLink} to='/authenticate' >Validation of PM Identities</MenuItem>
+                                        <MenuDivider />
+                                        <MenuItem as={ReachLink} to='/catalog'>Catalog of PM Identities</MenuItem>
+                                    </MenuList>
+                                </Menu>
+                                <Menu >
+                                    <MenuButton
+                                        as={Button}
+                                        color='#5c415c'
+                                        size='md'
+                                        square={'full'}
+                                        variant={'link'}
+                                        cursor={'pointer'}
+                                        _hover={{ color: '#906e90' }}
+                                        _active={{
+                                            color: '#906e90',
+                                            transform: 'scale(1.08)'
+                                        }}
+                                        minW={0}> News and Events
+                                    </MenuButton>
+                                    <MenuList>
+                                        <MenuItem as={ReachLink} to='/mint' >Create a PM Identity</MenuItem>
+                                        <MenuItem as={ReachLink} to='/authenticate' >Validation of PM Identities</MenuItem>
+                                        <MenuDivider />
+                                        <MenuItem as={ReachLink} to='/catalog'>Catalog of PM Identities</MenuItem>
+                                    </MenuList>
+                                </Menu>
+                            </Menu>
+                        </HStack>
                     </HStack>
 
                     <Flex alignItems={'center'}>

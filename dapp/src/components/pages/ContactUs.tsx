@@ -2,8 +2,6 @@ import React from 'react';
 import {useState, useEffect} from "react";
 import type {FC} from 'react'
 import {Button, FormControl, FormLabel, Grid, GridItem, Input, Stack} from '@chakra-ui/react';
-import SimpleSidebar from "../molecules/Sidebar";
-
 
 interface Interface {
 
@@ -12,7 +10,7 @@ interface Interface {
 export const ContactUs:FC<Interface>=()=>{
 
     return(
-        <SimpleSidebar>
+
             <Grid
                 w={'1800px'}
                 h='900px'
@@ -29,7 +27,7 @@ export const ContactUs:FC<Interface>=()=>{
             </Grid>
 
 
-        </SimpleSidebar>
+
     )
 };
 

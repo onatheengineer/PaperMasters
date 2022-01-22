@@ -3,8 +3,6 @@ import {useState, useEffect} from "react";
 import type {FC} from 'react'
 import {Button, FormControl, FormLabel, Grid, GridItem, Input, Stack} from '@chakra-ui/react';
 import {Text} from '@chakra-ui/layout';
-import SimpleSidebar from "../molecules/Sidebar";
-
 
 
 interface Interface {
