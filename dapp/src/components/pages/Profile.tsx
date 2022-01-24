@@ -425,7 +425,7 @@ export const Profile:FC<Interface>=()=> {
                                 <Card mx={{xl: "15px"}} m='5px' borderRadius='15px' bg='white' p="16px" px="24px">
                                     <CardHeader p="12px 5px" mb="12px">
                                         <Text fontSize="lg" color={textColor} fontWeight="bold">
-                                            Conversations
+                                            Mentions
                                         </Text>
                                     </CardHeader>
                                     <CardBody px="5px">

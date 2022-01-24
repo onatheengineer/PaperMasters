@@ -40,7 +40,9 @@ export const FAQ:FC<Interface>=()=> {
                     px={'24px'}
                 >
                     <CollapseButton title={'What is a Non-Fungiable-Identity (NFI)'} body={'dfgfdhdftgyertg'}/>
+                    <CollapseButton title={'What is the difference between a NFT and PaperMasters NFI'} body={'dfgfdhdftgyertg'}/>
                     <CollapseButton title={'What are the benefits of having a PaperMasters NFI?'} body={'dfgfdhdftgyertg'}/>
+                    <CollapseButton title={'Mint PaperMasters NFI required fields'} body={'dfgfdhdftgyertg'}/>
 
                     <StackDivider borderColor='pmpurple.3'/>
 
