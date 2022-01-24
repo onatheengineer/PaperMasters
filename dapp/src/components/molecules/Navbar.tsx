@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import React, { ReactNode } from 'react';
 import {
     Box,
     Flex,
@@ -171,6 +171,25 @@ export default function Navbar() {
                                         <MenuItem as={ReachLink} to='/authenticate' >Validation of PM Identities</MenuItem>
                                         <MenuDivider />
                                         <MenuItem as={ReachLink} to='/catalog'>Catalog of PM Identities</MenuItem>
+                                    </MenuList>
+                                </Menu>
+                                <Menu>
+                                    <MenuButton
+                                        as={Button}
+                                        color='#5c415c'
+                                        size='md'
+                                        square={'full'}
+                                        variant={'link'}
+                                        cursor={'pointer'}
+                                        _hover={{ color: '#906e90' }}
+                                        _active={{
+                                            color: '#906e90',
+                                            transform: 'scale(1.08)'
+                                        }}
+                                        minW={0}> FAQ
+                                    </MenuButton>
+                                    <MenuList>
+                                        <MenuItem as={ReachLink} to='/FAQ' >FAQ</MenuItem>
                                     </MenuList>
                                 </Menu>
                                 <Menu >

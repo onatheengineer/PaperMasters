@@ -55,7 +55,8 @@ export const SocialMediaLinks = (props: ButtonGroupProps) => (
         <Container
             as={Stack}
             maxW={'7xl'}
-            py={4}
+            pt={4}
+            pb={2}
             direction={{ base: 'column', md: 'row' }}
             spacing={4}
             justify={{ md: 'space-between' }}

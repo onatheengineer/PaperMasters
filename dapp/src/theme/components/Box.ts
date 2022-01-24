@@ -1,3 +1,3 @@
 export const Box = {
-    borderColor: '#e6dee6',
+    borderColor: 'pmpurple.300',
 }

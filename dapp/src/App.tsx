@@ -15,6 +15,8 @@ import ProofConcept from "./components/pages/ProofConcept";
 import News from "./components/pages/News";
 import SupportUs from "./components/pages/SupportUs";
 import Profile from "./components/pages/Profile";
+import FAQ from "./components/pages/FAQ";
+
 import {
   Routes,
   Route
@@ -46,6 +48,8 @@ function App() {
             <Route path="/ProofConcept" element={  <ProofConcept/> }/>
             <Route path="/News" element={  <News/> }/>
             <Route path="/Profile" element={  <Profile/> }/>
+            <Route path="/FAQ" element={  <FAQ/> }/>
+
         </Routes>
         <Footer/>
             <SocialMediaLinks/>

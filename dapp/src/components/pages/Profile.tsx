@@ -40,8 +40,6 @@ import {
 } from "react-icons/fa";
 import { IoDocumentsSharp } from "react-icons/io5";
 import Sidebar from "../molecules/Sidebar";
-import ValidateInputPMIForm from "../molecules/ValidateInputPMIForm";
-import ValidateOutputPMIForm from "../molecules/ValidateOutputPMIForm";
 
 
 interface Interface {

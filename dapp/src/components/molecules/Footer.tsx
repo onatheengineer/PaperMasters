@@ -1,7 +1,6 @@
 import {Box, Container, Heading, HeadingProps, Link, SimpleGrid, Stack, Text, useColorModeValue} from '@chakra-ui/react'
 import * as React from 'react'
 import PMLogo from "../../PaperMastersLogoGIMP.png";
-import {SubscribeForm} from "../atoms/SubscribeForm";
 import {Link as ReachLink} from "react-router-dom";
 import {ReactNode} from "react";
 import SocialMediaLinks from "../atoms/SocialMediaLinks";
@@ -18,12 +17,12 @@ const ListHeader = ({ children }: { children: ReactNode }) => {
 export default function Footer() {
     return (
         <Box
-            bg={useColorModeValue('#f2eef2', 'gray.900')}
+            bg={useColorModeValue('#ffffff', 'gray.900')}
             color={useColorModeValue('#5c415c', 'gray.200')}
             borderTopWidth={1}
             borderStyle={'solid'}
             borderColor={useColorModeValue('#daceda', 'gray.700')}>
-            <Container as={Stack} maxW={'7xl'} py={8}>
+            <Container as={Stack} maxW={'8xl'} px={0} py={8}>
                 <SimpleGrid columns={{ base: 1, sm: 2, md: 6 }} spacing={9}>
 
                     <Stack align={'flex-start'}>
@@ -34,7 +33,6 @@ export default function Footer() {
                             <SimpleGrid columns={2} spacing={{ base: '10', md: '20', lg: '28' }} flex="1" >
                             </SimpleGrid>
                         </Stack>
-                        <SubscribeForm width={{ base: 'full', md: 'sm' }} />
                     </Stack>
                     <Stack></Stack>
                     <Stack align={'flex-start'}>

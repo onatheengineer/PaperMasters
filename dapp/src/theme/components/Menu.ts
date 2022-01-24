@@ -1,5 +1,5 @@
 export const Menu = {
-    parts: ['menu', 'item'],
+   parts: ['menu', 'item'],
         baseStyle: {
         menu: {
             boxShadow: 'lg',
@@ -10,7 +10,7 @@ export const Menu = {
         item: {
             fontWeight: 'medium',
                 lineHeight: 'normal',
-            color:"purple.100"
+            color:"purple.10"
         },
     },
     sizes: {
