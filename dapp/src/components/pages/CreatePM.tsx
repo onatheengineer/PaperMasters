@@ -89,13 +89,15 @@ export const CreatePM: FC<Interface>=(props: HTMLChakraProps<'form'>)=> {
             <Flex borderRight="1px solid " borderColor='#daceda'>
                 <Sidebar/>
             </Flex>
-
+            <Box flex='auto' style={{border: '1px solid #b59eb5'}} mx={{sm: '12px', xl: '12px'}} borderRadius='8px'
+                 py="18px" px="18px" my={{sm: "12px", xl: "12px"}} bg={'pmpurple.1'}>
             <Grid templateColumns='repeat(2, 1fr)' gap={2}>
 
                 <GridItem colstart={1} rowSpan={1} colSpan={1} w='100%'>
 
-                    <Box flex='auto' mx={{sm: '12px', xl: '18px'}} borderRadius='15px' p="26px"
-                         px="24px" my={{sm: "14px", xl: "16px"}} bg={'pmpurple.1'}>
+
+                    <Box flex='auto' style={{border: '1px solid #b59eb5'}} mx={{xl: '8px'}}
+                         borderRadius='15px' py="22px" px="56px" my={{xl: "8px"}} bg={'pmpurple.1'}>
 
                         <Heading textAlign="center" size="xl" fontWeight="extrabold">
                             Mint PaperMaster NFI
@@ -151,8 +153,9 @@ export const CreatePM: FC<Interface>=(props: HTMLChakraProps<'form'>)=> {
                     </Box>
                 </GridItem>
 
-                <Box flex='auto' mx={{sm: '12px', xl: '18px'}} borderRadius='15px' p="26px"
-                     px="24px" my={{sm: "14px", xl: "16px"}} bg={'pmpurple.1'}>
+                <Box flex='auto' style={{border: '1px solid #b59eb5'}} mx={{xl: '8px'}}
+                     borderRadius='15px' py="22px" px="56px" my={{xl: "8px"}} bg={'pmpurple.1'}>
+
                     <GridItem colstart={2} rowSpan={1} colSpan={1} w='100%'>
 
                         <Heading textAlign="center" size="xl" fontWeight="extrabold">
@@ -279,6 +282,7 @@ export const CreatePM: FC<Interface>=(props: HTMLChakraProps<'form'>)=> {
                     </GridItem>
                 </Box>
             </Grid>
+            </Box>
         </Flex>
     )
 };
