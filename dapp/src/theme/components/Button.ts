@@ -6,7 +6,7 @@ export const Button = {
     // 2. We can add a new button size or extend existing
     sizes: {
         xl: {
-            h: '56px',
+            h: '26px',
                 fontSize: 'lg',
                 px: '32px',
         },

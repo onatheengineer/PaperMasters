@@ -20,11 +20,16 @@ import { extendTheme } from '@chakra-ui/react';
 import {Link as ReachLink} from "react-router-dom";
 import {HamburgerIcon, CloseIcon, AddIcon, EditIcon, LinkIcon} from '@chakra-ui/icons';
 import { Icon } from '@chakra-ui/react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSearch, faFileAlt, faLink, faChartLine, faBookmark, faPaperclip, faScroll, faUserCheck } from '@fortawesome/free-solid-svg-icons'
+import { FaPlug, FaSearch, FaFileAlt, FaLink, FaChartLine, FaBookmark, FaPaperclip, FaScroll, FaUserCheck, FaQuestionCircle, FaConnectdevelop } from "react-icons/fa";
+import { SiSololearn } from "react-icons/si";
+import { ImBooks } from "react-icons/im";
+import { GiBookshelf, GiNewShoot } from "react-icons/gi";
+import { MdManageAccounts } from "react-icons/md";
 import Logo from '../../PaperMastersLogoGIMP.png';
 import PMLogo from '../../legoLavendar.png';
+import PMGIMPResized from '../../PMGIMPResized.png';
 import ConnectAccounts from "../atoms/ConnectAccounts";
+import {IoMdCheckmarkCircleOutline} from "react-icons/io";
 // import {Folder} from 'react-kawaii';
 
 const NavLink = (props: any) => (
@@ -67,167 +72,178 @@ export default function Navbar() {
                                     <MenuButton
                                         as={Button}
                                         color='#5c415c'
-                                        size='md'
+                                        size='lg'
                                         square={'full'}
                                         variant={'link'}
                                         cursor={'pointer'}
                                         _hover={{ color: '#906e90' }}
                                         _active={{
                                             color: '#906e90',
-                                            transform: 'scale(1.08)'
+                                            transform: 'scale(0.96)'
                                         }}
-                                        minW={0}> Products
+                                        minW={0}>
+
+                                        <MenuItem as={ReachLink} to='/Products' icon={<FaPlug />} >Products</MenuItem>
                                     </MenuButton>
                                     <MenuList >
-                                        <MenuItem as={ReachLink} to='/Analytics'  icon={<FontAwesomeIcon icon={faChartLine} />} >PM Identity</MenuItem>
+                                        <MenuItem as={ReachLink} to='/Analytics'  icon={<FaChartLine />} >PM Identity</MenuItem>
                                         <MenuDivider />
-                                        <MenuItem as={ReachLink} to='/Create'   icon={<FontAwesomeIcon icon={faBookmark} />} > Create</MenuItem>
-                                        <MenuItem as={ReachLink} to='/Validate'   icon={<FontAwesomeIcon icon={faUserCheck} />} >Validate</MenuItem>
-                                        <MenuItem as={ReachLink} to='/Attach'  icon={<FontAwesomeIcon icon={faScroll} />} >Attach</MenuItem>
-                                        <MenuItem as={ReachLink} to='/Search'  icon={<FontAwesomeIcon icon={faSearch} />} >Search</MenuItem>
+                                        <MenuItem as={ReachLink} to='/Create'   icon={<FaBookmark />} > Create</MenuItem>
+                                        <MenuItem as={ReachLink} to='/Validate'   icon={<FaUserCheck />} >Validate</MenuItem>
+                                        <MenuItem as={ReachLink} to='/Attach'  icon={<FaScroll />}>Attach</MenuItem>
+                                        <MenuItem as={ReachLink} to='/Search'  icon={<FaSearch />}>Search</MenuItem>
                                     </MenuList>
                                 </Menu>
                                 <Menu >
                                     <MenuButton
                                         as={Button}
                                         color='#5c415c'
-                                        size='md'
+                                        size='lg'
                                         square={'full'}
                                         variant={'link'}
                                         cursor={'pointer'}
                                         _hover={{ color: '#906e90' }}
                                         _active={{
                                             color: '#906e90',
-                                            transform: 'scale(1.08)'
+                                            transform: 'scale(0.96)'
                                         }}
-                                        minW={0}> Analytics
+                                        minW={0}>
+
+                                        <MenuItem as={ReachLink} to='/Analytics' icon={<FaScroll />} >Analytics</MenuItem>
                                     </MenuButton>
-                                    <MenuList >
-                                        <MenuItem as={ReachLink} to='/Analytics'  icon={<FontAwesomeIcon icon={faChartLine} />} >Analytics</MenuItem>
-                                    </MenuList>
                                 </Menu>
                                 <Menu>
                                     <MenuButton
                                         as={Button}
                                         color='#5c415c'
-                                        size='md'
+                                        size='lg'
                                         square={'full'}
                                         variant={'link'}
                                         cursor={'pointer'}
                                         _hover={{ color: '#906e90' }}
                                         _active={{
                                             color: '#906e90',
-                                            transform: 'scale(1.08)'
+                                            transform: 'scale(0.96)'
                                         }}
-                                        minW={0}> Learn
+                                        minW={0}>
+                                        <MenuItem as={ReachLink} to='/Learn' icon={<ImBooks fontSize={'16px'} />} >Learn</MenuItem>
                                     </MenuButton>
-                                    <MenuList>
-                                        <MenuItem as={ReachLink} to='/mint' >Catalog of PM Identities</MenuItem>
-                                        <MenuDivider />
-                                        <MenuItem as={ReachLink} to='/catalog'> Create a PM Identity</MenuItem>
-                                        <MenuItem as={ReachLink} to='/authenticate' >Validation of PM Identities</MenuItem>
-                                    </MenuList>
+
                                 </Menu>
                                 <Menu >
                                     <MenuButton
                                         as={Button}
                                         color='#5c415c'
-                                        size='md'
+                                        size='lg'
                                         square={'full'}
                                         variant={'link'}
                                         cursor={'pointer'}
                                         _hover={{ color: '#906e90' }}
                                         _active={{
                                             color: '#906e90',
-                                            transform: 'scale(1.08)'
+                                            transform: 'scale(0.96)'
                                         }}
-                                        minW={0}> Company
+                                        minW={0}>
+                                        <MenuItem as={ReachLink} to='/Company' icon={<FaConnectdevelop fontSize={'16px'}/>} >Company</MenuItem>
                                     </MenuButton>
                                     <MenuList>
-                                        <MenuItem as={ReachLink} to='/Analytics' >Analytics</MenuItem>
                                         <MenuItem as={ReachLink} to='/AboutUs' >About Us</MenuItem>
                                         <MenuItem as={ReachLink} to='/ContactUs' >Contact Us</MenuItem>
-                                        <MenuItem as={ReachLink} to='/SupportUs' >Support Us</MenuItem>
-                                        <MenuItem as={ReachLink} to='/News' >News</MenuItem>
+                                        <MenuItem as={ReachLink} to='/Support the Project' >Support Us</MenuItem>
                                     </MenuList>
                                 </Menu>
                                 <Menu >
                                     <MenuButton
                                         as={Button}
                                         color='#5c415c'
-                                        size='md'
+                                        size='lg'
                                         square={'full'}
                                         variant={'link'}
                                         cursor={'pointer'}
                                         _hover={{ color: '#906e90' }}
                                         _active={{
                                             color: '#906e90',
-                                            transform: 'scale(1.08)'
+                                            transform: 'scale(0.96)'
                                         }}
-                                        minW={0}> Security
+                                        minW={0}>
+                                        <MenuItem as={ReachLink} to='/Security' icon={<FaLink fontSize={'14px'} />} >Security</MenuItem>
+
                                     </MenuButton>
                                     <MenuList>
-                                        <MenuItem as={ReachLink} to='/mint' >Create a PM Identity</MenuItem>
-                                        <MenuItem as={ReachLink} to='/authenticate' >Validation of PM Identities</MenuItem>
-                                        <MenuDivider />
-                                        <MenuItem as={ReachLink} to='/catalog'>Catalog of PM Identities</MenuItem>
+                                        <MenuItem as={ReachLink} to='/PrivacyPolicy' >Privacy Policy</MenuItem>
+                                        <MenuItem as={ReachLink} to='/TermsOfService' >Terms of Service</MenuItem>
                                     </MenuList>
                                 </Menu>
                                 <Menu>
                                     <MenuButton
                                         as={Button}
                                         color='#5c415c'
-                                        size='md'
+                                        size='lg'
                                         square={'full'}
                                         variant={'link'}
                                         cursor={'pointer'}
                                         _hover={{ color: '#906e90' }}
                                         _active={{
                                             color: '#906e90',
-                                            transform: 'scale(1.08)'
+                                            transform: 'scale(0.96)'
                                         }}
-                                        minW={0}> FAQ
+                                        minW={0}>
+                                        <MenuItem as={ReachLink} to='/News' icon={<GiNewShoot fontSize={'16px'} />} >News</MenuItem>
                                     </MenuButton>
-                                    <MenuList>
-                                        <MenuItem as={ReachLink} to='/FAQ' >FAQ</MenuItem>
-                                    </MenuList>
                                 </Menu>
                                 <Menu >
                                     <MenuButton
                                         as={Button}
                                         color='#5c415c'
-                                        size='md'
+                                        size='lg'
                                         square={'full'}
                                         variant={'link'}
                                         cursor={'pointer'}
                                         _hover={{ color: '#906e90' }}
                                         _active={{
                                             color: '#906e90',
-                                            transform: 'scale(1.08)'
+                                            transform: 'scale(0.96)'
                                         }}
-                                        minW={0}> News and Events
+                                        minW={0}>
+                                        <MenuItem as={ReachLink} to='/FAQ' icon={<FaQuestionCircle fontSize={'14px'} />} >FAQ</MenuItem>
                                     </MenuButton>
-                                    <MenuList>
-                                        <MenuItem as={ReachLink} to='/mint' >Create a PM Identity</MenuItem>
-                                        <MenuItem as={ReachLink} to='/authenticate' >Validation of PM Identities</MenuItem>
-                                        <MenuDivider />
-                                        <MenuItem as={ReachLink} to='/catalog'>Catalog of PM Identities</MenuItem>
-                                    </MenuList>
                                 </Menu>
+
                             </Menu>
                         </HStack>
                     </HStack>
 
                     <Flex alignItems={'center'}>
-                        {/*<Button*/}
-                        {/*    variant={'solid'}*/}
-                        {/*    colorScheme={'purple'}*/}
-                        {/*    size={'sm'}*/}
-                        {/*    mr={4}*/}
-                        {/*    leftIcon={<AddIcon />}>*/}
-                        {/*    Needs to connect to Wallet?*/}
-                        {/*</Button>*/}
-                        <ConnectAccounts/>
+
+{/*bring in the navbar Avatar*/}
+
+                        <Menu>
+                            <MenuButton
+                                as={Button}
+                                rounded={'full'}
+                                variant={'link'}
+                                cursor={'pointer'}
+                                size='lg'
+                                minW={0}>
+                                <Avatar
+                                    size={'22px'}
+                                    src={PMGIMPResized}
+                                />
+                            </MenuButton>
+
+                            <MenuList>
+                                {/*opens MetaMask and other wallets*/}
+
+                                    <MenuItem as={ReachLink} to='/Profile' fontSize={'16px'} icon={<SiSololearn fontSize={'16px'} />} >Connect Wallet
+
+                                        {/*<ConnectAccounts/>*/}
+                                    </MenuItem>
+                                    <MenuDivider />
+                                <MenuItem as={ReachLink} to='/Profile' fontSize={'16px'} icon={<MdManageAccounts fontSize={'20px'}/>} >Profile</MenuItem>
+                            </MenuList>
+
+
+                        </Menu>
 
                     </Flex>
                 </Flex>

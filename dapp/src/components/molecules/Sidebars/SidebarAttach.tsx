@@ -1,5 +1,5 @@
 import React, { ReactNode, ReactText, useState, useEffect } from 'react';
-import PMLogo from '../../PMGIMPResized.png';
+import PMLogo from '../../../PMGIMPResized.png';
 import { AiOutlineFileSearch } from "react-icons/ai";
 import { BiHomeHeart, BiBookmarkHeart } from 'react-icons/bi';
 import { IoMdCheckmarkCircleOutline, IoMdAttach } from 'react-icons/io';
@@ -36,8 +36,11 @@ import {
 } from 'react-icons/fi';
 import { IconType } from 'react-icons';
 import type {FC} from 'react';
-import createPM from "../pages/CreatePM";
+import createPM from "../../pages/Create";
 import {Link as ReachLink} from "react-router-dom";
+import { faSearch, faFileAlt, faLink, faChartLine, faBookmark, faPaperclip, faScroll, faUserCheck } from '@fortawesome/free-solid-svg-icons'
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+
 
 interface InterfaceNavHoverBox {
     title?: string;
@@ -129,8 +132,36 @@ export const NavItem: FC<InterfaceNavItem> = ({ icon, title, description, active
     )
 };
 
+interface MobileProps extends FlexProps {
+    onOpen: () => void;
+}
+const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
+    return (
+        <Flex
+            ml={{base: 0, md: 60}}
+            px={{base: 4, md: 24}}
+            height="20"
+            alignItems="center"
+            bg={useColorModeValue('white', 'gray.900')}
+            border="1px solid"
+            borderColor='#765476'
+            justifyContent="flex-start"
+            {...rest}>
+            <IconButton
+                variant="outline"
+                onClick={onOpen}
+                aria-label="open menu"
+                icon={<FiMenu/>}
+            />
 
-export const Sidebar: FC<InterfaceSidebar>= (props) => {
+            <Text fontSize="2xl" ml="8" fontFamily="monospace" fontWeight="bold">
+                <img src={PMLogo}/>
+            </Text>
+        </Flex>
+    );
+};
+
+export const SidebarAttach: FC<InterfaceSidebar>= (props) => {
     const [navSize, changeNavSize] = useState("large")
     return (
         <Flex
@@ -205,6 +236,12 @@ export const Sidebar: FC<InterfaceSidebar>= (props) => {
                 <NavItem navSize={navSize} icon={AiOutlineFileSearch} title="Search PaperMaster" description="Search PaperMasters"/>
                 <NavItem navSize={navSize} icon={FiTrendingUp} title="Analytics" />
 
+                {/*<MenuItem as={ReachLink} to='/Analytics'  icon={<FontAwesomeIcon icon={faChartLine} />} >PM Identity</MenuItem>*/}
+                {/*<MenuDivider />*/}
+                {/*<MenuItem as={ReachLink} to='/Products/Create'   icon={<FontAwesomeIcon icon={faBookmark} />} > Create</MenuItem>*/}
+                {/*<MenuItem as={ReachLink} to='/Products/Validate'   icon={<FontAwesomeIcon icon={faUserCheck} />} >Validate</MenuItem>*/}
+                {/*<MenuItem as={ReachLink} to='/Products/Attach'  icon={<FontAwesomeIcon icon={faScroll} />} >Attach</MenuItem>*/}
+
             </Flex>
             <Flex
                 p="5%"
@@ -213,133 +250,12 @@ export const Sidebar: FC<InterfaceSidebar>= (props) => {
                 alignItems={navSize == "small" ? "center" : "flex-start"}
                 mb={4}
             >
-
-
             </Flex>
         </Flex>
     )
 };
 
-export default Sidebar;
+export default SidebarAttach;
 
 
-
-
-// interface LinkItemProps {
-//     name: string;
-//     icon: IconType;
-// }
-// const LinkItems: Array<LinkItemProps> = [
-//     { name: 'Home', icon: FiHome },
-//     { name: 'Analytics', icon: FiTrendingUp },
-//     { name: 'Create PM Identity', icon: FiCompass },
-//     { name: 'Validate PM Identity', icon: FiStar },
-//     { name: 'Search PM Identity', icon: FiStar },
-//     { name: 'Attach NFTs to PM Identity', icon: FiStar },
-//     { name: 'Search Identities', icon: FiStar },
-//     { name: 'Manage Account', icon: FiSettings },
-// ];
-
-//          <Box>
-    //             {LinkItems.map((link) => (
-//                 <NavItem key={link.name} icon={link.icon}>
-//                     {link.name}
-//                 </NavItem>
-//             ))}
-//             </Box>
-
-
-
-
-        // <Box boarderLeft='1px' borderTop='1px' borderBottom='1px' borderColor='#e6dee6' bg={useColorModeValue('#9c7e9c', 'gray.900')}>
-        //     <SidebarContent
-        //         onClose={() => onClose}
-        //         display={{ base: 'none', md: 'block' }}
-        //     />
-        //     <Drawer
-        //         autoFocus={false}
-        //         isOpen={isOpen}
-        //         placement="left"
-        //         onClose={onClose}
-        //         returnFocusOnClose={false}
-        //         onOverlayClick={onClose}
-        //         size="full">
-        //         <DrawerContent>
-        //             <SidebarContent onClose={onClose} />
-        //         </DrawerContent>
-        //     </Drawer>
-        //      mobilenav
-        //     <MobileNav display={{ base: 'flex', md: 'none' }} onOpen={onOpen} />
-        //     <Box ml={{ base: 0, md: 60 }} p="8">
-        //         {children}
-        //     </Box>
-        // </Box>
-  //  );
-//}
-//
-
-
-// interface NavItemProps extends FlexProps {
-//     icon: IconType;
-//     children: ReactText;
-// }
-// const NavItem = ({ icon, children, ...rest }: NavItemProps) => {
-//     return (
-//         <Link href="#" style={{ textDecoration: 'none' }} _focus={{ boxShadow: 'none' }}>
-//             <Flex
-//                 align="center"
-//                 p="4"
-//                 mx="4"
-//                 borderRadius="lg"
-//                 role="group"
-//                 cursor="pointer"
-//                 _hover={{
-//                     //bg: '#c1aec1',
-//                     color: '#694b69',
-//                 }}
-//                 {...rest}>
-//                 {icon && (
-//                     <Icon
-//                         mr="4"
-//                         fontSize="16"
-//                         _groupHover={{
-//                             color: '#694b69',
-//                         }}
-//                         as={icon}
-//                     />
-//                 )}
-//                 {children}
-//             </Flex>
-//         </Link>
-//     );
-// };
-
-interface MobileProps extends FlexProps {
-    onOpen: () => void;
-}
-const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
-    return (
-        <Flex
-            ml={{ base: 0, md: 60 }}
-            px={{ base: 4, md: 24 }}
-            height="20"
-            alignItems="center"
-            bg={useColorModeValue('white', 'gray.900')}
-            border="1px solid"
-            borderColor='#765476'
-            justifyContent="flex-start"
-            {...rest}>
-            <IconButton
-                variant="outline"
-                onClick={onOpen}
-                aria-label="open menu"
-                icon={<FiMenu />}
-            />
-
-            <Text fontSize="2xl" ml="8" fontFamily="monospace" fontWeight="bold">
-                <img src={PMLogo}/>
-            </Text>
-        </Flex>
-    );
-};
 

@@ -11,7 +11,7 @@ const initialState: PMIState = {
 
 };
 
-const PMISlice = createSlice ({
+const CreateSlice = createSlice ({
     name: 'PMI',
     initialState,
     reducers: {
@@ -28,8 +28,8 @@ const PMISlice = createSlice ({
         //update state of accounts page to make TRANSFER, mint new NFT, and add a personal description to the page after PMI token after created action fires
     }
 });
-console.log(PMISlice);
-export const { accountsArr, statusOfArr } = PMISlice.actions;
-export default PMISlice.reducer;
+console.log(CreateSlice);
+export const { accountsArr, statusOfArr } = CreateSlice.actions;
+export default CreateSlice.reducer;
 
 

@@ -25,7 +25,7 @@ import {
     DrawerContent,
     useDisclosure,
     BoxProps,
-    FlexProps, chakra, Center, Image, Avatar, Progress, HTMLChakraProps,
+    FlexProps, chakra, Center, Image, Avatar, Progress, HTMLChakraProps, FormHelperText, FormErrorMessage,
 } from '@chakra-ui/react';
 import { FaFacebook, FaGithub, FaGoogle } from 'react-icons/fa';
 import { PMNFI } from '../atoms/PMNFI';
@@ -35,66 +35,58 @@ import {useAppSelector} from "../../app/hooks";
 import { ReactNode, ReactText } from 'react';
 import PMLogo from '../../PMGIMPResized.png';
 import Logo from '../atoms/Logo';
-import BoxBox from "../atoms/BoxBox";
-import Sidebar from "../molecules/Sidebar";
+import SidebarCreate from "../molecules/Sidebars/SidebarCreate";
 
 interface Interface {
 
 }
 
-export const CreatePM: FC<Interface>=(props: HTMLChakraProps<'form'>)=> {
+export const Create: FC<Interface>=(props: HTMLChakraProps<'form'>)=> {
 
     const accounts = useAppSelector((state) => state.PMI.accounts);
     const status = useAppSelector((state) => state.PMI.status);
 
     const [name, setName] = useState<string | null>(null);
     const [profession, setProfession] = useState<string | null>(null);
-    const [slogan, setSlogan] = useState<string | null>(null);
-    const [org, setOrg] = useState<string | null>(null);
-    const [descr, setDescr] = useState<string | null>(null);
-    const [url, setUrl] = useState<string | null>(null);
     const [email, setEmail] = useState<string | null>(null);
+    const [slogan, setSlogan] = useState<string | null>(null);
+    const [organization, setOrganization] = useState<string | null>(null);
+    const [description, setDescription] = useState<string | null>(null);
+    const [url, setUrl] = useState<string | null>(null);
+
 
     const [account, setAccount] = useState<string[]>([]);
     const [identities, setIdentities] = useState({});
 
-    const nameChange = (e: any) => {
-        console.log(e);
-        console.log(e.target.value);
-        setName(e.target.value);
+    const nameHandler = (e: React.FormEvent<HTMLInputElement>) => {
+        setName(e.currentTarget.value);
     };
-    const professionChange = (e: any) => {
-        setProfession(e.target.value);
+
+    const professionHandler = (e: React.FormEvent<HTMLInputElement>) => {
+        setProfession(e.currentTarget.value);
     };
-    const sloganChange = (e: any) => {
-        setSlogan(e.target.value);
+    const emailHandler = (e: React.FormEvent<HTMLInputElement>) => {
+        setEmail(e.currentTarget.value);
     };
-    const orgChange = (e: any) => {
-        setOrg(e.target.value);
+    const sloganHandler = (e: React.FormEvent<HTMLInputElement>) => {
+        setSlogan(e.currentTarget.value);
     };
-    const descrChange = (e: any) => {
-        setDescr(e.target.value);
+    const organizationHandler = (e: React.FormEvent<HTMLInputElement>) => {
+        setOrganization(e.currentTarget.value);
     };
-    const urlChange = (e: any) => {
-        setUrl(e.target.value);
+    const descriptionHandler = (e: React.FormEvent<HTMLInputElement>) => {
+        setDescription(e.currentTarget.value);
     };
-    const emailChange = (e: any) => {
-        setEmail(e.target.value);
+    const urlHandler = (e: React.FormEvent<HTMLInputElement>) => {
+        setUrl(e.currentTarget.value);
     };
+
 
     return (
 
-        <Flex justify-content={'space-between'}>
-
-            <Flex borderRight="1px solid " borderColor='#daceda'>
-                <Sidebar/>
-            </Flex>
-            <Box flex='auto' style={{border: '1px solid #b59eb5'}} mx={{sm: '12px', xl: '12px'}} borderRadius='8px'
-                 py="18px" px="18px" my={{sm: "12px", xl: "12px"}} bg={'pmpurple.1'}>
                 <Grid templateColumns='repeat(2, 1fr)' gap={2}>
 
                     <GridItem colstart={1} rowSpan={1} colSpan={1} w='100%'>
-
 
                         <Box flex='auto' style={{border: '1px solid #b59eb5'}} mx={{xl: '8px'}}
                              borderRadius='15px' py="22px" px="56px" my={{xl: "8px"}} bg={'pmpurple.1'}>
@@ -119,35 +111,42 @@ export const CreatePM: FC<Interface>=(props: HTMLChakraProps<'form'>)=> {
                                 {...props}
                             >
                                 <Stack spacing="6">
-                                    <FormControl id="name">
-                                        <FormLabel>Name</FormLabel>
-                                        <Input name="name" onChange={nameChange} type="name" required/>
+                                    <FormControl isRequired>
+                                        <FormLabel htmlFor='name'>Name</FormLabel>
+                                        <Input id='name' placeholder='name, company' onChange={nameHandler}/>
+                                        <FormErrorMessage>Field is required.</FormErrorMessage>
+
                                     </FormControl>
-                                    <FormControl id="profession">
-                                        <FormLabel>profession</FormLabel>
-                                        <Input name="profession" onChange={professionChange}
-                                               type="profession" />
+                                    <FormControl >
+                                        <FormLabel htmlFor='profession'>Profession</FormLabel>
+                                        <Input id='profession' placeholder='profession' onChange={professionHandler}/>
+
                                     </FormControl>
-                                    <FormControl id="email">
-                                        <FormLabel>Email</FormLabel>
-                                        <Input name="email" type="email"/>
+                                    <FormControl >
+                                        <FormLabel htmlFor='email'>Email</FormLabel>
+                                        <Input id='email' placeholder='email' onChange={emailHandler} />
+
                                     </FormControl>
-                                    <FormControl id="slogan">
-                                        <FormLabel>Slogan</FormLabel>
-                                        <Input name="slogan" type="slogan"/>
+                                    <FormControl >
+                                        <FormLabel htmlFor='slogan'>Slogan</FormLabel>
+                                        <Input id='slogan' placeholder='slogan' onChange={sloganHandler}/>
+
                                     </FormControl>
-                                    <FormControl id="org">
-                                        <FormLabel>Organization</FormLabel>
-                                        <Input name="org" type="org" />
+                                    <FormControl >
+                                        <FormLabel htmlFor='organization'>Organization</FormLabel>
+                                        <Input id='organization' placeholder='organization' onChange={organizationHandler}/>
+
                                     </FormControl>
-                                    <FormControl id="url">
-                                        <FormLabel>url</FormLabel>
-                                        <Input name="url" type="url" />
+                                    <FormControl>
+                                        <FormLabel htmlFor='url'>url</FormLabel>
+                                        <Input id='url' placeholder='url' onChange={urlHandler} />
                                     </FormControl>
-                                    <FormControl id="descr">
-                                        <FormLabel>Description</FormLabel>
-                                        <Input name="descr" type="descr" required/>
+                                    <FormControl isRequired>
+                                        <FormLabel htmlFor='description'>Description</FormLabel>
+                                        <Input id='description' placeholder='description' onChange={descriptionHandler}/>
+                                        <FormErrorMessage>Field is required.</FormErrorMessage>
                                     </FormControl>
+
                                 </Stack>
                             </chakra.form>
                         </Box>
@@ -182,22 +181,27 @@ export const CreatePM: FC<Interface>=(props: HTMLChakraProps<'form'>)=> {
                                     py="8"
                                     px={{base: '2', lg: '6'}}
                                 >
-
+                        {/*this is the start of the avatar*/}
                                     <Center py={6}>
                                         <Box
-                                            maxW={'270px'}
+                                            maxW={'320px'}
                                             w={'full'}
                                             bg={useColorModeValue('white', 'gray.800')}
                                             boxShadow={'2xl'}
                                             rounded={'md'}
-                                            overflow={'hidden'}>
+                                            overflow={'hidden'}
+                                            //backgroundImage='legoLavendarheadercroped.png'
+                                            //backgroundPosition="center"
+                                            //backgroundRepeat="no-repeat"
+                                            >
                                             <Image
                                                 h={'70px'}
                                                 w={'full'}
+                                                backgroundPosition="center"
                                                 src='legoLavendarheadercroped.png'
                                                 objectFit={'cover'}
                                             />
-                                            <Flex justify={'center'} mt={-12}>
+                                            <Flex justify={'center'} mt={-10}>
                                                 <Avatar
                                                     size={'lg'}
                                                     src='PMlogo.png'
@@ -207,25 +211,38 @@ export const CreatePM: FC<Interface>=(props: HTMLChakraProps<'form'>)=> {
                                                 />
                                             </Flex>
 
-                                            <Box p={6}>
-                                                <Stack spacing={0} align={'center'} mb={5}>
-                                                    <Heading fontSize={'2xl'} fontWeight={500}
+                                            <Box px={'16px'}>
+                                                <Stack spacing={0} align={'center'} mb={5} wordBreak={'break-word'}>
+                                                    <Text mt='0px' fontSize={'2xl'} fontWeight={500}
+                                                          fontFamily={'body'} align={'center'}>
+                                                        PaperMaster
+                                                    </Text>
+                                                    <Text mt='0px' fontSize={'2xl'} fontWeight={500}
                                                              fontFamily={'body'} align={'center'}>
-                                                        PaperMaster Andrew the Tusken from Mos Eisley
-                                                    </Heading>
-                                                    <Text align={'center'} color={'gray.500'}>Mos Eisley
-                                                        Software Developer</Text>
-                                                    <Text align={'center'}
-                                                          color={'gray.500'}>www.ramonajenny.com</Text>
-                                                    <Text align={'center'}
-                                                          color={'gray.500'}>ramonajenny@gmail.com</Text>
-                                                    <Text align={'center'} color={'gray.500'}>PaperMaster
-                                                        Non-Fungible-Identification</Text>
-                                                    <Text align={'center'}
-                                                          color={'gray.500'}>sdkrhwer93847538475kjekhfskjjhdfsdjf</Text>
-                                                </Stack>
+                                                        {name}
+                                                    </Text>
 
-                                                <Stack direction={'row'} justify={'center'} spacing={6}>
+                                                    <Text align={'center'} color={'gray.500'}>
+                                                        {profession}
+                                                    </Text>
+                                                    <Text align={'center'} color={'gray.500'}>
+                                                        {email}
+                                                    </Text>
+                                                    <Text align={'center'} color={'gray.500'}>
+                                                        {slogan}
+                                                    </Text>
+                                                    <Text align={'center'} color={'gray.500'}>
+                                                        {organization}
+                                                    </Text>
+                                                    <Text align={'center'} color={'gray.500'}>
+                                                        {url}
+                                                    </Text>
+                                                    <Text align={'center'} color={'gray.500'} >
+                                                        {description}
+                                                    </Text>
+                                            </Stack>
+
+                                                <Stack direction={'row'} justify={'center'} spacing={6} >
                                                     <Stack spacing={0} align={'center'}>
                                                         <Text fontWeight={600}>57</Text>
                                                         <Text fontSize={'sm'} color={'gray.500'}>
@@ -238,17 +255,21 @@ export const CreatePM: FC<Interface>=(props: HTMLChakraProps<'form'>)=> {
                                                             Mentions
                                                         </Text>
                                                     </Stack>
-                                                    <Stack spacing={0} align={'center'}>
-                                                        <Text fontWeight={600}>2</Text>
+                                                    <Stack spacing={0} align={'center'} whiteSpace={'pre'}>
+                                                        <Text fontWeight={600}>Dec 30, 1976</Text>
                                                         <Text fontSize={'sm'} color={'gray.500'}>
-                                                            Reported
+                                                            Origin Date
                                                         </Text>
                                                     </Stack>
                                                 </Stack>
+                                                <Text mt='12px' align={'center'} color={'gray.500'}>
+                                                    PaperMaster NFI
+                                                </Text>
 
                                                 <Button
                                                     w={'full'}
-                                                    mt={8}
+                                                    mt={2}
+                                                    mb={2}
                                                     bg={useColorModeValue('#4f384f', 'gray.900')}
                                                     color={'white'}
                                                     rounded={'md'}
@@ -256,7 +277,7 @@ export const CreatePM: FC<Interface>=(props: HTMLChakraProps<'form'>)=> {
                                                         transform: 'translateY(-2px)',
                                                         boxShadow: 'lg',
                                                     }}>
-                                                    PMNFI: sdkrhwer93847538475kjekhfskjjhdfsdjf
+                                                    0x888800008888888888888888888888888888888888888
                                                 </Button>
                                             </Box>
                                         </Box>
@@ -278,9 +299,8 @@ export const CreatePM: FC<Interface>=(props: HTMLChakraProps<'form'>)=> {
                         </GridItem>
                     </Box>
                 </Grid>
-            </Box>
-        </Flex>
+
     )
 };
 
-export default CreatePM;
+export default Create;

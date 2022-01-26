@@ -1,9 +1,9 @@
 import {Box, Container, Heading, HeadingProps, Link, SimpleGrid, Stack, Text, useColorModeValue} from '@chakra-ui/react'
 import * as React from 'react'
-import PMLogo from "../../PaperMastersLogoGIMP.png";
+import PMLogo from "../../../PaperMastersLogoGIMP.png";
 import {Link as ReachLink} from "react-router-dom";
 import {ReactNode} from "react";
-import SocialMediaLinks from "../atoms/SocialMediaLinks";
+import SocialMediaLinksFooter from "./SocialMediaLinksFooter";
 
 
 const ListHeader = ({ children }: { children: ReactNode }) => {
@@ -22,7 +22,7 @@ export default function Footer() {
             borderTopWidth={1}
             borderStyle={'solid'}
             borderColor={useColorModeValue('#daceda', 'gray.700')}>
-            <Container as={Stack} maxW={'8xl'} px={0} py={8}>
+            <Container as={Stack} maxW={'8xl'} px={6} py={8}>
                 <SimpleGrid columns={{ base: 1, sm: 2, md: 6 }} spacing={9}>
 
                     <Stack align={'flex-start'}>
@@ -37,30 +37,30 @@ export default function Footer() {
                     <Stack></Stack>
                     <Stack align={'flex-start'}>
                         <ListHeader>Security</ListHeader>
-                        <Link href={'#'}>Privacy Policy</Link>
-                        <Link href={'#'}>Terms of Service</Link>
-                        {/*<Link href={'#'}>Community Guidelines</Link>*/}
+                        <Link >Privacy Policy</Link>
+                        <Link >Terms of Service</Link>
+                        {/*<Link >Community Guidelines</Link>*/}
                     </Stack>
                     <Stack align={'flex-start'}>
                         <ListHeader>Support</ListHeader>
-                        <Link href={'#'}>Learning Center</Link>
-                        <Link href={'#'}>Community Forum</Link>
+                        <Link >Learning Center</Link>
+                        <Link >Community Forum</Link>
                     </Stack>
                     <Stack align={'flex-start'}>
                         <ListHeader>Products</ListHeader>
-                        <Link href={'#'}>Authentic PM Identities</Link>
-                        <Link href={'#'}>Minting NFTs</Link>
-                        <Link href={'#'}>Validation</Link>
-                        <Link href={'#'}>PM Identity Cataloging</Link>
+                        <Link  as={ReachLink} to="/" >Authentic PM Identities</Link>
+                        <Link  as={ReachLink} to="/" >Minting NFTs</Link>
+                        <Link  as={ReachLink} to="/" >Validation</Link>
+                        <Link  as={ReachLink} to="/" >NFI Cataloging</Link>
                     </Stack>
                     <Stack align={'flex-start'}>
                         <ListHeader>Company</ListHeader>
-                        <Link  as={ReachLink} to="/Analytics" href={'#'}>Analytics</Link>
-                        <Link as={ReachLink} to="/AboutUs" href={'#'}>About Us</Link>
-                        <Link  as={ReachLink} to="/AboutUs"href={'#'}>Contact Us</Link>
-                        <Link as={ReachLink} to="/SupportUs" href={'#'}>Support Us</Link>
-                        <Link  as={ReachLink} to="/Logokit"href={'#'}>Logo Kit</Link>
-                        <Link  as={ReachLink} to="/News" href={'#'}>News and Events</Link>
+                        <Link  as={ReachLink} to="/Analytics" >Analytics</Link>
+                        <Link as={ReachLink} to="/AboutUs" >About Us</Link>
+                        <Link  as={ReachLink} to="/AboutUs">Contact Us</Link>
+                        <Link as={ReachLink} to="/SupportUs" >Support Us</Link>
+                        <Link  as={ReachLink} to="/Logokit" >Logo Kit</Link>
+                        <Link  as={ReachLink} to="/News" >News and Events</Link>
                     </Stack>
                 </SimpleGrid>
             </Container>

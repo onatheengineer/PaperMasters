@@ -2,15 +2,17 @@ export const global = {
     // styles for the `body`
     body: {
         bg: 'pmpurple.2',
+        //backdropFilter: "saturate(100%) blur(50px)",
     },
 
     // styles for the `a`
     a: {
-        color: 'pmpurple.13',
+        color: 'pmpurple.14',
             _hover: {
             textDecoration: 'underline',
         },
     },
+
     // textStyles: {
     //     h1: {
     //         // you can also use responsive styles

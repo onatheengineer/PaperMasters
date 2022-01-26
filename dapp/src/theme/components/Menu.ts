@@ -8,8 +8,8 @@ export const Menu = {
                 py: '2',
         },
         item: {
-            fontWeight: 'medium',
-                lineHeight: 'normal',
+            fontWeight: 'bold',
+                lineHeight: 'auto',
             color:"purple.10"
         },
     },

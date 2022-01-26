@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
+import { MetamaskStateProvider } from "use-metamask";
 import App from './App';
 import { Provider } from 'react-redux';
 import { store } from './app/store'
@@ -12,14 +13,17 @@ import {ChakraProvider} from '@chakra-ui/react';
 import theme from "../src/theme";
 
 console.log(theme)
+
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
+        <MetamaskStateProvider>
         <ChakraProvider theme={theme}>
         <BrowserRouter>
       <App />
         </BrowserRouter>,
         </ChakraProvider>
+    </MetamaskStateProvider>
     </Provider>
   </React.StrictMode>,
 

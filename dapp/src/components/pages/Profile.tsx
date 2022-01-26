@@ -39,7 +39,7 @@ import {
     FaTwitter,
 } from "react-icons/fa";
 import { IoDocumentsSharp } from "react-icons/io5";
-import Sidebar from "../molecules/Sidebar";
+import SidebarCreate from "../molecules/Sidebars/SidebarCreate";
 
 
 interface Interface {
@@ -63,17 +63,17 @@ export const Profile:FC<Interface>=()=> {
 
     return (
 
-        <Flex >
+        <Flex>
 
-            <Flex   borderRight="1px solid " borderColor='#daceda'>
-                <Sidebar/>
+            <Flex borderRight="1px solid " borderColor='#daceda'>
+                <SidebarCreate/>
             </Flex>
 
-            <Box >
+            <Box>
 
                 <Grid templateColumns='repeat(1, 1fr)' padding={'0'}>
 
-                    <Box flex='1' bg='#e6dee6' style={{border: '0px solid #5c415c'}}>
+                    <Box flex='1' bg='#e6dee6' style={{border: '8px solid white'}}>
 
                         <Flex direction="column">
 
@@ -114,7 +114,7 @@ export const Profile:FC<Interface>=()=> {
                                         borderRadius="20px"
                                         transform={{
                                             sm: "translateY(45%)",
-                                            md: "translateY(110%)",
+                                            md: "translateY(90%)",
                                             lg: "translateY(110%)",
                                         }}
                                     >
@@ -134,7 +134,7 @@ export const Profile:FC<Interface>=()=> {
                                                 h="80px"
                                                 borderRadius="15px"
                                             />
-                                            <Flex direction="column" maxWidth="100%" my={{sm: "14px"}}>
+                                            <Flex direction="column" maxWidth="100%" >
                                                 <Text
                                                     fontSize={{sm: "lg", lg: "xl"}}
                                                     color={'#271c27'}
@@ -150,6 +150,45 @@ export const Profile:FC<Interface>=()=> {
                                                 >
                                                     ramonajenny.n@gmail.com
                                                 </Text>
+                                                <Flex align="center" mb="0px">
+                                                    <Text
+                                                        fontSize="md"
+                                                        color={textColor}
+                                                        fontWeight="bold"
+                                                        me="10px"
+                                                    >
+                                                        Social Media:{" "}
+                                                    </Text>
+                                                    <Flex>
+                                                        <Link
+                                                            href="#"
+                                                            color="#9c7e9c"
+                                                            fontSize="lg"
+                                                            me="10px"
+                                                            _hover={{color: "#9c7e9c"}}
+                                                        >
+                                                            <Icon as={FaFacebook}/>
+                                                        </Link>
+                                                        <Link
+                                                            href="#"
+                                                            color="#9c7e9c"
+                                                            fontSize="lg"
+                                                            me="10px"
+                                                            _hover={{color: "#9c7e9c"}}
+                                                        >
+                                                            <Icon as={FaInstagram}/>
+                                                        </Link>
+                                                        <Link
+                                                            href="#"
+                                                            color="#9c7e9c"
+                                                            fontSize="lg"
+                                                            me="10px"
+                                                            _hover={{color: "#9c7e9c"}}
+                                                        >
+                                                            <Icon as={FaTwitter}/>
+                                                        </Link>
+                                                    </Flex>
+                                                </Flex>
                                             </Flex>
                                         </Flex>
                                         <Flex
@@ -179,7 +218,8 @@ export const Profile:FC<Interface>=()=> {
                                 </Box>
                             </Box>
 
-                            <Card mx={{xl: '32px'}} borderRadius='15px' bg='white' p="16px" px="24px" my={{sm: "24px", xl: "16px"}} >
+                            <Card mx={"5px"} borderRadius='15px' bg='white' p="16px" px="24px"
+                                  mt={{sm: "24px", md: '5px', xl: "16px"}} mb='16px'>
                                 <CardHeader p="12px 5px" mb="12px">
                                     <Text fontSize="lg" color={textColor} fontWeight="bold">
                                         Description
@@ -188,399 +228,350 @@ export const Profile:FC<Interface>=()=> {
                                 <CardBody px="5px">
                                     <Flex direction="column">
                                         <Text fontSize="md" color="gray.500" fontWeight="400" mb="30px">
-                                            Mathematics may not teach us how to add love or subtract hate, but it gives us every reason to hope that every problem has a solution.
+                                            Mathematics may not teach us how to add love or subtract hate, but it gives
+                                            us every reason to hope that every problem has a solution.
                                         </Text>
                                     </Flex>
                                 </CardBody>
                             </Card>
-                        <Card mx={{xl: "15px"}}>
-                            <Grid templateColumns={{sm: "1fr", xl: "repeat(3, 1fr)"}} gap="12px">
-                                <Card mx={{xl: "15px"}} m='5px' borderRadius='15px' bg='white' p="16px" px="24px">
-                                    <CardHeader p="12px 5px" mb="12px">
-                                        <Text fontSize="lg" color={textColor} fontWeight="bold">
-                                            Platform Settings
-                                        </Text>
-                                    </CardHeader>
-                                    <CardBody px="5px">
-                                        <Flex direction="column">
-                                            <Text fontSize="sm" color="gray.500" fontWeight="600" mb="20px">
-                                                ACCOUNT
+                            <Card >
+                                <Grid templateColumns={{sm: "1fr", xl: "repeat(3, 1fr)"}} gap="12px">
+                                    <Card mx={{xl: "15px"}} m='5px' borderRadius='15px' bg='white' p="16px" px="24px">
+                                        <CardHeader p="12px 5px" mb="12px">
+                                            <Text fontSize="lg" color={textColor} fontWeight="bold">
+                                                Platform Settings
                                             </Text>
-                                            <Flex align="center" mb="20px">
-                                                <Switch colorScheme="purple" me="10px"/>
-                                                <Text
-                                                    noOfLines={1}
-                                                    fontSize="md"
-                                                    color="gray.500"
-                                                    fontWeight="400"
-                                                >
-                                                    Email me when someone Validates me
+                                        </CardHeader>
+                                        <CardBody px="5px">
+                                            <Flex direction="column">
+                                                <Text fontSize="sm" color="gray.500" fontWeight="600" mb="20px">
+                                                    ACCOUNT
                                                 </Text>
-                                            </Flex>
-                                            <Flex align="center" mb="20px">
-                                                <Switch colorScheme="purple" me="10px"/>
+                                                <Flex align="center" mb="20px">
+                                                    <Switch colorScheme="purple" me="10px"/>
+                                                    <Text
+                                                        noOfLines={1}
+                                                        fontSize="md"
+                                                        color="gray.500"
+                                                        fontWeight="400"
+                                                    >
+                                                        Email me when someone Validates me
+                                                    </Text>
+                                                </Flex>
+                                                <Flex align="center" mb="20px">
+                                                    <Switch colorScheme="purple" me="10px"/>
+                                                    <Text
+                                                        noOfLines={1}
+                                                        fontSize="md"
+                                                        color="gray.500"
+                                                        fontWeight="400"
+                                                    >
+                                                        Email me when my PMI attached NFTs sell
+                                                    </Text>
+                                                </Flex>
+                                                <Flex align="center" mb="20px">
+                                                    <Switch colorScheme="purple" me="10px"/>
+                                                    <Text
+                                                        noOfLines={1}
+                                                        fontSize="md"
+                                                        color="gray.500"
+                                                        fontWeight="400"
+                                                    >
+                                                        Email me when someone answers on my post
+                                                    </Text>
+                                                </Flex>
+                                                <Flex align="center" mb="20px">
+                                                    <Switch colorScheme="purple" me="10px"/>
+                                                    <Text
+                                                        noOfLines={1}
+                                                        fontSize="md"
+                                                        color="gray.500"
+                                                        fontWeight="400"
+                                                    >
+                                                        Email me when someone mentions me
+                                                    </Text>
+                                                </Flex>
                                                 <Text
-                                                    noOfLines={1}
-                                                    fontSize="md"
+                                                    fontSize="sm"
                                                     color="gray.500"
-                                                    fontWeight="400"
+                                                    fontWeight="600"
+                                                    m="6px 0px 20px 0px"
                                                 >
-                                                    Email me when my PMI attached NFTs sell
+                                                    APPLICATION
                                                 </Text>
+                                                <Flex align="center" mb="20px">
+                                                    <Switch colorScheme="purple" me="10px"/>
+                                                    <Text
+                                                        noOfLines={1}
+                                                        fontSize="md"
+                                                        color="gray.500"
+                                                        fontWeight="400"
+                                                    >
+                                                        New launches and projects
+                                                    </Text>
+                                                </Flex>
+                                                <Flex align="center" mb="20px">
+                                                    <Switch colorScheme="purple" me="10px"/>
+                                                    <Text
+                                                        noOfLines={1}
+                                                        fontSize="md"
+                                                        color="gray.500"
+                                                        fontWeight="400"
+                                                    >
+                                                        Monthly product changes
+                                                    </Text>
+                                                </Flex>
+                                                <Flex align="center" mb="20px">
+                                                    <Switch colorScheme="purple" me="10px"/>
+                                                    <Text
+                                                        noOfLines={1}
+                                                        fontSize="md"
+                                                        color="gray.500"
+                                                        fontWeight="400"
+                                                    >
+                                                        Subscribe to newsletter
+                                                    </Text>
+                                                </Flex>
                                             </Flex>
-                                            <Flex align="center" mb="20px">
-                                                <Switch colorScheme="purple" me="10px"/>
-                                                <Text
-                                                    noOfLines={1}
-                                                    fontSize="md"
-                                                    color="gray.500"
-                                                    fontWeight="400"
-                                                >
-                                                    Email me when someone answers on my post
-                                                </Text>
-                                            </Flex>
-                                            <Flex align="center" mb="20px">
-                                                <Switch colorScheme="purple" me="10px"/>
-                                                <Text
-                                                    noOfLines={1}
-                                                    fontSize="md"
-                                                    color="gray.500"
-                                                    fontWeight="400"
-                                                >
-                                                    Email me when someone mentions me
-                                                </Text>
-                                            </Flex>
-                                            <Text
-                                                fontSize="sm"
-                                                color="gray.500"
-                                                fontWeight="600"
-                                                m="6px 0px 20px 0px"
-                                            >
-                                                APPLICATION
+                                        </CardBody>
+                                    </Card>
+                                    <Card mx={{xl: "15px"}} m='5px' borderRadius='15px' bg='white' p="16px" px="24px">
+                                        <CardHeader p="12px 5px" mb="12px">
+                                            <Text fontSize="lg" color={textColor} fontWeight="bold">
+                                                PMI goes here
                                             </Text>
-                                            <Flex align="center" mb="20px">
-                                                <Switch colorScheme="purple" me="10px"/>
-                                                <Text
-                                                    noOfLines={1}
-                                                    fontSize="md"
-                                                    color="gray.500"
-                                                    fontWeight="400"
-                                                >
-                                                    New launches and projects
-                                                </Text>
-                                            </Flex>
-                                            <Flex align="center" mb="20px">
-                                                <Switch colorScheme="purple" me="10px"/>
-                                                <Text
-                                                    noOfLines={1}
-                                                    fontSize="md"
-                                                    color="gray.500"
-                                                    fontWeight="400"
-                                                >
-                                                    Monthly product changes
-                                                </Text>
-                                            </Flex>
-                                            <Flex align="center" mb="20px">
-                                                <Switch colorScheme="purple" me="10px"/>
-                                                <Text
-                                                    noOfLines={1}
-                                                    fontSize="md"
-                                                    color="gray.500"
-                                                    fontWeight="400"
-                                                >
-                                                    Subscribe to newsletter
-                                                </Text>
-                                            </Flex>
-                                        </Flex>
-                                    </CardBody>
-                                </Card>
-                                <Card mx={{xl: "15px"}} m='5px' borderRadius='15px' bg='white' p="16px" px="24px">
-                                    <CardHeader p="12px 5px" mb="12px">
-                                        <Text fontSize="lg" color={textColor} fontWeight="bold">
-                                            Profile
-                                        </Text>
-                                    </CardHeader>
-                                    <CardBody px="5px">
-                                        <Flex direction="column">
-                                            <Flex align="center" mb="18px">
-                                                <Text
-                                                    fontSize="md"
-                                                    color={textColor}
-                                                    fontWeight="bold"
-                                                    me="10px"
-                                                >
-                                                    Familiar Name:{" "}
-                                                </Text>
-                                                <Text fontSize="md" color="gray.500" fontWeight="400">
-                                                    Andrew the Jedi
-                                                </Text>
-                                            </Flex>
-                                            <Flex align="center" mb="18px">
-                                                <Text
-                                                    fontSize="md"
-                                                    color={textColor}
-                                                    fontWeight="bold"
-                                                    me="10px"
-                                                >
-                                                    Title:{" "}
-                                                </Text>
-                                                <Text fontSize="md" color="gray.500" fontWeight="400">
-                                                    Bounty Hunter
-                                                </Text>
-                                            </Flex>
-                                            <Flex align="center" mb="18px">
-                                                <Text
-                                                    fontSize="md"
-                                                    color={textColor}
-                                                    fontWeight="bold"
-                                                    me="10px"
-                                                >
-                                                    Email:{" "}
-                                                </Text>
-                                                <Text fontSize="md" color="gray.500" fontWeight="400">
-                                                    ramonajenny.n@gmail.com
-                                                </Text>
-                                            </Flex>
-                                            <Flex align="center" mb="18px">
-                                                <Text
-                                                    fontSize="md"
-                                                    color={textColor}
-                                                    fontWeight="bold"
-                                                    me="10px"
-                                                >
-                                                    Slogon:{" "}
-                                                </Text>
-                                                <Text fontSize="md" color="gray.500" fontWeight="400">
-                                                    all things wave
-                                                </Text>
-                                            </Flex>
-                                            <Flex align="center" mb="18px">
-                                                <Text
-                                                    fontSize="md"
-                                                    color={textColor}
-                                                    fontWeight="bold"
-                                                    me="10px"
-                                                >
-                                                    url:{" "}
-                                                </Text>
-                                                <Text fontSize="md" color="gray.500" fontWeight="400">
-                                                    www.ramonajenny.com
-                                                </Text>
-                                            </Flex>
-                                            <Flex align="center" mb="18px">
-                                                <Text
-                                                    fontSize="md"
-                                                    color={textColor}
-                                                    fontWeight="bold"
-                                                    me="10px"
-                                                >
-                                                    Location:{" "}
-                                                </Text>
-                                                <Text fontSize="md" color="gray.500" fontWeight="400">
-                                                    United States
-                                                </Text>
-                                            </Flex>
-                                            <Flex align="center" mb="18px">
-                                                <Text
-                                                    fontSize="md"
-                                                    color={textColor}
-                                                    fontWeight="bold"
-                                                    me="10px"
-                                                >
-                                                    Social Media:{" "}
-                                                </Text>
-                                                <Flex>
-                                                    <Link
-                                                        href="#"
-                                                        color="#9c7e9c"
-                                                        fontSize="lg"
-                                                        me="10px"
-                                                        _hover={{color: "#9c7e9c"}}
-                                                    >
-                                                        <Icon as={FaFacebook}/>
-                                                    </Link>
-                                                    <Link
-                                                        href="#"
-                                                        color="#9c7e9c"
-                                                        fontSize="lg"
-                                                        me="10px"
-                                                        _hover={{color: "#9c7e9c"}}
-                                                    >
-                                                        <Icon as={FaInstagram}/>
-                                                    </Link>
-                                                    <Link
-                                                        href="#"
-                                                        color="#9c7e9c"
-                                                        fontSize="lg"
-                                                        me="10px"
-                                                        _hover={{color: "#9c7e9c"}}
-                                                    >
-                                                        <Icon as={FaTwitter}/>
-                                                    </Link>
-                                                </Flex>
-                                            </Flex>
-                                        </Flex>
-                                    </CardBody>
-                                </Card>
-                                <Card mx={{xl: "15px"}} m='5px' borderRadius='15px' bg='white' p="16px" px="24px">
-                                    <CardHeader p="12px 5px" mb="12px">
-                                        <Text fontSize="lg" color={textColor} fontWeight="bold">
-                                            Mentions
-                                        </Text>
-                                    </CardHeader>
-                                    <CardBody px="5px">
-                                        <Flex direction="column" w="100%">
-                                            <Flex justifyContent="space-between" mb="21px">
-                                                <Flex align="center">
-                                                    <Avatar
-                                                        src='PMlogo.png'
-                                                        w="50px"
-                                                        h="50px"
-                                                        borderRadius="15px"
-                                                        me="10px"
-                                                    />
-                                                    <Flex direction="column">
-                                                        <Text fontSize="sm" color={textColor} fontWeight="bold">
-                                                            JediKnight{" "}
-                                                        </Text>
-                                                        <Text fontSize="xs" color="gray.500" fontWeight="400">
-                                                            Hi! I need more information...
-                                                        </Text>
-                                                    </Flex>
-                                                </Flex>
-                                                <Button p="0px" bg="transparent" variant="no-hover">
+                                        </CardHeader>
+                                        <CardBody px="5px">
+                                            <Flex direction="column">
+                                                <Flex align="center" mb="18px">
                                                     <Text
-                                                        fontSize="sm"
-                                                        fontWeight="600"
-                                                        color="#9c7e9c"
-                                                        alignSelf="center"
-                                                    >
-                                                        REPLY
-                                                    </Text>
-                                                </Button>
-                                            </Flex>
-                                            <Flex justifyContent="space-between" mb="21px">
-                                                <Flex align="center">
-                                                    <Avatar
-                                                        src='legoLavendar.png'
-                                                        w="50px"
-                                                        h="50px"
-                                                        borderRadius="15px"
+                                                        fontSize="md"
+                                                        color={textColor}
+                                                        fontWeight="bold"
                                                         me="10px"
-                                                    />
-                                                    <Flex direction="column">
-                                                        <Text fontSize="sm" color={textColor} fontWeight="bold">
-                                                            WhyWhyWhy{" "}
-                                                        </Text>
-                                                        <Text fontSize="xs" color="gray.500" fontWeight="400">
-                                                            Awesome work, can you change...
-                                                        </Text>
-                                                    </Flex>
-                                                </Flex>
-                                                <Button p="0px" bg="transparent" variant="no-hover">
-                                                    <Text
-                                                        fontSize="sm"
-                                                        fontWeight="600"
-                                                        color="#9c7e9c"
-                                                        alignSelf="center"
                                                     >
-                                                        REPLY
+                                                        Familiar Name:{" "}
                                                     </Text>
-                                                </Button>
-                                            </Flex>
-                                            <Flex justifyContent="space-between" mb="21px">
-                                                <Flex align="center">
-                                                    <Avatar
-                                                        src={'PMlogo.png'}
-                                                        w="50px"
-                                                        h="50px"
-                                                        borderRadius="15px"
+                                                    <Text fontSize="md" color="gray.500" fontWeight="400">
+                                                        Andrew the Jedi
+                                                    </Text>
+                                                </Flex>
+
+
+                                                <Flex align="center" mb="18px">
+                                                    <Text
+                                                        fontSize="md"
+                                                        color={textColor}
+                                                        fontWeight="bold"
                                                         me="10px"
-                                                    />
-                                                    <Flex direction="column">
-                                                        <Text fontSize="sm" color={textColor} fontWeight="bold">
-                                                            Ammon AC{" "}
-                                                        </Text>
-                                                        <Text fontSize="xs" color="gray.500" fontWeight="400">
-                                                            Have a great afternoon...
-                                                        </Text>
-                                                    </Flex>
-                                                </Flex>
-                                                <Button p="0px" bg="transparent" variant="no-hover">
-                                                    <Text
-                                                        fontSize="sm"
-                                                        fontWeight="600"
-                                                        color="#9c7e9c"
-                                                        alignSelf="center"
                                                     >
-                                                        REPLY
+                                                        Location:{" "}
                                                     </Text>
-                                                </Button>
-                                            </Flex>
-                                            <Flex justifyContent="space-between" mb="21px">
-                                                <Flex align="center">
-                                                    <Avatar
-                                                        src={'legoLavendar.png'}
-                                                        w="50px"
-                                                        h="50px"
-                                                        borderRadius="15px"
-                                                        me="10px"
-                                                    />
-                                                    <Flex direction="column">
-                                                        <Text fontSize="sm" color={textColor} fontWeight="bold">
-                                                            Captain Nautica{" "}
-                                                        </Text>
-                                                        <Text fontSize="xs" color="gray.500" fontWeight="400">
-                                                            About NFTs I can...
-                                                        </Text>
-                                                    </Flex>
+                                                    <Text fontSize="md" color="gray.500" fontWeight="400">
+                                                        United States
+                                                    </Text>
                                                 </Flex>
-                                                <Button p="0px" bg="transparent" variant="no-hover">
-                                                    <Text
-                                                        fontSize="sm"
-                                                        fontWeight="600"
-                                                        color="#9c7e9c"
-                                                        alignSelf="center"
-                                                    >
-                                                        REPLY
-                                                    </Text>
-                                                </Button>
+                                                {/*<Flex align="center" mb="18px">*/}
+                                                {/*    <Text*/}
+                                                {/*        fontSize="md"*/}
+                                                {/*        color={textColor}*/}
+                                                {/*        fontWeight="bold"*/}
+                                                {/*        me="10px"*/}
+                                                {/*    >*/}
+                                                {/*        Social Media:{" "}*/}
+                                                {/*    </Text>*/}
+                                                {/*    <Flex>*/}
+                                                {/*        <Link*/}
+                                                {/*            href="#"*/}
+                                                {/*            color="#9c7e9c"*/}
+                                                {/*            fontSize="lg"*/}
+                                                {/*            me="10px"*/}
+                                                {/*            _hover={{color: "#9c7e9c"}}*/}
+                                                {/*        >*/}
+                                                {/*            <Icon as={FaFacebook}/>*/}
+                                                {/*        </Link>*/}
+                                                {/*        <Link*/}
+                                                {/*            href="#"*/}
+                                                {/*            color="#9c7e9c"*/}
+                                                {/*            fontSize="lg"*/}
+                                                {/*            me="10px"*/}
+                                                {/*            _hover={{color: "#9c7e9c"}}*/}
+                                                {/*        >*/}
+                                                {/*            <Icon as={FaInstagram}/>*/}
+                                                {/*        </Link>*/}
+                                                {/*        <Link*/}
+                                                {/*            href="#"*/}
+                                                {/*            color="#9c7e9c"*/}
+                                                {/*            fontSize="lg"*/}
+                                                {/*            me="10px"*/}
+                                                {/*            _hover={{color: "#9c7e9c"}}*/}
+                                                {/*        >*/}
+                                                {/*            <Icon as={FaTwitter}/>*/}
+                                                {/*        </Link>*/}
+                                                {/*    </Flex>*/}
+                                                {/*</Flex>*/}
                                             </Flex>
-                                            <Flex justifyContent="space-between" mb="21px">
-                                                <Flex align="center">
-                                                    <Avatar
-                                                        src={'PMlogo.png'}
-                                                        w="50px"
-                                                        h="50px"
-                                                        borderRadius="15px"
-                                                        me="10px"
-                                                    />
-                                                    <Flex direction="column">
-                                                        <Text fontSize="sm" color={textColor} fontWeight="bold">
-                                                            Atlas World{" "}
-                                                        </Text>
-                                                        <Text fontSize="xs" color="gray.500" fontWeight="400">
-                                                            Are you the author...
-                                                        </Text>
+                                        </CardBody>
+                                    </Card>
+                                    <Card mx={{xl: "15px"}} m='5px' borderRadius='15px' bg='white' p="16px" px="24px">
+                                        <CardHeader p="12px 5px" mb="12px">
+                                            <Text fontSize="lg" color={textColor} fontWeight="bold">
+                                                Mentions
+                                            </Text>
+                                        </CardHeader>
+                                        <CardBody px="5px">
+                                            <Flex direction="column" w="100%">
+                                                <Flex justifyContent="space-between" mb="21px">
+                                                    <Flex align="center">
+                                                        <Avatar
+                                                            src='PMlogo.png'
+                                                            w="50px"
+                                                            h="50px"
+                                                            borderRadius="15px"
+                                                            me="10px"
+                                                        />
+                                                        <Flex direction="column">
+                                                            <Text fontSize="sm" color={textColor} fontWeight="bold">
+                                                                JediKnight{" "}
+                                                            </Text>
+                                                            <Text fontSize="xs" color="gray.500" fontWeight="400">
+                                                                Hi! I need more information...
+                                                            </Text>
+                                                        </Flex>
                                                     </Flex>
+                                                    <Button p="0px" bg="transparent" variant="no-hover">
+                                                        <Text
+                                                            fontSize="sm"
+                                                            fontWeight="600"
+                                                            color="#9c7e9c"
+                                                            alignSelf="center"
+                                                        >
+                                                            REPLY
+                                                        </Text>
+                                                    </Button>
                                                 </Flex>
-                                                <Button p="0px" bg="transparent" variant="no-hover">
-                                                    <Text
-                                                        fontSize="sm"
-                                                        fontWeight="600"
-                                                        color="#9c7e9c"
-                                                        alignSelf="center"
-                                                    >
-                                                        REPLY
-                                                    </Text>
-                                                </Button>
+                                                <Flex justifyContent="space-between" mb="21px">
+                                                    <Flex align="center">
+                                                        <Avatar
+                                                            src='legoLavendar.png'
+                                                            w="50px"
+                                                            h="50px"
+                                                            borderRadius="15px"
+                                                            me="10px"
+                                                        />
+                                                        <Flex direction="column">
+                                                            <Text fontSize="sm" color={textColor} fontWeight="bold">
+                                                                WhyWhyWhy{" "}
+                                                            </Text>
+                                                            <Text fontSize="xs" color="gray.500" fontWeight="400">
+                                                                Awesome work, can you change...
+                                                            </Text>
+                                                        </Flex>
+                                                    </Flex>
+                                                    <Button p="0px" bg="transparent" variant="no-hover">
+                                                        <Text
+                                                            fontSize="sm"
+                                                            fontWeight="600"
+                                                            color="#9c7e9c"
+                                                            alignSelf="center"
+                                                        >
+                                                            REPLY
+                                                        </Text>
+                                                    </Button>
+                                                </Flex>
+                                                <Flex justifyContent="space-between" mb="21px">
+                                                    <Flex align="center">
+                                                        <Avatar
+                                                            src={'PMlogo.png'}
+                                                            w="50px"
+                                                            h="50px"
+                                                            borderRadius="15px"
+                                                            me="10px"
+                                                        />
+                                                        <Flex direction="column">
+                                                            <Text fontSize="sm" color={textColor} fontWeight="bold">
+                                                                Ammon AC{" "}
+                                                            </Text>
+                                                            <Text fontSize="xs" color="gray.500" fontWeight="400">
+                                                                Have a great afternoon...
+                                                            </Text>
+                                                        </Flex>
+                                                    </Flex>
+                                                    <Button p="0px" bg="transparent" variant="no-hover">
+                                                        <Text
+                                                            fontSize="sm"
+                                                            fontWeight="600"
+                                                            color="#9c7e9c"
+                                                            alignSelf="center"
+                                                        >
+                                                            REPLY
+                                                        </Text>
+                                                    </Button>
+                                                </Flex>
+                                                <Flex justifyContent="space-between" mb="21px">
+                                                    <Flex align="center">
+                                                        <Avatar
+                                                            src={'legoLavendar.png'}
+                                                            w="50px"
+                                                            h="50px"
+                                                            borderRadius="15px"
+                                                            me="10px"
+                                                        />
+                                                        <Flex direction="column">
+                                                            <Text fontSize="sm" color={textColor} fontWeight="bold">
+                                                                Captain Nautica{" "}
+                                                            </Text>
+                                                            <Text fontSize="xs" color="gray.500" fontWeight="400">
+                                                                About NFTs I can...
+                                                            </Text>
+                                                        </Flex>
+                                                    </Flex>
+                                                    <Button p="0px" bg="transparent" variant="no-hover">
+                                                        <Text
+                                                            fontSize="sm"
+                                                            fontWeight="600"
+                                                            color="#9c7e9c"
+                                                            alignSelf="center"
+                                                        >
+                                                            REPLY
+                                                        </Text>
+                                                    </Button>
+                                                </Flex>
+                                                <Flex justifyContent="space-between" mb="21px">
+                                                    <Flex align="center">
+                                                        <Avatar
+                                                            src={'PMlogo.png'}
+                                                            w="50px"
+                                                            h="50px"
+                                                            borderRadius="15px"
+                                                            me="10px"
+                                                        />
+                                                        <Flex direction="column">
+                                                            <Text fontSize="sm" color={textColor} fontWeight="bold">
+                                                                Atlas World{" "}
+                                                            </Text>
+                                                            <Text fontSize="xs" color="gray.500" fontWeight="400">
+                                                                Are you the author...
+                                                            </Text>
+                                                        </Flex>
+                                                    </Flex>
+                                                    <Button p="0px" bg="transparent" variant="no-hover">
+                                                        <Text
+                                                            fontSize="sm"
+                                                            fontWeight="600"
+                                                            color="#9c7e9c"
+                                                            alignSelf="center"
+                                                        >
+                                                            REPLY
+                                                        </Text>
+                                                    </Button>
+                                                </Flex>
                                             </Flex>
-                                        </Flex>
-                                    </CardBody>
-                                </Card>
-                            </Grid>
-                        </Card>
-                            <Card p="16px" my="24px" mx={{xl: '32px'}} borderRadius='15px' bg='white' px="24px" >
+                                        </CardBody>
+                                    </Card>
+                                </Grid>
+                            </Card>
+                            <Card p="16px" my="24px" mx={{xl: '32px'}} borderRadius='15px' bg='white' px="24px">
                                 <CardHeader p="12px 5px" mb="12px">
                                     <Flex direction="column">
                                         <Text fontSize="lg" color={textColor} fontWeight="bold">
@@ -598,7 +589,8 @@ export const Profile:FC<Interface>=()=> {
                                         gap="24px"
                                     >
 
-                                        <Flex style={{border: '1px solid #b59eb5'}} mx={{xl: "15px"}} m='5px' borderRadius='15px' bg='white' p="16px" direction="column">
+                                        <Flex style={{border: '1px solid #b59eb5'}} mx={{xl: "15px"}} m='5px'
+                                              borderRadius='15px' bg='white' p="16px" direction="column">
                                             <Box mb="20px" position="relative" borderRadius="15px">
                                                 <Image src={ImageArchitect1} borderRadius="15px"/>
                                                 <Box
@@ -646,7 +638,8 @@ export const Profile:FC<Interface>=()=> {
                                                 </Flex>
                                             </Flex>
                                         </Flex>
-                                        <Flex style={{border: '1px solid #b59eb5'}} mx={{xl: "15px"}} m='5px' borderRadius='15px' bg='white' p="16px" direction="column">
+                                        <Flex style={{border: '1px solid #b59eb5'}} mx={{xl: "15px"}} m='5px'
+                                              borderRadius='15px' bg='white' p="16px" direction="column">
                                             <Box mb="20px" position="relative" borderRadius="15px">
                                                 <Image src={ImageArchitect2} borderRadius="15px"/>
                                                 <Box
@@ -694,7 +687,8 @@ export const Profile:FC<Interface>=()=> {
                                                 </Flex>
                                             </Flex>
                                         </Flex>
-                                        <Flex style={{border: '1px solid #b59eb5'}} mx={{xl: "15px"}} m='5px' borderRadius='15px' bg='white' p="16px" direction="column">
+                                        <Flex style={{border: '1px solid #b59eb5'}} mx={{xl: "15px"}} m='5px'
+                                              borderRadius='15px' bg='white' p="16px" direction="column">
                                             <Box mb="20px" position="relative" borderRadius="15px">
                                                 <Image src={ImageArchitect3} borderRadius="15px"/>
                                                 <Box

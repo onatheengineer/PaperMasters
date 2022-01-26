@@ -1,6 +1,7 @@
 export const MenuButton = {
     // 1. We can update the base styles
     baseStyle: {
+        fontSize: '2em',
         fontWeight: 'bold',
         color:"#bb0000",
         border:"3px",
@@ -10,13 +11,18 @@ export const MenuButton = {
     sizes: {
         xl: {
             h: '56px',
-                fontSize: 'lg',
+                fontSize: '2em',
                 px: '32px',
+        },
+        lg: {
+            h: '26px',
+            fontSize: '2em',
+            px: '26px',
         },
         sm: {
             h: '26px',
-                fontSize: 'sm',
-                px: '12px',
+                fontSize: '2em',
+                px: '26px',
         },
     },
     // 3. We can add a new visual variant

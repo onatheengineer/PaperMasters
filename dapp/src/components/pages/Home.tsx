@@ -11,14 +11,14 @@ import {} from '@chakra-ui/react';
 import WithAction from "../molecules/Navbar";
 
 import BackgroundLogo from '../../legoLavendarheadercroped.png';
-import SecondFooterHome from '../molecules/SecondFooterHome';
+import SecondFooterHome from '../molecules/Footers/SecondFooterHome';
 
 export default function Home() {
     return (
        <div>
         <Flex
             w={'full'}
-            h={'71vh'}
+            h={'60vh'}
             backgroundImage={BackgroundLogo}
             backgroundSize={'cover'}
             backgroundPosition={'center center'}>
@@ -30,26 +30,19 @@ export default function Home() {
                 <Stack maxW={'2xl'} align={'flex-start'} spacing={6}>
                     <Text
                         color={'white'}
-                        fontWeight={700}
+                        fontWeight={600}
                         lineHeight={1.2}
-                        fontSize={useBreakpointValue({ base: '3xl', md: '4xl' })}>
+                        fontSize={useBreakpointValue({ base: '3xl', md: '6xl' })}>
                         The PaperMasters
                     </Text>
                     <Text
                         color={'white'}
                         fontWeight={300}
-                        lineHeight={0.2}
-                        fontSize={useBreakpointValue({ base: '3xl', md: '4xl' })}>
-                        Bringing Legitimacy to the Blockchain
+                        lineHeight={0.5}
+                        fontSize={useBreakpointValue({ base: '4xl', md: '3xl' })}>
+                        Bringing Protection and Legitimacy to the Blockchain
                     </Text>
                     <Stack direction={'row'}>
-                        <Button
-                            bg={'blue.400'}
-                            rounded={'full'}
-                            color={'white'}
-                            _hover={{ bg: 'blue.500' }}>
-                            Show me more
-                        </Button>
                         <Button
                             bg={'whiteAlpha.300'}
                             rounded={'full'}

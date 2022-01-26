@@ -2,20 +2,21 @@ import React from 'react';
 import './App.css';
 import {useAppDispatch, useAppSelector} from './app/hooks';
 import Navbar from "./components/molecules/Navbar";
-import Footer from "./components/molecules/Footer";
+import Footer from "./components/molecules/Footers/Footer";
 import Home from "./components/pages/Home";
 import Analytics from "./components/pages/Analytics";
-import CreatePM from "./components/pages/CreatePM";
-import ValidatePM from "./components/pages/ValidatePM";
-import SearchPM from "./components/pages/SearchPM";
+import Create from "./components/pages/Create";
+import Validate from "./components/pages/Validate";
+import Search from "./components/pages/Search";
 import AboutUs from "./components/pages/AboutUs";
-import AttachToPM from "./components/pages/AttachToPM";
+import Attach from "./components/pages/Attach";
 import ContactUs from "./components/pages/ContactUs";
 import ProofConcept from "./components/pages/ProofConcept";
 import News from "./components/pages/News";
 import SupportUs from "./components/pages/SupportUs";
 import Profile from "./components/pages/Profile";
 import FAQ from "./components/pages/FAQ";
+import PageCreateTemplate from './components/atoms/pageCreateTemplate';
 
 import {
   Routes,
@@ -23,7 +24,8 @@ import {
 } from "react-router-dom";
 import {produce} from 'immer';
 import Web3 from "web3";
-import SocialMediaLinks from "./components/atoms/SocialMediaLinks";
+import SocialMediaLinksFooter from "./components/molecules/Footers/SocialMediaLinksFooter";
+
 
 
 function App() {
@@ -37,22 +39,23 @@ function App() {
         <Navbar/>
         <Routes>
           <Route path="/" element={<Home/>}/>
-            <Route path="/Analytics" element={  <Analytics/> }/>
-            <Route path="/Create" element={  <CreatePM/> }/>
-            <Route path="/Validate" element={  <ValidatePM/> }/>
-            <Route path="/Search" element={  <SearchPM/> }/>
-            <Route path="/Attach" element={  <AttachToPM/> }/>
-            <Route path="/AboutUs" element={  <AboutUs/> }/>
+
+            <Route path="/Create" element={<PageCreateTemplate/>}/>
+            <Route path="/Validate" element={<Validate/> }/>
+            <Route path="/Attach" element={<Attach/>}/>
+            <Route path="/Profile" element={<Profile/>}/>
+            <Route path="/Analytics" element={<Analytics/>}/>
+            <Route path="/AboutUs" element={<AboutUs/>}/>
+            <Route path="/Search" element={<Search/>}/>
             <Route path="/ContactUs" element={  <ContactUs/> }/>
             <Route path="/SupportUs" element={  <SupportUs/> }/>
             <Route path="/ProofConcept" element={  <ProofConcept/> }/>
             <Route path="/News" element={  <News/> }/>
-            <Route path="/Profile" element={  <Profile/> }/>
             <Route path="/FAQ" element={  <FAQ/> }/>
 
         </Routes>
         <Footer/>
-            <SocialMediaLinks/>
+            <SocialMediaLinksFooter/>
       </div>
 
   );

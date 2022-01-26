@@ -18,7 +18,7 @@ export default {
   'app.setting.sidemenu': 'Susunan Menu Samping',
   'app.setting.topmenu': 'Susunan Menu Atas',
   'app.setting.fixedheader': 'Header Tetap',
-  'app.setting.fixedsidebar': 'Sidebar Tetap',
+  'app.setting.fixedsidebar': 'SidebarCreate Tetap',
   'app.setting.fixedsidebar.hint': 'Berjalan pada Susunan Menu Samping',
   'app.setting.hideheader': 'Sembunyikan Header ketika gulir ke bawah',
   'app.setting.hideheader.hint': 'Bekerja ketika Header tersembunyi dimunculkan',

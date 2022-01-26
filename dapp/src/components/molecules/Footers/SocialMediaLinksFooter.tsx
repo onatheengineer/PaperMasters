@@ -47,7 +47,7 @@ export const SocialButton = ({
 };
 
 
-export const SocialMediaLinks = (props: ButtonGroupProps) => (
+export const SocialMediaLinksFooter = (props: ButtonGroupProps) => (
     <Box
         borderTopWidth={1}
         borderStyle={'solid'}
@@ -92,4 +92,4 @@ export const SocialMediaLinks = (props: ButtonGroupProps) => (
 
 );
 
-export default SocialMediaLinks;
+export default SocialMediaLinksFooter;

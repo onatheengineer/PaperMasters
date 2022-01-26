@@ -152,8 +152,8 @@ purity-ui-dashboard/
     │   │   └── TransactionRow.js
     │   ├── Separator
     │   │   └── Separator.js
-    │   ├── Sidebar
-    │   │   ├── Sidebar.js
+    │   ├── SidebarCreate
+    │   │   ├── SidebarCreate.js
     │   │   └── SidebarHelp.js
     │   └── Tables
     │       ├── BillingRow.js

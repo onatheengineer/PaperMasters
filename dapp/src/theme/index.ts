@@ -9,6 +9,7 @@ import {Menu} from "./components/Menu";
 import {colors} from './colors';
 import {Card} from './components/Card';
 import {Heading} from './components/Heading';
+import {SocialMediaLinks} from "./components/SocialMediaLinks";
 
 
 const theme = extendTheme({
@@ -23,6 +24,7 @@ const theme = extendTheme({
         Menu,
         Card,
         Heading,
+        SocialMediaLinks,
     }
 });
 export default theme;
