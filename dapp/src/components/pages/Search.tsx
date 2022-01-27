@@ -1,14 +1,12 @@
 import * as React from 'react';
-import {useState, useEffect, useCallback, useMemo} from "react";
+import {useState, useEffect, useCallback, useMemo, MouseEventHandler, ChangeEventHandler} from "react";
 import Web3 from "web3";
 import type {FC} from 'react';
-import { Box, Flex,} from '@chakra-ui/react';
+import {Box, Flex, MenuButton, Input, Button, HStack, InputGroup, InputRightAddon} from '@chakra-ui/react';
 import {useAppSelector} from "../../app/hooks";
 import DataTable, {ExpanderComponentProps, TableColumn} from 'react-data-table-component';
 import {Route, Routes} from "react-router-dom";
 import SidebarSearch from "../molecules/Sidebars/SidebarSearch";
-
-
 
 
 interface DataRow {
@@ -21,6 +19,23 @@ interface DataRow {
     reported: number;
     ownedTokens: number;
 };
+
+interface interfaceFilterComponent{
+    filterText: string,
+    onClear: MouseEventHandler<HTMLButtonElement>,
+    onFilter: ChangeEventHandler<HTMLInputElement>,
+}
+
+const FilterComponent: FC<interfaceFilterComponent> = ( { filterText, onClear, onFilter }) => (
+    <Box>
+        <HStack>
+            <InputGroup>
+            <Input isFullWidth={false} variant='outline' id="search" type="text" placeholder="Search Filter" aria-label="Search Input" value={filterText} onChange={onFilter} />
+                <InputRightAddon p='0' children={ <Button size='md' onClick={onClear} >Reset</Button>}/>
+            </InputGroup>
+        </HStack>
+    </Box>
+)
 
     const columns: TableColumn<DataRow>[] = [
         {
@@ -48,7 +63,7 @@ interface DataRow {
             reorder: true,
         },
         {
-            name: 'Origin Data',
+            name: 'Origin Date',
             selector: row => row.originDate,
             sortable: true,
             reorder: true,
@@ -74,6 +89,116 @@ interface DataRow {
     ];
 
     const data: DataRow[] = [
+        {
+            name: 'andrwe niederhasuern',
+            IdNFI: '789345hjkgf897435jhkgdkjhdfg897ertjkhdfgfkjhdfg',
+            profession: 'engineer',
+            validations: 654654,
+            mentions: 1,
+            originDate: 'dec 30, 1976',
+            ownedTokens: 3234,
+            reported: 2,
+        },
+        {
+            name: 'ramona',
+            IdNFI: '789345hjkgf897435jhkgdkjhdfg897ertjkhdfgfkjhdfg',
+            profession: 'Beetlejuice',
+            validations: 7,
+            mentions: 2,
+            originDate: 'dec 30, 1976',
+            ownedTokens: 3234,
+            reported: 2,
+        },
+        {
+            name: 'ramona',
+            IdNFI: '789345hjkgf897435jhkgdkjhdfg897ertjkhdfgfkjhdfg',
+            profession: 'Beetlejuice',
+            validations: 654,
+            mentions: 3,
+            originDate: 'jan 08, 1958',
+            ownedTokens: 3234,
+            reported: 1,
+        },
+        {
+            name: 'Nautica',
+            IdNFI: '789345hjkgf897435jhkgdkjhdfg897ertjkhdfgfkjhdfg',
+            profession: 'Beetlejuice',
+            validations: 4654,
+            mentions: 4,
+            originDate: 'mar 02, 2007',
+            ownedTokens: 3234,
+            reported: 0,
+        },
+        {
+            name: 'ammon',
+            IdNFI: '789345hjkgf897435jhkgdkjhdfg897ertjkhdfgfkjhdfg',
+            profession: 'Beetlejuice',
+            validations: 65,
+            mentions: 7,
+            originDate: 'Sept 09, 2010',
+            ownedTokens: 324,
+            reported: 9,
+        },
+        {
+            name: 'Kaleb',
+            IdNFI: '789345hjkgf897435jhkgdkjhdfg897ertjkhdfgfkjhdfg',
+            profession: 'Beetlejuice',
+            validations: 547,
+            mentions: 5,
+            originDate: 'Aug 09, 2010',
+            ownedTokens: 324,
+            reported: 9,
+        },
+        {
+            name: 'Matthias',
+            IdNFI: '789345hjkgf897435jhkgdkjhdfg897ertjkhdfgfkjhdfg',
+            profession: 'Beetlejuice',
+            validations: 645,
+            mentions: 6,
+            originDate: 'june 09, 2010',
+            ownedTokens: 324,
+            reported: 9,
+        },
+        {
+            name: 'werwe',
+            IdNFI: '789345hjkgf897435jhkgdkjhdfg897ertjkhdfgfkjhdfg',
+            profession: 'Beetlejuice',
+            validations: 698,
+            mentions: 10,
+            originDate: 'July 09, 2010',
+            ownedTokens: 324,
+            reported: 9,
+        },
+        {
+            name: 'Elijah',
+            IdNFI: '789345hjkgf897435jhkgdkjhdfg897ertjkhdfgfkjhdfg',
+            profession: 'Beetlejuice',
+            validations: 61,
+            mentions: 11,
+            originDate: 'April 09, 2010',
+            ownedTokens: 324,
+            reported: 9,
+        },
+        {
+            name: 'Zechariah',
+            IdNFI: '789345hjkgf897435jhkgdkjhdfg897ertjkhdfgfkjhdfg',
+            profession: 'Beetlejuice',
+            validations: 60,
+            mentions: 12,
+            originDate: 'Feb 09, 2010',
+            ownedTokens: 324,
+            reported: 9,
+        },
+        {
+            name: 'Atlas',
+            IdNFI: '789345hjkgf897435jhkgdkjhdfg897ertjkhdfgfkjhdfg',
+            profession: 'Beetlejuice',
+            validations: 78,
+            mentions: 13,
+            originDate: 'Jan 09, 2010',
+            ownedTokens: 324,
+            reported: 9,
+        },
         {
             name: 'andrwe',
             IdNFI: '789345hjkgf897435jhkgdkjhdfg897ertjkhdfgfkjhdfg',
@@ -105,7 +230,7 @@ interface DataRow {
             reported: 1,
         },
         {
-            name: 'rnatuica',
+            name: 'Nautica',
             IdNFI: '789345hjkgf897435jhkgdkjhdfg897ertjkhdfgfkjhdfg',
             profession: 'Beetlejuice',
             validations: 4654,
@@ -125,7 +250,7 @@ interface DataRow {
             reported: 9,
         },
         {
-            name: 'vbn',
+            name: 'Kaleb',
             IdNFI: '789345hjkgf897435jhkgdkjhdfg897ertjkhdfgfkjhdfg',
             profession: 'Beetlejuice',
             validations: 547,
@@ -135,7 +260,7 @@ interface DataRow {
             reported: 9,
         },
         {
-            name: 'xcv',
+            name: 'Matthias',
             IdNFI: '789345hjkgf897435jhkgdkjhdfg897ertjkhdfgfkjhdfg',
             profession: 'Beetlejuice',
             validations: 645,
@@ -155,7 +280,7 @@ interface DataRow {
             reported: 9,
         },
         {
-            name: 'uyiuy',
+            name: 'Elijah',
             IdNFI: '789345hjkgf897435jhkgdkjhdfg897ertjkhdfgfkjhdfg',
             profession: 'Beetlejuice',
             validations: 61,
@@ -165,7 +290,7 @@ interface DataRow {
             reported: 9,
         },
         {
-            name: 'fghf',
+            name: 'Zechariah',
             IdNFI: '789345hjkgf897435jhkgdkjhdfg897ertjkhdfgfkjhdfg',
             profession: 'Beetlejuice',
             validations: 60,
@@ -175,7 +300,7 @@ interface DataRow {
             reported: 9,
         },
         {
-            name: 'dfg',
+            name: 'Atlas',
             IdNFI: '789345hjkgf897435jhkgdkjhdfg897ertjkhdfgfkjhdfg',
             profession: 'Beetlejuice',
             validations: 78,
@@ -192,29 +317,37 @@ const ExpandedComponent: FC<ExpanderComponentProps<DataRow>> = ({ data }) => {
     return <pre>{JSON.stringify(data, null, 2)}</pre>;
 };
 
-const [filterText, setFilterText] = useState('');
-const [resetPaginationToggle, setResetPaginationToggle] = useState(false);
-
-const filteredItems = data.filter(
-    item => item.name && item.name.toLowerCase().includes(filterText.toLowerCase()),
-);
-
-const subHeaderComponentMemo = useMemo(() => {
-    const handleClear = () => {
-        if (filterText) {
-            setResetPaginationToggle(!resetPaginationToggle);
-            setFilterText('');
-        }
-    };
-
-    return (
-        <FilterComponent onFilter={e => setFilterText(e.target.value)} onClear={handleClear} filterText={filterText} />
-    );
-}, [filterText, resetPaginationToggle]);
-
 export const Search: FC=()=> {
 
+    const [filterText, setFilterText] = useState('');
+    const [resetPaginationToggle, setResetPaginationToggle] = useState(false);
+
+    const filteredItems = data.filter(
+        item => {
+            if (item.name && item.name.toLowerCase().includes(filterText.toLowerCase())) { return item;}
+            if (item.profession && item.profession.toLowerCase().includes(filterText.toLowerCase())) { return item;}
+            if (item.originDate && item.originDate.toLowerCase().includes(filterText.toLowerCase())) { return item;}
+            if (item.IdNFI && item.IdNFI.toLowerCase().includes(filterText.toLowerCase())) { return item;}
+        },
+    );
+
+
+    const subHeaderComponentMemo = useMemo(() => {
+        const handleClear = () => {
+            if (filterText) {
+                setResetPaginationToggle(!resetPaginationToggle);
+                setFilterText('');
+            }
+        };
+
+
+        return (
+            <FilterComponent onFilter={(e:any) => setFilterText(e.target.value)} onClear={handleClear} filterText={filterText} />
+        );
+    }, [filterText, resetPaginationToggle]);
+
     return(
+
     <Flex>
 
         <Flex borderRight="1px solid " borderColor='#daceda'>
@@ -237,13 +370,14 @@ export const Search: FC=()=> {
                 expandableRowsComponent={ExpandedComponent}
                 defaultSortFieldId={5}
                 fixedHeader={true}
-                fixedHeaderScrollHeight={'300px'}
+                fixedHeaderScrollHeight={'600px'}
                 pagination={true}
                 paginationResetDefaultPage={resetPaginationToggle} // optionally, a hook to reset pagination to page 1
-                subHeader
+                subHeader={true}
                 subHeaderComponent={subHeaderComponentMemo}
                 selectableRows
                 persistTableHead
+                paginationPerPage={20}
             />
 
         </Box>

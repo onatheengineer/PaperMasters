@@ -213,31 +213,31 @@ export const Create: FC<Interface>=(props: HTMLChakraProps<'form'>)=> {
 
                                             <Box px={'16px'}>
                                                 <Stack spacing={0} align={'center'} mb={5} wordBreak={'break-word'}>
-                                                    <Text mt='0px' fontSize={'2xl'} fontWeight={500}
-                                                          fontFamily={'body'} align={'center'}>
+                                                    <Text mt='0px' fontSize={'24px'} fontWeight={500}
+                                                          fontFamily={'body'} align={'center'} color={'pmpurple.15'}>
                                                         PaperMaster
                                                     </Text>
-                                                    <Text mt='0px' fontSize={'2xl'} fontWeight={500}
-                                                             fontFamily={'body'} align={'center'}>
+                                                    <Text mt='0px' fontSize={'20px'} fontWeight={500}
+                                                             fontFamily={'body'} align={'center'} color={'pmpurple.15'}>
                                                         {name}
                                                     </Text>
 
-                                                    <Text align={'center'} color={'gray.500'}>
+                                                    <Text align={'center'} color={'pmpurple.15'}>
                                                         {profession}
                                                     </Text>
-                                                    <Text align={'center'} color={'gray.500'}>
+                                                    <Text align={'center'} color={'pmpurple.15'}>
                                                         {email}
                                                     </Text>
-                                                    <Text align={'center'} color={'gray.500'}>
+                                                    <Text align={'center'} color={'pmpurple.15'}>
                                                         {slogan}
                                                     </Text>
-                                                    <Text align={'center'} color={'gray.500'}>
+                                                    <Text align={'center'} color={'pmpurple.15'}>
                                                         {organization}
                                                     </Text>
-                                                    <Text align={'center'} color={'gray.500'}>
+                                                    <Text align={'center'} color={'pmpurple.15'}>
                                                         {url}
                                                     </Text>
-                                                    <Text align={'center'} color={'gray.500'} >
+                                                    <Text align={'center'} color={'pmpurple.10'} >
                                                         {description}
                                                     </Text>
                                             </Stack>
@@ -245,24 +245,24 @@ export const Create: FC<Interface>=(props: HTMLChakraProps<'form'>)=> {
                                                 <Stack direction={'row'} justify={'center'} spacing={6} >
                                                     <Stack spacing={0} align={'center'}>
                                                         <Text fontWeight={600}>57</Text>
-                                                        <Text fontSize={'sm'} color={'gray.500'}>
+                                                        <Text fontSize={'sm'} color={'pmpurple.11'}>
                                                             Validations
                                                         </Text>
                                                     </Stack>
                                                     <Stack spacing={0} align={'center'}>
                                                         <Text fontWeight={600}>23k</Text>
-                                                        <Text fontSize={'sm'} color={'gray.500'}>
+                                                        <Text fontSize={'sm'} color={'pmpurple.11'}>
                                                             Mentions
                                                         </Text>
                                                     </Stack>
                                                     <Stack spacing={0} align={'center'} whiteSpace={'pre'}>
                                                         <Text fontWeight={600}>Dec 30, 1976</Text>
-                                                        <Text fontSize={'sm'} color={'gray.500'}>
+                                                        <Text fontSize={'sm'} color={'pmpurple.11'}>
                                                             Origin Date
                                                         </Text>
                                                     </Stack>
                                                 </Stack>
-                                                <Text mt='12px' align={'center'} color={'gray.500'}>
+                                                <Text mt='12px' align={'center'} color={'pmpurple.11'}>
                                                     PaperMaster NFI
                                                 </Text>
 
@@ -270,14 +270,14 @@ export const Create: FC<Interface>=(props: HTMLChakraProps<'form'>)=> {
                                                     w={'full'}
                                                     mt={2}
                                                     mb={2}
-                                                    bg={useColorModeValue('#4f384f', 'gray.900')}
+                                                    bg={'pmpurple.13'}
                                                     color={'white'}
                                                     rounded={'md'}
                                                     _hover={{
                                                         transform: 'translateY(-2px)',
                                                         boxShadow: 'lg',
                                                     }}>
-                                                    0x888800008888888888888888888888888888888888888
+                                                    NFI Identification string will show once minted
                                                 </Button>
                                             </Box>
                                         </Box>

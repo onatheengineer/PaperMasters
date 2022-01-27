@@ -206,16 +206,7 @@ export const SidebarFAQ: FC<InterfaceSidebar>= (props) => {
                 <NavItem navSize={navSize} icon={FiTrendingUp} title="Analytics" />
 
             </Flex>
-            <Flex
-                p="5%"
-                flexDir="column"
-                w="100%"
-                alignItems={navSize == "small" ? "center" : "flex-start"}
-                mb={4}
-            >
 
-
-            </Flex>
         </Flex>
     )
 };

@@ -49,21 +49,22 @@ export const SocialButton = ({
 
 export const SocialMediaLinksFooter = (props: ButtonGroupProps) => (
     <Box
-        borderTopWidth={1}
+        bg={"white"}
+        // minH={'80px'}
+        // maxH={"120px"}
         borderStyle={'solid'}
         borderColor={useColorModeValue('#e6dee6', 'gray.700')}>
         <Container
             as={Stack}
             maxW={'7xl'}
-            pt={4}
-            pb={2}
+            py={6}
             direction={{ base: 'column', md: 'row' }}
             spacing={4}
             justify={{ md: 'space-between' }}
-            align={{ md: 'center' }}>
+            align={'center' }>
             {/*<Copyright />*/}
             {/*    copyright={`${currentYear} ${defaultMessage}`}*/}
-            <Text>© 2022 Made with <Icon as={BsHeartFill} style={{marginRight:"5px", marginLeft:"5px"}}/> by The PaperMasters ~ working to bring protection and legitimacy to the Blockchain.</Text>
+            <Text color='pmpurple.13'  >© 2022 Made with <Icon as={BsHeartFill} fontSize={'13px'} color='pmpurple.13' style={{marginRight:"5px", marginLeft:"5px"}}/> by The PaperMasters ~ working to bring protection and legitimacy to the Blockchain.</Text>
             <Stack direction={'row'} spacing={8}>
                 <SocialButton label={'Twitter'} href={'https://twitter.com/ramonajenny_n'}>
                     <FaTwitter />

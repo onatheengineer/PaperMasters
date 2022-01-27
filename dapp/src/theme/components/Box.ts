@@ -1,3 +1,4 @@
 export const Box = {
-    borderColor: 'pmpurple.300',
+    borderColor: 'pmpurple.4',
+    borderStyle: 'solid',
 }

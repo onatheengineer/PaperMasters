@@ -243,14 +243,7 @@ export const SidebarAttach: FC<InterfaceSidebar>= (props) => {
                 {/*<MenuItem as={ReachLink} to='/Products/Attach'  icon={<FontAwesomeIcon icon={faScroll} />} >Attach</MenuItem>*/}
 
             </Flex>
-            <Flex
-                p="5%"
-                flexDir="column"
-                w="100%"
-                alignItems={navSize == "small" ? "center" : "flex-start"}
-                mb={4}
-            >
-            </Flex>
+
         </Flex>
     )
 };

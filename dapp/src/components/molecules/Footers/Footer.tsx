@@ -17,51 +17,62 @@ const ListHeader = ({ children }: { children: ReactNode }) => {
 export default function Footer() {
     return (
         <Box
-            bg={useColorModeValue('#ffffff', 'gray.900')}
-            color={useColorModeValue('#5c415c', 'gray.200')}
+            bg={'pmpurple.2'}
+            color={'pmpurple.13'}
             borderTopWidth={1}
             borderStyle={'solid'}
-            borderColor={useColorModeValue('#daceda', 'gray.700')}>
-            <Container as={Stack} maxW={'8xl'} px={6} py={8}>
-                <SimpleGrid columns={{ base: 1, sm: 2, md: 6 }} spacing={9}>
+            borderColor={'pmpurple.4'}>
+            <Container as={Stack}
+                       maxW={'9xl'}
+                       px={2}
+                       pt={8}
+                       pb={8}
+                       pl={16}
+                       direction={{ base: 'column', md: 'row' }}
+                       justify={'center'}>
+                <SimpleGrid columns={6} spacing={16}>
 
-                    <Stack align={'flex-start'}>
-                        <ListHeader><img src={PMLogo}/></ListHeader>
+                    <Stack >
+                        {/*<ListHeader ><img src={PMLogo}/></ListHeader>*/}
+                        <Link  as={ReachLink} to="/" ><img src={PMLogo}/></Link>
                         {/*<AppStoreBadge />*/}
                         {/*<PlayStoreBadge />*/}
-                        <Stack direction={{ base: 'column', md: 'row' }} spacing={{ base: '10', md: '20' }}>
-                            <SimpleGrid columns={2} spacing={{ base: '10', md: '20', lg: '28' }} flex="1" >
-                            </SimpleGrid>
-                        </Stack>
                     </Stack>
-                    <Stack></Stack>
-                    <Stack align={'flex-start'}>
-                        <ListHeader>Security</ListHeader>
-                        <Link >Privacy Policy</Link>
-                        <Link >Terms of Service</Link>
-                        {/*<Link >Community Guidelines</Link>*/}
-                    </Stack>
-                    <Stack align={'flex-start'}>
-                        <ListHeader>Support</ListHeader>
-                        <Link >Learning Center</Link>
-                        <Link >Community Forum</Link>
-                    </Stack>
-                    <Stack align={'flex-start'}>
+                    <Stack >
                         <ListHeader>Products</ListHeader>
                         <Link  as={ReachLink} to="/" >Authentic PM Identities</Link>
                         <Link  as={ReachLink} to="/" >Minting NFTs</Link>
                         <Link  as={ReachLink} to="/" >Validation</Link>
                         <Link  as={ReachLink} to="/" >NFI Cataloging</Link>
                     </Stack>
-                    <Stack align={'flex-start'}>
+                    <Stack >
+                        <ListHeader>Learn and Support</ListHeader>
+                        <Link  as={ReachLink} to="/" >Learning Center</Link>
+                        <Link  as={ReachLink} to="/" >Community Forum</Link>
+                        <Link  as={ReachLink} to="/FAQ" >FAQ</Link>
+                    </Stack>
+                    <Stack >
+                        <ListHeader>Security</ListHeader>
+                        <Link as={ReachLink} to="/">Privacy Policy</Link>
+                        <Link as={ReachLink} to="/">Terms of Service</Link>
+                        <Link as={ReachLink} to="/">Blockchain Protection</Link>
+                        <Link as={ReachLink} to="/">Blockchain Legitimacy</Link>
+                        <Link as={ReachLink} to="/">Community Guidelines</Link>
+                    </Stack>
+                    <Stack >
+                        <ListHeader>News and Events</ListHeader>
+                        <Link  as={ReachLink} to="/" >New & Updated Features</Link>
+                        <Link aas={ReachLink} to="/" >Stories to come</Link>
+                    </Stack>
+                    <Stack >
                         <ListHeader>Company</ListHeader>
                         <Link  as={ReachLink} to="/Analytics" >Analytics</Link>
                         <Link as={ReachLink} to="/AboutUs" >About Us</Link>
                         <Link  as={ReachLink} to="/AboutUs">Contact Us</Link>
                         <Link as={ReachLink} to="/SupportUs" >Support Us</Link>
                         <Link  as={ReachLink} to="/Logokit" >Logo Kit</Link>
-                        <Link  as={ReachLink} to="/News" >News and Events</Link>
                     </Stack>
+
                 </SimpleGrid>
             </Container>
         </Box>
