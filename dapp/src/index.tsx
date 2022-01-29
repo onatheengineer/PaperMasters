@@ -10,7 +10,7 @@ import {
     BrowserRouter
 } from "react-router-dom";
 import {ChakraProvider} from '@chakra-ui/react';
-import theme from "../src/theme";
+import theme from "./components/theme";
 
 console.log(theme)
 
@@ -32,5 +32,5 @@ ReactDOM.render(
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
+// DashboardProducts more about service workers: https://bit.ly/CRA-PWA
 serviceWorker.unregister();

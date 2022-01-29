@@ -2,11 +2,15 @@ import * as React from 'react';
 import {useState, useEffect, useCallback, useMemo, MouseEventHandler, ChangeEventHandler} from "react";
 import Web3 from "web3";
 import type {FC} from 'react';
-import {Box, Flex, MenuButton, Input, Button, HStack, InputGroup, InputRightAddon} from '@chakra-ui/react';
+import {Box, Flex, MenuButton, Input, Button, HStack, InputGroup, InputRightAddon, Text} from '@chakra-ui/react';
 import {useAppSelector} from "../../app/hooks";
 import DataTable, {ExpanderComponentProps, TableColumn} from 'react-data-table-component';
 import {Route, Routes} from "react-router-dom";
-import SidebarSearch from "../molecules/Sidebars/SidebarSearch";
+import Sidebar from "../molecules/Sidebar";
+import {Link as ReachLink} from "react-router-dom";
+import {MdManageAccounts} from "react-icons/md";
+import {HiOutlineDocumentReport} from "react-icons/hi";
+import {MdOutlineLibraryAddCheck} from "react-icons/md";
 
 
 interface DataRow {
@@ -18,6 +22,7 @@ interface DataRow {
     profession: string;
     reported: number;
     ownedTokens: number;
+
 };
 
 interface interfaceFilterComponent{
@@ -27,6 +32,7 @@ interface interfaceFilterComponent{
 }
 
 const FilterComponent: FC<interfaceFilterComponent> = ( { filterText, onClear, onFilter }) => (
+
     <Box>
         <HStack>
             <InputGroup>
@@ -43,49 +49,89 @@ const FilterComponent: FC<interfaceFilterComponent> = ( { filterText, onClear, o
             selector: row => row.name,
             sortable: true,
             reorder: true,
+            center: true,
+            // style: {
+            //     backgroundColor: '#f2eef2',
+            //     color: '#694b69',
+            // },
         },
         {
             name: 'NFI Identification',
             selector: row => row.IdNFI,
             sortable: true,
             reorder: true,
+            center: true,
+            style: {
+                backgroundColor: '#f2eef2',
+               fontWeight: 'bold'
+            },
         },
+
         {
             name: 'Validations',
             selector: row => row.validations,
             sortable: true,
             reorder: true,
+            center: true,
+
         },
         {
-            name: 'Mentions',
-            selector: row => row.mentions,
+            name: 'Validate',
             sortable: true,
             reorder: true,
+            button: true,
+            center: true,
+            cell: () => <Button as={ReachLink} to={'/validate'}  bg={'#f2eef2'} fontSize={'12px'} > <MdOutlineLibraryAddCheck fontSize={'16px'}/>
+                <Text ml={'6px'}> Validate </Text>
+            </Button>,
         },
         {
             name: 'Origin Date',
             selector: row => row.originDate,
             sortable: true,
             reorder: true,
+            center: true,
+        },
+        {
+            name: 'Mentions',
+            selector: row => row.mentions,
+            sortable: true,
+            reorder: true,
+            center: true,
         },
         {
             name: 'Profession',
             selector: row => row.profession,
             sortable: true,
             reorder: true,
+            center: true,
         },
+        // {
+        //     name: 'Owned Tokens',
+        //     selector: row => row.ownedTokens,
+        //     sortable: true,
+        //     reorder: true,
+        //     center: true,
+        //
+        // },
         {
             name: 'Reported',
             selector: row => row.reported,
             sortable: true,
             reorder: true,
+            center: true,
         },
         {
-            name: 'Owned Tokens',
-            selector: row => row.ownedTokens,
+            name: 'Report',
             sortable: true,
             reorder: true,
+            button: true,
+            center: true,
+            cell: () => <Button as={ReachLink} to={'/report'} bg={'#f2eef2'} fontSize={'12px'} > <HiOutlineDocumentReport fontSize={'16px'}/>
+                <Text ml={'6px'}> Report </Text>
+            </Button>,
         },
+
     ];
 
     const data: DataRow[] = [
@@ -101,7 +147,7 @@ const FilterComponent: FC<interfaceFilterComponent> = ( { filterText, onClear, o
         },
         {
             name: 'ramona',
-            IdNFI: '789345hjkgf897435jhkgdkjhdfg897ertjkhdfgfkjhdfg',
+            IdNFI: 'ytuytrtertr',
             profession: 'Beetlejuice',
             validations: 7,
             mentions: 2,
@@ -309,7 +355,6 @@ const FilterComponent: FC<interfaceFilterComponent> = ( { filterText, onClear, o
             ownedTokens: 324,
             reported: 9,
         },
-
     ]
 
 // data provides access to your row data
@@ -331,7 +376,6 @@ export const Search: FC=()=> {
         },
     );
 
-
     const subHeaderComponentMemo = useMemo(() => {
         const handleClear = () => {
             if (filterText) {
@@ -340,29 +384,28 @@ export const Search: FC=()=> {
             }
         };
 
-
         return (
             <FilterComponent onFilter={(e:any) => setFilterText(e.target.value)} onClear={handleClear} filterText={filterText} />
         );
     }, [filterText, resetPaginationToggle]);
 
     return(
+        <Flex>
 
-    <Flex>
+            <Flex >
+                <Sidebar/>
+            </Flex>
 
-        <Flex borderRight="1px solid " borderColor='#daceda'>
-            <SidebarSearch/>
-        </Flex>
-
-        <Box
-            border={'8px'}
-            borderColor={"white"}
+    <Box
             justifyContent="center"
             flex='auto'
-            p={'16px'}
+            p={'26px'}
+
             >
 
-            <DataTable
+
+
+        <DataTable
                 title="Non-Fungible-Identities"
                 columns={columns}
                 data={filteredItems}
@@ -375,14 +418,13 @@ export const Search: FC=()=> {
                 paginationResetDefaultPage={resetPaginationToggle} // optionally, a hook to reset pagination to page 1
                 subHeader={true}
                 subHeaderComponent={subHeaderComponentMemo}
-                selectableRows
                 persistTableHead
                 paginationPerPage={20}
+                striped={true}
             />
-
         </Box>
-    </Flex>
 
+        </Flex>
     )
 }
 

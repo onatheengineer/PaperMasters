@@ -1,7 +1,11 @@
 import React from 'react';
 import {useState, useEffect} from "react";
 import type {FC} from 'react'
-import {Button, FormControl, FormLabel, Grid, GridItem, Input, Stack} from '@chakra-ui/react';
+import {Box, Flex, Button, FormControl, FormLabel, Grid, GridItem, Input, Stack} from '@chakra-ui/react';
+import Sidebar from "../molecules/Sidebar";
+import {Route, Routes} from "react-router-dom";
+
+
 
 interface Interface {
 
@@ -9,24 +13,22 @@ interface Interface {
 
 export const News:FC<Interface>=()=>{
 
-    return(
 
-            <Grid
-                w={'1800px'}
-                h='900px'
-                templateRows='repeat(2, 1fr)'
-                templateColumns='repeat(5, 1fr)'
-                gap={4}
-            >
-                {/*<GridItem rowSpan={2} colSpan={1} bg='tomato' />*/}
-                <GridItem colSpan={2} bg='whitesmoke' />
-                <GridItem colSpan={2} bg='whitesmoke' />
-                <GridItem colSpan={2} bg='whitesmoke' />
-                <GridItem colSpan={2} bg='whitesmoke' />
-                {/*<GridItem colSpan={4} bg='tomato' />*/}
-            </Grid>
+        return (
 
-    )
-};
+            <Flex>
+
+                <Flex >
+                    <Sidebar/>
+                </Flex>
+                <Box flex='auto'  style={{border: '8px solid white'}}>
+
+
+                </Box>
+            </Flex>
+
+        )
+    };
+
 
 export default News;

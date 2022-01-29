@@ -7,7 +7,7 @@ import {
     Menu, MenuButton, MenuDivider,
     MenuItem, MenuList, StackDivider, Text, useColorModeValue, Stack, Collapse, useDisclosure,
 } from '@chakra-ui/react';
-import SidebarCreate from "../molecules/Sidebars/SidebarCreate";
+import Sidebar from "../molecules/Sidebar";
 import {Link as ReachLink} from "react-router-dom";
 
 
@@ -40,13 +40,13 @@ export const CollapseButton:FC<Interface>=({title, body})=> {
                     transform: 'scale(.98)'
                 }}
                 minW={0}>
-                <Text fontSize="xl" color={'pmpurple.13'} fontWeight="bold">
+                <Text fontSize="lg" color={'pmpurple.13'} fontWeight="bold">
                     {title}
                 </Text>
             </MenuButton>
             <Collapse in={isOpen} animateOpacity>
                 <Box
-                    p='40px'
+                    p='26px'
                     color='pmpurple.10'
                     mt='4'
                     bg='pmpurple.2'

@@ -45,6 +45,7 @@
     "react-native-crypto": "^2.2.0",
     "react-redux": "^7.2.6",
     "react-rewire": "0.0.0",
+    "react-router": "^6.2.1",
     "react-router-dom": "^6.2.1",
     "react-scripts": "^5.0.0",
     "react-table": "^7.7.0",

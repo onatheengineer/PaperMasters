@@ -31,7 +31,7 @@ export default {
   'menu.list.search-list.applications': 'Daftar Pencarian(aplikasi)',
   'menu.profile': 'Profil',
   'menu.profile.basic': 'Profil Dasar',
-  'menu.profile.advanced': 'Profile Lanjutan',
+  'menu.profile.advanced': 'Identity Lanjutan',
   'menu.result': 'Hasil',
   'menu.result.success': 'Sukses',
   'menu.result.fail': 'Gagal',

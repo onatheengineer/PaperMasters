@@ -8,7 +8,7 @@ Most trendiest, complex and innovative Dashboard Made by [Creative Tim](https://
 
 Designed for those who like modern UI elements and beautiful websites. Made of hundred of elements, designed blocks and fully coded pages, Purity UI Dashboard is ready to help you create stunning websites and webapps.
 
-We created many examples for pages like Sign In, Profile and so on. Just choose between a Basic Design, an illustration or a cover and you are good to go!
+We created many examples for pages like Sign In, Identity and so on. Just choose between a Basic Design, an illustration or a cover and you are good to go!
 
 **Fully Coded Elements**
 
@@ -36,7 +36,7 @@ View <a href="https://demos.creative-tim.com/purity-ui-dashboard/#/admin/dashboa
 
 - View <a href="https://github.com/creativetimofficial/purity-ui-dashboard" target="_blank">Github Repository</a>
 
-- Check <a href="https://www.creative-tim.com/knowledge-center?ref=readme-pud" target="_blank">FAQ Page</a>
+- Check <a href="https://www.creative-tim.com/knowledge-center?ref=readme-pud" target="_blank">Learn Page</a>
 
 #### Special thanks
 
@@ -77,7 +77,7 @@ Let us know your thoughts below. And good luck with development!
 - [Dashboard](https://demos.creative-tim.com/purity-ui-dashboard/#/admin/dashboard?ref=readme-pud)
 - [Tables page](https://demos.creative-tim.com/purity-ui-dashboard/#/admin/tables?ref=readme-pud)
 - [Billing page](https://demos.creative-tim.com/purity-ui-dashboard/#/admin/billing?ref=readme-pud)
-- [Profile page](http://demos.creative-tim.com/purity-ui-dashboard/#/admin/profile?ref=readme-pud)
+- [Identity page](http://demos.creative-tim.com/purity-ui-dashboard/#/admin/profile?ref=readme-pud)
 - [Sign in page](https://demos.creative-tim.com/purity-ui-dashboard/#/auth/signin?ref=readme-pud)
 - [Sign up page](https://demos.creative-tim.com/purity-ui-dashboard/#/auth/signup?ref=readme-pud)
 
@@ -152,8 +152,8 @@ purity-ui-dashboard/
     │   │   └── TransactionRow.js
     │   ├── Separator
     │   │   └── Separator.js
-    │   ├── SidebarCreate
-    │   │   ├── SidebarCreate.js
+    │   ├── Sidebar
+    │   │   ├── Sidebar.js
     │   │   └── SidebarHelp.js
     │   └── Tables
     │       ├── BillingRow.js
@@ -194,7 +194,7 @@ purity-ui-dashboard/
     │   ├── Dashboard
     │   │   ├── Billing.js
     │   │   ├── Dashboard.js
-    │   │   ├── Profile.js
+    │   │   ├── Identity.js
     │   │   └── Tables.js
     │   ├── Pages
     │       ├── SignIn.js

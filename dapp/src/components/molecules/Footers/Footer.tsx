@@ -30,7 +30,7 @@ export default function Footer() {
                        pl={16}
                        direction={{ base: 'column', md: 'row' }}
                        justify={'center'}>
-                <SimpleGrid columns={6} spacing={16}>
+                <SimpleGrid columns={7} spacing={14}>
 
                     <Stack >
                         {/*<ListHeader ><img src={PMLogo}/></ListHeader>*/}
@@ -41,15 +41,19 @@ export default function Footer() {
                     <Stack >
                         <ListHeader>Products</ListHeader>
                         <Link  as={ReachLink} to="/" >Authentic PM Identities</Link>
-                        <Link  as={ReachLink} to="/" >Minting NFTs</Link>
-                        <Link  as={ReachLink} to="/" >Validation</Link>
-                        <Link  as={ReachLink} to="/" >NFI Cataloging</Link>
+                        <Link  as={ReachLink} to="/" >NFI Validation</Link>
+                        <Link  as={ReachLink} to="/" >Attach NFTs to NFIs</Link>
+                    </Stack>
+                    <Stack >
+                        <ListHeader>Services</ListHeader>
+                        <Link  as={ReachLink} to="/" >Search NFIs</Link>
+                        <Link  as={ReachLink} to="/" >Report suspicious activity</Link>
+                        <Link  as={ReachLink} to="/" >CloudHWM</Link>
                     </Stack>
                     <Stack >
                         <ListHeader>Learn and Support</ListHeader>
                         <Link  as={ReachLink} to="/" >Learning Center</Link>
                         <Link  as={ReachLink} to="/" >Community Forum</Link>
-                        <Link  as={ReachLink} to="/FAQ" >FAQ</Link>
                     </Stack>
                     <Stack >
                         <ListHeader>Security</ListHeader>
@@ -69,7 +73,7 @@ export default function Footer() {
                         <Link  as={ReachLink} to="/Analytics" >Analytics</Link>
                         <Link as={ReachLink} to="/AboutUs" >About Us</Link>
                         <Link  as={ReachLink} to="/AboutUs">Contact Us</Link>
-                        <Link as={ReachLink} to="/SupportUs" >Support Us</Link>
+                        <Link as={ReachLink} to="/SupportProject" >Support the Project</Link>
                         <Link  as={ReachLink} to="/Logokit" >Logo Kit</Link>
                     </Stack>
 

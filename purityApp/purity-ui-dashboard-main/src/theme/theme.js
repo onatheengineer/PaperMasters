@@ -20,7 +20,7 @@ export default extendTheme(
   buttonStyles, // Button styles
   badgeStyles, // Badge styles
   linkStyles, // Link styles
-  drawerStyles, // SidebarCreate variant for Chakra's drawer
+  drawerStyles, // Sidebar variant for Chakra's drawer
   CardComponent, // Card component
   CardBodyComponent, // Card Body component
   CardHeaderComponent, // Card Header component
