@@ -13,6 +13,12 @@ interface Interface {
 
 export const News:FC<Interface>=()=>{
 
+    // const NewsForumPage = [
+    //     <ForumPageTemplate title={'PaperMaster News'} body={'dfgfdhdftgyertg'}/>,
+    //     <ForumPageTemplate title={'New Features'} body={'dfgfdhdftgyertg'}/>,
+    //     <ForumPageTemplate title={'Updated Features'} body={'dfgfdhdftgyertg'}/>,
+    //     <ForumPageTemplate title={'Future Features'} body={'bdfkljgiuertywrebfbfshjteruerter'}/>,
+    // ]
 
         return (
 
@@ -22,7 +28,6 @@ export const News:FC<Interface>=()=>{
                     <Sidebar/>
                 </Flex>
                 <Box flex='auto'  style={{border: '8px solid white'}}>
-
 
                 </Box>
             </Flex>

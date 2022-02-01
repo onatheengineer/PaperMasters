@@ -23,7 +23,7 @@ import { Icon } from '@chakra-ui/react';
 import { FaPlug, FaSearch, FaFileAlt, FaLink, FaChartLine, FaBookmark, FaPaperclip, FaScroll, FaForumbee, FaUserCheck, FaQuestionCircle, FaConnectdevelop, FaServicestack } from "react-icons/fa";
 import { SiSololearn } from "react-icons/si";
 import { ImBooks } from "react-icons/im";
-import { GiBookshelf, GiNewShoot, GiHeatHaze } from "react-icons/gi";
+import {GiBookshelf, GiNewShoot, GiHeatHaze, GiDiscussion} from "react-icons/gi";
 import { MdManageAccounts } from "react-icons/md";
 import Logo from '../../PaperMastersLogoGIMP.png';
 import PMLogo from '../../legoLavendar.png';
@@ -52,7 +52,7 @@ export default function Navbar() {
                     <HStack spacing={8} alignItems={'center'}>
                         <Box><Link as={ReachLink} to="/"><img src={Logo}/></Link></Box>
 
-                        <HStack spacing={12} alignItems={'right'}>
+                        <HStack spacing={10} alignItems={'right'}>
                             <Menu >
                                 <Menu>
                                     <Link as={ReachLink} to='/identity'>
@@ -130,7 +130,7 @@ export default function Navbar() {
                                             transform: 'scale(0.96)'
                                         }}
                                         minW={0}>
-                                        <MenuItem fontSize={'18px'} icon={<FaForumbee fontSize={'16px'} />} >Community Forum</MenuItem>
+                                        <MenuItem fontSize={'18px'} icon={<GiDiscussion fontSize={'16px'} />} >Community Forum</MenuItem>
                                     </MenuButton>
                                 </Link>
                             </Menu>
@@ -154,7 +154,7 @@ export default function Navbar() {
                                 </Menu>
 
                                 <Menu>
-                                <Link as={ReachLink} to='/news'>
+                                <Link as={ReachLink} to='/yourpeople'>
                                     <MenuButton
                                         as={Button}
                                         size='lg'
@@ -167,7 +167,7 @@ export default function Navbar() {
                                             transform: 'scale(0.96)'
                                         }}
                                         minW={0}>
-                                        <MenuItem fontSize={'18px'} icon={<GiNewShoot fontSize={'16px'} />} >News</MenuItem>
+                                        <MenuItem fontSize={'18px'} icon={<GiNewShoot fontSize={'16px'} />} >Your People</MenuItem>
                                     </MenuButton>
                                 </Link>
                             </Menu>
@@ -175,8 +175,9 @@ export default function Navbar() {
                         </HStack>
                     </HStack>
 
-                    <Flex alignItems={'center'}>
 
+
+                    <Flex alignItems={'center'}>
                         <Menu>
                             <MenuButton
                                 as={Button}
@@ -187,14 +188,11 @@ export default function Navbar() {
                                 minW={0}>
                                 <MenuItem as={ReachLink} to='/' fontSize={'16px'} icon={<SiSololearn fontSize={'16px'} />} >Connect Wallet</MenuItem>
                             </MenuButton>
-
                         </Menu>
-
                     </Flex>
 
+
                 </Flex>
-
-
             </Box>
         </>
     );

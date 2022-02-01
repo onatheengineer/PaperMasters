@@ -390,20 +390,19 @@ export const Search: FC=()=> {
     }, [filterText, resetPaginationToggle]);
 
     return(
-        <Flex>
 
-            <Flex >
-                <Sidebar/>
-            </Flex>
 
     <Box
-            justifyContent="center"
-            flex='auto'
-            p={'26px'}
+           // justifyContent="center"
+            //flex='auto'
+            p={'16px'}
 
             >
-
-
+        <Box
+           border={'2px'}
+            borderStyle={"solid"}
+        borderColor={'pmpurple.13'}
+        >
 
         <DataTable
                 title="Non-Fungible-Identities"
@@ -413,7 +412,7 @@ export const Search: FC=()=> {
                 expandableRowsComponent={ExpandedComponent}
                 defaultSortFieldId={5}
                 fixedHeader={true}
-                fixedHeaderScrollHeight={'600px'}
+                fixedHeaderScrollHeight={'60vh'}
                 pagination={true}
                 paginationResetDefaultPage={resetPaginationToggle} // optionally, a hook to reset pagination to page 1
                 subHeader={true}
@@ -423,8 +422,8 @@ export const Search: FC=()=> {
                 striped={true}
             />
         </Box>
+</Box>
 
-        </Flex>
     )
 }
 

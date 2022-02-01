@@ -9,6 +9,7 @@ import {
     useColorModeValue,
     VisuallyHidden,
     Icon,
+    Flex,
 } from '@chakra-ui/react'
 import * as React from 'react'
 import {FaGithub, FaInstagram, FaLinkedin, FaTwitter, FaYoutube} from 'react-icons/fa';
@@ -48,12 +49,14 @@ export const SocialButton = ({
 
 
 export const SocialMediaLinksFooter = (props: ButtonGroupProps) => (
+
     <Box
         bg={"white"}
         // minH={'80px'}
         // maxH={"120px"}
         borderStyle={'solid'}
-        borderColor={useColorModeValue('#e6dee6', 'gray.700')}>
+        borderSize={'8px'}
+        borderColor={'blue'}>
         <Container
             as={Stack}
             maxW={'7xl'}
@@ -90,6 +93,7 @@ export const SocialMediaLinksFooter = (props: ButtonGroupProps) => (
             </Stack>
         </Container>
     </Box>
+
 
 );
 

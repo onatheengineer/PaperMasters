@@ -9,8 +9,13 @@ interface Interface {
 
 }
 
-export const SupportUs:FC<Interface>=()=>{
-
+export const YourPeople:FC<Interface>=()=>{
+    // const YourPeopleForumPage = [
+    //     <ForumPageTemplate title={'We want you to know who we are'} body={'dfgfdhdftgyertg'}/>,
+    //     <ForumPageTemplate title={'About Us'} body={'dfgfdhdftgyertg'}/>,
+    //     <ForumPageTemplate title={'Contact Us'} body={'dfgfdhdftgyertg'}/>,
+    //     <ForumPageTemplate title={'Support Project'} body={'bdfkljgiuertywrebfbfshjteruerter'}/>,
+    // ]
     return(
 <Text>
 
@@ -41,4 +46,4 @@ export const SupportUs:FC<Interface>=()=>{
     )
 };
 
-export default SupportUs;
+export default YourPeople;

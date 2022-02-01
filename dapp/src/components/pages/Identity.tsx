@@ -66,10 +66,6 @@ export const Identity:FC<Interface>=()=> {
 
         <Flex>
 
-            <Flex borderRight="1px solid " borderColor='#daceda'>
-                <Sidebar/>
-            </Flex>
-
             <Box>
 
                 <Grid templateColumns='repeat(1, 1fr)' padding={'0'}>
