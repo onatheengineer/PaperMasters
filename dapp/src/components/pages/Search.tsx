@@ -6,7 +6,7 @@ import {Box, Flex, MenuButton, Input, Button, HStack, InputGroup, InputRightAddo
 import {useAppSelector} from "../../app/hooks";
 import DataTable, {ExpanderComponentProps, TableColumn} from 'react-data-table-component';
 import {Route, Routes} from "react-router-dom";
-import Sidebar from "../molecules/Sidebar";
+import Sidebar from "../Sidebar";
 import {Link as ReachLink} from "react-router-dom";
 import {MdManageAccounts} from "react-icons/md";
 import {HiOutlineDocumentReport} from "react-icons/hi";

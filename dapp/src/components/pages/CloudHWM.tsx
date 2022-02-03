@@ -3,9 +3,9 @@ import type {FC} from 'react';
 import {
     Stack, Box, Flex, Button, Text, VStack, useBreakpointValue } from '@chakra-ui/react';
 import {Route, Routes} from "react-router-dom";
-import WithAction from "../molecules/Navbar";
-import BackgroundLogo from '../../legoLavendarheadercroped.png';
-import SecondFooterHome from '../molecules/Footers/SecondFooterHome';
+import WithAction from "../Navbar";
+import BackgroundLogo from '../../assets/legoLavendarheadercroped.png';
+import SecondFooterHome from '../Footers/SecondFooterHome';
 
 
 

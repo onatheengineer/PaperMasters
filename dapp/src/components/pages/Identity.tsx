@@ -17,9 +17,9 @@ import {
 } from "@chakra-ui/react";
 // Custom components
 import { BsFillCloudRainFill } from 'react-icons/bs'
-import Card from '../molecules/Card/Card';
-import CardBody from "../molecules/Card/CardBody";
-import CardHeader from "../molecules/Card/CardHeader";
+import Card from '../Card/Card';
+import CardBody from "../Card/CardBody";
+import CardHeader from "../Card/CardHeader";
 // Assets
 import avatar2 from "../../assets/img/avatars/avatar2.png";
 import avatar3 from "../../assets/img/avatars/avatar3.png";
@@ -39,7 +39,7 @@ import {
     FaTwitter,
 } from "react-icons/fa";
 import { IoDocumentsSharp } from "react-icons/io5";
-import Sidebar from "../molecules/Sidebar";
+import Sidebar from "../Sidebar";
 import {GiNewShoot} from "react-icons/gi";
 
 
@@ -131,7 +131,7 @@ export const Identity:FC<Interface>=()=> {
                                                 h="80px"
                                                 borderRadius="15px"
                                             />
-                                            <Flex direction="column" maxWidth="100%" >
+                                            <Flex direction="column" maxWidth="100%">
                                                 <Text
                                                     fontSize={{sm: "lg", lg: "xl"}}
                                                     color={'#271c27'}
@@ -208,8 +208,9 @@ export const Identity:FC<Interface>=()=> {
                                                     <Icon as={FaCube} me="6px"/>
                                                     <Text fontSize="sm" color={textColor} fontWeight="bold">
                                                         {/*//when I click on this button I want it to route me to the validations page*/}
-                                                        <Link as = {ReachLink} to={'/validate'} >
-                                                            NFI: dcxflkdgoiudfhglaskrekwsufiosdfhxckjvbbdfgufdiouger8ter908te90r8t
+                                                        <Link as={ReachLink} to={'/validate'}>
+                                                            NFI:
+                                                            dcxflkdgoiudfhglaskrekwsufiosdfhxckjvbbdfgufdiouger8ter908te90r8t
                                                         </Link>
 
                                                     </Text>
@@ -236,7 +237,7 @@ export const Identity:FC<Interface>=()=> {
                                     </Flex>
                                 </CardBody>
                             </Card>
-                            <Card >
+                            <Card>
                                 <Grid templateColumns={{sm: "1fr", xl: "repeat(3, 1fr)"}} gap="12px">
                                     <Card mx={{xl: "15px"}} m='5px' borderRadius='15px' bg='white' p="16px" px="24px">
                                         <CardHeader p="12px 5px" mb="12px">

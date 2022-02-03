@@ -28,13 +28,12 @@ import {
     FlexProps, chakra, Center, Image, Avatar, Progress, HTMLChakraProps, FormHelperText, FormErrorMessage,
 } from '@chakra-ui/react';
 import { FaFacebook, FaGithub, FaGoogle } from 'react-icons/fa';
-import { PMNFI } from '../atoms/PMNFI';
-import { Link } from '../atoms/Link';
+import { Link } from '../../Link';
 import {useAppSelector} from "../../app/hooks";
 import { ReactNode, ReactText } from 'react';
-import PMLogo from '../../PMGIMPResized.png';
-import Logo from '../atoms/Logo';
-import Sidebar from "../molecules/Sidebar";
+import PMLogo from '../../assets/PMGIMPResized.png';
+import Logo from '../../assets/Logo';
+import Sidebar from "../Sidebar";
 
 interface Interface {
 
@@ -42,16 +41,16 @@ interface Interface {
 
 export const Register: FC<Interface>=(props: HTMLChakraProps<'form'>)=> {
 
-    const accounts = useAppSelector((state) => state.PMI.accounts);
-    const status = useAppSelector((state) => state.PMI.status);
+    const accounts = useAppSelector((state) => state.register.accounts);
+    const status = useAppSelector((state) => state.register.status);
 
     const [name, setName] = useState<string | null>(null);
     const [profession, setProfession] = useState<string | null>(null);
     const [email, setEmail] = useState<string | null>(null);
     const [slogan, setSlogan] = useState<string | null>(null);
     const [organization, setOrganization] = useState<string | null>(null);
-    const [description, setDescription] = useState<string | null>(null);
-    const [url, setUrl] = useState<string | null>(null);
+    const [uniqueYou, setuniqueYou] = useState<string | null>(null);
+    const [Website, setWebsite] = useState<string | null>(null);
 
 
     const [account, setAccount] = useState<string[]>([]);
@@ -73,11 +72,11 @@ export const Register: FC<Interface>=(props: HTMLChakraProps<'form'>)=> {
     const organizationHandler = (e: React.FormEvent<HTMLInputElement>) => {
         setOrganization(e.currentTarget.value);
     };
-    const descriptionHandler = (e: React.FormEvent<HTMLInputElement>) => {
-        setDescription(e.currentTarget.value);
+    const uniqueYouHandler = (e: React.FormEvent<HTMLInputElement>) => {
+        setuniqueYou(e.currentTarget.value);
     };
-    const urlHandler = (e: React.FormEvent<HTMLInputElement>) => {
-        setUrl(e.currentTarget.value);
+    const WebsiteHandler = (e: React.FormEvent<HTMLInputElement>) => {
+        setWebsite(e.currentTarget.value);
     };
 
 
@@ -138,12 +137,12 @@ export const Register: FC<Interface>=(props: HTMLChakraProps<'form'>)=> {
 
                                     </FormControl>
                                     <FormControl>
-                                        <FormLabel htmlFor='url'>url</FormLabel>
-                                        <Input id='url' placeholder='url' onChange={urlHandler} />
+                                        <FormLabel htmlFor='Website'>Website</FormLabel>
+                                        <Input id='Website' placeholder='Website, url' onChange={WebsiteHandler} />
                                     </FormControl>
                                     <FormControl isRequired>
-                                        <FormLabel htmlFor='description'>Description</FormLabel>
-                                        <Input id='description' placeholder='description' onChange={descriptionHandler}/>
+                                        <FormLabel htmlFor='uniqueYou'>Your Uniqueness</FormLabel>
+                                        <Input id='uniqueYou' placeholder='About you, date of birth, anything and everything but keep it short' onChange={uniqueYouHandler}/>
                                         <FormErrorMessage>Field is required.</FormErrorMessage>
                                     </FormControl>
 
@@ -235,10 +234,10 @@ export const Register: FC<Interface>=(props: HTMLChakraProps<'form'>)=> {
                                                         {organization}
                                                     </Text>
                                                     <Text align={'center'} color={'pmpurple.15'}>
-                                                        {url}
+                                                        {Website}
                                                     </Text>
                                                     <Text align={'center'} color={'pmpurple.10'} >
-                                                        {description}
+                                                        {uniqueYou}
                                                     </Text>
                                             </Stack>
 

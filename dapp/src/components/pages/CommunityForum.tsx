@@ -1,37 +1,33 @@
-import * as React from 'react';
-import type {FC} from 'react';
-import { Box, Flex} from '@chakra-ui/react';
-import Sidebar from "../molecules/Sidebar";
-import {Route, Routes} from "react-router-dom";
+//import React { useEffect, useState, useRef } from "react";
+import type {FC} from 'react'
+import {
+    Box, Heading, useMergeRefs,
+    Button,
+    Flex,
+    Menu, MenuButton, MenuDivider,
+    MenuItem, MenuList, StackDivider, Text, useColorModeValue, Stack, Collapse, useDisclosure,
+} from '@chakra-ui/react';
+import Sidebar from "../Sidebar";
+import {Link as ReachLink} from "react-router-dom";
+import {setRef} from "@mui/material";
 
 
 
 
-interface Interface {
+export const CommunityForum:FC=()=> {
 
-}
 
-export const CommunityForum: FC<Interface>=()=> {
-    // const CommunityForumPage = [
-    //     <ForumPageTemplate title={'Community Forum'} body={'dfgfdhdftgyertg'}/>,
-    //     <ForumPageTemplate title={'Community Discussion'} body={'dfgfdhdftgyertg'}/>,
-    //     <ForumPageTemplate title={'Community Events'} body={'dfgfdhdftgyertg'}/>,
-    //     <ForumPageTemplate title={'Report Suspicious Activity'} body={'dfgfdhdftgyertg'}/>,
-    //     <ForumPageTemplate title={'Papermaster project Feedback'} body={'bdfkljgiuertywrebfbfshjteruerter'}/>,
-    // ]
-    //
     return (
 
         <Flex>
-
-            <Box flex='auto'  style={{border: '8px solid white'}}>
-
+            community forum
 
 
-            </Box>
         </Flex>
-
     )
+
+
 };
 
 export default CommunityForum;
+

@@ -1,18 +1,20 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction, createAction } from "@reduxjs/toolkit";
 
-interface PMIState {
+
+interface RegisterState {
     accounts: string[];
     status: 'idle' | 'loading' | 'succeeded' | 'failed';
 }
 
-const initialState: PMIState = {
+const initialState: RegisterState = {
     accounts: [],
     status: 'idle',
-
 };
 
-const CreateSlice = createSlice ({
-    name: 'PMI',
+
+
+const RegisterSlice = createSlice ({
+    name: 'register',
     initialState,
     reducers: {
         accountsArr(state, action){
@@ -28,8 +30,12 @@ const CreateSlice = createSlice ({
         //update state of accounts page to make TRANSFER, mint new NFT, and add a personal description to the page after PMI token after created action fires
     }
 });
-console.log(CreateSlice);
-export const { accountsArr, statusOfArr } = CreateSlice.actions;
-export default CreateSlice.reducer;
+
+console.log(RegisterSlice);
+export const { accountsArr, statusOfArr } = RegisterSlice.actions;
+
+export const RequestAccountsAsyncAction = createAction("REQUEST_ACCOUNTS_ACTION_SAGA");
+
+export default RegisterSlice.reducer;
 
 

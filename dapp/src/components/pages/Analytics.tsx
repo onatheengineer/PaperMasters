@@ -19,12 +19,7 @@ export const Analytics:FC<Interface>=()=>{
                 templateColumns='repeat(5, 1fr)'
                 gap={4}
             >
-                {/*<GridItem rowSpan={2} colSpan={1} bg='tomato' />*/}
-                <GridItem colSpan={2} bg='whitesmoke' />
-                <GridItem colSpan={2} bg='whitesmoke' />
-                <GridItem colSpan={2} bg='whitesmoke' />
-                <GridItem colSpan={2} bg='whitesmoke' />
-                {/*<GridItem colSpan={4} bg='tomato' />*/}
+
 
                 Row 1 Col 1: Create: PIE CHART: types of mints - artitist, compamnies, ideas
 

@@ -17,8 +17,8 @@ contract MintIdentity is ERC721Enumerable, Ownable {
         string aka;
         string organization;
         string slogan;
-        string description;
-        string url;
+        string uniqueYou;
+        string Website;
         uint created;
         uint lastupdated;
         bool valid;
@@ -26,7 +26,7 @@ contract MintIdentity is ERC721Enumerable, Ownable {
         uint validationscore;
     }
 
-    mapping(uint256=> Identity) id_to_identity;
+    mapping(address=> uint256 ) public nfi;
 
     string private _currentBaseURI;
     uint private identityFee; // In Finney
@@ -69,9 +69,9 @@ contract MintIdentity is ERC721Enumerable, Ownable {
         string memory aka,
         string memory org,
         string memory slogan,
-        string memory description,
-        string memory url) private view returns(bytes32) {
-        return keccak256(abi.encodePacked(name, aka, org, slogan, description, url, block.timestamp));
+        string memory uniqueYou,
+        string memory Website) private view returns(bytes32) {
+        return keccak256(abi.encodePacked(name, aka, org, slogan, uniqueYou, Website, block.timestamp));
     }
 
     function getTokenIdentity(uint256 tokenId) public view returns(Identity memory ident) {
@@ -83,11 +83,11 @@ contract MintIdentity is ERC721Enumerable, Ownable {
         string memory aka,
         string memory org,
         string memory slogan,
-        string memory description,
-        string memory url) internal {
-            bytes32 uniqueId = createUniqueId(name, aka, org, slogan, description, url);
-            id_to_identity[_tokenIds.current()] = Identity(uniqueId,name, aka, org, slogan, description,
-                url, block.timestamp, block.timestamp, false, 0, 0);
+        string memory uniqueYou,
+        string memory Website) internal {
+            bytes32 uniqueId = createUniqueId(name, aka, org, slogan, uniqueYou, Website);
+            id_to_identity[_tokenIds.current()] = Identity(uniqueId,name, aka, org, slogan, uniqueYou,
+                Website, block.timestamp, block.timestamp, false, 0, 0);
             _safeMint(msg.sender,_tokenIds.current());
             _tokenIds.increment();
     }
@@ -98,11 +98,11 @@ contract MintIdentity is ERC721Enumerable, Ownable {
         string memory aka,
         string memory org,
         string memory slogan,
-        string memory description,
-        string memory url) external payable {
+        string memory uniqueYou,
+        string memory Website) external payable {
         uint fee = identityFee * 0.001 ether;
         require(msg.value ==  fee, "claiming an identity costs finney");
-        mintIdentity(name, aka, org, slogan, description, url);
+        mintIdentity(name, aka, org, slogan, uniqueYou, Website);
         payable(owner()).transfer(fee);
     }
 
@@ -127,17 +127,17 @@ contract MintIdentity is ERC721Enumerable, Ownable {
 
     }
 
-    function changeDescription(uint256 tokenId, string memory newDescription)  public {
+    function changeuniqueYou(uint256 tokenId, string memory newuniqueYou)  public {
         require(_exists(tokenId), "token not minted");
         require(ownerOf(tokenId) == msg.sender, "only the owner of this unique ID can change its title");
-        id_to_identity[tokenId].description = newDescription;
+        id_to_identity[tokenId].uniqueYou = newuniqueYou;
 
     }
 
-    function changeURL(uint256 tokenId, string memory newURL)  public {
+    function changeWebsite(uint256 tokenId, string memory newWebsite)  public {
         require(_exists(tokenId), "token not minted");
         require(ownerOf(tokenId) == msg.sender, "only the owner of this unique ID can change its title");
-        id_to_identity[tokenId].url = newURL;
+        id_to_identity[tokenId].Website = newWebsite;
 
         }
 

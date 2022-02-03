@@ -25,10 +25,10 @@ import { SiSololearn } from "react-icons/si";
 import { ImBooks } from "react-icons/im";
 import {GiBookshelf, GiNewShoot, GiHeatHaze, GiDiscussion} from "react-icons/gi";
 import { MdManageAccounts } from "react-icons/md";
-import Logo from '../../PaperMastersLogoGIMP.png';
-import PMLogo from '../../legoLavendar.png';
-import PMGIMPResized from '../../PMGIMPResized.png';
-import ConnectAccounts from "../atoms/ConnectAccounts";
+import Logo from '../assets/PaperMastersLogoGIMP.png';
+import PMLogo from '../assets/legoLavendar.png';
+import PMGIMPResized from '../assets/PMGIMPResized.png';
+import ConnectAccounts, {ConnectWalletButton} from "./ConnectAccounts";
 import {IoMdCheckmarkCircleOutline} from "react-icons/io";
 import {FiTrendingUp} from "react-icons/fi";
 // import {Folder} from 'react-kawaii';
@@ -175,22 +175,7 @@ export default function Navbar() {
                         </HStack>
                     </HStack>
 
-
-
-                    <Flex alignItems={'center'}>
-                        <Menu>
-                            <MenuButton
-                                as={Button}
-                                rounded={'full'}
-                                variant={'link'}
-                                cursor={'pointer'}
-                                size='lg'
-                                minW={0}>
-                                <MenuItem as={ReachLink} to='/' fontSize={'16px'} icon={<SiSololearn fontSize={'16px'} />} >Connect Wallet</MenuItem>
-                            </MenuButton>
-                        </Menu>
-                    </Flex>
-
+                   <ConnectWalletButton/>
 
                 </Flex>
             </Box>

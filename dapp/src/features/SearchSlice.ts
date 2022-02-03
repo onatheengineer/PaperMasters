@@ -1,17 +1,17 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface SearchState {
-    //accounts where retrieved in PMISlice
+    //accounts where retrieved in RegisterSlice
     searchExistingPMIdentities: any[];
 }
 
 const initialState: SearchState = {
-    //accounts where retrieved in PMISlice
+    //accounts where retrieved in RegisterSlice
     searchExistingPMIdentities: [],
 };
 
 const SearchSlice = createSlice ({
-    name: 'searchPMI',
+    name: 'search',
     initialState,
     reducers: {
         searchExistingPMIdentitiesArr(state, action){

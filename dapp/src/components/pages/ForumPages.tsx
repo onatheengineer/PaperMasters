@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, {useEffect, useState, useRef, MutableRefObject, forwardRef} from "react";
 import type {FC} from 'react'
 import {
     Box, Heading, useMergeRefs,
@@ -7,43 +7,52 @@ import {
     Menu, MenuButton, MenuDivider,
     MenuItem, MenuList, StackDivider, Text, useColorModeValue, Stack, Collapse, useDisclosure,
 } from '@chakra-ui/react';
-import Sidebar from "../molecules/Sidebar";
+import Sidebar from "../Sidebar";
 import {Link as ReachLink} from "react-router-dom";
-import {setRef} from "@mui/material";
+
 
 
 interface InterfaceFORUM {
-    title: string,
-    body: string,
-    pageHeading: string,
+title: string;
+body: string;
+forumPageHeader: string;
 }
 
-export const ForumPageTemplate:FC<InterfaceFORUM>=({title, body, pageHeading})=> {
+
+export const ForumPages=forwardRef<HTMLDivElement | null, InterfaceFORUM>(({forumPageHeader, title, body }, ref)=> {
 
     const [isOpen, setIsOpen] = useState<boolean>(false);
 
-    const titleRef = useRef()
+    const refCommunity = useRef<HTMLDivElement>( null)
+    const refCommunityDiscussion = useRef<HTMLDivElement>( null)
+    const refCommunityEvent = useRef<HTMLDivElement>( null)
+    const refReportSus = useRef<HTMLDivElement>( null)
+
+    const CommunityForumPage = [
+        // <ForumPages title={'Community Forum'} body={'dfgfdhdftgyertg'}/>,
+        // <ForumPages title={'Community Discussion'} body={'dfgfdhdftgyertg'}/>,
+        // <ForumPages title={'Community Events'} body={'dfgfdhdftgyertg'}/>,
+        // <ForumPages title={'Report Suspicious Activity'} body={'dfgfdhdftgyertg'}/>,
+        // <ForumPages title={'Papermaster project Feedback'} body={'bdfkljgiuertywrebfbfshjteruerter'}/>,
+    ]
 
 
-    //
-
-    //
-
-    //
+    const gotoPageRef = () => {
+        if(refCommunity.current !== null){
+            console.log(refCommunity.current.offsetTop);
+            window.scrollTo({
+                top: refCommunity.current.offsetTop,
+                behavior: 'smooth',
+                // You can also assign value "auto" to the behavior parameter.
+            })}
+    };
 
     return (
 
-        <Flex justify-content={'space-between'}>
-            {/*<Flex >*/}
-            {/*    <Sidebar/>*/}
-            {/*</Flex>*/}
+        <Flex ref={ref} justify-content={'space-between'}>
 
             <Box flex='auto' mx={{sm: '12px', xl: '18px'}} borderRadius='15px' bg='white' p="26px"
                  px="24px" my={{sm: "14px", xl: "16px"}}>
-
-                <Heading fontSize={'26px'}>
-                    {pageHeading}
-                </Heading>
 
                 <Stack
                     divider={<StackDivider borderColor='pmpurple.3'/>}
@@ -52,6 +61,12 @@ export const ForumPageTemplate:FC<InterfaceFORUM>=({title, body, pageHeading})=>
                     px={'24px'}
                 >
                     <Menu>
+                        <Heading fontSize={'26px'}>
+                            {forumPageHeader}
+                        </Heading>
+
+                        <Button onClick={()=> {gotoPageRef()}} >Community</Button>
+
                         <MenuButton
                             as={Button}
                             onClick={() => {
@@ -70,11 +85,13 @@ export const ForumPageTemplate:FC<InterfaceFORUM>=({title, body, pageHeading})=>
                             }}
                             minW={0}>
 
-                            {/*<Text ref={internalRef} fontSize="lg" color={'pmpurple.13'} fontWeight="bold">*/}
-                            {/*    {title}*/}
-                            {/*</Text>*/}
+
+                            <Text fontSize="lg" color={'pmpurple.13'} fontWeight="bold">
+                                {title}
+                            </Text>
+
                         </MenuButton>
-                        <Collapse in={isOpen} animateOpacity>
+                        {/*<Collapse in={isOpen} animateOpacity>*/}
                             <Box
                                 p='26px'
                                 color='pmpurple.10'
@@ -87,22 +104,17 @@ export const ForumPageTemplate:FC<InterfaceFORUM>=({title, body, pageHeading})=>
                                     {body}
                                 </Text>
                             </Box>
-                        </Collapse>
+                        {/*</Collapse>*/}
                     </Menu>
-
-                   /////
 
                     <StackDivider borderColor='pmpurple.3'/>
 
                 </Stack>
 
             </Box>
-
         </Flex>
     )
+});
 
-
-};
-
-export default ForumPageTemplate;
+export default ForumPages;
 

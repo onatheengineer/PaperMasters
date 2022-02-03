@@ -11,10 +11,10 @@ interface Interface {
 
 export const YourPeople:FC<Interface>=()=>{
     // const YourPeopleForumPage = [
-    //     <ForumPageTemplate title={'We want you to know who we are'} body={'dfgfdhdftgyertg'}/>,
-    //     <ForumPageTemplate title={'About Us'} body={'dfgfdhdftgyertg'}/>,
-    //     <ForumPageTemplate title={'Contact Us'} body={'dfgfdhdftgyertg'}/>,
-    //     <ForumPageTemplate title={'Support Project'} body={'bdfkljgiuertywrebfbfshjteruerter'}/>,
+    //     <ForumPages title={'We want you to know who we are'} body={'dfgfdhdftgyertg'}/>,
+    //     <ForumPages title={'About Us'} body={'dfgfdhdftgyertg'}/>,
+    //     <ForumPages title={'Contact Us'} body={'dfgfdhdftgyertg'}/>,
+    //     <ForumPages title={'Support Project'} body={'bdfkljgiuertywrebfbfshjteruerter'}/>,
     // ]
     return(
 <Text>

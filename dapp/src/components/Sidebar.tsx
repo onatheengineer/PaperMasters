@@ -1,9 +1,9 @@
 import React, { ReactNode, ReactText, useState, useEffect } from 'react';
 import {Route, Routes, useLocation} from 'react-router-dom';
-import PMLogo from '../../PMGIMPResized.png';
+import PMLogo from '../assets/PMGIMPResized.png';
 import { AiOutlineFileSearch } from "react-icons/ai";
 import { BiHomeHeart, BiBookmarkHeart } from 'react-icons/bi';
-import { IoMdCheckmarkCircleOutline, IoMdAttach } from 'react-icons/io';
+import { IoMdCheckmarkCircleOutline, IoMdAttach,  } from 'react-icons/io';
 import {
     IconButton,
     Box,
@@ -27,7 +27,6 @@ import {
 } from '@chakra-ui/react';
 import { FaPlug, FaSearch, FaFileAlt, FaLink, FaChartLine, FaBookmark, FaPaperclip, FaScroll,
     FaUserCheck, FaQuestionCircle, FaConnectdevelop, FaServicestack } from "react-icons/fa";
-
 import {
     FiHome,
     FiTrendingUp,
@@ -40,21 +39,25 @@ import {
 } from 'react-icons/fi';
 import { IconType } from 'react-icons';
 import type {FC} from 'react';
-import Register from "../pages/Register";
-import Search from '../pages/Search'
+import Register from "./pages/Register";
+import Search from './pages/Search'
 import {Link as ReachLink, To} from "react-router-dom";
-import { faSearch, faFileAlt, faLink, faChartLine, faBookmark, faPaperclip, faScroll,
-    faUserCheck } from '@fortawesome/free-solid-svg-icons'
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {MdOutlineFeedback, MdOutlineReport, MdReport} from "react-icons/md";
+import {MdOutlineFeedback, MdOutlineReport, MdOutlineWarningAmber} from "react-icons/md";
 import {GiBookCover, GiBookmark, GiDiscussion, GiSuspicious} from "react-icons/gi";
 import {BsCalendar2Event} from "react-icons/bs";
-import Home from "../pages/Home";
-import Identity from "../pages/Identity";
-import Attach from "../pages/Attach";
-import CloudHWM from "../pages/CloudHWM";
-import CommunityForum from "../pages/CommunityForum";
-import YourPeople from "../pages/YourPeople";
+import Home from "./pages/Home";
+import Identity from "./pages/Identity";
+import Attach from "./pages/Attach";
+import CloudHWM from "./pages/CloudHWM";
+import ForumPages from "./pages/ForumPages";
+import YourPeople from "./pages/YourPeople";
+import Validate from "./pages/Validate";
+import Analytics from "./pages/Analytics";
+import Learn from "./pages/Learn";
+import News from "./pages/News";
+import Security from "./pages/Security";
+import {SiSololearn} from "react-icons/si";
+
 
 
 interface InterfaceNavItem {
@@ -73,7 +76,6 @@ interface InterfaceSidebar{
 
 export const NavItem: FC<InterfaceNavItem> = ({ icon, title, active,
                                                   navItemSize, path} ) => {
-
 
     return (
         <Flex
@@ -97,6 +99,7 @@ export const NavItem: FC<InterfaceNavItem> = ({ icon, title, active,
                             <Icon as={icon} fontSize="xl" color={"#694b69"}  />
                             <Text ml={5} display={navItemSize == "small" ? "none" : "flex"}>{title}</Text>
                         </Flex>
+
                     </MenuButton>
                 </Link>
             </Menu>
@@ -119,12 +122,11 @@ export const Sidebar: FC<InterfaceSidebar>= ({icon, profileName} ) => {
         const SidebarIdentity = [
             <NavItem navItemSize={navSize} icon={BiBookmarkHeart} title="Register" path={'/register'}/>,
             <NavItem navItemSize={navSize} icon={IoMdAttach} title="Attach NFTs to your NFI" path={'/attach'}/>,
-            <NavItem navItemSize={navSize} icon={IoMdCheckmarkCircleOutline} title="Validate NFI"
-                     path={'/validate'}/>,
+            <NavItem navItemSize={navSize} icon={IoMdCheckmarkCircleOutline} title="Validate NFI" path={'/validate'}/>,
             <NavItem navItemSize={navSize} icon={AiOutlineFileSearch} title="Search NFIs" path={'/search'}/>,
-            <NavItem navItemSize={navSize} icon={MdReport} title="Report NFI" path={'/report'}/>,
-            <NavItem navItemSize={navSize} icon={GiSuspicious} title="Report sus" path={'/communityforum'}/>,
-            <NavItem navItemSize={navSize} icon={FiTrendingUp} title="Learn" path={'/learn'}/>,
+            <NavItem navItemSize={navSize} icon={MdOutlineReport} title="Report NFI" path={'/report'}/>,
+            <NavItem navItemSize={navSize} icon={MdOutlineWarningAmber} title="Report sus" path={'/forumPages'}/>,
+            <NavItem navItemSize={navSize} icon={SiSololearn} title="Learn" path={'/learn'}/>,
             <NavItem navItemSize={navSize} icon={FiTrendingUp} title="Analytics" path={'/analytics'}/>,
 
         ]
@@ -133,20 +135,19 @@ export const Sidebar: FC<InterfaceSidebar>= ({icon, profileName} ) => {
             <NavItem navItemSize={navSize} icon={BiBookmarkHeart} title="Search NFIs" path={'/search'}/>,
             <NavItem navItemSize={navSize} icon={BiBookmarkHeart} title="Register" path={'/register'}/>,
             <NavItem navItemSize={navSize} icon={IoMdAttach} title="Attach NFTs to your NFI" path={'/attach'}/>,
-            <NavItem navItemSize={navSize} icon={IoMdCheckmarkCircleOutline} title="Validate NFI"
-                     path={'/validate'}/>,
-            <NavItem navItemSize={navSize} icon={MdReport} title="Report NFI" path={'/report'}/>,
-            <NavItem navItemSize={navSize} icon={GiSuspicious} title="Report sus" path={'/communityforum'}/>,
-            <NavItem navItemSize={navSize} icon={FiTrendingUp} title="Learn" path={'/learn'}/>,
+            <NavItem navItemSize={navSize} icon={IoMdCheckmarkCircleOutline} title="Validate NFI" path={'/validate'}/>,
+            <NavItem navItemSize={navSize} icon={MdOutlineReport} title="Report NFI" path={'/report'}/>,
+            <NavItem navItemSize={navSize} icon={MdOutlineWarningAmber} title="Report sus" path={'/forumPages'}/>,
+            <NavItem navItemSize={navSize} icon={SiSololearn} title="Learn" path={'/learn'}/>,
             <NavItem navItemSize={navSize} icon={FiTrendingUp} title="Analytics" path={'/analytics'}/>,
 
         ]
 
         const SidebarCommunityForum = [
-            <NavItem navItemSize={navSize} icon={BiHomeHeart} title="Community Guidelines" path={'/communityforum'}/>,
-            <NavItem navItemSize={navSize} icon={GiDiscussion} title="Community Discussion" path={"/communityforum"}/>,
-            <NavItem navItemSize={navSize} icon={BsCalendar2Event} title="Community Events" path={'/communityforum'}/>,
-            <NavItem navItemSize={navSize} icon={MdOutlineFeedback} title="Report Suspicious Activity" path={'/communityforum'}/>,
+            <NavItem navItemSize={navSize} icon={BiHomeHeart} title="Community Guidelines" path={'/forumPages'}/>,
+            <NavItem navItemSize={navSize} icon={GiDiscussion} title="Community Discussion" path={"/forumPages"}/>,
+            <NavItem navItemSize={navSize} icon={BsCalendar2Event} title="Community Events" path={'/forumPages'}/>,
+            <NavItem navItemSize={navSize} icon={MdOutlineWarningAmber} title="Report Suspicious Activity" path={'/forumPages'}/>,
 
         ]
 
@@ -181,13 +182,11 @@ export const Sidebar: FC<InterfaceSidebar>= ({icon, profileName} ) => {
         ]
 
         const SidebarLearn = [
-
+            <NavItem navItemSize={navSize} icon={SiSololearn} title="Learn" path={'/learn'}/>,
             <NavItem navItemSize={navSize} icon={FiTrendingUp} title="Analytics" path={'/analytics'}/>,
 
 
         ]
-
-
 
         switch (location.pathname) {
             case '/':
@@ -199,7 +198,7 @@ export const Sidebar: FC<InterfaceSidebar>= ({icon, profileName} ) => {
             case '/register':
             case '/attach':
             case '/validate':
-
+            case '/report':
                 setNavItemRender(SidebarIdentity);
                 setHeaderTitle("NFI");
                 setHeaderText("sdfsdfsdf");
@@ -234,7 +233,7 @@ export const Sidebar: FC<InterfaceSidebar>= ({icon, profileName} ) => {
                 break;
             case '/security':
                 setNavItemRender(SidebarSecurity);
-                setHeaderTitle("Protection");
+                setHeaderTitle("Security");
                 setHeaderText("sdfsdfssdfsddf");
                 break;
             case '/learn':
@@ -324,16 +323,19 @@ export const Sidebar: FC<InterfaceSidebar>= ({icon, profileName} ) => {
             <Flex>
                 <Routes>
                     <Route path="/" element={<Home/>}/>
-                    <Route path={'/register'} element={ <Register/>}/>
                     <Route path={'/identity'} element={ <Identity/>}/>
+                    <Route path={'/register'} element={ <Register/>}/>
                     <Route path={'/attach'} element={ <Attach/>}/>
-                    <Route path={'/CloudHWM'} element={ <CloudHWM/>}/>
-                    <Route path={'/communityforum'} element={ <CommunityForum/>}/>
-                    <Route path={'/yourpeople'} element={ <YourPeople/>}/>
-
+                    <Route path={'/validate'} element={ <Validate/>}/>
+                    <Route path={'/report'} element={ <Search/>}/>
+                    <Route path={'/analytics'} element={ <Analytics/>}/>
                     <Route path={'/search'} element={ <Search/> }/>
-
-
+                    <Route path={'/learn'} element={ <Learn/>}/>
+                    <Route path={'/news'} element={ <News/>}/>
+                    <Route path={'/security'} element={ <Security/>}/>
+                    <Route path={'/CloudHWM'} element={ <CloudHWM/>}/>
+                    {/*<Route path={'/community'} element={ <ForumPages/>}/>*/}
+                    <Route path={'/yourpeople'} element={ <YourPeople/>}/>
                 </Routes>
             </Flex>
 
