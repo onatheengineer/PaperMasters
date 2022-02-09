@@ -135,11 +135,11 @@ export default function Footer(props: ButtonGroupProps) {
         // maxH={"120px"}
         borderStyle={'solid'}
         borderSize={'8px'}
-        borderColor={'blue'}>
+        borderColor={'pmpurple.9'}>
         <Container
             as={Stack}
             maxW={'7xl'}
-            py={6}
+            py={4}
             direction={{ base: 'column', md: 'row' }}
             spacing={4}
             justify={{ md: 'space-between' }}

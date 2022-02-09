@@ -43,8 +43,7 @@ export default function Navbar() {
 
     return (
         <>
-            <Box alignItems={'center'} border={'1px solid #daceda'} bg={useColorModeValue('#ffffff', 'gray.900')}
-                 px={16}>
+            <Box alignItems={'center'} border={'1px solid #daceda'} bg={"pmpurple.2"} px={16}>
                 <Flex h={16} alignItems={'center'} justifyContent={'space-between'}>
                     <IconButton
                         size={'md'}

@@ -125,7 +125,7 @@ export const Sidebar: FC<InterfaceSidebar>= ({icon, profileName} ) => {
             <NavItem navItemSize={navSize} icon={IoMdCheckmarkCircleOutline} title="Validate NFI" path={'/validate'}/>,
             <NavItem navItemSize={navSize} icon={AiOutlineFileSearch} title="Search NFIs" path={'/search'}/>,
             <NavItem navItemSize={navSize} icon={MdOutlineReport} title="Report NFI" path={'/report'}/>,
-            <NavItem navItemSize={navSize} icon={MdOutlineWarningAmber} title="Report sus" path={'/forumPages'}/>,
+            <NavItem navItemSize={navSize} icon={MdOutlineWarningAmber} title="Report suss" path={'/forumPages'}/>,
             <NavItem navItemSize={navSize} icon={SiSololearn} title="Learn" path={'/learn'}/>,
             <NavItem navItemSize={navSize} icon={FiTrendingUp} title="Analytics" path={'/analytics'}/>,
 
@@ -137,7 +137,7 @@ export const Sidebar: FC<InterfaceSidebar>= ({icon, profileName} ) => {
             <NavItem navItemSize={navSize} icon={IoMdAttach} title="Attach NFTs to your NFI" path={'/attach'}/>,
             <NavItem navItemSize={navSize} icon={IoMdCheckmarkCircleOutline} title="Validate NFI" path={'/validate'}/>,
             <NavItem navItemSize={navSize} icon={MdOutlineReport} title="Report NFI" path={'/report'}/>,
-            <NavItem navItemSize={navSize} icon={MdOutlineWarningAmber} title="Report sus" path={'/forumPages'}/>,
+            <NavItem navItemSize={navSize} icon={MdOutlineWarningAmber} title="Report suss" path={'/forumPages'}/>,
             <NavItem navItemSize={navSize} icon={SiSololearn} title="Learn" path={'/learn'}/>,
             <NavItem navItemSize={navSize} icon={FiTrendingUp} title="Analytics" path={'/analytics'}/>,
 
@@ -147,7 +147,8 @@ export const Sidebar: FC<InterfaceSidebar>= ({icon, profileName} ) => {
             <NavItem navItemSize={navSize} icon={BiHomeHeart} title="Community Guidelines" path={'/forumPages'}/>,
             <NavItem navItemSize={navSize} icon={GiDiscussion} title="Community Discussion" path={"/forumPages"}/>,
             <NavItem navItemSize={navSize} icon={BsCalendar2Event} title="Community Events" path={'/forumPages'}/>,
-            <NavItem navItemSize={navSize} icon={MdOutlineWarningAmber} title="Report Suspicious Activity" path={'/forumPages'}/>,
+            <NavItem navItemSize={navSize} icon={MdOutlineWarningAmber} title="Report Suspicious Activity"
+                     path={'/forumPages'}/>,
 
         ]
 
@@ -169,7 +170,6 @@ export const Sidebar: FC<InterfaceSidebar>= ({icon, profileName} ) => {
 
         const SidebarAnalytics = [
             <NavItem navItemSize={navSize} icon={FiTrendingUp} title="Analytics" path={'/analytics'}/>,
-
 
 
         ]
@@ -253,12 +253,13 @@ export const Sidebar: FC<InterfaceSidebar>= ({icon, profileName} ) => {
         <Flex>
             {navItemsRender == null ? null :
                 <Box
-                    //pos="sticky"
                     // left="5"
-                    h="95vh"
-                    backgroundColor='pmpurple.1'
+                    h="fill"
+                    backgroundColor='pmpurple.2'
                     //marginTop="2.5vh"
-                    boxShadow="0 4px 12px 0 rgba(0, 0, 0, 0.05)"
+                    //boxShadow="0 4px 12px 0 rgba(0, 0, 0, 0.05)"
+                    borderRight={'2px'}
+                    borderColor={'pmpurple.13'}
                     // borderRadius={navSize == "small" ? "15px" : "30px"}
                     w={navSize == "small" ? "75px" : "200px"}
                     flexDir="column"
@@ -304,7 +305,7 @@ export const Sidebar: FC<InterfaceSidebar>= ({icon, profileName} ) => {
 
                         {/*//walletConnet useEffect state*/}
 
-                        <Flex mt={4} align="center">
+                        <Flex mt={4} mb={4} align="center">
                             <Avatar size="sm" src="avatar-1.jpg"/>
                             <Flex flexDir="column" ml={4} display={navSize == "small" ? "none" : "flex"}>
                                 <Heading as="h3" size="sm">
@@ -324,19 +325,19 @@ export const Sidebar: FC<InterfaceSidebar>= ({icon, profileName} ) => {
             <Flex>
                 <Routes>
                     <Route path="/" element={<Home/>}/>
-                    <Route path={'/identity'} element={ <Identity/>}/>
-                    <Route path={'/register'} element={ <Register/>}/>
-                    <Route path={'/attach'} element={ <Attach/>}/>
-                    <Route path={'/validate'} element={ <Validate/>}/>
-                    <Route path={'/report'} element={ <Search/>}/>
-                    <Route path={'/analytics'} element={ <Analytics/>}/>
-                    <Route path={'/search'} element={ <Search/> }/>
-                    <Route path={'/learn'} element={ <Learn/>}/>
-                    <Route path={'/news'} element={ <News/>}/>
-                    <Route path={'/security'} element={ <Security/>}/>
-                    <Route path={'/CloudHWM'} element={ <CloudHWM/>}/>
+                    <Route path={'/identity'} element={<Identity/>}/>
+                    <Route path={'/register'} element={<Register/>}/>
+                    <Route path={'/attach'} element={<Attach/>}/>
+                    <Route path={'/validate'} element={<Validate/>}/>
+                    <Route path={'/report'} element={<Search/>}/>
+                    <Route path={'/analytics'} element={<Analytics/>}/>
+                    <Route path={'/search'} element={<Search/>}/>
+                    <Route path={'/learn'} element={<Learn/>}/>
+                    <Route path={'/news'} element={<News/>}/>
+                    <Route path={'/security'} element={<Security/>}/>
+                    <Route path={'/CloudHWM'} element={<CloudHWM/>}/>
                     {/*<Route path={'/community'} element={ <ForumPages/>}/>*/}
-                    <Route path={'/yourpeople'} element={ <YourPeople/>}/>
+                    <Route path={'/yourpeople'} element={<YourPeople/>}/>
                 </Routes>
             </Flex>
 

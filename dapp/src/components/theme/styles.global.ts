@@ -1,7 +1,7 @@
 export const global = {
     // styles for the `body`
     body: {
-        bg: 'blue',
+        bg: 'pmpurple.8',
         //backdropFilter: "saturate(100%) blur(50px)",
     },
 

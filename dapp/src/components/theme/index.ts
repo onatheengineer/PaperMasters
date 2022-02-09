@@ -10,6 +10,7 @@ import {Card} from './components/Card';
 import {Heading} from './components/Heading';
 import {SocialMediaLinks} from "./components/SocialMediaLinks";
 import {Link} from "./components/Link";
+import {Divider} from "./components/Divider";
 
 
 const theme = extendTheme({
@@ -25,6 +26,7 @@ const theme = extendTheme({
         Heading,
         SocialMediaLinks,
         Link,
+        Divider,
     }
 });
 export default theme;

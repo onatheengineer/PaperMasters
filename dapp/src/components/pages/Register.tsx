@@ -21,6 +21,9 @@ import {
     FormErrorMessage,
     GridItem,
     AvatarBadge,
+    VStack,
+    HStack,
+    Textarea, Divider,
 } from '@chakra-ui/react';
 import { FaFacebook, FaGithub, FaGoogle } from 'react-icons/fa';
 import {useAppSelector} from "../../app/hooks";
@@ -80,76 +83,9 @@ export const Register: FC<Interface>=()=> {
     return (
 
 
-        <Grid templateColumns='repeat(2, 1fr)' gap={'0px'}>
-
-            {/*<GridItem colstart={1} rowSpan={1} colSpan={1} w='100%'>*/}
-
-            <Box flex='auto' style={{border: '1px solid #b59eb5'}} mx={{xl: '8px'}}
-                 borderRadius='15px' py="22px" px="56px" my={{xl: "8px"}} bg={'pmpurple.1'}>
-
-                <Heading textAlign="center" size="xl" fontWeight="extrabold">
-                    Mint PaperMaster NFI
-                </Heading>
-
-                <Text mt="4" mb="8" align="center" maxW="100%" fontWeight="medium">
-                    <Text as="span">PaperMaster Identities are permanent Blockchain PaperMaster
-                        Non-Fungible-Identity, future changes require additional minting, please proofread!</Text>
-                </Text>
-
-                <Stack spacing="6">
-                    <FormControl isRequired>
-                        <FormLabel htmlFor='name'>Name</FormLabel>
-                        <Input id='name' placeholder='name, company' isDisabled={submitButtonClicked}
-                               onChange={nameHandler}/>
-                        <FormErrorMessage>Field is required.</FormErrorMessage>
-                        //40 characters , make logic to take out leading or trailing spaces - js TRIM
-                    </FormControl>
-                    <FormControl>
-                        <FormLabel htmlFor='email'>Email</FormLabel>
-                        <Input id='email' placeholder='email' isDisabled={submitButtonClicked}
-                               onChange={emailHandler}/>
-                        //40 characters
-                    </FormControl>
-                    <FormControl>
-                        <FormLabel htmlFor='profession'>Profession</FormLabel>
-                        <Input id='profession' placeholder='profession' isDisabled={submitButtonClicked}
-                               onChange={professionHandler}/>
-                        //30 characters , make logic to take out leading or trailing spaces
-                    </FormControl>
-                    <FormControl>
-                        <FormLabel htmlFor='slogan'>Slogan</FormLabel>
-                        <Input id='slogan' placeholder='slogan' isDisabled={submitButtonClicked}
-                               onChange={sloganHandler}/>
-                        //80 characters
-                    </FormControl>
-                    <FormControl>
-                        <FormLabel htmlFor='organization'>Organization</FormLabel>
-                        <Input id='organization' placeholder='organization' isDisabled={submitButtonClicked}
-                               onChange={organizationHandler}/>
-                        //60 characters
-                    </FormControl>
-                    <FormControl>
-                        <FormLabel htmlFor='Website'>website</FormLabel>
-                        <Input id='website' placeholder='website, url' isDisabled={submitButtonClicked}
-                               onChange={websiteHandler}/>
-                        //40 characters
-                    </FormControl>
-                    <FormControl>
-                        <FormLabel htmlFor='uniqueYou'>Your Uniqueness</FormLabel>
-                        <Input id='uniqueYou'
-                               placeholder='About you, date of birth, also known as, anything and everything but keep it short'
-                               isDisabled={submitButtonClicked} onChange={uniqueYouHandler}/>
-                        //200 characters
-                    </FormControl>
-                </Stack>
-            </Box>
-            {/*</GridItem>*/}
-
-
-            {/*<GridItem colstart={2} rowSpan={1} colSpan={2} w='100%'>*/}
-
+        <Flex>
             <Box
-                flex='auto'
+                w={"50%"}
                 showBorder={true}
                 border={'2px'}
                 borderStyle={'solid'}
@@ -158,127 +94,245 @@ export const Register: FC<Interface>=()=> {
                 borderRadius='15px'
                 py="22px" px="56px"
                 my={{xl: "8px"}}
-                bg={'pmpurple.1'}>
-
-                <Heading textAlign="center" size="xl" fontWeight="extrabold">
-                    Your PaperMaster Non-Fungible-Identity
-                </Heading>
-
-                <Text mt="4" mb="8" align="center" maxW="100%" fontWeight="medium">
-                    Below is what your Papermaster Non-Fungible-Identification will
-                    look like, please make sure you love it!
-                </Text>
+                bg={'pmpurple.1'}
+                align="center"
+            >
+                <Flex flexDirection={'column'}>
 
 
-                    <AspectRatio maxW='320px' ratio={4 / 5} bg={'red'}>
+                    <Heading textAlign="center" size="xl" fontWeight="extrabold">
+                        Mint PaperMaster NFI
+                    </Heading>
 
-                        <Center>
-                            <Box
-                                centerContent
-                                // maxW={'320px'}
-                                //ratio={4 / 5}
-                                w={'full'}
-                                bg={'pmpurple.2'}
-                                rounded={'md'}
-                                overflow={'hidden'}
-                                //backgroundImage='legoLavendarheadercroped.png'
-                                //backgroundPosition="center"
-                                //backgroundRepeat="no-repeat"
-                            >
-                                <Image
-                                    h={'60px'}
-                                    w={'full'}
-                                    backgroundPosition="center"
-                                    src='legoLavendarheadercroped.png'
-                                    objectFit={'cover'}
-                                />
-                                <Flex justify={'center'} mt={-10}>
-                                    <Avatar
-                                        size={'lg'}
-                                        src='PMlogo.png'
-                                        border={'2px'}
-                                        borderColor={'white'}
+                    <Text mt="4" mb="8" align="center" maxW="100%" fontWeight="medium">
+                        <Text as="span">PaperMaster Identities are permanent Blockchain PaperMaster
+                            Non-Fungible-Identity, future changes require additional minting, please proofread!</Text>
+                    </Text>
+                </Flex>
+                <Stack spacing="6">
+                    <FormControl isRequired>
+                        <FormLabel htmlFor='name'>Name</FormLabel>
+                        <Input focusBorderColor='pmpurple.9' id='name' placeholder='name, company'
+                               isDisabled={submitButtonClicked}
+                               onChange={nameHandler}/>
+                        <FormErrorMessage>Field is required.</FormErrorMessage>
+                    </FormControl>
+                    <FormControl>
+                        <FormLabel htmlFor='email'>Email</FormLabel>
+                        <Input focusBorderColor='pmpurple.9' id='email' placeholder='email'
+                               isDisabled={submitButtonClicked}
+                               onChange={emailHandler}/>
+
+                    </FormControl>
+                    <FormControl>
+                        <FormLabel htmlFor='profession'>Profession</FormLabel>
+                        <Input focusBorderColor='pmpurple.9' id='profession' placeholder='profession'
+                               isDisabled={submitButtonClicked}
+                               onChange={professionHandler}/>
+
+                    </FormControl>
+                    <FormControl>
+                        <FormLabel htmlFor='slogan'>Slogan</FormLabel>
+                        <Input focusBorderColor='pmpurple.9' id='slogan' placeholder='slogan'
+                               isDisabled={submitButtonClicked}
+                               onChange={sloganHandler}/>
+
+                    </FormControl>
+                    <FormControl>
+                        <FormLabel htmlFor='organization'>Organization</FormLabel>
+                        <Input focusBorderColor='pmpurple.9' id='organization' placeholder='organization'
+                               isDisabled={submitButtonClicked}
+                               onChange={organizationHandler}/>
+
+                    </FormControl>
+                    <FormControl>
+                        <FormLabel htmlFor='Website'>website</FormLabel>
+                        <Input focusBorderColor='pmpurple.9' id='website' placeholder='website, url'
+                               isDisabled={submitButtonClicked}
+                               onChange={websiteHandler}/>
+
+                    </FormControl>
+                    <FormControl>
+                        <FormLabel htmlFor='uniqueYou'>Your Uniqueness</FormLabel>
+                        <Input focusBorderColor='pmpurple.9' id='uniqueYou'
+                               placeholder='About you, date of birth, also known as, anything and everything but keep it short'
+                               isDisabled={submitButtonClicked} onChange={uniqueYouHandler}/>
+
+                    </FormControl>
+                </Stack>
+            </Box>
+
+
+            <Box
+                w={"50%"}
+                showBorder={true}
+                border={'2px'}
+                borderStyle={'solid'}
+                borderColor={'pmpurple.13'}
+                mx={{xl: '8px'}}
+                borderRadius='15px'
+                py="22px" px="56px"
+                my={{xl: "8px"}}
+                bg={'pmpurple.1'}
+                align="center"
+            >
+                <Flex flexDirection={'column'}>
+
+                    <Heading textAlign="center" size="xl" fontWeight="extrabold">
+                        Your PaperMaster Non-Fungible-Identity
+                    </Heading>
+
+                    <Text mt="4" mb="8" align="center" maxW="100%" fontWeight="medium">
+                        Below is what your Papermaster Non-Fungible-Identification will
+                        look like, please make sure you love it!
+                    </Text>
+                </Flex>
+
+                <AspectRatio w='320px' ratio={4 / 5}>
+                    <Box
+                        h={"100%"}
+                        w={'full'}
+                        border={'3px'}
+                        rounded={'12px'}
+                        borderColor={'pmpurple.13'}
+                        borderStyle={'solid'}
+                        bg={'pmpurple.13'}
+                    >
+
+                        <Stack
+                            h={"100%"}
+                            w={'full'}
+                            align={'center'}
+                            spacing={0}
+                            bg={'pmpurple.2'}
+                            wordBreak={'break-word'}
+                            rounded={'12px'}
+                        >
+
+                            <Image
+                                position={'absolute'}
+                                top={'0px'}
+                                right={'0px'}
+                                left={'0px'}
+                                //borderRadius='full'
+                                h={'60px'}
+                                // w={'110%'}
+                                backgroundPosition="center"
+                                src='legoLavendarheadercroped.png'
+                                objectFit={'cover'}
+                            />
+
+                            <Flex justify={'center'}>
+                                <Avatar
+                                    mt={'22px'}
+                                    src='PMlogo.png'
+                                    boxSize='3.05em'
+                                    css={{
+                                        border: '2px solid #4f384f',
+                                    }}
+                                >
+                                    <AvatarBadge
+                                        border={'1px'}
+                                        borderColor={'pmpurple.15'}
                                         borderStyle={'solid'}
+                                        boxSize='1.25em'
+                                        bg='pmpurple.2'>
+                                        <Text mt='0px' fontSize={'12px'} fontWeight={500}
+                                              fontFamily={'body'} align={'center'} color={'pmpurple.15'}>
+                                            NFI
+                                        </Text>
+                                    </AvatarBadge>
+                                </Avatar>
+                            </Flex>
+
+
+                            <Text pt={'0px'} fontSize={'22px'} fontWeight={500}
+                                  fontFamily={'body'} align={'center'} color={'pmpurple.15'}>
+                                PaperMaster
+                            </Text>
+                            <Text noOfLines={2} py={'0px'} fontSize={'18px'} fontWeight={500}
+                                  fontFamily={'body'} align={'center'} color={'pmpurple.15'}>
+                                {name}
+                            </Text>
+
+                            <Divider css={{borderColor: '#a88ea8'}}/>
+                            <Flex
+                                flexGrow={'1'}
+                                flexDirection={'row'}
+                                border={'0px'}
+                                borderColor={'pmpurple.15'}
+                                borderStyle={'solid'}
+                                textAlign={'center'}
+
+                                maxH={'20vh'}
+                            >
+                                <Center>
+                                    <VStack
+                                        align={'center'}
+                                        fontSize={'16px'}
+                                        px={'18px'}
+                                        spacing={0}
+                                        alignItems={"center"}
                                     >
-                                        <AvatarBadge
-                                            border={'1px'}
-                                            borderColor={'pmpurple.15'}
-                                            borderStyle={'solid'}
-                                            boxSize='1.10em'
-                                            bg='pmpurple.2'>
-                                            <Text mt='0px' fontSize={'12px'} fontWeight={500}
-                                                  fontFamily={'body'} align={'center'} color={'pmpurple.15'}>
-                                                NFI
-                                            </Text>
-                                        </AvatarBadge>
-                                    </Avatar>
-                                </Flex>
 
-
-                                    <Stack spacing={0} align={'center'} mb={3} wordBreak={'break-word'}>
-
-
-                                        {/*ﯹ*/}
-                                        <Text mt='0px' fontSize={'22px'} fontWeight={500}
-                                              fontFamily={'body'} align={'center'} color={'pmpurple.15'}>
-                                            PaperMaster ﯹ
-                                        </Text>
-                                        <Text mt='0px' fontSize={'20px'} fontWeight={500}
-                                              fontFamily={'body'} align={'center'} color={'pmpurple.15'}>
-                                            {name}
-                                        </Text>
-                                        <Text align={'center'} color={'pmpurple.15'}>
-                                            {profession}
-                                        </Text>
-                                        <Text align={'center'} color={'pmpurple.15'}>
+                                        <Text noOfLines={1} color={'pmpurple.15'}>
                                             {email}
                                         </Text>
-                                        <Text align={'center'} color={'pmpurple.15'}>
+                                        <Text noOfLines={1} color={'pmpurple.15'}>
+                                            {profession}
+                                        </Text>
+                                        <Text noOfLines={1} color={'pmpurple.15'}>
                                             {slogan}
                                         </Text>
-                                        <Text align={'center'} color={'pmpurple.15'}>
+                                        <Text noOfLines={1} color={'pmpurple.15'}>
                                             {organization}
                                         </Text>
-                                        <Text align={'center'} color={'pmpurple.15'}>
+                                        <Text noOfLines={1} color={'pmpurple.15'}>
                                             {website}
                                         </Text>
-                                        <Text align={'center'} color={'pmpurple.10'}>
+                                        <Text noOfLines={2} color={'pmpurple.12'}>
                                             {uniqueYou}
                                         </Text>
-                                        <Text fontSize={'sm'} color={'pmpurple.11'}>
-                                            Origin Date {originDateFormatted}
-                                        </Text>
-                                        <Text mt='12px' align={'center'} color={'pmpurple.11'}>
-                                            PaperMaster NFI
-                                        </Text>
-                                        <Button
-                                            w={'full'}
-                                            mt={2}
-                                            mb={2}
-                                            bg={'pmpurple.13'}
-                                            color={'white'}
-                                            rounded={'md'}
-                                            _hover={{
-                                                transform: 'translateY(-2px)',
-                                                boxShadow: 'lg',
-                                            }}>
-                                            <Text fontSize={'sm'} color={'white'}>
-                                                {/*NFI Identification string will show once minted*/}
-                                                0x0000000000000000000000000000000 <br/>
-                                                000000000000000000000000000000000
-                                            </Text>
-                                        </Button>
+                                    </VStack>
+                                </Center>
+                            </Flex>
 
-                                    </Stack>
+                            <Box>
+                                <Text as='cite' mb={'0px'} pb={'0px'} fontSize={'sm'} color={'pmpurple.12'}>
+                                    Origin Date {originDateFormatted}
+                                </Text>
 
+                                <Button
+                                    w={'90%'}
+                                    pb={'0px'}
+                                    m={'0px'}
+                                    mt={'0px'}
+                                    mb={'8px'}
+                                    bg={'pmpurple.13'}
+                                    color={'white'}
+                                    rounded={'md'}
+                                    _hover={{
+                                        transform: 'translateY(-2px)',
+                                        boxShadow: 'lg',
+                                    }}>
+                                    <Text fontSize={'sm'} color={'white'}>
+                                        {/*NFI Identification string will show once minted*/}
+                                        0x0000000000000000000000000000000 <br/>
+                                        000000000000000000000000000000000
+                                    </Text>
+                                </Button>
                             </Box>
-                        </Center>
-                    </AspectRatio>
+                        </Stack>
+                    </Box>
+                </AspectRatio>
 
 
                 <Center>
                     {name !== "" ?
                         <Button
+                            align={'center'}
+                            mt={"18px"}
+                            mb={"2px"}
                             onClick={() => {
                                 console.log('Im submitting my mint')
                                 console.log(name)
@@ -292,7 +346,7 @@ export const Register: FC<Interface>=()=> {
                                 //dispatch sage action mintIdentitySaga
                             }}
                             isLoading={submitButtonClicked}
-                            loadingText='Submitting'
+                            loadingText='Submitting to the Blockchain for minting, this can take up to 10 minutes'
                             colorScheme='"#9c7e9c"'
                             variant='outline'
                         >
@@ -305,8 +359,8 @@ export const Register: FC<Interface>=()=> {
 
                 {/*</GridItem>*/}
             </Box>
-        </Grid>
 
+        </Flex>
     )
 };
 
