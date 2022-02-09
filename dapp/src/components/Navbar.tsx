@@ -14,7 +14,7 @@ import {
     MenuDivider,
     useDisclosure,
     useColorModeValue,
-    Stack,
+    Stack, Text,
 } from '@chakra-ui/react';
 import { extendTheme } from '@chakra-ui/react';
 import {Link as ReachLink} from "react-router-dom";
@@ -28,154 +28,190 @@ import { MdManageAccounts } from "react-icons/md";
 import Logo from '../assets/PaperMastersLogoGIMP.png';
 import PMLogo from '../assets/legoLavendar.png';
 import PMGIMPResized from '../assets/PMGIMPResized.png';
-import ConnectAccounts, {ConnectWalletButton} from "./ConnectAccounts";
 import {IoMdCheckmarkCircleOutline} from "react-icons/io";
 import {FiTrendingUp} from "react-icons/fi";
-// import {Folder} from 'react-kawaii';
+import Web3 from "web3";
+import { useAppSelector, useAppDispatch } from '../app/hooks';
+import RegisterSlice, {accountsArr, RequestAccountsAsyncAction, statusOfArr} from '../features/RegisterSlice';
 
 
 
 export default function Navbar() {
-    const { isOpen, onOpen, onClose } = useDisclosure();
+    const {isOpen, onOpen, onClose} = useDisclosure();
+    const getAccountsArr = useAppSelector((state)=> state.register.accounts);
+    const dispatch = useAppDispatch();
 
     return (
         <>
-            <Box alignItems={'center'} border={'1px solid #daceda'} bg={useColorModeValue('#f2eef2', 'gray.900')} px={16}>
+            <Box alignItems={'center'} border={'1px solid #daceda'} bg={useColorModeValue('#ffffff', 'gray.900')}
+                 px={16}>
                 <Flex h={16} alignItems={'center'} justifyContent={'space-between'}>
                     <IconButton
                         size={'md'}
-                        icon={isOpen ? <CloseIcon /> : <HamburgerIcon />}
+                        icon={isOpen ? <CloseIcon/> : <HamburgerIcon/>}
                         aria-label={'Open Menu'}
-                        display={{ md: 'none' }}
+                        display={{md: 'none'}}
                         onClick={isOpen ? onClose : onOpen}
                     />
                     <HStack spacing={8} alignItems={'center'}>
                         <Box><Link as={ReachLink} to="/"><img src={Logo}/></Link></Box>
 
                         <HStack spacing={10} alignItems={'right'}>
-                            <Menu >
+                            <Menu>
                                 <Menu>
-                                    <Link as={ReachLink} to='/identity'>
-                                    <MenuButton
-                                        as={Button}
-                                        size='lg'
-                                        square={'full'}
-                                        variant={'link'}
-                                        cursor={'pointer'}
-                                        _hover={{ color: '#906e90' }}
-                                        _active={{
-                                            color: '#906e90',
-                                            transform: 'scale(0.96)'
-                                        }}
-                                        minW={0}>
-                                        <MenuItem fontSize={'18px'} icon={<MdManageAccounts fontSize={'20px'}/>} >Identity</MenuItem>
-                                        </MenuButton>
-                                    </Link>
-                            </Menu>
-
-                                <Menu>
-
-
-                                <Link as={ReachLink} to='/search'>
-                                    <MenuButton
-                                        as={Button}
-                                        size='lg'
-                                        square={'full'}
-                                        variant={'link'}
-                                        cursor={'pointer'}
-                                        _hover={{ color: '#906e90' }}
-                                        _active={{
-                                            color: '#906e90',
-                                            transform: 'scale(0.96)'
-                                        }}
-                                        minW={0}>
-                                        <MenuItem fontSize={'18px'} icon={<FaScroll fontSize={'16px'}/>}>Search</MenuItem>
-                                    </MenuButton>
-                                </Link>
-                            </Menu>
-
-                                <Menu>
-
-
-                                <Link as={ReachLink} to='/CloudHWM'>
-                                    <MenuButton
-                                        as={Button}
-                                        size='lg'
-                                        square={'full'}
-                                        variant={'link'}
-                                        cursor={'pointer'}
-                                        _hover={{ color: '#906e90' }}
-                                        _active={{
-                                            color: '#906e90',
-                                            transform: 'scale(0.96)'
-                                        }}
-                                        minW={0}>
-                                        <MenuItem fontSize={'18px'} icon={<GiHeatHaze fontSize={'18px'}  />} >CloudHWM</MenuItem>
-                                    </MenuButton>
-                                </Link>
-                            </Menu>
-                                <Menu>
-
-
-                                <Link as={ReachLink} to='/communityforum'>
-                                    <MenuButton
-                                        as={Button}
-                                        size='lg'
-                                        square={'full'}
-                                        variant={'link'}
-                                        cursor={'pointer'}
-                                        _hover={{ color: '#906e90' }}
-                                        _active={{
-                                            color: '#906e90',
-                                            transform: 'scale(0.96)'
-                                        }}
-                                        minW={0}>
-                                        <MenuItem fontSize={'18px'} icon={<GiDiscussion fontSize={'16px'} />} >Community Forum</MenuItem>
-                                    </MenuButton>
-                                </Link>
-                            </Menu>
-                                <Menu >
-                                    <Link as={ReachLink} to='/learn'>
+                                    <Link as={ReachLink} to='/identity' variant={'navLinks'}>
                                         <MenuButton
                                             as={Button}
                                             size='lg'
                                             square={'full'}
                                             variant={'link'}
                                             cursor={'pointer'}
-                                            _hover={{ color: '#906e90' }}
+                                            _hover={{color: 'pmpurple.9'}}
                                             _active={{
                                                 color: '#906e90',
                                                 transform: 'scale(0.96)'
                                             }}
                                             minW={0}>
-                                            <MenuItem fontSize={'18px'} icon={<ImBooks fontSize={'16px'} />} >Learn</MenuItem>
+                                            <MenuItem fontSize={'18px'} fontWeight={'Bold'}
+                                                      icon={<MdManageAccounts fontSize={'20px'}/>}>Identity</MenuItem>
                                         </MenuButton>
                                     </Link>
                                 </Menu>
 
                                 <Menu>
-                                <Link as={ReachLink} to='/yourpeople'>
-                                    <MenuButton
-                                        as={Button}
-                                        size='lg'
-                                        square={'full'}
-                                        variant={'link'}
-                                        cursor={'pointer'}
-                                        _hover={{ color: '#906e90' }}
-                                        _active={{
-                                            color: '#906e90',
-                                            transform: 'scale(0.96)'
-                                        }}
-                                        minW={0}>
-                                        <MenuItem fontSize={'18px'} icon={<GiNewShoot fontSize={'16px'} />} >Your People</MenuItem>
-                                    </MenuButton>
-                                </Link>
-                            </Menu>
+
+
+                                    <Link as={ReachLink} to='/search' variant={'navLinks'} >
+                                        <MenuButton
+                                            as={Button}
+                                            size='lg'
+                                            square={'full'}
+                                            variant={'link'}
+                                            cursor={'pointer'}
+                                            _hover={{color: 'pmpurple.9'}}
+                                            _active={{
+                                                color: '#906e90',
+                                                transform: 'scale(0.96)'
+                                            }}
+                                            minW={0}>
+                                            <MenuItem fontSize={'18px'} fontWeight={'Bold'}
+                                                      icon={<FaScroll fontSize={'16px'}/>}>Search</MenuItem>
+                                        </MenuButton>
+                                    </Link>
+                                </Menu>
+
+                                <Menu>
+
+
+                                    <Link as={ReachLink} to='/CloudHWM'  variant={'navLinks'} >
+                                        <MenuButton
+                                            as={Button}
+                                            size='lg'
+                                            square={'full'}
+                                            variant={'link'}
+                                            cursor={'pointer'}
+                                            _hover={{color: 'pmpurple.9'}}
+                                            _active={{
+                                                color: '#906e90',
+                                                transform: 'scale(0.96)'
+                                            }}
+                                            minW={0}>
+                                            <MenuItem fontSize={'18px'} fontWeight={'Bold'}
+                                                      icon={<GiHeatHaze fontSize={'18px'}/>}>CloudHWM</MenuItem>
+                                        </MenuButton>
+                                    </Link>
+                                </Menu>
+                                <Menu>
+
+
+                                    <Link as={ReachLink} to='/communityforum'  variant={'navLinks'} >
+                                        <MenuButton
+                                            as={Button}
+                                            size='lg'
+                                            square={'full'}
+                                            variant={'link'}
+                                            cursor={'pointer'}
+                                            _hover={{color: 'pmpurple.9'}}
+                                            _active={{
+                                                color: '#906e90',
+                                                transform: 'scale(0.96)'
+                                            }}
+                                            minW={0}>
+                                            <MenuItem fontSize={'18px'} fontWeight={'Bold'} icon={<GiDiscussion fontSize={'16px'}/>}>Community
+                                                Forum</MenuItem>
+                                        </MenuButton>
+                                    </Link>
+                                </Menu>
+                                <Menu>
+                                    <Link as={ReachLink} to='/learn'  variant={'navLinks'} >
+                                        <MenuButton
+                                            as={Button}
+                                            size='lg'
+                                            square={'full'}
+                                            variant={'link'}
+                                            cursor={'pointer'}
+                                            _hover={{color: 'pmpurple.9'}}
+                                            _active={{
+                                                color: '#906e90',
+                                                transform: 'scale(0.96)'
+                                            }}
+                                            minW={0}>
+                                            <MenuItem fontSize={'18px'} fontWeight={'Bold'}
+                                                      icon={<ImBooks fontSize={'16px'}/>}>Learn</MenuItem>
+                                        </MenuButton>
+                                    </Link>
+                                </Menu>
+
+                                <Menu>
+                                    <Link as={ReachLink} to='/yourpeople'  variant={'navLinks'} >
+                                        <MenuButton
+                                            as={Button}
+                                            size='lg'
+                                             square={'full'}
+                                            variant={'link'}
+                                            cursor={'pointer'}
+                                            _hover={{color: 'pmpurple.9'}}
+                                            _active={{
+                                                color: '#906e90',
+                                                transform: 'scale(0.96)'
+                                            }}
+                                            minW={0}>
+                                            <MenuItem fontSize={'18px'} fontWeight={'Bold'} icon={<GiNewShoot fontSize={'16px'}/>}>Your
+                                                People</MenuItem>
+                                        </MenuButton>
+                                    </Link>
+                                </Menu>
+                                <Menu>
+                                    {getAccountsArr.length === 0 ?
+                                        <MenuButton
+                                            as={Button}
+                                            size='lg'
+                                            color={'#4B694B'}
+                                            onClick={()=> {
+                                                console.log('i am clicked')
+                                                dispatch(RequestAccountsAsyncAction());
+                                            }}
+                                            square={'full'}
+                                            variant={'link'}
+                                            cursor={'pointer'}
+                                            _hover={{color: '#7E9C7E'}}
+                                            // _active={{
+                                            //     //color: '#7fa37f',
+                                            //     transform: 'scale(0.96)'
+                                            // }}
+                                            minW={0}
+                                        >
+                                            <MenuItem fontSize={'18px'} fontWeight={'Bold'} icon={<SiSololearn fontSize={'16px'}/>}>Connect
+                                                Wallet</MenuItem>
+
+                                        </MenuButton>
+                                        :  <MenuItem fontSize={'18px'} fontWeight={'Bold'} icon={<SiSololearn fontSize={'16px'}/>}>Connected</MenuItem>   }
+                                </Menu>
                             </Menu>
                         </HStack>
                     </HStack>
 
-                   <ConnectWalletButton/>
+
 
                 </Flex>
             </Box>

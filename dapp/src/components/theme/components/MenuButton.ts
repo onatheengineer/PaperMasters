@@ -3,7 +3,7 @@ export const MenuButton = {
     baseStyle: {
         fontSize: '2em',
         fontWeight: 'bold',
-        color:"#bb0000",
+        color:"#694b69",
         border:"3px",
         borderColor:"black"
     },
@@ -29,16 +29,16 @@ export const MenuButton = {
     variants: {
         'with-shadow': {
             bg: 'red.400',
-                boxShadow: '0 0 2px 2px #efdfde',
+                boxShadow: '0 0 2px 2px #c1aec1',
         },
         colorful: {
             item: {
-                color: 'orange.600'
+                color: '#694b69'
             },
             // 4. We can override existing variants
-            solid: (props: any) => ({
-                bg: props.colorMode === 'dark' ? 'red.300' : 'red.500',
-            }),
+            // solid: (props: any) => ({
+            //     bg: props.colorMode === 'dark' ? 'red.300' : 'red.500',
+            // }),
         },
     },
     defaultProps: {

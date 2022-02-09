@@ -12,7 +12,6 @@ const initialState: RegisterState = {
 };
 
 
-
 const RegisterSlice = createSlice ({
     name: 'register',
     initialState,

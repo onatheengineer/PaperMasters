@@ -6,12 +6,15 @@ import {RequestAccountsAsyncAction} from "../features/RegisterSlice";
 
 
 function* requestAccountsSaga() {
-    yield delay(1000);
     yield put(statusOfArr("loading"));
     try {
-        yield delay(1000);
+        const web3 = new Web3(Web3.givenProvider || 'ws://some.local-or-remote.node:8546');
+        const acc: string[]= yield call(web3.eth.requestAccounts as any);
+        console.log(acc);
+        yield put(accountsArr(acc));
         yield put(statusOfArr("success"));
-    } catch {
+    } catch (e) {
+        console.log(e);
         yield put(statusOfArr("failed"));
     }
 }

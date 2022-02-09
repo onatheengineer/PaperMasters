@@ -10,7 +10,7 @@ import {
     Grid, GridItem,
     Icon,
     Image,
-    Link, MenuItem,
+    Link, MenuItem, Stack,
     Switch,
     Text,
     useColorModeValue,
@@ -41,6 +41,8 @@ import {
 import { IoDocumentsSharp } from "react-icons/io5";
 import Sidebar from "../Sidebar";
 import {GiNewShoot} from "react-icons/gi";
+import {useAppSelector} from "../../app/hooks";
+import {SiSololearn} from "react-icons/si";
 
 
 interface Interface {
@@ -60,7 +62,7 @@ export const Identity:FC<Interface>=()=> {
         "rgba(255, 255, 255, 0.31)"
     );
     const emailColor = useColorModeValue("gray.400", "gray.300");
-
+    const filledAccountsArr = useAppSelector((state)=> state.register.accounts);
 
     return (
 
@@ -132,14 +134,20 @@ export const Identity:FC<Interface>=()=> {
                                                 borderRadius="15px"
                                             />
                                             <Flex direction="column" maxWidth="100%">
+                                                {filledAccountsArr.length === 0 ?
                                                 <Text
                                                     fontSize={{sm: "lg", lg: "xl"}}
                                                     color={'#271c27'}
                                                     fontWeight="bold"
                                                     ms={{sm: "8px", md: "0px"}}
                                                 >
+                                                    {/*{name}*/}
                                                     Andrew from Mos Eisley
                                                 </Text>
+
+                                                    :  <Flex alignItems={'center'}> {filledAccountsArr[0]} </Flex>}
+
+
                                                 <Text
                                                     fontSize={{sm: "sm", md: "md"}}
                                                     color='#342534'
@@ -184,8 +192,40 @@ export const Identity:FC<Interface>=()=> {
                                                         >
                                                             <Icon as={FaTwitter}/>
                                                         </Link>
+                                                        <Link
+                                                            href="#"
+                                                            color="#9c7e9c"
+                                                            fontSize="lg"
+                                                            me="10px"
+                                                            _hover={{color: "#9c7e9c"}}
+                                                        >
+                                                            <Icon as={FaFacebook}/>
+
+                                                        </Link>
+
                                                     </Flex>
+
                                                 </Flex>
+
+                                                <Text
+                                                    fontSize="md"
+                                                    color={textColor}
+                                                    fontWeight="bold"
+                                                    me="10px"
+                                                >
+                                                    Your unique NFI Hex:{" "}
+                                                    <Link
+                                                        href="#"
+                                                        color="#9c7e9c"
+                                                        fontSize="lg"
+                                                        me="10px"
+                                                        _hover={{color: "#9c7e9c"}}
+                                                    >
+                                                        <Icon as={FaFacebook}/>
+
+                                                    </Link>
+                                                </Text>
+
                                             </Flex>
                                         </Flex>
                                         <Flex
@@ -199,8 +239,9 @@ export const Identity:FC<Interface>=()=> {
                                                     bg="hsla(0,0%,100%,.3)"
                                                     borderRadius="15px"
                                                     justifyContent="center"
-                                                    py="10px"
-                                                    px="10px"
+                                                    py="12px"
+                                                    px="14px"
+                                                    mx={'42px'}
                                                     boxShadow="inset 0 0 1px 1px hsl(0deg 0% 100% / 90%), 0 20px 27px 0 rgb(0 0 0 / 5%)"
                                                     border="1px solid gray.500"
                                                     cursor="pointer"
@@ -210,13 +251,26 @@ export const Identity:FC<Interface>=()=> {
                                                         {/*//when I click on this button I want it to route me to the validations page*/}
                                                         <Link as={ReachLink} to={'/validate'}>
                                                             NFI:
-                                                            dcxflkdgoiudfhglaskrekwsufiosdfhxckjvbbdfgufdiouger8ter908te90r8t
+                                                            Transaction HASH
                                                         </Link>
-
                                                     </Text>
                                                 </Flex>
                                             </Button>
                                         </Flex>
+                                        <Stack direction={'row'} justify={'center'} spacing={6} >
+                                            <Stack spacing={0} align={'center'}>
+                                                <Text fontWeight={600}>57</Text>
+                                                <Text fontSize={'sm'} color={'pmpurple.11'}>
+                                                    Validations
+                                                </Text>
+                                            </Stack>
+                                            <Stack spacing={0} align={'center'}>
+                                                <Text fontWeight={600}>23k</Text>
+                                                <Text fontSize={'sm'} color={'pmpurple.11'}>
+                                                    Mentions
+                                                </Text>
+                                            </Stack>
+                                        </Stack>
                                     </Flex>
                                 </Box>
                             </Box>

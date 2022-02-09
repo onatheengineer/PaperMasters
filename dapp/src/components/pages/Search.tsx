@@ -11,6 +11,7 @@ import {Link as ReachLink} from "react-router-dom";
 import {MdManageAccounts} from "react-icons/md";
 import {HiOutlineDocumentReport} from "react-icons/hi";
 import {MdOutlineLibraryAddCheck} from "react-icons/md";
+import {SiSololearn} from "react-icons/si";
 
 
 interface DataRow {
@@ -22,7 +23,6 @@ interface DataRow {
     profession: string;
     reported: number;
     ownedTokens: number;
-
 };
 
 interface interfaceFilterComponent{
@@ -43,6 +43,17 @@ const FilterComponent: FC<interfaceFilterComponent> = ( { filterText, onClear, o
     </Box>
 )
 
+
+// data provides access to your row data
+const ExpandedComponent: FC<ExpanderComponentProps<DataRow>> = ({ data }) => {
+    return <pre>{JSON.stringify(data, null, 2)}</pre>;
+};
+
+export const Search: FC=()=> {
+    const getAccountsArr = useAppSelector((state)=> state.register.accounts);
+    const [filterText, setFilterText] = useState('');
+    const [resetPaginationToggle, setResetPaginationToggle] = useState(false);
+
     const columns: TableColumn<DataRow>[] = [
         {
             name: 'Name',
@@ -50,10 +61,6 @@ const FilterComponent: FC<interfaceFilterComponent> = ( { filterText, onClear, o
             sortable: true,
             reorder: true,
             center: true,
-            // style: {
-            //     backgroundColor: '#f2eef2',
-            //     color: '#694b69',
-            // },
         },
         {
             name: 'NFI Identification',
@@ -63,7 +70,7 @@ const FilterComponent: FC<interfaceFilterComponent> = ( { filterText, onClear, o
             center: true,
             style: {
                 backgroundColor: '#f2eef2',
-               fontWeight: 'bold'
+                fontWeight: 'bold'
             },
         },
 
@@ -73,7 +80,6 @@ const FilterComponent: FC<interfaceFilterComponent> = ( { filterText, onClear, o
             sortable: true,
             reorder: true,
             center: true,
-
         },
         {
             name: 'Validate',
@@ -112,7 +118,6 @@ const FilterComponent: FC<interfaceFilterComponent> = ( { filterText, onClear, o
         //     sortable: true,
         //     reorder: true,
         //     center: true,
-        //
         // },
         {
             name: 'Reported',
@@ -137,7 +142,7 @@ const FilterComponent: FC<interfaceFilterComponent> = ( { filterText, onClear, o
     const data: DataRow[] = [
         {
             name: 'andrwe niederhasuern',
-            IdNFI: '789345hjkgf897435jhkgdkjhdfg897ertjkhdfgfkjhdfg',
+            IdNFI: (getAccountsArr.length === 0 ?  'No NFI' : getAccountsArr[0]),
             profession: 'engineer',
             validations: 654654,
             mentions: 1,
@@ -357,15 +362,7 @@ const FilterComponent: FC<interfaceFilterComponent> = ( { filterText, onClear, o
         },
     ]
 
-// data provides access to your row data
-const ExpandedComponent: FC<ExpanderComponentProps<DataRow>> = ({ data }) => {
-    return <pre>{JSON.stringify(data, null, 2)}</pre>;
-};
 
-export const Search: FC=()=> {
-
-    const [filterText, setFilterText] = useState('');
-    const [resetPaginationToggle, setResetPaginationToggle] = useState(false);
 
     const filteredItems = data.filter(
         item => {
