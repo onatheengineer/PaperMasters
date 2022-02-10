@@ -185,7 +185,7 @@ export default function Navbar() {
                                         <MenuButton
                                             as={Button}
                                             size='lg'
-                                            color={'#4B694B'}
+                                            color={'#FF6F61'}
                                             onClick={()=> {
                                                 console.log('i am clicked')
                                                 dispatch(RequestAccountsAsyncAction());
@@ -193,7 +193,7 @@ export default function Navbar() {
                                             square={'full'}
                                             variant={'link'}
                                             cursor={'pointer'}
-                                            _hover={{color: '#7E9C7E'}}
+                                            _hover={{color: '#ff8a80'}}
                                             // _active={{
                                             //     //color: '#7fa37f',
                                             //     transform: 'scale(0.96)'
@@ -204,13 +204,11 @@ export default function Navbar() {
                                                 Wallet</MenuItem>
 
                                         </MenuButton>
-                                        :  <MenuItem fontSize={'18px'} fontWeight={'Bold'} icon={<SiSololearn fontSize={'16px'}/>}>Connected</MenuItem>   }
+                                        :  <MenuItem color={'#ffb9b3'} fontSize={'18px'} fontWeight={'Bold'} icon={<SiSololearn fontSize={'16px'}/>}>Connected</MenuItem>   }
                                 </Menu>
                             </Menu>
                         </HStack>
                     </HStack>
-
-
 
                 </Flex>
             </Box>

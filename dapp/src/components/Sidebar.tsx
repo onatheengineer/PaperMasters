@@ -126,7 +126,7 @@ export const Sidebar: FC<InterfaceSidebar>= ({icon, profileName} ) => {
             <NavItem navItemSize={navSize} icon={AiOutlineFileSearch} title="Search NFIs" path={'/search'}/>,
             <NavItem navItemSize={navSize} icon={MdOutlineReport} title="Report NFI" path={'/report'}/>,
             <NavItem navItemSize={navSize} icon={MdOutlineWarningAmber} title="Report suss" path={'/forumPages'}/>,
-            <NavItem navItemSize={navSize} icon={SiSololearn} title="Learn" path={'/learn'}/>,
+            <NavItem navItemSize={navSize} icon={GiBookCover} title="Learn" path={'/learn'}/>,
             <NavItem navItemSize={navSize} icon={FiTrendingUp} title="Analytics" path={'/analytics'}/>,
 
         ]
@@ -138,7 +138,7 @@ export const Sidebar: FC<InterfaceSidebar>= ({icon, profileName} ) => {
             <NavItem navItemSize={navSize} icon={IoMdCheckmarkCircleOutline} title="Validate NFI" path={'/validate'}/>,
             <NavItem navItemSize={navSize} icon={MdOutlineReport} title="Report NFI" path={'/report'}/>,
             <NavItem navItemSize={navSize} icon={MdOutlineWarningAmber} title="Report suss" path={'/forumPages'}/>,
-            <NavItem navItemSize={navSize} icon={SiSololearn} title="Learn" path={'/learn'}/>,
+            <NavItem navItemSize={navSize} icon={GiBookCover} title="Learn" path={'/learn'}/>,
             <NavItem navItemSize={navSize} icon={FiTrendingUp} title="Analytics" path={'/analytics'}/>,
 
         ]
@@ -182,7 +182,7 @@ export const Sidebar: FC<InterfaceSidebar>= ({icon, profileName} ) => {
         ]
 
         const SidebarLearn = [
-            <NavItem navItemSize={navSize} icon={SiSololearn} title="Learn" path={'/learn'}/>,
+            <NavItem navItemSize={navSize} icon={GiBookCover} title="Learn" path={'/learn'}/>,
             <NavItem navItemSize={navSize} icon={FiTrendingUp} title="Analytics" path={'/analytics'}/>,
 
 
@@ -322,7 +322,9 @@ export const Sidebar: FC<InterfaceSidebar>= ({icon, profileName} ) => {
                     </Flex>
                 </Box>
             }
-            <Flex>
+            <Flex
+                w={"100%"}
+            >
                 <Routes>
                     <Route path="/" element={<Home/>}/>
                     <Route path={'/identity'} element={<Identity/>}/>
@@ -340,7 +342,6 @@ export const Sidebar: FC<InterfaceSidebar>= ({icon, profileName} ) => {
                     <Route path={'/yourpeople'} element={<YourPeople/>}/>
                 </Routes>
             </Flex>
-
         </Flex>
     )
 };

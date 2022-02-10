@@ -25,9 +25,15 @@ export const colors = {
             //other purples
             21: '#431D53',
             22: '#51414F',
-            23: '#442a44'
+            23: '#442a44',
+        24: '#D8BFD8', //thistle
+        25: '#E6E6FA', //lavender
+        26: '#233067', //indigo
+        27: '#ff5b4d', //Living Coral darker
+        28: '#FF6F61', //Living Coral
+        29: '#ff8a80', //Living Coral lighter
 
-    },
+},
 
         pmgreen:{
                 //complmentary color to pmpurple.9
