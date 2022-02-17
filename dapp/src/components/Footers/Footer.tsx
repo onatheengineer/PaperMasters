@@ -63,7 +63,9 @@ const ListHeader = ({ children }: { children: ReactNode }) => {
 
 export default function Footer(props: ButtonGroupProps) {
     return (
+
         <Box
+            flex={'auto'}
             bg={'pmpurple.2'}
             color={'pmpurple.13'}
             borderTopWidth={1}
@@ -176,6 +178,7 @@ export default function Footer(props: ButtonGroupProps) {
         </Container>
     </Box>
         </Box>
+
     );
 
 };

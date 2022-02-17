@@ -35,7 +35,6 @@ import { useAppSelector, useAppDispatch } from '../app/hooks';
 import RegisterSlice, {accountsArr, RequestAccountsAsyncAction, statusOfArr} from '../features/RegisterSlice';
 
 
-
 export default function Navbar() {
     const {isOpen, onOpen, onClose} = useDisclosure();
     const getAccountsArr = useAppSelector((state)=> state.register.accounts);
@@ -68,7 +67,7 @@ export default function Navbar() {
                                             _hover={{color: 'pmpurple.9'}}
                                             _active={{
                                                 color: '#906e90',
-                                                transform: 'scale(0.96)'
+                                                transform: 'scale(0.96)',
                                             }}
                                             minW={0}>
                                             <MenuItem fontSize={'18px'} fontWeight={'Bold'}
@@ -185,7 +184,7 @@ export default function Navbar() {
                                         <MenuButton
                                             as={Button}
                                             size='lg'
-                                            color={'#FF6F61'}
+                                            color={'pmgreen.16'}
                                             onClick={()=> {
                                                 console.log('i am clicked')
                                                 dispatch(RequestAccountsAsyncAction());
@@ -193,18 +192,17 @@ export default function Navbar() {
                                             square={'full'}
                                             variant={'link'}
                                             cursor={'pointer'}
-                                            _hover={{color: '#ff8a80'}}
+                                            _hover={{color: '#b4eeb4'}}
                                             // _active={{
                                             //     //color: '#7fa37f',
                                             //     transform: 'scale(0.96)'
                                             // }}
                                             minW={0}
                                         >
-                                            <MenuItem fontSize={'18px'} fontWeight={'Bold'} icon={<SiSololearn fontSize={'16px'}/>}>Connect
-                                                Wallet</MenuItem>
+                                            <MenuItem fontSize={'18px'} fontWeight={'Bold'} icon={<SiSololearn fontSize={'16px'}/>}>Connect Wallet</MenuItem>
 
                                         </MenuButton>
-                                        :  <MenuItem color={'#ffb9b3'} fontSize={'18px'} fontWeight={'Bold'} icon={<SiSololearn fontSize={'16px'}/>}>Connected</MenuItem>   }
+                                        :  <MenuItem color={'pmgreen.21'} fontSize={'18px'} fontWeight={'Bold'} icon={<SiSololearn fontSize={'16px'}/>}>Connected</MenuItem>   }
                                 </Menu>
                             </Menu>
                         </HStack>

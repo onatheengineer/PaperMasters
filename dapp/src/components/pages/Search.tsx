@@ -50,7 +50,7 @@ const ExpandedComponent: FC<ExpanderComponentProps<DataRow>> = ({ data }) => {
 };
 
 export const Search: FC=()=> {
-    const getAccountsArr = useAppSelector((state)=> state.register.accounts);
+    const getAccountsArr = useAppSelector((state) => state.register.accounts);
     const [filterText, setFilterText] = useState('');
     const [resetPaginationToggle, setResetPaginationToggle] = useState(false);
 
@@ -87,7 +87,8 @@ export const Search: FC=()=> {
             reorder: true,
             button: true,
             center: true,
-            cell: () => <Button as={ReachLink} to={'/validate'}  bg={'#f2eef2'} fontSize={'12px'} > <MdOutlineLibraryAddCheck fontSize={'16px'}/>
+            cell: () => <Button as={ReachLink} to={'/validate'} bg={'#f2eef2'} fontSize={'12px'}>
+                <MdOutlineLibraryAddCheck fontSize={'16px'}/>
                 <Text ml={'6px'}> Validate </Text>
             </Button>,
         },
@@ -132,7 +133,8 @@ export const Search: FC=()=> {
             reorder: true,
             button: true,
             center: true,
-            cell: () => <Button as={ReachLink} to={'/report'} bg={'#f2eef2'} fontSize={'12px'} > <HiOutlineDocumentReport fontSize={'16px'}/>
+            cell: () => <Button as={ReachLink} to={'/report'} bg={'#f2eef2'} fontSize={'12px'}> <HiOutlineDocumentReport
+                fontSize={'16px'}/>
                 <Text ml={'6px'}> Report </Text>
             </Button>,
         },
@@ -142,7 +144,7 @@ export const Search: FC=()=> {
     const data: DataRow[] = [
         {
             name: 'andrwe niederhasuern',
-            IdNFI: (getAccountsArr.length === 0 ?  'No NFI' : getAccountsArr[0]),
+            IdNFI: (getAccountsArr.length === 0 ? 'No NFI' : getAccountsArr[0]),
             profession: 'engineer',
             validations: 654654,
             mentions: 1,
@@ -363,13 +365,20 @@ export const Search: FC=()=> {
     ]
 
 
-
     const filteredItems = data.filter(
         item => {
-            if (item.name && item.name.toLowerCase().includes(filterText.toLowerCase())) { return item;}
-            if (item.profession && item.profession.toLowerCase().includes(filterText.toLowerCase())) { return item;}
-            if (item.originDate && item.originDate.toLowerCase().includes(filterText.toLowerCase())) { return item;}
-            if (item.IdNFI && item.IdNFI.toLowerCase().includes(filterText.toLowerCase())) { return item;}
+            if (item.name && item.name.toLowerCase().includes(filterText.toLowerCase())) {
+                return item;
+            }
+            if (item.profession && item.profession.toLowerCase().includes(filterText.toLowerCase())) {
+                return item;
+            }
+            if (item.originDate && item.originDate.toLowerCase().includes(filterText.toLowerCase())) {
+                return item;
+            }
+            if (item.IdNFI && item.IdNFI.toLowerCase().includes(filterText.toLowerCase())) {
+                return item;
+            }
         },
     );
 
@@ -382,46 +391,47 @@ export const Search: FC=()=> {
         };
 
         return (
-            <FilterComponent onFilter={(e:any) => setFilterText(e.target.value)} onClear={handleClear} filterText={filterText} />
+            <FilterComponent onFilter={(e: any) => setFilterText(e.target.value)} onClear={handleClear}
+                             filterText={filterText}/>
         );
     }, [filterText, resetPaginationToggle]);
 
-    return(
+    return (
 
 
-    <Box
-           // justifyContent="center"
+        <Box
+            // justifyContent="center"
             //flex='auto'
             p={'16px'}
 
-            >
-        <Box
-           border={'2px'}
-            borderStyle={"solid"}
-        borderColor={'pmpurple.13'}
         >
+            <Box
+                border={'2px'}
+                borderStyle={"solid"}
+                borderColor={'pmpurple.13'}
+            >
 
-        <DataTable
-                title="Non-Fungible-Identities"
-                columns={columns}
-                data={filteredItems}
-                expandableRows
-                expandableRowsComponent={ExpandedComponent}
-                defaultSortFieldId={5}
-                fixedHeader={true}
-                fixedHeaderScrollHeight={'60vh'}
-                pagination={true}
-                paginationResetDefaultPage={resetPaginationToggle} // optionally, a hook to reset pagination to page 1
-                subHeader={true}
-                subHeaderComponent={subHeaderComponentMemo}
-                persistTableHead
-                paginationPerPage={20}
-                striped={true}
-            />
+                <DataTable
+                    title="Non-Fungible-Identities"
+                    columns={columns}
+                    data={filteredItems}
+                    expandableRows
+                    expandableRowsComponent={ExpandedComponent}
+                    defaultSortFieldId={5}
+                    fixedHeader={true}
+                    fixedHeaderScrollHeight={'60vh'}
+                    pagination={true}
+                    paginationResetDefaultPage={resetPaginationToggle} // optionally, a hook to reset pagination to page 1
+                    subHeader={true}
+                    subHeaderComponent={subHeaderComponentMemo}
+                    persistTableHead
+                    paginationPerPage={20}
+                    striped={true}
+                />
+            </Box>
         </Box>
-</Box>
 
     )
-}
+};
 
 export default Search;

@@ -68,11 +68,9 @@ export const Identity:FC<Interface>=()=> {
 
         <Flex>
 
-            <Box>
-
                 <Grid templateColumns='repeat(1, 1fr)' padding={'0'}>
 
-                    <Box flex='1' bg='#e6dee6' style={{border: '8px solid white'}}>
+                    <Box bg='#e6dee6' style={{border: '8px solid white'}}>
 
                         <Flex direction="column">
 
@@ -114,7 +112,7 @@ export const Identity:FC<Interface>=()=> {
                                         transform={{
                                             sm: "translateY(45%)",
                                             md: "translateY(90%)",
-                                            lg: "translateY(110%)",
+                                            lg: "translateY(83%)",
                                         }}
                                     >
                                         <Flex
@@ -213,7 +211,7 @@ export const Identity:FC<Interface>=()=> {
                                                     fontWeight="bold"
                                                     me="10px"
                                                 >
-                                                    Your unique NFI Hex:{" "}
+                                                    Your NFI QR code:{" "}
                                                     <Link
                                                         href="#"
                                                         color="#9c7e9c"
@@ -228,10 +226,12 @@ export const Identity:FC<Interface>=()=> {
 
                                             </Flex>
                                         </Flex>
+                                        <Stack direction={'row'} justify={'center'} spacing={6} >
                                         <Flex
                                             direction={{sm: "column", lg: "row"}}
                                             w={{sm: "100%", md: "50%", lg: "auto"}}
                                         >
+
                                             <Button p="0px" bg="transparent" _hover={{bg: "none"}}>
                                                 <Flex
                                                     align="center"
@@ -257,7 +257,6 @@ export const Identity:FC<Interface>=()=> {
                                                 </Flex>
                                             </Button>
                                         </Flex>
-                                        <Stack direction={'row'} justify={'center'} spacing={6} >
                                             <Stack spacing={0} align={'center'}>
                                                 <Text fontWeight={600}>57</Text>
                                                 <Text fontSize={'sm'} color={'pmpurple.11'}>
@@ -632,7 +631,7 @@ export const Identity:FC<Interface>=()=> {
                                 <CardHeader p="12px 5px" mb="12px">
                                     <Flex direction="column">
                                         <Text fontSize="lg" color={textColor} fontWeight="bold">
-                                            Non-Fungible-Identities & Tokens
+                                            Non-Fungible-Tokens
                                         </Text>
                                         <Text fontSize="sm" color="gray.500" fontWeight="400">
                                             PaperMasters protect the Blockchain
@@ -819,7 +818,7 @@ export const Identity:FC<Interface>=()=> {
                         </Flex>
                     </Box>
                 </Grid>
-            </Box>
+
         </Flex>
     )
 };

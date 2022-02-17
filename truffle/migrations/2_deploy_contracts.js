@@ -1,5 +1,5 @@
-const MintIdentity = artifacts.require("MintIdentity");
+const PaperMastersNFI = artifacts.require("PaperMastersNFI");
 
 module.exports = function (deployer) {
-    deployer.deploy(MintIdentity);
+    deployer.deploy(PaperMastersNFI);
 };

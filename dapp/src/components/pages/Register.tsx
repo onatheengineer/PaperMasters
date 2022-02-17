@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {useState, useEffect} from "react";
+import {useState, useEffect, MouseEventHandler} from "react";
 import Web3 from "web3";
 import type {FC} from 'react';
 import {
@@ -31,6 +31,7 @@ import {
     PopoverHeader,
     PopoverContent,
     PopoverCloseButton, PopoverBody, PopoverArrow, PopoverFooter, PopoverTrigger, Popover, Portal, MenuItem,
+    InputLeftElement,
 } from '@chakra-ui/react';
 import {FaFacebook, FaGithub, FaGoogle, FaScroll} from 'react-icons/fa';
 import { MdOutlineColorLens} from 'react-icons/md';
@@ -39,6 +40,20 @@ import PMLogo from '../../assets/PMGIMPResized.png';
 import Logo from '../../assets/Logo';
 import {ColorChangeHandler, ColorResult, SketchPicker, GithubPicker, RGBColor} from 'react-color';
 
+// https://web3js.readthedocs.io/en/v1.2.11/web3-eth-contract.html
+// https://web3js.readthedocs.io/en/v1.2.11/web3-eth-contract.html#methods-mymethod-call
+
+
+//web3.eth.sendTransaction({from: '0x123...', data: '0x432...'})
+//.once('sending', function(payload){ ... })
+//.once('sent', function(payload){ ... })
+//.once('transactionHash', function(hash){ ... })
+//.once('receipt', function(receipt){ ... })
+//.on('confirmation', function(confNumber, receipt, latestBlockHash){ ... })
+//.on('error', function(error){ ... })
+//.then(function(receipt){
+//// will be fired once the receipt is mined
+//});
 
 
 
@@ -47,43 +62,38 @@ interface InterfaceRegister {
 }
 
 
-
 export const Register: FC<InterfaceRegister>=()=> {
 
     const accounts = useAppSelector((state) => state.register.accounts);
     const status = useAppSelector((state) => state.register.status);
 
-    const [name, setName] = useState<string>("");
+    const [name, setName] = useState<string | null>("");
     const [profession, setProfession] = useState<string | null>(null);
     const [email, setEmail] = useState<string | null>(null);
     const [slogan, setSlogan] = useState<string | null>(null);
     const [organization, setOrganization] = useState<string | null>(null);
-    const [uniqueYou, setuniqueYou] = useState<string | null>(null);
+    const [uniqueYou, setUniqueYou] = useState<string | null>(null);
     const [website, setWebsite] = useState<string | null>(null);
 
     const [submitButtonClicked, setSubmitButtonClicked] = useState<boolean>(false);
 
+    const defaultColorBG={hex: '#f2eef2', rgb:{r:242, g:238, b:242, a:1}, hsl:{h: 300, s:0.13333333333333283, l:0.9411764705882353, a:1}}
+    const defaultColorText={hex:'#694b69', rgb:{r:105, g:75, b:105, a:1}, hsl:{h: 300, s:0.17, l:0.35, a:1}}
 
-
-    const [colorBG, setColorBG] = useState<ColorResult>({hex: '#f2eef2', rgb:{r:242, g:238, b:242, a:1}, hsl:{h: 300, s:0.13333333333333283, l:0.9411764705882353, a:1}});
-    const [colorTextName, setColorTextName] = useState<ColorResult>({hex:'#906e90', rgb:{r:144, g:110, b:144, a:1}, hsl:{h: 300, s:0.1338582677165354, l:0.4980392156862745, a:1}});
-    const [colorTextEmail, setColorTextEmail] = useState<ColorResult>({hex:'#906e90', rgb:{r:144, g:110, b:144, a:1}, hsl:{h: 300, s:0.1338582677165354, l:0.4980392156862745, a:1}});
-    const [colorTextProfession, setColorTextProfession] = useState<ColorResult>({hex:'#906e90', rgb:{r:144, g:110, b:144, a:1}, hsl:{h: 300, s:0.1338582677165354, l:0.4980392156862745, a:1}});
-    const [colorTextSlogan, setColorTextSlogan] = useState<ColorResult>({hex:'#906e90', rgb:{r:144, g:110, b:144, a:1}, hsl:{h: 300, s:0.1338582677165354, l:0.4980392156862745, a:1}});
-    const [colorTextOrganization, setColorTextOrganization] = useState<ColorResult>({hex:'#906e90', rgb:{r:144, g:110, b:144, a:1}, hsl:{h: 300, s:0.1338582677165354, l:0.4980392156862745, a:1}});
-    const [colorTextWebsite, setColorTextWebsite] = useState<ColorResult>({hex:'#906e90', rgb:{r:144, g:110, b:144, a:1}, hsl:{h: 300, s:0.1338582677165354, l:0.4980392156862745, a:1}});
-    const [colorTextUniqueYou, setColorTextUniqueYou] = useState<ColorResult>({hex:'#906e90', rgb:{r:144, g:110, b:144, a:1}, hsl:{h: 300, s:0.1338582677165354, l:0.4980392156862745, a:1}});
-
+    const [colorBG, setColorBG] = useState<ColorResult>(defaultColorBG);
+    const [colorTextName, setColorTextName] = useState<ColorResult>(defaultColorText);
+    const [colorTextEmail, setColorTextEmail] = useState<ColorResult>(defaultColorText);
+    const [colorTextProfession, setColorTextProfession] = useState<ColorResult>(defaultColorText);
+    const [colorTextSlogan, setColorTextSlogan] = useState<ColorResult>(defaultColorText);
+    const [colorTextOrganization, setColorTextOrganization] = useState<ColorResult>(defaultColorText);
+    const [colorTextWebsite, setColorTextWebsite] = useState<ColorResult>(defaultColorText);
+    const [colorTextUniqueYou, setColorTextUniqueYou] = useState<ColorResult>(defaultColorText);
 
     const [whichColorField, setWhichColorField] = useState<string>('');
-
 
     const [originDate, setOriginDate] = useState(new Date())
     console.log(originDate.getTime());
     const originDateFormatted: string = `${originDate.toLocaleString('en-us', {month: 'short'})} ${originDate.getDate()}, ${originDate.getFullYear()}`
-
-    const [account, setAccount] = useState<string[]>([]);
-    const [identities, setIdentities] = useState({});
 
     const nameHandler = (e: React.FormEvent<HTMLInputElement>) => {
         setName(e.currentTarget.value);
@@ -101,7 +111,7 @@ export const Register: FC<InterfaceRegister>=()=> {
         setOrganization(e.currentTarget.value);
     };
     const uniqueYouHandler = (e: React.FormEvent<HTMLInputElement>) => {
-        setuniqueYou(e.currentTarget.value);
+        setUniqueYou(e.currentTarget.value);
     };
     const websiteHandler = (e: React.FormEvent<HTMLInputElement>) => {
         setWebsite(e.currentTarget.value);
@@ -140,7 +150,6 @@ export const Register: FC<InterfaceRegister>=()=> {
         console.table(colorSelect);
     };
 
-
     return (
 
 
@@ -166,11 +175,13 @@ export const Register: FC<InterfaceRegister>=()=> {
                     Mint PaperMaster NFI
                 </Heading>
 
-                <Text mt="4" mb="8" align="center" maxW="100%" fontWeight="medium">
+                <Text mt="4" mb="8px" color={'pmpurple.13'} align="center" maxW="100%" fontWeight="medium">
                     PaperMaster Identities are permanent Blockchain PaperMaster
-                    Non-Fungible-Identity, future changes require additional minting, please proofread!
+                    Non-Fungible-Identity, future changes require additional minting, please proofread! Only one NFI per account.
+                    If you are minting your company, please make sure you use your company's wallet account.
                 </Text>
 
+                <Divider py={'0px'} color={'pmpurple.8'} />
 
                 <Stack spacing="5">
 
@@ -178,14 +189,14 @@ export const Register: FC<InterfaceRegister>=()=> {
                                     <PopoverTrigger>
                                         <Button
                                             //w={'100%'}
-                                            m={'4px'}
+                                            mt={'32px'}
                                             bg={colorBG.hex}
                                             h='2.00rem'
                                             size='mg'
                                             rounded={'md'}
                                             borderStyle={'solid'}
                                             border={'1px'}
-                                            borderColor={'pmpurple.10'}
+                                            borderColor={'pmpurple.4'}
                                             _hover={{
                                                 transform: 'translateY(-2px)',
                                                 boxShadow: 'lg',
@@ -195,8 +206,9 @@ export const Register: FC<InterfaceRegister>=()=> {
                                             }}
                                         >
 
-                                            <Text px={'20px'} color={"pmpurple.13"}> Set NFI Background Color </Text>
+                                            <Text px={'20px'} color={"pmpurple.10"}> Set NFI Background Color </Text>
                                             <MdOutlineColorLens fontSize={'20px'} color={"#9c7e9c"}/>
+                                            <InputRightElement m='3px' textAlign={'center'} children={<Button bg='pmpurple.9' size='xs' onClick={()=>{setColorBG(defaultColorBG)}}> Reset</Button>}/>
                                         </Button>
                                     </PopoverTrigger>
 
@@ -225,15 +237,17 @@ export const Register: FC<InterfaceRegister>=()=> {
                                     </Portal>
                                 </Popover>
 
+
                     <FormControl isRequired>
-                        <FormLabel htmlFor='name'>Name</FormLabel>
+                        <FormLabel htmlFor='name' color={'pmpurple.13'} mb={'2px'}>Name</FormLabel>
                         <InputGroup size='md'>
-                            <Input focusBorderColor='pmpurple.9' id='name' placeholder='name, company'
+                            <Input focusBorderColor='pmpurple.9' borderColor={"pmpurple.4"} id='name' pl={'62px'} placeholder='name, company'
                                    isDisabled={submitButtonClicked}
                                    onChange={nameHandler}
                                    color={'pmpurple.15'}
                             />
-                            <InputRightElement
+                            <InputRightAddon p='0' borderColor={"pmpurple.4"} bg={'pmpurple.3'} children={<Button size='xs' color={"pmpurple.10"} onClick={()=>{setColorTextName(defaultColorText)}}> Reset</Button>}/>
+                            <InputLeftElement
                                 width='3.5rem'
                             >
                                 <Popover>
@@ -285,7 +299,8 @@ export const Register: FC<InterfaceRegister>=()=> {
                                         </PopoverContent>
                                     </Portal>
                                 </Popover>
-                            </InputRightElement>
+
+                            </InputLeftElement>
                         </InputGroup>
 
                         <FormErrorMessage>Field is required.</FormErrorMessage>
@@ -293,14 +308,15 @@ export const Register: FC<InterfaceRegister>=()=> {
 
 
                     <FormControl>
-                        <FormLabel htmlFor='email'>Email</FormLabel>
+                        <FormLabel htmlFor='email' color={'pmpurple.13'} mb={'2px'}>Email</FormLabel>
                         <InputGroup size='md'>
-                            <Input focusBorderColor='pmpurple.9' id='email' placeholder='email'
+                            <Input focusBorderColor='pmpurple.9' borderColor={"pmpurple.4"} id='email' pl={'62px'} placeholder='email'
                                    isDisabled={submitButtonClicked}
                                    onChange={emailHandler}
                                    color={'pmpurple.15'}
                             />
-                            <InputRightElement
+                            <InputRightAddon p='0' borderColor={"pmpurple.4"} bg={'pmpurple.3'}  children={<Button size='xs' color={"pmpurple.10"} onClick={()=>{setColorTextEmail(defaultColorText)}}> Reset</Button>}/>
+                            <InputLeftElement
                                 width='3.5rem'
                             >
                                 <Popover>
@@ -352,20 +368,21 @@ export const Register: FC<InterfaceRegister>=()=> {
                                         </PopoverContent>
                                     </Portal>
                                 </Popover>
-                            </InputRightElement>
+                            </InputLeftElement>
                         </InputGroup>
 
                     </FormControl>
 
                     <FormControl>
-                        <FormLabel htmlFor='profession'>Profession</FormLabel>
+                        <FormLabel color={'pmpurple.13'} mb={'2px'} htmlFor='profession'>Profession</FormLabel>
                         <InputGroup size='md'>
-                            <Input focusBorderColor='pmpurple.9' id='profession' placeholder='profession'
+                            <Input focusBorderColor='pmpurple.9' id='profession' pl={'62px'} placeholder='profession'
                                    isDisabled={submitButtonClicked}
                                    onChange={professionHandler}
                                    color={'pmpurple.15'}
                             />
-                            <InputRightElement
+                            <InputRightAddon p='0' borderColor={"pmpurple.4"} bg={'pmpurple.3'} children={<Button size='xs' color={"pmpurple.10"} onClick={()=>{setColorTextProfession(defaultColorText)}}> Reset</Button>}/>
+                            <InputLeftElement
                                 width='3.5rem'
                             >
                                 <Popover>
@@ -417,19 +434,20 @@ export const Register: FC<InterfaceRegister>=()=> {
                                         </PopoverContent>
                                     </Portal>
                                 </Popover>
-                            </InputRightElement>
+                            </InputLeftElement>
                         </InputGroup>
 
                     </FormControl>
                     <FormControl>
-                        <FormLabel htmlFor='slogan'>Slogan</FormLabel>
+                        <FormLabel color={'pmpurple.13'} mb={'2px'} htmlFor='slogan'>Slogan</FormLabel>
                         <InputGroup size='md'>
-                            <Input focusBorderColor='pmpurple.9' id='slogan' placeholder='slogan'
+                            <Input focusBorderColor='pmpurple.9' id='slogan' pl={'62px'} placeholder='slogan'
                                    isDisabled={submitButtonClicked}
                                    onChange={sloganHandler}
                                    color={'pmpurple.15'}
                             />
-                            <InputRightElement
+                            <InputRightAddon p='0' borderColor={"pmpurple.4"} bg={'pmpurple.3'} children={<Button size='xs' color={"pmpurple.10"} onClick={()=>{setColorTextSlogan(defaultColorText)}}> Reset</Button>}/>
+                            <InputLeftElement
                                 width='3.5rem'
                             >
                                 <Popover>
@@ -480,20 +498,21 @@ export const Register: FC<InterfaceRegister>=()=> {
                                         </PopoverContent>
                                     </Portal>
                                 </Popover>
-                            </InputRightElement>
+                            </InputLeftElement>
                         </InputGroup>
 
                     </FormControl>
 
                     <FormControl>
-                        <FormLabel htmlFor='organization'>Organization</FormLabel>
+                        <FormLabel color={'pmpurple.13'} mb={'2px'} htmlFor='organization'>Organization</FormLabel>
                         <InputGroup size='md'>
-                            <Input focusBorderColor='pmpurple.9' id='organization' placeholder='organization'
+                            <Input focusBorderColor='pmpurple.9' id='organization' pl={'62px'} placeholder='organization'
                                    isDisabled={submitButtonClicked}
                                    onChange={organizationHandler}
                                    color={'pmpurple.15'}
                             />
-                            <InputRightElement
+                            <InputRightAddon p='0' borderColor={"pmpurple.4"} bg={'pmpurple.3'} children={<Button size='xs' color={"pmpurple.10"} onClick={()=>{setColorTextOrganization(defaultColorText)}}> Reset</Button>}/>
+                            <InputLeftElement
                                 width='3.5rem'
                             >
                                 <Popover>
@@ -544,19 +563,20 @@ export const Register: FC<InterfaceRegister>=()=> {
                                         </PopoverContent>
                                     </Portal>
                                 </Popover>
-                            </InputRightElement>
+                            </InputLeftElement>
                         </InputGroup>
 
                     </FormControl>
                     <FormControl>
-                        <FormLabel htmlFor='website'>website</FormLabel>
+                        <FormLabel color={'pmpurple.13'} mb={'2px'} htmlFor='website'>website</FormLabel>
                         <InputGroup size='md'>
-                            <Input focusBorderColor='pmpurple.9' id='website' placeholder='website'
+                            <Input focusBorderColor='pmpurple.9' id='website' pl={'62px'} placeholder='website'
                                    isDisabled={submitButtonClicked}
                                    onChange={websiteHandler}
                                    color={'pmpurple.15'}
                             />
-                            <InputRightElement
+                            <InputRightAddon p='0' borderColor={"pmpurple.4"} bg={'pmpurple.3'} children={<Button size='xs' color={"pmpurple.10"} onClick={()=>{setColorTextWebsite(defaultColorText)}}> Reset</Button>}/>
+                            <InputLeftElement
                                 width='3.5rem'
                             >
                                 <Popover>
@@ -607,19 +627,18 @@ export const Register: FC<InterfaceRegister>=()=> {
                                         </PopoverContent>
                                     </Portal>
                                 </Popover>
-                            </InputRightElement>
+                            </InputLeftElement>
                         </InputGroup>
                     </FormControl>
 
                     <FormControl>
-                        <FormLabel htmlFor='uniqueYou'>Your Uniqueness</FormLabel>
+                        <FormLabel color={'pmpurple.13'} mb={'2px'} htmlFor='uniqueYou'>Your Uniqueness</FormLabel>
                         <InputGroup size='md'>
-                            <Input focusBorderColor='pmpurple.9' id='uniqueYou' placeholder='uniqueYou'
-                                   isDisabled={submitButtonClicked}
-                                   onChange={uniqueYouHandler}
-                                   color={'pmpurple.15'}
+                            <Input focusBorderColor='pmpurple.9' id='uniqueYou' pl={'62px'} placeholder='unique you, date of birth, anything goes here'
+                                   isDisabled={submitButtonClicked} onChange={uniqueYouHandler} color={'pmpurple.15'} mb={'18px'}
                             />
-                            <InputRightElement
+                            <InputRightAddon p='0' borderColor={"pmpurple.4"} bg={'pmpurple.3'} children={<Button size='xs' color={"pmpurple.10"} onClick={()=>{setColorTextUniqueYou(defaultColorText)}}> Reset</Button>}/>
+                            <InputLeftElement
                                 width='3.5rem'
                             >
                                 <Popover>
@@ -670,7 +689,7 @@ export const Register: FC<InterfaceRegister>=()=> {
                                         </PopoverContent>
                                     </Portal>
                                 </Popover>
-                            </InputRightElement>
+                            </InputLeftElement>
                         </InputGroup>
                     </FormControl>
                 </Stack>
@@ -691,15 +710,16 @@ export const Register: FC<InterfaceRegister>=()=> {
                 align="center"
             >
 
-                <Heading textAlign="center" size="xl" fontWeight="extrabold">
+                <Heading mb="54px" textAlign="center" size="xl" fontWeight="extrabold">
                     Your PaperMaster Non-Fungible-Identity
                 </Heading>
 
-                <Text mt="4" mb="8" align="center" maxW="100%" fontWeight="medium">
+                <Text mt="4" mb="8px" color={'pmpurple.13'} align="center" maxW="100%" fontWeight="medium">
                     Below is what your Papermaster Non-Fungible-Identification will
                     look like, please make sure you love it!
                 </Text>
 
+                <Divider py={'0px'} mb="54px" color={'pmpurple.8'} />
 
                 <AspectRatio w='320px' ratio={4 / 5}>
                     <Box
@@ -717,7 +737,7 @@ export const Register: FC<InterfaceRegister>=()=> {
                             w={'full'}
                             align={'center'}
                             spacing={0}
-                            bg={colorBG.hex}
+                            bg={`rgba(${colorBG.rgb.r}, ${colorBG.rgb.g}, ${colorBG.rgb.b}, ${colorBG.rgb.a})`}
                             wordBreak={'break-word'}
                             rounded={'10px'}
                         >
@@ -765,7 +785,7 @@ export const Register: FC<InterfaceRegister>=()=> {
                             </Text>
 
                             <Text noOfLines={2} py={'0px'} px={'16px'} fontSize={'18px'} fontWeight={500}
-                                  fontFamily={'body'} align={'center'} color={colorTextName.hex}>
+                                  fontFamily={'body'} align={'center'} color={`rgba(${colorTextName.rgb.r}, ${colorTextName.rgb.g}, ${colorTextName.rgb.b}, ${colorTextName.rgb.a})`}>
                                 {name}
                             </Text>
 
@@ -788,23 +808,23 @@ export const Register: FC<InterfaceRegister>=()=> {
                                         spacing={0}
                                         alignItems={"center"}
                                     >
-                                        <Text noOfLines={1} color={colorTextEmail.hex}>
+                                        <Text noOfLines={1} color={`rgba(${colorTextEmail.rgb.r}, ${colorTextEmail.rgb.g}, ${colorTextEmail.rgb.b}, ${colorTextEmail.rgb.a})`}>
                                             {email}
                                         </Text>
 
-                                        <Text noOfLines={1} color={colorTextProfession.hex}>
+                                        <Text noOfLines={1} color={`rgba(${colorTextProfession.rgb.r}, ${colorTextProfession.rgb.g}, ${colorTextProfession.rgb.b}, ${colorTextProfession.rgb.a})`}>
                                             {profession}
                                         </Text>
-                                        <Text noOfLines={1} color={colorTextSlogan.hex}>
+                                        <Text noOfLines={1} color={`rgba(${colorTextSlogan.rgb.r}, ${colorTextSlogan.rgb.g}, ${colorTextSlogan.rgb.b}, ${colorTextSlogan.rgb.a})`}>
                                             {slogan}
                                         </Text>
-                                        <Text noOfLines={1} color={colorTextOrganization.hex}>
+                                        <Text noOfLines={1} color={`rgba(${colorTextOrganization.rgb.r}, ${colorTextOrganization.rgb.g}, ${colorTextOrganization.rgb.b}, ${colorTextOrganization.rgb.a})`}>
                                             {organization}
                                         </Text>
-                                        <Text noOfLines={1} color={colorTextWebsite.hex}>
+                                        <Text noOfLines={1} color={`rgba(${colorTextWebsite.rgb.r}, ${colorTextWebsite.rgb.g}, ${colorTextWebsite.rgb.b}, ${colorTextWebsite.rgb.a})`}>
                                             {website}
                                         </Text>
-                                        <Text noOfLines={2} color={colorTextUniqueYou.hex}>
+                                        <Text noOfLines={2} color={`rgba(${colorTextUniqueYou.rgb.r}, ${colorTextUniqueYou.rgb.g}, ${colorTextUniqueYou.rgb.b}, ${colorTextUniqueYou.rgb.a})`}>
                                             {uniqueYou}
                                         </Text>
                                     </VStack>
@@ -821,7 +841,7 @@ export const Register: FC<InterfaceRegister>=()=> {
                                     py={'2px'}
                                     px={'2px'}
                                     m={'0px'}
-                                    mt={'0px'}
+                                    mt={'2px'}
                                     mb={'8px'}
                                     bg={'pmpurple.10'}
                                     borderStyle={'solid'}
