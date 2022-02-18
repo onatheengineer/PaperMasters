@@ -116,13 +116,10 @@ contract PaperMastersNFI is ERC721, Ownable {
         return totalIdentities.length;
     }
 
-
-    //contract Pausable is Ownable {
     event Pause();
     event Unpause();
 
     bool public paused = false;
-
 
     modifier whenNotPaused() {
         require(!paused);
@@ -140,7 +137,6 @@ contract PaperMastersNFI is ERC721, Ownable {
         paused = true;
         emit Pause();
     }
-
 
     function unpause() onlyOwner whenPaused public {
         paused = false;

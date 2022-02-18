@@ -2,7 +2,6 @@ import * as React from 'react';
 import {useState, useEffect} from "react";
 import Web3 from "web3";
 import type {FC} from 'react';
-import MintIdentity from '../../contracts/MintIdentity.json';
 import {
     FormControl,
     FormLabel,

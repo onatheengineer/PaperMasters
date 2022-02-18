@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import './App.css';
 import {useAppDispatch, useAppSelector} from './app/hooks';
 import Navbar from "./components/Navbar";
@@ -13,15 +13,22 @@ import {FaBookmark} from "react-icons/fa";
 import type {FC} from 'react';
 import { Box, Flex} from '@chakra-ui/react';
 import Sidebar, {NavItem} from './components/Sidebar'
+import {RequestAccountsAsyncAction} from "./features/RegisterSlice";
 
 
 function App() {
+    const dispatch = useAppDispatch();
+
+useEffect( () => {
+    console.log("is this euseEffect running")
+    dispatch(RequestAccountsAsyncAction());
+}, [] )
+
 
     return (
         <Box>
             <Navbar/>
             <Sidebar/>
-
             <Footer/>
         </Box>
     )

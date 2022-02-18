@@ -1,3 +1,7 @@
+#truffle
+truffle/.secret
+truffle/.privateKeyTest
+
 # Logs
 logs
 *.log

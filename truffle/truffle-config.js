@@ -18,10 +18,11 @@
  *
  */
 
-// const HDWalletProvider = require('@truffle/hdwallet-provider');
+const HDWalletProvider = require('@truffle/hdwallet-provider');
 //
-// const fs = require('fs');
-// const mnemonic = fs.readFileSync(".secret").toString().trim();
+ const fs = require('fs');
+ const mnemonic = fs.readFileSync(".secret").toString().trim();
+ const privateKeyTest = fs.readFileSync(".privateKeyTest").toString().trim();
 
 module.exports = {
   /**
@@ -35,6 +36,30 @@ module.exports = {
    */
 
   networks: {
+      testnet: {
+          provider: () => {
+              return new HDWalletProvider({
+                  mnemonic,
+                  providerOrUrl: 'https://api.s0.b.hmny.io', // https://api.s0.t.hmny.io for mainnet
+                  derivationPath: `m/44'/1023'/0'/0/`
+              });
+          },
+          network_id: 1666700000, // 1666600000 for mainnet
+      },
+      testnetHar: {
+          provider: () => {
+              if (!privateKeyTest.trim()) {
+                  throw new Error(
+                      'Please enter a private key with funds, you can use the default one'
+                  );
+              }
+              return new HDWalletProvider({
+                  privateKeys: [privateKeyTest],
+                  providerOrUrl: 'https://api.s0.b.hmny.io',
+              });
+          },
+          network_id: 1666700000,
+      },
     // Useful for testing. The `development` name is special - truffle uses it by default
     // if it's defined here and no other network is specified at the command line.
     // You should run a client (like ganache-cli, geth or parity) in a separate terminal

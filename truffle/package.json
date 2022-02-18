@@ -22,5 +22,8 @@
     "solc": "^0.8.10",
     "truffle": "^5.4.26",
     "updates": "^13.0.1"
+  },
+  "devDependencies": {
+    "@truffle/hdwallet-provider": "^2.0.3"
   }
 }

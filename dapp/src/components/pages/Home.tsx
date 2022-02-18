@@ -31,9 +31,9 @@ export default function Home() {
                         <Text
                             color={'white'}
                             fontWeight={300}
-                            lineHeight={0.5}
+                            lineHeight={1.2}
                             fontSize={useBreakpointValue({base: '4xl', md: '3xl'})}>
-                            Bringing Protection and Legitimacy to the Blockchain
+                            Providing protection and legitimacy by bringing Non-Fungable-Identities (NFIs) to the Blockchain
                         </Text>
                         <Stack direction={'row'}>
                             <Button

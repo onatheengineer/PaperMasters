@@ -35,26 +35,13 @@ import {
 } from '@chakra-ui/react';
 import {FaFacebook, FaGithub, FaGoogle, FaScroll} from 'react-icons/fa';
 import { MdOutlineColorLens} from 'react-icons/md';
-import {useAppSelector} from "../../app/hooks";
+import {useAppDispatch, useAppSelector} from "../../app/hooks";
 import PMLogo from '../../assets/PMGIMPResized.png';
 import Logo from '../../assets/Logo';
 import {ColorChangeHandler, ColorResult, SketchPicker, GithubPicker, RGBColor} from 'react-color';
-
-// https://web3js.readthedocs.io/en/v1.2.11/web3-eth-contract.html
-// https://web3js.readthedocs.io/en/v1.2.11/web3-eth-contract.html#methods-mymethod-call
-
-
-//web3.eth.sendTransaction({from: '0x123...', data: '0x432...'})
-//.once('sending', function(payload){ ... })
-//.once('sent', function(payload){ ... })
-//.once('transactionHash', function(hash){ ... })
-//.once('receipt', function(receipt){ ... })
-//.on('confirmation', function(confNumber, receipt, latestBlockHash){ ... })
-//.on('error', function(error){ ... })
-//.then(function(receipt){
-//// will be fired once the receipt is mined
-//});
-
+import {RequestAccountsAsyncAction} from "../../features/RegisterSlice";
+import {mintIdentityAsyncAction} from "../../features/MintSlice";
+import mintNFI from "../../abiFiles/PaperMastersNFI.json";
 
 
 interface InterfaceRegister {
@@ -63,7 +50,7 @@ interface InterfaceRegister {
 
 
 export const Register: FC<InterfaceRegister>=()=> {
-
+    const dispatch = useAppDispatch();
     const accounts = useAppSelector((state) => state.register.accounts);
     const status = useAppSelector((state) => state.register.status);
 
@@ -150,8 +137,30 @@ export const Register: FC<InterfaceRegister>=()=> {
         console.table(colorSelect);
     };
 
-    return (
+    const submitMintHandler = ()=>{
 
+        const mintPayload: {} = {
+            colorBGAvatar: colorBG,
+            name: name,
+            nameColor: colorTextName,
+            email: email,
+            emailColor: colorTextEmail,
+            profession: profession,
+            professionColor: colorTextProfession,
+            slogan: slogan,
+            sloganColor: colorTextSlogan,
+            org: organization,
+            orgColor: colorTextOrganization,
+            website: website,
+            uniqueYou: colorTextUniqueYou,
+            originDate: originDate.getTime(),
+        }
+        //console.table(mintPayload);
+        setSubmitButtonClicked(true)
+        dispatch(mintIdentityAsyncAction(mintPayload));
+    }
+
+    return (
 
         <Flex
             w={"100%"}
@@ -879,18 +888,7 @@ export const Register: FC<InterfaceRegister>=()=> {
                                 transform: 'translateY(-2px)',
                                 boxShadow: 'md',
                             }}
-                            onClick={() => {
-                                console.log('Im submitting my mint')
-                                console.log(name)
-                                console.log(email)
-                                console.log(profession)
-                                console.log(slogan)
-                                console.log(organization)
-                                console.log(website)
-                                console.log(uniqueYou)
-                                setSubmitButtonClicked(true)
-                                //dispatch sage action mintIdentitySaga
-                            }}
+                            onClick={submitMintHandler}
                             isLoading={submitButtonClicked}
                             loadingText='Submitting to the Blockchain for minting, this can take up to 10 minutes'
                             color={"pmpurple.13"}

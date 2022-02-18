@@ -29,7 +29,7 @@ const MintSlice = createSlice ({
 console.log(MintSlice);
 export const { mintIdentArr, originDate } = MintSlice.actions;
 
-export const mintIdentityAsyncAction = createAction("MINT_IDENT_TO_HEX_SAGA");
+export const mintIdentityAsyncAction = createAction<{}>("MINT_IDENT_TO_HEX_SAGA");
 
 export default MintSlice.reducer;
 

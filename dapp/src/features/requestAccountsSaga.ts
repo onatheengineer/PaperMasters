@@ -4,12 +4,12 @@ import {accountsArr, statusOfArr} from "./RegisterSlice";
 import {RequestAccountsAsyncAction} from "../features/RegisterSlice";
 
 
-
 function* requestAccountsSaga() {
+
     yield put(statusOfArr("loading"));
     try {
-        const web3 = new Web3(Web3.givenProvider || 'ws://some.local-or-remote.node:8546');
-        const acc: string[]= yield call(web3.eth.requestAccounts as any);
+        const web3 = new Web3(Web3.givenProvider);
+        const acc: string[] = yield call(web3.eth.requestAccounts as any);
         console.log(acc);
         yield put(accountsArr(acc));
         yield put(statusOfArr("success"));
@@ -18,6 +18,7 @@ function* requestAccountsSaga() {
         yield put(statusOfArr("failed"));
     }
 }
+
 
 export function* watchRequestAccountsSaga() {
     yield takeEvery(RequestAccountsAsyncAction.type, requestAccountsSaga);

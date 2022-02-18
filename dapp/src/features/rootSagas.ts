@@ -3,5 +3,5 @@ import {watchRequestAccountsSaga} from './requestAccountsSaga';
 import {watchMintIdentitySaga} from "./mintIdentitySaga";
 
 export default function* rootSaga() {
-    yield all([ call(watchRequestAccountsSaga), call(watchMintIdentitySaga), call(watchMintIdentitySaga)]);
+    yield all([ call(watchRequestAccountsSaga), call(watchMintIdentitySaga)]);
 }
