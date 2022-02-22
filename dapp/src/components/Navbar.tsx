@@ -32,7 +32,7 @@ import {IoMdCheckmarkCircleOutline} from "react-icons/io";
 import {FiTrendingUp} from "react-icons/fi";
 import Web3 from "web3";
 import { useAppSelector, useAppDispatch } from '../app/hooks';
-import RegisterSlice, {accountsArr, RequestAccountsAsyncAction, statusOfArr} from '../features/RegisterSlice';
+import RegisterSlice, {accountsArr, RequestAccountsAsyncAction, statusOfArr} from '../features/RequestWalletAccountSlice';
 
 
 export default function Navbar() {

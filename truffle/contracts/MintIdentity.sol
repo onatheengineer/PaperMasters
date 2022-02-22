@@ -3,14 +3,16 @@ pragma solidity >=0.8.0 <0.9.0;
 
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
+import "@openzeppelin/contracts/token/ERC721/extensions/IERC721Metadata.sol";
 
 contract PaperMastersNFI is ERC721, Ownable {
-
+//do I need to bring in SafeMath???
     string private _setBaseURI;
     uint256 private identityFee;
 
     struct identity
     {
+        address walletAccount;
         string name;
         string email;
         string profession;
@@ -18,16 +20,16 @@ contract PaperMastersNFI is ERC721, Ownable {
         string slogan;
         string website;
         string uniqueYou;
-        string backGroundRGB;
+        string bgRGB;
         uint originDate;
-        string linkToFinishedAvatar;
     }
 
     //an array of type identity of the total identities minted
     identity[] totalIdentities;
 
     //just making a generic mapping of address to number
-    mapping(address => uint256) public _dictionaryNFIs;
+    mapping(address => uint256) _dictionaryNFIs;
+    mapping(address => uint256) _supportPMDonations;
 
     //prevents ren-entry when modifier is added to a function
     bool internal locked;
@@ -38,10 +40,10 @@ contract PaperMastersNFI is ERC721, Ownable {
         locked = false;
     }
 
-    constructor() ERC721("PaperMastersNFI", "NFI") {
+    constructor() ERC721("papermasters.io", "NFI") {
         _setBaseURI = "www.papermasters.io/identity";
-        identityFee = 5e16;
-        totalIdentities.push(identity('','','','','','','','',0,'')); // This is needed to fill the 0 token. The 0 Token is an invalid token
+        identityFee = 100000000000000000;
+        totalIdentities.push(identity(address(this),'','','','','','','','',0)); // This is needed to fill the 0 token. The 0 Token is an invalid token
     }
 
     function addressToTokenID(address walletAddress) public view returns(uint256) {
@@ -61,7 +63,6 @@ contract PaperMastersNFI is ERC721, Ownable {
     function setBaseURI(string memory changeBaseURI) public onlyOwner{
         _setBaseURI = changeBaseURI;
     }
-
 
     function _baseURI() internal view virtual override returns (string memory) {
         return _setBaseURI;
@@ -96,7 +97,13 @@ contract PaperMastersNFI is ERC721, Ownable {
 
     receive() external payable {}
 
-    function deposit() public payable {}
+    function deposit() public payable {
+        uint amount = msg.value;
+        _supportPMDonations[msg.sender] += msg.value;
+        emit DonationMade(amount, address(this).balance, msg.sender, _supportPMDonations[msg.sender]);
+    }
+        event DonationMade(uint256 amount, uint balance, address donationSender, uint totalDonationsBySender);
+
 
     function getBalance() public view onlyOwner returns (uint) {
         return address(this).balance;
@@ -110,7 +117,6 @@ contract PaperMastersNFI is ERC721, Ownable {
         emit Withdraw(amount, address(this).balance, msg.sender);
     }
     event Withdraw(uint256 amount, uint256 balance, address withdrawAddress);
-
 
     function totalSupply() public view returns (uint256) {
         return totalIdentities.length;
@@ -126,12 +132,10 @@ contract PaperMastersNFI is ERC721, Ownable {
         _;
     }
 
-
     modifier whenPaused() {
         require(paused);
         _;
     }
-
 
     function pause() onlyOwner whenNotPaused public {
         paused = true;
@@ -151,16 +155,15 @@ contract PaperMastersNFI is ERC721, Ownable {
         string memory _slogan,
         string memory _website,
         string memory _uniqueYou,
-        string memory _backGroundRGB,
-        uint _originDate,
-        string memory _linkToFinishedAvatar
+        string memory _bgRGB,
+        uint _originDate
     ) public virtual noReentrant payable whenNotPaused
-
     {
         require(!addressHasToken(msg.sender)," Wallet already has an NFI! You get one per wallet account");
         require(msg.value >= identityFee, "Not enough ETH sent; check price!");
 
         identity memory _identity = identity({
+        walletAccount: msg.sender,
         name: _name,
         email: _email,
         profession: _profession,
@@ -168,9 +171,8 @@ contract PaperMastersNFI is ERC721, Ownable {
         slogan: _slogan,
         website: _website,
         uniqueYou: _uniqueYou,
-        backGroundRGB: _backGroundRGB,
-        originDate: _originDate,
-        linkToFinishedAvatar: _linkToFinishedAvatar
+        bgRGB: _bgRGB,
+        originDate: _originDate
         });
 
         totalIdentities.push(_identity);
@@ -184,7 +186,6 @@ contract PaperMastersNFI is ERC721, Ownable {
         emit NFIMinted(msg.sender, newTokenID);
 
     }
-
     event NFIMinted(address indexed _from, uint256 tokenId);
 
     function setApprovalForAll(address operator, bool approved) public virtual override onlyOwner{}

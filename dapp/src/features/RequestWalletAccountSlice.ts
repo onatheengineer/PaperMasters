@@ -11,8 +11,7 @@ const initialState: RegisterState = {
     status: 'idle',
 };
 
-
-const RegisterSlice = createSlice ({
+const RequestWalletAccountSlice = createSlice ({
     name: 'register',
     initialState,
     reducers: {
@@ -30,11 +29,11 @@ const RegisterSlice = createSlice ({
     }
 });
 
-console.log(RegisterSlice);
-export const { accountsArr, statusOfArr } = RegisterSlice.actions;
+console.log(RequestWalletAccountSlice);
+export const { accountsArr, statusOfArr } = RequestWalletAccountSlice.actions;
 
 export const RequestAccountsAsyncAction = createAction("REQUEST_ACCOUNTS_ACTION_SAGA");
 
-export default RegisterSlice.reducer;
+export default RequestWalletAccountSlice.reducer;
 
 

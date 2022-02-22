@@ -72,7 +72,7 @@ export const Identity:FC<Interface>=()=> {
 
                     <Box bg='#e6dee6' style={{border: '8px solid white'}}>
 
-                        <Flex direction="column">
+                        <Flex direction="column" align="center">
 
                             <Box
                                 mb={{sm: "205px", md: "75px", xl: "40px"}}
@@ -81,7 +81,6 @@ export const Identity:FC<Interface>=()=> {
                                 display="flex"
                                 flexDirection="column"
                                 justifyContent="center"
-                                align="center"
                             >
                                 <Box
                                     bgImage={'legoLavendarheadercroped.png'}

@@ -13,7 +13,7 @@ import {FaBookmark} from "react-icons/fa";
 import type {FC} from 'react';
 import { Box, Flex} from '@chakra-ui/react';
 import Sidebar, {NavItem} from './components/Sidebar'
-import {RequestAccountsAsyncAction} from "./features/RegisterSlice";
+import {RequestAccountsAsyncAction} from "./features/RequestWalletAccountSlice";
 
 
 function App() {

@@ -1,6 +1,7 @@
 import { configureStore, ThunkAction, Action} from '@reduxjs/toolkit';
-import RegisterReducer from "../features/RegisterSlice";
-import searchReducer from '../features/SearchSlice';
+import registerSlice from "../features/RequestWalletAccountSlice";
+import searchSlice from '../features/SearchSlice';
+import mintSlice from '../features/MintNFISlice';
 import createSaga from "redux-saga";
 import rootSaga from "../features/rootSagas";
 import logger from 'redux-logger';
@@ -11,8 +12,9 @@ const sagaMiddleware = createSaga();
 export const store = configureStore({
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger).concat(sagaMiddleware),
   reducer: {
-    register: RegisterReducer,
-    search: searchReducer,
+    register: registerSlice,
+    search: searchSlice,
+    mint: mintSlice,
 
   },
 });

@@ -115,8 +115,8 @@ export default function Footer(props: ButtonGroupProps) {
                         <ListHeader>News</ListHeader>
                         <Link  as={ReachLink} to="/" >New Features</Link>
                         <Link  as={ReachLink} to="/" >Updated Features</Link>
-                        <Link aas={ReachLink} to="/" >Stories to come</Link>
-                        <Link aas={ReachLink} to="/" >Project Feedback Forum</Link>
+                        <Link as={ReachLink} to="/" >Stories to come</Link>
+                        <Link as={ReachLink} to="/" >Project Feedback Forum</Link>
                     </Stack>
                     <Stack >
                         <ListHeader>Your People</ListHeader>
@@ -136,7 +136,6 @@ export default function Footer(props: ButtonGroupProps) {
         // minH={'80px'}
         // maxH={"120px"}
         borderStyle={'solid'}
-        borderSize={'8px'}
         borderColor={'pmpurple.9'}>
         <Container
             as={Stack}

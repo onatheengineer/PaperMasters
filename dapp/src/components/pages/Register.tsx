@@ -1,6 +1,7 @@
 import * as React from 'react';
 import {useState, useEffect, MouseEventHandler} from "react";
 import Web3 from "web3";
+//import {getFilledAccountsArr}
 import type {FC} from 'react';
 import {
     FormControl,
@@ -32,15 +33,32 @@ import {
     PopoverContent,
     PopoverCloseButton, PopoverBody, PopoverArrow, PopoverFooter, PopoverTrigger, Popover, Portal, MenuItem,
     InputLeftElement,
+    Modal,
+    ModalOverlay,
+    ModalContent,
+    ModalHeader,
+    ModalFooter,
+    ModalBody,
+    ModalCloseButton,
+    useDisclosure,
 } from '@chakra-ui/react';
+// import {
+//     Modal,
+//     ModalOverlay,
+//     ModalContent,
+//     ModalHeader,
+//     ModalFooter,
+//     ModalBody,
+//     ModalCloseButton,
+// } from "@chakra-ui/core";
 import {FaFacebook, FaGithub, FaGoogle, FaScroll} from 'react-icons/fa';
 import { MdOutlineColorLens} from 'react-icons/md';
 import {useAppDispatch, useAppSelector} from "../../app/hooks";
 import PMLogo from '../../assets/PMGIMPResized.png';
 import Logo from '../../assets/Logo';
 import {ColorChangeHandler, ColorResult, SketchPicker, GithubPicker, RGBColor} from 'react-color';
-import {RequestAccountsAsyncAction} from "../../features/RegisterSlice";
-import {mintIdentityAsyncAction} from "../../features/MintSlice";
+import {RequestAccountsAsyncAction} from "../../features/RequestWalletAccountSlice";
+import {mintNFIAsyncAction, gasForMintNFIAsyncAction} from "../../features/MintNFISlice";
 import mintNFI from "../../abiFiles/PaperMastersNFI.json";
 
 
@@ -48,26 +66,32 @@ interface InterfaceRegister {
 
 }
 
+const ColorRGBToString=(colorResultRGB: ColorResult)=>{
+    const colorStringRGB = `rgba(${colorResultRGB.rgb.r}, ${colorResultRGB.rgb.g}, ${colorResultRGB.rgb.b}, ${colorResultRGB.rgb.a})`
+    return colorStringRGB;
+}
+
 
 export const Register: FC<InterfaceRegister>=()=> {
+
+    const { isOpen, onOpen, onClose } = useDisclosure();
+
     const dispatch = useAppDispatch();
-    const accounts = useAppSelector((state) => state.register.accounts);
+    const accountsArr = useAppSelector((state) => state.register.accounts);
     const status = useAppSelector((state) => state.register.status);
+    const gasPrice = useAppSelector((state) => state.mint.gasPrice);
 
-    const [name, setName] = useState<string | null>("");
-    const [profession, setProfession] = useState<string | null>(null);
-    const [email, setEmail] = useState<string | null>(null);
-    const [slogan, setSlogan] = useState<string | null>(null);
-    const [organization, setOrganization] = useState<string | null>(null);
-    const [uniqueYou, setUniqueYou] = useState<string | null>(null);
-    const [website, setWebsite] = useState<string | null>(null);
+    const [name, setName] = useState<string | "">("");
+    const [profession, setProfession] = useState<string | "">("");
+    const [email, setEmail] = useState<string | "">("");
+    const [slogan, setSlogan] = useState<string | "">("");
+    const [organization, setOrganization] = useState<string | "">("");
+    const [website, setWebsite] = useState<string | "">("");
+    const [uniqueYou, setUniqueYou] = useState<string | "">("");
 
-    const [submitButtonClicked, setSubmitButtonClicked] = useState<boolean>(false);
+    const defaultColorBG = { hex: '#f2eef2', rgb: {r: 242, g: 238, b: 242, a: 1}, hsl: {h: 300, s: 0.13333333333333283, l: 0.9411764705882353, a: 1}}
+    const defaultColorText = {hex: '#694b69', rgb: {r: 105, g: 75, b: 105, a: 1}, hsl: {h: 300, s: 0.17, l: 0.35, a: 1}}
 
-    const defaultColorBG={hex: '#f2eef2', rgb:{r:242, g:238, b:242, a:1}, hsl:{h: 300, s:0.13333333333333283, l:0.9411764705882353, a:1}}
-    const defaultColorText={hex:'#694b69', rgb:{r:105, g:75, b:105, a:1}, hsl:{h: 300, s:0.17, l:0.35, a:1}}
-
-    const [colorBG, setColorBG] = useState<ColorResult>(defaultColorBG);
     const [colorTextName, setColorTextName] = useState<ColorResult>(defaultColorText);
     const [colorTextEmail, setColorTextEmail] = useState<ColorResult>(defaultColorText);
     const [colorTextProfession, setColorTextProfession] = useState<ColorResult>(defaultColorText);
@@ -75,10 +99,14 @@ export const Register: FC<InterfaceRegister>=()=> {
     const [colorTextOrganization, setColorTextOrganization] = useState<ColorResult>(defaultColorText);
     const [colorTextWebsite, setColorTextWebsite] = useState<ColorResult>(defaultColorText);
     const [colorTextUniqueYou, setColorTextUniqueYou] = useState<ColorResult>(defaultColorText);
+    const [bgRGB, setbgRGB] = useState<ColorResult>(defaultColorBG);
 
     const [whichColorField, setWhichColorField] = useState<string>('');
 
     const [originDate, setOriginDate] = useState(new Date())
+
+    const [submitButtonClicked, setSubmitButtonClicked] = useState<boolean>(false);
+
     console.log(originDate.getTime());
     const originDateFormatted: string = `${originDate.toLocaleString('en-us', {month: 'short'})} ${originDate.getDate()}, ${originDate.getFullYear()}`
 
@@ -94,21 +122,20 @@ export const Register: FC<InterfaceRegister>=()=> {
     const sloganHandler = (e: React.FormEvent<HTMLInputElement>) => {
         setSlogan(e.currentTarget.value);
     };
+    const websiteHandler = (e: React.FormEvent<HTMLInputElement>) => {
+        setWebsite(e.currentTarget.value);
+    };
     const organizationHandler = (e: React.FormEvent<HTMLInputElement>) => {
         setOrganization(e.currentTarget.value);
     };
     const uniqueYouHandler = (e: React.FormEvent<HTMLInputElement>) => {
         setUniqueYou(e.currentTarget.value);
     };
-    const websiteHandler = (e: React.FormEvent<HTMLInputElement>) => {
-        setWebsite(e.currentTarget.value);
-    };
 
-
-    const colorChangeHandler: ColorChangeHandler = (colorSelect: ColorResult) => {
-        switch (whichColorField) {
+        const colorChangeHandler: ColorChangeHandler = (colorSelect: ColorResult) => {
+            switch (whichColorField) {
             case 'colorBG':
-                setColorBG(colorSelect);
+                setbgRGB(colorSelect);
                 break;
             case "name":
                 setColorTextName(colorSelect);
@@ -137,48 +164,61 @@ export const Register: FC<InterfaceRegister>=()=> {
         console.table(colorSelect);
     };
 
-    const submitMintHandler = ()=>{
+    useEffect(() => {
+        if (accountsArr.length !== 0) {
+            estimateGasHandler();
+        }
+    }, [accountsArr, name, email, profession, slogan, website, organization, uniqueYou])
 
+    const submitMintHandler = () => {
         const mintPayload: {} = {
-            colorBGAvatar: colorBG,
-            name: name,
-            nameColor: colorTextName,
-            email: email,
-            emailColor: colorTextEmail,
-            profession: profession,
-            professionColor: colorTextProfession,
-            slogan: slogan,
-            sloganColor: colorTextSlogan,
-            org: organization,
-            orgColor: colorTextOrganization,
-            website: website,
-            uniqueYou: colorTextUniqueYou,
+            name: `${name},${ColorRGBToString(colorTextName)}`,
+            email: `${email},${ColorRGBToString(colorTextEmail)}`,
+            profession: `${profession},${ColorRGBToString(colorTextProfession)}`,
+            organization: `${organization},${ColorRGBToString(colorTextOrganization)}`,
+            slogan: `${slogan},${ColorRGBToString(colorTextSlogan)}`,
+            website: `${website},${ColorRGBToString(colorTextWebsite)}`,
+            uniqueYou: `${uniqueYou},${ColorRGBToString(colorTextUniqueYou)}`,
+            bgRGB: `${ColorRGBToString(bgRGB)}`,
             originDate: originDate.getTime(),
         }
-        //console.table(mintPayload);
+        console.table(mintPayload);
         setSubmitButtonClicked(true)
-        dispatch(mintIdentityAsyncAction(mintPayload));
-    }
+        dispatch(mintNFIAsyncAction(mintPayload));
+    };
+
+    const estimateGasHandler = () => {
+        const mintPayload: {} = {
+            name: `${name},${ColorRGBToString(colorTextName)}`,
+            email: `${email},${ColorRGBToString(colorTextEmail)}`,
+            profession: `${profession},${ColorRGBToString(colorTextProfession)}`,
+            organization: `${organization},${ColorRGBToString(colorTextOrganization)}`,
+            slogan: `${slogan},${ColorRGBToString(colorTextSlogan)}`,
+            website: `${website},${ColorRGBToString(colorTextWebsite)}`,
+            uniqueYou: `${uniqueYou},${ColorRGBToString(colorTextUniqueYou)}`,
+            bgRGB: `${ColorRGBToString(bgRGB)}`,
+            originDate: originDate.getTime(),
+        }
+        dispatch(gasForMintNFIAsyncAction(mintPayload));
+    };
 
     return (
-
         <Flex
             w={"100%"}
+            align="center"
         >
             <Box
                 w={"50%"}
-                showBorder={true}
+                h={"98%"}
                 border={'2px'}
                 borderStyle={'solid'}
                 borderColor={'pmpurple.13'}
                 mx={{xl: '8px'}}
                 borderRadius='15px'
                 py="22px" px="56px"
-                my={{xl: "8px"}}
+                my={{xl: "16px"}}
                 bg={'pmpurple.1'}
-                align="center"
             >
-
 
                 <Heading textAlign="center" size="xl" fontWeight="extrabold">
                     Mint PaperMaster NFI
@@ -186,76 +226,84 @@ export const Register: FC<InterfaceRegister>=()=> {
 
                 <Text mt="4" mb="8px" color={'pmpurple.13'} align="center" maxW="100%" fontWeight="medium">
                     PaperMaster Identities are permanent Blockchain PaperMaster
-                    Non-Fungible-Identity, future changes require additional minting, please proofread! Only one NFI per account.
+                    Non-Fungible-Identity, future changes require additional minting, please proofread! Only one NFI per
+                    account.
                     If you are minting your company, please make sure you use your company's wallet account.
                 </Text>
 
-                <Divider py={'0px'} color={'pmpurple.8'} />
+                <Divider py={'0px'} color={'pmpurple.8'}/>
 
                 <Stack spacing="5">
 
-                                <Popover>
-                                    <PopoverTrigger>
-                                        <Button
-                                            //w={'100%'}
-                                            mt={'32px'}
-                                            bg={colorBG.hex}
-                                            h='2.00rem'
-                                            size='mg'
-                                            rounded={'md'}
-                                            borderStyle={'solid'}
-                                            border={'1px'}
-                                            borderColor={'pmpurple.4'}
-                                            _hover={{
-                                                transform: 'translateY(-2px)',
-                                                boxShadow: 'lg',
+                    <Popover>
+                        <PopoverTrigger>
+                            <Button
+                                //w={'100%'}
+                                mt={'32px'}
+                                bg={bgRGB.hex}
+                                h='2.00rem'
+                                size='mg'
+                                rounded={'md'}
+                                borderStyle={'solid'}
+                                border={'1px'}
+                                borderColor={'pmpurple.4'}
+                                _hover={{
+                                    transform: 'translateY(-2px)',
+                                    boxShadow: 'lg',
+                                }}
+                                onClick={() => {
+                                    setWhichColorField('colorBG')
+                                }}
+                            >
+
+                                <Text px={'20px'} color={"pmpurple.10"}> Set NFI Background Color </Text>
+                                <MdOutlineColorLens fontSize={'20px'} color={"#9c7e9c"}/>
+                                <InputRightElement m='3px' textAlign={'center'}
+                                                   children={<Button bg='pmpurple.9' size='xs' onClick={() => {
+                                                       setbgRGB(defaultColorBG)
+                                                   }}> Reset</Button>}/>
+                            </Button>
+                        </PopoverTrigger>
+
+                        <Portal>
+                            <PopoverContent
+                                bg='transparent'
+                                border={'1px'}
+                                w={'50px'}
+                                p={'0px'}
+                                m={'0px'}
+                                h={'50px'}
+                            >
+                                <PopoverBody>
+
+                                    <Box position={'absolute'} zIndex={'2'}>
+                                        <SketchPicker
+                                            color={bgRGB.rgb}
+                                            onChange={colorChangeHandler}
+                                            onSwatchHover={(colorHover: any) => {
+                                                console.log(colorHover);
                                             }}
-                                            onClick={() => {
-                                                setWhichColorField('colorBG')
-                                            }}
-                                        >
-
-                                            <Text px={'20px'} color={"pmpurple.10"}> Set NFI Background Color </Text>
-                                            <MdOutlineColorLens fontSize={'20px'} color={"#9c7e9c"}/>
-                                            <InputRightElement m='3px' textAlign={'center'} children={<Button bg='pmpurple.9' size='xs' onClick={()=>{setColorBG(defaultColorBG)}}> Reset</Button>}/>
-                                        </Button>
-                                    </PopoverTrigger>
-
-                                    <Portal>
-                                        <PopoverContent
-                                            bg='transparent'
-                                            border={'1px'}
-                                            w={'50px'}
-                                            p={'0px'}
-                                            m={'0px'}
-                                            h={'50px'}
-                                        >
-                                            <PopoverBody>
-
-                                                <Box postition={'absolute'} zIndex={'2'}>
-                                                    <SketchPicker
-                                                        color={colorBG.rgb}
-                                                        onChange={colorChangeHandler}
-                                                        onSwatchHover={(colorHover: any) => {
-                                                            console.log(colorHover);
-                                                        }}
-                                                    />
-                                                </Box>
-                                            </PopoverBody>
-                                        </PopoverContent>
-                                    </Portal>
-                                </Popover>
+                                        />
+                                    </Box>
+                                </PopoverBody>
+                            </PopoverContent>
+                        </Portal>
+                    </Popover>
 
 
                     <FormControl isRequired>
                         <FormLabel htmlFor='name' color={'pmpurple.13'} mb={'2px'}>Name</FormLabel>
                         <InputGroup size='md'>
-                            <Input focusBorderColor='pmpurple.9' borderColor={"pmpurple.4"} id='name' pl={'62px'} placeholder='name, company'
+                            <Input focusBorderColor='pmpurple.9' borderColor={"pmpurple.4"} id='name' pl={'62px'}
+                                   placeholder='name, company'
                                    isDisabled={submitButtonClicked}
                                    onChange={nameHandler}
                                    color={'pmpurple.15'}
                             />
-                            <InputRightAddon p='0' borderColor={"pmpurple.4"} bg={'pmpurple.3'} children={<Button size='xs' color={"pmpurple.10"} onClick={()=>{setColorTextName(defaultColorText)}}> Reset</Button>}/>
+                            <InputRightAddon p='0' borderColor={"pmpurple.4"} bg={'pmpurple.3'}
+                                             children={<Button size='xs' color={"pmpurple.10"} onClick={() => {
+                                                 setColorTextName(defaultColorText)
+                                             }}> Reset</Button>}/>
                             <InputLeftElement
                                 width='3.5rem'
                             >
@@ -295,7 +343,7 @@ export const Register: FC<InterfaceRegister>=()=> {
                                         >
                                             <PopoverBody>
 
-                                                <Box postition={'absolute'} zIndex={'2'}>
+                                                <Box position={'absolute'} zIndex={'2'}>
                                                     <SketchPicker
                                                         color={colorTextName.rgb}
                                                         onChange={colorChangeHandler}
@@ -315,16 +363,19 @@ export const Register: FC<InterfaceRegister>=()=> {
                         <FormErrorMessage>Field is required.</FormErrorMessage>
                     </FormControl>
 
-
                     <FormControl>
                         <FormLabel htmlFor='email' color={'pmpurple.13'} mb={'2px'}>Email</FormLabel>
                         <InputGroup size='md'>
-                            <Input focusBorderColor='pmpurple.9' borderColor={"pmpurple.4"} id='email' pl={'62px'} placeholder='email'
+                            <Input focusBorderColor='pmpurple.9' borderColor={"pmpurple.4"} id='email' pl={'62px'}
+                                   placeholder='email'
                                    isDisabled={submitButtonClicked}
                                    onChange={emailHandler}
                                    color={'pmpurple.15'}
                             />
-                            <InputRightAddon p='0' borderColor={"pmpurple.4"} bg={'pmpurple.3'}  children={<Button size='xs' color={"pmpurple.10"} onClick={()=>{setColorTextEmail(defaultColorText)}}> Reset</Button>}/>
+                            <InputRightAddon p='0' borderColor={"pmpurple.4"} bg={'pmpurple.3'}
+                                             children={<Button size='xs' color={"pmpurple.10"} onClick={() => {
+                                                 setColorTextEmail(defaultColorText)
+                                             }}> Reset</Button>}/>
                             <InputLeftElement
                                 width='3.5rem'
                             >
@@ -363,7 +414,7 @@ export const Register: FC<InterfaceRegister>=()=> {
                                         >
                                             <PopoverBody>
 
-                                                <Box postition={'absolute'} zIndex={'2'}>
+                                                <Box position={'absolute'} zIndex={'2'}>
 
                                                     <SketchPicker
                                                         color={colorTextEmail.rgb}
@@ -390,7 +441,10 @@ export const Register: FC<InterfaceRegister>=()=> {
                                    onChange={professionHandler}
                                    color={'pmpurple.15'}
                             />
-                            <InputRightAddon p='0' borderColor={"pmpurple.4"} bg={'pmpurple.3'} children={<Button size='xs' color={"pmpurple.10"} onClick={()=>{setColorTextProfession(defaultColorText)}}> Reset</Button>}/>
+                            <InputRightAddon p='0' borderColor={"pmpurple.4"} bg={'pmpurple.3'}
+                                             children={<Button size='xs' color={"pmpurple.10"} onClick={() => {
+                                                 setColorTextProfession(defaultColorText)
+                                             }}> Reset</Button>}/>
                             <InputLeftElement
                                 width='3.5rem'
                             >
@@ -429,7 +483,7 @@ export const Register: FC<InterfaceRegister>=()=> {
                                         >
                                             <PopoverBody>
 
-                                                <Box postition={'absolute'} zIndex={'2'}>
+                                                <Box position={'absolute'} zIndex={'2'}>
 
                                                     <SketchPicker
                                                         color={colorTextProfession.rgb}
@@ -455,7 +509,10 @@ export const Register: FC<InterfaceRegister>=()=> {
                                    onChange={sloganHandler}
                                    color={'pmpurple.15'}
                             />
-                            <InputRightAddon p='0' borderColor={"pmpurple.4"} bg={'pmpurple.3'} children={<Button size='xs' color={"pmpurple.10"} onClick={()=>{setColorTextSlogan(defaultColorText)}}> Reset</Button>}/>
+                            <InputRightAddon p='0' borderColor={"pmpurple.4"} bg={'pmpurple.3'}
+                                             children={<Button size='xs' color={"pmpurple.10"} onClick={() => {
+                                                 setColorTextSlogan(defaultColorText)
+                                             }}> Reset</Button>}/>
                             <InputLeftElement
                                 width='3.5rem'
                             >
@@ -494,7 +551,7 @@ export const Register: FC<InterfaceRegister>=()=> {
                                         >
                                             <PopoverBody>
 
-                                                <Box postition={'absolute'} zIndex={'2'}>
+                                                <Box position={'absolute'} zIndex={'2'}>
                                                     <SketchPicker
                                                         color={colorTextSlogan.rgb}
                                                         onChange={colorChangeHandler}
@@ -515,12 +572,16 @@ export const Register: FC<InterfaceRegister>=()=> {
                     <FormControl>
                         <FormLabel color={'pmpurple.13'} mb={'2px'} htmlFor='organization'>Organization</FormLabel>
                         <InputGroup size='md'>
-                            <Input focusBorderColor='pmpurple.9' id='organization' pl={'62px'} placeholder='organization'
+                            <Input focusBorderColor='pmpurple.9' id='organization' pl={'62px'}
+                                   placeholder='organization'
                                    isDisabled={submitButtonClicked}
                                    onChange={organizationHandler}
                                    color={'pmpurple.15'}
                             />
-                            <InputRightAddon p='0' borderColor={"pmpurple.4"} bg={'pmpurple.3'} children={<Button size='xs' color={"pmpurple.10"} onClick={()=>{setColorTextOrganization(defaultColorText)}}> Reset</Button>}/>
+                            <InputRightAddon p='0' borderColor={"pmpurple.4"} bg={'pmpurple.3'}
+                                             children={<Button size='xs' color={"pmpurple.10"} onClick={() => {
+                                                 setColorTextOrganization(defaultColorText)
+                                             }}> Reset</Button>}/>
                             <InputLeftElement
                                 width='3.5rem'
                             >
@@ -559,7 +620,7 @@ export const Register: FC<InterfaceRegister>=()=> {
                                             h={'50px'}
                                         >
                                             <PopoverBody>
-                                                <Box postition={'absolute'} zIndex={'2'}>
+                                                <Box position={'absolute'} zIndex={'2'}>
                                                     <SketchPicker
                                                         color={colorTextOrganization.rgb}
                                                         onChange={colorChangeHandler}
@@ -584,7 +645,10 @@ export const Register: FC<InterfaceRegister>=()=> {
                                    onChange={websiteHandler}
                                    color={'pmpurple.15'}
                             />
-                            <InputRightAddon p='0' borderColor={"pmpurple.4"} bg={'pmpurple.3'} children={<Button size='xs' color={"pmpurple.10"} onClick={()=>{setColorTextWebsite(defaultColorText)}}> Reset</Button>}/>
+                            <InputRightAddon p='0' borderColor={"pmpurple.4"} bg={'pmpurple.3'}
+                                             children={<Button size='xs' color={"pmpurple.10"} onClick={() => {
+                                                 setColorTextWebsite(defaultColorText)
+                                             }}> Reset</Button>}/>
                             <InputLeftElement
                                 width='3.5rem'
                             >
@@ -623,7 +687,7 @@ export const Register: FC<InterfaceRegister>=()=> {
                                             h={'50px'}
                                         >
                                             <PopoverBody>
-                                                <Box postition={'absolute'} zIndex={'2'}>
+                                                <Box position={'absolute'} zIndex={'2'}>
                                                     <SketchPicker
                                                         color={colorTextWebsite.rgb}
                                                         onChange={colorChangeHandler}
@@ -643,10 +707,15 @@ export const Register: FC<InterfaceRegister>=()=> {
                     <FormControl>
                         <FormLabel color={'pmpurple.13'} mb={'2px'} htmlFor='uniqueYou'>Your Uniqueness</FormLabel>
                         <InputGroup size='md'>
-                            <Input focusBorderColor='pmpurple.9' id='uniqueYou' pl={'62px'} placeholder='unique you, date of birth, anything goes here'
-                                   isDisabled={submitButtonClicked} onChange={uniqueYouHandler} color={'pmpurple.15'} mb={'18px'}
+                            <Input focusBorderColor='pmpurple.9' id='uniqueYou' pl={'62px'}
+                                   placeholder='unique you, date of birth, anything goes here'
+                                   isDisabled={submitButtonClicked} onChange={uniqueYouHandler} color={'pmpurple.15'}
+                                   mb={'18px'}
                             />
-                            <InputRightAddon p='0' borderColor={"pmpurple.4"} bg={'pmpurple.3'} children={<Button size='xs' color={"pmpurple.10"} onClick={()=>{setColorTextUniqueYou(defaultColorText)}}> Reset</Button>}/>
+                            <InputRightAddon p='0' borderColor={"pmpurple.4"} bg={'pmpurple.3'}
+                                             children={<Button size='xs' color={"pmpurple.10"} onClick={() => {
+                                                 setColorTextUniqueYou(defaultColorText)
+                                             }}> Reset</Button>}/>
                             <InputLeftElement
                                 width='3.5rem'
                             >
@@ -685,7 +754,7 @@ export const Register: FC<InterfaceRegister>=()=> {
                                             h={'50px'}
                                         >
                                             <PopoverBody>
-                                                <Box postition={'absolute'} zIndex={'2'}>
+                                                <Box position={'absolute'} zIndex={'2'}>
                                                     <SketchPicker
                                                         color={colorTextUniqueYou.rgb}
                                                         onChange={colorChangeHandler}
@@ -704,19 +773,17 @@ export const Register: FC<InterfaceRegister>=()=> {
                 </Stack>
             </Box>
 
-
             <Box
                 w={"50%"}
-                showBorder={true}
+                h={"98%"}
                 border={'2px'}
                 borderStyle={'solid'}
                 borderColor={'pmpurple.13'}
                 mx={{xl: '8px'}}
                 borderRadius='15px'
                 py="22px" px="56px"
-                my={{xl: "8px"}}
                 bg={'pmpurple.1'}
-                align="center"
+                my={{xl: "16px"}}
             >
 
                 <Heading mb="54px" textAlign="center" size="xl" fontWeight="extrabold">
@@ -728,7 +795,7 @@ export const Register: FC<InterfaceRegister>=()=> {
                     look like, please make sure you love it!
                 </Text>
 
-                <Divider py={'0px'} mb="54px" color={'pmpurple.8'} />
+                <Divider py={'0px'} mb="54px" color={'pmpurple.8'}/>
 
                 <AspectRatio w='320px' ratio={4 / 5}>
                     <Box
@@ -746,7 +813,7 @@ export const Register: FC<InterfaceRegister>=()=> {
                             w={'full'}
                             align={'center'}
                             spacing={0}
-                            bg={`rgba(${colorBG.rgb.r}, ${colorBG.rgb.g}, ${colorBG.rgb.b}, ${colorBG.rgb.a})`}
+                            bg={`rgba(${bgRGB.rgb.r}, ${bgRGB.rgb.g}, ${bgRGB.rgb.b}, ${bgRGB.rgb.a})`}
                             wordBreak={'break-word'}
                             rounded={'10px'}
                         >
@@ -768,7 +835,7 @@ export const Register: FC<InterfaceRegister>=()=> {
                                     src='PMlogo.png'
                                     boxSize='3.05em'
                                     variant={"square"}
-                                    square={true}
+                                    //square={true}
                                     css={{
                                         border: '2px solid #4f384f',
                                     }}
@@ -793,12 +860,13 @@ export const Register: FC<InterfaceRegister>=()=> {
                                 PaperMaster
                             </Text>
 
-                            <Text noOfLines={2} py={'0px'} px={'16px'} fontSize={'18px'} fontWeight={500}
-                                  fontFamily={'body'} align={'center'} color={`rgba(${colorTextName.rgb.r}, ${colorTextName.rgb.g}, ${colorTextName.rgb.b}, ${colorTextName.rgb.a})`}>
+                            <Text noOfLines={2} mb={'0px'} py={'0px'} px={'16px'} fontSize={'18px'} fontWeight={500}
+                                  fontFamily={'body'} align={'center'}
+                                  color={`rgba(${colorTextName.rgb.r}, ${colorTextName.rgb.g}, ${colorTextName.rgb.b}, ${colorTextName.rgb.a})`}>
                                 {name}
                             </Text>
 
-                            <Divider py={'0px'} css={{borderColor: '#a88ea8'}}/>
+                            <Divider pt={'0px'} css={{borderColor: '#a88ea8'}}/>
 
                             <Flex
                                 flexGrow={'1'}
@@ -817,67 +885,75 @@ export const Register: FC<InterfaceRegister>=()=> {
                                         spacing={0}
                                         alignItems={"center"}
                                     >
-                                        <Text noOfLines={1} color={`rgba(${colorTextEmail.rgb.r}, ${colorTextEmail.rgb.g}, ${colorTextEmail.rgb.b}, ${colorTextEmail.rgb.a})`}>
+                                        <Text noOfLines={1}
+                                              color = {ColorRGBToString(colorTextEmail)}>
                                             {email}
                                         </Text>
 
-                                        <Text noOfLines={1} color={`rgba(${colorTextProfession.rgb.r}, ${colorTextProfession.rgb.g}, ${colorTextProfession.rgb.b}, ${colorTextProfession.rgb.a})`}>
+                                        <Text noOfLines={1}
+                                              color={ColorRGBToString(colorTextProfession)}>
                                             {profession}
                                         </Text>
-                                        <Text noOfLines={1} color={`rgba(${colorTextSlogan.rgb.r}, ${colorTextSlogan.rgb.g}, ${colorTextSlogan.rgb.b}, ${colorTextSlogan.rgb.a})`}>
+                                        <Text noOfLines={1}
+                                              color={ColorRGBToString(colorTextSlogan)}>
                                             {slogan}
                                         </Text>
-                                        <Text noOfLines={1} color={`rgba(${colorTextOrganization.rgb.r}, ${colorTextOrganization.rgb.g}, ${colorTextOrganization.rgb.b}, ${colorTextOrganization.rgb.a})`}>
+                                        <Text noOfLines={1}
+                                              color={ColorRGBToString(colorTextOrganization)}>
                                             {organization}
                                         </Text>
-                                        <Text noOfLines={1} color={`rgba(${colorTextWebsite.rgb.r}, ${colorTextWebsite.rgb.g}, ${colorTextWebsite.rgb.b}, ${colorTextWebsite.rgb.a})`}>
+                                        <Text noOfLines={1}
+                                              color={ColorRGBToString(colorTextWebsite)}>
                                             {website}
                                         </Text>
-                                        <Text noOfLines={2} color={`rgba(${colorTextUniqueYou.rgb.r}, ${colorTextUniqueYou.rgb.g}, ${colorTextUniqueYou.rgb.b}, ${colorTextUniqueYou.rgb.a})`}>
+                                        <Text noOfLines={3}
+                                              color={ColorRGBToString(colorTextUniqueYou)}>
                                             {uniqueYou}
                                         </Text>
                                     </VStack>
                                 </Center>
                             </Flex>
 
-                            <Box>
-                                <Text as='cite' mb={'0px'} pb={'0px'} fontSize={'sm'} color={'pmpurple.13'}>
+
+                            <Stack
+                            textAlign={'center'}
+                            >
+                                <Text as='cite' mb={'26px'} pb={'0px'} fontSize={'sm'} color={'pmpurple.13'}>
                                     Origin Date {originDateFormatted}
                                 </Text>
 
-                                <Button
-                                    w={'90%'}
-                                    py={'2px'}
-                                    px={'2px'}
-                                    m={'0px'}
-                                    mt={'2px'}
-                                    mb={'8px'}
+                                <Box
+                                    position={'absolute'}
+                                    bottom={'0px'}
+                                    right={'0px'}
+                                    left={'0px'}
+                                    h={'25px'}
+                                    backgroundPosition="center"
+                                    objectFit={'cover'}
+                                    // w={'100%'}
                                     bg={'pmpurple.10'}
-                                    borderStyle={'solid'}
-                                    border={'1px'}
-                                    borderColor={'pmpurple.13'}
-                                    //color={'pmpurple.15'}
-                                    rounded={'md'}
+                                    // borderStyle={'solid'}
+                                    // border={'1px'}
+
+                                    // borderColor={'pmpurple.13'}
                                     _hover={{
-                                        transform: 'translateY(-2px)',
-                                        boxShadow: 'md',
-                                    }}>
-                                    <Text fontSize={'sm'} color={'white'} textAlign={'center'}>
+                                        transform: 'translateY(4px)',
+                                        //boxShadow: 'md',
+                                    }}
+                                >
+                                    <Text p={'2px'} fontSize={'9.5pt'} color={'white'} whiteSpace={'break-spaces'}>
                                         {/*NFI Identification string will show once minted*/}
-                                        0x0000000000000000000000000000000 <br/>
-                                        000000000000000000000000000000000
+                                        {accountsArr[0]}
                                     </Text>
-                                </Button>
-                            </Box>
+                                </Box>
+                            </Stack>
                         </Stack>
                     </Box>
                 </AspectRatio>
 
-
                 <Center>
                     {name !== "" ?
                         <Button
-                            align={'center'}
                             borderStyle={'solid'}
                             border={'2px'}
                             borderColor={'pmpurple.13'}
@@ -890,7 +966,7 @@ export const Register: FC<InterfaceRegister>=()=> {
                             }}
                             onClick={submitMintHandler}
                             isLoading={submitButtonClicked}
-                            loadingText='Submitting to the Blockchain for minting, this can take up to 10 minutes'
+                            loadingText='Submitting to the Blockchain for minting, this can take up to 2.5 minutes'
                             color={"pmpurple.13"}
                             variant='outline'
                         >
@@ -898,20 +974,45 @@ export const Register: FC<InterfaceRegister>=()=> {
                         </Button>
                         : null}
                 </Center>
-                {submitButtonClicked ?
-                    <Progress
-                        isAnimated
-                        hasStripe
-                        value={64}
-                        size='sm'
-                        mt={'8px'}
-                        height='10px'
-                        css={{
-                            border: '1px solid #c1aec1',
-                        }}
-                        colorScheme="green"/>
-                    : null}
+                <Center>
+                    <Box
+                        borderStyle={'solid'}
+                        border={'2px'}
+                        borderColor={'pmpurple.13'}
+                        bg={'pmpurple.3'}
+                        mt={"20px"}
+                        mb={"2px"}
+                        px={'6px'}
+                        //loadingText='Waiting to get cost estimates for gas'
+                        color={"pmpurple.13"}
+                    >
+                        <Text as='u'>Estimated Gas: {gasPrice}</Text>
+                        {/*{estimateGasHandler}*/}
+                    </Box>
+            </Center>
+
+                <Modal blockScrollOnMount={false} isOpen={isOpen} onClose={onClose}>
+                    <ModalOverlay />
+                    <ModalContent>
+                        <ModalHeader>You've already minted, one identity per account number</ModalHeader>
+                        <ModalCloseButton />
+                        <ModalBody>
+                            <Text fontWeight="bold" mb="1rem">
+                                You can scroll the content behind the modal
+                            </Text>
+                            sdflkhjsdhbfweriotuyerughdfkjghdflkgjrehyterkljgfdlfhkgdbfvbdkjfhgweiurytdjhsbg;kdhg;lkfdhgiudstvbreethkejghkldfhgskljhdfg
+                        </ModalBody>
+
+                        <ModalFooter>
+                            <Button color={"pmpurple.13"} mr={3} onClick={onClose}>
+                                Close
+                            </Button>
+                        </ModalFooter>
+                    </ModalContent>
+                </Modal>
+
             </Box>
+
         </Flex>
     )
 };
