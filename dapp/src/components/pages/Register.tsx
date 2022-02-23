@@ -40,17 +40,8 @@ import {
     ModalFooter,
     ModalBody,
     ModalCloseButton,
-    useDisclosure,
+    useDisclosure, Container,
 } from '@chakra-ui/react';
-// import {
-//     Modal,
-//     ModalOverlay,
-//     ModalContent,
-//     ModalHeader,
-//     ModalFooter,
-//     ModalBody,
-//     ModalCloseButton,
-// } from "@chakra-ui/core";
 import {FaFacebook, FaGithub, FaGoogle, FaScroll} from 'react-icons/fa';
 import { MdOutlineColorLens} from 'react-icons/md';
 import {useAppDispatch, useAppSelector} from "../../app/hooks";
@@ -58,8 +49,9 @@ import PMLogo from '../../assets/PMGIMPResized.png';
 import Logo from '../../assets/Logo';
 import {ColorChangeHandler, ColorResult, SketchPicker, GithubPicker, RGBColor} from 'react-color';
 import {RequestAccountsAsyncAction} from "../../features/RequestWalletAccountSlice";
-import {mintNFIAsyncAction, gasForMintNFIAsyncAction} from "../../features/MintNFISlice";
+import {mintNFIAsyncAction, gasForMintNFIAsyncAction, mintingError} from "../../features/MintNFISlice";
 import mintNFI from "../../abiFiles/PaperMastersNFI.json";
+import {call} from "redux-saga/effects";
 
 
 interface InterfaceRegister {
@@ -74,12 +66,11 @@ const ColorRGBToString=(colorResultRGB: ColorResult)=>{
 
 export const Register: FC<InterfaceRegister>=()=> {
 
-    const { isOpen, onOpen, onClose } = useDisclosure();
-
     const dispatch = useAppDispatch();
     const accountsArr = useAppSelector((state) => state.register.accounts);
     const status = useAppSelector((state) => state.register.status);
     const gasPrice = useAppSelector((state) => state.mint.gasPrice);
+    const mintSucceeded = useAppSelector((state) => state.mint.mintSucceeded);
 
     const [name, setName] = useState<string | "">("");
     const [profession, setProfession] = useState<string | "">("");
@@ -107,6 +98,8 @@ export const Register: FC<InterfaceRegister>=()=> {
 
     const [submitButtonClicked, setSubmitButtonClicked] = useState<boolean>(false);
 
+    const [ isModalOpen, setIsModalOpen ] = useState<boolean>(false);
+
     console.log(originDate.getTime());
     const originDateFormatted: string = `${originDate.toLocaleString('en-us', {month: 'short'})} ${originDate.getDate()}, ${originDate.getFullYear()}`
 
@@ -132,8 +125,8 @@ export const Register: FC<InterfaceRegister>=()=> {
         setUniqueYou(e.currentTarget.value);
     };
 
-        const colorChangeHandler: ColorChangeHandler = (colorSelect: ColorResult) => {
-            switch (whichColorField) {
+    const colorChangeHandler: ColorChangeHandler = (colorSelect: ColorResult) => {
+        switch (whichColorField) {
             case 'colorBG':
                 setbgRGB(colorSelect);
                 break;
@@ -168,7 +161,7 @@ export const Register: FC<InterfaceRegister>=()=> {
         if (accountsArr.length !== 0) {
             estimateGasHandler();
         }
-    }, [accountsArr, name, email, profession, slogan, website, organization, uniqueYou])
+    }, [accountsArr, name, email, profession, slogan, website, organization, uniqueYou]);
 
     const submitMintHandler = () => {
         const mintPayload: {} = {
@@ -202,7 +195,15 @@ export const Register: FC<InterfaceRegister>=()=> {
         dispatch(gasForMintNFIAsyncAction(mintPayload));
     };
 
+useEffect(()=>{
+    if(mintSucceeded==='failed'){
+        setIsModalOpen(true);
+    }
+},[mintSucceeded]);
+
+
     return (
+
         <Flex
             w={"100%"}
             align="center"
@@ -275,7 +276,6 @@ export const Register: FC<InterfaceRegister>=()=> {
                                 h={'50px'}
                             >
                                 <PopoverBody>
-
                                     <Box position={'absolute'} zIndex={'2'}>
                                         <SketchPicker
                                             color={bgRGB.rgb}
@@ -797,6 +797,8 @@ export const Register: FC<InterfaceRegister>=()=> {
 
                 <Divider py={'0px'} mb="54px" color={'pmpurple.8'}/>
 
+                <Container centerContent>
+
                 <AspectRatio w='320px' ratio={4 / 5}>
                     <Box
                         h={"100%"}
@@ -835,7 +837,6 @@ export const Register: FC<InterfaceRegister>=()=> {
                                     src='PMlogo.png'
                                     boxSize='3.05em'
                                     variant={"square"}
-                                    //square={true}
                                     css={{
                                         border: '2px solid #4f384f',
                                     }}
@@ -860,7 +861,7 @@ export const Register: FC<InterfaceRegister>=()=> {
                                 PaperMaster
                             </Text>
 
-                            <Text noOfLines={2} mb={'0px'} py={'0px'} px={'16px'} fontSize={'18px'} fontWeight={500}
+                            <Text noOfLines={[1, 2]} mb={'0px'} py={'0px'} px={'16px'} fontSize={'18px'} fontWeight={500}
                                   fontFamily={'body'} align={'center'}
                                   color={`rgba(${colorTextName.rgb.r}, ${colorTextName.rgb.g}, ${colorTextName.rgb.b}, ${colorTextName.rgb.a})`}>
                                 {name}
@@ -927,22 +928,20 @@ export const Register: FC<InterfaceRegister>=()=> {
                                     bottom={'0px'}
                                     right={'0px'}
                                     left={'0px'}
-                                    h={'25px'}
+                                    h={'26px'}
                                     backgroundPosition="center"
                                     objectFit={'cover'}
                                     // w={'100%'}
                                     bg={'pmpurple.10'}
                                     // borderStyle={'solid'}
                                     // border={'1px'}
-
                                     // borderColor={'pmpurple.13'}
                                     _hover={{
                                         transform: 'translateY(4px)',
                                         //boxShadow: 'md',
                                     }}
                                 >
-                                    <Text p={'2px'} fontSize={'9.5pt'} color={'white'} whiteSpace={'break-spaces'}>
-                                        {/*NFI Identification string will show once minted*/}
+                                    <Text p={'3px'} fontSize={'9.8pt'} color={'white'} whiteSpace={'break-spaces'}>
                                         {accountsArr[0]}
                                     </Text>
                                 </Box>
@@ -950,70 +949,80 @@ export const Register: FC<InterfaceRegister>=()=> {
                         </Stack>
                     </Box>
                 </AspectRatio>
+                </Container>
 
-                <Center>
-                    {name !== "" ?
-                        <Button
-                            borderStyle={'solid'}
-                            border={'2px'}
-                            borderColor={'pmpurple.13'}
-                            bg={'pmpurple.3'}
-                            mt={"20px"}
-                            mb={"2px"}
-                            _hover={{
-                                transform: 'translateY(-2px)',
-                                boxShadow: 'md',
-                            }}
-                            onClick={submitMintHandler}
-                            isLoading={submitButtonClicked}
-                            loadingText='Submitting to the Blockchain for minting, this can take up to 2.5 minutes'
-                            color={"pmpurple.13"}
-                            variant='outline'
-                        >
-                            Submit
-                        </Button>
-                        : null}
-                </Center>
-                <Center>
-                    <Box
-                        borderStyle={'solid'}
-                        border={'2px'}
-                        borderColor={'pmpurple.13'}
-                        bg={'pmpurple.3'}
-                        mt={"20px"}
-                        mb={"2px"}
-                        px={'6px'}
-                        //loadingText='Waiting to get cost estimates for gas'
-                        color={"pmpurple.13"}
-                    >
-                        <Text as='u'>Estimated Gas: {gasPrice}</Text>
-                        {/*{estimateGasHandler}*/}
-                    </Box>
-            </Center>
 
-                <Modal blockScrollOnMount={false} isOpen={isOpen} onClose={onClose}>
-                    <ModalOverlay />
-                    <ModalContent>
-                        <ModalHeader>You've already minted, one identity per account number</ModalHeader>
-                        <ModalCloseButton />
-                        <ModalBody>
-                            <Text fontWeight="bold" mb="1rem">
-                                You can scroll the content behind the modal
-                            </Text>
-                            sdflkhjsdhbfweriotuyerughdfkjghdflkgjrehyterkljgfdlfhkgdbfvbdkjfhgweiurytdjhsbg;kdhg;lkfdhgiudstvbreethkejghkldfhgskljhdfg
-                        </ModalBody>
 
-                        <ModalFooter>
-                            <Button color={"pmpurple.13"} mr={3} onClick={onClose}>
-                                Close
-                            </Button>
-                        </ModalFooter>
-                    </ModalContent>
-                </Modal>
+
+                   <Center>
+                       {name !== "" ?
+                           <Button
+                               borderStyle={'solid'}
+                               border={'2px'}
+                               borderColor={'pmpurple.13'}
+                               bg={'pmpurple.3'}
+                               mt={"20px"}
+                               mb={"2px"}
+                               _hover={{
+                                   transform: 'translateY(-2px)',
+                                   boxShadow: 'md',
+                               }}
+                               onClick={submitMintHandler}
+                               isLoading={submitButtonClicked}
+                               loadingText='Submitting to the Blockchain for minting, this can take up to 2.5 minutes'
+                               color={"pmpurple.13"}
+                               variant='outline'
+                           >
+                               Submit
+                           </Button>
+                           : null}
+                   </Center>
+                   <Center>
+
+                   <Box
+                   borderStyle={'solid'}
+                   border={'2px'}
+                   borderColor={'pmpurple.13'}
+                   bg={'pmpurple.3'}
+                   mt={"20px"}
+                   mb={"2px"}
+                   px={'6px'}
+                   //loadingText='Waiting to get cost estimates for gas'
+                   color={"pmpurple.13"}
+                   >
+                   <Text as='u'>Estimated Gas: {gasPrice}</Text>
+               {/*{estimateGasHandler}*/}
+                   </Box>
+                   </Center>
+
+
+
+                {isModalOpen &&
+                    <Modal closeOnOverlayClick={false} blockScrollOnMount={false} isOpen={true} onClose={()=>{setIsModalOpen(false)}}>
+                        <ModalOverlay/>
+                        <ModalContent>
+                            <ModalHeader fontWeight="bold" >You've already minted, one identity per account number</ModalHeader>
+                            <ModalCloseButton/>
+                            <ModalBody pb={6}>
+                                <Text mb="1rem">
+                                    If you need failure message......
+                                </Text>
+                            </ModalBody>
+                            <ModalFooter>
+
+                                <Button color={"pmpurple.13"} mr={3} onClick={()=>{setIsModalOpen(false)}}>
+                                    Close
+                                </Button>
+
+                            </ModalFooter>
+                        </ModalContent>
+                    </Modal>
+                }
 
             </Box>
 
         </Flex>
+
     )
 };
 

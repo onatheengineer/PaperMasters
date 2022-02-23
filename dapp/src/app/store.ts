@@ -2,6 +2,7 @@ import { configureStore, ThunkAction, Action} from '@reduxjs/toolkit';
 import registerSlice from "../features/RequestWalletAccountSlice";
 import searchSlice from '../features/SearchSlice';
 import mintSlice from '../features/MintNFISlice';
+import mintedSlice from '../features/MintedNFISlice';
 import createSaga from "redux-saga";
 import rootSaga from "../features/rootSagas";
 import logger from 'redux-logger';
@@ -15,6 +16,7 @@ export const store = configureStore({
     register: registerSlice,
     search: searchSlice,
     mint: mintSlice,
+    minted: mintedSlice,
 
   },
 });

@@ -50,12 +50,11 @@ contract PaperMastersNFI is ERC721, Ownable {
         return _dictionaryNFIs[walletAddress];
     }
 
-    function tokenIDtoIdentity(uint256 _tokenid) public view returns(identity memory) {
+    function tokenIDtoIdentityStruct(uint256 _tokenid) public view returns(identity memory) {
         return totalIdentities[_tokenid];
     }
 
-
-    function addressHasToken(address walletAddress) public view returns(bool) {
+    function addressHasTokenBool(address walletAddress) public view returns(bool) {
         uint256 _tokenId = addressToTokenID(walletAddress);
         return _tokenId >= 1;
     }
@@ -76,6 +75,8 @@ contract PaperMastersNFI is ERC721, Ownable {
         string memory baseURI = _baseURI();
 
         return bytes(baseURI).length > 0 ? string(abi.encodePacked(baseURI, owner)) : "";
+
+        //string memory tokenURI = baseURI/identity[tokenId];
     }
 
     function getIdentityFee() public view returns (uint256) {
@@ -159,7 +160,7 @@ contract PaperMastersNFI is ERC721, Ownable {
         uint _originDate
     ) public virtual noReentrant payable whenNotPaused
     {
-        require(!addressHasToken(msg.sender)," Wallet already has an NFI! You get one per wallet account");
+        require(!addressHasTokenBool(msg.sender)," Wallet already has an NFI! You get one per wallet account");
         require(msg.value >= identityFee, "Not enough ETH sent; check price!");
 
         identity memory _identity = identity({
@@ -194,5 +195,4 @@ contract PaperMastersNFI is ERC721, Ownable {
     function safeTransferFrom(address from, address to, uint256 tokenId) public virtual override  onlyOwner {}
     function safeTransferFrom(address from, address to, uint256 tokenId, bytes memory _data) public virtual override onlyOwner {}
     function _safeTransfer(address from, address to, uint256 tokenId, bytes memory _data) internal virtual override onlyOwner {}
-
 }

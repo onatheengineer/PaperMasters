@@ -1,7 +1,7 @@
 import { call, put, takeEvery, delay, all, takeLatest, select} from 'redux-saga/effects';
 import Web3 from "web3";
 import RegisterSlice, {accountsArr, RequestAccountsAsyncAction, statusOfArr} from "./RequestWalletAccountSlice";
-import {mintNFIAsyncAction, mintSucceededSuccessful, gasForMintNFIAsyncAction, gasForMinting} from "./MintNFISlice";
+import {mintNFIAsyncAction, mintSucceededSuccessful, gasForMintNFIAsyncAction, gasForMinting, mintingError} from "./MintNFISlice";
 import MintABI from '../abiFiles/PaperMastersNFI.json'
 
 export const getFilledAccountsArr = (state: any) => state.register.accounts;
@@ -10,7 +10,7 @@ function* mintNFISaga(actionObject: any):any {
 
     if (actionObject.payload.name === null) {
         //TODO: handle error logging
-        console.log("Name can not be empty");
+        yield put(mintingError( "Name can not be empty" ));
         return;
     }
 
@@ -18,22 +18,22 @@ function* mintNFISaga(actionObject: any):any {
     console.log(filledAccountsArr);
 
     if (filledAccountsArr.length === 0) {
-        console.log("Please Connect Wallet to mint an NFI");
+        yield put(mintingError("Please Connect Wallet to mint an NFI" ));
         return;
     }
 
-    yield console.log("my mint identity saga")
-    yield console.table(actionObject)
-    yield console.table(actionObject.payload)
-    yield console.log(actionObject.payload.name)
+    // yield console.log("my mint identity saga")
+    // yield console.table(actionObject)
+    // yield console.table(actionObject.payload)
+    // yield console.log(actionObject.payload.name)
 
     const web3 = new Web3(Web3.givenProvider);
     const papermastersNFIContract = new web3.eth.Contract(MintABI.abi as any, MintABI.networks['1666700000'].address);
 
-    const alreadyMinted = yield call(papermastersNFIContract.methods.addressHasToken(filledAccountsArr[0]).call, {from: filledAccountsArr[0]})
+    const alreadyMinted = yield call(papermastersNFIContract.methods.addressHasTokenBool(filledAccountsArr[0]).call, {from: filledAccountsArr[0]})
     if (alreadyMinted){
         yield put(mintSucceededSuccessful('failed'));
-        console.log('Sorry, only one NFI per account')
+        yield put(mintingError( 'Sorry, only one NFI per account' ));
         return;
     }
 
@@ -54,12 +54,13 @@ function* mintNFISaga(actionObject: any):any {
     try{
         const mintResult: any = yield call( prepareResult.send, {from: filledAccountsArr[0], value:100000000000000000});
         yield put(mintSucceededSuccessful('success'));
-        console.log("mint sent!");
+        console.log( "mint sent!" );
+        yield put(mintingError(""))
         console.log(mintResult);
     }
-    catch(mintFailed)
+    catch(mintFailed: any)
     { yield put(mintSucceededSuccessful('failed'))
-        console.log(mintFailed)
+        yield put(mintingError(mintFailed.message))
     }
 }
 

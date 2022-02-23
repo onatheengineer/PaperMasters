@@ -7,6 +7,15 @@ import Web3 from "web3";
 //
 // event Withdraw
 
+function* depositSaga(){
+
+};
+
+
 function* withdrawSaga(){
+
+};
+
+function* getBalanceSaga(){
 
 };

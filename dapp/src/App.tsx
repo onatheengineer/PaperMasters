@@ -20,7 +20,7 @@ function App() {
     const dispatch = useAppDispatch();
 
 useEffect( () => {
-    console.log("is this euseEffect running")
+    console.log("is this useEffect running")
     dispatch(RequestAccountsAsyncAction());
 }, [] )
 

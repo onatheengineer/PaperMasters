@@ -20,10 +20,10 @@
     "@openzeppelin/contracts-upgradeable": "^4.4.1",
     "chai": "^4.3.4",
     "solc": "^0.8.10",
-    "truffle": "^5.4.26",
+    "truffle": "^5.1.67",
     "updates": "^13.0.1"
   },
   "devDependencies": {
-    "@truffle/hdwallet-provider": "^2.0.3"
+    "@truffle/hdwallet-provider": "^1.7.0"
   }
 }

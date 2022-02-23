@@ -2,6 +2,6 @@ import { call, put, takeEvery, delay, all, takeLatest, select} from 'redux-saga/
 import Web3 from "web3";
 
 
-function* addressToTokenSaga(){
+function* setBaseURISaga(){
 
 };
