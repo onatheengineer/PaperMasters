@@ -48,8 +48,8 @@ import {useAppDispatch, useAppSelector} from "../../app/hooks";
 import PMLogo from '../../assets/PMGIMPResized.png';
 import Logo from '../../assets/Logo';
 import {ColorChangeHandler, ColorResult, SketchPicker, GithubPicker, RGBColor} from 'react-color';
-import {RequestAccountsAsyncAction} from "../../features/RequestWalletAccountSlice";
-import {mintNFIAsyncAction, gasForMintNFIAsyncAction, mintingError} from "../../features/MintNFISlice";
+import {RequestAccountsAsyncActionSaga} from "../../features/RequestWalletAccountSlice";
+import {mintNFIAsyncActionSaga, gasForMintNFIAsyncActionSaga, mintingError} from "../../features/MintNFISlice";
 import mintNFI from "../../abiFiles/PaperMastersNFI.json";
 import {call} from "redux-saga/effects";
 
@@ -177,7 +177,7 @@ export const Register: FC<InterfaceRegister>=()=> {
         }
         console.table(mintPayload);
         setSubmitButtonClicked(true)
-        dispatch(mintNFIAsyncAction(mintPayload));
+        dispatch(mintNFIAsyncActionSaga(mintPayload));
     };
 
     const estimateGasHandler = () => {
@@ -192,7 +192,7 @@ export const Register: FC<InterfaceRegister>=()=> {
             bgRGB: `${ColorRGBToString(bgRGB)}`,
             originDate: originDate.getTime(),
         }
-        dispatch(gasForMintNFIAsyncAction(mintPayload));
+        dispatch(gasForMintNFIAsyncActionSaga(mintPayload));
     };
 
 useEffect(()=>{

@@ -33,16 +33,16 @@ export default function Home() {
                             fontWeight={300}
                             lineHeight={1.2}
                             fontSize={useBreakpointValue({base: '4xl', md: '3xl'})}>
-                            Providing protection and legitimacy by bringing Non-Fungable-Identities (NFIs) to the Blockchain
+                            Providing protection and legitimacy for the community by bringing Non-Fungable-Identities (NFIs) to the Blockchain
                         </Text>
                         <Stack direction={'row'}>
-                            <Button
-                                bg={'whiteAlpha.300'}
-                                rounded={'full'}
-                                color={'white'}
-                                _hover={{bg: 'whiteAlpha.500'}}>
-                                Show me more
-                            </Button>
+                            {/*<Button*/}
+                            {/*    bg={'whiteAlpha.300'}*/}
+                            {/*    rounded={'full'}*/}
+                            {/*    color={'white'}*/}
+                            {/*    _hover={{bg: 'whiteAlpha.500'}}>*/}
+                            {/*    Show me more*/}
+                            {/*</Button>*/}
                         </Stack>
                     </Stack>
                 </VStack>

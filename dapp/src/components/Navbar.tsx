@@ -32,7 +32,7 @@ import {IoMdCheckmarkCircleOutline} from "react-icons/io";
 import {FiTrendingUp} from "react-icons/fi";
 import Web3 from "web3";
 import { useAppSelector, useAppDispatch } from '../app/hooks';
-import RegisterSlice, {accountsArr, RequestAccountsAsyncAction, statusOfArr} from '../features/RequestWalletAccountSlice';
+import RegisterSlice, {accountsArr, RequestAccountsAsyncActionSaga, statusOfArr} from '../features/RequestWalletAccountSlice';
 
 
 export default function Navbar() {
@@ -187,7 +187,7 @@ export default function Navbar() {
                                             color={'pmgreen.16'}
                                             onClick={()=> {
                                                 console.log('i am clicked')
-                                                dispatch(RequestAccountsAsyncAction());
+                                                dispatch(RequestAccountsAsyncActionSaga());
                                             }}
                                             square={'full'}
                                             variant={'link'}
