@@ -256,8 +256,6 @@ export const Sidebar: FC<InterfaceSidebar>= ({icon, profileName} ) => {
                     // left="5"
                     h="fill"
                     backgroundColor='pmpurple.2'
-                    //marginTop="2.5vh"
-                    //boxShadow="0 4px 12px 0 rgba(0, 0, 0, 0.05)"
                     borderRight={'2px'}
                     borderColor={'pmpurple.13'}
                     // borderRadius={navSize == "small" ? "15px" : "30px"}
@@ -322,9 +320,7 @@ export const Sidebar: FC<InterfaceSidebar>= ({icon, profileName} ) => {
                     </Flex>
                 </Box>
             }
-            <Flex
-                w={"100%"}
-            >
+            <Flex w={"100%"} >
                 <Routes>
                     <Route path="/" element={<Home/>}/>
                     <Route path={'/identity'} element={<Identity/>}/>
@@ -342,7 +338,7 @@ export const Sidebar: FC<InterfaceSidebar>= ({icon, profileName} ) => {
                     <Route path={'/yourpeople'} element={<YourPeople/>}/>
                 </Routes>
             </Flex>
-        </Flex>
+         </Flex>
     )
 };
 

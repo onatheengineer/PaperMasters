@@ -31,7 +31,9 @@ function App() {
 
 
     return (
-        <Box>
+        <Box
+            border={'1px solid'} borderColor={"pmpurple.8"}
+        >
             <Navbar/>
             <Sidebar/>
             <Footer/>

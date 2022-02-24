@@ -21,7 +21,7 @@ ReactDOM.render(
         <ChakraProvider theme={theme}>
         <BrowserRouter>
       <App />
-        </BrowserRouter>,
+        </BrowserRouter>
         </ChakraProvider>
     </MetamaskStateProvider>
     </Provider>

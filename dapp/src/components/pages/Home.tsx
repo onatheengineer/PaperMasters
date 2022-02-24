@@ -4,10 +4,12 @@ import React from "react";
 import {} from '@chakra-ui/react';
 import WithAction from "../Navbar";
 import BackgroundLogo from '../../assets/legoLavendarheadercroped.png';
-import SecondFooterHome from '../Footers/SecondFooterHome';
+import SecondFooter from '../Footers/SecondFooterHome'
 
 export default function Home() {
     return (
+        <Box>
+
             <Flex
                 w={'100vw'}
                 h={'60vh'}
@@ -45,7 +47,10 @@ export default function Home() {
                             {/*</Button>*/}
                         </Stack>
                     </Stack>
+
                 </VStack>
             </Flex>
+    <SecondFooter/>
+        </Box>
     )
 };

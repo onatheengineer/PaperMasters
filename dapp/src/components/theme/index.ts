@@ -12,7 +12,6 @@ import {SocialMediaLinks} from "./components/SocialMediaLinks";
 import {Link} from "./components/Link";
 import {Divider} from "./components/Divider";
 
-
 const theme = extendTheme({
     colors,
     styles: {

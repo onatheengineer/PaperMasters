@@ -41,9 +41,9 @@ export default function Navbar() {
     const dispatch = useAppDispatch();
 
     return (
-        <>
-            <Box alignItems={'center'} border={'1px solid #daceda'} bg={"pmpurple.2"} px={16}>
-                <Flex h={16} alignItems={'center'} justifyContent={'space-between'}>
+            <Box alignItems={'center'} border={'1px solid'} borderColor={"pmpurple.8"} bg={"pmpurple.2"} p={'5px'}
+
+            >
                     <IconButton
                         size={'md'}
                         icon={isOpen ? <CloseIcon/> : <HamburgerIcon/>}
@@ -208,9 +208,7 @@ export default function Navbar() {
                         </HStack>
                     </HStack>
 
-                </Flex>
             </Box>
-        </>
     );
 }
 
