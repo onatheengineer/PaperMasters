@@ -50,8 +50,8 @@ const MintNFISlice = createSlice ({
 
 //console.log(MintNFISlice);
 export const { mintNFIContract, mintSucceededSuccessful, gasForMinting, mintingError } = MintNFISlice.actions;
-export const mintNFIAsyncActionSaga = createAction<{}>("MINT_NFI_SAGA");
-export const gasForMintNFIAsyncActionSaga = createAction<{}>("GAS_FOR_MINT_NFI_SAGA");
+export const mintNFIAsyncAction = createAction<{}>("MINT_NFI_SAGA");
+export const gasForMintNFIAsyncAction = createAction<{}>("GAS_FOR_MINT_NFI_SAGA");
 
 export default MintNFISlice.reducer;
 

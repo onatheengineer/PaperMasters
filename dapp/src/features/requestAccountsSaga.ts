@@ -1,7 +1,7 @@
 import { call, put, takeEvery, delay, all, takeLatest } from 'redux-saga/effects';
 import Web3 from "web3";
 import {accountsArr, statusOfArr} from "./RequestWalletAccountSlice";
-import {RequestAccountsAsyncActionSaga} from "./RequestWalletAccountSlice";
+import {requestAccountsAsyncAction} from "./RequestWalletAccountSlice";
 
 
 function* requestAccountsSaga() {
@@ -20,7 +20,7 @@ function* requestAccountsSaga() {
 }
 
 export function* watchRequestAccountsSaga() {
-    yield takeEvery(RequestAccountsAsyncActionSaga.type, requestAccountsSaga);
+    yield takeEvery(requestAccountsAsyncAction.type, requestAccountsSaga);
 }
 
 

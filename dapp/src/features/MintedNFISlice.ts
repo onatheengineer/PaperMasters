@@ -1,33 +1,20 @@
 import { createSlice, PayloadAction, createAction } from "@reduxjs/toolkit";
 
 
-interface IdentityDictionary{
-    walletAccount: string;
-    name: string;
-    email: string;
-    profession: string;
-    organization: string;
-    slogan: string;
-    website: string;
-    uniqueYou: string;
-    bgRGB: string;
-    originDate: number;
-}
-
 interface MintedState {
     addressHasIdentity: boolean;
     addressToTokenID: number;
-    tokenIDtoIdentityStruct: IdentityDictionary | undefined;
-    mintedNFISagasStatus: 'succeeded' | 'failed' | 'initial null state';
-    mintedNFISagasError: string;
+    tokenIDtoIdentityStruct: string[];
+    mintedNFIStatus: 'succeeded' | 'failed' | 'initial null state';
+    mintedNFIError: string;
 }
 
 const initialState: MintedState = {
     addressHasIdentity: false,
     addressToTokenID: 0,
-    tokenIDtoIdentityStruct: undefined,
-    mintedNFISagasStatus: 'initial null state',
-    mintedNFISagasError: '',
+    tokenIDtoIdentityStruct: [],
+    mintedNFIStatus: 'initial null state',
+    mintedNFIError: '',
 };
 
 const mintedSlice = createSlice ({
@@ -43,21 +30,21 @@ const mintedSlice = createSlice ({
         tokenIDToIdentity(state, action) {
             state.tokenIDtoIdentityStruct = action.payload
         },
-        mintedNFISagas(state, action) {
-            state.mintedNFISagasStatus = action.payload
+        mintedNFI(state, action) {
+            state.mintedNFIStatus = action.payload
         },
-        mintedNFISagasErrorMessage(state, action) {
-            state.mintedNFISagasError = action.payload
+        mintedNFIErrorMessage(state, action) {
+            state.mintedNFIError = action.payload
         },
     },
 });
 
 //console.log(MintNFISlice);
-export const { addressHasIdentityBool, addressToToken, tokenIDToIdentity, mintedNFISagas, mintedNFISagasErrorMessage } = mintedSlice.actions;
+export const { addressHasIdentityBool, addressToToken, tokenIDToIdentity, mintedNFI, mintedNFIErrorMessage } = mintedSlice.actions;
 
-export const addressHasIdentityBoolActionSaga = createAction<string>("DOES_ADDRESS_HAVE_IDENTITY_SAGA");
-export const addressToTokenActionSaga = createAction<string>("ADDRESS_TO_TOKEN_SAGA");
-export const tokenIDToIdentityActionSaga = createAction<number>("TOKEN_HAS_IDENTITY_SAGA");
+export const addressHasIdentityBoolAction = createAction<string>("DOES_ADDRESS_HAVE_IDENTITY_SAGA");
+export const addressToTokenAction = createAction<string>("ADDRESS_TO_TOKEN_SAGA");
+export const tokenIDToIdentityAction = createAction<number>("TOKEN_HAS_IDENTITY_SAGA");
 
 export default mintedSlice.reducer;
 

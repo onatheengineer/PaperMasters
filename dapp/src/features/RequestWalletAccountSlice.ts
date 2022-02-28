@@ -32,7 +32,7 @@ const RequestWalletAccountSlice = createSlice ({
 console.log(RequestWalletAccountSlice);
 export const { accountsArr, statusOfArr } = RequestWalletAccountSlice.actions;
 
-export const RequestAccountsAsyncActionSaga = createAction("REQUEST_ACCOUNTS_ACTION_SAGA");
+export const requestAccountsAsyncAction = createAction("REQUEST_ACCOUNTS_ACTION_SAGA");
 
 export default RequestWalletAccountSlice.reducer;
 

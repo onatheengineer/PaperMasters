@@ -261,7 +261,7 @@ RightContent 是以上几个组件的组合，同时新增了 plugins 的 `Selec
       <QuestionCircleOutlined />
     </span>
   </Tooltip>
-  <Avatar />
+  <AvatarNFI />
   {REACT_APP_ENV && (
     <span>
       <Tag color={ENVTagColor[REACT_APP_ENV]}>{REACT_APP_ENV}</Tag>

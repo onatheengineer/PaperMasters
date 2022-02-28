@@ -12,7 +12,7 @@ export default function Home() {
 
             <Flex
                 w={'100vw'}
-                h={'60vh'}
+                h={'70vh'}
                 backgroundImage={BackgroundLogo}
                 backgroundSize={'cover'}
                 backgroundPosition={'center center'}
@@ -35,7 +35,7 @@ export default function Home() {
                             fontWeight={300}
                             lineHeight={1.2}
                             fontSize={useBreakpointValue({base: '4xl', md: '3xl'})}>
-                            Providing protection and legitimacy for the community by bringing Non-Fungable-Identities (NFIs) to the Blockchain
+                            Providing protection and legitimacy for People, Companies and Contracts by bringing Non-Fungable-Identities (NFIs) to the Blockchain
                         </Text>
                         <Stack direction={'row'}>
                             {/*<Button*/}
@@ -53,4 +53,5 @@ export default function Home() {
     <SecondFooter/>
         </Box>
     )
+
 };

@@ -32,7 +32,7 @@ const Feature = ({ heading, text }: FeatureProps) => {
 
 export default function secondFooterHome() {
     return (
-        <Box as={Container} maxW="full" pt={'24px'} pb={'24px'} px={'84px'} bg={'pmpurple.4'} color={'pmpurple.11'}>
+        <Box as={Container} maxW="full" pt={'24px'} pb={'24px'} px={'84px'} bg={'pmpurple.4'} color={'pmpurple.12'}>
             <Grid
                 templateColumns={{
                     base: 'repeat(1, 1fr)',

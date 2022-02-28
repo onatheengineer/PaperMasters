@@ -1,7 +1,7 @@
 import { call, put, takeEvery, delay, all, takeLatest, select} from 'redux-saga/effects';
 import Web3 from "web3";
-import RegisterSlice, {accountsArr, RequestAccountsAsyncActionSaga, statusOfArr} from "./RequestWalletAccountSlice";
-import {mintNFIAsyncActionSaga, mintSucceededSuccessful, gasForMintNFIAsyncActionSaga, gasForMinting, mintingError} from "./MintNFISlice";
+import RegisterSlice, {accountsArr, requestAccountsAsyncAction, statusOfArr} from "./RequestWalletAccountSlice";
+import {mintNFIAsyncAction, mintSucceededSuccessful, gasForMintNFIAsyncAction, gasForMinting, mintingError} from "./MintNFISlice";
 import MintABI from '../abiFiles/PaperMastersNFI.json'
 
 export const getFilledAccountsArr = (state: any) => state.register.accounts;
@@ -87,6 +87,7 @@ function* getGasForMintSaga(actionObject: any):any {
             value: 100000000000000000
         });
         console.log(`estimated gas price: ${gasMintResult}`);
+        //web3.utils.toWei(gasMintResult, "ether")
         yield put(gasForMinting(gasMintResult));
     } catch (gasEstimationError) {
         yield put(gasForMinting('failed'))
@@ -96,8 +97,8 @@ function* getGasForMintSaga(actionObject: any):any {
 
 
 export function* watchMintNFISaga() {
-    yield takeLatest(mintNFIAsyncActionSaga.type, mintNFISaga);
-    yield takeLatest(gasForMintNFIAsyncActionSaga.type, getGasForMintSaga);
+    yield takeLatest(mintNFIAsyncAction.type, mintNFISaga);
+    yield takeLatest(gasForMintNFIAsyncAction.type, getGasForMintSaga);
 }
 
 

@@ -4,7 +4,6 @@ import { mode } from '@chakra-ui/theme-tools';
 import {global} from "./styles.global";
 import {Button} from "./components/Button";
 import {Box} from "./components/Box";
-import {MenuButton} from "./components/MenuButton";
 import {colors} from './colors';
 import {Card} from './components/Card';
 import {Heading} from './components/Heading';
@@ -20,7 +19,6 @@ const theme = extendTheme({
     components: {
         Button,
         Box,
-        MenuButton,
         Card,
         Heading,
         SocialMediaLinks,

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import type {FC} from 'react';
-import {Link as ReachLink} from "react-router-dom";
+import {Link as ReachLink, useParams} from "react-router-dom";
 import {
     Avatar,
     AvatarGroup,
@@ -14,37 +14,62 @@ import {
     Switch,
     Text,
     useColorModeValue,
-    HStack,
-    VStack,
+    HStack, useDisclosure,
+    VStack, Container, AspectRatio, AvatarBadge, Divider, Center, InputRightElement, useStyleConfig,
 } from "@chakra-ui/react";
+import { RiShareForwardLine} from 'react-icons/ri';
 // Custom components
 import { BsFillCloudRainFill } from 'react-icons/bs'
-import Card from '../Card/Card';
-import CardBody from "../Card/CardBody";
-import CardHeader from "../Card/CardHeader";
 // Assets
-import avatar2 from "../../assets/img/avatars/avatar2.png";
-import avatar3 from "../../assets/img/avatars/avatar3.png";
-import avatar4 from "../../assets/img/avatars/avatar4.png";
-import avatar5 from "../../assets/img/avatars/avatar5.png";
-import avatar6 from "../../assets/img/avatars/avatar6.png";
 import ImageArchitect1 from "../../assets/img/ImageArchitect1.png";
 import ImageArchitect2 from "../../assets/img/ImageArchitect2.png";
 import ImageArchitect3 from "../../assets/img/ImageArchitect3.png";
 import ProfileBgImage from "../../assets/img/ProfileBackground.png";
-import {
-    FaCube,
-    FaFacebook,
-    FaInstagram,
-    FaPenFancy,
-    FaPlus,
-    FaTwitter,
-} from "react-icons/fa";
+import { FaCube, FaFacebook, FaInstagram, FaPenFancy, FaPlus, FaTwitter,} from "react-icons/fa";
 import { IoDocumentsSharp } from "react-icons/io5";
 import Sidebar from "../Sidebar";
 import {GiNewShoot} from "react-icons/gi";
 import {useAppSelector} from "../../app/hooks";
 import {SiSololearn} from "react-icons/si";
+import {accountsArr} from "../../features/RequestWalletAccountSlice";
+import {MdOutlineColorLens} from "react-icons/md";
+import AvatarNFI from "../AvatarNFI";
+import bgImage from '../../assets/legoLavendarheadercroped.png'
+import {useState} from "react";
+
+function Card(props: any) {
+    const { variant, children, ...rest } = props;
+    const styles = useStyleConfig("Card", { variant });
+    // Pass the computed styles into the `__css` prop
+    return (
+        <Box __css={styles} {...rest}>
+            {children}
+        </Box>
+    );
+}
+
+function CardBody(props: any) {
+    const { variant, children, ...rest } = props;
+    const styles = useStyleConfig("CardBody", { variant });
+    // Pass the computed styles into the `__css` prop
+    return (
+        <Box __css={styles} {...rest}>
+            {children}
+        </Box>
+    );
+}
+
+function CardHeader(props: any) {
+    const { variant, children, ...rest } = props;
+    const styles = useStyleConfig("CardHeader", { variant });
+    // Pass the computed styles into the `__css` prop
+    return (
+        <Box __css={styles} {...rest}>
+            {children}
+        </Box>
+    );
+}
+
 
 interface Interface {
 
@@ -53,24 +78,27 @@ interface Interface {
 
 export const Identity:FC<Interface>=()=> {
 
-
+    const { isOpen, onOpen, onClose } = useDisclosure()
+    const initialRef = React.useRef()
+    const finalRef = React.useRef()
     // Chakra color mode
     const textColor = useColorModeValue("#5c415c", "white");
 
     const filledAccountsArr = useAppSelector((state) => state.register.accounts);
     const tokenIDtoIdentityStruct = useAppSelector((state) => state.minted.tokenIDtoIdentityStruct);
 
-    return (
 
-        <Flex
-        //justify={'stretch'}
-        >
+
+    console.log(tokenIDtoIdentityStruct);
+
+
+    return (
+        <Flex>
             <Stack bg={"pmpurple.2"}>
                 <Box
-                    bgImage={'legoLavendarheadercroped.png'}
+                    bgImage={bgImage}
                     w="100%"
                     h="200px"
-                    // borderRadius="25px"
                     bgPosition="0%"
                     bgRepeat="repeat"
                     position="relative"
@@ -83,7 +111,6 @@ export const Identity:FC<Interface>=()=> {
                     backgroundPosition="center"
                     objectFit={'cover'}
                 >
-
                     <Flex
                         direction={{sm: "column", md: "row"}}
                         left={'10px'}
@@ -109,11 +136,9 @@ export const Identity:FC<Interface>=()=> {
                             w={{sm: "100%"}}
                             //textAlign={{sm: "center", md: "start"}}
                             bg={'transparent'}
-                            // border="2px solid "
-                            // borderColor='yellow'
+                            //border="2px solid yellow"
                             m={"0px"}
                             p={'0px'}
-
                         >
                             <Avatar
                                 me={{md: "22px"}}
@@ -137,8 +162,7 @@ export const Identity:FC<Interface>=()=> {
                                         fontWeight="bold"
                                         ms={{sm: "8px", md: "0px"}}
                                     >
-                                        {/*{name}*/}
-                                        Andrew from Mos Eisley
+                                        Non-Registered Wallet Account
                                     </Text>
 
                                     : <Flex alignItems={'center'}> {filledAccountsArr[0]} </Flex>}
@@ -248,11 +272,15 @@ export const Identity:FC<Interface>=()=> {
                                         boxShadow="inset 0 0 1px 1px hsl(0deg 0% 100% / 90%), 0 20px 27px 0 rgb(0 0 0 / 5%)"
                                         border="1px solid gray.500"
                                         cursor="pointer"
+                                        _hover={{
+                                            transform: 'translateY(4px)',
+                                            //boxShadow: 'md',
+                                        }}
                                     >
                                         <Icon as={FaCube} me="6px"/>
                                         <Text fontSize="sm" color={textColor} fontWeight="bold">
                                             {/*//when I click on this button I want it to route me to the validations page*/}
-                                            <Link as={ReachLink} to={'/validate'}>
+                                            <Link as={ReachLink} to={'/validate'}  _hover={{ textDecor: 'none' }}>
                                                 NFI:
                                                 Transaction Hash --connect to HarmonyOne
                                             </Link>
@@ -273,6 +301,12 @@ export const Identity:FC<Interface>=()=> {
                                         Mentions
                                     </Text>
                                 </Stack>
+                                <Stack spacing={0} align={'center'}>
+                                    <Text fontWeight={600}>23k</Text>
+                                    <Text fontSize={'sm'} color={'pmpurple.11'}>
+                                        Report this NFI
+                                    </Text>
+                                </Stack>
                             </HStack>
 
                         </VStack>
@@ -281,14 +315,14 @@ export const Identity:FC<Interface>=()=> {
                 <Stack p={'10px'}>
 
                     <Card borderRadius='15px' bg='white' p="12px" px="24px">
-                        <CardHeader p="12px 5px" mb="12px">
+                        <CardHeader p="12px 5px" mb="0px">
                             <Text fontSize="lg" color={textColor} fontWeight="bold">
                                 Description
                             </Text>
                         </CardHeader>
                         <CardBody px="5px">
                             <Flex direction="column">
-                                <Text fontSize="md" color="gray.500" fontWeight="400" mb="30px">
+                                <Text fontSize="md" color="gray.500" fontWeight="400" mb="20px">
                                     Mathematics may not teach us how to add love or subtract hate, but it gives
                                     us every reason to hope that every problem has a solution.
                                 </Text>
@@ -299,7 +333,7 @@ export const Identity:FC<Interface>=()=> {
                             <Card w='33%' borderRadius='15px' bg='white' p="16px" px="24px">
                                 <CardHeader p="12px 5px" mb="12px">
                                     <Text fontSize="lg" color={textColor} fontWeight="bold">
-                                        Platform Settings
+                                        Alias / User Names / Also Known As
                                     </Text>
                                 </CardHeader>
                                 <CardBody px="5px">
@@ -326,7 +360,7 @@ export const Identity:FC<Interface>=()=> {
                                                 color="gray.500"
                                                 fontWeight="400"
                                             >
-                                                Email me when my PMI attached NFTs sell
+                                                Email me when my NFI attached NFTs sell
                                             </Text>
                                         </Flex>
                                         <Flex align="center" mb="20px">
@@ -398,43 +432,72 @@ export const Identity:FC<Interface>=()=> {
                             <Card w='33%' borderRadius='15px' bg='white' p="16px" px="24px">
                                 <CardHeader p="12px 5px" mb="12px">
                                     <Text fontSize="lg" color={textColor} fontWeight="bold">
-                                        NFI goes here
-                                    </Text>
+
+                                        </Text>
                                 </CardHeader>
                                 <CardBody px="5px">
-                                    <Flex direction="column">
-                                        <Flex align="center" mb="18px">
-                                            <Text
-                                                fontSize="md"
-                                                color={textColor}
-                                                fontWeight="bold"
-                                                me="10px"
-                                            >
-                                                Familiar Name:{" "}
-                                            </Text>
-                                            <Text fontSize="md" color="gray.500" fontWeight="400">
-                                                Andrew the Jedi
-                                            </Text>
-                                        </Flex>
 
+                                    {filledAccountsArr.length !== 0 && tokenIDtoIdentityStruct.length !== 0 ?
 
-                                        <Flex align="center" mb="18px">
-                                            <Text
-                                                fontSize="md"
-                                                color={textColor}
-                                                fontWeight="bold"
-                                                me="10px"
-                                            >
-                                                Location:{" "}
-                                            </Text>
-                                            <Text fontSize="md" color="gray.500" fontWeight="400">
-                                                United States
-                                            </Text>
-                                        </Flex>
+                                       <AvatarNFI accountNumber={tokenIDtoIdentityStruct[0]}
+                                                  name={tokenIDtoIdentityStruct[1].split("|||")[0]}
+                                                  nameColor={tokenIDtoIdentityStruct[1].split("|||")[1]}
+                                                  email={tokenIDtoIdentityStruct[2].split("|||")[0]}
+                                                  emailColor={tokenIDtoIdentityStruct[2].split("|||")[1]}
+                                                  profession={tokenIDtoIdentityStruct[3].split("|||")[0]}
+                                                  professionColor={tokenIDtoIdentityStruct[3].split("|||")[1]}
+                                                  organization={tokenIDtoIdentityStruct[4].split("|||")[0]}
+                                                  organizationColor={tokenIDtoIdentityStruct[4].split("|||")[1]}
+                                                  slogan={tokenIDtoIdentityStruct[5].split("|||")[0]}
+                                                  sloganColor={tokenIDtoIdentityStruct[5].split("|||")[1]}
+                                                  website={tokenIDtoIdentityStruct[6].split("|||")[0]}
+                                                  websiteColor={tokenIDtoIdentityStruct[6].split("|||")[1]}
+                                                  uniqueYou={tokenIDtoIdentityStruct[7].split("|||")[0]}
+                                                  uniqueYouColor={tokenIDtoIdentityStruct[7].split("|||")[1]}
+                                                  avatarBG={tokenIDtoIdentityStruct[8]}
+                                                  originDate={parseInt(tokenIDtoIdentityStruct[9])}
+                                                   />
+                                           :
 
-                                    </Flex>
+                                        <Button
+                                            w={'100%'}
+                                            p={"6px"}
+                                            mt={'62px'}
+                                            bg={'pmpurple.2'}
+                                            h='10.00rem'
+                                            //size='lg'
+                                            borderRadius={'20px'}
+                                            borderStyle={'solid'}
+                                            border={'4px'}
+                                            borderColor={'pmpurple.6'}
+                                            textDecoration={'none'}
+                                            _hover={{
+                                                transform: 'translateY(-2px)',
+                                                boxShadow: 'xl',
+                                            }}
+                                        >
+                                        <Link as={ReachLink} to='/register'
+                                              _hover={{ textDecor: 'none' }}
+                                              cursor={'pointer'}
+                                        >
+                                            <CardHeader p="12px 5px" mb="12px">
+                                                <HStack>
+                                                <Text p='12px' textAlign={'center'} fontSize="xl" color={'pmpurple.13'} fontWeight="bold" whiteSpace={'pre-wrap'} >
+                                                    NFI will display here, please mint an NFI to your wallet account
+                                                </Text>
+                                                    <Box position={"absolute"} bottom={'10px'} right={"10px"}>
+                                                        <RiShareForwardLine fontSize={'40px'} />
+                                                    </Box>
+
+                                            </HStack>
+                                            </CardHeader>
+
+                                        </Link>
+                                        </Button>
+                                    }
                                 </CardBody>
                             </Card>
+
                             <Card w='33%' borderRadius='15px' bg='white' p="16px" px="24px">
                                 <CardHeader p="12px 5px" mb="12px">
                                     <Text fontSize="lg" color={textColor} fontWeight="bold">
@@ -457,7 +520,7 @@ export const Identity:FC<Interface>=()=> {
                                                         JediKnight{" "}
                                                     </Text>
                                                     <Text fontSize="xs" color="gray.500" fontWeight="400">
-                                                        Hi! I need more information...
+                                                        Hi! I need more information about your upcoming project...
                                                     </Text>
                                                 </Flex>
                                             </Flex>
@@ -633,11 +696,10 @@ export const Identity:FC<Interface>=()=> {
                                             fontWeight="bold"
                                             mb="10px"
                                         >
-                                            Modern
+                                            My future project...
                                         </Text>
                                         <Text fontSize="md" color="gray.500" fontWeight="400" mb="20px">
-                                            As Uber works through a huge amount of internal management
-                                            turmoil.
+                                            As I look through my bucket list, I find my next endeavor...
                                         </Text>
                                         <Flex justifyContent="space-between">
                                             <Button
@@ -682,11 +744,10 @@ export const Identity:FC<Interface>=()=> {
                                             fontWeight="bold"
                                             mb="10px"
                                         >
-                                            Scandinavian
+                                            Back in the day
                                         </Text>
                                         <Text fontSize="md" color="gray.500" fontWeight="400" mb="20px">
-                                            Music is something that every person has his or her own
-                                            specific opinion about.
+                                            Drawing was the thing to do, now it's digital art.
                                         </Text>
                                         <Flex justifyContent="space-between">
                                             <Button
@@ -731,11 +792,11 @@ export const Identity:FC<Interface>=()=> {
                                             fontWeight="bold"
                                             mb="10px"
                                         >
-                                            Minimalist
+                                            Nowadays
                                         </Text>
                                         <Text fontSize="md" color="gray.500" fontWeight="400" mb="20px">
                                             Different people have different taste, especially various
-                                            types of music.
+                                            types of NFTs.
                                         </Text>
                                         <Flex justifyContent="space-between">
                                             <Button

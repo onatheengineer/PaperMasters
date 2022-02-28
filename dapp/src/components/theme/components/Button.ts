@@ -1,13 +1,16 @@
 export const Button = {
 
     baseStyle: {
+        //bg: 'red',
         lineHeight: "1.2",
         borderRadius: "md",
         fontWeight: "semibold",
         transitionProperty: "common",
         transitionDuration: "normal",
+        focusBorderColor: 'none !important',
+        boxShadow: "none !important",
         _focus: {
-            boxShadow: "outline"
+            boxShadow: "none !important"
         },
         _disabled: {
             opacity: 0.4,
@@ -18,11 +21,17 @@ export const Button = {
             _disabled: {
                 bg: "initial"
             }
-        }
+        },
+        _active: {
+            bg: 'red !important',
+            boxShadow: 'none !important',
+            color: 'pmpurple.9',
+            transform: 'scale(0.96)',
+        },
     },
     variants: {
         unstyled: {
-            bg: "none",
+            bg: "red",
             color: "pmpurple.13",
             display: "inline",
             lineHeight: "inherit",

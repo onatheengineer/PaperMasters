@@ -33,12 +33,7 @@ import {
     PopoverContent,
     PopoverCloseButton, PopoverBody, PopoverArrow, PopoverFooter, PopoverTrigger, Popover, Portal, MenuItem,
     InputLeftElement,
-    Modal,
-    ModalOverlay,
-    ModalContent,
-    ModalHeader,
-    ModalFooter,
-    ModalBody,
+    Modal, ModalOverlay, ModalContent, ModalHeader, ModalFooter, ModalBody,
     ModalCloseButton,
     useDisclosure, Container,
 } from '@chakra-ui/react';
@@ -48,10 +43,11 @@ import {useAppDispatch, useAppSelector} from "../../app/hooks";
 import PMLogo from '../../assets/PMGIMPResized.png';
 import Logo from '../../assets/Logo';
 import {ColorChangeHandler, ColorResult, SketchPicker, GithubPicker, RGBColor} from 'react-color';
-import {RequestAccountsAsyncActionSaga} from "../../features/RequestWalletAccountSlice";
-import {mintNFIAsyncActionSaga, gasForMintNFIAsyncActionSaga, mintingError} from "../../features/MintNFISlice";
+import {requestAccountsAsyncAction} from "../../features/RequestWalletAccountSlice";
+import {mintNFIAsyncAction, gasForMintNFIAsyncAction, mintingError} from "../../features/MintNFISlice";
 import mintNFI from "../../abiFiles/PaperMastersNFI.json";
 import {call} from "redux-saga/effects";
+import AvatarNFI from "../AvatarNFI";
 
 
 interface InterfaceRegister {
@@ -94,14 +90,12 @@ export const Register: FC<InterfaceRegister>=()=> {
 
     const [whichColorField, setWhichColorField] = useState<string>('');
 
-    const [originDate, setOriginDate] = useState(new Date())
+    const [originDate, setOriginDate] = useState(Date.now())
+    console.log(`This is the Date.Now: ${originDate}`)
 
     const [submitButtonClicked, setSubmitButtonClicked] = useState<boolean>(false);
 
     const [ isModalOpen, setIsModalOpen ] = useState<boolean>(false);
-
-    console.log(originDate.getTime());
-    const originDateFormatted: string = `${originDate.toLocaleString('en-us', {month: 'short'})} ${originDate.getDate()}, ${originDate.getFullYear()}`
 
     const nameHandler = (e: React.FormEvent<HTMLInputElement>) => {
         setName(e.currentTarget.value);
@@ -165,34 +159,34 @@ export const Register: FC<InterfaceRegister>=()=> {
 
     const submitMintHandler = () => {
         const mintPayload: {} = {
-            name: `${name},${ColorRGBToString(colorTextName)}`,
-            email: `${email},${ColorRGBToString(colorTextEmail)}`,
-            profession: `${profession},${ColorRGBToString(colorTextProfession)}`,
-            organization: `${organization},${ColorRGBToString(colorTextOrganization)}`,
-            slogan: `${slogan},${ColorRGBToString(colorTextSlogan)}`,
-            website: `${website},${ColorRGBToString(colorTextWebsite)}`,
-            uniqueYou: `${uniqueYou},${ColorRGBToString(colorTextUniqueYou)}`,
+            name: `${name}|||${ColorRGBToString(colorTextName)}`,
+            email: `${email}|||${ColorRGBToString(colorTextEmail)}`,
+            profession: `${profession}|||${ColorRGBToString(colorTextProfession)}`,
+            organization: `${organization}|||${ColorRGBToString(colorTextOrganization)}`,
+            slogan: `${slogan}|||${ColorRGBToString(colorTextSlogan)}`,
+            website: `${website}|||${ColorRGBToString(colorTextWebsite)}`,
+            uniqueYou: `${uniqueYou}|||${ColorRGBToString(colorTextUniqueYou)}`,
             bgRGB: `${ColorRGBToString(bgRGB)}`,
-            originDate: originDate.getTime(),
+            originDate: originDate,
         }
         console.table(mintPayload);
         setSubmitButtonClicked(true)
-        dispatch(mintNFIAsyncActionSaga(mintPayload));
+        dispatch(mintNFIAsyncAction(mintPayload));
     };
 
     const estimateGasHandler = () => {
         const mintPayload: {} = {
-            name: `${name},${ColorRGBToString(colorTextName)}`,
-            email: `${email},${ColorRGBToString(colorTextEmail)}`,
-            profession: `${profession},${ColorRGBToString(colorTextProfession)}`,
-            organization: `${organization},${ColorRGBToString(colorTextOrganization)}`,
-            slogan: `${slogan},${ColorRGBToString(colorTextSlogan)}`,
-            website: `${website},${ColorRGBToString(colorTextWebsite)}`,
-            uniqueYou: `${uniqueYou},${ColorRGBToString(colorTextUniqueYou)}`,
+            name: `${name}|||${ColorRGBToString(colorTextName)}`,
+            email: `${email}|||${ColorRGBToString(colorTextEmail)}`,
+            profession: `${profession}|||${ColorRGBToString(colorTextProfession)}`,
+            organization: `${organization}|||${ColorRGBToString(colorTextOrganization)}`,
+            slogan: `${slogan}|||${ColorRGBToString(colorTextSlogan)}`,
+            website: `${website}|||${ColorRGBToString(colorTextWebsite)}`,
+            uniqueYou: `${uniqueYou}|||${ColorRGBToString(colorTextUniqueYou)}`,
             bgRGB: `${ColorRGBToString(bgRGB)}`,
-            originDate: originDate.getTime(),
+            originDate: originDate,
         }
-        dispatch(gasForMintNFIAsyncActionSaga(mintPayload));
+        dispatch(gasForMintNFIAsyncAction(mintPayload));
     };
 
 useEffect(()=>{
@@ -201,9 +195,7 @@ useEffect(()=>{
     }
 },[mintSucceeded]);
 
-
     return (
-
         <Flex
             w={"100%"}
             align="center"
@@ -797,162 +789,14 @@ useEffect(()=>{
 
                 <Divider py={'0px'} mb="54px" color={'pmpurple.8'}/>
 
-                <Container centerContent>
-
-                <AspectRatio w='320px' ratio={4 / 5}>
-                    <Box
-                        h={"100%"}
-                        w={'full'}
-                        border={'3px'}
-                        rounded={'10px'}
-                        borderColor={'pmpurple.13'}
-                        borderStyle={'solid'}
-                        bg={'pmpurple.13'}
-                    >
-
-                        <Stack
-                            h={"100%"}
-                            w={'full'}
-                            align={'center'}
-                            spacing={0}
-                            bg={`rgba(${bgRGB.rgb.r}, ${bgRGB.rgb.g}, ${bgRGB.rgb.b}, ${bgRGB.rgb.a})`}
-                            wordBreak={'break-word'}
-                            rounded={'10px'}
-                        >
-
-                            <Image
-                                position={'absolute'}
-                                top={'0px'}
-                                right={'0px'}
-                                left={'0px'}
-                                h={'60px'}
-                                backgroundPosition="center"
-                                src='legoLavendarheadercroped.png'
-                                objectFit={'cover'}
-                            />
-
-                            <Flex justify={'center'}>
-                                <Avatar
-                                    mt={'22px'}
-                                    src='PMlogo.png'
-                                    boxSize='3.05em'
-                                    variant={"square"}
-                                    css={{
-                                        border: '2px solid #4f384f',
-                                    }}
-                                >
-                                    <AvatarBadge
-                                        border={'1px'}
-                                        borderColor={'pmpurple.15'}
-                                        borderStyle={'solid'}
-                                        boxSize='1.25em'
-                                        bg='pmpurple.2'>
-                                        <Text mt='0px' fontSize={'12px'} fontWeight={500}
-                                              fontFamily={'body'} align={'center'} color={'pmpurple.15'}>
-                                            NFI
-                                        </Text>
-                                    </AvatarBadge>
-                                </Avatar>
-                            </Flex>
-
-
-                            <Text pt={'0px'} fontSize={'22px'} fontWeight={500}
-                                  fontFamily={'body'} align={'center'} color={'pmpurple.15'}>
-                                PaperMaster
-                            </Text>
-
-                            <Text noOfLines={[1, 2]} mb={'0px'} py={'0px'} px={'16px'} fontSize={'18px'} fontWeight={500}
-                                  fontFamily={'body'} align={'center'}
-                                  color={`rgba(${colorTextName.rgb.r}, ${colorTextName.rgb.g}, ${colorTextName.rgb.b}, ${colorTextName.rgb.a})`}>
-                                {name}
-                            </Text>
-
-                            <Divider pt={'0px'} css={{borderColor: '#a88ea8'}}/>
-
-                            <Flex
-                                flexGrow={'1'}
-                                flexDirection={'row'}
-                                border={'0px'}
-                                borderColor={'pmpurple.15'}
-                                borderStyle={'solid'}
-                                textAlign={'center'}
-                                maxH={'20vh'}
-                            >
-                                <Center>
-                                    <VStack
-                                        align={'center'}
-                                        fontSize={'16px'}
-                                        px={'18px'}
-                                        spacing={0}
-                                        alignItems={"center"}
-                                    >
-                                        <Text noOfLines={1}
-                                              color = {ColorRGBToString(colorTextEmail)}>
-                                            {email}
-                                        </Text>
-
-                                        <Text noOfLines={1}
-                                              color={ColorRGBToString(colorTextProfession)}>
-                                            {profession}
-                                        </Text>
-                                        <Text noOfLines={1}
-                                              color={ColorRGBToString(colorTextSlogan)}>
-                                            {slogan}
-                                        </Text>
-                                        <Text noOfLines={1}
-                                              color={ColorRGBToString(colorTextOrganization)}>
-                                            {organization}
-                                        </Text>
-                                        <Text noOfLines={1}
-                                              color={ColorRGBToString(colorTextWebsite)}>
-                                            {website}
-                                        </Text>
-                                        <Text noOfLines={3}
-                                              color={ColorRGBToString(colorTextUniqueYou)}>
-                                            {uniqueYou}
-                                        </Text>
-                                    </VStack>
-                                </Center>
-                            </Flex>
-
-
-                            <Stack
-                            textAlign={'center'}
-                            >
-                                <Text as='cite' mb={'26px'} pb={'0px'} fontSize={'sm'} color={'pmpurple.13'}>
-                                    Origin Date {originDateFormatted}
-                                </Text>
-
-                                <Box
-                                    position={'absolute'}
-                                    bottom={'0px'}
-                                    right={'0px'}
-                                    left={'0px'}
-                                    h={'26px'}
-                                    backgroundPosition="center"
-                                    objectFit={'cover'}
-                                    // w={'100%'}
-                                    bg={'pmpurple.10'}
-                                    // borderStyle={'solid'}
-                                    // border={'1px'}
-                                    // borderColor={'pmpurple.13'}
-                                    _hover={{
-                                        transform: 'translateY(4px)',
-                                        //boxShadow: 'md',
-                                    }}
-                                >
-                                    <Text p={'3px'} fontSize={'9.8pt'} color={'white'} whiteSpace={'break-spaces'}>
-                                        {accountsArr[0]}
-                                    </Text>
-                                </Box>
-                            </Stack>
-                        </Stack>
-                    </Box>
-                </AspectRatio>
-                </Container>
-
-
-
+          <AvatarNFI name={name} nameColor={ColorRGBToString(colorTextName)} email={email} emailColor={ColorRGBToString(colorTextEmail)}
+                     profession={profession} professionColor={ColorRGBToString(colorTextProfession)}
+                     organization={organization} organizationColor={ColorRGBToString(colorTextOrganization)}
+                     slogan={slogan} sloganColor={ColorRGBToString(colorTextSlogan)}
+                     website={website} websiteColor={ColorRGBToString(colorTextWebsite)} uniqueYou={uniqueYou}
+                     uniqueYouColor={ColorRGBToString(colorTextUniqueYou)} avatarBG={ColorRGBToString(bgRGB)}
+                     originDate={originDate} accountNumber={accountsArr[0]}
+          />
 
                    <Center>
                        {name !== "" ?
@@ -994,7 +838,6 @@ useEffect(()=>{
                {/*{estimateGasHandler}*/}
                    </Box>
                    </Center>
-
 
 
                 {isModalOpen &&

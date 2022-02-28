@@ -20,7 +20,7 @@ export const CloudHWM: FC<Interface>=()=> {
             <Flex
                 w={'100vw'}
                 h={'60vh'}
-                backgroundImage={BackgroundLogo}
+                //backgroundImage={BackgroundLogo}
                 backgroundSize={'cover'}
                 backgroundPosition={'center center'}
             >
@@ -40,9 +40,9 @@ export const CloudHWM: FC<Interface>=()=> {
                         <Text
                             color={'white'}
                             fontWeight={300}
-                            lineHeight={0.5}
+                            lineHeight={1.2}
                             fontSize={useBreakpointValue({base: '4xl', md: '3xl'})}>
-                            Bringing Protection to our Blockchain Miners
+                            Bringing Hardware Protection to Blockchain Miners
                         </Text>
                         <Stack direction={'row'}>
                             <Button

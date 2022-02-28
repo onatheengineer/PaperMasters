@@ -1,5 +1,5 @@
 import React, { ReactNode, ReactText, useState, useEffect } from 'react';
-import {Route, Routes, useLocation} from 'react-router-dom';
+import {Route, Routes, useLocation, useParams, useNavigate, Navigate} from 'react-router-dom';
 import PMLogo from '../assets/PMGIMPResized.png';
 import { AiOutlineFileSearch } from "react-icons/ai";
 import { BiHomeHeart, BiBookmarkHeart } from 'react-icons/bi';
@@ -57,7 +57,7 @@ import Learn from "./pages/Learn";
 import News from "./pages/News";
 import Security from "./pages/Security";
 import {SiSololearn} from "react-icons/si";
-
+import {useAppSelector} from "../app/hooks";
 
 
 interface InterfaceNavItem {
@@ -109,7 +109,13 @@ export const NavItem: FC<InterfaceNavItem> = ({ icon, title, active,
 
 export const Sidebar: FC<InterfaceSidebar>= ({icon, profileName} ) => {
 
+
+    const tokenIDtoIdentityStruct = useAppSelector((state) => state.minted.tokenIDtoIdentityStruct);
+
     const location = useLocation();
+    const navigate = useNavigate();
+
+
     const [navSize, changeNavSize] = useState<'small' | 'large'>("small");
     const [navItemsRender, setNavItemRender] = useState<JSX.Element[] | null>([]);
     const [headerTitle, setHeaderTitle] = useState<string>('');
@@ -147,8 +153,7 @@ export const Sidebar: FC<InterfaceSidebar>= ({icon, profileName} ) => {
             <NavItem navItemSize={navSize} icon={BiHomeHeart} title="Community Guidelines" path={'/forumPages'}/>,
             <NavItem navItemSize={navSize} icon={GiDiscussion} title="Community Discussion" path={"/forumPages"}/>,
             <NavItem navItemSize={navSize} icon={BsCalendar2Event} title="Community Events" path={'/forumPages'}/>,
-            <NavItem navItemSize={navSize} icon={MdOutlineWarningAmber} title="Report Suspicious Activity"
-                     path={'/forumPages'}/>,
+            <NavItem navItemSize={navSize} icon={MdOutlineWarningAmber} title="Report Suspicious Activity" path={'/forumPages'}/>,
 
         ]
 
@@ -170,22 +175,16 @@ export const Sidebar: FC<InterfaceSidebar>= ({icon, profileName} ) => {
 
         const SidebarAnalytics = [
             <NavItem navItemSize={navSize} icon={FiTrendingUp} title="Analytics" path={'/analytics'}/>,
-
-
         ]
 
         const SidebarSecurity = [
 
             <NavItem navItemSize={navSize} icon={FiTrendingUp} title="Analytics" path={'/analytics'}/>,
-
-
         ]
 
         const SidebarLearn = [
             <NavItem navItemSize={navSize} icon={GiBookCover} title="Learn" path={'/learn'}/>,
             <NavItem navItemSize={navSize} icon={FiTrendingUp} title="Analytics" path={'/analytics'}/>,
-
-
         ]
 
         switch (location.pathname) {
@@ -256,8 +255,9 @@ export const Sidebar: FC<InterfaceSidebar>= ({icon, profileName} ) => {
                     // left="5"
                     h="fill"
                     backgroundColor='pmpurple.2'
-                    borderRight={'2px'}
-                    borderColor={'pmpurple.13'}
+                    borderRight={'1px'}
+                    borderTop={'1px'}
+                    borderColor={'pmpurple.8'}
                     // borderRadius={navSize == "small" ? "15px" : "30px"}
                     w={navSize == "small" ? "75px" : "200px"}
                     flexDir="column"
@@ -298,7 +298,6 @@ export const Sidebar: FC<InterfaceSidebar>= ({icon, profileName} ) => {
 
                         {navItemsRender}
 
-
                         <Divider display={navSize == "small" ? "none" : "flex"}/>
 
                         {/*//walletConnet useEffect state*/}
@@ -320,11 +319,17 @@ export const Sidebar: FC<InterfaceSidebar>= ({icon, profileName} ) => {
                     </Flex>
                 </Box>
             }
-            <Flex w={"100%"} >
+            <Flex w={"100%"}>
                 <Routes>
                     <Route path="/" element={<Home/>}/>
+                    <Route path={'/identity/:walletAccount'} element={<Identity/>}/>
                     <Route path={'/identity'} element={<Identity/>}/>
-                    <Route path={'/register'} element={<Register/>}/>
+                    {tokenIDtoIdentityStruct.length === 0 ?
+                        <Route path={'/register'} element={<Register/>}/>
+                    :   <Route path="/register" element={<Navigate replace to={`/identity/${tokenIDtoIdentityStruct[0]}`} />}
+                        />
+                    }
+
                     <Route path={'/attach'} element={<Attach/>}/>
                     <Route path={'/validate'} element={<Validate/>}/>
                     <Route path={'/report'} element={<Search/>}/>
@@ -338,7 +343,7 @@ export const Sidebar: FC<InterfaceSidebar>= ({icon, profileName} ) => {
                     <Route path={'/yourpeople'} element={<YourPeople/>}/>
                 </Routes>
             </Flex>
-         </Flex>
+        </Flex>
     )
 };
 

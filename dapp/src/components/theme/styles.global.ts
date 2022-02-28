@@ -1,5 +1,16 @@
 export const global = {
+//     _focus: {
+//     WebkitTapHighlightColor: 'transparent',
+// },
+    // _focus: {
+    //     boxShadow: 'none !important',
+    // },
     // styles for the `body`
+    //
+    // *before, ::
+
+    //focusBorderColor: 'red !important',
+
     body: {
         w: '100%',
         bg: 'pmpurple.8',

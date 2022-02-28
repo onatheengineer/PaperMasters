@@ -1,8 +1,8 @@
 import { call, put, takeEvery, delay, all, takeLatest, select} from 'redux-saga/effects';
 import Web3 from "web3";
 import {
-    addressHasIdentityBool, addressHasIdentityBoolActionSaga, addressToToken, addressToTokenActionSaga, tokenIDToIdentity,
-    tokenIDToIdentityActionSaga, mintedNFISagas, mintedNFISagasErrorMessage,
+    addressHasIdentityBool, addressHasIdentityBoolAction, addressToToken, addressToTokenAction, tokenIDToIdentity,
+    tokenIDToIdentityAction, mintedNFIErrorMessage, mintedNFI,
 } from "./MintedNFISlice";
 import MintABI from "../abiFiles/PaperMastersNFI.json";
 
@@ -17,7 +17,7 @@ function* addressHasIdentityBoolSaga(actionObject: any):any {
         if (filledAccountsArr.length === 0) {
             yield put(addressHasIdentityBool(false))
             yield put(addressToToken(0))
-            yield put(tokenIDToIdentity(undefined))
+            yield put(tokenIDToIdentity([]))
             return;
         }
         const alreadyMintedBool = yield call(papermastersNFIContract.methods.addressHasTokenBool(filledAccountsArr[0]).call, {from: filledAccountsArr[0]})
@@ -27,12 +27,12 @@ function* addressHasIdentityBoolSaga(actionObject: any):any {
         }
         console.log(`have I already minted?: ${alreadyMintedBool}`);
     } catch (addressHasTokenBoolFAILED: any) {
-        yield put(mintedNFISagas('failed'))
-        yield put(mintedNFISagasErrorMessage(addressHasTokenBoolFAILED.message))
+        yield put(mintedNFI('failed'))
+        yield put(mintedNFIErrorMessage(addressHasTokenBoolFAILED.message))
 
         yield put(addressHasIdentityBool(false))
         yield put(addressToToken(0))
-        yield put(tokenIDToIdentity(undefined))
+        yield put(tokenIDToIdentity([]))
     }
 };
 
@@ -42,20 +42,20 @@ function* addressToTokenSaga(): any {
         const tokenFromAddress = yield call(papermastersNFIContract.methods.addressToTokenID(filledAccountsArr[0]).call, {from: filledAccountsArr[0]})
         if (tokenFromAddress >= 1) {
             yield put(addressToToken(tokenFromAddress));
-            yield put(tokenIDToIdentityActionSaga(tokenFromAddress));
+            yield put(tokenIDToIdentityAction(tokenFromAddress));
         }
         if (tokenFromAddress === 0) {
             yield put(addressHasIdentityBool(false))
             yield put(addressToToken(0))
-            yield put(tokenIDToIdentity(undefined))
+            yield put(tokenIDToIdentity([]))
         }
     } catch (gotTokenFromAddressFailed: any) {
-        yield put(mintedNFISagas('failed'))
-        yield put(mintedNFISagasErrorMessage(gotTokenFromAddressFailed.message))
+        yield put(mintedNFI('failed'))
+        yield put(mintedNFIErrorMessage(gotTokenFromAddressFailed.message))
 
         yield put(addressHasIdentityBool(false))
         yield put(addressToToken(0))
-        yield put(tokenIDToIdentity(undefined))
+        yield put(tokenIDToIdentity([]))
     }
 };
 
@@ -65,17 +65,17 @@ function* tokenIDToIdentitySaga(actionObject: any):any {
        const getIdentityStructFromTokenID = yield call(papermastersNFIContract.methods.tokenIDtoIdentityStruct(actionObject.payload).call, {from: filledAccountsArr[0]})
        yield put(tokenIDToIdentity(getIdentityStructFromTokenID));
    } catch(tokenToIdentityFailed: any){
-       yield put(mintedNFISagas('failed'))
-       yield put(mintedNFISagasErrorMessage(tokenToIdentityFailed.message))
+       yield put(mintedNFI('failed'))
+       yield put(mintedNFIErrorMessage(tokenToIdentityFailed.message))
 
        yield put(addressHasIdentityBool(false))
        yield put(addressToToken(0))
-       yield put(tokenIDToIdentity(undefined))
+       yield put(tokenIDToIdentity([]))
    }
 };
 
 export function* watchMintedNFISaga() {
-    yield takeLatest(addressHasIdentityBoolActionSaga.type, addressHasIdentityBoolSaga);
-    yield takeLatest(addressToTokenActionSaga.type, addressToTokenSaga);
-    yield takeLatest(tokenIDToIdentityActionSaga.type, tokenIDToIdentitySaga);
+    yield takeLatest(addressHasIdentityBoolAction.type, addressHasIdentityBoolSaga);
+    yield takeLatest(addressToTokenAction.type, addressToTokenSaga);
+    yield takeLatest(tokenIDToIdentityAction.type, tokenIDToIdentitySaga);
 }
