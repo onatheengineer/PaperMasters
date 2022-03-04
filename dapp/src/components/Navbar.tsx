@@ -16,6 +16,7 @@ import {
     useDisclosure,
     useColorModeValue,
     Stack, Text, Container,
+    MenuIcon,
 } from '@chakra-ui/react';
 import { extendTheme } from '@chakra-ui/react';
 import {Link as ReachLink, useParams} from "react-router-dom";
@@ -42,17 +43,34 @@ export const SparklyComponent = () => (
     </div>
 )
 
+
 export default function Navbar() {
     //const {isOpen, onOpen, onClose} = useDisclosure();
     const getAccountsArr = useAppSelector((state) => state.register.accounts);
     const tokenIDtoIdentityStruct = useAppSelector((state) => state.minted.tokenIDtoIdentityStruct);
-    const { walletAccount } = useParams();
+    const {walletAccount} = useParams();
 
     const dispatch = useAppDispatch();
 
     return (
-        <Box p={'4px'} alignItems={'center'} border={'0px solid'} borderColor={"pmpurple.8"} bg={"pmpurple.2"}>
-            <HStack spacing={0} alignItems={'center'}>
+
+        <Box
+            p={'4px'}
+            alignItems={'center'}
+            border={'0px solid'}
+            borderColor={"pmpurple.8"}
+            bg={"pmpurple.2"}
+            //flexBasis={{ base: "100%", md: "auto" }}
+            // transform={{
+            //     sm: "translateY(45%)",
+            //     md: "translateY(90%)",
+            //     lg: "translateY(85%)",
+            // }}
+
+
+
+        >
+            <HStack spacing={4} alignItems={'center'}>
                 <Box px={'16px'}><Link as={ReachLink} to="/"><img src={Logo}/></Link></Box>
                 <Menu>
 
@@ -67,11 +85,11 @@ export default function Navbar() {
                                     color: 'pmpurple.9',
                                     transform: 'scale(0.96)',
                                 }}
-                              >
+                            >
                                 <MenuItem
-                                    _focus={{ boxShadow: 'none' }}
+                                    _focus={{boxShadow: 'none'}}
                                     fontSize={'18px'} fontWeight={'Bold'}
-                                          icon={<MdManageAccounts fontSize={'20px'}/>}>Identity</MenuItem>
+                                    icon={<MdManageAccounts fontSize={'20px'}/>}>Identity</MenuItem>
                             </MenuButton>
                         </Link>
                     </Menu>
@@ -88,9 +106,9 @@ export default function Navbar() {
                                 }}
                             >
                                 <MenuItem
-                                    _focus={{ boxShadow: 'none' }}
+                                    _focus={{boxShadow: 'none'}}
                                     fontSize={'18px'} fontWeight={'Bold'}
-                                          icon={<FaScroll fontSize={'16px'}/>}>Search</MenuItem>
+                                    icon={<FaScroll fontSize={'16px'}/>}>Search</MenuItem>
                             </MenuButton>
                         </Link>
                     </Menu>
@@ -109,9 +127,9 @@ export default function Navbar() {
                                 }}
                             >
                                 <MenuItem
-                                    _focus={{ boxShadow: 'none' }}
+                                    _focus={{boxShadow: 'none'}}
                                     fontSize={'18px'} fontWeight={'Bold'}
-                                          icon={<GiHeatHaze fontSize={'18px'}/>}>CloudHWM</MenuItem>
+                                    icon={<GiHeatHaze fontSize={'18px'}/>}>CloudHWM</MenuItem>
                             </MenuButton>
                         </Link>
                     </Menu>
@@ -129,9 +147,9 @@ export default function Navbar() {
                                 }}
                             >
                                 <MenuItem
-                                    _focus={{ boxShadow: 'none' }}
+                                    _focus={{boxShadow: 'none'}}
                                     fontSize={'18px'} fontWeight={'Bold'}
-                                          icon={<GiDiscussion fontSize={'16px'}/>}>Community
+                                    icon={<GiDiscussion fontSize={'16px'}/>}>Community
                                     Forum</MenuItem>
                             </MenuButton>
                         </Link>
@@ -148,9 +166,9 @@ export default function Navbar() {
                                 }}
                             >
                                 <MenuItem
-                                    _focus={{ boxShadow: 'none' }}
+                                    _focus={{boxShadow: 'none'}}
                                     fontSize={'18px'} fontWeight={'Bold'}
-                                          icon={<ImBooks fontSize={'16px'}/>}>Learn</MenuItem>
+                                    icon={<ImBooks fontSize={'16px'}/>}>Learn</MenuItem>
                             </MenuButton>
                         </Link>
                     </Menu>
@@ -167,9 +185,9 @@ export default function Navbar() {
                                 }}
                             >
                                 <MenuItem
-                                    _focus={{ boxShadow: 'none' }}
+                                    _focus={{boxShadow: 'none'}}
                                     fontSize={'18px'} fontWeight={'Bold'}
-                                          icon={<GiNewShoot fontSize={'16px'}/>}>Your
+                                    icon={<GiNewShoot fontSize={'16px'}/>}>Your
                                     People</MenuItem>
                             </MenuButton>
                         </Link>

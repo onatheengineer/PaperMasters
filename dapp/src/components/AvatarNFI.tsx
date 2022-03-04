@@ -177,7 +177,7 @@ export const AvatarNFI:FC<AvatarNFIInterface>=( {accountNumber,
                             <Stack
                                 textAlign={'center'}
                             >
-                                <Text as='cite' mb={'28px'} pb={'0px'} fontSize={'sm'}
+                                <Text as='cite' mb={'32px'} pb={'0px'} fontSize={'sm'}
                                       color={'pmpurple.13'}>
                                     Origin Date {originDateFormatted}
                                 </Text>
@@ -187,13 +187,13 @@ export const AvatarNFI:FC<AvatarNFIInterface>=( {accountNumber,
                                     bottom={'0px'}
                                     right={'0px'}
                                     left={'0px'}
-                                    h={'28px'}
+                                    h={'32px'}
                                     backgroundPosition="center"
                                     objectFit={'cover'}
                                     // w={'100%'}
                                     bg={'pmpurple.10'}
                                 >
-                                    <Text p={'4px'} fontSize={'10pt'} color={'white'}
+                                    <Text p={'6px'} fontSize={'9.8pt'} color={'white'}
                                           whiteSpace={'break-spaces'}>
                                         {accountNumber}
                                     </Text>

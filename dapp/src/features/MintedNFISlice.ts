@@ -7,6 +7,7 @@ interface MintedState {
     tokenIDtoIdentityStruct: string[];
     mintedNFIStatus: 'succeeded' | 'failed' | 'initial null state';
     mintedNFIError: string;
+    receiptDBTransHash: string;
 }
 
 const initialState: MintedState = {
@@ -15,6 +16,8 @@ const initialState: MintedState = {
     tokenIDtoIdentityStruct: [],
     mintedNFIStatus: 'initial null state',
     mintedNFIError: '',
+    receiptDBTransHash: '',
+
 };
 
 const mintedSlice = createSlice ({
@@ -36,15 +39,19 @@ const mintedSlice = createSlice ({
         mintedNFIErrorMessage(state, action) {
             state.mintedNFIError = action.payload
         },
+        receiptDBHash(state, action) {
+            state.receiptDBTransHash = action.payload
+        },
     },
 });
 
 //console.log(MintNFISlice);
-export const { addressHasIdentityBool, addressToToken, tokenIDToIdentity, mintedNFI, mintedNFIErrorMessage } = mintedSlice.actions;
+export const { addressHasIdentityBool, addressToToken, tokenIDToIdentity, mintedNFI, mintedNFIErrorMessage, receiptDBHash } = mintedSlice.actions;
 
 export const addressHasIdentityBoolAction = createAction<string>("DOES_ADDRESS_HAVE_IDENTITY_SAGA");
 export const addressToTokenAction = createAction<string>("ADDRESS_TO_TOKEN_SAGA");
 export const tokenIDToIdentityAction = createAction<number>("TOKEN_HAS_IDENTITY_SAGA");
+export const receiptDBAction = createAction("RECEIPT_DB_SAGA");
 
 export default mintedSlice.reducer;
 

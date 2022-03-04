@@ -11,7 +11,11 @@ function* requestAccountsSaga() {
         const web3 = new Web3(Web3.givenProvider);
         const acc: string[] = yield call(web3.eth.requestAccounts as any);
         console.log(acc);
-        yield put(accountsArr(acc));
+        const accLower = acc.map(element => {
+            return element.toLowerCase();
+        })
+        console.log(accLower);
+        yield put(accountsArr(accLower));
         yield put(statusOfArr("success"));
     } catch (e) {
         console.log(e);

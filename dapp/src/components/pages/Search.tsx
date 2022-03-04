@@ -2,16 +2,28 @@ import * as React from 'react';
 import {useState, useEffect, useCallback, useMemo, MouseEventHandler, ChangeEventHandler} from "react";
 import Web3 from "web3";
 import type {FC} from 'react';
-import {Box, Flex, MenuButton, Input, Button, HStack, InputGroup, InputRightAddon, Text} from '@chakra-ui/react';
+import {
+    Box,
+    Flex,
+    MenuButton,
+    Input,
+    Button,
+    HStack,
+    InputGroup,
+    InputRightAddon,
+    Text,
+    FormControl
+} from '@chakra-ui/react';
 import {useAppSelector} from "../../app/hooks";
 import DataTable, {ExpanderComponentProps, TableColumn} from 'react-data-table-component';
-import {Route, Routes} from "react-router-dom";
+import {Route, Routes, useNavigate} from "react-router-dom";
 import Sidebar from "../Sidebar";
 import {Link as ReachLink} from "react-router-dom";
 import {MdManageAccounts} from "react-icons/md";
 import {HiOutlineDocumentReport} from "react-icons/hi";
 import {MdOutlineLibraryAddCheck} from "react-icons/md";
 import {SiSololearn} from "react-icons/si";
+import IdentityEntryModal from "../../utils/IdentityEntryModal";
 
 
 interface DataRow {
@@ -27,22 +39,28 @@ interface DataRow {
 
 interface interfaceFilterComponent{
     filterText: string,
-    onClear: MouseEventHandler<HTMLButtonElement>,
+    onClick: MouseEventHandler<HTMLButtonElement>,
     onFilter: ChangeEventHandler<HTMLInputElement>,
+    text: string,
+    placeHolder: string,
+    idType: string,
+    activateButton: boolean,
 }
 
-const FilterComponent: FC<interfaceFilterComponent> = ( { filterText, onClear, onFilter }) => (
+const FilterComponent: FC<interfaceFilterComponent> = ( { filterText, onClick, onFilter, text , placeHolder, idType, activateButton}) => (
 
     <Box>
         <HStack>
             <InputGroup>
-            <Input isFullWidth={false} variant='outline' id="search" type="text" placeholder="Search Filter" aria-label="Search Input" value={filterText} onChange={onFilter} />
-                <InputRightAddon p='0' children={ <Button size='md' onClick={onClear} >Reset</Button>}/>
+            <Input focusBorderColor='pmpurple.8' color={'pmpurple.13'} border={'1px solid'} borderColor={'pmpurple.3'} id={idType} type="text" placeholder={placeHolder} aria-label="Search Input" value={filterText} onChange={onFilter} />
+                <InputRightAddon
+                    p='0' borderColor={"pmpurple.4"} bg={'pmpurple.2'}
+                    children={<Button bg={'pmpurple.5'} color={"pmpurple.13"} disabled={activateButton} onClick={onClick} >{text}</Button>} />
             </InputGroup>
         </HStack>
     </Box>
-)
 
+)
 
 // data provides access to your row data
 const ExpandedComponent: FC<ExpanderComponentProps<DataRow>> = ({ data }) => {
@@ -51,8 +69,10 @@ const ExpandedComponent: FC<ExpanderComponentProps<DataRow>> = ({ data }) => {
 
 export const Search: FC=()=> {
     const getAccountsArr = useAppSelector((state) => state.register.accounts);
-    const [filterText, setFilterText] = useState('');
-    const [resetPaginationToggle, setResetPaginationToggle] = useState(false);
+    const [filterText, setFilterText] = useState<string>('');
+    const [searchWalletAccount, setWalletAccount] = useState<string>('');
+    const [resetPaginationToggle, setResetPaginationToggle] = useState<boolean>(false);
+    const [isIdentityModalOpen, setIdentityModalOpen] = useState<boolean>(false);
 
     const columns: TableColumn<DataRow>[] = [
         {
@@ -334,7 +354,7 @@ export const Search: FC=()=> {
         },
         {
             name: 'Elijah',
-            IdNFI: '789345hjkgf897435jhkgdkjhdfg897ertjkhdfgfkjhdfg',
+            IdNFI: 'khjsfuyrtyrt9837453874535',
             profession: 'Beetlejuice',
             validations: 61,
             mentions: 11,
@@ -365,21 +385,30 @@ export const Search: FC=()=> {
     ]
 
 
-    const filteredItems = data.filter(
-        item => {
-            if (item.name && item.name.toLowerCase().includes(filterText.toLowerCase())) {
+    const filteredItems = data.filter( item => {
+            if (filterText.length === 0 && searchWalletAccount.length === 0) {
                 return item;
             }
-            if (item.profession && item.profession.toLowerCase().includes(filterText.toLowerCase())) {
-                return item;
+            if (filterText.length !== 0) {
+                if (item.name && item.name.toLowerCase().includes(filterText.toLowerCase())) {
+                    return item;
+                }
+                if (item.profession && item.profession.toLowerCase().includes(filterText.toLowerCase())) {
+                    return item;
+                }
+                if (item.originDate && item.originDate.toLowerCase().includes(filterText.toLowerCase())) {
+                    return item;
+                }
+                if (item.IdNFI && item.IdNFI.toLowerCase().includes(filterText.toLowerCase())) {
+                        return item;
+                    }
+                }
+            if (searchWalletAccount.length !== 0) {
+                if (item.IdNFI && item.IdNFI.toLowerCase().includes(searchWalletAccount.toLowerCase()) && item.name && item.name.toLowerCase().includes(filterText.toLowerCase())) {
+                    return item;
+                }
             }
-            if (item.originDate && item.originDate.toLowerCase().includes(filterText.toLowerCase())) {
-                return item;
-            }
-            if (item.IdNFI && item.IdNFI.toLowerCase().includes(filterText.toLowerCase())) {
-                return item;
-            }
-        },
+        }
     );
 
     const subHeaderComponentMemo = useMemo(() => {
@@ -389,26 +418,40 @@ export const Search: FC=()=> {
                 setFilterText('');
             }
         };
+        const addWalletAccountHandler = () => {
+            setIdentityModalOpen(true)
+        };
 
         return (
-            <FilterComponent onFilter={(e: any) => setFilterText(e.target.value)} onClear={handleClear}
-                             filterText={filterText}/>
+            <Box>
+                <HStack>
+
+                    <FilterComponent onFilter={(e: any) => setFilterText(e.target.value)} onClick={handleClear} activateButton={false}
+                                     filterText={filterText} text={"reset"} placeHolder={"Search NFI"} idType={"Search"}/>
+
+                    <FilterComponent onFilter={(e: any) => setWalletAccount(e.target.value)} onClick={addWalletAccountHandler} activateButton={(filteredItems.length !== 0)}
+                                     filterText={searchWalletAccount} text={"Add Wallet Account"} placeHolder={"Search Wallet Account"} idType={"WalletAccount"}/>
+
+                    <IdentityEntryModal title={'Create a profile for a Non-Registered'} text={'Enter Wallet Account'} placeHolder={'wallet account'}
+                                        buttonText={'Create'} isOpen={isIdentityModalOpen} onClose={()=>{setIdentityModalOpen(false)}}/>
+                </HStack>
+            </Box>
         );
-    }, [filterText, resetPaginationToggle]);
+    }, [filterText, searchWalletAccount, resetPaginationToggle, filteredItems]);
+
 
     return (
 
-
-        <Box
+        <Flex
             // justifyContent="center"
             //flex='auto'
             p={'16px'}
 
         >
             <Box
-                border={'2px'}
-                borderStyle={"solid"}
-                borderColor={'pmpurple.13'}
+                // border={'1px'}
+                // borderStyle={"solid"}
+                // borderColor={'pmpurple.13'}
             >
 
                 <DataTable
@@ -429,8 +472,7 @@ export const Search: FC=()=> {
                     striped={true}
                 />
             </Box>
-        </Box>
-
+        </Flex>
     )
 };
 

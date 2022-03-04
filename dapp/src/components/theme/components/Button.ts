@@ -23,8 +23,8 @@ export const Button = {
             }
         },
         _active: {
-            bg: 'red !important',
-            boxShadow: 'none !important',
+            bg: 'pmpurple.4',
+            //boxShadow: 'none !important',
             color: 'pmpurple.9',
             transform: 'scale(0.96)',
         },

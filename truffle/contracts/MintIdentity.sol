@@ -24,10 +24,8 @@ contract PaperMastersNFI is ERC721, Ownable {
         uint originDate;
     }
 
-    //an array of type identity of the total identities minted
     identity[] totalIdentities;
 
-    //just making a generic mapping of address to number
     mapping(address => uint256) _dictionaryNFIs;
     mapping(address => uint256) _supportPMDonations;
 
@@ -43,7 +41,7 @@ contract PaperMastersNFI is ERC721, Ownable {
     constructor() ERC721("papermasters.io", "NFI") {
         _setBaseURI = "www.papermasters.io/identity";
         identityFee = 100000000000000000;
-        totalIdentities.push(identity(address(this),'','','','','','','','',0)); // This is needed to fill the 0 token. The 0 Token is an invalid token
+        totalIdentities.push(identity(address(this),'','','','','','','','',0));
     }
 
     function addressToTokenID(address walletAddress) public view returns(uint256) {
@@ -184,10 +182,10 @@ contract PaperMastersNFI is ERC721, Ownable {
 
         _safeMint(msg.sender, newTokenID);
 
-        emit NFIMinted(msg.sender, newTokenID);
+        emit NFIMinted(msg.sender, newTokenID, block.timestamp );
 
     }
-    event NFIMinted(address indexed _from, uint256 tokenId);
+    event NFIMinted(address indexed _from, uint256 tokenId, uint256 timeStamp);
 
     function setApprovalForAll(address operator, bool approved) public virtual override onlyOwner{}
     function isApprovedForAll(address owner, address operator) public view virtual override onlyOwner returns (bool) {}

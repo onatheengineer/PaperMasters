@@ -11,7 +11,7 @@ import { Box, Flex} from '@chakra-ui/react';
 import Sidebar, {NavItem} from './components/Sidebar'
 import {requestAccountsAsyncAction} from "./features/RequestWalletAccountSlice";
 import {mintNFIAsyncAction} from "./features/MintNFISlice";
-import {addressHasIdentityBoolAction} from "./features/MintedNFISlice";
+import {addressHasIdentityBoolAction, receiptDBAction} from "./features/MintedNFISlice";
 
 
 function App() {
@@ -26,7 +26,9 @@ function App() {
     useEffect( () => {
         console.log("is there a wallet account connected? Now check for identity")
         if (accountsArr.length !== 0) {
-            dispatch(addressHasIdentityBoolAction(accountsArr[0])); }
+            dispatch(addressHasIdentityBoolAction(accountsArr[0]));
+            dispatch(receiptDBAction());
+        }
     }, [accountsArr] )
 
 

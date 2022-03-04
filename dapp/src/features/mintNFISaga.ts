@@ -1,10 +1,20 @@
 import { call, put, takeEvery, delay, all, takeLatest, select} from 'redux-saga/effects';
 import Web3 from "web3";
+import axios from "axios";
 import RegisterSlice, {accountsArr, requestAccountsAsyncAction, statusOfArr} from "./RequestWalletAccountSlice";
-import {mintNFIAsyncAction, mintSucceededSuccessful, gasForMintNFIAsyncAction, gasForMinting, mintingError} from "./MintNFISlice";
+import {
+    mintNFIAsyncAction,
+    mintSucceededSuccessful,
+    gasForMintNFIAsyncAction,
+    gasForMinting,
+    mintingError,
+    transHash,
+} from "./MintNFISlice";
 import MintABI from '../abiFiles/PaperMastersNFI.json'
+import {useState} from "react";
 
 export const getFilledAccountsArr = (state: any) => state.register.accounts;
+const baseURL = 'https://ociuozqx85.execute-api.us-east-1.amazonaws.com/receipt';
 
 function* mintNFISaga(actionObject: any):any {
 
@@ -55,12 +65,47 @@ function* mintNFISaga(actionObject: any):any {
         const mintResult: any = yield call(prepareResult.send, {from: filledAccountsArr[0], value: 100000000000000000});
         yield put(mintSucceededSuccessful('success'));
         console.log("mint sent!");
+        //why do I need a minting error here?
         yield put(mintingError(""))
         console.log(mintResult);
+
+        const walletAccount = yield mintResult.from;
+        console.log(`this is the from walletAccount: ${walletAccount}` );
+
+        const transHashString = yield mintResult.transactionHash;
+        console.log(`this is the TransactionHash: ${transHashString}` );
+        yield put(transHash(transHashString));
+
+        const gasUsed = yield mintResult.gasUsed;
+        console.log(`this is the gasUsed: ${gasUsed}` );
+
+        const contractAccount = yield mintResult.to;
+        console.log(`this is the contract Account: ${contractAccount}` );
+
+        const tokenID = yield mintResult.events.NFIMinted.returnValues.tokenId;
+        console.log(`this is the TokenID: ${tokenID}` );
+
+        const originDate = yield mintResult.events.NFIMinted.returnValues.timeStamp;
+        console.log(`this is the timeStamp: ${originDate}` );
+
+        const dataToSend = {
+            walletAccount: `${walletAccount}`,
+            gasUsed: `${gasUsed}`,
+            contractAccount: `${contractAccount}`,
+            transactionHash: `${transHashString}`,
+            tokenID: `${tokenID}`,
+            timeStamp: `${originDate}`
+        }
+
+        const axiosPUT = yield call(axios.put, baseURL, dataToSend)
+        console.log(axiosPUT)
+        // axios.put(baseURL, `${transHashString}`)
+        //     .then((response) => {console.log(response.data) });
     } catch (mintFailed: any) {
         yield put(mintSucceededSuccessful('failed'))
-        yield put(mintingError(mintFailed.message))
+        yield put(mintingError(`${mintFailed.message}, ${mintFailed.name}`))
     }
+
 };
 
 function* getGasForMintSaga(actionObject: any):any {
@@ -86,19 +131,35 @@ function* getGasForMintSaga(actionObject: any):any {
             gas: null,
             value: 100000000000000000
         });
-        console.log(`estimated gas price: ${gasMintResult}`);
-        //web3.utils.toWei(gasMintResult, "ether")
+        const getGasPrice = yield call(web3.eth.getGasPrice);
+
+        // const getGasPriceBN = yield ((getGasPrice:number)=>{const gasPrice = (getGasPrice/=1000000000)});
+        //
+        // if (getGasPrice > web3.utils.toWei(getGasPrice, 'ether')){
+        //     return web3.utils.toWei(getGasPrice, 'gwei')
+        // } return web3.utils.toWei(getGasPrice, 'gwei');
+
+        //console.log(`estimated gas price: ${gasMintResult}`);
+        console.log(`estimated gas price getPrice: ${getGasPrice}`);
+        //console.log(`estimated gas price getPrice BN: ${getGasPriceBN}`);
+
+        //web3.utils.toWei(gasMintResult, "ether");
+
         yield put(gasForMinting(gasMintResult));
+
     } catch (gasEstimationError) {
         yield put(gasForMinting('failed'))
         console.log(gasEstimationError)
     }
+
+
 }
 
 
 export function* watchMintNFISaga() {
     yield takeLatest(mintNFIAsyncAction.type, mintNFISaga);
     yield takeLatest(gasForMintNFIAsyncAction.type, getGasForMintSaga);
+    //yield takeLatest(transactionHashAction.type, transactionHashSaga);
 }
 
 

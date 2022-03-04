@@ -2,6 +2,7 @@ import React, { ReactNode, ReactText, useState, useEffect } from 'react';
 import {Route, Routes, useLocation, useParams, useNavigate, Navigate} from 'react-router-dom';
 import PMLogo from '../assets/PMGIMPResized.png';
 import { AiOutlineFileSearch } from "react-icons/ai";
+import { RiFileSearchLine } from "react-icons/ri";
 import { BiHomeHeart, BiBookmarkHeart } from 'react-icons/bi';
 import { IoMdCheckmarkCircleOutline, IoMdAttach,  } from 'react-icons/io';
 import {
@@ -58,6 +59,8 @@ import News from "./pages/News";
 import Security from "./pages/Security";
 import {SiSololearn} from "react-icons/si";
 import {useAppSelector} from "../app/hooks";
+import identity from "./pages/Identity";
+import Test from "./pages/Test";
 
 
 interface InterfaceNavItem {
@@ -109,12 +112,11 @@ export const NavItem: FC<InterfaceNavItem> = ({ icon, title, active,
 
 export const Sidebar: FC<InterfaceSidebar>= ({icon, profileName} ) => {
 
-
     const tokenIDtoIdentityStruct = useAppSelector((state) => state.minted.tokenIDtoIdentityStruct);
+    const walletAccount = useAppSelector((state) => state.register.accounts);
 
     const location = useLocation();
     const navigate = useNavigate();
-
 
     const [navSize, changeNavSize] = useState<'small' | 'large'>("small");
     const [navItemsRender, setNavItemRender] = useState<JSX.Element[] | null>([]);
@@ -138,7 +140,7 @@ export const Sidebar: FC<InterfaceSidebar>= ({icon, profileName} ) => {
         ]
 
         const SidebarSearch = [
-            <NavItem navItemSize={navSize} icon={BiBookmarkHeart} title="Search NFIs" path={'/search'}/>,
+            <NavItem navItemSize={navSize} icon={AiOutlineFileSearch} title="Search NFIs" path={'/search'}/>,
             <NavItem navItemSize={navSize} icon={BiBookmarkHeart} title="Register" path={'/register'}/>,
             <NavItem navItemSize={navSize} icon={IoMdAttach} title="Attach NFTs to your NFI" path={'/attach'}/>,
             <NavItem navItemSize={navSize} icon={IoMdCheckmarkCircleOutline} title="Validate NFI" path={'/validate'}/>,
@@ -187,6 +189,7 @@ export const Sidebar: FC<InterfaceSidebar>= ({icon, profileName} ) => {
             <NavItem navItemSize={navSize} icon={FiTrendingUp} title="Analytics" path={'/analytics'}/>,
         ]
 
+
         switch (location.pathname) {
             case '/':
                 setNavItemRender(null);
@@ -194,6 +197,7 @@ export const Sidebar: FC<InterfaceSidebar>= ({icon, profileName} ) => {
                 setHeaderText("");
                 break;
             case '/identity':
+            case `/identity/${walletAccount}`:
             case '/register':
             case '/attach':
             case '/validate':
@@ -324,6 +328,7 @@ export const Sidebar: FC<InterfaceSidebar>= ({icon, profileName} ) => {
                     <Route path="/" element={<Home/>}/>
                     <Route path={'/identity/:walletAccount'} element={<Identity/>}/>
                     <Route path={'/identity'} element={<Identity/>}/>
+
                     {tokenIDtoIdentityStruct.length === 0 ?
                         <Route path={'/register'} element={<Register/>}/>
                     :   <Route path="/register" element={<Navigate replace to={`/identity/${tokenIDtoIdentityStruct[0]}`} />}
@@ -339,6 +344,8 @@ export const Sidebar: FC<InterfaceSidebar>= ({icon, profileName} ) => {
                     <Route path={'/news'} element={<News/>}/>
                     <Route path={'/security'} element={<Security/>}/>
                     <Route path={'/CloudHWM'} element={<CloudHWM/>}/>
+
+                    <Route path={'/test'} element={<Test/>}/>
                     {/*<Route path={'/community'} element={ <ForumPages/>}/>*/}
                     <Route path={'/yourpeople'} element={<YourPeople/>}/>
                 </Routes>

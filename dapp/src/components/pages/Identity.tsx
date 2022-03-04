@@ -2,20 +2,10 @@ import * as React from 'react';
 import type {FC} from 'react';
 import {Link as ReachLink, useParams} from "react-router-dom";
 import {
-    Avatar,
-    AvatarGroup,
-    Box,
-    Button,
-    Flex,
-    Grid, GridItem,
-    Icon,
-    Image,
-    Link, MenuItem, Stack,
-    Switch,
-    Text,
-    useColorModeValue,
-    HStack, useDisclosure,
-    VStack, Container, AspectRatio, AvatarBadge, Divider, Center, InputRightElement, useStyleConfig,
+    Avatar, AvatarGroup, Box, Button, Flex, Grid, GridItem, Icon, Image, Link, MenuItem,
+    Stack, Switch, Text, useColorModeValue, HStack, useDisclosure, Tooltip, VStack,
+    Container, AspectRatio, AvatarBadge, Divider, Center, InputRightElement, useStyleConfig,
+    TabPanel, TabPanels, TabList, Tabs, Tab, Select, Heading,
 } from "@chakra-ui/react";
 import { RiShareForwardLine} from 'react-icons/ri';
 // Custom components
@@ -32,43 +22,14 @@ import {GiNewShoot} from "react-icons/gi";
 import {useAppSelector} from "../../app/hooks";
 import {SiSololearn} from "react-icons/si";
 import {accountsArr} from "../../features/RequestWalletAccountSlice";
+import {addressHasIdentityBool} from "../../features/MintedNFISlice";
 import {MdOutlineColorLens} from "react-icons/md";
 import AvatarNFI from "../AvatarNFI";
 import bgImage from '../../assets/legoLavendarheadercroped.png'
-import {useState} from "react";
+import {FormEvent, useState} from "react";
+import {Mentions} from "../identity/Mentions";
+import {AiOutlineComment} from "react-icons/ai";
 
-function Card(props: any) {
-    const { variant, children, ...rest } = props;
-    const styles = useStyleConfig("Card", { variant });
-    // Pass the computed styles into the `__css` prop
-    return (
-        <Box __css={styles} {...rest}>
-            {children}
-        </Box>
-    );
-}
-
-function CardBody(props: any) {
-    const { variant, children, ...rest } = props;
-    const styles = useStyleConfig("CardBody", { variant });
-    // Pass the computed styles into the `__css` prop
-    return (
-        <Box __css={styles} {...rest}>
-            {children}
-        </Box>
-    );
-}
-
-function CardHeader(props: any) {
-    const { variant, children, ...rest } = props;
-    const styles = useStyleConfig("CardHeader", { variant });
-    // Pass the computed styles into the `__css` prop
-    return (
-        <Box __css={styles} {...rest}>
-            {children}
-        </Box>
-    );
-}
 
 
 interface Interface {
@@ -81,16 +42,15 @@ export const Identity:FC<Interface>=()=> {
     const { isOpen, onOpen, onClose } = useDisclosure()
     const initialRef = React.useRef()
     const finalRef = React.useRef()
-    // Chakra color mode
-    const textColor = useColorModeValue("#5c415c", "white");
+    const {walletAccount} = useParams();
 
     const filledAccountsArr = useAppSelector((state) => state.register.accounts);
     const tokenIDtoIdentityStruct = useAppSelector((state) => state.minted.tokenIDtoIdentityStruct);
-
+    const receiptHashDB = useAppSelector((state) => state.minted.receiptDBTransHash);
+    const addressHasIdentityBool = useAppSelector((state) => state.minted.addressHasIdentity);
 
 
     console.log(tokenIDtoIdentityStruct);
-
 
     return (
         <Flex>
@@ -140,6 +100,7 @@ export const Identity:FC<Interface>=()=> {
                             m={"0px"}
                             p={'0px'}
                         >
+
                             <Avatar
                                 me={{md: "22px"}}
                                 src='' //this is the profile image
@@ -148,6 +109,10 @@ export const Identity:FC<Interface>=()=> {
                                 mb={"6px"}
                                 borderRadius="10px"
                             />
+
+
+                            <Stack>
+
                             <Flex direction="column" maxWidth="100%"
                                   m={"0px"}
                                   p={'0px'}
@@ -162,7 +127,10 @@ export const Identity:FC<Interface>=()=> {
                                         fontWeight="bold"
                                         ms={{sm: "8px", md: "0px"}}
                                     >
-                                        Non-Registered Wallet Account
+                                        {walletAccount?.length !== 0 ?
+                                            walletAccount
+                                            : 'Non - Registered Wallet Account'
+                                        }
                                     </Text>
 
                                     : <Flex alignItems={'center'}> {filledAccountsArr[0]} </Flex>}
@@ -174,19 +142,20 @@ export const Identity:FC<Interface>=()=> {
                                 >
                                     ramonajenny.n@gmail.com
                                 </Text>
+
                                 <Flex align="center" mb="0px">
                                     <Text
                                         fontSize="md"
-                                        color={textColor}
+                                        color='pmpurple.13'
                                         fontWeight="bold"
                                         me="10px"
                                     >
                                         Social Media:{" "}
                                     </Text>
-                                    <Flex>
+
                                         <Link
                                             href="#"
-                                            color="#9c7e9c"
+                                            color='pmpurple.13'
                                             fontSize="lg"
                                             me="10px"
                                             _hover={{color: "#9c7e9c"}}
@@ -195,7 +164,7 @@ export const Identity:FC<Interface>=()=> {
                                         </Link>
                                         <Link
                                             href="#"
-                                            color="#9c7e9c"
+                                            color='pmpurple.13'
                                             fontSize="lg"
                                             me="10px"
                                             _hover={{color: "#9c7e9c"}}
@@ -204,7 +173,7 @@ export const Identity:FC<Interface>=()=> {
                                         </Link>
                                         <Link
                                             href="#"
-                                            color="#9c7e9c"
+                                            color='pmpurple.13'
                                             fontSize="lg"
                                             me="10px"
                                             _hover={{color: "#9c7e9c"}}
@@ -213,7 +182,7 @@ export const Identity:FC<Interface>=()=> {
                                         </Link>
                                         <Link
                                             href="#"
-                                            color="#9c7e9c"
+                                            color='pmpurple.13'
                                             fontSize="lg"
                                             me="10px"
                                             _hover={{color: "#9c7e9c"}}
@@ -222,20 +191,19 @@ export const Identity:FC<Interface>=()=> {
 
                                         </Link>
 
-                                    </Flex>
-
                                 </Flex>
+
 
                                 <Text
                                     fontSize="md"
-                                    color={textColor}
+                                    color='pmpurple.13'
                                     fontWeight="bold"
                                     me="10px"
                                 >
                                     Your NFI QR code:{" "}
                                     <Link
                                         href="#"
-                                        color="#9c7e9c"
+                                        color='pmpurple.13'
                                         fontSize="lg"
                                         me="10px"
                                         _hover={{color: "#9c7e9c"}}
@@ -246,6 +214,7 @@ export const Identity:FC<Interface>=()=> {
                                 </Text>
 
                             </Flex>
+                            </Stack>
                         </Flex>
                         <VStack direction={'row'} justify={'center'} spacing={6}
                                 // border="2px solid "
@@ -266,6 +235,7 @@ export const Identity:FC<Interface>=()=> {
                                         bg="hsla(0,0%,100%,.3)"
                                         borderRadius="15px"
                                         justifyContent="center"
+                                        mt={'12px'}
                                         py="12px"
                                         px="14px"
                                         mx={'42px'}
@@ -278,11 +248,19 @@ export const Identity:FC<Interface>=()=> {
                                         }}
                                     >
                                         <Icon as={FaCube} me="6px"/>
-                                        <Text fontSize="sm" color={textColor} fontWeight="bold">
+                                        <Text fontSize="sm" color='pmpurple.13' fontWeight="bold">
                                             {/*//when I click on this button I want it to route me to the validations page*/}
                                             <Link as={ReachLink} to={'/validate'}  _hover={{ textDecor: 'none' }}>
-                                                NFI:
-                                                Transaction Hash --connect to HarmonyOne
+                                                {addressHasIdentityBool === false ?
+
+                                                    <Text fontSize={'18px'} color={'red.600'} letterSpacing={'1px'} textShadow={'#F7FAFC 0px 0px 10px'} >
+                                                        Non-Registered Wallet Account
+                                                    </Text>
+
+                                                    :
+                                                    `NFI Transaction Hash: ${receiptHashDB}`
+                                                }
+
                                             </Link>
                                         </Text>
                                     </Flex>
@@ -291,22 +269,43 @@ export const Identity:FC<Interface>=()=> {
                             <HStack spacing={'34px'} >
                                 <Stack spacing={'0px'} align={'center'}>
                                     <Text fontWeight={600}>57</Text>
-                                    <Text fontSize={'sm'} color={'pmpurple.11'}>
-                                        Validations
-                                    </Text>
+                                    <Tooltip hasArrow label='Total received Validations from other Blockchain accounts' bg='pmpurple.4' color='pmpurple.13'>
+                                        <Text fontSize={'sm'} color={'pmpurple.11'}>
+                                            Validations
+                                        </Text>
+                                    </Tooltip>
+
+
                                 </Stack>
                                 <Stack spacing={0} align={'center'}>
                                     <Text fontWeight={600}>23k</Text>
-                                    <Text fontSize={'sm'} color={'pmpurple.11'}>
-                                        Mentions
-                                    </Text>
+                                    <Tooltip hasArrow label='Total Mentions about this PaperMaster' bg='pmpurple.4' color='pmpurple.13'>
+                                        <Text fontSize={'sm'} color={'pmpurple.11'}>
+                                            Mentions
+                                        </Text>
+                                    </Tooltip>
                                 </Stack>
                                 <Stack spacing={0} align={'center'}>
                                     <Text fontWeight={600}>23k</Text>
+                                    <Tooltip hasArrow label='Total reports made about PaperMaster' bg='pmpurple.4' color='pmpurple.13'>
                                     <Text fontSize={'sm'} color={'pmpurple.11'}>
-                                        Report this NFI
+                                        Reported
                                     </Text>
+                                    </Tooltip>
                                 </Stack>
+                                <Stack spacing={0} align={'center'}>
+                                    <Text fontWeight={600}>3k</Text>
+                                    <Tooltip hasArrow label='Number of Validations this PaperMaster has given to other Blockchain accounts' bg='pmpurple.4' color='pmpurple.13'>
+                                    <Text fontSize={'sm'} color={'pmpurple.11'}>
+                                        Given Validations
+                                    </Text>
+                                        </Tooltip>
+                                </Stack>
+                                <Select placeholder='Alias' color={'pmpurple.13'} borderColor={'pmpurple.5'}>
+                                    <option value='ALias'>OpenSea</option>
+                                    <option value='Profile Name'>Cordano</option>
+                                    <option value='option3'>Option 3</option>
+                                </Select>
                             </HStack>
 
                         </VStack>
@@ -314,128 +313,74 @@ export const Identity:FC<Interface>=()=> {
                 </Box>
                 <Stack p={'10px'}>
 
-                    <Card borderRadius='15px' bg='white' p="12px" px="24px">
-                        <CardHeader p="12px 5px" mb="0px">
-                            <Text fontSize="lg" color={textColor} fontWeight="bold">
+                    <Box borderRadius='15px' bg='white' p="12px" px="24px">
+                        <Heading p="12px 5px" mb="0px">
+                            <Text fontSize="lg" color='pmpurple.13' fontWeight="bold">
                                 Description
                             </Text>
-                        </CardHeader>
-                        <CardBody px="5px">
+                        </Heading>
+                        <Box px="5px">
                             <Flex direction="column">
-                                <Text fontSize="md" color="gray.500" fontWeight="400" mb="20px">
+                                <Text fontSize="md" color={'pmpurple.8'} fontWeight="400" mb="20px">
                                     Mathematics may not teach us how to add love or subtract hate, but it gives
                                     us every reason to hope that every problem has a solution.
                                 </Text>
                             </Flex>
-                        </CardBody>
-                    </Card>
+                        </Box>
+                    </Box>
                         <HStack spacing={'10px'}  align='stretch' justify={'space-evenly'}>
-                            <Card w='33%' borderRadius='15px' bg='white' p="16px" px="24px">
-                                <CardHeader p="12px 5px" mb="12px">
-                                    <Text fontSize="lg" color={textColor} fontWeight="bold">
-                                        Alias / User Names / Also Known As
-                                    </Text>
-                                </CardHeader>
-                                <CardBody px="5px">
-                                    <Flex direction="column">
-                                        <Text fontSize="sm" color="gray.500" fontWeight="600" mb="20px">
-                                            ACCOUNT
-                                        </Text>
-                                        <Flex align="center" mb="20px">
-                                            <Switch colorScheme="purple" me="10px"/>
-                                            <Text
-                                                noOfLines={1}
-                                                fontSize="md"
-                                                color="gray.500"
-                                                fontWeight="400"
-                                            >
-                                                Email me when someone Validates me
-                                            </Text>
-                                        </Flex>
-                                        <Flex align="center" mb="20px">
-                                            <Switch colorScheme="purple" me="10px"/>
-                                            <Text
-                                                noOfLines={1}
-                                                fontSize="md"
-                                                color="gray.500"
-                                                fontWeight="400"
-                                            >
-                                                Email me when my NFI attached NFTs sell
-                                            </Text>
-                                        </Flex>
-                                        <Flex align="center" mb="20px">
-                                            <Switch colorScheme="purple" me="10px"/>
-                                            <Text
-                                                noOfLines={1}
-                                                fontSize="md"
-                                                color="gray.500"
-                                                fontWeight="400"
-                                            >
-                                                Email me when someone answers on my post
-                                            </Text>
-                                        </Flex>
-                                        <Flex align="center" mb="20px">
-                                            <Switch colorScheme="purple" me="10px"/>
-                                            <Text
-                                                noOfLines={1}
-                                                fontSize="md"
-                                                color="gray.500"
-                                                fontWeight="400"
-                                            >
-                                                Email me when someone mentions me
-                                            </Text>
-                                        </Flex>
-                                        <Text
-                                            fontSize="sm"
-                                            color="gray.500"
-                                            fontWeight="600"
-                                            m="6px 0px 20px 0px"
-                                        >
-                                            APPLICATION
-                                        </Text>
-                                        <Flex align="center" mb="20px">
-                                            <Switch colorScheme="purple" me="10px"/>
-                                            <Text
-                                                noOfLines={1}
-                                                fontSize="md"
-                                                color="gray.500"
-                                                fontWeight="400"
-                                            >
-                                                New launches and projects
-                                            </Text>
-                                        </Flex>
-                                        <Flex align="center" mb="20px">
-                                            <Switch colorScheme="purple" me="10px"/>
-                                            <Text
-                                                noOfLines={1}
-                                                fontSize="md"
-                                                color="gray.500"
-                                                fontWeight="400"
-                                            >
-                                                Monthly product changes
-                                            </Text>
-                                        </Flex>
-                                        <Flex align="center" mb="20px">
-                                            <Switch colorScheme="purple" me="10px"/>
-                                            <Text
-                                                noOfLines={1}
-                                                fontSize="md"
-                                                color="gray.500"
-                                                fontWeight="400"
-                                            >
-                                                Subscribe to newsletter
-                                            </Text>
-                                        </Flex>
-                                    </Flex>
-                                </CardBody>
-                            </Card>
-                            <Card w='33%' borderRadius='15px' bg='white' p="16px" px="24px">
-                                <CardHeader p="12px 5px" mb="12px">
-                                    <Text fontSize="lg" color={textColor} fontWeight="bold">
+                            <Box w='33%' borderRadius='15px' bg='white' p="16px" px="24px">
+                                <Heading p="12px 5px" mb="12px">
+                                    <Tabs isFitted variant='enclosed'>
+                                        <TabList mb='1em' color={'pmpurple.13'}>
+                                            <Tab>Validations</Tab>
+                                            <Tab>Reports</Tab>
+                                        </TabList>
+                                        <TabPanels>
+                                            <TabPanel>
 
-                                        </Text>
-                                </CardHeader>
-                                <CardBody px="5px">
+                                                    <Text fontSize="sm" color={'pmpurple.8'} fontWeight="600" mb="20px">
+                                                        GIFTED BY ACCOUNT:
+                                                    </Text>
+                                                    <Flex align="center" mb="20px">
+                                                        <Switch colorScheme="purple" me="10px"/>
+                                                        <Text
+                                                            noOfLines={1}
+                                                            fontSize="md"
+                                                            color="gray.500"
+                                                            fontWeight="400"
+                                                        >
+                                                            Email me when someone Validates me
+                                                        </Text>
+                                                    </Flex>
+
+
+                                            </TabPanel>
+                                            <TabPanel>
+
+                                                    <Text fontSize="sm" color={'pmpurple.8'} fontWeight="600" mb="20px">
+                                                        REPORTED BY ACCOUNT:
+                                                    </Text>
+                                                    <Flex align="center" mb="20px">
+                                                        <Switch colorScheme="purple" me="10px"/>
+                                                        <Text
+                                                            noOfLines={1}
+                                                            fontSize="md"
+                                                            color="gray.500"
+                                                            fontWeight="400"
+                                                        >
+                                                            Email me when someone REPORTS me
+                                                        </Text>
+                                                    </Flex>
+
+                                            </TabPanel>
+                                        </TabPanels>
+                                    </Tabs>
+
+                                </Heading>
+                            </Box>
+
+                            <Box w='33%' borderRadius='15px' bg='white' p="24px">
 
                                     {filledAccountsArr.length !== 0 && tokenIDtoIdentityStruct.length !== 0 ?
 
@@ -457,12 +402,13 @@ export const Identity:FC<Interface>=()=> {
                                                   avatarBG={tokenIDtoIdentityStruct[8]}
                                                   originDate={parseInt(tokenIDtoIdentityStruct[9])}
                                                    />
+
                                            :
 
                                         <Button
                                             w={'100%'}
                                             p={"6px"}
-                                            mt={'62px'}
+                                            mt={'32px'}
                                             bg={'pmpurple.2'}
                                             h='10.00rem'
                                             //size='lg'
@@ -480,8 +426,6 @@ export const Identity:FC<Interface>=()=> {
                                               _hover={{ textDecor: 'none' }}
                                               cursor={'pointer'}
                                         >
-                                            <CardHeader p="12px 5px" mb="12px">
-                                                <HStack>
                                                 <Text p='12px' textAlign={'center'} fontSize="xl" color={'pmpurple.13'} fontWeight="bold" whiteSpace={'pre-wrap'} >
                                                     NFI will display here, please mint an NFI to your wallet account
                                                 </Text>
@@ -489,184 +433,29 @@ export const Identity:FC<Interface>=()=> {
                                                         <RiShareForwardLine fontSize={'40px'} />
                                                     </Box>
 
-                                            </HStack>
-                                            </CardHeader>
-
                                         </Link>
                                         </Button>
                                     }
-                                </CardBody>
-                            </Card>
 
-                            <Card w='33%' borderRadius='15px' bg='white' p="16px" px="24px">
-                                <CardHeader p="12px 5px" mb="12px">
-                                    <Text fontSize="lg" color={textColor} fontWeight="bold">
-                                        Mentions
-                                    </Text>
-                                </CardHeader>
-                                <CardBody px="5px">
-                                    <Flex direction="column" w="100%">
-                                        <Flex justifyContent="space-between" mb="21px">
-                                            <Flex align="center">
-                                                <Avatar
-                                                    src='PMlogo.png'
-                                                    w="50px"
-                                                    h="50px"
-                                                    borderRadius="15px"
-                                                    me="10px"
-                                                />
-                                                <Flex direction="column">
-                                                    <Text fontSize="sm" color={textColor} fontWeight="bold">
-                                                        JediKnight{" "}
-                                                    </Text>
-                                                    <Text fontSize="xs" color="gray.500" fontWeight="400">
-                                                        Hi! I need more information about your upcoming project...
-                                                    </Text>
-                                                </Flex>
-                                            </Flex>
-                                            <Button p="0px" bg="transparent" variant="no-hover">
-                                                <Text
-                                                    fontSize="sm"
-                                                    fontWeight="600"
-                                                    color="#9c7e9c"
-                                                    alignSelf="center"
-                                                >
-                                                    REPLY
-                                                </Text>
-                                            </Button>
-                                        </Flex>
-                                        <Flex justifyContent="space-between" mb="21px">
-                                            <Flex align="center">
-                                                <Avatar
-                                                    src='legoLavendar.png'
-                                                    w="50px"
-                                                    h="50px"
-                                                    borderRadius="15px"
-                                                    me="10px"
-                                                />
-                                                <Flex direction="column">
-                                                    <Text fontSize="sm" color={textColor} fontWeight="bold">
-                                                        WhyWhyWhy{" "}
-                                                    </Text>
-                                                    <Text fontSize="xs" color="gray.500" fontWeight="400">
-                                                        Awesome work, can you change...
-                                                    </Text>
-                                                </Flex>
-                                            </Flex>
-                                            <Button p="0px" bg="transparent" variant="no-hover">
-                                                <Text
-                                                    fontSize="sm"
-                                                    fontWeight="600"
-                                                    color="#9c7e9c"
-                                                    alignSelf="center"
-                                                >
-                                                    REPLY
-                                                </Text>
-                                            </Button>
-                                        </Flex>
-                                        <Flex justifyContent="space-between" mb="21px">
-                                            <Flex align="center">
-                                                <Avatar
-                                                    src={'PMlogo.png'}
-                                                    w="50px"
-                                                    h="50px"
-                                                    borderRadius="15px"
-                                                    me="10px"
-                                                />
-                                                <Flex direction="column">
-                                                    <Text fontSize="sm" color={textColor} fontWeight="bold">
-                                                        Ammon AC{" "}
-                                                    </Text>
-                                                    <Text fontSize="xs" color="gray.500" fontWeight="400">
-                                                        Have a great afternoon...
-                                                    </Text>
-                                                </Flex>
-                                            </Flex>
-                                            <Button p="0px" bg="transparent" variant="no-hover">
-                                                <Text
-                                                    fontSize="sm"
-                                                    fontWeight="600"
-                                                    color="#9c7e9c"
-                                                    alignSelf="center"
-                                                >
-                                                    REPLY
-                                                </Text>
-                                            </Button>
-                                        </Flex>
-                                        <Flex justifyContent="space-between" mb="21px">
-                                            <Flex align="center">
-                                                <Avatar
-                                                    src={'legoLavendar.png'}
-                                                    w="50px"
-                                                    h="50px"
-                                                    borderRadius="15px"
-                                                    me="10px"
-                                                />
-                                                <Flex direction="column">
-                                                    <Text fontSize="sm" color={textColor} fontWeight="bold">
-                                                        Captain Nautica{" "}
-                                                    </Text>
-                                                    <Text fontSize="xs" color="gray.500" fontWeight="400">
-                                                        About NFTs I can...
-                                                    </Text>
-                                                </Flex>
-                                            </Flex>
-                                            <Button p="0px" bg="transparent" variant="no-hover">
-                                                <Text
-                                                    fontSize="sm"
-                                                    fontWeight="600"
-                                                    color="#9c7e9c"
-                                                    alignSelf="center"
-                                                >
-                                                    REPLY
-                                                </Text>
-                                            </Button>
-                                        </Flex>
-                                        <Flex justifyContent="space-between" mb="21px">
-                                            <Flex align="center">
-                                                <Avatar
-                                                    src={'PMlogo.png'}
-                                                    w="50px"
-                                                    h="50px"
-                                                    borderRadius="15px"
-                                                    me="10px"
-                                                />
-                                                <Flex direction="column">
-                                                    <Text fontSize="sm" color={textColor} fontWeight="bold">
-                                                        Atlas World{" "}
-                                                    </Text>
-                                                    <Text fontSize="xs" color="gray.500" fontWeight="400">
-                                                        Are you the author...
-                                                    </Text>
-                                                </Flex>
-                                            </Flex>
-                                            <Button p="0px" bg="transparent" variant="no-hover">
-                                                <Text
-                                                    fontSize="sm"
-                                                    fontWeight="600"
-                                                    color="#9c7e9c"
-                                                    alignSelf="center"
-                                                >
-                                                    REPLY
-                                                </Text>
-                                            </Button>
-                                        </Flex>
-                                    </Flex>
-                                </CardBody>
-                            </Card>
+
+                            </Box>
+
+
+             <Mentions/>
+
                         </HStack>
-                    <Card p="16px" my="24px" mx={{xl: '32px'}} borderRadius='15px' bg='white' px="24px">
-                        <CardHeader p="12px 5px" mb="12px">
+                    <Box p="16px" my="24px" mx={{xl: '32px'}} borderRadius='15px' bg='white' px="24px">
+                        <Heading p="12px 5px" mb="12px">
                             <Flex direction="column">
-                                <Text fontSize="lg" color={textColor} fontWeight="bold">
+                                <Text fontSize="lg" color={'pmpurple.13'} fontWeight="bold">
                                     Non-Fungible-Tokens
                                 </Text>
-                                <Text fontSize="sm" color="gray.500" fontWeight="400">
+                                <Text fontSize="sm" color={'pmpurple.13'} fontWeight="400">
                                     PaperMasters protect the Blockchain
                                 </Text>
                             </Flex>
-                        </CardHeader>
-                        <CardBody px="5px">
+                        </Heading>
+                        <Box px="5px">
                             <Grid
                                 templateColumns={{sm: "1fr", md: "1fr 1fr", xl: "repeat(4, 1fr)"}}
                                 templateRows={{sm: "1fr 1fr 1fr auto", md: "1fr 1fr", xl: "1fr"}}
@@ -692,19 +481,19 @@ export const Identity:FC<Interface>=()=> {
                                         </Text>
                                         <Text
                                             fontSize="xl"
-                                            color={textColor}
+                                            color={'pmpurple.13'}
                                             fontWeight="bold"
                                             mb="10px"
                                         >
                                             My future project...
                                         </Text>
-                                        <Text fontSize="md" color="gray.500" fontWeight="400" mb="20px">
+                                        <Text fontSize="md" color={'pmpurple.13'} fontWeight="400" mb="20px">
                                             As I look through my bucket list, I find my next endeavor...
                                         </Text>
                                         <Flex justifyContent="space-between">
                                             <Button
                                                 variant="outline"
-                                                colorScheme="purple"
+                                                color={'pmpurple.13'}
                                                 minW="110px"
                                                 h="36px"
                                                 fontSize="xs"
@@ -740,7 +529,7 @@ export const Identity:FC<Interface>=()=> {
                                         </Text>
                                         <Text
                                             fontSize="xl"
-                                            color={textColor}
+                                            color={'pmpurple.13'}
                                             fontWeight="bold"
                                             mb="10px"
                                         >
@@ -783,25 +572,25 @@ export const Identity:FC<Interface>=()=> {
                                         ></Box>
                                     </Box>
                                     <Flex direction="column">
-                                        <Text fontSize="md" color="gray.500" fontWeight="600" mb="10px">
+                                        <Text fontSize="md" color={'pmpurple.13'} fontWeight="600" mb="10px">
                                             Project #3
                                         </Text>
                                         <Text
                                             fontSize="xl"
-                                            color={textColor}
+                                            color={'pmpurple.13'}
                                             fontWeight="bold"
                                             mb="10px"
                                         >
                                             Nowadays
                                         </Text>
-                                        <Text fontSize="md" color="gray.500" fontWeight="400" mb="20px">
+                                        <Text fontSize="md" color={'pmpurple.13'} fontWeight="400" mb="20px">
                                             Different people have different taste, especially various
                                             types of NFTs.
                                         </Text>
                                         <Flex justifyContent="space-between">
                                             <Button
                                                 variant="outline"
-                                                colorScheme="purple"
+                                                color={'pmpurple.13'}
                                                 minW="110px"
                                                 h="36px"
                                                 fontSize="xs"
@@ -822,7 +611,7 @@ export const Identity:FC<Interface>=()=> {
                                     style={{border: '1px solid #b59eb5'}}
                                     p="0px"
                                     bg="transparent"
-                                    color="#9c7e9c"
+                                    color={'pmpurple.13'}
                                     border="1px solid lightgray"
                                     borderRadius="15px"
                                     minHeight={{sm: "200px", md: "100%"}}
@@ -839,8 +628,8 @@ export const Identity:FC<Interface>=()=> {
                                     </Flex>
                                 </Button>
                             </Grid>
-                        </CardBody>
-                    </Card>
+                        </Box>
+                    </Box>
                 </Stack>
 
             </Stack>

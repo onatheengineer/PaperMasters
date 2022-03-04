@@ -5,12 +5,14 @@ interface IdentityStateSlice {
     unRegisteredNoIdentity: boolean,
     unRegisteredWithIdentity: boolean,
     registeredIdentity: boolean,
+    searchWalletAccountEntry: boolean,
 }
 
 const initialState: IdentityStateSlice = {
     unRegisteredNoIdentity: false,
     unRegisteredWithIdentity: false,
     registeredIdentity: false,
+    searchWalletAccountEntry: false,
 };
 
 const identityStateSlice = createSlice ({
@@ -26,6 +28,9 @@ const identityStateSlice = createSlice ({
         registered(state, action) {
             state.registeredIdentity = action.payload
         },
+        searchParams(state, action) {
+            state.searchWalletAccountEntry = action.payload
+        },
     },
 });
 
@@ -36,6 +41,7 @@ export const { noIdentity, hasIdentity, registered } = identityStateSlice.action
 export const unRegisteredNoIdentityAction= createAction<string>("UNREGISTERED_NO_IDENTITY_SAGA");
 export const unRegisteredWithIdentityAction= createAction<string>("UNREGISTERED_WITH_IDENTITY_SAGA");
 export const registeredIdentityAction= createAction<string>("REGISTERED_IDENTITY_SAGA");
+export const searchParamsAction= createAction<string>("SEARCH_PARAMS_SAGA");
 
 export default identityStateSlice.reducer;
 
