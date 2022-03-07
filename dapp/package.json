@@ -37,6 +37,7 @@
     "immer": "^9.0.12",
     "logrocket": "^2.2.0",
     "lowdash": "^1.2.0",
+    "moment": "^2.29.1",
     "mui-datatables": "^4.0.0",
     "prettier": "^2.5.1",
     "react": "^17.0.2",

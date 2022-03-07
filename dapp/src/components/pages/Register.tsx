@@ -95,7 +95,7 @@ export const Register: FC<InterfaceRegister>=()=> {
 
     const [submitButtonClicked, setSubmitButtonClicked] = useState<boolean>(false);
 
-    const [ isModalOpen, setIsModalOpen ] = useState<boolean>(false);
+    const [isModalOpen, setIsModalOpen ] = useState<boolean>(false);
 
     const nameHandler = (e: React.FormEvent<HTMLInputElement>) => {
         setName(e.currentTarget.value);
@@ -355,7 +355,7 @@ useEffect(()=>{
                         <FormErrorMessage>Field is required.</FormErrorMessage>
                     </FormControl>
 
-                    <FormControl>
+                    <FormControl isRequired>
                         <FormLabel htmlFor='email' color={'pmpurple.13'} mb={'2px'}>Email</FormLabel>
                         <InputGroup size='md'>
                             <Input focusBorderColor='pmpurple.9' borderColor={"pmpurple.4"} id='email' pl={'62px'}

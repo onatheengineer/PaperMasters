@@ -11,7 +11,9 @@ import { Box, Flex} from '@chakra-ui/react';
 import Sidebar, {NavItem} from './components/Sidebar'
 import {requestAccountsAsyncAction} from "./features/RequestWalletAccountSlice";
 import {mintNFIAsyncAction} from "./features/MintNFISlice";
-import {addressHasIdentityBoolAction, receiptDBAction} from "./features/MintedNFISlice";
+import {addressHasIdentityBoolAction} from "./features/MintedNFISlice";
+import { createBreakpoints } from '@chakra-ui/theme-tools'
+import {receiptDBAction} from "./features/AccountSlice";
 
 
 function App() {

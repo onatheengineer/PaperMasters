@@ -6,6 +6,7 @@ import mintedSlice from '../features/MintedNFISlice';
 import createSaga from "redux-saga";
 import rootSaga from "../features/rootSagas";
 import logger from 'redux-logger';
+import accountSlice from "../features/AccountSlice";
 
 
 const sagaMiddleware = createSaga();
@@ -17,7 +18,7 @@ export const store = configureStore({
     search: searchSlice,
     mint: mintSlice,
     minted: mintedSlice,
-
+    account: accountSlice,
   },
 });
 

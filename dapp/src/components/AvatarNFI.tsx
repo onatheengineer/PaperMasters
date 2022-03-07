@@ -55,8 +55,7 @@ export const AvatarNFI:FC<AvatarNFIInterface>=( {accountNumber,
                                                 originDate} )=> {
 
     const originDateObject = new Date(originDate);
-    const originDateFormatted: string = `${originDateObject.toLocaleString('en-us', {month: 'long'})} 
-                                            ${originDateObject.getDate()}, ${originDateObject.getFullYear()}`
+    const originDateFormatted: string = `${originDateObject.toLocaleString('en-us', {month: 'long'})} ${originDateObject.getDate()}, ${originDateObject.getFullYear()}`
 
     return (
 
@@ -193,7 +192,7 @@ export const AvatarNFI:FC<AvatarNFIInterface>=( {accountNumber,
                                     // w={'100%'}
                                     bg={'pmpurple.10'}
                                 >
-                                    <Text p={'6px'} fontSize={'9.8pt'} color={'white'}
+                                    <Text p={'6px'} fontSize={'9pt'} color={'white'}
                                           whiteSpace={'break-spaces'}>
                                         {accountNumber}
                                     </Text>

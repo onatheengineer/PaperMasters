@@ -155,7 +155,8 @@ export const Sidebar: FC<InterfaceSidebar>= ({icon, profileName} ) => {
             <NavItem navItemSize={navSize} icon={BiHomeHeart} title="Community Guidelines" path={'/forumPages'}/>,
             <NavItem navItemSize={navSize} icon={GiDiscussion} title="Community Discussion" path={"/forumPages"}/>,
             <NavItem navItemSize={navSize} icon={BsCalendar2Event} title="Community Events" path={'/forumPages'}/>,
-            <NavItem navItemSize={navSize} icon={MdOutlineWarningAmber} title="Report Suspicious Activity" path={'/forumPages'}/>,
+            <NavItem navItemSize={navSize} icon={MdOutlineWarningAmber} title="Report Suspicious Activity"
+                     path={'/forumPages'}/>,
 
         ]
 
@@ -189,15 +190,12 @@ export const Sidebar: FC<InterfaceSidebar>= ({icon, profileName} ) => {
             <NavItem navItemSize={navSize} icon={FiTrendingUp} title="Analytics" path={'/analytics'}/>,
         ]
 
-
         switch (location.pathname) {
             case '/':
                 setNavItemRender(null);
                 setHeaderTitle("");
                 setHeaderText("");
                 break;
-            case '/identity':
-            case `/identity/${walletAccount}`:
             case '/register':
             case '/attach':
             case '/validate':
@@ -245,9 +243,16 @@ export const Sidebar: FC<InterfaceSidebar>= ({icon, profileName} ) => {
                 setHeaderText("sdfsdfssdfsddf");
                 break;
             default:
-                setNavItemRender(null);
-                setHeaderTitle("");
-                setHeaderText("");
+                if (location.pathname.startsWith('/identity')) {
+                    setNavItemRender(SidebarIdentity);
+                    setHeaderTitle("NFI");
+                    setHeaderText("sdfsdfsdf");
+
+                } else {
+                    setNavItemRender(null);
+                    setHeaderTitle("");
+                    setHeaderText("");
+                }
         }
     }, [location, navSize]);
 
@@ -331,7 +336,7 @@ export const Sidebar: FC<InterfaceSidebar>= ({icon, profileName} ) => {
 
                     {tokenIDtoIdentityStruct.length === 0 ?
                         <Route path={'/register'} element={<Register/>}/>
-                    :   <Route path="/register" element={<Navigate replace to={`/identity/${tokenIDtoIdentityStruct[0]}`} />}
+                    :   <Route path="/register" element={<Navigate replace to={`/identity/${tokenIDtoIdentityStruct[0].toLowerCase()}`} />}
                         />
                     }
 
