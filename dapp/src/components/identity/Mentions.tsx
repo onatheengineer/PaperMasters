@@ -32,177 +32,175 @@ export const Mentions: FC<Interface>=()=> {
     const firstField = useRef<HTMLTextAreaElement>(null)
     const filledAccountsArr = useAppSelector((state) => state.register.accounts);
     const {walletAccount} = useParams();
-
     const dateFormated = moment().format('MMM DD YYYY, hh:mm:ss a');
 
 
     return (
 
-            <HStack>
-                <Box  p="5px">
-                    <Text fontSize="18px" color={'pmpurple.13'} fontWeight="bold">
-                        Mentions
-                    </Text>
-                </Box>
+        <HStack>
+            <Box p="5px">
+                <Text fontSize="18px" color={'pmpurple.13'} fontWeight="bold">
+                    Mentions
+                </Text>
+            </Box>
 
-<Spacer/>
-                {filledAccountsArr[0] !== walletAccount ?
-                    <Box>
+            <Spacer/>
+            {filledAccountsArr[0] !== walletAccount ?
+                <Box>
+                    <Button leftIcon={<AiOutlineComment/>} color={'pmpurple.10'} onClick={onOpen}>
+                        <Text fontSize="14px">
+                            Add Mention
+                        </Text>
+                    </Button>
 
-                        <Button leftIcon={<AiOutlineComment/>} color={'pmpurple.10'} onClick={onOpen}>
-                            <Text fontSize="14px"  >
-                                Add Mention
-                            </Text>
-                        </Button>
+                    <Drawer
+                        isOpen={isOpen}
+                        placement='right'
+                        initialFocusRef={firstField}
+                        onClose={onClose}
+                    >
+                        <DrawerOverlay/>
+                        <DrawerContent>
+                            <DrawerCloseButton/>
+                            <DrawerHeader
+                                color='pmpurple.15'
+                                borderBottomWidth='1px'>
+                                Mentions
+                            </DrawerHeader>
 
-                        <Drawer
-                            isOpen={isOpen}
-                            placement='right'
-                            initialFocusRef={firstField}
-                            onClose={onClose}
-                        >
-                            <DrawerOverlay/>
-                            <DrawerContent>
-                                <DrawerCloseButton/>
-                                <DrawerHeader
-                                    color='pmpurple.15'
-                                    borderBottomWidth='1px'>
-                                    Mentions
-                                </DrawerHeader>
-
-                                <DrawerBody>
-                                    <Stack spacing='24px'>
-                                        <Box>
-                                            <FormLabel
-                                                mt={'22px'}
-                                                color='pmpurple.15'
-                                                htmlFor='username'>From Wallet Account</FormLabel>
-                                            {filledAccountsArr.length !== 0 ?
-                                                <Input
-                                                    isDisabled={true}
-                                                    border={'1px solid'}
-                                                    borderColor={'pmpurple.8'}
-                                                    bg={'pmpurple.2'}
-                                                    color='pmpurple.15'
-                                                    value={filledAccountsArr[0]}
-                                                    id='username'
-                                                    placeholder={filledAccountsArr[0]}
-                                                />
-                                                :
-                                                <Input
-                                                    color='pmpurple.15'
-                                                    border={'1px solid'}
-                                                    borderColor={'pmpurple.6'}
-                                                    bg={'pmpurple.2'}
-                                                    value={filledAccountsArr[0]}
-                                                    id='username'
-                                                    placeholder='Please Connect your Wallet'
-                                                />
-
-                                            }
-                                            <FormLabel
-                                                mt={'22px'}
-                                                color='pmpurple.15'
-                                                htmlFor='username'>To Wallet Account</FormLabel>
-                                            {filledAccountsArr.length !== 0 ?
-                                                <Input
-                                                    isDisabled={true}
-                                                    border={'1px solid'}
-                                                    borderColor={'pmpurple.8'}
-                                                    bg={'pmpurple.2'}
-                                                    color='pmpurple.15'
-                                                    value={filledAccountsArr[0]}
-                                                    id='username'
-                                                    placeholder={filledAccountsArr[0]}
-                                                />
-                                                :
-                                                <Input
-                                                    color='pmpurple.15'
-                                                    border={'1px solid'}
-                                                    borderColor={'pmpurple.6'}
-                                                    bg={'pmpurple.2'}
-                                                    value={filledAccountsArr[0]}
-                                                    id='username'
-                                                    placeholder='Please Connect your Wallet'
-                                                />
-
-                                            }
-
-                                        </Box>
-                                        <RadioGroup mt={'48px'} defaultValue={resize} onChange={setResize}
-                                                    mb={'0px'}>
-                                            <Stack direction='row' spacing={5}>
-                                                <Radio color='pmpurple.15' bg={'pmgreen.15'}
-                                                       colorScheme='green' value='Positive'>Postive</Radio>
-                                                <Radio color='pmpurple.15' bg={'red.600'} colorScheme='red'
-                                                       value='Negative'>Negative</Radio>
-                                                <Radio color='pmpurple.15' bg={'pmpurple.6'}
-                                                       colorScheme='pmpurple.13'
-                                                       value='Neutral'>Neutral</Radio>
-                                            </Stack>
-                                        </RadioGroup>
-
-                                        <Box>
-                                            <FormLabel
-                                                mt={'0px'}
-                                                color='pmpurple.15'
-                                                htmlFor='desc'>Add Mention</FormLabel>
-                                            <Textarea
-                                                color='pmpurple.13'
-                                                border={'1px solid'}
-                                                borderColor={'pmpurple.6'}
-                                                bg={'pmpurple.2'}
-                                                h={'400px'}
-                                                id='desc' ref={firstField}
-                                                placeholder='Give a Mention'
-                                            />
-                                        </Box>
-                                        <Box>
+                            <DrawerBody>
+                                <Stack spacing='24px'>
+                                    <Box>
+                                        <FormLabel
+                                            mt={'22px'}
+                                            color='pmpurple.15'
+                                            htmlFor='username'>From Wallet Account</FormLabel>
+                                        {filledAccountsArr.length !== 0 ?
                                             <Input
                                                 isDisabled={true}
                                                 border={'1px solid'}
                                                 borderColor={'pmpurple.8'}
                                                 bg={'pmpurple.2'}
                                                 color='pmpurple.15'
-                                                value={dateFormated}
+                                                value={filledAccountsArr[0]}
                                                 id='username'
-                                                placeholder={'Date'}
+                                                placeholder={filledAccountsArr[0]}
+                                            />
+                                            :
+                                            <Input
+                                                color='pmpurple.15'
+                                                border={'1px solid'}
+                                                borderColor={'pmpurple.6'}
+                                                bg={'pmpurple.2'}
+                                                value={filledAccountsArr[0]}
+                                                id='username'
+                                                placeholder='Please Connect your Wallet'
                                             />
 
-                                        </Box>
+                                        }
+                                        <FormLabel
+                                            mt={'22px'}
+                                            color='pmpurple.15'
+                                            htmlFor='username'>To Wallet Account</FormLabel>
+                                        {filledAccountsArr.length !== 0 ?
+                                            <Input
+                                                isDisabled={true}
+                                                border={'1px solid'}
+                                                borderColor={'pmpurple.8'}
+                                                bg={'pmpurple.2'}
+                                                color='pmpurple.15'
+                                                value={filledAccountsArr[0]}
+                                                id='username'
+                                                placeholder={filledAccountsArr[0]}
+                                            />
+                                            :
+                                            <Input
+                                                color='pmpurple.15'
+                                                border={'1px solid'}
+                                                borderColor={'pmpurple.6'}
+                                                bg={'pmpurple.2'}
+                                                value={filledAccountsArr[0]}
+                                                id='username'
+                                                placeholder='Please Connect your Wallet'
+                                            />
 
-                                    </Stack>
-                                </DrawerBody>
+                                        }
 
-                                <DrawerFooter borderTopWidth='1px'>
-                                    <Button
-                                        variant='outline'
-                                        color='pmpurple.12'
-                                        border={'1px solid'}
-                                        borderColor={'pmpurple.6'}
-                                        bg={'pmpurple.2'}
-                                        mr={3}
-                                        onClick={onClose}>
-                                        Cancel
-                                    </Button>
-                                    <Button
-                                        color='pmpurple.12'
-                                        border={'1px solid'}
-                                        borderColor={'pmpurple.6'}
-                                        bg={'pmpurple.4'}
-                                    > Submit </Button>
+                                    </Box>
+                                    <RadioGroup mt={'48px'} defaultValue={resize} onChange={setResize}
+                                                mb={'0px'}>
+                                        <Stack direction='row' spacing={5}>
+                                            <Radio color='pmpurple.15' bg={'pmgreen.15'}
+                                                   colorScheme='green' value='Positive'>Postive</Radio>
+                                            <Radio color='pmpurple.15' bg={'red.600'} colorScheme='red'
+                                                   value='Negative'>Negative</Radio>
+                                            <Radio color='pmpurple.15' bg={'pmpurple.6'}
+                                                   colorScheme='pmpurple.13'
+                                                   value='Neutral'>Neutral</Radio>
+                                        </Stack>
+                                    </RadioGroup>
 
-                                </DrawerFooter>
-                            </DrawerContent>
-                        </Drawer>
+                                    <Box>
+                                        <FormLabel
+                                            mt={'0px'}
+                                            color='pmpurple.15'
+                                            htmlFor='desc'>Add Mention</FormLabel>
+                                        <Textarea
+                                            color='pmpurple.13'
+                                            border={'1px solid'}
+                                            borderColor={'pmpurple.6'}
+                                            bg={'pmpurple.2'}
+                                            h={'400px'}
+                                            id='desc' ref={firstField}
+                                            placeholder='Give a Mention'
+                                        />
+                                    </Box>
+                                    <Box>
+                                        <Input
+                                            isDisabled={true}
+                                            border={'1px solid'}
+                                            borderColor={'pmpurple.8'}
+                                            bg={'pmpurple.2'}
+                                            color='pmpurple.15'
+                                            value={dateFormated}
+                                            id='username'
+                                            placeholder={'Date'}
+                                        />
 
-                    </Box>
+                                    </Box>
+
+                                </Stack>
+                            </DrawerBody>
+
+                            <DrawerFooter borderTopWidth='1px'>
+                                <Button
+                                    variant='outline'
+                                    color='pmpurple.12'
+                                    border={'1px solid'}
+                                    borderColor={'pmpurple.6'}
+                                    bg={'pmpurple.2'}
+                                    mr={3}
+                                    onClick={onClose}>
+                                    Cancel
+                                </Button>
+                                <Button
+                                    color='pmpurple.12'
+                                    border={'1px solid'}
+                                    borderColor={'pmpurple.6'}
+                                    bg={'pmpurple.4'}
+                                > Submit </Button>
+
+                            </DrawerFooter>
+                        </DrawerContent>
+                    </Drawer>
+
+                </Box>
 
 
-                    :
-                    null
-                }
-            </HStack>
+                :
+                null
+            }
+        </HStack>
     )
 };
 

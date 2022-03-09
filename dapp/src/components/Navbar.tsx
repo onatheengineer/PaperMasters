@@ -34,7 +34,7 @@ import {IoMdCheckmarkCircleOutline} from "react-icons/io";
 import {FiTrendingUp} from "react-icons/fi";
 import Web3 from "web3";
 import { useAppSelector, useAppDispatch } from '../app/hooks';
-import RegisterSlice, {accountsArr, requestAccountsAsyncAction, statusOfArr} from '../features/RequestWalletAccountSlice';
+import RegisterSlice, {accountsArr, requestAccountsAsyncAction, statusOfArr} from '../features/RequestWalletSlice';
 
 export const SparklyComponent = () => (
     // Note: the parent of Sparkle must be positioned relatively or absolutely
@@ -46,9 +46,10 @@ export const SparklyComponent = () => (
 
 export default function Navbar() {
     //const {isOpen, onOpen, onClose} = useDisclosure();
-    const getAccountsArr = useAppSelector((state) => state.register.accounts);
+    const filledAccountsArr = useAppSelector((state) => state.register.accounts);
     const tokenIDtoIdentityStruct = useAppSelector((state) => state.minted.tokenIDtoIdentityStruct);
     const {walletAccount} = useParams();
+
 
     const dispatch = useAppDispatch();
 
@@ -75,7 +76,7 @@ export default function Navbar() {
                 <Menu>
 
                     <Menu>
-                        <Link as={ReachLink} to='/identity'>
+                        <Link as={ReachLink} to={`/identity/${filledAccountsArr[0]}`}>
                             <MenuButton
                                 as={Button}
                                 color={'pmpurple.13'}
@@ -114,7 +115,6 @@ export default function Navbar() {
                     </Menu>
 
                     <Menu>
-
 
                         <Link as={ReachLink} to='/CloudHWM' variant={'navLinks'}>
                             <MenuButton
@@ -195,7 +195,7 @@ export default function Navbar() {
 
                     <Menu>
 
-                        {getAccountsArr.length === 0 ?
+                        {filledAccountsArr.length === 0 ?
 
                             <MenuButton
                                 //border={'1px solid blue'}

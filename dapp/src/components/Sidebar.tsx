@@ -113,7 +113,6 @@ export const NavItem: FC<InterfaceNavItem> = ({ icon, title, active,
 export const Sidebar: FC<InterfaceSidebar>= ({icon, profileName} ) => {
 
     const tokenIDtoIdentityStruct = useAppSelector((state) => state.minted.tokenIDtoIdentityStruct);
-    const walletAccount = useAppSelector((state) => state.register.accounts);
 
     const location = useLocation();
     const navigate = useNavigate();
@@ -202,7 +201,7 @@ export const Sidebar: FC<InterfaceSidebar>= ({icon, profileName} ) => {
             case '/report':
                 setNavItemRender(SidebarIdentity);
                 setHeaderTitle("NFI");
-                setHeaderText("sdfsdfsdf");
+                setHeaderText("Non-Fungible Token");
                 break;
             case '/search':
                 setNavItemRender(SidebarSearch);
@@ -245,8 +244,8 @@ export const Sidebar: FC<InterfaceSidebar>= ({icon, profileName} ) => {
             default:
                 if (location.pathname.startsWith('/identity')) {
                     setNavItemRender(SidebarIdentity);
-                    setHeaderTitle("NFI");
-                    setHeaderText("sdfsdfsdf");
+                    setHeaderTitle("Account");
+                    setHeaderText("Wallet Account");
 
                 } else {
                     setNavItemRender(null);
@@ -268,7 +267,7 @@ export const Sidebar: FC<InterfaceSidebar>= ({icon, profileName} ) => {
                     borderTop={'1px'}
                     borderColor={'pmpurple.8'}
                     // borderRadius={navSize == "small" ? "15px" : "30px"}
-                    w={navSize == "small" ? "75px" : "200px"}
+                    w={navSize == "small" ? "90px" : "200px"}
                     flexDir="column"
                     justifyContent="space-between"
                 >
@@ -279,11 +278,11 @@ export const Sidebar: FC<InterfaceSidebar>= ({icon, profileName} ) => {
                         alignItems={navSize == "small" ? "center" : "flex-start"}
                         as="nav"
                     >
-                        <Heading textAlign="center" size="md" mt="8px" w='100%' fontWeight="extrabold">
+                        <Heading textAlign="center" fontSize={'18px'} mt="8px" w='100%' fontWeight="extrabold">
                             {headerTitle}
                         </Heading>
-                        <Text mt="5px" mb="5px" align="center" w='100%' fontWeight="medium">
-                            <Text as="span">
+                        <Text mt="0px" mb="5px" align="center" w='100%' fontWeight="medium">
+                            <Text  >
                                 {headerText}
                             </Text>
                         </Text>
@@ -331,7 +330,7 @@ export const Sidebar: FC<InterfaceSidebar>= ({icon, profileName} ) => {
             <Flex w={"100%"}>
                 <Routes>
                     <Route path="/" element={<Home/>}/>
-                    <Route path={'/identity/:walletAccount'} element={<Identity/>}/>
+                    <Route path={'/identity/:walletAccountParams'} element={<Identity/>}/>
                     <Route path={'/identity'} element={<Identity/>}/>
 
                     {tokenIDtoIdentityStruct.length === 0 ?

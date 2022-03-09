@@ -1,5 +1,5 @@
 import { configureStore, ThunkAction, Action} from '@reduxjs/toolkit';
-import registerSlice from "../features/RequestWalletAccountSlice";
+import registerSlice from "../features/RequestWalletSlice";
 import searchSlice from '../features/SearchSlice';
 import mintSlice from '../features/MintNFISlice';
 import mintedSlice from '../features/MintedNFISlice';
