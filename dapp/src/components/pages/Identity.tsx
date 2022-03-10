@@ -12,10 +12,6 @@ import { RiShareForwardLine} from 'react-icons/ri';
 // Custom components
 import { BsFillCloudRainFill } from 'react-icons/bs'
 // Assets
-import ImageArchitect1 from "../../assets/img/ImageArchitect1.png";
-import ImageArchitect2 from "../../assets/img/ImageArchitect2.png";
-import ImageArchitect3 from "../../assets/img/ImageArchitect3.png";
-import ProfileBgImage from "../../assets/img/ProfileBackground.png";
 import { FaCube, FaFacebook, FaInstagram, FaPenFancy, FaPlus, FaTwitter,} from "react-icons/fa";
 import { IoDocumentsSharp } from "react-icons/io5";
 import Sidebar from "../Sidebar";
@@ -36,7 +32,6 @@ import {filledInputClasses} from "@mui/material";
 import Header from "../identity/Header";
 import Projects from "../identity/Projects";
 import ValidationsReports from "../identity/ValidationsReports";
-import {getDBAccountDictionaryDic} from "../../features/AccountSlice";
 
 interface Interface {
 
@@ -48,13 +43,16 @@ export const Identity:FC<Interface>=()=> {
     const initialRef = React.useRef()
     const finalRef = React.useRef()
     const {walletAccountParams} = useParams();
-    console.log("this is walletAccount:")
-    console.log(walletAccountParams)
+    console.log(`this is walletAccountparams: ${walletAccountParams}`)
 
     const filledAccountsArr = useAppSelector((state) => state.register.accounts);
     const tokenIDtoIdentityStruct = useAppSelector((state) => state.minted.tokenIDtoIdentityStruct);
     const accountDictionary = useAppSelector((state) => state.account.getDBAccountDictionary);
     const walletAccount = useAppSelector((state) => state.account.getDBAccountDictionary.walletAccount);
+    const addressHasIdentityBool = useAppSelector((state) => state.minted.addressHasIdentity);
+
+    console.log(`this is the tokenIDtoIdentityStruct[0]: ${tokenIDtoIdentityStruct.walletAccount}`);
+
 
     const breakpoints = createBreakpoints({
         sm: '30em',
@@ -65,7 +63,6 @@ export const Identity:FC<Interface>=()=> {
     })
 
 
-    console.log(tokenIDtoIdentityStruct[0]);
 
     return (
 
@@ -104,7 +101,7 @@ export const Identity:FC<Interface>=()=> {
                             <Box px="5px">
                                 <Flex direction="column">
                                     <Text fontSize="md" color={'pmpurple.8'} fontWeight="400" mb="20px" align={'left'}>
-                                        {tokenIDtoIdentityStruct[0] === walletAccount && filledAccountsArr[0] ?
+                                        {tokenIDtoIdentityStruct.walletAccount === walletAccount && filledAccountsArr[0] ?
                                             accountDictionary['ownerDescription']
                                             //{accountDictionary.hasOwnProperty('description')}
                                             :
@@ -125,25 +122,25 @@ export const Identity:FC<Interface>=()=> {
 
                             <Box w='33%' borderRadius='15px' bg='white' p="16px" px="24px">
 
-                                {filledAccountsArr.length !== 0 && tokenIDtoIdentityStruct.length !== 0 ?
+                                {filledAccountsArr.length !== 0 && addressHasIdentityBool !== false ?
 
-                                    <AvatarNFI accountNumber={tokenIDtoIdentityStruct[0]}
-                                               name={tokenIDtoIdentityStruct[1].split("|||")[0]}
-                                               nameColor={tokenIDtoIdentityStruct[1].split("|||")[1]}
-                                               email={tokenIDtoIdentityStruct[2].split("|||")[0]}
-                                               emailColor={tokenIDtoIdentityStruct[2].split("|||")[1]}
-                                               profession={tokenIDtoIdentityStruct[3].split("|||")[0]}
-                                               professionColor={tokenIDtoIdentityStruct[3].split("|||")[1]}
-                                               organization={tokenIDtoIdentityStruct[4].split("|||")[0]}
-                                               organizationColor={tokenIDtoIdentityStruct[4].split("|||")[1]}
-                                               slogan={tokenIDtoIdentityStruct[5].split("|||")[0]}
-                                               sloganColor={tokenIDtoIdentityStruct[5].split("|||")[1]}
-                                               website={tokenIDtoIdentityStruct[6].split("|||")[0]}
-                                               websiteColor={tokenIDtoIdentityStruct[6].split("|||")[1]}
-                                               uniqueYou={tokenIDtoIdentityStruct[7].split("|||")[0]}
-                                               uniqueYouColor={tokenIDtoIdentityStruct[7].split("|||")[1]}
-                                               avatarBG={tokenIDtoIdentityStruct[8]}
-                                               originDate={parseInt(tokenIDtoIdentityStruct[9])}
+                                    <AvatarNFI accountNumber={tokenIDtoIdentityStruct.walletAccount}
+                                               name={tokenIDtoIdentityStruct.name.split("|||")[0]}
+                                               nameColor={tokenIDtoIdentityStruct.name.split("|||")[1]}
+                                               email={tokenIDtoIdentityStruct.email.split("|||")[0]}
+                                               emailColor={tokenIDtoIdentityStruct.email.split("|||")[1]}
+                                               profession={tokenIDtoIdentityStruct.profession.split("|||")[0]}
+                                               professionColor={tokenIDtoIdentityStruct.profession.split("|||")[1]}
+                                               organization={tokenIDtoIdentityStruct.organization.split("|||")[0]}
+                                               organizationColor={tokenIDtoIdentityStruct.organization.split("|||")[1]}
+                                               slogan={tokenIDtoIdentityStruct.slogan.split("|||")[0]}
+                                               sloganColor={tokenIDtoIdentityStruct.slogan.split("|||")[1]}
+                                               website={tokenIDtoIdentityStruct.website.split("|||")[0]}
+                                               websiteColor={tokenIDtoIdentityStruct.website.split("|||")[1]}
+                                               uniqueYou={tokenIDtoIdentityStruct.uniqueYou.split("|||")[0]}
+                                               uniqueYouColor={tokenIDtoIdentityStruct.uniqueYou.split("|||")[1]}
+                                               avatarBG={tokenIDtoIdentityStruct.bgRGB}
+                                               originDate={parseInt(tokenIDtoIdentityStruct.originDate)}
                                     />
 
                                     :

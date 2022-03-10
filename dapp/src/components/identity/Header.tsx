@@ -48,10 +48,10 @@ import {FaCube, FaFacebook, FaInstagram, FaTwitter, FaRegEdit, FaDiscord, FaLink
 import {MdOutlineColorLens, MdOutlineQrCode, MdOutlinePeopleOutline} from "react-icons/md";
 import {BsFillPersonLinesFill} from "react-icons/bs";
 import {SketchPicker} from "react-color";
-import {createDBAccountDictionaryAction, getDBAccountDictionaryAction} from '../../features/AccountSlice';
+
 import {SocialButton} from "../Footers/Footer";
 import {openseaIcon} from '../../assets/icons/openseaIcon';
-import {accountDictionaryInterface} from '../../features/AccountSlice';
+import {accountDictionaryInterface, putDBAccountDictionary} from '../../features/AccountSlice';
 import {ChevronDownIcon} from "@chakra-ui/icons";
 
 
@@ -92,17 +92,17 @@ export const Header:FC<Interface>=()=> {
     const dispatch = useAppDispatch();
     const requestWalletArr = useAppSelector((state) => state.register.accounts);
     const getDBAccountDictionary = useAppSelector((state) => state.account.getDBAccountDictionary)
-    const getReceiptDBState = useAppSelector((state) => state.minted.getReceiptDB);
     const addressHasIdentityBool = useAppSelector((state) => state.minted.addressHasIdentity);
     const tokenIDtoIdentityStruct = useAppSelector((state) => state.minted.tokenIDtoIdentityStruct);
-    const walletAccount = useAppSelector((state) => state.account.getDBAccountDictionary.walletAccount);
+    //this walletaccount has to be fixed
+    const walletAccount = useAppSelector((state) => state.register.putWalletInDBStatus);
 
     const {isOpen, onOpen, onClose} = useDisclosure()
     const firstField = useRef<HTMLTextAreaElement>(null)
     const [resize, setResize] = useState('horizontal')
 
     const [state, dispatchAccountProfileDictionary] = useReducer(reducer, tokenIDtoIdentityStruct, init);
-    console.log(state);
+    console.log(`this is the state in my useReducer: ${state}`);
 
     const submitHandler = () => {
         const accountProfileDictionary: accountDictionaryInterface = {
@@ -114,7 +114,7 @@ export const Header:FC<Interface>=()=> {
             emailValidationNotification: false,
             emailReportNotification: false
         }
-        dispatch(createDBAccountDictionaryAction(accountProfileDictionary));
+        dispatch(putDBAccountDictionary(accountProfileDictionary));
         onClose();
     }
 
@@ -783,7 +783,7 @@ export const Header:FC<Interface>=()=> {
                                             Non-Registered Wallet Account
                                         </Text>
                                         {/*// :*/}
-                                        `NFI Transaction Hash: ${getReceiptDBState}`
+                                        {/*NFI Transaction Hash: ${ of any user}*/}
                                     {/*// }*/}
                                 </Link>
                             </Text>

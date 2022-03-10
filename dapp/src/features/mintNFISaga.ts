@@ -7,27 +7,26 @@ import {
     mintSucceededSuccessful,
     gasForMintNFIAsyncAction,
     gasForMinting,
-    mintingError,
-    transHash,
+    mintingError
 } from "./MintNFISlice";
 import MintABI from '../abiFiles/PaperMastersNFI.json'
 import {useState} from "react";
 
-export const getFilledAccountsArr = (state: any) => state.register.accounts;
+//this is a function that gets accounts from the slice
+export const getRequestWalletArr = (state: any) => state.register.accounts;
 const baseURL = 'https://ociuozqx85.execute-api.us-east-1.amazonaws.com/receipt';
 
 function* mintNFISaga(actionObject: any):any {
-
     if (actionObject.payload.name === null) {
         //TODO: handle error logging
         yield put(mintingError("Name can not be empty"));
         return;
     }
 
-    const filledAccountsArr: string[] = yield select(getFilledAccountsArr);
-    console.log(filledAccountsArr);
+    const requestWalletArr: string[] = yield select(getRequestWalletArr);
+    console.log(requestWalletArr);
 
-    if (filledAccountsArr.length === 0) {
+    if (requestWalletArr.length === 0) {
         yield put(mintingError("Please Connect Wallet to mint an NFI"));
         return;
     }
@@ -40,7 +39,7 @@ function* mintNFISaga(actionObject: any):any {
     const web3 = new Web3(Web3.givenProvider);
     const papermastersNFIContract = new web3.eth.Contract(MintABI.abi as any, MintABI.networks['1666700000'].address);
 
-    const alreadyMinted = yield call(papermastersNFIContract.methods.addressHasTokenBool(filledAccountsArr[0]).call, {from: filledAccountsArr[0]})
+    const alreadyMinted = yield call(papermastersNFIContract.methods.addressHasTokenBool(requestWalletArr[0]).call, {from: requestWalletArr[0]})
     if (alreadyMinted) {
         yield put(mintSucceededSuccessful('failed'));
         yield put(mintingError('Sorry, only one NFI per account'));
@@ -62,19 +61,20 @@ function* mintNFISaga(actionObject: any):any {
     console.table(prepareResult);
     //TODO: get fee variable from contract and replace the 'value'
     try {
-        const mintResult: any = yield call(prepareResult.send, {from: filledAccountsArr[0], value: 100000000000000000});
+        const mintResult: any = yield call(prepareResult.send, {from: requestWalletArr[0], value: 100000000000000000});
         yield put(mintSucceededSuccessful('success'));
         console.log("mint sent!");
         //why do I need a minting error here?
         yield put(mintingError(""))
-        console.log(mintResult);
+        console.log('this is my mintResult:')
+         console.log(mintResult);
 
+        //processing receipt:
         const walletAccount = yield mintResult.from;
         console.log(`this is the from walletAccount: ${walletAccount}` );
 
         const transHashString = yield mintResult.transactionHash;
         console.log(`this is the TransactionHash: ${transHashString}` );
-        yield put(transHash(transHashString));
 
         const gasUsed = yield mintResult.gasUsed;
         console.log(`this is the gasUsed: ${gasUsed}` );
@@ -88,14 +88,28 @@ function* mintNFISaga(actionObject: any):any {
         const originDate = yield mintResult.events.NFIMinted.returnValues.timeStamp;
         console.log(`this is the timeStamp: ${originDate}` );
 
+        const contractFee = yield mintResult.events.NFIMinted.returnValues.contractFee;
+        console.log(`this is the contractFee: ${contractFee}` );
+
+        const identityStruct = yield mintResult.events.NFIMinted.returnValues.identityStruct;
+        console.log(`this is the identityStruct: ${identityStruct}` );
+
+        const NFIMintedReturnValues = yield mintResult.events.NFIMinted.returnValues;
+        console.log('this is the NFIMintedReturnValues:')
+         console.log(NFIMintedReturnValues);
+
         const dataToSend = {
-            walletAccount: `${walletAccount}`,
-            gasUsed: `${gasUsed}`,
-            contractAccount: `${contractAccount}`,
-            transactionHash: `${transHashString}`,
-            tokenID: `${tokenID}`,
-            timeStamp: `${originDate}`
+            walletAccount: walletAccount,
+            gasUsed: gasUsed,
+            contractAccount: contractAccount,
+            transactionHash: transHashString,
+            tokenID: tokenID,
+            timeStamp: originDate,
+            contractFee: contractFee,
+            identityStruct: identityStruct
         }
+        console.log("this is the data to send to accountDB")
+        console.log(dataToSend)
 
         const axiosPUT = yield call(axios.put, baseURL, dataToSend)
         console.log(axiosPUT)
@@ -111,7 +125,7 @@ function* mintNFISaga(actionObject: any):any {
 function* getGasForMintSaga(actionObject: any):any {
     const web3 = new Web3(Web3.givenProvider);
     const papermastersNFIContract = new web3.eth.Contract(MintABI.abi as any, MintABI.networks['1666700000'].address);
-    const filledAccountsArr: string[] = yield select(getFilledAccountsArr);
+    const requestWalletArr: string[] = yield select(getRequestWalletArr);
 
     const prepareResult = yield call(
         papermastersNFIContract.methods.mintNFI,
@@ -127,7 +141,7 @@ function* getGasForMintSaga(actionObject: any):any {
     )
     try {
         const gasMintResult: any = yield call(prepareResult.estimateGas, {
-            from: filledAccountsArr[0],
+            from: requestWalletArr[0],
             gas: null,
             value: 100000000000000000
         });
@@ -155,27 +169,9 @@ function* getGasForMintSaga(actionObject: any):any {
 
 }
 
-
 export function* watchMintNFISaga() {
     yield takeLatest(mintNFIAsyncAction.type, mintNFISaga);
     yield takeLatest(gasForMintNFIAsyncAction.type, getGasForMintSaga);
-    //yield takeLatest(transactionHashAction.type, transactionHashSaga);
 }
-
-
-//web3.eth.sendTransaction({from: '0x123...', data: '0x432...'})
-//.once('sending', function(payload){ ... })
-//.once('sent', function(payload){ ... })
-//.once('transactionHash', function(hash){ ... })
-//.once('receipt', function(receipt){ ... })
-//.on('confirmation', function(confNumber, receipt, latestBlockHash){ ... })
-//.on('error', function(error){ ... })
-//.then(function(receipt){
-//// will be fired once the receipt is mined
-//});
-
-//|| 'https://api.s0.b.hmny.io'
-
-
 
 

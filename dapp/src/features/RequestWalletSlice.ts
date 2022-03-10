@@ -3,12 +3,16 @@ import { createSlice, PayloadAction, createAction } from "@reduxjs/toolkit";
 
 interface RegisterState {
     accounts: string[];
-    status: 'idle' | 'loading' | 'succeeded' | 'failed';
+    status: 'idle' | 'loading' | 'success' | 'failed';
+    putWalletInDBStatus:'idle' | 'succeeded to create new entry in DB' | 'failed because their is already an entry in DB';
+    getWalletFromDB: {  };
 }
 
 const initialState: RegisterState = {
     accounts: [],
     status: 'idle',
+    putWalletInDBStatus: "idle",
+    getWalletFromDB: { },
 };
 
 const RequestWalletSlice = createSlice ({
@@ -22,17 +26,21 @@ const RequestWalletSlice = createSlice ({
         statusOfArr(state, action){
             state.status = action.payload;
         },
-
-        //update state of accounts/wallet to include/showing PMI token after created action fires
-        //update state of accounts page to include new PMI token added
-        //update state of accounts page to make TRANSFER, mint new NFT, and add a personal description to the page after PMI token after created action fires
+        putWalletInDBStatus(state, action){
+            state.putWalletInDBStatus = action.payload;
+        },
+        getWalletFromDB(state, action){
+            state.getWalletFromDB = action.payload;
+        },
     }
 });
 
 console.log(RequestWalletSlice);
-export const { accountsArr, statusOfArr } = RequestWalletSlice.actions;
+export const { accountsArr, statusOfArr, putWalletInDBStatus, getWalletFromDB } = RequestWalletSlice.actions;
 
 export const requestAccountsAsyncAction = createAction("REQUEST_ACCOUNTS_ACTION_SAGA");
+export const putWalletInDBAction = createAction("PUT_WALLET_IN_DB_SAGA");
+export const getWalletFromDBAction = createAction("GET_WALLET_IN_DB_SAGA");
 
 export default RequestWalletSlice.reducer;
 

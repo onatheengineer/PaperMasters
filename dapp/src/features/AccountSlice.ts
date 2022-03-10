@@ -1,5 +1,17 @@
 import { createSlice, PayloadAction, createAction } from "@reduxjs/toolkit";
 
+//TODO: change the BCReceipt types to the ones that actually be of the correct type
+
+interface BCReceiptInterface {
+    walletAccount: string,
+    gasUsed: string,
+    contractAccount: string,
+    transactionHash: string,
+    tokenID: string,
+    timeStamp: string
+    contractFee: string,
+}
+
 export interface accountDictionaryInterface{
     walletAccount:string,
     ownerName:string,
@@ -11,53 +23,52 @@ export interface accountDictionaryInterface{
 }
 
 interface AccountSlice {
-    createDBAccountDictionary: {};
+    putDBAccountDictionary: {};
     getDBAccountDictionary: accountDictionaryInterface;
-    getdbNFIReceipt: {};
     userSameAccountBool: boolean;
     accountError: string,
+    getReceiptDBCurrentUser:BCReceiptInterface;
 
 }
 
 const initialState: AccountSlice = {
-    createDBAccountDictionary: {},
+    putDBAccountDictionary: {},
     getDBAccountDictionary: {walletAccount: "", ownerName: "", ownerEmail: "", ownerDescription: "", aliasProfileLinks: "", emailValidationNotification: false, emailReportNotification: false },
-    getdbNFIReceipt: {},
     userSameAccountBool: false,
     accountError: "",
+    getReceiptDBCurrentUser: { walletAccount: "", gasUsed: "", contractAccount: "", transactionHash: "", tokenID: "", timeStamp: "", contractFee: ""},
 };
 
 const AccountSlice = createSlice ({
     name: 'account',
     initialState,
     reducers: {
-        createDBAccountDictionaryDic(state, action) {
-            state.createDBAccountDictionary = action.payload
+        putDBAccountDictionary(state, action) {
+            state.putDBAccountDictionary = action.payload
         },
-        getDBAccountDictionaryDic(state, action) {
+        getDBAccountDictionary(state, action) {
             state.getDBAccountDictionary = action.payload
         },
-        getdbNFIReceiptDic(state, action) {
-            state.createDBAccountDictionary = action.payload
-        },
-        userSameAccountBoolBool(state, action) {
+        userSameAccountBool(state, action) {
             state.userSameAccountBool = action.payload
         },
-        accountErrorMessage(state, action) {
+        accountError(state, action) {
             state.accountError = action.payload
+        },
+        getReceiptDBCurrentUser(state, action) {
+            state.getReceiptDBCurrentUser = action.payload
         },
     },
 });
 
 
 //console.log(MintNFISlice);
-export const {  createDBAccountDictionaryDic, getDBAccountDictionaryDic, getdbNFIReceiptDic, userSameAccountBoolBool, accountErrorMessage } = AccountSlice.actions;
+export const {  putDBAccountDictionary, getDBAccountDictionary, getReceiptDBCurrentUser, userSameAccountBool, accountError } = AccountSlice.actions;
 
-
-export const createDBAccountDictionaryAction= createAction<accountDictionaryInterface>("CREATE_ACCOUNT_DICTIONARY_SAGA");
+export const putDBAccountDictionaryAction= createAction<accountDictionaryInterface>("CREATE_ACCOUNT_DICTIONARY_SAGA");
 export const getDBAccountDictionaryAction= createAction<string>("GET_ACCOUNT_DICTIONARY_SAGA");
-export const getdbNFIReceiptAction= createAction<string>("GET_NFIRECEIPT_SAGA");
 export const userSameAccountBoolAction= createAction<string>("USER_SAME_ACCOUNT_BOOL_SAGA");
+export const getReceiptDBConnectUserAction = createAction("GET_RECEIPT_DB_SAGA");
 
 
 export default AccountSlice.reducer;

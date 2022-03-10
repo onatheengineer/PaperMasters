@@ -19,7 +19,6 @@ interface MintState {
     mintSucceeded: 'idle' | 'loading' | 'succeeded' | 'failed';
     gasPrice: number;
     mintErrorReason: string;
-    transactionHash: string;
 }
 
 const initialState: MintState = {
@@ -27,7 +26,6 @@ const initialState: MintState = {
     mintSucceeded: "idle",
     gasPrice: 0,
     mintErrorReason: "",
-    transactionHash: "",
 };
 
 const MintNFISlice = createSlice ({
@@ -43,9 +41,6 @@ const MintNFISlice = createSlice ({
         gasForMinting(state, action) {
             state.gasPrice = action.payload
         },
-        transHash(state, action) {
-            state.transactionHash = action.payload
-        },
         mintingError(state, action) {
             state.mintErrorReason = action.payload
         },
@@ -53,11 +48,9 @@ const MintNFISlice = createSlice ({
 
 });
 
-//console.log(MintNFISlice);
-export const { mintNFIContract, mintSucceededSuccessful, gasForMinting, mintingError, transHash } = MintNFISlice.actions;
+export const { mintNFIContract, mintSucceededSuccessful, gasForMinting, mintingError } = MintNFISlice.actions;
 export const mintNFIAsyncAction = createAction<{}>("MINT_NFI_SAGA");
 export const gasForMintNFIAsyncAction = createAction<{}>("GAS_FOR_MINT_NFI_SAGA");
-//export const transactionHashAction = createAction<{}>("TRANSACTION_HASH_SAGA");
 
 export default MintNFISlice.reducer;
 

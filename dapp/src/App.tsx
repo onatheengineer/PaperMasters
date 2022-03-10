@@ -11,9 +11,10 @@ import { Box, Flex} from '@chakra-ui/react';
 import Sidebar, {NavItem} from './components/Sidebar'
 import {requestAccountsAsyncAction} from "./features/RequestWalletSlice";
 import {mintNFIAsyncAction} from "./features/MintNFISlice";
-import {addressHasIdentityBoolAction, putReceiptDBAction, getReceiptDBAction} from "./features/MintedNFISlice";
+import {addressHasIdentityBoolAction} from "./features/MintedNFISlice";
 import { createBreakpoints } from '@chakra-ui/theme-tools'
-
+import {getReceiptDBConnectUserAction} from "./features/AccountSlice";
+import Identity from "./components/pages/Identity";
 
 
 function App() {
@@ -25,11 +26,16 @@ function App() {
         dispatch(requestAccountsAsyncAction());
     }, [] )
 
+    // useEffect( () => {
+    //     console.log("this is the app dispatch to store useParams")
+    //     dispatch();
+    // }, [] )
+
     useEffect( () => {
-        console.log("is there a wallet account connected? Now check for identity")
+        console.log("is there a wallet account connected? Now check for NFI")
         if (requestWalletArr.length !== 0) {
             dispatch(addressHasIdentityBoolAction(requestWalletArr[0]));
-            dispatch(putReceiptDBAction());
+            dispatch(getReceiptDBConnectUserAction());
         }
     }, [requestWalletArr] )
 
@@ -41,6 +47,7 @@ function App() {
             <Navbar/>
             <Sidebar/>
             <Footer/>
+            <Identity/>
         </Box>
     )
 };

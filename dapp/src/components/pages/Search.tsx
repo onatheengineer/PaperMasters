@@ -14,7 +14,7 @@ import {
     Text,
     FormControl
 } from '@chakra-ui/react';
-import {useAppSelector} from "../../app/hooks";
+import {useAppDispatch, useAppSelector} from "../../app/hooks";
 import DataTable, {ExpanderComponentProps, TableColumn} from 'react-data-table-component';
 import {Route, Routes, useNavigate} from "react-router-dom";
 import Sidebar from "../Sidebar";
@@ -24,6 +24,8 @@ import {HiOutlineDocumentReport} from "react-icons/hi";
 import {MdOutlineLibraryAddCheck} from "react-icons/md";
 import {SiSololearn} from "react-icons/si";
 import IdentityEntryModal from "../../utils/IdentityEntryModal";
+import {getReceiptDBCurrentUser} from "../../features/AccountSlice";
+import {getWalletFromDBAction} from "../../features/RequestWalletSlice";
 
 
 interface DataRow {
@@ -68,16 +70,24 @@ const ExpandedComponent: FC<ExpanderComponentProps<DataRow>> = ({ data }) => {
 };
 
 export const Search: FC=()=> {
-    const getAccountsArr = useAppSelector((state) => state.register.accounts);
+    const requesterConnectedUserAccountsArr = useAppSelector((state) => state.register.accounts);
+    const addressHasIdentityBool = useAppSelector((state) => state.minted.addressHasIdentity);
+    const tokenIDToIdentity = useAppSelector((state) => state.minted.tokenIDtoIdentityStruct);
+
     const [filterText, setFilterText] = useState<string>('');
     const [searchWalletAccount, setWalletAccount] = useState<string>('');
     const [resetPaginationToggle, setResetPaginationToggle] = useState<boolean>(false);
     const [isIdentityModalOpen, setIdentityModalOpen] = useState<boolean>(false);
+    const dispatch = useAppDispatch();
+
+    useEffect(()=>{
+        dispatch(getWalletFromDBAction());
+    });
 
     const columns: TableColumn<DataRow>[] = [
         {
-            name: 'Name',
-            selector: row => row.name,
+            name: 'name',
+            selector: row => row.IdNFI,
             sortable: true,
             reorder: true,
             center: true,
@@ -162,16 +172,7 @@ export const Search: FC=()=> {
     ];
 
     const data: DataRow[] = [
-        {
-            name: 'andrwe niederhasuern',
-            IdNFI: (getAccountsArr.length === 0 ? 'No NFI' : getAccountsArr[0]),
-            profession: 'engineer',
-            validations: 654654,
-            mentions: 1,
-            originDate: 'dec 30, 1976',
-            ownedTokens: 3234,
-            reported: 2,
-        },
+
         {
             name: 'ramona',
             IdNFI: 'ytuytrtertr',
@@ -443,17 +444,17 @@ export const Search: FC=()=> {
     return (
 
         <Flex
-            // justifyContent="center"
-            //flex='auto'
+            justifyContent="center"
+            flex='auto'
+            w={'100%'}
             p={'16px'}
 
         >
             <Box
-                // border={'1px'}
-                // borderStyle={"solid"}
-                // borderColor={'pmpurple.13'}
+                border={'1px'}
+                borderStyle={"solid"}
+                borderColor={'pmpurple.13'}
             >
-
                 <DataTable
                     title="Non-Fungible-Identities"
                     columns={columns}

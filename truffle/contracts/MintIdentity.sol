@@ -182,10 +182,10 @@ contract PaperMastersNFI is ERC721, Ownable {
 
         _safeMint(msg.sender, newTokenID);
 
-        emit NFIMinted(msg.sender, newTokenID, block.timestamp );
+        emit NFIMinted(msg.sender, newTokenID, block.timestamp, msg.value, _identity );
 
     }
-    event NFIMinted(address indexed _from, uint256 tokenId, uint256 timeStamp);
+    event NFIMinted(address indexed _from, uint256 tokenId, uint256 timeStamp, uint256 contractFee, identity identityStruct);
 
     function setApprovalForAll(address operator, bool approved) public virtual override onlyOwner{}
     function isApprovedForAll(address owner, address operator) public view virtual override onlyOwner returns (bool) {}

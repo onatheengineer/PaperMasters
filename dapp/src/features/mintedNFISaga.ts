@@ -9,8 +9,6 @@ import {
     tokenIDToIdentityAction,
     mintedNFIErrorMessage,
     mintedNFI,
-    putReceiptDBAction,
-    getReceiptDBAction, getReceiptDBDB, putReceiptDBDB
 } from "./MintedNFISlice";
 import MintABI from "../abiFiles/PaperMastersNFI.json";
 import axios from "axios";
@@ -49,6 +47,7 @@ function* addressToTokenSaga(): any {
     try {
         const requestWallet: string[] = yield select(requestWalletArr);
         const tokenFromAddress = yield call(papermastersNFIContract.methods.addressToTokenID(requestWallet[0]).call, {from: requestWallet[0]})
+        //tokenID 0 is the constructor
         if (tokenFromAddress >= 1) {
             yield put(addressToToken(tokenFromAddress));
             yield put(tokenIDToIdentityAction(tokenFromAddress));
@@ -71,6 +70,7 @@ function* tokenIDToIdentitySaga(actionObject: any):any {
    try{
        const requestWallet: string[] = yield select(requestWalletArr);
        const getIdentityStructFromTokenID = yield call(papermastersNFIContract.methods.tokenIDtoIdentityStruct(actionObject.payload).call, {from: requestWallet[0]})
+       console.log(`this is the output for the tokenIDtoIdentityStruct: ${getIdentityStructFromTokenID}`);
        yield put(tokenIDToIdentity(getIdentityStructFromTokenID));
    } catch(tokenToIdentityFailed: any){
        yield put(mintedNFI('failed'))
@@ -81,36 +81,10 @@ function* tokenIDToIdentitySaga(actionObject: any):any {
    }
 };
 
-function* putReceiptDBSaga(): any {
-    try {
-        const requestWallet: string[] = yield select(requestWalletArr);
-        if (requestWallet.length !== 0) {
-            const receiptHashEntryWallet = yield call(axios.get, `${baseURL}/receipt/${requestWallet[0]}`);
-            console.log(`${baseURL}/${requestWallet[0]}`)
-            console.log("this is the receipt from DB:");
-            console.table(receiptHashEntryWallet);
-            yield put( putReceiptDBDB(receiptHashEntryWallet.data.Item.transactionHash))
-        }
-    } catch(receiptDBFailed: any){
-        yield put(putReceiptDBDB(""));
-    }
-};
-
-function* getReceiptDBSaga(): any {
-    try {
-        const requestWallet: string[] = yield select(requestWalletArr);
-    } catch(receiptDBFailed: any) {
-        yield put(getReceiptDBDB(""));
-    }
-
-};
-
 
 export function* watchMintedNFISaga() {
     yield takeLatest(addressHasIdentityBoolAction.type, addressHasIdentityBoolSaga);
     yield takeLatest(addressToTokenAction.type, addressToTokenSaga);
     yield takeLatest(tokenIDToIdentityAction.type, tokenIDToIdentitySaga);
-    yield takeLatest(putReceiptDBAction.type, putReceiptDBSaga);
-    yield takeLatest(getReceiptDBAction.type, getReceiptDBSaga);
 
 };

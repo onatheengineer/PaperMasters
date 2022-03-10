@@ -61,6 +61,7 @@ import {SiSololearn} from "react-icons/si";
 import {useAppSelector} from "../app/hooks";
 import identity from "./pages/Identity";
 import Test from "./pages/Test";
+import {accountsArr} from "../features/RequestWalletSlice";
 
 
 interface InterfaceNavItem {
@@ -328,16 +329,14 @@ export const Sidebar: FC<InterfaceSidebar>= ({icon, profileName} ) => {
                 </Box>
             }
             <Flex w={"100%"}>
+
                 <Routes>
                     <Route path="/" element={<Home/>}/>
-                    <Route path={'/identity/:walletAccountParams'} element={<Identity/>}/>
+
                     <Route path={'/identity'} element={<Identity/>}/>
 
-                    {tokenIDtoIdentityStruct.length === 0 ?
-                        <Route path={'/register'} element={<Register/>}/>
-                    :   <Route path="/register" element={<Navigate replace to={`/identity/${tokenIDtoIdentityStruct[0].toLowerCase()}`} />}
-                        />
-                    }
+                    <Route path={'/register'} element={<Register/>}/>
+
 
                     <Route path={'/attach'} element={<Attach/>}/>
                     <Route path={'/validate'} element={<Validate/>}/>
