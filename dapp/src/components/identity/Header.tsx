@@ -51,7 +51,8 @@ import {SketchPicker} from "react-color";
 
 import {SocialButton} from "../Footers/Footer";
 import {openseaIcon} from '../../assets/icons/openseaIcon';
-import {accountDictionaryInterface, putDBAccountDictionary} from '../../features/AccountSlice';
+import {putDBAccountDictionary} from '../../features/AccountSlice';
+import {accountDictionaryInterface} from "../../features/RequestWalletSlice";
 import {ChevronDownIcon} from "@chakra-ui/icons";
 
 

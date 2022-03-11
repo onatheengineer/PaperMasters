@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction, createAction } from "@reduxjs/toolkit";
-
+import {accountDictionaryInterface} from "./RequestWalletSlice";
 //TODO: change the BCReceipt types to the ones that actually be of the correct type
 
 interface BCReceiptInterface {
@@ -12,15 +12,6 @@ interface BCReceiptInterface {
     contractFee: string,
 }
 
-export interface accountDictionaryInterface{
-    walletAccount:string,
-    ownerName:string,
-    ownerEmail:string,
-    ownerDescription:string,
-    aliasProfileLinks:string,
-    emailValidationNotification:boolean,
-    emailReportNotification:boolean,
-}
 
 interface AccountSlice {
     putDBAccountDictionary: {};
@@ -33,7 +24,7 @@ interface AccountSlice {
 
 const initialState: AccountSlice = {
     putDBAccountDictionary: {},
-    getDBAccountDictionary: {walletAccount: "", ownerName: "", ownerEmail: "", ownerDescription: "", aliasProfileLinks: "", emailValidationNotification: false, emailReportNotification: false },
+    getDBAccountDictionary: {walletAccount: "", walletAccountLink: '', linkToFinishedAvatar: "",  ownerName: "", ownerEmail: "", ownerDescription: "", aliasProfileLinks: [], emailValidationNotification: false, emailReportNotification: false },
     userSameAccountBool: false,
     accountError: "",
     getReceiptDBCurrentUser: { walletAccount: "", gasUsed: "", contractAccount: "", transactionHash: "", tokenID: "", timeStamp: "", contractFee: ""},

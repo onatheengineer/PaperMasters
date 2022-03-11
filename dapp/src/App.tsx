@@ -15,15 +15,26 @@ import {addressHasIdentityBoolAction} from "./features/MintedNFISlice";
 import { createBreakpoints } from '@chakra-ui/theme-tools'
 import {getReceiptDBConnectUserAction} from "./features/AccountSlice";
 import Identity from "./components/pages/Identity";
+import detectEthereumProvider from '@metamask/detect-provider';
 
 
 function App() {
     const dispatch = useAppDispatch();
     const requestWalletArr = useAppSelector((state) => state.register.accounts);
 
-    useEffect( () => {
+    useEffect(  () => {
         console.log("is this dispatch metamask useEffect running?")
         dispatch(requestAccountsAsyncAction());
+
+        const provider: any = detectEthereumProvider();
+        console.log("this is provider:", provider);
+        provider.then((actualProvider: any) => {
+            console.log('what is this actual provider?', actualProvider);
+            actualProvider.on('accountsChanged', (accounts: any) => {
+                console.log('account changed!')
+                window.location.reload();
+            });
+        });
     }, [] )
 
     // useEffect( () => {

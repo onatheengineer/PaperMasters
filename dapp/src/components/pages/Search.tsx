@@ -16,7 +16,7 @@ import {
 } from '@chakra-ui/react';
 import {useAppDispatch, useAppSelector} from "../../app/hooks";
 import DataTable, {ExpanderComponentProps, TableColumn} from 'react-data-table-component';
-import {Route, Routes, useNavigate} from "react-router-dom";
+import {Route, Routes, useNavigate, useParams} from "react-router-dom";
 import Sidebar from "../Sidebar";
 import {Link as ReachLink} from "react-router-dom";
 import {MdManageAccounts} from "react-icons/md";
@@ -25,14 +25,17 @@ import {MdOutlineLibraryAddCheck} from "react-icons/md";
 import {SiSololearn} from "react-icons/si";
 import IdentityEntryModal from "../../utils/IdentityEntryModal";
 import {getReceiptDBCurrentUser} from "../../features/AccountSlice";
-import {getWalletFromDBAction} from "../../features/RequestWalletSlice";
+import {
+    getAllReceiptFromDBAction,
+    getAllWalletFromDBAction,
+    putWalletInDBStatus
+} from "../../features/RequestWalletSlice";
 
 
 interface DataRow {
     name: string;
-    IdNFI: string;
+    walletAccount: string;
     validations: number;
-    mentions: number;
     originDate: string;
     profession: string;
     reported: number;
@@ -73,6 +76,10 @@ export const Search: FC=()=> {
     const requesterConnectedUserAccountsArr = useAppSelector((state) => state.register.accounts);
     const addressHasIdentityBool = useAppSelector((state) => state.minted.addressHasIdentity);
     const tokenIDToIdentity = useAppSelector((state) => state.minted.tokenIDtoIdentityStruct);
+    const getAllWalletFromDB = useAppSelector((state) => state.register.getAllWalletFromDB);
+    const getOneWalletFromDB = useAppSelector((state) => state.register.getOneWalletFromDB);
+    const getAllReceiptFromDB = useAppSelector((state) => state.register.getAllReceiptFromDB);
+    const getOneReceiptFromDB = useAppSelector((state) => state.register.getOneReceiptFromDB);
 
     const [filterText, setFilterText] = useState<string>('');
     const [searchWalletAccount, setWalletAccount] = useState<string>('');
@@ -80,30 +87,92 @@ export const Search: FC=()=> {
     const [isIdentityModalOpen, setIdentityModalOpen] = useState<boolean>(false);
     const dispatch = useAppDispatch();
 
+    console.log('this is the getallwalletfromdb', getAllWalletFromDB);
+    console.log('this is the getAllReceiptFromDB', getAllReceiptFromDB)
+
+    // useEffect( getSpecificWallet=()=> {
+    //     //walletString = getAllWalletFromDB[0];
+    //     getAllWalletFromDB.walletAccount = useParams;
+    // }[]);
+
+
+    //console.log('this is the getallwalletfromdb name:' getAllWalletFromDB.name)
+
     useEffect(()=>{
-        dispatch(getWalletFromDBAction());
-    });
+        dispatch(getAllWalletFromDBAction());
+        dispatch(getAllReceiptFromDBAction());
+    },[]);
+
+    const rowsTable = useMemo(()=>{
+       const receiptDictionary:any = {};
+        getAllReceiptFromDB.map((el)=>{
+            receiptDictionary[el.walletAccount]= el;
+        })
+        console.log('this is the receiptDictionary:', receiptDictionary);
+
+        const datarow: DataRow[] = [];
+
+        getAllWalletFromDB.map((el)=>{
+            const singleWalletDictionary = {
+                walletAccount: el.walletAccount,
+                name: (el.ownerName ? el.ownerName : "non-registered"),
+                profession: "",
+                validations: 7,
+                originDate: receiptDictionary[el.walletAccount].originDate,
+                ownedTokens: 3234,
+                reported: 2,
+            }
+            datarow.push(singleWalletDictionary);
+        })
+
+        return datarow;
+        },[getAllWalletFromDB, getAllReceiptFromDB]);
+        console.log("this is my rowstable", rowsTable);
+
 
     const columns: TableColumn<DataRow>[] = [
         {
-            name: 'name',
-            selector: row => row.IdNFI,
+            //allowRowEvents: true,
+            name: 'Wallet Account',
+            //cell: (row, index, column, id)=>{ <button onClick={handleButtonClick}>Action</button>},
+            selector: row => row.walletAccount,
+            cell: (row, index, column, id) => <Button as={ReachLink} to={`/identity/${row.walletAccount}`} bg={'#f2eef2'} color={'pmpurple.13'} fontSize={'12px'}>
+                <Text ml={'6px'}> {row.walletAccount} </Text>
+            </Button>,
             sortable: true,
             reorder: true,
             center: true,
-        },
-        {
-            name: 'NFI Identification',
-            selector: row => row.IdNFI,
-            sortable: true,
-            reorder: true,
-            center: true,
+            //sortable: true,
+            grow: 3.2,
             style: {
                 backgroundColor: '#f2eef2',
                 fontWeight: 'bold'
             },
         },
-
+        {
+            name: 'Name',
+            selector: row => row.name,
+            cell: (row, index, column, id) => <Button as={ReachLink} to={`/identity/${row.walletAccount}`} color={'pmpurple.13'} fontSize={'12px'}>
+                <Text ml={'6px'}> {row.name} </Text>
+            </Button>,
+            sortable: true,
+            reorder: true,
+            center: true,
+        },
+        {
+            name: 'Origin Date',
+            selector: row => row.originDate,
+            sortable: true,
+            reorder: true,
+            center: true,
+        },
+        {
+            name: 'Profession',
+            selector: row => row.profession,
+            sortable: true,
+            reorder: true,
+            center: true,
+        },
         {
             name: 'Validations',
             selector: row => row.validations,
@@ -117,39 +186,11 @@ export const Search: FC=()=> {
             reorder: true,
             button: true,
             center: true,
-            cell: () => <Button as={ReachLink} to={'/validate'} bg={'#f2eef2'} fontSize={'12px'}>
+            cell: () => <Button as={ReachLink} to={'/validate'} color={'pmpurple.13'} bg={'#f2eef2'} fontSize={'12px'}>
                 <MdOutlineLibraryAddCheck fontSize={'16px'}/>
                 <Text ml={'6px'}> Validate </Text>
             </Button>,
         },
-        {
-            name: 'Origin Date',
-            selector: row => row.originDate,
-            sortable: true,
-            reorder: true,
-            center: true,
-        },
-        {
-            name: 'Mentions',
-            selector: row => row.mentions,
-            sortable: true,
-            reorder: true,
-            center: true,
-        },
-        {
-            name: 'Profession',
-            selector: row => row.profession,
-            sortable: true,
-            reorder: true,
-            center: true,
-        },
-        // {
-        //     name: 'Owned Tokens',
-        //     selector: row => row.ownedTokens,
-        //     sortable: true,
-        //     reorder: true,
-        //     center: true,
-        // },
         {
             name: 'Reported',
             selector: row => row.reported,
@@ -163,7 +204,7 @@ export const Search: FC=()=> {
             reorder: true,
             button: true,
             center: true,
-            cell: () => <Button as={ReachLink} to={'/report'} bg={'#f2eef2'} fontSize={'12px'}> <HiOutlineDocumentReport
+            cell: () => <Button as={ReachLink} to={'/report'} color={'pmpurple.13'} bg={'#f2eef2'} fontSize={'12px'}> <HiOutlineDocumentReport
                 fontSize={'16px'}/>
                 <Text ml={'6px'}> Report </Text>
             </Button>,
@@ -171,222 +212,8 @@ export const Search: FC=()=> {
 
     ];
 
-    const data: DataRow[] = [
 
-        {
-            name: 'ramona',
-            IdNFI: 'ytuytrtertr',
-            profession: 'Beetlejuice',
-            validations: 7,
-            mentions: 2,
-            originDate: 'dec 30, 1976',
-            ownedTokens: 3234,
-            reported: 2,
-        },
-        {
-            name: 'ramona',
-            IdNFI: '789345hjkgf897435jhkgdkjhdfg897ertjkhdfgfkjhdfg',
-            profession: 'Beetlejuice',
-            validations: 654,
-            mentions: 3,
-            originDate: 'jan 08, 1958',
-            ownedTokens: 3234,
-            reported: 1,
-        },
-        {
-            name: 'Nautica',
-            IdNFI: '789345hjkgf897435jhkgdkjhdfg897ertjkhdfgfkjhdfg',
-            profession: 'Beetlejuice',
-            validations: 4654,
-            mentions: 4,
-            originDate: 'mar 02, 2007',
-            ownedTokens: 3234,
-            reported: 0,
-        },
-        {
-            name: 'ammon',
-            IdNFI: '789345hjkgf897435jhkgdkjhdfg897ertjkhdfgfkjhdfg',
-            profession: 'Beetlejuice',
-            validations: 65,
-            mentions: 7,
-            originDate: 'Sept 09, 2010',
-            ownedTokens: 324,
-            reported: 9,
-        },
-        {
-            name: 'Kaleb',
-            IdNFI: '789345hjkgf897435jhkgdkjhdfg897ertjkhdfgfkjhdfg',
-            profession: 'Beetlejuice',
-            validations: 547,
-            mentions: 5,
-            originDate: 'Aug 09, 2010',
-            ownedTokens: 324,
-            reported: 9,
-        },
-        {
-            name: 'Matthias',
-            IdNFI: '789345hjkgf897435jhkgdkjhdfg897ertjkhdfgfkjhdfg',
-            profession: 'Beetlejuice',
-            validations: 645,
-            mentions: 6,
-            originDate: 'june 09, 2010',
-            ownedTokens: 324,
-            reported: 9,
-        },
-        {
-            name: 'werwe',
-            IdNFI: '789345hjkgf897435jhkgdkjhdfg897ertjkhdfgfkjhdfg',
-            profession: 'Beetlejuice',
-            validations: 698,
-            mentions: 10,
-            originDate: 'July 09, 2010',
-            ownedTokens: 324,
-            reported: 9,
-        },
-        {
-            name: 'Elijah',
-            IdNFI: '789345hjkgf897435jhkgdkjhdfg897ertjkhdfgfkjhdfg',
-            profession: 'Beetlejuice',
-            validations: 61,
-            mentions: 11,
-            originDate: 'April 09, 2010',
-            ownedTokens: 324,
-            reported: 9,
-        },
-        {
-            name: 'Zechariah',
-            IdNFI: '789345hjkgf897435jhkgdkjhdfg897ertjkhdfgfkjhdfg',
-            profession: 'Beetlejuice',
-            validations: 60,
-            mentions: 12,
-            originDate: 'Feb 09, 2010',
-            ownedTokens: 324,
-            reported: 9,
-        },
-        {
-            name: 'Atlas',
-            IdNFI: '789345hjkgf897435jhkgdkjhdfg897ertjkhdfgfkjhdfg',
-            profession: 'Beetlejuice',
-            validations: 78,
-            mentions: 13,
-            originDate: 'Jan 09, 2010',
-            ownedTokens: 324,
-            reported: 9,
-        },
-        {
-            name: 'andrwe',
-            IdNFI: '789345hjkgf897435jhkgdkjhdfg897ertjkhdfgfkjhdfg',
-            profession: 'Beetlejuice',
-            validations: 654654,
-            mentions: 1,
-            originDate: 'dec 30, 1976',
-            ownedTokens: 3234,
-            reported: 2,
-        },
-        {
-            name: 'ramona',
-            IdNFI: '789345hjkgf897435jhkgdkjhdfg897ertjkhdfgfkjhdfg',
-            profession: 'Beetlejuice',
-            validations: 7,
-            mentions: 2,
-            originDate: 'dec 30, 1976',
-            ownedTokens: 3234,
-            reported: 2,
-        },
-        {
-            name: 'ramona',
-            IdNFI: '789345hjkgf897435jhkgdkjhdfg897ertjkhdfgfkjhdfg',
-            profession: 'Beetlejuice',
-            validations: 654,
-            mentions: 3,
-            originDate: 'jan 08, 1958',
-            ownedTokens: 3234,
-            reported: 1,
-        },
-        {
-            name: 'Nautica',
-            IdNFI: '789345hjkgf897435jhkgdkjhdfg897ertjkhdfgfkjhdfg',
-            profession: 'Beetlejuice',
-            validations: 4654,
-            mentions: 4,
-            originDate: 'mar 02, 2007',
-            ownedTokens: 3234,
-            reported: 0,
-        },
-        {
-            name: 'ammon',
-            IdNFI: '789345hjkgf897435jhkgdkjhdfg897ertjkhdfgfkjhdfg',
-            profession: 'Beetlejuice',
-            validations: 65,
-            mentions: 7,
-            originDate: 'Sept 09, 2010',
-            ownedTokens: 324,
-            reported: 9,
-        },
-        {
-            name: 'Kaleb',
-            IdNFI: '789345hjkgf897435jhkgdkjhdfg897ertjkhdfgfkjhdfg',
-            profession: 'Beetlejuice',
-            validations: 547,
-            mentions: 5,
-            originDate: 'Aug 09, 2010',
-            ownedTokens: 324,
-            reported: 9,
-        },
-        {
-            name: 'Matthias',
-            IdNFI: '789345hjkgf897435jhkgdkjhdfg897ertjkhdfgfkjhdfg',
-            profession: 'Beetlejuice',
-            validations: 645,
-            mentions: 6,
-            originDate: 'june 09, 2010',
-            ownedTokens: 324,
-            reported: 9,
-        },
-        {
-            name: 'werwe',
-            IdNFI: '789345hjkgf897435jhkgdkjhdfg897ertjkhdfgfkjhdfg',
-            profession: 'Beetlejuice',
-            validations: 698,
-            mentions: 10,
-            originDate: 'July 09, 2010',
-            ownedTokens: 324,
-            reported: 9,
-        },
-        {
-            name: 'Elijah',
-            IdNFI: 'khjsfuyrtyrt9837453874535',
-            profession: 'Beetlejuice',
-            validations: 61,
-            mentions: 11,
-            originDate: 'April 09, 2010',
-            ownedTokens: 324,
-            reported: 9,
-        },
-        {
-            name: 'Zechariah',
-            IdNFI: '789345hjkgf897435jhkgdkjhdfg897ertjkhdfgfkjhdfg',
-            profession: 'Beetlejuice',
-            validations: 60,
-            mentions: 12,
-            originDate: 'Feb 09, 2010',
-            ownedTokens: 324,
-            reported: 9,
-        },
-        {
-            name: 'Atlas',
-            IdNFI: '789345hjkgf897435jhkgdkjhdfg897ertjkhdfgfkjhdfg',
-            profession: 'Beetlejuice',
-            validations: 78,
-            mentions: 13,
-            originDate: 'Jan 09, 2010',
-            ownedTokens: 324,
-            reported: 9,
-        },
-    ]
-
-
-    const filteredItems = data.filter( item => {
+    const filteredItems = rowsTable.filter( item => {
             if (filterText.length === 0 && searchWalletAccount.length === 0) {
                 return item;
             }
@@ -400,12 +227,12 @@ export const Search: FC=()=> {
                 if (item.originDate && item.originDate.toLowerCase().includes(filterText.toLowerCase())) {
                     return item;
                 }
-                if (item.IdNFI && item.IdNFI.toLowerCase().includes(filterText.toLowerCase())) {
+                if (item.walletAccount && item.walletAccount.toLowerCase().includes(filterText.toLowerCase())) {
                         return item;
                     }
                 }
             if (searchWalletAccount.length !== 0) {
-                if (item.IdNFI && item.IdNFI.toLowerCase().includes(searchWalletAccount.toLowerCase()) && item.name && item.name.toLowerCase().includes(filterText.toLowerCase())) {
+                if (item.walletAccount && item.walletAccount.toLowerCase().includes(searchWalletAccount.toLowerCase()) && item.name && item.name.toLowerCase().includes(filterText.toLowerCase())) {
                     return item;
                 }
             }
@@ -471,6 +298,7 @@ export const Search: FC=()=> {
                     persistTableHead
                     paginationPerPage={20}
                     striped={true}
+                    selectableRows
                 />
             </Box>
         </Flex>

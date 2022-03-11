@@ -85,13 +85,14 @@ function* mintNFISaga(actionObject: any):any {
         const tokenID = yield mintResult.events.NFIMinted.returnValues.tokenId;
         console.log(`this is the TokenID: ${tokenID}` );
 
-        const originDate = yield mintResult.events.NFIMinted.returnValues.timeStamp;
-        console.log(`this is the timeStamp: ${originDate}` );
+        const timeStampBC = yield mintResult.events.NFIMinted.returnValues.timeStamp;
+        console.log(`this is the timeStamp: ${timeStampBC}` );
 
         const contractFee = yield mintResult.events.NFIMinted.returnValues.contractFee;
         console.log(`this is the contractFee: ${contractFee}` );
 
         const identityStruct = yield mintResult.events.NFIMinted.returnValues.identityStruct;
+        identityStruct[9]=parseInt(identityStruct[9]);
         console.log(`this is the identityStruct: ${identityStruct}` );
 
         const NFIMintedReturnValues = yield mintResult.events.NFIMinted.returnValues;
@@ -104,7 +105,7 @@ function* mintNFISaga(actionObject: any):any {
             contractAccount: contractAccount,
             transactionHash: transHashString,
             tokenID: tokenID,
-            timeStamp: originDate,
+            timeStamp: timeStampBC,
             contractFee: contractFee,
             identityStruct: identityStruct
         }
