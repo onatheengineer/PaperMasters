@@ -48,7 +48,6 @@ import {FaCube, FaFacebook, FaInstagram, FaTwitter, FaRegEdit, FaDiscord, FaLink
 import {MdOutlineColorLens, MdOutlineQrCode, MdOutlinePeopleOutline} from "react-icons/md";
 import {BsFillPersonLinesFill} from "react-icons/bs";
 import {SketchPicker} from "react-color";
-
 import {SocialButton} from "../Footers/Footer";
 import {openseaIcon} from '../../assets/icons/openseaIcon';
 import {putDBAccountDictionary} from '../../features/AccountSlice';
@@ -56,12 +55,11 @@ import {accountDictionaryInterface} from "../../features/RequestWalletSlice";
 import {ChevronDownIcon} from "@chakra-ui/icons";
 
 
-
 interface Interface {
 
 }
 
-function init(tokenIDtoIdentityStruct:any) {
+function initialState(tokenIDtoIdentityStruct:any) {
     if(tokenIDtoIdentityStruct.length > 0 ){
         return {
             name: tokenIDtoIdentityStruct[1].split('|||')[0],
@@ -82,7 +80,6 @@ function reducer(state:any, action:any) {
             return {...state, ownerDescription: action.payload};
         case 'aliasProfileLinks':
             return {...state, aliasProfileLinks: action.payload};
-
         default:
             throw new Error();
     }
@@ -102,7 +99,7 @@ export const Header:FC<Interface>=()=> {
     const firstField = useRef<HTMLTextAreaElement>(null)
     const [resize, setResize] = useState('horizontal')
 
-    const [state, dispatchAccountProfileDictionary] = useReducer(reducer, tokenIDtoIdentityStruct, init);
+    const [state, dispatchAccountProfileDictionary] = useReducer(reducer, tokenIDtoIdentityStruct, initialState);
     console.log(`this is the state in my useReducer: ${state}`);
 
     const submitHandler = () => {

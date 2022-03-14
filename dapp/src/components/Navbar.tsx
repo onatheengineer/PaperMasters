@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import React, {ReactNode, useEffect} from 'react';
 import Sparkle from 'react-sparkle';
 import {
     Box,
@@ -35,6 +35,7 @@ import {FiTrendingUp} from "react-icons/fi";
 import Web3 from "web3";
 import { useAppSelector, useAppDispatch } from '../app/hooks';
 import RegisterSlice, {accountsArr, requestAccountsAsyncAction, statusOfArr} from '../features/RequestWalletSlice';
+import detectEthereumProvider from "@metamask/detect-provider";
 
 export const SparklyComponent = () => (
     // Note: the parent of Sparkle must be positioned relatively or absolutely
@@ -46,12 +47,12 @@ export const SparklyComponent = () => (
 
 export default function Navbar() {
     //const {isOpen, onOpen, onClose} = useDisclosure();
-    const filledAccountsArr = useAppSelector((state) => state.register.accounts);
+    const requestAccountsArr = useAppSelector((state) => state.register.accounts);
     const tokenIDtoIdentityStruct = useAppSelector((state) => state.minted.tokenIDtoIdentityStruct);
     const {walletAccount} = useParams();
 
-
     const dispatch = useAppDispatch();
+
 
     return (
 
@@ -76,7 +77,7 @@ export default function Navbar() {
                 <Menu>
 
                     <Menu>
-                        <Link as={ReachLink} to={`/identity/${filledAccountsArr[0]}`}>
+                        <Link as={ReachLink} to={`/identity/${requestAccountsArr[0]}`}>
                             <MenuButton
                                 as={Button}
                                 color={'pmpurple.13'}
@@ -195,7 +196,7 @@ export default function Navbar() {
 
                     <Menu>
 
-                        {filledAccountsArr.length === 0 ?
+                        {requestAccountsArr.length === 0 ?
 
                             <MenuButton
                                 //border={'1px solid blue'}
@@ -231,6 +232,7 @@ export default function Navbar() {
                             </MenuButton>
 
                             :
+
                             <MenuButton>
                                 <MenuItem
                                     _focus={{boxShadow: 'none !important'}}

@@ -30,6 +30,7 @@ import {
     getAllWalletFromDBAction,
     putWalletInDBStatus
 } from "../../features/RequestWalletSlice";
+import AvatarNFI from "../AvatarNFI";
 
 
 interface DataRow {
@@ -39,7 +40,6 @@ interface DataRow {
     originDate: string;
     profession: string;
     reported: number;
-    ownedTokens: number;
 };
 
 interface interfaceFilterComponent{
@@ -64,12 +64,40 @@ const FilterComponent: FC<interfaceFilterComponent> = ( { filterText, onClick, o
             </InputGroup>
         </HStack>
     </Box>
-
 )
 
 // data provides access to your row data
+
 const ExpandedComponent: FC<ExpanderComponentProps<DataRow>> = ({ data }) => {
-    return <pre>{JSON.stringify(data, null, 2)}</pre>;
+    console.log(data)
+    // @ts-ignore
+    const identityStruct: any[] = data['identityStruct'] as any[]
+    if(identityStruct.length === 0){
+        return (null);
+    }
+        return(
+
+    <AvatarNFI
+        accountNumber={identityStruct[0]}
+        name={identityStruct[1].split("|||")[0]}
+        nameColor={identityStruct[1].split("|||")[1]}
+        email={identityStruct[2].split("|||")[0]}
+        emailColor={identityStruct[2].split("|||")[1]}
+        profession={identityStruct[3].split("|||")[0]}
+        professionColor={identityStruct[3].split("|||")[1]}
+        organization={identityStruct[4].split("|||")[0]}
+        organizationColor={identityStruct[4].split("|||")[1]}
+        slogan={identityStruct[5].split("|||")[0]}
+        sloganColor={identityStruct[5].split("|||")[1]}
+        website={identityStruct[6].split("|||")[0]}
+        websiteColor={identityStruct[6].split("|||")[1]}
+        uniqueYou={identityStruct[7].split("|||")[0]}
+        uniqueYouColor={identityStruct[7].split("|||")[1]}
+        avatarBG={identityStruct[8]}
+        originDate={parseInt(identityStruct[9])}
+    />
+        )
+
 };
 
 export const Search: FC=()=> {
@@ -87,6 +115,7 @@ export const Search: FC=()=> {
     const [isIdentityModalOpen, setIdentityModalOpen] = useState<boolean>(false);
     const dispatch = useAppDispatch();
 
+
     console.log('this is the getallwalletfromdb', getAllWalletFromDB);
     console.log('this is the getAllReceiptFromDB', getAllReceiptFromDB)
 
@@ -98,37 +127,53 @@ export const Search: FC=()=> {
 
     //console.log('this is the getallwalletfromdb name:' getAllWalletFromDB.name)
 
-    useEffect(()=>{
+    useEffect(() => {
         dispatch(getAllWalletFromDBAction());
         dispatch(getAllReceiptFromDBAction());
-    },[]);
+    }, []);
 
-    const rowsTable = useMemo(()=>{
-       const receiptDictionary:any = {};
-        getAllReceiptFromDB.map((el)=>{
-            receiptDictionary[el.walletAccount]= el;
+    const rowsTable = useMemo(() => {
+        const receiptDictionary: any = {};
+        console.log('get all receipts from db', getAllReceiptFromDB)
+        getAllReceiptFromDB.map((el) => {
+            receiptDictionary[el.walletAccount] = el;
         })
         console.log('this is the receiptDictionary:', receiptDictionary);
-
         const datarow: DataRow[] = [];
+        getAllWalletFromDB.map((element) => {
+            let name = "";
+            let profession = "";
+            let originDateFormatted:string = "";
+            let identityStruct:any[] = [];
+            if (receiptDictionary.hasOwnProperty(element.walletAccount)) {
+                console.log('this is the receiptdictionary walletaccount', receiptDictionary[element.walletAccount])
+                if (receiptDictionary[element.walletAccount].hasOwnProperty('identityStruct')) {
+                    if (receiptDictionary[element.walletAccount]['identityStruct'].length >= 10) {
+                        identityStruct = receiptDictionary[element.walletAccount]['identityStruct']
+                        name = receiptDictionary[element.walletAccount]['identityStruct'][1].split('|||')[0]
+                        profession = receiptDictionary[element.walletAccount]['identityStruct'][3].split('|||')[0]
+                        const originDate = receiptDictionary[element.walletAccount]['identityStruct'][9]
+                        const originDateObject = new Date(originDate);
+                        originDateFormatted = `${originDateObject.toLocaleString('en-us', {month: 'long'})} ${originDateObject.getDate()}, ${originDateObject.getFullYear()}`
+                        console.log("this is the origin date from Search", originDate)
+                    }
+                }
+            }
 
-        getAllWalletFromDB.map((el)=>{
             const singleWalletDictionary = {
-                walletAccount: el.walletAccount,
-                name: (el.ownerName ? el.ownerName : "non-registered"),
-                profession: "",
-                validations: 7,
-                originDate: receiptDictionary[el.walletAccount].originDate,
-                ownedTokens: 3234,
-                reported: 2,
+                identityStruct: identityStruct,
+                walletAccount: element.walletAccount,
+                name: (name ? name : "non-registered"),
+                profession: profession,
+                validations: 1,
+                originDate: originDateFormatted,
+                reported: 0,
             }
             datarow.push(singleWalletDictionary);
         })
-
         return datarow;
-        },[getAllWalletFromDB, getAllReceiptFromDB]);
-        console.log("this is my rowstable", rowsTable);
-
+    }, [getAllWalletFromDB, getAllReceiptFromDB]);
+    console.log("this is my rowstable", rowsTable);
 
     const columns: TableColumn<DataRow>[] = [
         {
@@ -136,7 +181,8 @@ export const Search: FC=()=> {
             name: 'Wallet Account',
             //cell: (row, index, column, id)=>{ <button onClick={handleButtonClick}>Action</button>},
             selector: row => row.walletAccount,
-            cell: (row, index, column, id) => <Button as={ReachLink} to={`/identity/${row.walletAccount}`} bg={'#f2eef2'} color={'pmpurple.13'} fontSize={'12px'}>
+            cell: (row, index, column, id) => <Button as={ReachLink} to={`/identity/${row.walletAccount}`}
+                                                      bg={'#f2eef2'} color={'pmpurple.13'} fontSize={'12px'}>
                 <Text ml={'6px'}> {row.walletAccount} </Text>
             </Button>,
             sortable: true,
@@ -152,7 +198,8 @@ export const Search: FC=()=> {
         {
             name: 'Name',
             selector: row => row.name,
-            cell: (row, index, column, id) => <Button as={ReachLink} to={`/identity/${row.walletAccount}`} color={'pmpurple.13'} fontSize={'12px'}>
+            cell: (row, index, column, id) => <Button as={ReachLink} to={`/identity/${row.walletAccount}`}
+                                                      color={'pmpurple.13'} fontSize={'12px'}>
                 <Text ml={'6px'}> {row.name} </Text>
             </Button>,
             sortable: true,
@@ -204,8 +251,9 @@ export const Search: FC=()=> {
             reorder: true,
             button: true,
             center: true,
-            cell: () => <Button as={ReachLink} to={'/report'} color={'pmpurple.13'} bg={'#f2eef2'} fontSize={'12px'}> <HiOutlineDocumentReport
-                fontSize={'16px'}/>
+            cell: () => <Button as={ReachLink} to={'/report'} color={'pmpurple.13'} bg={'#f2eef2'} fontSize={'12px'}>
+                <HiOutlineDocumentReport
+                    fontSize={'16px'}/>
                 <Text ml={'6px'}> Report </Text>
             </Button>,
         },
@@ -213,7 +261,7 @@ export const Search: FC=()=> {
     ];
 
 
-    const filteredItems = rowsTable.filter( item => {
+    const filteredItems = rowsTable.filter(item => {
             if (filterText.length === 0 && searchWalletAccount.length === 0) {
                 return item;
             }
@@ -228,9 +276,9 @@ export const Search: FC=()=> {
                     return item;
                 }
                 if (item.walletAccount && item.walletAccount.toLowerCase().includes(filterText.toLowerCase())) {
-                        return item;
-                    }
+                    return item;
                 }
+            }
             if (searchWalletAccount.length !== 0) {
                 if (item.walletAccount && item.walletAccount.toLowerCase().includes(searchWalletAccount.toLowerCase()) && item.name && item.name.toLowerCase().includes(filterText.toLowerCase())) {
                     return item;
@@ -254,14 +302,21 @@ export const Search: FC=()=> {
             <Box>
                 <HStack>
 
-                    <FilterComponent onFilter={(e: any) => setFilterText(e.target.value)} onClick={handleClear} activateButton={false}
-                                     filterText={filterText} text={"reset"} placeHolder={"Search NFI"} idType={"Search"}/>
+                    <FilterComponent onFilter={(e: any) => setFilterText(e.target.value)} onClick={handleClear}
+                                     activateButton={false}
+                                     filterText={filterText} text={"reset"} placeHolder={"Search NFI"}
+                                     idType={"Search"}/>
 
-                    <FilterComponent onFilter={(e: any) => setWalletAccount(e.target.value)} onClick={addWalletAccountHandler} activateButton={(filteredItems.length !== 0)}
-                                     filterText={searchWalletAccount} text={"Add Wallet Account"} placeHolder={"Search Wallet Account"} idType={"WalletAccount"}/>
+                    <FilterComponent onFilter={(e: any) => setWalletAccount(e.target.value)}
+                                     onClick={addWalletAccountHandler} activateButton={(filteredItems.length !== 0)}
+                                     filterText={searchWalletAccount} text={"Add Wallet Account"}
+                                     placeHolder={"Search Wallet Account"} idType={"WalletAccount"}/>
 
-                    <IdentityEntryModal title={'Create a profile for a Non-Registered'} text={'Enter Wallet Account'} placeHolder={'wallet account'}
-                                        buttonText={'Create'} isOpen={isIdentityModalOpen} onClose={()=>{setIdentityModalOpen(false)}}/>
+                    <IdentityEntryModal title={'Create a profile for a Non-Registered'} text={'Enter Wallet Account'}
+                                        placeHolder={'wallet account'}
+                                        buttonText={'Create'} isOpen={isIdentityModalOpen} onClose={() => {
+                        setIdentityModalOpen(false)
+                    }}/>
                 </HStack>
             </Box>
         );
@@ -298,7 +353,7 @@ export const Search: FC=()=> {
                     persistTableHead
                     paginationPerPage={20}
                     striped={true}
-                    selectableRows
+                    //selectableRows
                 />
             </Box>
         </Flex>

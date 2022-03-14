@@ -67,6 +67,7 @@ export const Register: FC<InterfaceRegister>=()=> {
     const status = useAppSelector((state) => state.register.status);
     const gasPrice = useAppSelector((state) => state.mint.gasPrice);
     const mintSucceeded = useAppSelector((state) => state.mint.mintSucceeded);
+    const mintErrorReason = useAppSelector((state) => state.mint.mintErrorReason);
 
     const [name, setName] = useState<string | "">("");
     const [profession, setProfession] = useState<string | "">("");
@@ -844,7 +845,10 @@ useEffect(()=>{
                     <Modal closeOnOverlayClick={false} blockScrollOnMount={false} isOpen={true} onClose={()=>{setIsModalOpen(false)}}>
                         <ModalOverlay/>
                         <ModalContent>
-                            <ModalHeader fontWeight="bold" >You've already minted, one identity per account number</ModalHeader>
+                            {/*need to deal with: is it minting successful or is it already minded*/}
+                            <ModalHeader fontWeight="bold" >
+                                {mintErrorReason}
+                                Minting Successful! / You've already minted, one identity per account number</ModalHeader>
                             <ModalCloseButton/>
                             <ModalBody pb={6}>
                                 <Text mb="1rem">

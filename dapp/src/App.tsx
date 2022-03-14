@@ -9,7 +9,7 @@ import Web3 from "web3";
 import type {FC} from 'react';
 import { Box, Flex} from '@chakra-ui/react';
 import Sidebar, {NavItem} from './components/Sidebar'
-import {requestAccountsAsyncAction} from "./features/RequestWalletSlice";
+import {accountsArr, requestAccountsAsyncAction} from "./features/RequestWalletSlice";
 import {mintNFIAsyncAction} from "./features/MintNFISlice";
 import {addressHasIdentityBoolAction} from "./features/MintedNFISlice";
 import { createBreakpoints } from '@chakra-ui/theme-tools'
@@ -32,8 +32,13 @@ function App() {
             console.log('what is this actual provider?', actualProvider);
             actualProvider.on('accountsChanged', (accounts: any) => {
                 console.log('account changed!')
+                dispatch(accountsArr([]));
+                dispatch(requestAccountsAsyncAction());
                 window.location.reload();
             });
+            actualProvider.on('chainChanged', (chainId:any) => {
+                window.location.reload();
+            })
         });
     }, [] )
 
@@ -58,7 +63,6 @@ function App() {
             <Navbar/>
             <Sidebar/>
             <Footer/>
-            <Identity/>
         </Box>
     )
 };

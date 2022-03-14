@@ -97,7 +97,6 @@ function* getOneReceiptFromDBSaga(actionObject: any): any {
 };
 
 
-
 export function* watchRequestAccountsSaga() {
     yield takeEvery(requestAccountsAsyncAction.type, requestAccountsSaga);
     yield takeEvery(putWalletInDBAction.type, putWalletInDBSaga);

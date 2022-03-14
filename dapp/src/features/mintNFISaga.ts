@@ -85,15 +85,17 @@ function* mintNFISaga(actionObject: any):any {
         const tokenID = yield mintResult.events.NFIMinted.returnValues.tokenId;
         console.log(`this is the TokenID: ${tokenID}` );
 
-        const timeStampBC = yield mintResult.events.NFIMinted.returnValues.timeStamp;
-        console.log(`this is the timeStamp: ${timeStampBC}` );
+        const timeStamp = yield mintResult.events.NFIMinted.returnValues.timeStamp;
+        console.log(`this is the timeStamp: ${timeStamp}` );
 
         const contractFee = yield mintResult.events.NFIMinted.returnValues.contractFee;
         console.log(`this is the contractFee: ${contractFee}` );
 
         const identityStruct = yield mintResult.events.NFIMinted.returnValues.identityStruct;
-        identityStruct[9]=parseInt(identityStruct[9]);
-        console.log(`this is the identityStruct: ${identityStruct}` );
+        console.log('this is the identityStruct:', identityStruct );
+        const identStruct = [...identityStruct];
+        identStruct[9]=parseInt(identStruct[9]);
+        console.log('this is the identityStruct:', identityStruct );
 
         const NFIMintedReturnValues = yield mintResult.events.NFIMinted.returnValues;
         console.log('this is the NFIMintedReturnValues:')
@@ -105,9 +107,9 @@ function* mintNFISaga(actionObject: any):any {
             contractAccount: contractAccount,
             transactionHash: transHashString,
             tokenID: tokenID,
-            timeStamp: timeStampBC,
+            timeStamp: timeStamp,
             contractFee: contractFee,
-            identityStruct: identityStruct
+            identityStruct: identStruct
         }
         console.log("this is the data to send to accountDB")
         console.log(dataToSend)

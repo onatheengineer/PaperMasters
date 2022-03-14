@@ -202,7 +202,7 @@ export const Sidebar: FC<InterfaceSidebar>= ({icon, profileName} ) => {
             case '/report':
                 setNavItemRender(SidebarIdentity);
                 setHeaderTitle("NFI");
-                setHeaderText("Non-Fungible Token");
+                //setHeaderText("Non-Fungible Token");
                 break;
             case '/search':
                 setNavItemRender(SidebarSearch);
@@ -245,8 +245,8 @@ export const Sidebar: FC<InterfaceSidebar>= ({icon, profileName} ) => {
             default:
                 if (location.pathname.startsWith('/identity')) {
                     setNavItemRender(SidebarIdentity);
-                    setHeaderTitle("Account");
-                    setHeaderText("Wallet Account");
+                    setHeaderTitle("Wallet Account");
+                    //setHeaderText("Wallet Account");
 
                 } else {
                     setNavItemRender(null);
@@ -255,7 +255,6 @@ export const Sidebar: FC<InterfaceSidebar>= ({icon, profileName} ) => {
                 }
         }
     }, [location, navSize]);
-
 
     return (
         <Flex>
@@ -279,7 +278,7 @@ export const Sidebar: FC<InterfaceSidebar>= ({icon, profileName} ) => {
                         alignItems={navSize == "small" ? "center" : "flex-start"}
                         as="nav"
                     >
-                        <Heading textAlign="center" fontSize={'18px'} mt="8px" w='100%' fontWeight="extrabold">
+                        <Heading textAlign="center" fontSize={'14px'} mt="8px" w='100%' fontWeight="bold">
                             {headerTitle}
                         </Heading>
                         <Text mt="0px" mb="5px" align="center" w='100%' fontWeight="medium">

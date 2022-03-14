@@ -53,7 +53,6 @@ export const Identity:FC<Interface>=()=> {
 
     console.log(`this is the tokenIDtoIdentityStruct[0]: ${tokenIDtoIdentityStruct.walletAccount}`);
 
-
     const breakpoints = createBreakpoints({
         sm: '30em',
         md: '48em',
@@ -63,11 +62,9 @@ export const Identity:FC<Interface>=()=> {
     })
 
 
-
     return (
 
         <Flex>
-
 
             <Stack bg={"pmpurple.2"}>
                 <Box
