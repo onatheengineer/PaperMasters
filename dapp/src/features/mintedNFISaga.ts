@@ -36,7 +36,6 @@ function* addressHasIdentityBoolSaga(actionObject: any):any {
     } catch (addressHasTokenBoolFAILED: any) {
         yield put(mintedNFI('failed'))
         yield put(mintedNFIErrorMessage(addressHasTokenBoolFAILED.message))
-
         yield put(addressHasIdentityBool(false))
         yield put(addressToToken(0))
         yield put(tokenIDToIdentity([]))

@@ -332,7 +332,7 @@ export const Sidebar: FC<InterfaceSidebar>= ({icon, profileName} ) => {
                 <Routes>
                     <Route path="/" element={<Home/>}/>
 
-                    <Route path={'/identity'} element={<Identity/>}/>
+                    <Route path={'/identity/:walletAcc'} element={<Identity/>}/>
 
                     <Route path={'/register'} element={<Register/>}/>
 

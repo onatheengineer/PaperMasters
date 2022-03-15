@@ -2,7 +2,7 @@ import { createSlice, PayloadAction, createAction } from "@reduxjs/toolkit";
 import {accountDictionaryInterface} from "./RequestWalletSlice";
 //TODO: change the BCReceipt types to the ones that actually be of the correct type
 
-interface BCReceiptInterface {
+export interface BCReceiptInterface {
     walletAccount: string,
     gasUsed: string,
     contractAccount: string,
@@ -10,6 +10,7 @@ interface BCReceiptInterface {
     tokenID: string,
     timeStamp: string
     contractFee: string,
+    identityStruct: [],
 }
 
 
@@ -19,7 +20,6 @@ interface AccountSlice {
     userSameAccountBool: boolean;
     accountError: string,
     getReceiptDBCurrentUser:BCReceiptInterface;
-
 }
 
 const initialState: AccountSlice = {
@@ -27,7 +27,7 @@ const initialState: AccountSlice = {
     getDBAccountDictionary: {walletAccount: "", walletAccountLink: '', linkToFinishedAvatar: "",  ownerName: "", ownerEmail: "", ownerDescription: "", aliasProfileLinks: [], emailValidationNotification: false, emailReportNotification: false },
     userSameAccountBool: false,
     accountError: "",
-    getReceiptDBCurrentUser: { walletAccount: "", gasUsed: "", contractAccount: "", transactionHash: "", tokenID: "", timeStamp: "", contractFee: ""},
+    getReceiptDBCurrentUser: { walletAccount: "", gasUsed: "", contractAccount: "", transactionHash: "", tokenID: "", timeStamp: "", contractFee: "", identityStruct: []},
 };
 
 const AccountSlice = createSlice ({

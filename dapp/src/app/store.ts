@@ -3,10 +3,12 @@ import registerSlice from "../features/RequestWalletSlice";
 import searchSlice from '../features/SearchSlice';
 import mintSlice from '../features/MintNFISlice';
 import mintedSlice from '../features/MintedNFISlice';
+import identUseParamsSlice from '../features/IdentityPageUseParamsSlice';
 import createSaga from "redux-saga";
 import rootSaga from "../features/rootSagas";
 import logger from 'redux-logger';
 import accountSlice from "../features/AccountSlice";
+import {watchIdentUseParamsSaga} from "../features/identityPageUseParamsSaga";
 
 
 const sagaMiddleware = createSaga();
@@ -19,6 +21,7 @@ export const store = configureStore({
     mint: mintSlice,
     minted: mintedSlice,
     account: accountSlice,
+    identUseParams: identUseParamsSlice,
   },
 });
 

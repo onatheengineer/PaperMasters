@@ -42,7 +42,7 @@ import {
     RadioGroup,
     Radio, Textarea, DrawerFooter, useDisclosure, Center, Menu, MenuButton, MenuList, MenuDivider,
 } from "@chakra-ui/react";
-import {useMemo, useReducer, useRef, useState} from "react";
+import {useEffect, useMemo, useReducer, useRef, useState} from "react";
 import {useAppDispatch, useAppSelector} from "../../app/hooks";
 import {FaCube, FaFacebook, FaInstagram, FaTwitter, FaRegEdit, FaDiscord, FaLinkedin, FaYoutube, FaTwitch} from "react-icons/fa";
 import {MdOutlineColorLens, MdOutlineQrCode, MdOutlinePeopleOutline} from "react-icons/md";
@@ -53,17 +53,14 @@ import {openseaIcon} from '../../assets/icons/openseaIcon';
 import {putDBAccountDictionary} from '../../features/AccountSlice';
 import {accountDictionaryInterface} from "../../features/RequestWalletSlice";
 import {ChevronDownIcon} from "@chakra-ui/icons";
+import {paramsWalletAccAction} from "../../features/IdentityPageUseParamsSlice";
 
 
-interface Interface {
-
-}
-
-function initialState(tokenIDtoIdentityStruct:any) {
-    if(tokenIDtoIdentityStruct.length > 0 ){
+function initialState(requestStructUsingParamsFromBC:any) {
+    if(requestStructUsingParamsFromBC.length > 0 ){
         return {
-            name: tokenIDtoIdentityStruct[1].split('|||')[0],
-            email: tokenIDtoIdentityStruct[2].split('|||')[0],
+            name: requestStructUsingParamsFromBC[1].split('|||')[0],
+            email: requestStructUsingParamsFromBC[2].split('|||')[0],
             ownerDescription: "Mathematics may not teach us how to add love or subtract hate, but it gives us every reason to hope that every problem has a solution.",
             aliasProfileLinks: ""
         };
@@ -85,26 +82,33 @@ function reducer(state:any, action:any) {
     }
 }
 
+interface Interface {
+
+}
+
 export const Header:FC<Interface>=()=> {
-    const {walletAccountParams} = useParams();
+
+    const userRequestWalletArr = useAppSelector((state) => state.register.accounts);
+    const userTokenIDtoIdentityStruct = useAppSelector((state) => state.minted.tokenIDtoIdentityStruct);
+    const userAccountDictionary = useAppSelector((state) => state.account.getDBAccountDictionary);
+    const userWalletAccount = useAppSelector((state) => state.account.getDBAccountDictionary.walletAccount);
+
+    const paramsWalletAcc = useAppSelector((state) => state.identUseParams.paramsWalletAcc);
+    const paramsAddressHasIdentityBoolBC = useAppSelector((state) => state.identUseParams.addressHasIdentityBC);
+    const requestReceiptUsingParams = useAppSelector((state) => state.identUseParams.requestReceiptUsingParams);
+    const requestStructUsingParamsFromBC = useAppSelector((state) => state.identUseParams.requestStructUsingParamsFromBC);
+    const paramsRequestAccountDictionary = useAppSelector((state) => state.identUseParams.requestAccountDictionary);
+
+    console.log('this is the tokenIDtoIdentityStruct[0]:', userTokenIDtoIdentityStruct.walletAccount);
+    console.log('requestReceiptUsingParams:', requestReceiptUsingParams);
+
+    const [state, dispatchAccountProfileDictionary] = useReducer(reducer, paramsRequestAccountDictionary, initialState);
+    console.log('this is the state in my useReducer:', state);
     const dispatch = useAppDispatch();
-    const requestWalletArr = useAppSelector((state) => state.register.accounts);
-    const getDBAccountDictionary = useAppSelector((state) => state.account.getDBAccountDictionary)
-    const addressHasIdentityBool = useAppSelector((state) => state.minted.addressHasIdentity);
-    const tokenIDtoIdentityStruct = useAppSelector((state) => state.minted.tokenIDtoIdentityStruct);
-    //this walletaccount has to be fixed
-    const walletAccount = useAppSelector((state) => state.register.putWalletInDBStatus);
-
-    const {isOpen, onOpen, onClose} = useDisclosure()
-    const firstField = useRef<HTMLTextAreaElement>(null)
-    const [resize, setResize] = useState('horizontal')
-
-    const [state, dispatchAccountProfileDictionary] = useReducer(reducer, tokenIDtoIdentityStruct, initialState);
-    console.log(`this is the state in my useReducer: ${state}`);
 
     const submitHandler = () => {
         const accountProfileDictionary: accountDictionaryInterface = {
-            walletAccount: walletAccount as string,
+            walletAccount: paramsWalletAcc as string,
             ownerName: state.name,
             ownerEmail: state.email,
             ownerDescription: state.ownerDescription,
@@ -115,6 +119,10 @@ export const Header:FC<Interface>=()=> {
         dispatch(putDBAccountDictionary(accountProfileDictionary));
         onClose();
     }
+
+    const {isOpen, onOpen, onClose} = useDisclosure()
+    const firstField = useRef<HTMLTextAreaElement>(null)
+    const [resize, setResize] = useState('horizontal')
 
     return (
 
@@ -137,7 +145,7 @@ export const Header:FC<Interface>=()=> {
                 lg: "translateY(75%)",
             }}
         >
-            {requestWalletArr.length !== 0 && requestWalletArr[0].toLowerCase() === walletAccount?.toLowerCase() && addressHasIdentityBool ?
+            {userRequestWalletArr.length !== 0 && userRequestWalletArr[0].toLowerCase() === paramsWalletAcc?.toLowerCase() && paramsAddressHasIdentityBoolBC ?
                 <Box
                     right={"2px"}
                     top={"2px"}
@@ -186,7 +194,7 @@ export const Header:FC<Interface>=()=> {
                                                     payload: e.currentTarget.value
                                                 })
                                             }}
-                                            //placeholder={getDBAccountDictionary{${ownerName}}}
+                                            placeholder={paramsRequestAccountDictionary.ownerName}
                                         />
                                         <FormLabel
                                             mt={'22px'}
@@ -775,14 +783,18 @@ export const Header:FC<Interface>=()=> {
                             <Text fontSize="sm" color='pmpurple.13' fontWeight="bold">
                                 {/*TODO: when I click on this button I want it to route me to the validations page*/}
                                 <Link as={ReachLink} to={'/validate'} _hover={{textDecor: 'none'}}>
-                                    {/*{addressHasIdentityBool === false ?*/}
+                                    {paramsWalletAcc.length === 0 && paramsAddressHasIdentityBoolBC === false && requestStructUsingParamsFromBC.walletAccount.length === 0 ?
                                         <Text fontSize={'18px'} color={'red.600'} letterSpacing={'1px'}
                                               textShadow={'#F7FAFC 0px 0px 10px'}>
                                             Non-Registered Wallet Account
                                         </Text>
-                                        {/*// :*/}
-                                        {/*NFI Transaction Hash: ${ of any user}*/}
-                                    {/*// }*/}
+                                        :
+                                        <Tooltip hasArrow label='NFI Transaction Hash'
+                                                 bg='pmpurple.4' color='pmpurple.13'>
+                                            {requestReceiptUsingParams.transactionHash}
+                                        </Tooltip>
+
+                                    }
                                 </Link>
                             </Text>
                         </Flex>

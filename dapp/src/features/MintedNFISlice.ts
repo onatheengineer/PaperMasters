@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction, createAction } from "@reduxjs/toolkit";
 
-interface tokenIDtoIdentityStructInterface{
+export interface tokenIDtoIdentityStructInterface{
     walletAccount: string;
     name: string;
     email: string;
