@@ -45,35 +45,35 @@ import {
 import {useEffect, useMemo, useReducer, useRef, useState} from "react";
 import {useAppDispatch, useAppSelector} from "../../app/hooks";
 import {FaCube, FaFacebook, FaInstagram, FaTwitter, FaRegEdit, FaDiscord, FaLinkedin, FaYoutube, FaTwitch} from "react-icons/fa";
-import {MdOutlineColorLens, MdOutlineQrCode, MdOutlinePeopleOutline} from "react-icons/md";
+import {MdOutlineColorLens, MdOutlineQrCode, MdOutlinePeopleOutline, MdOutlineEmail} from "react-icons/md";
 import {BsFillPersonLinesFill} from "react-icons/bs";
 import {SketchPicker} from "react-color";
 import {SocialButton} from "../Footers/Footer";
 import {openseaIcon} from '../../assets/icons/openseaIcon';
-import {putDBAccountDictionary} from '../../features/AccountSlice';
-import {accountDictionaryInterface} from "../../features/RequestWalletSlice";
+import {putDBAccountDictionary, putDBAccountDictionaryAction} from '../../features/AccountSlice';
+import {accountDictionaryInterface} from "../../features/UserWalletSlice";
 import {ChevronDownIcon} from "@chakra-ui/icons";
 import {paramsWalletAccAction} from "../../features/IdentityPageUseParamsSlice";
+import DrawerComponent from "./DrawerComponent";
+import {SocialMedia} from "./SocialMedia";
 
 
-function initialState(requestStructUsingParamsFromBC:any) {
-    if(requestStructUsingParamsFromBC.length > 0 ){
+function initialState(paramsRequestAccountDictionary:any) {
         return {
-            name: requestStructUsingParamsFromBC[1].split('|||')[0],
-            email: requestStructUsingParamsFromBC[2].split('|||')[0],
+            ownerName: "",
+            ownerEmail: "",
             ownerDescription: "Mathematics may not teach us how to add love or subtract hate, but it gives us every reason to hope that every problem has a solution.",
             aliasProfileLinks: ""
         };
-    }
 }
 
 function reducer(state:any, action:any) {
     switch (action.type) {
         case 'name':
-            return {...state, name: action.payload};
+            return {...state, ownerName: action.payload};
         case 'email':
-            return {...state, email: action.payload};
-        case 'ownerDescription':
+            return {...state, ownerEmail: action.payload};
+        case 'description':
             return {...state, ownerDescription: action.payload};
         case 'aliasProfileLinks':
             return {...state, aliasProfileLinks: action.payload};
@@ -81,6 +81,22 @@ function reducer(state:any, action:any) {
             throw new Error();
     }
 }
+
+interface mailToInterface{
+    email: string,
+    subject: string,
+    body: string,
+    children: any,
+}
+
+export const Mailto:FC<mailToInterface> = ({ email, subject, body, ...props })=> {
+    return (
+        <a href={`mailto:${email}?subject=${subject || ""}&body=${body || ""}`}>
+            {props.children}
+        </a>
+    );
+}
+
 
 interface Interface {
 
@@ -99,6 +115,7 @@ export const Header:FC<Interface>=()=> {
     const requestStructUsingParamsFromBC = useAppSelector((state) => state.identUseParams.requestStructUsingParamsFromBC);
     const paramsRequestAccountDictionary = useAppSelector((state) => state.identUseParams.requestAccountDictionary);
 
+
     console.log('this is the tokenIDtoIdentityStruct[0]:', userTokenIDtoIdentityStruct.walletAccount);
     console.log('requestReceiptUsingParams:', requestReceiptUsingParams);
 
@@ -109,14 +126,14 @@ export const Header:FC<Interface>=()=> {
     const submitHandler = () => {
         const accountProfileDictionary: accountDictionaryInterface = {
             walletAccount: paramsWalletAcc as string,
-            ownerName: state.name,
-            ownerEmail: state.email,
+            ownerName: state.ownerName,
+            ownerEmail: state.ownerEmail,
             ownerDescription: state.ownerDescription,
             aliasProfileLinks: state.aliasProfileLinks,
             emailValidationNotification: false,
             emailReportNotification: false
         }
-        dispatch(putDBAccountDictionary(accountProfileDictionary));
+        dispatch(putDBAccountDictionaryAction(accountProfileDictionary));
         onClose();
     }
 
@@ -124,6 +141,158 @@ export const Header:FC<Interface>=()=> {
     const firstField = useRef<HTMLTextAreaElement>(null)
     const [resize, setResize] = useState('horizontal')
 
+
+    const logicTransactionHashMemo = useMemo(() => {
+        return (
+            <>
+                <Icon as={FaCube} me="6px"/>
+                <Text fontSize="sm" color='pmpurple.13' fontWeight="bold">
+                    {/*TODO: when I click on this button I want it to route me to the registration & validations page*/}
+                    <Link as={ReachLink} to={'/validate'} _hover={{textDecor: 'none'}}>
+                        {paramsWalletAcc.length !== 0 && paramsAddressHasIdentityBoolBC === false && requestStructUsingParamsFromBC.walletAccount.length === 0 ?
+                            <Text fontSize={'16px'} color={'red.600'} letterSpacing={'1px'}
+                                  textShadow={'#F7FAFC 0px 0px 10px'}>
+                                Non-Registered Wallet Account
+                            </Text>
+                            : requestReceiptUsingParams !== undefined ?
+                                <Tooltip hasArrow label='NFI Transaction Hash'
+                                         bg='pmpurple.4' color='pmpurple.13'>
+                                    {requestReceiptUsingParams.transactionHash}
+                                </Tooltip>
+                                : null
+                        }
+                    </Link>
+                </Text>
+            </>
+        )
+    }, [paramsWalletAcc, paramsAddressHasIdentityBoolBC, requestStructUsingParamsFromBC, requestReceiptUsingParams])
+
+    const logicNameMemo = useMemo(() => {
+        console.log('state:', state)
+        console.log('requestReceiptUsingParams:', requestReceiptUsingParams)
+        console.log('paramsWalletAcc:', paramsWalletAcc)
+
+        if(state !== undefined){
+            if(state.ownerName.length > 0){
+                return(
+                        state.ownerName
+                )
+            }
+        }
+        if( paramsAddressHasIdentityBoolBC && requestReceiptUsingParams !== undefined ){
+            if(requestReceiptUsingParams.hasOwnProperty('identityStruct') && requestReceiptUsingParams['identityStruct'].length > 0 && requestReceiptUsingParams['identityStruct'][1].length > 0 ){
+               return(
+                    requestReceiptUsingParams.identityStruct[1].split("|||")[0]
+               )
+            }
+        }
+        return (
+                paramsWalletAcc
+        );
+    }, [state.ownerName, paramsWalletAcc, paramsAddressHasIdentityBoolBC, requestReceiptUsingParams])
+
+
+    const logicEmailMemo = useMemo(() => {
+
+        if(state !== undefined){
+            if(state.ownerEmail.length > 0){
+                return(
+                    <Mailto
+                        email={state.ownerEmail}
+                        subject="Hello PaperMaster"
+                        body="Nice to meet you PaperMaster!">
+                        <MdOutlineEmail fontSize={'20px'} color={'#5c415c'}/>
+                    </Mailto>
+                )
+            }
+        }
+        if(paramsAddressHasIdentityBoolBC && requestReceiptUsingParams !== undefined ){
+            if(requestReceiptUsingParams.hasOwnProperty('identityStruct') && requestReceiptUsingParams['identityStruct'].length > 0 && requestReceiptUsingParams['identityStruct'][2].length > 0 ) {
+                return (
+                    <Mailto
+                        email={requestReceiptUsingParams.identityStruct[2].split("|||")[0]}
+                        subject="Hello PaperMaster"
+                        body="Nice to meet you PaperMaster!">
+                        <MdOutlineEmail fontSize={'20px'} color={'#5c415c'}/>
+                    </Mailto>
+                )
+            }
+        }
+        return (
+            <MdOutlineEmail fontSize={'20px'} color={'#5c415c'}/>
+        );
+    }, [state.ownerName, paramsWalletAcc, paramsAddressHasIdentityBoolBC, requestReceiptUsingParams])
+
+
+    // const logicQRCodeMemo = useMemo(()=>{
+    //     return(
+    //
+    //     <Link
+    //         href="#"
+    //         color='pmpurple.13'
+    //         fontSize="md"
+    //         me="10px"
+    //         _hover={{color: "#9c7e9c"}}
+    //     >
+    //         <HStack>
+    //             <Icon as={MdOutlineQrCode}/>
+    //             <Text fontSize="sm" color='pmpurple.13' fontWeight="semibold">
+    //                 NFI QR Code: comming soon
+    //             </Text>
+    //         </HStack>
+    //
+    //     </Link>
+    //
+    //     <Text
+    //         fontSize="md"
+    //         color='pmpurple.13'
+    //         fontWeight="bold"
+    //         me="10px"
+    //     >
+    //         NFI QR code:
+    //     </Text>
+    //
+    // )}, [paramsWalletAcc, paramsAddressHasIdentityBoolBC, requestStructUsingParamsFromBC, requestReceiptUsingParams] )
+
+    const logicDescription = useMemo(() => {
+        return (
+            <>
+            </>
+        )
+    }, [state.ownerDescription, paramsWalletAcc, paramsAddressHasIdentityBoolBC, requestStructUsingParamsFromBC, requestReceiptUsingParams])
+
+    const logicAliasProfileLinks = useMemo(() => {
+        return (
+            <>
+            </>
+        )
+    }, [state.aliasProfileLinks, paramsWalletAcc, paramsAddressHasIdentityBoolBC, requestStructUsingParamsFromBC, requestReceiptUsingParams])
+
+    const logicGivenValidationsMemo = useMemo(() => {
+        return (
+            <>
+            </>
+        )
+    }, [paramsWalletAcc, paramsAddressHasIdentityBoolBC, requestStructUsingParamsFromBC, requestReceiptUsingParams])
+
+    const logicReportMemo = useMemo(() => {
+        return (
+            <>
+            </>
+        )
+    }, [state.emailReportNotification, paramsWalletAcc, paramsAddressHasIdentityBoolBC, requestStructUsingParamsFromBC, requestReceiptUsingParams])
+
+    const logicValidationsMemo = useMemo(() => {
+        return (
+            <>
+            </>
+        )
+    }, [state.emailValidationNotification, paramsWalletAcc, paramsAddressHasIdentityBoolBC, requestStructUsingParamsFromBC, requestReceiptUsingParams])
+
+
+    if (state === undefined) {
+        return (null);
+    }
     return (
 
         <Flex
@@ -145,305 +314,7 @@ export const Header:FC<Interface>=()=> {
                 lg: "translateY(75%)",
             }}
         >
-            {userRequestWalletArr.length !== 0 && userRequestWalletArr[0].toLowerCase() === paramsWalletAcc?.toLowerCase() && paramsAddressHasIdentityBoolBC ?
-                <Box
-                    right={"2px"}
-                    top={"2px"}
-                    position="absolute"
-                >
-                    <Tooltip hasArrow label='Edit Account Profile' placement={'left'} border={'1px solid #694b69'}
-                             borderRadius={'5px'} bg='pmpurple.3' color='pmpurple.13'  >
-                        <Button
-                            onClick={onOpen}
-                            color={'pmpurple.15'}>
-                            <FaRegEdit/>
-                        </Button>
-                    </Tooltip>
-                    <Drawer
-                        isOpen={isOpen}
-                        placement='right'
-                        initialFocusRef={firstField}
-                        onClose={onClose}
-                    >
-                        <DrawerOverlay/>
-                        <DrawerContent>
-                            <DrawerCloseButton/>
-                            <DrawerHeader
-                                color='pmpurple.15'
-                                borderBottomWidth='1px'>
-                                Account Profile
-                            </DrawerHeader>
-                            <DrawerBody>
-                                <Stack spacing='24px'>
-                                    <Box>
-                                        <FormLabel
-                                            mt={'22px'}
-                                            color='pmpurple.15'
-                                            htmlFor='username'>Name</FormLabel>
-                                        <Input
-                                            focusBorderColor='pmpurple.9'
-                                            border={'1px solid'}
-                                            borderColor={'pmpurple.8'}
-                                            bg={'pmpurple.2'}
-                                            color='pmpurple.15'
-                                            value={state.name}
-                                            id='account Name'
-                                            onChange={(e) => {
-                                                dispatchAccountProfileDictionary({
-                                                    type: 'name',
-                                                    payload: e.currentTarget.value
-                                                })
-                                            }}
-                                            placeholder={paramsRequestAccountDictionary.ownerName}
-                                        />
-                                        <FormLabel
-                                            mt={'22px'}
-                                            color='pmpurple.15'
-                                            htmlFor='username'>Email</FormLabel>
-                                        <Input
-                                            focusBorderColor='pmpurple.9'
-                                            border={'1px solid'}
-                                            borderColor={'pmpurple.8'}
-                                            bg={'pmpurple.2'}
-                                            color='pmpurple.15'
-                                            value={state.email}
-                                            id='email'
-                                            onChange={(e) => {
-                                                dispatchAccountProfileDictionary({
-                                                    type: 'email',
-                                                    payload: e.currentTarget.value
-                                                })
-                                            }}
-                                            //placeholder={getDBAccountDictionary{${ownerName}}}
-                                        />
-
-                                        <FormLabel
-                                            mt={'22px'}
-                                            color='pmpurple.15'
-                                            htmlFor='username'>Social Media Links</FormLabel>
-                                        <HStack>
-                                            <SocialButton label={'GitHub'}
-                                                          href={'https://discord.com/channels/ramonajenny#1512'}>
-                                                <FaDiscord/>
-                                            </SocialButton>
-                                            <Input
-                                                focusBorderColor='pmpurple.9'
-                                                border={'1px solid'}
-                                                borderColor={'pmpurple.8'}
-                                                bg={'pmpurple.2'}
-                                                color='pmpurple.15'
-                                                value={state.aliasProfileLinks}
-                                                id='alias'
-                                                onChange={(e) => {
-                                                    dispatchAccountProfileDictionary({
-                                                        type: 'aliasProfileLinks',
-                                                        payload: e.currentTarget.value
-                                                    })
-                                                }}
-                                            />
-                                        </HStack>
-
-                                        <HStack>
-                                            <SocialButton label={'GitHub'}
-                                                          href={'https://discord.com/channels/ramonajenny#1512'}>
-                                                <FaTwitter/>
-                                            </SocialButton>
-                                            <Input
-                                                focusBorderColor='pmpurple.9'
-                                                border={'1px solid'}
-                                                borderColor={'pmpurple.8'}
-                                                bg={'pmpurple.2'}
-                                                color='pmpurple.15'
-                                                //value={getDBAccountDictionary{${ownerName}}}
-                                                id='account Name'
-                                                //placeholder={getDBAccountDictionary{${ownerName}}}
-                                            />
-                                        </HStack>
-                                        <HStack>
-                                            <SocialButton label={'GitHub'}
-                                                          href={'https://discord.com/channels/ramonajenny#1512'}>
-                                                <FaLinkedin/>
-                                            </SocialButton>
-                                            <Input
-                                                focusBorderColor='pmpurple.9'
-                                                border={'1px solid'}
-                                                borderColor={'pmpurple.8'}
-                                                bg={'pmpurple.2'}
-                                                color='pmpurple.15'
-                                                //value={getDBAccountDictionary{${ownerName}}}
-                                                id='account Name'
-                                                //placeholder={getDBAccountDictionary{${ownerName}}}
-                                            />
-                                        </HStack>
-                                        <HStack>
-                                            <SocialButton label={'GitHub'}
-                                                          href={'https://discord.com/channels/ramonajenny#1512'}>
-                                                <Icon as={openseaIcon}/>
-                                            </SocialButton>
-                                            <Input
-                                                focusBorderColor='pmpurple.9'
-                                                border={'1px solid'}
-                                                borderColor={'pmpurple.8'}
-                                                bg={'pmpurple.2'}
-                                                color='pmpurple.15'
-                                                //value={getDBAccountDictionary{${ownerName}}}
-                                                id='account Name'
-                                                //placeholder={getDBAccountDictionary{${ownerName}}}
-                                            />
-                                        </HStack>
-                                        <HStack>
-                                            <SocialButton label={'GitHub'}
-                                                          href={'https://discord.com/channels/ramonajenny#1512'}>
-                                                <FaYoutube/>
-                                            </SocialButton>
-                                            <Input
-                                                focusBorderColor='pmpurple.9'
-                                                border={'1px solid'}
-                                                borderColor={'pmpurple.8'}
-                                                bg={'pmpurple.2'}
-                                                color='pmpurple.15'
-                                                //value={getDBAccountDictionary{${ownerName}}}
-                                                id='account Name'
-                                                //placeholder={getDBAccountDictionary{${ownerName}}}
-                                            />
-                                        </HStack>
-                                        <HStack>
-                                            <SocialButton label={'GitHub'}
-                                                          href={'https://discord.com/channels/ramonajenny#1512'}>
-                                                <FaInstagram/>
-                                            </SocialButton>
-                                            <Input
-                                                focusBorderColor='pmpurple.9'
-                                                border={'1px solid'}
-                                                borderColor={'pmpurple.8'}
-                                                bg={'pmpurple.2'}
-                                                color='pmpurple.15'
-                                                //value={getDBAccountDictionary{${ownerName}}}
-                                                id='account Name'
-                                                //placeholder={getDBAccountDictionary{${ownerName}}}
-                                            />
-                                        </HStack>
-                                        <HStack>
-                                            <SocialButton label={'GitHub'}
-                                                          href={'https://discord.com/channels/ramonajenny#1512'}>
-                                                <FaTwitch/>
-                                            </SocialButton>
-                                            <Input
-                                                focusBorderColor='pmpurple.9'
-                                                border={'1px solid'}
-                                                borderColor={'pmpurple.8'}
-                                                bg={'pmpurple.2'}
-                                                color='pmpurple.15'
-                                                //value={getDBAccountDictionary{${ownerName}}}
-                                                id='account Name'
-                                                //placeholder={getDBAccountDictionary{${ownerName}}}
-                                            />
-                                        </HStack>
-                                        <HStack>
-                                            <SocialButton label={'GitHub'}
-                                                          href={'https://discord.com/channels/ramonajenny#1512'}>
-                                                <FaFacebook/>
-                                            </SocialButton>
-                                            <Input
-                                                focusBorderColor='pmpurple.9'
-                                                border={'1px solid'}
-                                                borderColor={'pmpurple.8'}
-                                                bg={'pmpurple.2'}
-                                                color='pmpurple.15'
-                                                //value={getDBAccountDictionary{${ownerName}}}
-                                                id='account Name'
-                                                //placeholder={getDBAccountDictionary{${ownerName}}}
-                                            />
-                                        </HStack>
-                                        <HStack>
-                                            <SocialButton label={'GitHub'}
-                                                          href={'https://discord.com/channels/ramonajenny#1512'}>
-                                                <MdOutlinePeopleOutline/>
-                                            </SocialButton>
-                                            <Input
-                                                focusBorderColor='pmpurple.9'
-                                                border={'1px solid'}
-                                                borderColor={'pmpurple.8'}
-                                                bg={'pmpurple.2'}
-                                                color='pmpurple.15'
-                                                //value={getDBAccountDictionary{${ownerName}}}
-                                                id='account Name'
-                                                placeholder={'Add social media link'}
-                                            />
-                                        </HStack>
-                                        <HStack>
-                                            <SocialButton label={'GitHub'}
-                                                          href={'https://discord.com/channels/ramonajenny#1512'}>
-                                                <MdOutlinePeopleOutline/>
-                                            </SocialButton>
-                                            <Input
-                                                focusBorderColor='pmpurple.9'
-                                                border={'1px solid'}
-                                                borderColor={'pmpurple.8'}
-                                                bg={'pmpurple.2'}
-                                                color='pmpurple.15'
-                                                //value={getDBAccountDictionary{${ownerName}}}
-                                                id='social media'
-                                                placeholder={'Add social media link'}
-                                                onChange={(e) => {
-                                                    dispatchAccountProfileDictionary({
-                                                        type: 'aliasProfileLinks',
-                                                        payload: e.currentTarget.value
-                                                    })
-                                                }}
-                                            />
-                                        </HStack>
-                                    </Box>
-                                    <Box>
-                                        <FormLabel
-                                            mt={'0px'}
-                                            color='pmpurple.15'
-                                            htmlFor='desc'>Description</FormLabel>
-                                        <Textarea
-                                            focusBorderColor='pmpurple.9'
-                                            color='pmpurple.13'
-                                            border={'1px solid'}
-                                            borderColor={'pmpurple.6'}
-                                            bg={'pmpurple.2'}
-                                            h={'400px'}
-                                            id='desc'
-                                            ref={firstField}
-                                            placeholder='Add description'
-                                            value={state.ownerDescription}
-                                            onChange={(e) => {
-                                                dispatchAccountProfileDictionary({
-                                                    type: 'ownerDescription',
-                                                    payload: e.currentTarget.value
-                                                })
-                                            }}
-                                        />
-                                    </Box>
-                                </Stack>
-                            </DrawerBody>
-                            <DrawerFooter borderTopWidth='1px'>
-                                <Button
-                                    variant='outline'
-                                    color='pmpurple.12'
-                                    border={'1px solid'}
-                                    borderColor={'pmpurple.6'}
-                                    bg={'pmpurple.2'}
-                                    mr={3}
-                                    onClick={onClose}>
-                                    Cancel
-                                </Button>
-                                <Button
-                                    color='pmpurple.12'
-                                    border={'1px solid'}
-                                    borderColor={'pmpurple.6'}
-                                    bg={'pmpurple.4'}
-                                    onClick={submitHandler}
-                                > Submit </Button>
-                            </DrawerFooter>
-                        </DrawerContent>
-                    </Drawer>
-                </Box>
-                : null
-            }
+            <DrawerComponent/>
 
             <Flex
                 align="center"
@@ -451,7 +322,7 @@ export const Header:FC<Interface>=()=> {
                 w={{sm: "100%"}}
                 //textAlign={{sm: "center", md: "start"}}
                 bg={'transparent'}
-                border="2px solid yellow"
+                //border="2px solid yellow"
                 m={"0px"}
                 p={'0px'}
             >
@@ -464,382 +335,134 @@ export const Header:FC<Interface>=()=> {
                     borderRadius="10px"
                 />
                 <Stack>
-                    <Flex direction="column" maxWidth="100%"
+                    <Flex direction="column"
+                          maxWidth="100%"
                           m={"0px"}
                           p={'0px'}
                           h={'100%'}
-                          border="2px solid "
-                          borderColor='red'
+                        //border="2px solid purple"
                     >
-                        {/*{addressHasIdentityBool ?*/}
-
-                        <Text
-                            fontSize={'20px'}
-                            color='pmpurple.16'
-                            fontWeight="bold"
-                            ms={{sm: "8px", md: "0px"}}
-                        >
-                            {/*{tokenIDtoIdentityStruct[1].split("|||")[0]}*/}
-                        </Text>
-                         {/* {requestWalletArr.length === 0 ?*/}
-                            <Text
-                                fontSize={{sm: "lg", lg: "xl"}}
-                                color='pmpurple.13'
-                                fontWeight="semibold"
-                                ms={{sm: "8px", md: "0px"}}
-                            >
-                                {/*{walletAccount?.length !== 0 ?*/}
-                                {/*    walletAccount*/}
-                                {/*    : 'Non - Registered Wallet Account'*/}
-
-                            </Text>
-                            {/* :*/}
-                            <Flex  color='pmpurple.13' fontWeight="semibold" alignItems={'center'}>
-                                {/*{requestWalletArr[0]}*/}
-                            </Flex>
-                        {/*}*/}
-                        <Text
-                            fontSize={{sm: "sm", md: "md"}}
-                            color='pmpurple.13'
-                            fontWeight="semibold"
-                        >
-                            email goes here
-                        </Text>
                         <Box
                             //border={'1px solid blue'}
-                            p={'0px'}
+                            p={'2px'}
+                            my={'0px'}
                         >
-                            <Menu>
-                                <MenuButton
-                                    as={Button}
-                                    rightIcon={<ChevronDownIcon fontSize={'18px'}/>}
-                                    leftIcon={<BsFillPersonLinesFill size={'16px'}/>}
-                                    //focusBorderColor='pmpurple.4'
-                                    w={'100%'}
-                                    border={'0px solid'}
-                                    //borderColor={'pmpurple.6'}
-                                    color='pmpurple.13'
-                                    m={'0px'}
-                                    bg={'pmpurple.4'}
-                                    //h='1.75rem'
-                                    size='xs'
-                                    p={'2px'}
-                                    borderRadius={'0px'}
-                                    // _hover={{
-                                    //     transform: 'translateY(-2px)',
-                                    //     boxShadow: 'lg',
-                                    // }}
-                                    _active={{
-                                        transform: 'scale(1.0)',
-                                    }}
-                                    boxShadow={'0px'}
-                                    // _focus={{
-                                    //     boxShadow:
-                                    //         '0 0 1px 2px rgba(88, 144, 255, .75), 0 1px 1px rgba(0, 0, 0, .15)',
-                                    // }}
+                            <HStack
+                                spacing={8}
+                            >
+                                <Box
+                                    //border={'1px solid blue'}
+                                    pt={'4px'}
+                                    my={'0px'}
                                 >
                                     <Text
-                                        fontSize={'15px'}
+                                        fontSize={'18px'}
                                         color='pmpurple.13'
                                         fontWeight="semibold"
-                                        textAlign={'left'}
                                     >
-                                        Persona
+                                {logicNameMemo}
                                     </Text>
-                                </MenuButton>
+                                </Box>
 
-
-
-                                <MenuList
-                                    w={'2px'}
+                                <Box
+                                    //border={'1px solid blue'}
+                                    pt={'4px'}
+                                    my={'0px'}
                                 >
-                                    <Box
-                                        border={'1px solid red'}
-                                    >
-                                    <HStack
-                                        spacing='-165px'
-                                    >
-                                    <MenuItem
-                                        border={'1px solid blue'}
-                                    >
-                                        <Link
-                                            border={'1px solid green'}
-                                            href="#"
-                                            color='pmpurple.13'
-                                            fontSize="lg"
-                                            //me="10px"
-                                            _hover={{color: "#9c7e9c"}}
-                                        >
-                                            <Icon as={FaDiscord}/>
-                                        </Link>
-                                    </MenuItem>
-                                    <MenuItem>
-                                        <Link
-                                            href="#"
-                                            color='pmpurple.13'
-                                            fontSize="lg"
-                                            //me="10px"
-                                            _hover={{color: "#9c7e9c"}}
-                                        >
-                                            <Icon as={FaTwitter}/>
-                                        </Link>
-                                    </MenuItem>
-                                    <MenuItem>
-                                        <Link
-                                            href="#"
-                                            color='pmpurple.13'
-                                            fontSize="lg"
-                                            //me="10px"
-                                            _hover={{color: "#9c7e9c"}}
-                                        >
-                                            <Icon as={FaLinkedin}/>
-                                        </Link>
-                                    </MenuItem>
-                                    <MenuItem>
-                                        <Link
-                                            mt={'-6px'}
-                                            href="#"
-                                            fontSize="lg"
-                                            //me="10px"
-                                            _hover={{color: "#9c7e9c"}}
-                                        >
-                                            <Icon as={openseaIcon}/>
-                                        </Link>
-                                    </MenuItem>
-                                    </HStack>
-                                    <HStack
-                                        spacing='-165px'
-                                    >
-                                    <MenuItem>
-                                        <Link
-                                            href="#"
-                                            color='pmpurple.13'
-                                            fontSize="lg"
-                                            //me="10px"
-                                            _hover={{color: "#9c7e9c"}}
-                                        >
-                                            <Icon as={FaYoutube}/>
-                                        </Link>
-                                    </MenuItem>
-                                    <MenuItem>
-                                        <Link
-                                            href="#"
-                                            color='pmpurple.13'
-                                            fontSize="lg"
-                                            //me="10px"
-                                            _hover={{color: "#9c7e9c"}}
-                                        >
-                                            <Icon as={FaInstagram}/>
-                                        </Link>
-                                    </MenuItem>
-                                        <MenuItem>
-                                            <Link
-                                                href="#"
-                                                color='pmpurple.13'
-                                                fontSize="lg"
-                                                //me="10px"
-                                                _hover={{color: "#9c7e9c"}}
-                                            >
-                                                <Icon as={FaTwitch}/>
-                                            </Link>
-                                        </MenuItem>
-                                    <MenuItem>
-                                        <Link
-                                            href="#"
-                                            color='pmpurple.13'
-                                            fontSize="lg"
-                                            //me="10px"
-                                            _hover={{color: "#9c7e9c"}}
-                                        >
-                                            <Icon as={FaFacebook}/>
-                                        </Link>
-                                    </MenuItem>
-                                    </HStack>
-                                    <MenuDivider/>
-                                    <MenuItem
-                                        _hover={{color: "#9c7e9c"}}
-                                    >
-                                        <Box
-                                            //cursor={'pointer'}
-                                            //focusBorderColor='pmpurple.8'
-                                            border={'1px solid'}
-                                            borderColor={'pmpurple.6'}
-                                            bg={'pmpurple.2'}
-                                            color='pmpurple.15'
-                                            //value={state.alias}
-                                            id='social media'
-                                            //size={'sm'}
-                                            //placeholder={getDBAccountDictionary{${ownerName}}}
-                                        >
-                                            <Link>
-                                                <Text
-                                                    fontSize={'14px'}
-                                                    color='pmpurple.13'
-                                                    fontWeight="semibold"
-                                                    textAlign={'left'}
-                                                    px={'4px'}
-                                                >
-                                                    Social Media Link
-                                                </Text>
-                                            </Link>
-                                        </Box>
-                                    </MenuItem>
-                                    <MenuItem>
-                                        <Box
-                                            //cursor={'pointer'}
-                                            //focusBorderColor='pmpurple.8'
-                                            border={'1px solid'}
-                                            borderColor={'pmpurple.6'}
-                                            bg={'pmpurple.2'}
-                                            color='pmpurple.15'
-                                            //value={state.alias}
-                                            id='social media'
-                                            //size={'sm'}
-                                            //placeholder={getDBAccountDictionary{${ownerName}}}
-                                        >
-                                            <Link>
-                                                <Text
-                                                    fontSize={'14px'}
-                                                    color='pmpurple.13'
-                                                    fontWeight="semibold"
-                                                    textAlign={'left'}
-                                                    px={'4px'}
-                                                >
-                                                    Social Media Link
-                                                </Text>
-                                            </Link>
-                                        </Box>
-                                    </MenuItem>
-
-                                    </Box>
-                                </MenuList>
-
-                            </Menu>
+                                {logicEmailMemo}
+                                </Box>
+                            </HStack>
                         </Box>
-                        {/*{requestWalletArr[0] === walletAccount ?*/}
-                            <Link
-                                href="#"
-                                color='pmpurple.13'
-                                fontSize="md"
-                                me="10px"
-                                _hover={{color: "#9c7e9c"}}
-                            >
-                                <HStack>
-                                    <Icon as={MdOutlineQrCode}/>
-                                    <Text fontSize="sm" color='pmpurple.13' fontWeight="semibold">
-                                        NFI QR Code: comming soon
-                                    </Text>
-                                </HStack>
-
-                            </Link>
-                            {/*:*/}
-                            <Text
-                                fontSize="md"
-                                color='pmpurple.13'
-                                fontWeight="bold"
-                                me="10px"
-                            >
-                                NFI QR code:
-                            </Text>
-                        {/*}*/}
+                        <SocialMedia/>
+                        {/*{logicQRCodeMemo}*/}
                     </Flex>
                 </Stack>
             </Flex>
-            <VStack direction={'row'} justify={'center'} spacing={6}
-                // border="2px solid "
-                // borderColor='red'
+            <Flex
+                align="center"
+                direction={{sm: "column", md: "row"}}
+                w={{sm: "100%"}}
+                //textAlign={'right'}
+                bg={'transparent'}
+                //border="2px solid purple"
+                m={"0px"}
+                p={'0px'}
+                maxWidth="100%"
+                h="100%"
+                justify={'right'}
             >
-                <Flex
-                    direction={{sm: "column", lg: "row"}}
-                    w={{sm: "100%", md: "50%", lg: "auto"}}
-                    mx={'22px'}
-                    // border="2px solid "
-                    // borderColor='blue'
-                >
-                    <Button
-                        // border="2px solid "
-                        //borderColor='blue'
-                        p="0px" bg="transparent" _hover={{bg: "none"}}
-                    >
-                        <Flex
-                            align="center"
-                            w={'100%'}
-                            bg="hsla(0,0%,100%,.3)"
-                            borderRadius="15px"
-                            justifyContent="center"
-                            mt={'0px'}
-                            py="12px"
-                            px="14px"
-                            mx={'0px'}
-                            boxShadow="inset 0 0 1px 1px hsl(0deg 0% 100% / 90%), 0 20px 27px 0 rgb(0 0 0 / 5%)"
-                            border="1px solid gray.500"
-                            cursor="pointer"
-                            _hover={{
-                                transform: 'translateY(4px)',
-                                //boxShadow: 'md',
-                            }}
-                        >
-                            <Icon as={FaCube} me="6px"/>
-                            <Text fontSize="sm" color='pmpurple.13' fontWeight="bold">
-                                {/*TODO: when I click on this button I want it to route me to the validations page*/}
-                                <Link as={ReachLink} to={'/validate'} _hover={{textDecor: 'none'}}>
-                                    {paramsWalletAcc.length === 0 && paramsAddressHasIdentityBoolBC === false && requestStructUsingParamsFromBC.walletAccount.length === 0 ?
-                                        <Text fontSize={'18px'} color={'red.600'} letterSpacing={'1px'}
-                                              textShadow={'#F7FAFC 0px 0px 10px'}>
-                                            Non-Registered Wallet Account
-                                        </Text>
-                                        :
-                                        <Tooltip hasArrow label='NFI Transaction Hash'
-                                                 bg='pmpurple.4' color='pmpurple.13'>
-                                            {requestReceiptUsingParams.transactionHash}
-                                        </Tooltip>
 
-                                    }
-                                </Link>
-                            </Text>
-                        </Flex>
-                    </Button>
-                </Flex>
-                <HStack spacing={'34px'}>
-                    <Stack spacing={'0px'} align={'center'}>
-                        <Text fontWeight={600}>57</Text>
-                        <Tooltip hasArrow label='Total received Validations from other Blockchain accounts'
-                                 bg='pmpurple.4' color='pmpurple.13'>
-                            <Text fontSize={'sm'} color={'pmpurple.11'}>
-                                Validations
-                            </Text>
-                        </Tooltip>
-                    </Stack>
-                    <Stack spacing={0} align={'center'}>
-                        <Text fontWeight={600}>23k</Text>
-                        <Tooltip hasArrow label='Total Mentions about this PaperMaster' bg='pmpurple.4'
-                                 color='pmpurple.13'>
-                            <Text fontSize={'sm'} color={'pmpurple.11'}>
-                                Mentions
-                            </Text>
-                        </Tooltip>
-                    </Stack>
-                    <Stack spacing={0} align={'center'}>
-                        <Text fontWeight={600}>23k</Text>
-                        <Tooltip hasArrow label='Total reports made about PaperMaster' bg='pmpurple.4'
-                                 color='pmpurple.13'>
-                            <Text fontSize={'sm'} color={'pmpurple.11'}>
-                                Reported
-                            </Text>
-                        </Tooltip>
-                    </Stack>
-                    <Stack spacing={0} align={'center'}>
-                        <Text fontWeight={600}>3k</Text>
-                        <Tooltip hasArrow
-                                 label='Number of Validations this PaperMaster has given to other Blockchain accounts'
-                                 bg='pmpurple.4' color='pmpurple.13'>
-                            <Text fontSize={'sm'} color={'pmpurple.11'}>
-                                Given Validations
-                            </Text>
-                        </Tooltip>
-                    </Stack>
-                </HStack>
-            </VStack>
+                <VStack direction={'row'} justify={'right'} spacing={6}
+                    //border="2px solid purple"
+                >
+                        <Button
+                            //border="2px solid purple"
+                            p="0px" bg="transparent" _hover={{bg: "none"}}
+
+                        >
+                            <Flex
+                                align="right"
+                                w={'100%'}
+                                bg="hsla(0,0%,100%,.3)"
+                                borderRadius="15px"
+                                justifyContent="right"
+                                mt={'0px'}
+                                py="12px"
+                                px="14px"
+                                mx={'0px'}
+                                boxShadow="inset 0 0 1px 1px hsl(0deg 0% 100% / 90%), 0 20px 27px 0 rgb(0 0 0 / 5%)"
+                                border="1px solid gray.500"
+                                cursor="pointer"
+                                _hover={{
+                                    transform: 'translateY(4px)',
+                                    //boxShadow: 'md',
+                                }}
+                            >
+                                {logicTransactionHashMemo}
+                            </Flex>
+                        </Button>
+
+                    <HStack spacing={'34px'}>
+                        <Stack spacing={'0px'} align={'center'}>
+                            <Text fontWeight={600}>57</Text>
+                            <Tooltip hasArrow label='Total received Validations from other Blockchain accounts'
+                                     bg='pmpurple.4' color='pmpurple.13'>
+                                <Text fontSize={'sm'} color={'pmpurple.11'}>
+                                    Validations
+                                </Text>
+                            </Tooltip>
+                        </Stack>
+                        <Stack spacing={0} align={'center'}>
+                            <Text fontWeight={600}>23k</Text>
+                            <Tooltip hasArrow label='Total Mentions about PaperMaster' bg='pmpurple.4'
+                                     color='pmpurple.13'>
+                                <Text fontSize={'sm'} color={'pmpurple.11'}>
+                                    Mentions
+                                </Text>
+                            </Tooltip>
+                        </Stack>
+                        <Stack spacing={0} align={'center'}>
+                            <Text fontWeight={600}>23k</Text>
+                            <Tooltip hasArrow label='Total reports made about PaperMaster' bg='pmpurple.4'
+                                     color='pmpurple.13'>
+                                <Text fontSize={'sm'} color={'pmpurple.11'}>
+                                    Reported
+                                </Text>
+                            </Tooltip>
+                        </Stack>
+                        <Stack spacing={0} align={'center'}>
+                            <Text fontWeight={600}>3k</Text>
+                            <Tooltip hasArrow
+                                     label='Number of Validations PaperMaster has given to other Blockchain accounts'
+                                     bg='pmpurple.4' color='pmpurple.13'>
+                                <Text fontSize={'sm'} color={'pmpurple.11'}>
+                                    Validations Given
+                                </Text>
+                            </Tooltip>
+                        </Stack>
+                    </HStack>
+                </VStack>
+            </Flex>
         </Flex>
     )
 };

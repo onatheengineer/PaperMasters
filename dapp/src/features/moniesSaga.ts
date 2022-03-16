@@ -19,3 +19,5 @@ function* withdrawSaga(){
 function* getBalanceSaga(){
 
 };
+
+export function* watchMoniesSaga() {}

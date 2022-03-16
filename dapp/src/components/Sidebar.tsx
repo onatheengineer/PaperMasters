@@ -4,7 +4,7 @@ import PMLogo from '../assets/PMGIMPResized.png';
 import { AiOutlineFileSearch } from "react-icons/ai";
 import { RiFileSearchLine } from "react-icons/ri";
 import { BiHomeHeart, BiBookmarkHeart } from 'react-icons/bi';
-import { IoMdCheckmarkCircleOutline, IoMdAttach,  } from 'react-icons/io';
+import { IoMdCheckmarkCircleOutline, IoMdAttach } from 'react-icons/io';
 import {
     IconButton,
     Box,
@@ -61,7 +61,9 @@ import {SiSololearn} from "react-icons/si";
 import {useAppSelector} from "../app/hooks";
 import identity from "./pages/Identity";
 import Test from "./pages/Test";
-import {accountsArr} from "../features/RequestWalletSlice";
+import {accountsArr} from "../features/UserWalletSlice";
+import {addressHasIdentityBC} from "../features/IdentityPageUseParamsSlice";
+import Report from "./pages/Report";
 
 
 interface InterfaceNavItem {
@@ -113,7 +115,8 @@ export const NavItem: FC<InterfaceNavItem> = ({ icon, title, active,
 
 export const Sidebar: FC<InterfaceSidebar>= ({icon, profileName} ) => {
 
-    const tokenIDtoIdentityStruct = useAppSelector((state) => state.minted.tokenIDtoIdentityStruct);
+    const addressHasIdentity = useAppSelector((state) => state.minted.addressHasIdentity);
+
 
     const location = useLocation();
     const navigate = useNavigate();
@@ -334,12 +337,16 @@ export const Sidebar: FC<InterfaceSidebar>= ({icon, profileName} ) => {
 
                     <Route path={'/identity/:walletAcc'} element={<Identity/>}/>
 
-                    <Route path={'/register'} element={<Register/>}/>
+                    {addressHasIdentity ?
+                        <Route path={'/register'} element={<Navigate replace to="/search" />}/>
+                        :
+                        <Route path={'/register'} element={<Register/>}/>
+                    }
 
 
                     <Route path={'/attach'} element={<Attach/>}/>
                     <Route path={'/validate'} element={<Validate/>}/>
-                    <Route path={'/report'} element={<Search/>}/>
+                    <Route path={'/report'} element={<Report/>}/>
                     <Route path={'/analytics'} element={<Analytics/>}/>
                     <Route path={'/search'} element={<Search/>}/>
                     <Route path={'/learn'} element={<Learn/>}/>

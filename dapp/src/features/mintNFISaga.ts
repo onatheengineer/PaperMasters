@@ -1,7 +1,7 @@
 import { call, put, takeEvery, delay, all, takeLatest, select} from 'redux-saga/effects';
 import Web3 from "web3";
 import axios from "axios";
-import RegisterSlice, {accountsArr, requestAccountsAsyncAction, statusOfArr} from "./RequestWalletSlice";
+import RegisterSlice, {accountsArr, requestAccountsAsyncAction, statusOfArr} from "./UserWalletSlice";
 import {
     mintNFIAsyncAction,
     mintSucceededSuccessful,

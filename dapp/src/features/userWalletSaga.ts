@@ -6,8 +6,8 @@ import {
     putWalletInDBAction,
     putWalletInDBStatus,
     statusOfArr, getAllReceiptFromDBAction, getOneReceiptFromDBAction, getAllReceiptFromDB, getOneReceiptFromDB,
-} from "./RequestWalletSlice";
-import {requestAccountsAsyncAction} from "./RequestWalletSlice";
+} from "./UserWalletSlice";
+import {requestAccountsAsyncAction} from "./UserWalletSlice";
 import axios from "axios";
 import {useParams} from "react-router-dom";
 
@@ -20,7 +20,7 @@ const statusOfArrArr = (state: any) => state.register.status;
 const requestWalletArr = (state: any) => state.register.accounts;
 
 
-function* requestAccountsSaga() {
+function* userWalletSaga() {
     yield put(statusOfArr("loading"));
     try {
         const web3 = new Web3(Web3.givenProvider);
@@ -97,8 +97,8 @@ function* getOneReceiptFromDBSaga(actionObject: any): any {
 };
 
 
-export function* watchRequestAccountsSaga() {
-    yield takeEvery(requestAccountsAsyncAction.type, requestAccountsSaga);
+export function* watchUserWalletSaga() {
+    yield takeEvery(requestAccountsAsyncAction.type, userWalletSaga);
     yield takeEvery(putWalletInDBAction.type, putWalletInDBSaga);
     yield takeEvery(getAllWalletFromDBAction.type, getAllWalletFromDBSaga);
     yield takeEvery(getOneWalletFromDBAction.type, getOneWalletFromDBSaga);

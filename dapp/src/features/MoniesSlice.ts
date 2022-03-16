@@ -18,7 +18,7 @@ const initialState: FeeState = {
     supportPMDonation: 0,
 };
 
-const FeesNFISlice = createSlice( {
+const MoniesSlice = createSlice( {
    name: 'fees',
    initialState,
     reducers: {
@@ -43,7 +43,7 @@ const FeesNFISlice = createSlice( {
     },
 });
 
-export const { totalDepositsToContract, currentMintFee, totalDonationsToPM } = FeesNFISlice.actions;
+export const { totalDepositsToContract, currentMintFee, totalDonationsToPM } = MoniesSlice.actions;
 
 export const totalDepositsToContractAsyncAction = createAction<{}>('DEPOSIT_TO_CONTRACT_SAGA');
 export const currentMintFeeAsyncAction = createAction<{}>('BASE_MINT_FEE_SAGA');

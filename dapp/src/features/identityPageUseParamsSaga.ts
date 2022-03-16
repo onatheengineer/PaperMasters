@@ -22,7 +22,7 @@ import {
 } from "./MintedNFISlice";
 import Web3 from "web3";
 import MintABI from "../abiFiles/PaperMastersNFI.json";
-import {getOneReceiptFromDB, getOneWalletFromDB} from "./RequestWalletSlice";
+import {getOneReceiptFromDB, getOneWalletFromDB} from "./UserWalletSlice";
 import {createAction} from "@reduxjs/toolkit";
 
 const web3 = new Web3(Web3.givenProvider);

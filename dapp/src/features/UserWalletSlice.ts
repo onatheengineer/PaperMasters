@@ -59,7 +59,7 @@ const initialState: RegisterState = {
         },
 };
 
-const RequestWalletSlice = createSlice ({
+const UserWalletSlice = createSlice ({
     name: 'register',
     initialState,
     reducers: {
@@ -88,8 +88,8 @@ const RequestWalletSlice = createSlice ({
     }
 });
 
-console.log(RequestWalletSlice);
-export const { accountsArr, statusOfArr, putWalletInDBStatus, getAllWalletFromDB, getOneWalletFromDB, getAllReceiptFromDB, getOneReceiptFromDB } = RequestWalletSlice.actions;
+console.log(UserWalletSlice);
+export const { accountsArr, statusOfArr, putWalletInDBStatus, getAllWalletFromDB, getOneWalletFromDB, getAllReceiptFromDB, getOneReceiptFromDB } = UserWalletSlice.actions;
 
 export const requestAccountsAsyncAction = createAction("REQUEST_ACCOUNTS_ACTION_SAGA");
 export const putWalletInDBAction = createAction("PUT_WALLET_IN_DB_SAGA");
@@ -98,6 +98,6 @@ export const getOneWalletFromDBAction = createAction("GET_ONE_WALLET_IN_DB_SAGA"
 export const getAllReceiptFromDBAction = createAction("GET_ALL_RECEIPT_IN_DB_SAGA");
 export const getOneReceiptFromDBAction = createAction("GET_ONE_RECEIPT_IN_DB_SAGA");
 
-export default RequestWalletSlice.reducer;
+export default UserWalletSlice.reducer;
 
 

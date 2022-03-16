@@ -43,7 +43,7 @@ import {useAppDispatch, useAppSelector} from "../../app/hooks";
 import PMLogo from '../../assets/PMGIMPResized.png';
 import Logo from '../../assets/Logo';
 import {ColorChangeHandler, ColorResult, SketchPicker, GithubPicker, RGBColor} from 'react-color';
-import {requestAccountsAsyncAction} from "../../features/RequestWalletSlice";
+import {requestAccountsAsyncAction} from "../../features/UserWalletSlice";
 import {mintNFIAsyncAction, gasForMintNFIAsyncAction, mintingError} from "../../features/MintNFISlice";
 import mintNFI from "../../abiFiles/PaperMastersNFI.json";
 import {call} from "redux-saga/effects";
@@ -848,7 +848,11 @@ useEffect(()=>{
                             {/*need to deal with: is it minting successful or is it already minded*/}
                             <ModalHeader fontWeight="bold" >
                                 {mintErrorReason}
-                                Minting Successful! / You've already minted, one identity per account number</ModalHeader>
+
+
+                                Minting Successful! /
+
+                                You've already minted, one identity per account number</ModalHeader>
                             <ModalCloseButton/>
                             <ModalBody pb={6}>
                                 <Text mb="1rem">

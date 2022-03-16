@@ -7,3 +7,17 @@ import Web3 from "web3";
 function* pauseSaga(){
 
 };
+
+function* setBaseURISaga(){
+
+};
+
+
+function* tokenURISaga(){
+
+};
+
+
+function* totalSupplySaga(){
+
+};

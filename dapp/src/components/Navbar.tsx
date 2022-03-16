@@ -34,7 +34,7 @@ import {IoMdCheckmarkCircleOutline} from "react-icons/io";
 import {FiTrendingUp} from "react-icons/fi";
 import Web3 from "web3";
 import { useAppSelector, useAppDispatch } from '../app/hooks';
-import RegisterSlice, {accountsArr, requestAccountsAsyncAction, statusOfArr} from '../features/RequestWalletSlice';
+import RegisterSlice, {accountsArr, requestAccountsAsyncAction, statusOfArr} from '../features/UserWalletSlice';
 import detectEthereumProvider from "@metamask/detect-provider";
 
 export const SparklyComponent = () => (

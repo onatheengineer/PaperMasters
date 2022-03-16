@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction, createAction } from "@reduxjs/toolkit";
-import {accountDictionaryInterface} from "./RequestWalletSlice";
+import {accountDictionaryInterface} from "./UserWalletSlice";
 //TODO: change the BCReceipt types to the ones that actually be of the correct type
 
 export interface BCReceiptInterface {
@@ -10,7 +10,7 @@ export interface BCReceiptInterface {
     tokenID: string,
     timeStamp: string
     contractFee: string,
-    identityStruct: [],
+    identityStruct: any[],
 }
 
 

@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction, createAction } from "@reduxjs/toolkit";
-import {accountDictionaryInterface} from "./RequestWalletSlice";
+import {accountDictionaryInterface} from "./UserWalletSlice";
 import {tokenIDtoIdentityStructInterface} from "./MintedNFISlice";
 import {BCReceiptInterface} from "./AccountSlice";
 

@@ -29,7 +29,7 @@ import {
     getAllReceiptFromDBAction,
     getAllWalletFromDBAction,
     putWalletInDBStatus
-} from "../../features/RequestWalletSlice";
+} from "../../features/UserWalletSlice";
 import AvatarNFI from "../AvatarNFI";
 
 
@@ -101,13 +101,14 @@ const ExpandedComponent: FC<ExpanderComponentProps<DataRow>> = ({ data }) => {
 };
 
 export const Search: FC=()=> {
-    const requesterConnectedUserAccountsArr = useAppSelector((state) => state.register.accounts);
+    const requestConnectedUserAccountsArr = useAppSelector((state) => state.register.accounts);
     const addressHasIdentityBool = useAppSelector((state) => state.minted.addressHasIdentity);
     const tokenIDToIdentity = useAppSelector((state) => state.minted.tokenIDtoIdentityStruct);
     const getAllWalletFromDB = useAppSelector((state) => state.register.getAllWalletFromDB);
     const getOneWalletFromDB = useAppSelector((state) => state.register.getOneWalletFromDB);
     const getAllReceiptFromDB = useAppSelector((state) => state.register.getAllReceiptFromDB);
     const getOneReceiptFromDB = useAppSelector((state) => state.register.getOneReceiptFromDB);
+    const getDBAccountDictionary = useAppSelector((state) => state.account.getDBAccountDictionary);
 
     const [filterText, setFilterText] = useState<string>('');
     const [searchWalletAccount, setWalletAccount] = useState<string>('');
@@ -130,7 +131,7 @@ export const Search: FC=()=> {
     useEffect(() => {
         dispatch(getAllWalletFromDBAction());
         dispatch(getAllReceiptFromDBAction());
-    }, []);
+    }, [requestConnectedUserAccountsArr, getDBAccountDictionary]);
 
     const rowsTable = useMemo(() => {
         const receiptDictionary: any = {};
@@ -330,12 +331,11 @@ export const Search: FC=()=> {
             flex='auto'
             w={'100%'}
             p={'16px'}
-
         >
             <Box
-                border={'1px'}
-                borderStyle={"solid"}
-                borderColor={'pmpurple.13'}
+                // border={'1px'}
+                // borderStyle={"solid"}
+                // borderColor={'pmpurple.13'}
             >
                 <DataTable
                     title="Non-Fungible-Identities"
@@ -351,8 +351,9 @@ export const Search: FC=()=> {
                     subHeader={true}
                     subHeaderComponent={subHeaderComponentMemo}
                     persistTableHead
-                    paginationPerPage={20}
+                    paginationPerPage={12}
                     striped={true}
+                    highlightOnHover={true}
                     //selectableRows
                 />
             </Box>
