@@ -65,6 +65,10 @@ export const SocialMedia:FC<socialMediaInterface>=()=> {
             <HStack
             spacing={4}
             >
+                <IconLinkComponent
+                    hrefLink={'https://papermasters.io'}>
+                    <Icon as={openseaIcon}/>
+                </IconLinkComponent>
 
                 <IconLinkComponent
                     hrefLink={'https://papermasters.io'}>
@@ -79,11 +83,6 @@ export const SocialMedia:FC<socialMediaInterface>=()=> {
                 <IconLinkComponent
                     hrefLink={'https://papermasters.io'}>
                     <Icon as={FaLinkedin}/>
-                </IconLinkComponent>
-
-                <IconLinkComponent
-                    hrefLink={'https://papermasters.io'}>
-                    <Icon as={openseaIcon}/>
                 </IconLinkComponent>
 
                 <IconLinkComponent

@@ -24,7 +24,7 @@ import {MdOutlineColorLens} from "react-icons/md";
 import AvatarNFI from "../AvatarNFI";
 import bgImage from '../../assets/legoLavendarheadercroped.png'
 import {FormEvent, useEffect, useMemo, useState} from "react";
-import {Mentions} from "../identity/Mentions";
+import NewMention from "../identity/mentions/NewMention";
 import {AiOutlineComment} from "react-icons/ai";
 import { createBreakpoints } from '@chakra-ui/theme-tools';
 import {filledInputClasses} from "@mui/material";
@@ -76,7 +76,15 @@ export const Identity:FC<Interface>=()=> {
     })
 
     return (
-        <>
+        <Box
+
+            //borderRadius='15px'
+            px='0px'
+            display='flex'
+            flexDirection='column'
+            justifyContent='center'
+            //align='center'
+        >
 
             {paramsWalletAcc !== undefined && walletAcc !== 'undefined' && walletAcc !== "" ?
 
@@ -196,7 +204,7 @@ export const Identity:FC<Interface>=()=> {
                                 </Box>
 
                                 <Box w='33%' borderRadius='15px' bg='white' p="16px" px="24px">
-                                    <Mentions/>
+                                    <NewMention/>
                                 </Box>
                             </HStack>
                             <Projects/>
@@ -206,7 +214,7 @@ export const Identity:FC<Interface>=()=> {
                 :
                 <ModalForIdentNoUseParams/>
             }
-        </>
+        </Box>
     )
 };
 

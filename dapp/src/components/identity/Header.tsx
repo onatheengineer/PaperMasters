@@ -145,7 +145,8 @@ export const Header:FC<Interface>=()=> {
     const logicTransactionHashMemo = useMemo(() => {
         return (
             <>
-                <Icon as={FaCube} me="6px"/>
+
+                <Icon as={FaCube} me="6px" />
                 <Text fontSize="sm" color='pmpurple.13' fontWeight="bold">
                     {/*TODO: when I click on this button I want it to route me to the registration & validations page*/}
                     <Link as={ReachLink} to={'/validate'} _hover={{textDecor: 'none'}}>
@@ -296,7 +297,11 @@ export const Header:FC<Interface>=()=> {
     return (
 
         <Flex
-            direction={{sm: "column", md: "row"}}
+            direction={{ sm: "column", md: "row" }}
+            mx='1.5rem'
+            maxH='330px'
+            w={{ sm: "90%", xl: "95%" }}
+            align='center'
             left={'10px'}
             right={'10px'}
             //maxH="330px"
@@ -307,6 +312,7 @@ export const Header:FC<Interface>=()=> {
             border="2px solid "
             borderColor='pmpurple.13'
             p="18px"
+            pr={'38px'}
             borderRadius="20px"
             transform={{
                 sm: "translateY(45%)",
@@ -317,20 +323,21 @@ export const Header:FC<Interface>=()=> {
             <DrawerComponent/>
 
             <Flex
+                mb={{ sm: "10px", md: "0px" }}
+                direction={{ sm: "column", md: "row" }}
+                w={{ sm: "100%" }}
+                textAlign={{ sm: "center", md: "start" }}
                 align="center"
-                direction={{sm: "column", md: "row"}}
-                w={{sm: "100%"}}
-                //textAlign={{sm: "center", md: "start"}}
                 bg={'transparent'}
                 //border="2px solid yellow"
                 m={"0px"}
                 p={'0px'}
-            >
+>
                 <Avatar
                     me={{md: "22px"}}
                     src='' //this is the profile image
-                    w="98px"
-                    h="98px"
+                    w="90px"
+                    h="90px"
                     mb={"6px"}
                     borderRadius="10px"
                 />
@@ -348,7 +355,7 @@ export const Header:FC<Interface>=()=> {
                             my={'0px'}
                         >
                             <HStack
-                                spacing={8}
+                                spacing={4}
                             >
                                 <Box
                                     //border={'1px solid blue'}
@@ -366,7 +373,7 @@ export const Header:FC<Interface>=()=> {
 
                                 <Box
                                     //border={'1px solid blue'}
-                                    pt={'4px'}
+                                    pt={'6px'}
                                     my={'0px'}
                                 >
                                 {logicEmailMemo}

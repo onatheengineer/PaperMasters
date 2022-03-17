@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {FC, useRef, useState} from "react";
+import {FC, useEffect, useRef, useState} from "react";
 import moment from 'moment';
 import {
     Avatar, AvatarGroup, Box, Button, Flex, Grid, GridItem, Icon, Image, Link, MenuItem,
@@ -15,9 +15,10 @@ import {
     DrawerCloseButton, FormLabel, InputGroup, InputLeftAddon, InputRightAddon, Input, Heading, Spacer,
 } from "@chakra-ui/react";
 import {AiOutlineComment} from "react-icons/ai";
-import {useAppSelector} from "../../app/hooks";
+import {useAppDispatch, useAppSelector} from "../../../app/hooks";
 import {useParams} from "react-router-dom";
-
+import {paramsWalletAccAction} from "../../../features/IdentityPageUseParamsSlice";
+import ReplyMentions from "./ReplyMentions";
 
 
 
@@ -25,7 +26,7 @@ interface Interface {
 
 }
 
-export const Mentions: FC<Interface>=()=> {
+export const NewMention: FC<Interface>=()=> {
 
     const [resize, setResize] = useState('horizontal')
     const {isOpen, onOpen, onClose} = useDisclosure()
@@ -34,15 +35,19 @@ export const Mentions: FC<Interface>=()=> {
     const {walletAccount} = useParams();
     const dateFormated = moment().format('MMM DD YYYY, hh:mm:ss a');
 
+    const {walletAcc} = useParams();
+    const dispatch = useAppDispatch();
+
+    useEffect(() => {
+        if (walletAcc !== undefined && walletAcc !== 'undefined' && walletAcc !== "") {
+            dispatch(paramsWalletAccAction(walletAcc));
+        }
+    }, [walletAcc]);
 
     return (
 
         <HStack>
-            <Box p="5px">
-                <Text fontSize="18px" color={'pmpurple.13'} fontWeight="bold">
-                    Mentions
-                </Text>
-            </Box>
+            <ReplyMentions/>
 
             <Spacer/>
             {filledAccountsArr[0] !== walletAccount ?
@@ -109,9 +114,9 @@ export const Mentions: FC<Interface>=()=> {
                                                 borderColor={'pmpurple.8'}
                                                 bg={'pmpurple.2'}
                                                 color='pmpurple.15'
-                                                value={filledAccountsArr[0]}
+                                                value={walletAcc}
                                                 id='username'
-                                                placeholder={filledAccountsArr[0]}
+                                                placeholder={walletAcc}
                                             />
                                             :
                                             <Input
@@ -119,7 +124,7 @@ export const Mentions: FC<Interface>=()=> {
                                                 border={'1px solid'}
                                                 borderColor={'pmpurple.6'}
                                                 bg={'pmpurple.2'}
-                                                value={filledAccountsArr[0]}
+                                                value={walletAcc}
                                                 id='username'
                                                 placeholder='Please Connect your Wallet'
                                             />
@@ -196,12 +201,12 @@ export const Mentions: FC<Interface>=()=> {
 
                 </Box>
 
-
                 :
                 null
             }
         </HStack>
+
     )
 };
 
-export default Mentions;
+export default NewMention;
