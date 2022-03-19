@@ -13,7 +13,9 @@ import {FaDiscord, FaFacebook, FaInstagram, FaLinkedin, FaPlus, FaTwitch, FaTwit
 import {ChevronDownIcon} from "@chakra-ui/icons";
 import {BsFillPersonLinesFill} from "react-icons/bs";
 import {openseaIcon} from "../../assets/icons/openseaIcon";
+import {openseaIcon2} from "../../assets/icons/openseaIcon2";
 import {IconType} from "react-icons";
+import {openseaIcon3} from "../../assets/icons/openseaIcon3";
 
 interface iconLinkInterface{
     children: any,
@@ -64,22 +66,22 @@ export const SocialMedia:FC<socialMediaInterface>=()=> {
         >
             <HStack
             spacing={4}
+            alignItems={'center'}
             >
-                <IconLinkComponent
-                    hrefLink={'https://papermasters.io'}>
-                    <Icon as={openseaIcon}/>
-                </IconLinkComponent>
-
+                <Stack direction='row' spacing={2}>
                 <IconLinkComponent
                     hrefLink={'https://papermasters.io'}>
                     <Icon as={FaDiscord}/>
                 </IconLinkComponent>
-
+                </Stack>
                 <IconLinkComponent
                     hrefLink={'https://papermasters.io'}>
                     <Icon as={FaTwitter}/>
                 </IconLinkComponent>
-
+                <IconLinkComponent
+                    hrefLink={'https://papermasters.io'}>
+                    <Icon as={openseaIcon}/>
+                </IconLinkComponent>
                 <IconLinkComponent
                     hrefLink={'https://papermasters.io'}>
                     <Icon as={FaLinkedin}/>
@@ -99,7 +101,6 @@ export const SocialMedia:FC<socialMediaInterface>=()=> {
                     hrefLink={'https://papermasters.io'}>
                     <Icon as={FaFacebook}/>
                 </IconLinkComponent>
-
                 <IconLinkComponent
                     hrefLink={'https://papermasters.io'}>
                     <Icon as={FaYoutube}/>

@@ -24,7 +24,7 @@ import {MdOutlineColorLens} from "react-icons/md";
 import AvatarNFI from "../AvatarNFI";
 import bgImage from '../../assets/legoLavendarheadercroped.png'
 import {FormEvent, useEffect, useMemo, useState} from "react";
-import NewMention from "../identity/mentions/NewMention";
+import NewMention from "../identity/mentions/Mentions";
 import {AiOutlineComment} from "react-icons/ai";
 import { createBreakpoints } from '@chakra-ui/theme-tools';
 import {filledInputClasses} from "@mui/material";

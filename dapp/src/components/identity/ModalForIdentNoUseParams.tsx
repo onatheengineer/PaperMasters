@@ -33,8 +33,8 @@ export const ModalForIdentNoUseParams:FC<Interface>=()=> {
 
     useEffect(()=>{
         onOpen()
-        setTimeout(()=>{navigate('/search', { replace: true })
-            console.log('setTimeout')},10000)
+        //setTimeout(()=>{navigate('/search', { replace: true })
+            //console.log('setTimeout')},10000)
     }, [])
 
     return (

@@ -8,6 +8,8 @@ import rootSaga from "../features/rootSagas";
 import logger from 'redux-logger';
 import accountSlice from "../features/AccountSlice";
 import {watchIdentUseParamsSaga} from "../features/identityPageUseParamsSaga";
+import mentionsSlice from "../features/MentionsSlice";
+
 
 
 const sagaMiddleware = createSaga();
@@ -20,6 +22,7 @@ export const store = configureStore({
     minted: mintedSlice,
     account: accountSlice,
     identUseParams: identUseParamsSlice,
+    mentions: mentionsSlice,
   },
 });
 

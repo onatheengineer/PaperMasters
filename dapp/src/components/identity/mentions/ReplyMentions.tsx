@@ -38,6 +38,10 @@ export const ReplyMentions: FC<Interface>=()=> {
     const dateFormated = moment().format('MMM DD YYYY, hh:mm:ss a');
     const {isOpen, onOpen, onClose} = useDisclosure()
 
+    const filledAccountsArr = useAppSelector((state) => state.register.accounts);
+
+
+
     const handleClick = (newSize: any) => {
         // setSize(newSize)
         onOpen()
@@ -85,12 +89,11 @@ export const ReplyMentions: FC<Interface>=()=> {
                                 border={'1px solid'}
                                 borderColor={'pmpurple.6'}
                                 bg={'pmpurple.2'}
-                                h={'400px'}
+                                h={'100px'}
                                 id='desc' ref={firstField}
                                 placeholder='Reply to a Mention'
                             />
                         </Box>
-
                         <Box>
 
                             <Input
@@ -126,7 +129,6 @@ export const ReplyMentions: FC<Interface>=()=> {
                         > Submit </Button>
 
                     </DrawerFooter>
-
 
                 </DrawerContent>
             </Drawer>

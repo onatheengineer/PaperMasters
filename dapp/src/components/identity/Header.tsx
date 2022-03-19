@@ -300,11 +300,10 @@ export const Header:FC<Interface>=()=> {
             direction={{ sm: "column", md: "row" }}
             mx='1.5rem'
             maxH='330px'
-            w={{ sm: "90%", xl: "95%" }}
+            //w={{ sm: "90%", xl: "95%" }}
             align='center'
-            left={'10px'}
-            right={'10px'}
-            //maxH="330px"
+            left={'5px'}
+            right={'5px'}
             justifyContent={{sm: "center", md: "space-between"}}
             backdropFilter="saturate(100%) blur(50px)"
             position="absolute"

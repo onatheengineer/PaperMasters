@@ -2,35 +2,13 @@ import * as React from 'react';
 import type {FC} from 'react';
 import {Link as ReachLink, useParams} from "react-router-dom";
 import {
-    Avatar,
-    AvatarGroup,
     Box,
     Button,
-    Flex,
-    Grid,
-    GridItem,
     Icon,
-    Image,
-    Link,
-    MenuItem,
     Stack,
-    Switch,
-    Text,
-    Select,
-    Heading,
-    FormControl,
     FormLabel,
     InputGroup,
     Input,
-    InputRightAddon,
-    InputLeftElement,
-    Popover,
-    PopoverTrigger,
-    Portal,
-    PopoverContent,
-    PopoverBody,
-    Modal,
-    VStack,
     HStack,
     Tooltip,
     Drawer,
@@ -39,8 +17,7 @@ import {
     DrawerCloseButton,
     DrawerHeader,
     DrawerBody,
-    RadioGroup,
-    Radio, Textarea, DrawerFooter, useDisclosure, Center, Menu, MenuButton, MenuList, MenuDivider,
+    Textarea, DrawerFooter, useDisclosure,
 } from "@chakra-ui/react";
 import {useEffect, useMemo, useReducer, useRef, useState} from "react";
 import {useAppDispatch, useAppSelector} from "../../app/hooks";
@@ -144,10 +121,13 @@ export const DrawerComponent:FC<Interface>=()=> {
                     position="absolute"
                 >
                     <Tooltip hasArrow label='Edit Account Profile' placement={'left'} border={'1px solid #694b69'}
-                             borderRadius={'5px'} bg='pmpurple.3' color='pmpurple.13'  >
+                             borderRadius={'3px'} bg='pmpurple.3' color='pmpurple.13' m={'-14px'} >
                         <Button
                             onClick={onOpen}
-                            color={'pmpurple.15'}>
+                            color={'pmpurple.15'}
+                            mr={'-6px'}
+                            mt={'-4px'}
+                        >
                             <FaRegEdit/>
                         </Button>
                     </Tooltip>

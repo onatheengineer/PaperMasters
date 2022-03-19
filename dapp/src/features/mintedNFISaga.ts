@@ -32,7 +32,7 @@ function* addressHasIdentityBoolSaga(actionObject: any):any {
         if (alreadyMintedBool) {
             yield call(addressToTokenSaga);
         }
-        console.log(`have I already minted?: ${alreadyMintedBool}`);
+        console.log('have I alrady minted?:',alreadyMintedBool);
     } catch (addressHasTokenBoolFAILED: any) {
         yield put(mintedNFI('failed'))
         yield put(mintedNFIErrorMessage(addressHasTokenBoolFAILED.message))
