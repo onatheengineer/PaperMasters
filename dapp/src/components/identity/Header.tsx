@@ -16,31 +16,10 @@ import {
     Stack,
     Switch,
     Text,
-    Select,
-    Heading,
-    FormControl,
-    FormLabel,
-    InputGroup,
-    Input,
-    InputRightAddon,
-    InputLeftElement,
-    Popover,
-    PopoverTrigger,
-    Portal,
-    PopoverContent,
-    PopoverBody,
-    Modal,
     VStack,
     HStack,
     Tooltip,
-    Drawer,
-    DrawerOverlay,
-    DrawerContent,
-    DrawerCloseButton,
-    DrawerHeader,
-    DrawerBody,
-    RadioGroup,
-    Radio, Textarea, DrawerFooter, useDisclosure, Center, Menu, MenuButton, MenuList, MenuDivider,
+  useDisclosure
 } from "@chakra-ui/react";
 import {useEffect, useMemo, useReducer, useRef, useState} from "react";
 import {useAppDispatch, useAppSelector} from "../../app/hooks";
@@ -62,7 +41,7 @@ function initialState(paramsRequestAccountDictionary:any) {
         return {
             ownerName: "",
             ownerEmail: "",
-            ownerDescription: "Mathematics may not teach us how to add love or subtract hate, but it gives us every reason to hope that every problem has a solution.",
+            ownerDescription: "",
             aliasProfileLinks: ""
         };
 }
@@ -141,77 +120,78 @@ export const Header:FC<Interface>=()=> {
     const firstField = useRef<HTMLTextAreaElement>(null)
     const [resize, setResize] = useState('horizontal')
 
-
     const logicTransactionHashMemo = useMemo(() => {
-        return (
-            <>
-
-                <Icon as={FaCube} me="6px" />
-                <Text fontSize="sm" color='pmpurple.13' fontWeight="bold">
-                    {/*TODO: when I click on this button I want it to route me to the registration & validations page*/}
-                    <Link as={ReachLink} to={'/validate'} _hover={{textDecor: 'none'}}>
-                        {paramsWalletAcc.length !== 0 && paramsAddressHasIdentityBoolBC === false && requestStructUsingParamsFromBC.walletAccount.length === 0 ?
-                            <Text fontSize={'16px'} color={'red.600'} letterSpacing={'1px'}
-                                  textShadow={'#F7FAFC 0px 0px 10px'}>
-                                Non-Registered Wallet Account
-                            </Text>
-                            : requestReceiptUsingParams !== undefined ?
-                                <Tooltip hasArrow label='NFI Transaction Hash'
-                                         bg='pmpurple.4' color='pmpurple.13'>
-                                    {requestReceiptUsingParams.transactionHash}
-                                </Tooltip>
-                                : null
-                        }
-                    </Link>
+        console.log(paramsWalletAcc, paramsAddressHasIdentityBoolBC, requestReceiptUsingParams)
+        if (paramsWalletAcc.length > 0 && paramsAddressHasIdentityBoolBC && requestReceiptUsingParams !== undefined) {
+            if(requestReceiptUsingParams.transactionHash !== undefined){
+                if(requestReceiptUsingParams.transactionHash.length){
+                    return (
+                        <Text fontSize={'16px'} color={'red.600'} letterSpacing={'1px'}
+                              textShadow={'#F7FAFC 0px 0px 10px'}>
+                            {requestReceiptUsingParams.transactionHash}
+                        </Text>
+                    )
+                }
+            }
+        }
+        if (paramsAddressHasIdentityBoolBC ){
+            return (
+                <Text fontSize={'16px'} color={'pmpurple.13'} letterSpacing={'1px'}
+                          textShadow={'#F7FAFC 0px 0px 10px'}>
+                    Registered Wallet Account
                 </Text>
-            </>
-        )
-    }, [paramsWalletAcc, paramsAddressHasIdentityBoolBC, requestStructUsingParamsFromBC, requestReceiptUsingParams])
+            )
+        }
+            return (
+                <Text fontSize={'16px'} color={'red.600'} letterSpacing={'1px'}
+                          textShadow={'#F7FAFC 0px 0px 10px'}>
+                    Non-Registered Wallet Account
+                </Text>
+            )
+    }, [paramsWalletAcc, paramsAddressHasIdentityBoolBC, requestReceiptUsingParams])
 
     const logicNameMemo = useMemo(() => {
-        console.log('state:', state)
-        console.log('requestReceiptUsingParams:', requestReceiptUsingParams)
-        console.log('paramsWalletAcc:', paramsWalletAcc)
-
-        if(state !== undefined){
-            if(state.ownerName.length > 0){
-                return(
-                        state.ownerName
+        console.log(paramsRequestAccountDictionary, paramsWalletAcc, paramsAddressHasIdentityBoolBC, requestReceiptUsingParams)
+        if(paramsAddressHasIdentityBoolBC && requestReceiptUsingParams !== undefined && paramsRequestAccountDictionary.ownerName !== undefined ) {
+            if(paramsRequestAccountDictionary.ownerName.length > 0 ) {
+                return (
+                    paramsRequestAccountDictionary['ownerName']
                 )
             }
         }
-        if( paramsAddressHasIdentityBoolBC && requestReceiptUsingParams !== undefined ){
-            if(requestReceiptUsingParams.hasOwnProperty('identityStruct') && requestReceiptUsingParams['identityStruct'].length > 0 && requestReceiptUsingParams['identityStruct'][1].length > 0 ){
-               return(
-                    requestReceiptUsingParams.identityStruct[1].split("|||")[0]
-               )
+        if(paramsAddressHasIdentityBoolBC && requestReceiptUsingParams !== undefined ){
+            if(requestReceiptUsingParams.hasOwnProperty('identityStruct') && requestReceiptUsingParams['identityStruct'].length > 0 && requestReceiptUsingParams['identityStruct'][1].length > 0 ) {
+                if(requestReceiptUsingParams.identityStruct[1].split("|||")[0].length > 0 ){
+                    return (
+                        requestReceiptUsingParams.identityStruct[1].split("|||")[0]
+                    )}
             }
         }
         return (
-                paramsWalletAcc
+            paramsWalletAcc
         );
-    }, [state.ownerName, paramsWalletAcc, paramsAddressHasIdentityBoolBC, requestReceiptUsingParams])
+
+    }, [paramsRequestAccountDictionary, paramsWalletAcc, paramsAddressHasIdentityBoolBC, requestReceiptUsingParams])
 
 
     const logicEmailMemo = useMemo(() => {
 
-        if(state !== undefined){
-            if(state.ownerEmail.length > 0){
+        if(paramsAddressHasIdentityBoolBC && requestReceiptUsingParams !== undefined && paramsRequestAccountDictionary.ownerEmail !== undefined ){
                 return(
                     <Mailto
-                        email={state.ownerEmail}
+                        email={paramsRequestAccountDictionary['ownerEmail']}
                         subject="Hello PaperMaster"
                         body="Nice to meet you PaperMaster!">
                         <MdOutlineEmail fontSize={'20px'} color={'#5c415c'}/>
                     </Mailto>
                 )
             }
-        }
+
         if(paramsAddressHasIdentityBoolBC && requestReceiptUsingParams !== undefined ){
-            if(requestReceiptUsingParams.hasOwnProperty('identityStruct') && requestReceiptUsingParams['identityStruct'].length > 0 && requestReceiptUsingParams['identityStruct'][2].length > 0 ) {
+            if(requestReceiptUsingParams.hasOwnProperty('identityStruct') && requestReceiptUsingParams['identityStruct'].length > 0 && requestReceiptUsingParams['identityStruct'][3].length > 0 ) {
                 return (
                     <Mailto
-                        email={requestReceiptUsingParams.identityStruct[2].split("|||")[0]}
+                        email={requestReceiptUsingParams.identityStruct[3].split("|||")[0]}
                         subject="Hello PaperMaster"
                         body="Nice to meet you PaperMaster!">
                         <MdOutlineEmail fontSize={'20px'} color={'#5c415c'}/>
@@ -222,7 +202,7 @@ export const Header:FC<Interface>=()=> {
         return (
             <MdOutlineEmail fontSize={'20px'} color={'#5c415c'}/>
         );
-    }, [state.ownerName, paramsWalletAcc, paramsAddressHasIdentityBoolBC, requestReceiptUsingParams])
+    }, [paramsWalletAcc, paramsAddressHasIdentityBoolBC, requestReceiptUsingParams])
 
 
     // const logicQRCodeMemo = useMemo(()=>{
@@ -255,12 +235,6 @@ export const Header:FC<Interface>=()=> {
     //
     // )}, [paramsWalletAcc, paramsAddressHasIdentityBoolBC, requestStructUsingParamsFromBC, requestReceiptUsingParams] )
 
-    const logicDescription = useMemo(() => {
-        return (
-            <>
-            </>
-        )
-    }, [state.ownerDescription, paramsWalletAcc, paramsAddressHasIdentityBoolBC, requestStructUsingParamsFromBC, requestReceiptUsingParams])
 
     const logicAliasProfileLinks = useMemo(() => {
         return (
@@ -291,19 +265,15 @@ export const Header:FC<Interface>=()=> {
     }, [state.emailValidationNotification, paramsWalletAcc, paramsAddressHasIdentityBoolBC, requestStructUsingParamsFromBC, requestReceiptUsingParams])
 
 
-    if (state === undefined) {
-        return (null);
-    }
+
     return (
 
         <Flex
             direction={{ sm: "column", md: "row" }}
-            mx='1.5rem'
-            maxH='330px'
             //w={{ sm: "90%", xl: "95%" }}
             align='center'
-            left={'5px'}
-            right={'5px'}
+            left={'10px'}
+            right={'10px'}
             justifyContent={{sm: "center", md: "space-between"}}
             backdropFilter="saturate(100%) blur(50px)"
             position="absolute"
@@ -424,7 +394,16 @@ export const Header:FC<Interface>=()=> {
                                     //boxShadow: 'md',
                                 }}
                             >
-                                {logicTransactionHashMemo}
+
+                                    <Icon as={FaCube} me="6px" />
+                                    <Text fontSize="sm" color='pmpurple.13' fontWeight="bold">
+                                        {/*TODO: when I click on this button I want it to route me to the registration & validations page*/}
+                                        <Link as={ReachLink} to={'/validate'} _hover={{textDecor: 'none'}}>
+                                            {logicTransactionHashMemo}
+                                        </Link>
+                                    </Text>
+
+
                             </Flex>
                         </Button>
 
@@ -470,6 +449,7 @@ export const Header:FC<Interface>=()=> {
                 </VStack>
             </Flex>
         </Flex>
+
     )
 };
 

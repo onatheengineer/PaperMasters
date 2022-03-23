@@ -37,7 +37,7 @@ function initialState(paramsRequestAccountDictionary:any) {
     return {
         ownerName: "",
         ownerEmail: "",
-        ownerDescription: "Mathematics may not teach us how to add love or subtract hate, but it gives us every reason to hope that every problem has a solution.",
+        ownerDescription: "",
         aliasProfileLinks: ""
     };
 }

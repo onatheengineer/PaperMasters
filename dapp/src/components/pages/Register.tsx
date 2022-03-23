@@ -200,12 +200,14 @@ useEffect(()=>{
         <Flex
             w={"100%"}
             align="center"
+            //border={'2px solid blue'}
+            px={'68px'}
+            py={'20px'}
         >
             <Box
                 w={"50%"}
                 h={"98%"}
-                border={'2px'}
-                borderStyle={'solid'}
+                border={'2px solid'}
                 borderColor={'pmpurple.13'}
                 mx={{xl: '8px'}}
                 borderRadius='15px'
@@ -790,13 +792,16 @@ useEffect(()=>{
 
                 <Divider py={'0px'} mb="54px" color={'pmpurple.8'}/>
 
-          <AvatarNFI name={name} nameColor={ColorRGBToString(colorTextName)} email={email} emailColor={ColorRGBToString(colorTextEmail)}
+          <AvatarNFI name={name} nameColor={ColorRGBToString(colorTextName)}
+                     email={email} emailColor={ColorRGBToString(colorTextEmail)}
                      profession={profession} professionColor={ColorRGBToString(colorTextProfession)}
                      organization={organization} organizationColor={ColorRGBToString(colorTextOrganization)}
                      slogan={slogan} sloganColor={ColorRGBToString(colorTextSlogan)}
-                     website={website} websiteColor={ColorRGBToString(colorTextWebsite)} uniqueYou={uniqueYou}
-                     uniqueYouColor={ColorRGBToString(colorTextUniqueYou)} avatarBG={ColorRGBToString(bgRGB)}
-                     originDate={originDate} accountNumber={accountsArr[0]}
+                     website={website} websiteColor={ColorRGBToString(colorTextWebsite)}
+                     uniqueYou={uniqueYou} uniqueYouColor={ColorRGBToString(colorTextUniqueYou)}
+                     avatarBG={ColorRGBToString(bgRGB)}
+                     originDate={originDate}
+                     accountNumber={accountsArr[0]}
           />
 
                    <Center>

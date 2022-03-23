@@ -331,10 +331,10 @@ export const Search: FC=()=> {
             flex='auto'
             w={'100%'}
             p={'16px'}
+            //border={'1px solid blue'}
         >
             <Box
-                // border={'1px'}
-                // borderStyle={"solid"}
+                // border={'1px solid'}
                 // borderColor={'pmpurple.13'}
             >
                 <DataTable

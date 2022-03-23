@@ -15,6 +15,7 @@ import {
     DrawerCloseButton, FormLabel, InputGroup, InputLeftAddon, InputRightAddon, Input, Heading, Spacer,
 } from "@chakra-ui/react";
 import {AiOutlineComment} from "react-icons/ai";
+import {BsCircleFill} from "react-icons/bs";
 import {useAppDispatch, useAppSelector} from "../../../app/hooks";
 import {useParams} from "react-router-dom";
 import Sparkle from "react-sparkle";
@@ -24,6 +25,7 @@ import {
     allMentionsAction,
     singleMentionAction
 } from '../../../features/MentionsSlice'
+import DisplayMentions from "./DisplayMentions";
 
 function initialState():mentionsStateDictionaryInterface {
     return {
@@ -64,7 +66,7 @@ interface Interface {
 
 }
 
-export const Mention: FC<Interface>=()=> {
+export const Mentions: FC<Interface>=()=> {
 
     const [resize, setResize] = useState('horizontal')
     const {isOpen, onOpen, onClose} = useDisclosure()
@@ -74,7 +76,6 @@ export const Mention: FC<Interface>=()=> {
 
     const {walletAcc} = useParams();
     console.log('this is walletAccparamsfromMentions:', walletAcc)
-
 
     const dateFormated = moment().format('MMM DD YYYY, hh:mm:ss a');
 
@@ -93,7 +94,7 @@ export const Mention: FC<Interface>=()=> {
     }, [walletAcc]);
 
     useEffect(() => {
-        if (filledAccountsArr.length > 0 ) {
+        if (filledAccountsArr.length > 0) {
             mentionsDictionary({
                 type: 'connectedWallet',
                 payload: filledAccountsArr[0]
@@ -131,229 +132,214 @@ export const Mention: FC<Interface>=()=> {
     // }
     //
 
-    return (
 
-        <HStack>
-            <Box p="5px"
-                 border={'2px solid blue'}
+    return (
+        <Box>
+            <Box p="0px"
+                 m={'0px'}
+                //border={'2px solid blue'}
+                 h={'100%'}
+                 alignItems={'left'}
             >
                 <Button
                     bg={'pmpurple.2'}
                     border={'1px solid'}
-                    borderColor={'pmpurple.4'}
-                    mt={3}
+                    borderColor={'pmpurple.3'}
+                    mb={'10px'}
                     //value={scrollBehavior}
                     //onChange={setScrollBehavior}
                     leftIcon={<AiOutlineComment/>}
                     color={'pmpurple.13'}
+                    px={'10px'}
                     onClick={() => handleClick(isOpen)}
                 >
-                    <Text fontSize="18px" color={'pmpurple.13'} fontWeight="bold">
+                    <Text fontSize="16px" color={'pmpurple.13'} fontWeight="bold">
                         Mentions
                     </Text>
                 </Button>
+                <DisplayMentions/>
             </Box>
             <Box>
-                <VStack>
-                {allMentionsArr.map((mention)=>{
-                    return(
-                        <Box>
-                            {mention.timeStamp}<br/>
-                            {mention.fromWallet}<br/>
-                            {mention.messageBody}
-                        </Box>
-                    )
-                }
-                )}
-                </VStack>
-            </Box>
+                <Drawer
+                    size='xl'
+                    isOpen={isOpen}
+                    placement='right'
+                    initialFocusRef={firstField}
+                    onClose={onClose}
+                >
+                    <DrawerOverlay/>
+                    <DrawerContent>
+                        <DrawerCloseButton/>
+                        <DrawerHeader
+                            color='pmpurple.15'
+                            borderBottomWidth='1px'
+                        >
+                            Mentions
+                            <Sparkle
+                                color="#694b69"
+                                count={20}
+                                minSize={7}
+                                maxSize={12}
+                                overflowPx={0}
+                                fadeOutSpeed={30}
+                                flicker={false}
+                                //newSparkleOnFadeOut={false}
+                                //flickerSpeed="fast"
+                            />
+                        </DrawerHeader>
 
+                        <DrawerBody>
+                            <DisplayMentions/>
 
-            {filledAccountsArr[0] !== walletAcc ?
-                <Box>
-                    <Drawer
-                        size='xl'
-                        isOpen={isOpen}
-                        placement='right'
-                        initialFocusRef={firstField}
-                        onClose={onClose}
-                    >
-                        <DrawerOverlay/>
-                        <DrawerContent>
-                            <DrawerCloseButton/>
-                            <DrawerHeader
-                                color='pmpurple.15'
-                                borderBottomWidth='1px'>
-                                Mentions
-                                <Sparkle
-                                    color="#694b69"
-                                    count={20}
-                                    minSize={7}
-                                    maxSize={12}
-                                    overflowPx={0}
-                                    fadeOutSpeed={30}
-                                    flicker={false}
-                                    //newSparkleOnFadeOut={false}
-                                    //flickerSpeed="fast"
-                                />
-                            </DrawerHeader>
+                            <Stack spacing='24px'>
+                                {filledAccountsArr.length !== 0 ?
 
-                            <DrawerBody>
+                                    <Box
+                                        flex={'max-content'}
+                                        mt={'18px'}
+                                        //border={'2px solid blue'}
+                                        position={'sticky'}
+                                    >
+                                        <HStack>
 
-                                <Stack spacing='24px'>
-
-                                    {filledAccountsArr.length !== 0 ?
-                                        <Box>
-
-                                            <HStack>
-
-                                                <RadioGroup
-                                                    defaultValue='3'
-                                                    mt={'28px'}
-                                                            mb={'0px'}>
-                                                    <Stack direction='row' spacing={5}>
-                                                        <Radio
-                                                            isChecked = {(state.radioType === 1)}
-                                                            //color='pmpurple.15'
-                                                           // bg={'pmgreen.15'}
-                                                               colorScheme='green'
-                                                               //value='Positive'
-                                                               //value={state.radioType}
-                                                             //value={1}
-                                                               // onClick={() => {
-                                                               //     //state.radioType === 1;
-                                                               // }}
-                                                               onChange={(e) => {
-                                                                   mentionsDictionary({
-                                                                       type: 'radioType',
-                                                                       payload: 1
-                                                                   })
-                                                               }}
-                                                        >Postive</Radio>
-                                                        <Radio
-                                                            isChecked = {(state.radioType === 0)}
-                                                            //color='pmpurple.15'
-                                                            //bg={'red.600'}
-                                                            colorScheme='red'
-                                                               //value={0}
-                                                            //value={state.radioType}
-                                                            //value = {0}
-                                                            onChange={(e) => {
-                                                                mentionsDictionary({
-                                                                    type: 'radioType',
-                                                                    payload: 0
-                                                                })
-                                                            }}
-                                                        >Negative</Radio>
-                                                        <Radio
-                                                            isChecked = {(state.radioType === -1)}
-                                                           // color='pmpurple.15'
-                                                           // bg={'pmpurple.6'}
-                                                               colorScheme='blue'
-                                                               //value={state.radioType}
-                                                               //value = {-1}
-                                                               onChange={(e) => {
-                                                                   mentionsDictionary({
-                                                                       type: 'radioType',
-                                                                       payload: -1
-                                                                   })
-                                                               }}
-                                                        >Neutral</Radio>
-                                                    </Stack>
-                                                </RadioGroup>
-                                            </HStack>
-
-
-                                            <Textarea
-                                                mt={'0px'}
-                                                color='pmpurple.13'
-                                                border={'1px solid'}
-                                                borderColor={'pmpurple.6'}
-                                                bg={'pmpurple.2'}
-                                                h={'100px'}
-                                                id='message body'
-                                                ref={firstField}
-                                                placeholder='Give a Mention'
-                                                value={state.messageBody}
-                                                onChange={(e) => {
-                                                    mentionsDictionary({
-                                                        type: 'messageBody',
-                                                        payload: e.currentTarget.value
-                                                    })
-                                                }}
-                                            />
-                                        </Box>
-
-                                        :
-
-                                        <Box
-                                            color='pmpurple.15'
-                                            border={'2px solid'}
-                                            borderColor={'pmpurple.6'}
-                                            borderRadius={'5px'}
-                                            bg={'pmpurple.2'}
-                                            id='username'
-                                        >
-                                            <Text
-                                                p={'12px'}
+                                            <RadioGroup
+                                                defaultValue='3'
                                             >
-                                                Please connect your wallet account.
+                                                <Stack direction='row' spacing={5}>
+                                                    <Radio
+                                                        isChecked={(state.radioType === 1)}
+                                                        //color='pmpurple.15'
+                                                        // bg={'pmgreen.15'}
+                                                        colorScheme='green'
+                                                        //value='Positive'
+                                                        //value={state.radioType}
+                                                        //value={1}
+                                                        // onClick={() => {
+                                                        //     //state.radioType === 1;
+                                                        // }}
+                                                        onChange={(e) => {
+                                                            mentionsDictionary({
+                                                                type: 'radioType',
+                                                                payload: 1
+                                                            })
+                                                        }}
+                                                    >Postive</Radio>
+                                                    <Radio
+                                                        isChecked={(state.radioType === 0)}
+                                                        //color='pmpurple.15'
+                                                        //bg={'red.600'}
+                                                        colorScheme='red'
+                                                        //value={0}
+                                                        //value={state.radioType}
+                                                        //value = {0}
+                                                        onChange={(e) => {
+                                                            mentionsDictionary({
+                                                                type: 'radioType',
+                                                                payload: 0
+                                                            })
+                                                        }}
+                                                    >Negative</Radio>
+                                                    <Radio
+                                                        isChecked={(state.radioType === -1)}
+                                                        // color='pmpurple.15'
+                                                        // bg={'pmpurple.6'}
+                                                        colorScheme='blue'
+                                                        //value={state.radioType}
+                                                        //value = {-1}
+                                                        onChange={(e) => {
+                                                            mentionsDictionary({
+                                                                type: 'radioType',
+                                                                payload: -1
+                                                            })
+                                                        }}
+                                                    >Neutral</Radio>
+                                                </Stack>
+                                            </RadioGroup>
+                                        </HStack>
 
+                                        <Textarea
+                                            mt={'0px'}
+                                            color='pmpurple.13'
+                                            border={'1px solid'}
+                                            borderColor={'pmpurple.6'}
+                                            bg={'pmpurple.2'}
+                                            h={'100px'}
+                                            id='message body'
+                                            ref={firstField}
+                                            placeholder='Give a Mention'
+                                            value={state.messageBody}
+                                            onChange={(e) => {
+                                                mentionsDictionary({
+                                                    type: 'messageBody',
+                                                    payload: e.currentTarget.value
+                                                })
+                                            }}
+                                        />
+                                    </Box>
 
-                                            </Text>
-                                        </Box>
-                                    }
+                                    :
 
-                                    {/*<Box>*/}
-                                    {/*    <Input*/}
-                                    {/*        isDisabled={true}*/}
-                                    {/*        border={'1px solid'}*/}
-                                    {/*        borderColor={'pmpurple.8'}*/}
-                                    {/*        bg={'pmpurple.2'}*/}
-                                    {/*        color='pmpurple.15'*/}
-                                    {/*        value={dateFormated}*/}
-                                    {/*        id='username'*/}
-                                    {/*        placeholder={'Date'}/>*/}
+                                    <Box
+                                        color='pmpurple.15'
+                                        border={'2px solid'}
+                                        borderColor={'pmpurple.6'}
+                                        borderRadius={'5px'}
+                                        bg={'pmpurple.2'}
+                                        id='username'
+                                        mt={'18px'}
+                                    >
+                                        <Text
+                                            p={'14px'} fontSize={'16px'} fontWeight={'bold'} color={'pmpurple.13'}
+                                        >
+                                            Please connect your wallet account.
 
-                                </Stack>
-                            </DrawerBody>
+                                        </Text>
+                                    </Box>
+                                }
 
-                            <DrawerFooter borderTopWidth='1px'>
+                                {/*<Box>*/}
+                                {/*    <Input*/}
+                                {/*        isDisabled={true}*/}
+                                {/*        border={'1px solid'}*/}
+                                {/*        borderColor={'pmpurple.8'}*/}
+                                {/*        bg={'pmpurple.2'}*/}
+                                {/*        color='pmpurple.15'*/}
+                                {/*        value={dateFormated}*/}
+                                {/*        id='username'*/}
+                                {/*        placeholder={'Date'}/>*/}
+
+                            </Stack>
+                        </DrawerBody>
+
+                        <DrawerFooter borderTopWidth='1px'>
+                            <Button
+                                variant='outline'
+                                color='pmpurple.12'
+                                border={'1px solid'}
+                                borderColor={'pmpurple.6'}
+                                bg={'pmpurple.2'}
+                                mr={3}
+                                onClick={onClose}>
+                                Cancel
+                            </Button>
+                            {filledAccountsArr.length !== 0 ?
                                 <Button
-                                    variant='outline'
                                     color='pmpurple.12'
                                     border={'1px solid'}
                                     borderColor={'pmpurple.6'}
-                                    bg={'pmpurple.2'}
-                                    mr={3}
-                                    onClick={onClose}>
-                                    Cancel
-                                </Button>
-                                {filledAccountsArr.length !== 0 ?
-                                    <Button
-                                        color='pmpurple.12'
-                                        border={'1px solid'}
-                                        borderColor={'pmpurple.6'}
-                                        bg={'pmpurple.4'}
-                                        onClick={submitMentionsHandler}
+                                    bg={'pmpurple.4'}
+                                    onClick={submitMentionsHandler}
 
-                                    > Submit </Button>
-                                    : null}
+                                > Submit </Button>
+                                : null}
 
-                            </DrawerFooter>
-                        </DrawerContent>
-                    </Drawer>
-
-                </Box>
-
-                :
-                <Divider
-                    pt={'52px'}
-                />
-            }
-        </HStack>
-
+                        </DrawerFooter>
+                    </DrawerContent>
+                </Drawer>
+            </Box>
+            <Divider pt={'0px'}/>
+        </Box>
     )
 };
 
-export default Mention;
+export default Mentions;

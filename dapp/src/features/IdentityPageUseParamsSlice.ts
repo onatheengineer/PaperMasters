@@ -3,17 +3,6 @@ import {accountDictionaryInterface} from "./UserWalletSlice";
 import {tokenIDtoIdentityStructInterface} from "./MintedNFISlice";
 import {BCReceiptInterface} from "./AccountSlice";
 
-interface requestWalletAccDBDictionaryIndentHeaderInterface {
-    walletAccount: string,
-    walletAccountLink: string,
-    linkToFinishedAvatar: "",
-    ownerName: "",
-    ownerEmail: "",
-    ownerDescription: "",
-    aliasProfileLinks: [],
-    emailValidationNotification: false,
-    emailReportNotification: false
-}
 
 interface IdentityPageUseParamsSliceInterface{
     paramsWalletAcc: string,

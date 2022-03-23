@@ -16,6 +16,8 @@ import { createBreakpoints } from '@chakra-ui/theme-tools'
 import {getReceiptDBConnectUserAction} from "./features/AccountSlice";
 import Identity from "./components/pages/Identity";
 import detectEthereumProvider from '@metamask/detect-provider';
+import Search from "./components/pages/Search";
+import Register from "./components/pages/Register";
 
 
 function App() {
@@ -58,7 +60,7 @@ function App() {
 
     return (
         <Box
-            border={'2px solid'} borderColor={"pmpurple.8"}
+            border={'2px solid'} borderColor={"pmpurple.8"} bg={'pmpurple.6'}
         >
             <Navbar/>
             <Sidebar/>

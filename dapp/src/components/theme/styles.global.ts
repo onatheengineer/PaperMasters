@@ -13,7 +13,7 @@ export const global = {
 
     body: {
         w: '100%',
-        bg: 'pmpurple.8',
+        bg: 'pmpurple.2',
         //backdropFilter: "saturate(100%) blur(50px)",
     },
 

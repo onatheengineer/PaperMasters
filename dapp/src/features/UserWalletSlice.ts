@@ -14,7 +14,6 @@ export interface IdentityDictionaryInterface{
     originDate: number;
 }
 
-
 export interface accountDictionaryInterface{
     walletAccount:string,
     walletAccountLink?: string,

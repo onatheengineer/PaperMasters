@@ -26,21 +26,16 @@ export const ValidationsReports:FC<Interface>=()=> {
 
     const filledAccountsArr = useAppSelector((state) => state.register.accounts);
 
-
-
     return(
-
-
-            <Heading p="12px 5px" mb="12px">
+            <Heading>
                 <Tabs isFitted variant='enclosed'>
-                    <TabList mb='1em' color={'pmpurple.13'}>
+                    <TabList color={'pmpurple.13'}>
                         <Tab>Validations</Tab>
                         <Tab>Reports</Tab>
                     </TabList>
                     <TabPanels>
                         <TabPanel>
-
-                            <Text textAlign={'left'} fontSize="sm" color={'pmpurple.8'} fontWeight="600" mb="20px">
+                            <Text textAlign={'left'} fontSize="sm" color={'pmpurple.8'} fontWeight="600" mb="12px">
                                 GIFTED BY ACCOUNT:
                             </Text>
                             <Flex align="center" mb="20px">
@@ -58,8 +53,7 @@ export const ValidationsReports:FC<Interface>=()=> {
 
                         </TabPanel>
                         <TabPanel>
-
-                            <Text textAlign={'left'} fontSize="sm" color={'pmpurple.8'} fontWeight="600" mb="20px">
+                            <Text textAlign={'left'} fontSize="sm" color={'pmpurple.8'} fontWeight="600" mb="12px">
                                 REPORTED BY ACCOUNT:
                             </Text>
                             <Flex align="center" mb="20px">

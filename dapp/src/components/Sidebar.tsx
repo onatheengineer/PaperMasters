@@ -2,42 +2,23 @@ import React, { ReactNode, ReactText, useState, useEffect } from 'react';
 import {Route, Routes, useLocation, useParams, useNavigate, Navigate} from 'react-router-dom';
 import PMLogo from '../assets/PMGIMPResized.png';
 import { AiOutlineFileSearch } from "react-icons/ai";
-import { RiFileSearchLine } from "react-icons/ri";
+import { GiFlowerPot } from "react-icons/gi";
 import { BiHomeHeart, BiBookmarkHeart } from 'react-icons/bi';
 import { IoMdCheckmarkCircleOutline, IoMdAttach } from 'react-icons/io';
 import {
     IconButton,
     Box,
-    CloseButton,
     Flex,
     Icon,
-    useColorModeValue,
     Link,
-    Drawer,
-    DrawerContent,
     Text,
-    useDisclosure,
-    BoxProps,
-    FlexProps,
     Heading,
     Menu,
     MenuButton,
-    MenuList,
     Divider,
-    Avatar, Button, MenuItem, MenuDivider,
+    Avatar,
 } from '@chakra-ui/react';
-import { FaPlug, FaSearch, FaFileAlt, FaLink, FaChartLine, FaBookmark, FaPaperclip, FaScroll,
-    FaUserCheck, FaQuestionCircle, FaConnectdevelop, FaServicestack } from "react-icons/fa";
-import {
-    FiHome,
-    FiTrendingUp,
-    FiCompass,
-    FiStar,
-    FiSettings,
-    FiMenu,
-    FiUser,
-    FiBriefcase,
-} from 'react-icons/fi';
+import {FiTrendingUp, FiMenu} from 'react-icons/fi';
 import { IconType } from 'react-icons';
 import type {FC} from 'react';
 import Register from "./pages/Register";
@@ -48,7 +29,6 @@ import {GiBookCover, GiBookmark, GiDiscussion, GiSuspicious} from "react-icons/g
 import {BsCalendar2Event} from "react-icons/bs";
 import Home from "./pages/Home";
 import Identity from "./pages/Identity";
-import Attach from "./pages/Attach";
 import CloudHWM from "./pages/CloudHWM";
 import ForumPages from "./pages/ForumPages";
 import YourPeople from "./pages/YourPeople";
@@ -60,9 +40,6 @@ import Security from "./pages/Security";
 import {SiSololearn} from "react-icons/si";
 import {useAppSelector} from "../app/hooks";
 import identity from "./pages/Identity";
-import Test from "./pages/Test";
-import {accountsArr} from "../features/UserWalletSlice";
-import {addressHasIdentityBC} from "../features/IdentityPageUseParamsSlice";
 import Report from "./pages/Report";
 
 
@@ -84,32 +61,33 @@ export const NavItem: FC<InterfaceNavItem> = ({ icon, title, active,
                                                   navItemSize, path} ) => {
 
     return (
-        <Flex
-            mt={30}
-            flexDir="column"
-            w="100%"
-            alignItems={navItemSize == "small" ? "center" : "flex-start"}
-        >
-            <Menu placement="right">
-                <Link
-                    as={ReachLink}
-                    to={path}
-                    backgroundColor={active ? "#e6dee6" : "none"}
-                    p={3}
-                    borderRadius={8}
-                    _hover={{ textDecor: 'none', backgroundColor: "#c1aec1" }}
-                    w={navItemSize ? "large" : "100%"}
-                >
-                    <MenuButton w="100%">
-                        <Flex >
-                            <Icon as={icon} fontSize="xl" color={"#694b69"}  />
-                            <Text ml={5} display={navItemSize == "small" ? "none" : "flex"}>{title}</Text>
-                        </Flex>
+            <Flex
+                mt={'28px'}
+                flexDir="column"
+                w="100%"
+                h={'100%'}
+                alignItems={navItemSize == "small" ? "center" : "flex-start"}
+            >
+                <Menu placement="right">
+                    <Link
+                        as={ReachLink}
+                        to={path}
+                        backgroundColor={active ? "#e6dee6" : "none"}
+                        p={3}
+                        borderRadius={8}
+                        _hover={{textDecor: 'none', backgroundColor: "#c1aec1"}}
+                        w={navItemSize ? "large" : "100%"}
+                    >
+                        <MenuButton w="100%">
+                            <Flex>
+                                <Icon as={icon} fontSize="xl" color={"#694b69"}/>
+                                <Text ml={5} display={navItemSize == "small" ? "none" : "flex"}>{title}</Text>
+                            </Flex>
 
-                    </MenuButton>
-                </Link>
-            </Menu>
-        </Flex>
+                        </MenuButton>
+                    </Link>
+                </Menu>
+            </Flex>
     )
 }
 
@@ -131,21 +109,18 @@ export const Sidebar: FC<InterfaceSidebar>= ({icon, profileName} ) => {
         console.log(location);
 
         const SidebarIdentity = [
-            <NavItem navItemSize={navSize} icon={BiBookmarkHeart} title="Register" path={'/register'}/>,
-            <NavItem navItemSize={navSize} icon={IoMdAttach} title="Attach NFTs to your NFI" path={'/attach'}/>,
-            <NavItem navItemSize={navSize} icon={IoMdCheckmarkCircleOutline} title="Validate NFI" path={'/validate'}/>,
             <NavItem navItemSize={navSize} icon={AiOutlineFileSearch} title="Search NFIs" path={'/search'}/>,
+            <NavItem navItemSize={navSize} icon={BiBookmarkHeart} title="Register" path={'/register'}/>,
+            <NavItem navItemSize={navSize} icon={IoMdCheckmarkCircleOutline} title="Validate NFI" path={'/validate'}/>,
             <NavItem navItemSize={navSize} icon={MdOutlineReport} title="Report NFI" path={'/report'}/>,
             <NavItem navItemSize={navSize} icon={MdOutlineWarningAmber} title="Report suss" path={'/forumPages'}/>,
             <NavItem navItemSize={navSize} icon={GiBookCover} title="Learn" path={'/learn'}/>,
             <NavItem navItemSize={navSize} icon={FiTrendingUp} title="Analytics" path={'/analytics'}/>,
-
         ]
 
         const SidebarSearch = [
             <NavItem navItemSize={navSize} icon={AiOutlineFileSearch} title="Search NFIs" path={'/search'}/>,
             <NavItem navItemSize={navSize} icon={BiBookmarkHeart} title="Register" path={'/register'}/>,
-            <NavItem navItemSize={navSize} icon={IoMdAttach} title="Attach NFTs to your NFI" path={'/attach'}/>,
             <NavItem navItemSize={navSize} icon={IoMdCheckmarkCircleOutline} title="Validate NFI" path={'/validate'}/>,
             <NavItem navItemSize={navSize} icon={MdOutlineReport} title="Report NFI" path={'/report'}/>,
             <NavItem navItemSize={navSize} icon={MdOutlineWarningAmber} title="Report suss" path={'/forumPages'}/>,
@@ -156,8 +131,6 @@ export const Sidebar: FC<InterfaceSidebar>= ({icon, profileName} ) => {
 
         const SidebarCommunityForum = [
             <NavItem navItemSize={navSize} icon={BiHomeHeart} title="Community Guidelines" path={'/forumPages'}/>,
-            <NavItem navItemSize={navSize} icon={GiDiscussion} title="Community Discussion" path={"/forumPages"}/>,
-            <NavItem navItemSize={navSize} icon={BsCalendar2Event} title="Community Events" path={'/forumPages'}/>,
             <NavItem navItemSize={navSize} icon={MdOutlineWarningAmber} title="Report Suspicious Activity"
                      path={'/forumPages'}/>,
 
@@ -167,7 +140,7 @@ export const Sidebar: FC<InterfaceSidebar>= ({icon, profileName} ) => {
             <NavItem navItemSize={navSize} icon={BiHomeHeart} title="News" path={'/news'}/>,
             <NavItem navItemSize={navSize} icon={BiHomeHeart} title="New Features" path={'/news'}/>,
             <NavItem navItemSize={navSize} icon={BiHomeHeart} title="Updated Features" path={'/news'}/>,
-            <NavItem navItemSize={navSize} icon={BiHomeHeart} title="Future Features" path={'/news'}/>,
+            <NavItem navItemSize={navSize} icon={GiFlowerPot} title="Future Features" path={'/news'}/>,
             <NavItem navItemSize={navSize} icon={BiHomeHeart} title="Project Feedback Forum" path={'/news'}/>,
         ]
 
@@ -184,7 +157,6 @@ export const Sidebar: FC<InterfaceSidebar>= ({icon, profileName} ) => {
         ]
 
         const SidebarSecurity = [
-
             <NavItem navItemSize={navSize} icon={FiTrendingUp} title="Analytics" path={'/analytics'}/>,
         ]
 
@@ -196,11 +168,10 @@ export const Sidebar: FC<InterfaceSidebar>= ({icon, profileName} ) => {
         switch (location.pathname) {
             case '/':
                 setNavItemRender(null);
-                setHeaderTitle("");
-                setHeaderText("");
+                //setHeaderTitle("");
+                //setHeaderText("");
                 break;
             case '/register':
-            case '/attach':
             case '/validate':
             case '/report':
                 setNavItemRender(SidebarIdentity);
@@ -210,7 +181,7 @@ export const Sidebar: FC<InterfaceSidebar>= ({icon, profileName} ) => {
             case '/search':
                 setNavItemRender(SidebarSearch);
                 setHeaderTitle("Search");
-                setHeaderText("sdfsdfssdfsddf");
+                //setHeaderText("sdfsdfssdfsddf");
                 break;
             case '/communityforum':
                 setNavItemRender(SidebarCommunityForum);
@@ -220,7 +191,7 @@ export const Sidebar: FC<InterfaceSidebar>= ({icon, profileName} ) => {
             case '/news':
                 setNavItemRender(SidebarNews);
                 setHeaderTitle("News");
-                setHeaderText("sdfsdfssdfsddf");
+                //setHeaderText("sdfsdfssdfsddf");
                 break;
             case '/yourpeople':
             case '/aboutus':
@@ -228,22 +199,22 @@ export const Sidebar: FC<InterfaceSidebar>= ({icon, profileName} ) => {
             case '/supportus':
                 setNavItemRender(SidebarYourPeople);
                 setHeaderTitle("Your People");
-                setHeaderText("sdfsdfssdfsddf");
+                //setHeaderText("sdfsdfssdfsddf");
                 break;
             case '/analytics':
                 setNavItemRender(SidebarAnalytics);
                 setHeaderTitle("Analytics");
-                setHeaderText("sdfsdfssdfsddf");
+                //setHeaderText("sdfsdfssdfsddf");
                 break;
             case '/security':
                 setNavItemRender(SidebarSecurity);
                 setHeaderTitle("Security");
-                setHeaderText("sdfsdfssdfsddf");
+                //setHeaderText("sdfsdfssdfsddf");
                 break;
             case '/learn':
                 setNavItemRender(SidebarLearn);
                 setHeaderTitle("Learn");
-                setHeaderText("sdfsdfssdfsddf");
+                //setHeaderText("sdfsdfssdfsddf");
                 break;
             default:
                 if (location.pathname.startsWith('/identity')) {
@@ -260,77 +231,83 @@ export const Sidebar: FC<InterfaceSidebar>= ({icon, profileName} ) => {
     }, [location, navSize]);
 
     return (
-        <Flex>
-            {navItemsRender == null ? null :
-                <Box
-                    // left="5"
-                    h="fill"
-                    backgroundColor='pmpurple.2'
-                    borderRight={'1px'}
-                    borderTop={'1px'}
-                    borderColor={'pmpurple.8'}
-                    // borderRadius={navSize == "small" ? "15px" : "30px"}
-                    w={navSize == "small" ? "90px" : "200px"}
-                    flexDir="column"
-                    justifyContent="space-between"
-                >
-                    <Flex
-                        p="5%"
-                        flexDir="column"
-                        w="100%"
-                        alignItems={navSize == "small" ? "center" : "flex-start"}
-                        as="nav"
-                    >
-                        <Heading textAlign="center" fontSize={'14px'} mt="8px" w='100%' fontWeight="bold">
-                            {headerTitle}
-                        </Heading>
-                        <Text mt="0px" mb="5px" align="center" w='100%' fontWeight="medium">
-                            <Text  >
-                                {headerText}
-                            </Text>
-                        </Text>
 
-                        <Divider display={navSize == "small" ? "none" : "flex"}/>
+        <Flex
+            //border ={'1px solid blue'}
+            w="100%"
+            h={'100%'}
+        >
+            {/*{navItemsRender == null ? null :*/}
+            {/*    <Box*/}
+            {/*        // left="5"*/}
+            {/*        h="100%"*/}
+            {/*        backgroundColor='pmpurple.2'*/}
+            {/*        borderRight={'1px'}*/}
+            {/*        borderTop={'1px'}*/}
+            {/*        borderColor={'red'}*/}
+            {/*        // borderRadius={navSize == "small" ? "15px" : "30px"}*/}
+            {/*        w={navSize == "small" ? "90px" : "200px"}*/}
+            {/*        flexDir="column"*/}
+            {/*        justifyContent="space-between"*/}
+            {/*    >*/}
+            {/*        <Flex*/}
+            {/*            as="nav"*/}
+            {/*            p="5%"*/}
+            {/*            flexDir="column"*/}
+            {/*            w="100%"*/}
+            {/*            h="100%"*/}
+            {/*            alignItems={navSize == "small" ? "center" : "flex-start"}*/}
+            {/*        >*/}
+            {/*            <Heading textAlign="center" fontSize={'18px'} mt="12px" w='100%' fontWeight="bold">*/}
+            {/*                {headerTitle}*/}
+            {/*            </Heading>*/}
+            {/*            <Text mt="0px" mb="5px" align="center" w='100%' fontWeight="medium">*/}
+            {/*                <Text  >*/}
+            {/*                    {headerText}*/}
+            {/*                </Text>*/}
+            {/*            </Text>*/}
 
-                        <IconButton
-                            color={'pmpurple.13'}
-                            background="none"
-                            mt={5}
-                            _hover={{background: 'none'}}
-                            icon={<FiMenu/>}
-                            aria-label='Options'
-                            onClick={() => {
-                                if (navSize == "small")
-                                    changeNavSize("large")
-                                else
-                                    changeNavSize("small")
-                            }}
-                        />
+            {/*            <Divider display={navSize == "small" ? "none" : "flex"}/>*/}
 
-                        {navItemsRender}
+            {/*            <IconButton*/}
+            {/*                color={'pmpurple.13'}*/}
+            {/*                background="none"*/}
+            {/*                mt={5}*/}
+            {/*                _hover={{background: 'none'}}*/}
+            {/*                icon={<FiMenu/>}*/}
+            {/*                aria-label='Options'*/}
+            {/*                onClick={() => {*/}
+            {/*                    if (navSize == "small")*/}
+            {/*                        changeNavSize("large")*/}
+            {/*                    else*/}
+            {/*                        changeNavSize("small")*/}
+            {/*                }}*/}
+            {/*            />*/}
 
-                        <Divider display={navSize == "small" ? "none" : "flex"}/>
+            {/*            {navItemsRender}*/}
 
-                        {/*//walletConnet useEffect state*/}
-
-                        <Flex mt={4} mb={4} align="center">
-                            <Avatar size="sm" src="avatar-1.jpg"/>
-                            <Flex flexDir="column" ml={4} display={navSize == "small" ? "none" : "flex"}>
-                                <Heading as="h3" size="sm">
-                                    {/*{profileName}*/}
-                                    ramonajenny
-                                </Heading>
-                                <Text color="gray">
-                                    PaperMaster
-                                </Text>
-                            </Flex>
-                        </Flex>
+            {/*            <Divider display={navSize == "small" ? "none" : "flex"}/>*/}
 
 
-                    </Flex>
-                </Box>
-            }
-            <Flex w={"100%"}>
+
+            {/*            <Flex mt={4} mb={4} align="center">*/}
+            {/*                <Avatar size="sm" src="avatar-1.jpg"/>*/}
+            {/*                <Flex flexDir="column" ml={4} display={navSize == "small" ? "none" : "flex"}>*/}
+            {/*                    <Heading as="h3" size="sm">*/}
+            {/*                        /!*{profileName}*!/*/}
+            {/*                        ramonajenny*/}
+            {/*                    </Heading>*/}
+            {/*                    <Text color="gray">*/}
+            {/*                        PaperMaster*/}
+            {/*                    </Text>*/}
+            {/*                </Flex>*/}
+            {/*            </Flex>*/}
+
+
+            {/*        </Flex>*/}
+            {/*    </Box>*/}
+            {/*}*/}
+
 
                 <Routes>
                     <Route path="/" element={<Home/>}/>
@@ -344,7 +321,6 @@ export const Sidebar: FC<InterfaceSidebar>= ({icon, profileName} ) => {
                     }
 
 
-                    <Route path={'/attach'} element={<Attach/>}/>
                     <Route path={'/validate'} element={<Validate/>}/>
                     <Route path={'/report'} element={<Report/>}/>
                     <Route path={'/analytics'} element={<Analytics/>}/>
@@ -353,13 +329,10 @@ export const Sidebar: FC<InterfaceSidebar>= ({icon, profileName} ) => {
                     <Route path={'/news'} element={<News/>}/>
                     <Route path={'/security'} element={<Security/>}/>
                     <Route path={'/CloudHWM'} element={<CloudHWM/>}/>
-
-                    <Route path={'/test'} element={<Test/>}/>
                     {/*<Route path={'/community'} element={ <ForumPages/>}/>*/}
                     <Route path={'/yourpeople'} element={<YourPeople/>}/>
                 </Routes>
             </Flex>
-        </Flex>
     )
 };
 

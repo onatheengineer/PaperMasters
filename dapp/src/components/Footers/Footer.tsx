@@ -68,7 +68,7 @@ export default function Footer(props: ButtonGroupProps) {
         <Box
             flex={'auto'}
             bg={'pmpurple.2'}
-            color={'pmpurple.10'}
+            color={'pmpurple.13'}
             borderTopWidth={1}
             borderStyle={'solid'}
             borderColor={'pmpurple.8'}>
@@ -80,7 +80,7 @@ export default function Footer(props: ButtonGroupProps) {
                        pl={16}
                        direction={{base: 'column', md: 'row'}}
                        justify={'center'}>
-                <SimpleGrid columns={6} spacing={14}>
+                <SimpleGrid columns={5} spacing={24}>
 
                     <Stack>
                         {/*<ListHeader ><img src={PMLogo}/></ListHeader>*/}
@@ -90,20 +90,19 @@ export default function Footer(props: ButtonGroupProps) {
                     </Stack>
                     <Stack>
                         <ListHeader>Services</ListHeader>
-                        <Link as={ReachLink} to="/">Authentic PM Identities</Link>
-                        <Link as={ReachLink} to="/">NFI Validation</Link>
-                        <Link as={ReachLink} to="/">Attach NFTs to NFIs</Link>
-                        <Link as={ReachLink} to="/">Search NFIs</Link>
-                        <Link as={ReachLink} to="/">Report NFI</Link>
+                        <Link as={ReachLink} to="/">Non-Fungible Identities</Link>
+                        <Link as={ReachLink} to="/">Validation</Link>
+                        <Link as={ReachLink} to="/">Search</Link>
+                        <Link as={ReachLink} to="/">Report</Link>
                         <Link as={ReachLink} to="/">CloudHWM</Link>
                     </Stack>
                     <Stack>
                         <ListHeader>Community Support</ListHeader>
                         <Link as={ReachLink} to="/">Learning Center</Link>
-                        <Link as={ReachLink} to="/">Community Discussion</Link>
-                        <Link as={ReachLink} to="/">Community Events</Link>
-                        <Link as={ReachLink} to="/">Report suspicious activity</Link>
+                        <Link as={ReachLink} to="/">Authentic PM Identities</Link>
                         <Link as={ReachLink} to="/">Community Guidelines</Link>
+                        <Link as={ReachLink} to="/">New & Updated Features</Link>
+                        <Link as={ReachLink} to="/">Future Stories</Link>
                     </Stack>
                     <Stack>
                         <ListHeader>Security</ListHeader>
@@ -113,19 +112,10 @@ export default function Footer(props: ButtonGroupProps) {
                         <Link as={ReachLink} to="/">Terms of Service</Link>
                     </Stack>
                     <Stack>
-                        <ListHeader>News</ListHeader>
-                        <Link as={ReachLink} to="/">New Features</Link>
-                        <Link as={ReachLink} to="/">Updated Features</Link>
-                        <Link as={ReachLink} to="/">Stories to come</Link>
-                        <Link as={ReachLink} to="/">Project Feedback Forum</Link>
-                    </Stack>
-                    <Stack>
                         <ListHeader>Your People</ListHeader>
                         <Link as={ReachLink} to="/Analytics">Analytics</Link>
                         <Link as={ReachLink} to="/AboutUs">About Us</Link>
-                        <Link as={ReachLink} to="/AboutUs">Contact Us</Link>
                         <Link as={ReachLink} to="/SupportProject">Support the Project</Link>
-                        <Link as={ReachLink} to="/SupportProject">PaperMaster Project Feedback</Link>
                         <Link as={ReachLink} to="/Logokit">Logo Kit</Link>
                     </Stack>
 
@@ -136,14 +126,15 @@ export default function Footer(props: ButtonGroupProps) {
                 bg={"white"}
                 // minH={'80px'}
                 // maxH={"120px"}
-                borderStyle={'solid'}
-                borderColor={'pmpurple.9'}>
+               // border={'1px solid'}
+                //borderColor={'pmpurple.9'}
+              >
                 <Container
                     as={Stack}
                     maxW={'7xl'}
                     py={4}
                     direction={{base: 'column', md: 'row'}}
-                    spacing={4}
+                    spacing={8}
                     justify={{md: 'space-between'}}
                     align={'center'}>
                     {/*<Copyright />*/}
