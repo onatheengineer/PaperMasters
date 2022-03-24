@@ -9,7 +9,6 @@ import {
 import Web3 from "web3";
 import axios from "axios";
 
-
 export const requestWalletArr = (state: any) => state.register.accounts;
 
 const web3 = new Web3(Web3.givenProvider);
@@ -46,30 +45,10 @@ function* putDBAccountDictionarySaga(actionObject: any): { } {
 
 }
 
-function* getDBAccountDictionarySaga(actionObject: any):any {
-    const accountDictionary = yield call(axios.get, `${baseURL}/account/${actionObject.payload}`)
-    //yield put(getDBAccountDictionaryDic(accountDictionary));
-
-    if(accountDictionary.hasOwnProperty('walletAccount')){
-
-    }
-    if(accountDictionary.hasOwnProperty('ownerName')){
-
-    }
-}
-
-function* userSameAccountBoolSaga(actionObject: any):any {
-
-}
-
 
 export function* watchAccountSaga() {
-
     yield takeLatest(putDBAccountDictionaryAction.type, putDBAccountDictionarySaga);
-    yield takeLatest(getDBAccountDictionaryAction.type, getDBAccountDictionarySaga);
-    yield takeLatest(userSameAccountBoolAction.type, userSameAccountBoolSaga);
     yield takeLatest(getReceiptDBConnectUserAction.type, getReceiptDBConnectedUserSaga);
-
 
 }
 

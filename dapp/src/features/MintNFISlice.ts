@@ -33,6 +33,7 @@ const MintNFISlice = createSlice ({
 export const { mintSucceededSuccessful, gasForMinting, mintingError } = MintNFISlice.actions;
 export const mintNFIAsyncAction = createAction<{}>("MINT_NFI_SAGA");
 export const gasForMintNFIAsyncAction = createAction<{}>("GAS_FOR_MINT_NFI_SAGA");
+export const spiderBCforTransactionHashAction = createAction<string>("SPIDER_BC_TRANSHASH");
 
 export default MintNFISlice.reducer;
 

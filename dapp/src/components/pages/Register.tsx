@@ -1,41 +1,12 @@
 import * as React from 'react';
-import {useState, useEffect, MouseEventHandler} from "react";
+import {useState, useEffect, MouseEventHandler, useMemo} from "react";
 import Web3 from "web3";
 //import {getFilledAccountsArr}
 import type {FC} from 'react';
 import {
-    FormControl,
-    FormLabel,
-    Grid,
-    Input,
-    Stack,
-    Box,
-    Button,
-    Heading,
-    Text,
-    Flex,
-    AspectRatio,
-    Center,
-    Image,
-    Avatar,
-    Progress,
-    FormErrorMessage,
-    GridItem,
-    AvatarBadge,
-    VStack,
-    HStack,
-    Textarea,
-    Divider,
-    InputGroup,
-    InputRightAddon,
-    InputRightElement,
-    PopoverHeader,
-    PopoverContent,
-    PopoverCloseButton, PopoverBody, PopoverArrow, PopoverFooter, PopoverTrigger, Popover, Portal, MenuItem,
-    InputLeftElement,
-    Modal, ModalOverlay, ModalContent, ModalHeader, ModalFooter, ModalBody,
-    ModalCloseButton,
-    useDisclosure, Container,
+    FormControl, FormLabel, Input, Stack, Box, Button, Heading, Text, Flex, Center, FormErrorMessage, Divider,
+    InputGroup, InputRightAddon, InputRightElement, PopoverContent, PopoverBody, PopoverTrigger, Popover, Portal, MenuItem,
+    InputLeftElement, Modal, ModalOverlay, ModalContent, ModalHeader, ModalFooter, ModalBody, ModalCloseButton
 } from '@chakra-ui/react';
 import {FaFacebook, FaGithub, FaGoogle, FaScroll} from 'react-icons/fa';
 import { MdOutlineColorLens} from 'react-icons/md';
@@ -43,11 +14,13 @@ import {useAppDispatch, useAppSelector} from "../../app/hooks";
 import PMLogo from '../../assets/PMGIMPResized.png';
 import Logo from '../../assets/Logo';
 import {ColorChangeHandler, ColorResult, SketchPicker, GithubPicker, RGBColor} from 'react-color';
-import {requestAccountsAsyncAction} from "../../features/UserWalletSlice";
+import {getOneReceiptFromDB, requestAccountsAsyncAction} from "../../features/UserWalletSlice";
 import {mintNFIAsyncAction, gasForMintNFIAsyncAction, mintingError} from "../../features/MintNFISlice";
 import mintNFI from "../../abiFiles/PaperMastersNFI.json";
 import {call} from "redux-saga/effects";
 import AvatarNFI from "../AvatarNFI";
+import {paramsWalletAccAction} from "../../features/IdentityPageUseParamsSlice";
+import {addressHasIdentityBool} from "../../features/MintedNFISlice";
 
 
 interface InterfaceRegister {
@@ -61,6 +34,16 @@ const ColorRGBToString=(colorResultRGB: ColorResult)=>{
 
 
 export const Register: FC<InterfaceRegister>=()=> {
+
+    const userTokenIDtoIdentityStruct = useAppSelector((state) => state.minted.tokenIDtoIdentityStruct);
+
+    const paramsWalletAcc = useAppSelector((state) => state.identUseParams.paramsWalletAcc);
+    const paramsAddressHasIdentityBoolBC = useAppSelector((state) => state.identUseParams.addressHasIdentityBC);
+    const requestReceiptUsingParams = useAppSelector((state) => state.identUseParams.requestReceiptUsingParams);
+    const requestStructUsingParamsFromBC = useAppSelector((state) => state.identUseParams.requestStructUsingParamsFromBC);
+    const addressHasIdentityBool = useAppSelector((state) => state.minted.addressHasIdentity);
+    const getOneReceiptFromDB = useAppSelector((state) => state.register.getOneReceiptFromDB);
+
 
     const dispatch = useAppDispatch();
     const accountsArr = useAppSelector((state) => state.register.accounts);
@@ -77,7 +60,11 @@ export const Register: FC<InterfaceRegister>=()=> {
     const [website, setWebsite] = useState<string | "">("");
     const [uniqueYou, setUniqueYou] = useState<string | "">("");
 
-    const defaultColorBG = { hex: '#f2eef2', rgb: {r: 242, g: 238, b: 242, a: 1}, hsl: {h: 300, s: 0.13333333333333283, l: 0.9411764705882353, a: 1}}
+    const defaultColorBG = {
+        hex: '#f2eef2',
+        rgb: {r: 242, g: 238, b: 242, a: 1},
+        hsl: {h: 300, s: 0.13333333333333283, l: 0.9411764705882353, a: 1}
+    }
     const defaultColorText = {hex: '#694b69', rgb: {r: 105, g: 75, b: 105, a: 1}, hsl: {h: 300, s: 0.17, l: 0.35, a: 1}}
 
     const [colorTextName, setColorTextName] = useState<ColorResult>(defaultColorText);
@@ -96,7 +83,7 @@ export const Register: FC<InterfaceRegister>=()=> {
 
     const [submitButtonClicked, setSubmitButtonClicked] = useState<boolean>(false);
 
-    const [isModalOpen, setIsModalOpen ] = useState<boolean>(false);
+    const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
     const nameHandler = (e: React.FormEvent<HTMLInputElement>) => {
         setName(e.currentTarget.value);
@@ -190,11 +177,36 @@ export const Register: FC<InterfaceRegister>=()=> {
         dispatch(gasForMintNFIAsyncAction(mintPayload));
     };
 
-useEffect(()=>{
-    if(mintSucceeded==='failed'){
+
+    useEffect(() => {
+        console.log('accountsArr', accountsArr.length)
+        if (accountsArr.length === 0) {
+            dispatch(requestAccountsAsyncAction());
+        }
+    }, [accountsArr]);
+
+const [modalDisplayTitle, modalDisplayText] = useMemo(() => {
+    if (accountsArr.length === 0) {
         setIsModalOpen(true);
-    }
-},[mintSucceeded]);
+        return ( [ 'Connect Wallet Account for Access',"Please go to MetaMask and connect your wallet account."] )
+    };
+    if (addressHasIdentityBool && mintSucceeded==='idle') {
+        setIsModalOpen(true);
+        return (['You have already Minted', <span>Connected wallet account is already registered, each wallet account can have only one identity. <br/><br/> In the future, you will be able to mint an NFI for each contract that you own.</span> ]
+        )
+    };
+    if ( mintSucceeded==='failed') {
+        setIsModalOpen(true);
+        return ([ 'Minting failed' , <span> Noooo, what happened! Please email Ramona with the details @ ramonajenny.n@gmail.com.</span>]
+        )
+    };
+    if (mintSucceeded==='succeeded') {
+        setIsModalOpen(true);
+        return ([" Minted Successful!", 'You did it! You now have a registered wallet account, please click in the Non-Fungible Identity => Identity link in the Navbar and update your registered page.'])
+    };
+    setIsModalOpen(false)
+    return ([null,null])
+}, [accountsArr, userTokenIDtoIdentityStruct, getOneReceiptFromDB, addressHasIdentityBool, mintSucceeded ])
 
     return (
         <Flex
@@ -215,7 +227,6 @@ useEffect(()=>{
                 my={{xl: "16px"}}
                 bg={'pmpurple.1'}
             >
-
                 <Heading textAlign="center" size="xl" fontWeight="extrabold">
                     Mint PaperMaster NFI
                 </Heading>
@@ -230,7 +241,6 @@ useEffect(()=>{
                 <Divider py={'0px'} color={'pmpurple.8'}/>
 
                 <Stack spacing="5">
-
                     <Popover>
                         <PopoverTrigger>
                             <Button
@@ -780,105 +790,101 @@ useEffect(()=>{
                 bg={'pmpurple.1'}
                 my={{xl: "16px"}}
             >
-
                 <Heading mb="54px" textAlign="center" size="xl" fontWeight="extrabold">
                     Your PaperMaster Non-Fungible-Identity
                 </Heading>
 
                 <Text mt="4" mb="8px" color={'pmpurple.13'} align="center" maxW="100%" fontWeight="medium">
-                    Below is what your Papermaster Non-Fungible-Identification will
-                    look like, please make sure you love it!
+                    Below is what your Non-Fungible-Identification will
+                    look like, <br/> please make sure you love it!
                 </Text>
 
                 <Divider py={'0px'} mb="54px" color={'pmpurple.8'}/>
 
-          <AvatarNFI name={name} nameColor={ColorRGBToString(colorTextName)}
-                     email={email} emailColor={ColorRGBToString(colorTextEmail)}
-                     profession={profession} professionColor={ColorRGBToString(colorTextProfession)}
-                     organization={organization} organizationColor={ColorRGBToString(colorTextOrganization)}
-                     slogan={slogan} sloganColor={ColorRGBToString(colorTextSlogan)}
-                     website={website} websiteColor={ColorRGBToString(colorTextWebsite)}
-                     uniqueYou={uniqueYou} uniqueYouColor={ColorRGBToString(colorTextUniqueYou)}
-                     avatarBG={ColorRGBToString(bgRGB)}
-                     originDate={originDate}
-                     accountNumber={accountsArr[0]}
-          />
+                <AvatarNFI name={name} nameColor={ColorRGBToString(colorTextName)}
+                           email={email} emailColor={ColorRGBToString(colorTextEmail)}
+                           profession={profession} professionColor={ColorRGBToString(colorTextProfession)}
+                           organization={organization} organizationColor={ColorRGBToString(colorTextOrganization)}
+                           slogan={slogan} sloganColor={ColorRGBToString(colorTextSlogan)}
+                           website={website} websiteColor={ColorRGBToString(colorTextWebsite)}
+                           uniqueYou={uniqueYou} uniqueYouColor={ColorRGBToString(colorTextUniqueYou)}
+                           avatarBG={ColorRGBToString(bgRGB)}
+                           originDate={originDate}
+                           accountNumber={accountsArr[0]}
+                />
 
-                   <Center>
-                       {name !== "" ?
-                           <Button
-                               borderStyle={'solid'}
-                               border={'2px'}
-                               borderColor={'pmpurple.13'}
-                               bg={'pmpurple.3'}
-                               mt={"20px"}
-                               mb={"2px"}
-                               _hover={{
-                                   transform: 'translateY(-2px)',
-                                   boxShadow: 'md',
-                               }}
-                               onClick={submitMintHandler}
-                               isLoading={submitButtonClicked}
-                               loadingText='Submitting to the Blockchain for minting, this can take up to 2.5 minutes'
-                               color={"pmpurple.13"}
-                               variant='outline'
-                           >
-                               Submit
-                           </Button>
-                           : null}
-                   </Center>
-                   <Center>
+                <Center>
+                    {name !== "" ?
+                        <Button
+                            borderStyle={'solid'}
+                            border={'2px'}
+                            borderColor={'pmpurple.13'}
+                            bg={'pmpurple.3'}
+                            mt={"20px"}
+                            mb={"2px"}
+                            _hover={{
+                                transform: 'translateY(-2px)',
+                                boxShadow: 'md',
+                            }}
+                            onClick={submitMintHandler}
+                            isLoading={submitButtonClicked}
+                            loadingText='Submitting to the Blockchain for minting, this can take up to 2.5 minutes'
+                            color={"pmpurple.13"}
+                            variant='outline'
+                        >
+                            Submit
+                        </Button>
+                        : null}
+                </Center>
+                <Center>
+                    {name !== "" ?
+                    <Box
+                        borderStyle={'solid'}
+                        border={'2px'}
+                        borderColor={'pmpurple.13'}
+                        bg={'pmpurple.3'}
+                        mt={"20px"}
+                        mb={"2px"}
+                        px={'6px'}
+                        //loadingText='Waiting to get cost estimates for gas'
+                        color={"pmpurple.13"}
+                    >
+                        <Text as='u'>Estimated Gas Cost: {gasPrice}</Text>
+                        {/*{estimateGasHandler}*/}
+                    </Box>
+                    : null}
+                </Center>
 
-                   <Box
-                   borderStyle={'solid'}
-                   border={'2px'}
-                   borderColor={'pmpurple.13'}
-                   bg={'pmpurple.3'}
-                   mt={"20px"}
-                   mb={"2px"}
-                   px={'6px'}
-                   //loadingText='Waiting to get cost estimates for gas'
-                   color={"pmpurple.13"}
-                   >
-                   <Text as='u'>Estimated Gas: {gasPrice}</Text>
-               {/*{estimateGasHandler}*/}
-                   </Box>
-                   </Center>
-
-
-                {isModalOpen &&
-                    <Modal closeOnOverlayClick={false} blockScrollOnMount={false} isOpen={true} onClose={()=>{setIsModalOpen(false)}}>
+                    <Modal closeOnOverlayClick={false} blockScrollOnMount={true} isOpen={isModalOpen} onClose={() => {
+                        setIsModalOpen(false)
+                    }}>
                         <ModalOverlay/>
                         <ModalContent>
-                            {/*need to deal with: is it minting successful or is it already minded*/}
-                            <ModalHeader fontWeight="bold" >
-                                {mintErrorReason}
-
-
-                                Minting Successful! /
-
-                                You've already minted, one identity per account number</ModalHeader>
+                            <ModalHeader fontWeight="bold" color={'pmpurple.15'}>
+                                {modalDisplayTitle}
+                            </ModalHeader>
                             <ModalCloseButton/>
                             <ModalBody pb={6}>
-                                <Text mb="1rem">
-                                    If you need failure message......
+                                <Text mb="1rem" color={'pmpurple.15'}>
+                                    {modalDisplayText}
+                                    <br/>
+                                    <Text color={'gray.100'}>
+                                        {mintErrorReason}
+                                    </Text>
+
                                 </Text>
                             </ModalBody>
                             <ModalFooter>
-
-                                <Button color={"pmpurple.13"} mr={3} onClick={()=>{setIsModalOpen(false)}}>
+                                <Button color={"pmpurple.13"} mr={3} onClick={() => {
+                                    setIsModalOpen(false)
+                                }}>
                                     Close
                                 </Button>
-
                             </ModalFooter>
                         </ModalContent>
                     </Modal>
-                }
-
             </Box>
-
         </Flex>
-
     )
 };
 

@@ -122,43 +122,65 @@ export const Mentions: FC<Interface>=()=> {
     console.log('messageBody', state.messageBody)
     console.log('radioType', state.radioType)
 
-    const handleClick = (newSize: any) => {
-        // setSize(newSize)
-        onOpen()
-    }
-
-    // if(state === undefined){
-    //     return (null);
-    // }
-    //
-
 
     return (
-        <Box>
-            <Box p="0px"
-                 m={'0px'}
-                //border={'2px solid blue'}
-                 h={'100%'}
-                 alignItems={'left'}
+
+        <Flex
+            flexDirection={'column'}
+            h={'full'}
+        >
+            <Box
+            borderBottom={'1px solid'}
+            borderColor={'pmpurple.6'}
             >
-                <Button
-                    bg={'pmpurple.2'}
-                    border={'1px solid'}
-                    borderColor={'pmpurple.3'}
-                    mb={'10px'}
-                    //value={scrollBehavior}
-                    //onChange={setScrollBehavior}
-                    leftIcon={<AiOutlineComment/>}
-                    color={'pmpurple.13'}
-                    px={'10px'}
-                    onClick={() => handleClick(isOpen)}
-                >
-                    <Text fontSize="16px" color={'pmpurple.13'} fontWeight="bold">
-                        Mentions
-                    </Text>
-                </Button>
-                <DisplayMentions/>
+                <HStack>
+                    <Heading mb="18px">
+                        <Flex direction="column">
+                            <Text mb={'5px'} fontSize="18px" color={'pmpurple.13'} fontWeight="bold" align={'left'}>
+                                Mentions
+                            </Text>
+                            <Text fontSize="15px" color={'pmpurple.13'} fontWeight="400" align={'left'}>
+                                PaperMasters protect the Blockchain
+                            </Text>
+                        </Flex>
+                    </Heading>
+                    <Spacer/>
+                    <Button
+                        //style={{border: '1px solid #b59eb5'}}
+                        px="6px"
+                        py={'4px'}
+                        //bg="transparent"
+                        color={'pmpurple.13'}
+                        border="1px solid"
+                        borderColor={'pmpurple.2'}
+                        //borderRadius="15px"
+                        //minHeight={{sm: "200px", md: "100%"}}
+                        onClick={() => {
+                            onOpen()
+                        }}
+                        rightIcon={<AiOutlineComment fontSize="18px"/>}
+                    >
+                        <Text fontSize="sm" fontWeight="bold">
+                            Give Mention
+                        </Text>
+                    </Button>
+                </HStack>
             </Box>
+
+
+
+            <Box
+                //position={'relative'}
+                //h={'100%'}
+                px="5px"
+                //border={'1px solid blue'}
+                flexGrow={1}
+                display={'flex'}
+                overflow={'auto'}
+            >
+                <DisplayMentions mentionsFullDisplayWindowBool={false}/>
+            </Box>
+
             <Box>
                 <Drawer
                     size='xl'
@@ -189,7 +211,7 @@ export const Mentions: FC<Interface>=()=> {
                         </DrawerHeader>
 
                         <DrawerBody>
-                            <DisplayMentions/>
+                            <DisplayMentions mentionsFullDisplayWindowBool={true}/>
 
                             <Stack spacing='24px'>
                                 {filledAccountsArr.length !== 0 ?
@@ -296,18 +318,6 @@ export const Mentions: FC<Interface>=()=> {
                                         </Text>
                                     </Box>
                                 }
-
-                                {/*<Box>*/}
-                                {/*    <Input*/}
-                                {/*        isDisabled={true}*/}
-                                {/*        border={'1px solid'}*/}
-                                {/*        borderColor={'pmpurple.8'}*/}
-                                {/*        bg={'pmpurple.2'}*/}
-                                {/*        color='pmpurple.15'*/}
-                                {/*        value={dateFormated}*/}
-                                {/*        id='username'*/}
-                                {/*        placeholder={'Date'}/>*/}
-
                             </Stack>
                         </DrawerBody>
 
@@ -337,8 +347,7 @@ export const Mentions: FC<Interface>=()=> {
                     </DrawerContent>
                 </Drawer>
             </Box>
-            <Divider pt={'0px'}/>
-        </Box>
+        </Flex>
     )
 };
 

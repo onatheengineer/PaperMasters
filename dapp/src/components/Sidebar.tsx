@@ -314,13 +314,13 @@ export const Sidebar: FC<InterfaceSidebar>= ({icon, profileName} ) => {
 
                     <Route path={'/identity/:walletAcc'} element={<Identity/>}/>
 
-                    {addressHasIdentity ?
-                        <Route path={'/register'} element={<Navigate replace to="/search" />}/>
-                        :
-                        <Route path={'/register'} element={<Register/>}/>
-                    }
+                    {/*{addressHasIdentity ?*/}
+                    {/*    <Route path={'/register'} element={<Navigate replace to="/search" />}/>*/}
+                    {/*    :*/}
+                    {/*    <Route path={'/register'} element={<Register/>}/>*/}
+                    {/*}*/}
 
-
+                    <Route path={'/register'} element={<Register/>}/>
                     <Route path={'/validate'} element={<Validate/>}/>
                     <Route path={'/report'} element={<Report/>}/>
                     <Route path={'/analytics'} element={<Analytics/>}/>

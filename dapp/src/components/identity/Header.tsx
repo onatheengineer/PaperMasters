@@ -126,7 +126,7 @@ export const Header:FC<Interface>=()=> {
             if(requestReceiptUsingParams.transactionHash !== undefined){
                 if(requestReceiptUsingParams.transactionHash.length){
                     return (
-                        <Text fontSize={'16px'} color={'red.600'} letterSpacing={'1px'}
+                        <Text fontSize={'16px'} color={'pmpurple.10'} letterSpacing={'1px'}
                               textShadow={'#F7FAFC 0px 0px 10px'}>
                             {requestReceiptUsingParams.transactionHash}
                         </Text>
@@ -203,66 +203,6 @@ export const Header:FC<Interface>=()=> {
             <MdOutlineEmail fontSize={'20px'} color={'#5c415c'}/>
         );
     }, [paramsWalletAcc, paramsAddressHasIdentityBoolBC, requestReceiptUsingParams])
-
-
-    // const logicQRCodeMemo = useMemo(()=>{
-    //     return(
-    //
-    //     <Link
-    //         href="#"
-    //         color='pmpurple.13'
-    //         fontSize="md"
-    //         me="10px"
-    //         _hover={{color: "#9c7e9c"}}
-    //     >
-    //         <HStack>
-    //             <Icon as={MdOutlineQrCode}/>
-    //             <Text fontSize="sm" color='pmpurple.13' fontWeight="semibold">
-    //                 NFI QR Code: comming soon
-    //             </Text>
-    //         </HStack>
-    //
-    //     </Link>
-    //
-    //     <Text
-    //         fontSize="md"
-    //         color='pmpurple.13'
-    //         fontWeight="bold"
-    //         me="10px"
-    //     >
-    //         NFI QR code:
-    //     </Text>
-    //
-    // )}, [paramsWalletAcc, paramsAddressHasIdentityBoolBC, requestStructUsingParamsFromBC, requestReceiptUsingParams] )
-
-
-    const logicAliasProfileLinks = useMemo(() => {
-        return (
-            <>
-            </>
-        )
-    }, [state.aliasProfileLinks, paramsWalletAcc, paramsAddressHasIdentityBoolBC, requestStructUsingParamsFromBC, requestReceiptUsingParams])
-
-    const logicGivenValidationsMemo = useMemo(() => {
-        return (
-            <>
-            </>
-        )
-    }, [paramsWalletAcc, paramsAddressHasIdentityBoolBC, requestStructUsingParamsFromBC, requestReceiptUsingParams])
-
-    const logicReportMemo = useMemo(() => {
-        return (
-            <>
-            </>
-        )
-    }, [state.emailReportNotification, paramsWalletAcc, paramsAddressHasIdentityBoolBC, requestStructUsingParamsFromBC, requestReceiptUsingParams])
-
-    const logicValidationsMemo = useMemo(() => {
-        return (
-            <>
-            </>
-        )
-    }, [state.emailValidationNotification, paramsWalletAcc, paramsAddressHasIdentityBoolBC, requestStructUsingParamsFromBC, requestReceiptUsingParams])
 
 
 

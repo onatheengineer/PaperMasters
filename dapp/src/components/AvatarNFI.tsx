@@ -15,6 +15,7 @@ import {
 } from "@chakra-ui/react";
 import legoLavendarheadercroped from '../assets/legoLavendarheadercroped.png';
 import PMlogo from '../assets/PMlogo.png';
+import {PMsvgIcon} from "../assets/icons/PMSvgIcon";
 
 interface AvatarNFIInterface{
     accountNumber: string,
@@ -93,33 +94,48 @@ export const AvatarNFI:FC<AvatarNFIInterface>=( {accountNumber,
                         />
 
                         <Flex justify={'center'}>
+                            <Image
+                                position={'absolute'}
+                                mt={'22px'}
+                                top={'0px'}
+                                right={'0px'}
+                                left={'0px'}
+                                //h={'60px'}
+                                //backgroundPosition="center"
+                                //src={legoLavendarheadercroped}
+                                //objectFit={'cover'}
+                                >
+                                {/*<PMsvgIcon/>*/}
+                            </Image>
                             <Avatar
                                 mt={'22px'}
-                                src={PMlogo}
+                                icon={<PMsvgIcon />}
                                 boxSize='3.05em'
                                 variant={"square"}
-                                css={{
-                                    border: '2px solid #4f384f',
-                                }}
+                                showBorder={false}
+                                bg={"transparent"}
+                                // css={{
+                                //     border: '2px solid #4f384f',
+                                // }}
                             >
                                 <AvatarBadge
                                     border={'1px'}
-                                    borderColor={'pmpurple.15'}
+                                    borderColor={'pmpurple.13'}
                                     borderStyle={'solid'}
-                                    boxSize='1.25em'
-                                    bg='pmpurple.2'>
-                                    <Text mt='0px' fontSize={'12px'} fontWeight={500}
+                                    boxSize='22px'
+                                    bg='pmpurple.1'>
+                                    <Text mt='0px' p={'0px'} fontSize={'9px'} fontWeight={500}
                                           fontFamily={'body'} align={'center'}
-                                          color={'pmpurple.15'}>
+                                          color={'pmpurple.13'}>
                                         NFI
                                     </Text>
                                 </AvatarBadge>
                             </Avatar>
                         </Flex>
 
-                        <Text pt={'0px'} fontSize={'22px'} fontWeight={500}
+                        <Text pt={'0px'} fontSize={'21px'} fontWeight={500}
                               fontFamily={'body'} align={'center'}
-                              color={'pmpurple.15'}>
+                              color={'pmpurple.14'}>
                             PaperMaster
                         </Text>
 
@@ -176,7 +192,7 @@ export const AvatarNFI:FC<AvatarNFIInterface>=( {accountNumber,
                             <Stack
                                 textAlign={'center'}
                             >
-                                <Text as='cite' mb={'32px'} pb={'0px'} fontSize={'sm'}
+                                <Text as='cite' mb={'33px'} pb={'0px'} fontSize={'sm'}
                                       color={'pmpurple.13'}>
                                     Origin Date {originDateFormatted}
                                 </Text>

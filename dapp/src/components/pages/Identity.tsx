@@ -64,7 +64,7 @@ export const Identity:FC<Interface>=()=> {
 
 
     useEffect(() => {
-        if (walletAcc !== undefined && walletAcc !== 'undefined' && walletAcc !== "") {
+        if (walletAcc !== undefined && walletAcc !== "") {
             dispatch(paramsWalletAccAction(walletAcc));
         }
     }, [walletAcc]);
@@ -148,13 +148,13 @@ console.log(paramsRequestAccountDictionary, paramsWalletAcc, paramsAddressHasIde
                                 justify={'space-evenly'}
                                 maxH={"470px"}
                         >
-                            <Box w='33%' borderRadius='15px' bg='white' p="16px" overflow={'hidden'} whiteSpace={"nowrap"}
+                            <Box w='38%' borderRadius='15px' bg='white' p="16px" overflow={'none'} whiteSpace={"pre-line"}
                             >
                                 <ValidationsReports/>
                             </Box>
 
-                            <Box w='33%' borderRadius='15px' bg='white' p="16px"
-                                 pt={'28px'} overflow={'hidden'} whiteSpace={"nowrap"}
+                            <Box w='380px' borderRadius='15px' bg='white' px="16px"
+                                 py={'28px'} overflow={'none'} whiteSpace={'break-spaces'}
                             >
                                 {paramsWalletAcc.length !== 0 && paramsAddressHasIdentityBoolBC !== false && requestStructUsingParamsFromBC.walletAccount.length !== 0 ?
 
@@ -176,7 +176,6 @@ console.log(paramsRequestAccountDictionary, paramsWalletAcc, paramsAddressHasIde
                                                avatarBG={requestStructUsingParamsFromBC.bgRGB}
                                                originDate={parseInt(requestStructUsingParamsFromBC.originDate)}
                                     />
-
                                     :
                                     <Button
                                         w={'100%'}
@@ -209,18 +208,21 @@ console.log(paramsRequestAccountDictionary, paramsWalletAcc, paramsAddressHasIde
                                 }
                             </Box>
 
-                            <Box w='33%' borderRadius='15px' bg='white' p="12px" pb={'16px'}
-                                 overflow={'hidden'}
-                                 whiteSpace={"nowrap"}
+                            <Box w='38%' borderRadius='15px' bg='white' p="12px" pb={'16px'}
+                                 overflow={'none'}
+                                 whiteSpace={"pre-line"}
                             >
                                 <Box
                                     overflow={'hidden'}
-                                    whiteSpace={"nowrap"}
+                                    whiteSpace={"pre-line"}
                                     h={'100%'}
-                                    w={'30vW'}
+                                    //w={'30vW'}
                                     //border={'4px solid blue'}
                                 >
-                                    <Mentions/>
+                                    <Text borderBottom={'1px solid'} borderColor={'pmpurple.4'} p='12px' textAlign={'center'} fontSize="16px" color={'pmpurple.13'}
+                                           whiteSpace={'pre-wrap'}>
+                                        Account Ledger
+                                    </Text>
                                 </Box>
 
                             </Box>

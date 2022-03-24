@@ -137,8 +137,9 @@ export default function Navbar() {
 
     return (
 
+
         <Box
-            //flex={'auto'}
+            flex={'auto'}
             p={'8px'}
             alignItems={'center'}
             border={'0px solid'}

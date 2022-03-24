@@ -44,10 +44,6 @@ function App() {
         });
     }, [] )
 
-    // useEffect( () => {
-    //     console.log("this is the app dispatch to store useParams")
-    //     dispatch();
-    // }, [] )
 
     useEffect( () => {
         console.log("is there a wallet account connected? Now check for NFI")
