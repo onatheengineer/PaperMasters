@@ -128,7 +128,10 @@ export const Header:FC<Interface>=()=> {
                     return (
                         <Text fontSize={'16px'} color={'pmpurple.10'} letterSpacing={'1px'}
                               textShadow={'#F7FAFC 0px 0px 10px'}>
+                            <Link href={`https://explorer.pops.one/tx/${requestReceiptUsingParams.transactionHash}` }>
+
                             {requestReceiptUsingParams.transactionHash}
+                            </Link>
                         </Text>
                     )
                 }
@@ -338,9 +341,9 @@ export const Header:FC<Interface>=()=> {
                                     <Icon as={FaCube} me="6px" />
                                     <Text fontSize="sm" color='pmpurple.13' fontWeight="bold">
                                         {/*TODO: when I click on this button I want it to route me to the registration & validations page*/}
-                                        <Link as={ReachLink} to={'/validate'} _hover={{textDecor: 'none'}}>
+
                                             {logicTransactionHashMemo}
-                                        </Link>
+
                                     </Text>
 
 

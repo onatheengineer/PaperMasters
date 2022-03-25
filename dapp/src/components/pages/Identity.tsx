@@ -1,6 +1,6 @@
 import * as React from 'react';
 import type {FC} from 'react';
-import {Link as ReachLink, useParams} from "react-router-dom";
+import {Link as ReachLink, useNavigate, useParams} from "react-router-dom";
 import {
     Avatar, AvatarGroup, Box, Button, Flex, Grid, GridItem, Icon, Image, Link, MenuItem,
     Stack, Switch, Text, useColorModeValue, HStack, useDisclosure, Tooltip, VStack,
@@ -8,6 +8,7 @@ import {
     TabPanel, TabPanels, TabList, Tabs, Tab, Select, Heading,
 } from "@chakra-ui/react";
 import { RiShareForwardLine} from 'react-icons/ri';
+import { Navigate } from "react-router-dom";
 
 // Custom components
 import { BsFillCloudRainFill } from 'react-icons/bs'
@@ -33,6 +34,7 @@ import Projects from "../identity/Projects";
 import ValidationsReports from "../identity/ValidationsReports";
 import {paramsWalletAccAction, paramsWalletAcc} from "../../features/IdentityPageUseParamsSlice";
 import ModalForIdentNoUseParams from '../identity/ModalForIdentNoUseParams';
+import {Route} from "react-router";
 
 interface Interface {
 
@@ -62,28 +64,30 @@ export const Identity:FC<Interface>=()=> {
     console.log(`this is the tokenIDtoIdentityStruct[0]: ${userTokenIDtoIdentityStruct.walletAccount}`);
     const dispatch = useAppDispatch();
 
+    const navigate = useNavigate();
 
     useEffect(() => {
-        if (walletAcc !== undefined && walletAcc !== "") {
+        if (walletAcc !== undefined && walletAcc !== "" && walletAcc !== 'undefined') {
             dispatch(paramsWalletAccAction(walletAcc));
         }
     }, [walletAcc]);
 
     const logicDescriptionMemo = useMemo(() => {
-console.log(paramsRequestAccountDictionary, paramsWalletAcc, paramsAddressHasIdentityBoolBC, requestReceiptUsingParams)
-        if(paramsAddressHasIdentityBoolBC && requestReceiptUsingParams !== undefined && paramsRequestAccountDictionary.ownerDescription !== undefined ) {
-            if(paramsRequestAccountDictionary.ownerDescription.length > 0 ) {
+        console.log(paramsRequestAccountDictionary, paramsWalletAcc, paramsAddressHasIdentityBoolBC, requestReceiptUsingParams)
+        if (paramsAddressHasIdentityBoolBC && requestReceiptUsingParams !== undefined && paramsRequestAccountDictionary.ownerDescription !== undefined) {
+            if (paramsRequestAccountDictionary.ownerDescription.length > 0) {
                 return (
                     paramsRequestAccountDictionary['ownerDescription']
                 )
             }
         }
-        if(paramsAddressHasIdentityBoolBC && requestReceiptUsingParams !== undefined ){
-            if(requestReceiptUsingParams.hasOwnProperty('identityStruct') && requestReceiptUsingParams['identityStruct'].length > 0 && requestReceiptUsingParams['identityStruct'][7].length > 0 ) {
-                if(requestReceiptUsingParams.identityStruct[7].split("|||")[0].length > 0 ){
+        if (paramsAddressHasIdentityBoolBC && requestReceiptUsingParams !== undefined) {
+            if (requestReceiptUsingParams.hasOwnProperty('identityStruct') && requestReceiptUsingParams['identityStruct'].length > 0 && requestReceiptUsingParams['identityStruct'][7].length > 0) {
+                if (requestReceiptUsingParams.identityStruct[7].split("|||")[0].length > 0) {
                     return (
                         requestReceiptUsingParams.identityStruct[7].split("|||")[0]
-                    )}
+                    )
+                }
             }
         }
         return (
@@ -127,7 +131,7 @@ console.log(paramsRequestAccountDictionary, paramsWalletAcc, paramsAddressHasIde
                     <Stack p={'10px'}
                         //border={'4px solid blue'}
                     >
-                        <Box borderRadius='15px' bg='white' p="12px" px="24px" overflow={'none'} >
+                        <Box borderRadius='15px' bg='white' p="12px" px="24px" overflow={'none'}>
                             {/*<Heading p="12px 5px" mb="0px">*/}
                             {/*    <Text fontSize="16px" color='pmpurple.13' fontWeight="bold" align={'left'}>*/}
                             {/*        Description*/}
@@ -135,99 +139,101 @@ console.log(paramsRequestAccountDictionary, paramsWalletAcc, paramsAddressHasIde
                             {/*</Heading>*/}
                             <Box px="5px">
                                 <Flex direction="column">
-                                        <Text fontSize="md" color={'pmpurple.13'} fontWeight="400" mb="12px"
-                                              align={'left'}>
-                                            {logicDescriptionMemo}
-                                        </Text>
+                                    <Text fontSize="md" color={'pmpurple.13'} fontWeight="400" mb="12px"
+                                          align={'left'}>
+                                        {logicDescriptionMemo}
+                                    </Text>
                                 </Flex>
                             </Box>
                         </Box>
-<Box>
-                        <HStack spacing={'10px'}
-                                align='stretch'
-                                justify={'space-evenly'}
-                                maxH={"470px"}
-                        >
-                            <Box w='38%' borderRadius='15px' bg='white' p="16px" overflow={'none'} whiteSpace={"pre-line"}
+                        <Box>
+                            <HStack spacing={'10px'}
+                                    align='stretch'
+                                    justify={'space-evenly'}
+                                    maxH={"470px"}
                             >
-                                <ValidationsReports/>
-                            </Box>
-
-                            <Box w='380px' borderRadius='15px' bg='white' px="16px"
-                                 py={'28px'} overflow={'none'} whiteSpace={'break-spaces'}
-                            >
-                                {paramsWalletAcc.length !== 0 && paramsAddressHasIdentityBoolBC !== false && requestStructUsingParamsFromBC.walletAccount.length !== 0 ?
-
-                                    <AvatarNFI accountNumber={requestStructUsingParamsFromBC.walletAccount}
-                                               name={requestStructUsingParamsFromBC.name.split("|||")[0]}
-                                               nameColor={requestStructUsingParamsFromBC.name.split("|||")[1]}
-                                               email={requestStructUsingParamsFromBC.email.split("|||")[0]}
-                                               emailColor={requestStructUsingParamsFromBC.email.split("|||")[1]}
-                                               profession={requestStructUsingParamsFromBC.profession.split("|||")[0]}
-                                               professionColor={requestStructUsingParamsFromBC.profession.split("|||")[1]}
-                                               organization={requestStructUsingParamsFromBC.organization.split("|||")[0]}
-                                               organizationColor={requestStructUsingParamsFromBC.organization.split("|||")[1]}
-                                               slogan={requestStructUsingParamsFromBC.slogan.split("|||")[0]}
-                                               sloganColor={requestStructUsingParamsFromBC.slogan.split("|||")[1]}
-                                               website={requestStructUsingParamsFromBC.website.split("|||")[0]}
-                                               websiteColor={requestStructUsingParamsFromBC.website.split("|||")[1]}
-                                               uniqueYou={requestStructUsingParamsFromBC.uniqueYou.split("|||")[0]}
-                                               uniqueYouColor={requestStructUsingParamsFromBC.uniqueYou.split("|||")[1]}
-                                               avatarBG={requestStructUsingParamsFromBC.bgRGB}
-                                               originDate={parseInt(requestStructUsingParamsFromBC.originDate)}
-                                    />
-                                    :
-                                    <Button
-                                        w={'100%'}
-                                        bg={'pmpurple.2'}
-                                        h='10.00rem'
-                                        //size='lg'
-                                        borderRadius={'20px'}
-                                        borderStyle={'4px solid'}
-                                        borderColor={'pmpurple.6'}
-                                        textDecoration={'none'}
-                                        _hover={{
-                                            transform: 'translateY(-2px)',
-                                            boxShadow: 'xl',
-                                        }}
-                                    >
-                                        <Link as={ReachLink} to='/register'
-                                              _hover={{textDecor: 'none'}}
-                                              cursor={'pointer'}
-                                        >
-                                            <Text p='12px' textAlign={'center'} fontSize="xl" color={'pmpurple.13'}
-                                                  fontWeight="bold" whiteSpace={'pre-wrap'}>
-                                                NFI will display here, please mint an NFI to your wallet account
-                                            </Text>
-                                            <Box position={"absolute"} bottom={'10px'} right={"10px"}>
-                                                <RiShareForwardLine fontSize={'40px'}/>
-                                            </Box>
-
-                                        </Link>
-                                    </Button>
-                                }
-                            </Box>
-
-                            <Box w='38%' borderRadius='15px' bg='white' p="12px" pb={'16px'}
-                                 overflow={'none'}
-                                 whiteSpace={"pre-line"}
-                            >
-                                <Box
-                                    overflow={'hidden'}
-                                    whiteSpace={"pre-line"}
-                                    h={'100%'}
-                                    //w={'30vW'}
-                                    //border={'4px solid blue'}
+                                <Box w='38%' borderRadius='15px' bg='white' p="16px" overflow={'none'}
+                                     whiteSpace={"pre-line"}
                                 >
-                                    <Text borderBottom={'1px solid'} borderColor={'pmpurple.4'} p='12px' textAlign={'center'} fontSize="16px" color={'pmpurple.13'}
-                                           whiteSpace={'pre-wrap'}>
-                                        Account Ledger
-                                    </Text>
+                                    <ValidationsReports/>
                                 </Box>
 
-                            </Box>
-                        </HStack>
-</Box>
+                                <Box w='380px' borderRadius='15px' bg='white' px="16px"
+                                     py={'28px'} overflow={'none'} whiteSpace={'break-spaces'}
+                                >
+                                    {paramsWalletAcc.length !== 0 && paramsAddressHasIdentityBoolBC !== false && requestStructUsingParamsFromBC.walletAccount.length !== 0 ?
+
+                                        <AvatarNFI accountNumber={requestStructUsingParamsFromBC.walletAccount}
+                                                   name={requestStructUsingParamsFromBC.name.split("|||")[0]}
+                                                   nameColor={requestStructUsingParamsFromBC.name.split("|||")[1]}
+                                                   email={requestStructUsingParamsFromBC.email.split("|||")[0]}
+                                                   emailColor={requestStructUsingParamsFromBC.email.split("|||")[1]}
+                                                   profession={requestStructUsingParamsFromBC.profession.split("|||")[0]}
+                                                   professionColor={requestStructUsingParamsFromBC.profession.split("|||")[1]}
+                                                   organization={requestStructUsingParamsFromBC.organization.split("|||")[0]}
+                                                   organizationColor={requestStructUsingParamsFromBC.organization.split("|||")[1]}
+                                                   slogan={requestStructUsingParamsFromBC.slogan.split("|||")[0]}
+                                                   sloganColor={requestStructUsingParamsFromBC.slogan.split("|||")[1]}
+                                                   website={requestStructUsingParamsFromBC.website.split("|||")[0]}
+                                                   websiteColor={requestStructUsingParamsFromBC.website.split("|||")[1]}
+                                                   uniqueYou={requestStructUsingParamsFromBC.uniqueYou.split("|||")[0]}
+                                                   uniqueYouColor={requestStructUsingParamsFromBC.uniqueYou.split("|||")[1]}
+                                                   avatarBG={requestStructUsingParamsFromBC.bgRGB}
+                                                   originDate={parseInt(requestStructUsingParamsFromBC.originDate)}
+                                        />
+                                        :
+                                        <Button
+                                            w={'100%'}
+                                            bg={'pmpurple.2'}
+                                            h='10.00rem'
+                                            //size='lg'
+                                            borderRadius={'20px'}
+                                            borderStyle={'4px solid'}
+                                            borderColor={'pmpurple.6'}
+                                            textDecoration={'none'}
+                                            _hover={{
+                                                transform: 'translateY(-2px)',
+                                                boxShadow: 'xl',
+                                            }}
+                                        >
+                                            <Link as={ReachLink} to='/register'
+                                                  _hover={{textDecor: 'none'}}
+                                                  cursor={'pointer'}
+                                            >
+                                                <Text p='12px' textAlign={'center'} fontSize="xl" color={'pmpurple.13'}
+                                                      fontWeight="bold" whiteSpace={'pre-wrap'}>
+                                                    NFI will display here, please mint an NFI to your wallet account
+                                                </Text>
+                                                <Box position={"absolute"} bottom={'10px'} right={"10px"}>
+                                                    <RiShareForwardLine fontSize={'40px'}/>
+                                                </Box>
+
+                                            </Link>
+                                        </Button>
+                                    }
+                                </Box>
+
+                                <Box w='38%' borderRadius='15px' bg='white' p="12px" pb={'16px'}
+                                     overflow={'none'}
+                                     whiteSpace={"pre-line"}
+                                >
+                                    <Box
+                                        overflow={'hidden'}
+                                        whiteSpace={"pre-line"}
+                                        h={'100%'}
+                                        //w={'30vW'}
+                                        //border={'4px solid blue'}
+                                    >
+                                        <Text borderBottom={'1px solid'} borderColor={'pmpurple.4'} p='12px'
+                                              textAlign={'center'} fontSize="16px" color={'pmpurple.13'}
+                                              whiteSpace={'pre-wrap'}>
+                                            Account Ledger
+                                        </Text>
+                                    </Box>
+
+                                </Box>
+                            </HStack>
+                        </Box>
                         <Projects/>
                     </Stack>
                 </Stack>

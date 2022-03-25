@@ -202,7 +202,7 @@ const [modalDisplayTitle, modalDisplayText] = useMemo(() => {
     };
     if (mintSucceeded==='succeeded') {
         setIsModalOpen(true);
-        return ([" Minted Successful!", 'You did it! You now have a registered wallet account, please click in the Non-Fungible Identity => Identity link in the Navbar and update your registered page.'])
+        return ([" Minted Successful!", 'You did it! You are now a registered PaperMaster, please navigate to your Identity page and update your portfolio.'])
     };
     setIsModalOpen(false)
     return ([null,null])
@@ -849,7 +849,7 @@ const [modalDisplayTitle, modalDisplayText] = useMemo(() => {
                         //loadingText='Waiting to get cost estimates for gas'
                         color={"pmpurple.13"}
                     >
-                        <Text as='u'>Estimated Gas Cost: {gasPrice}</Text>
+                        <Text as='u'>Estimated Gas: {gasPrice}</Text>
                         {/*{estimateGasHandler}*/}
                     </Box>
                     : null}

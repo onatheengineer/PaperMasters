@@ -6,16 +6,13 @@ import {
     mintNFIAsyncAction,
     mintSucceededSuccessful,
     gasForMintNFIAsyncAction,
-    gasForMinting,
-    mintingError, spiderBCforTransactionHashAction
+    gasForMinting, statusBC,
+    mintingError,
 } from "./MintNFISlice";
 import MintABI from '../abiFiles/PaperMastersNFI.json'
 import {useState} from "react";
 
-
-const web33 = new Web3(new Web3.providers.HttpProvider(`https://api.s0.b.hmny.io`));
-console.log("web33.eth.accounts:", web33.eth.accounts);
-
+const web3 = new Web3(Web3.givenProvider);
 //this is a function that gets accounts from the slice
 export const getRequestWalletArr = (state: any) => state.register.accounts;
 const baseURL = 'https://ociuozqx85.execute-api.us-east-1.amazonaws.com/receipt';
@@ -40,7 +37,7 @@ function* mintNFISaga(actionObject: any):any {
     // yield console.table(actionObject.payload)
     // yield console.log(actionObject.payload.name)
 
-    const web3 = new Web3(Web3.givenProvider);
+    //const web3 = new Web3(Web3.givenProvider);
     const papermastersNFIContract = new web3.eth.Contract(MintABI.abi as any, MintABI.networks['1666700000'].address);
 
     const alreadyMinted = yield call(papermastersNFIContract.methods.addressHasTokenBool(requestWalletArr[0]).call, {from: requestWalletArr[0]})
@@ -66,7 +63,7 @@ function* mintNFISaga(actionObject: any):any {
     //TODO: get fee variable from contract and replace the 'value'
     try {
         const mintResult: any = yield call(prepareResult.send, {from: requestWalletArr[0], value: 100000000000000000});
-        yield put(mintSucceededSuccessful('success'));
+
         console.log("mint sent!");
         //why do I need a minting error here?
         yield put(mintingError(""))
@@ -105,23 +102,31 @@ function* mintNFISaga(actionObject: any):any {
         console.log('this is the NFIMintedReturnValues:')
          console.log(NFIMintedReturnValues);
 
-        const dataToSend = {
-            walletAccount: walletAccount,
-            gasUsed: gasUsed,
-            contractAccount: contractAccount,
-            transactionHash: transHashString,
-            tokenID: tokenID,
-            timeStamp: timeStamp,
-            contractFee: contractFee,
-            identityStruct: identStruct
-        }
-        console.log("this is the data to send to accountDB")
-        console.log(dataToSend)
+        const status = yield mintResult.status;
+        console.log(`this is the from walletAccount: ${status}` );
+        yield put(statusBC(status))
 
-        const axiosPUT = yield call(axios.put, baseURL, dataToSend)
-        console.log(axiosPUT)
-        // axios.put(baseURL, `${transHashString}`)
-        //     .then((response) => {console.log(response.data) });
+        if(status){
+            const dataToSend = {
+                walletAccount: walletAccount,
+                gasUsed: gasUsed,
+                contractAccount: contractAccount,
+                transactionHash: transHashString,
+                tokenID: tokenID,
+                timeStamp: timeStamp,
+                contractFee: contractFee,
+                identityStruct: identStruct
+            }
+            console.log("this is the data to send to accountDB:", dataToSend)
+
+            const axiosPUT = yield call(axios.put, baseURL, dataToSend)
+            console.log('axiosPUT for dataToSend mint receipt:', axiosPUT)
+
+            yield put(mintSucceededSuccessful('success'));
+        } else{
+            yield put(mintSucceededSuccessful('failed'))
+        }
+
     } catch (mintFailed: any) {
         yield put(mintSucceededSuccessful('failed'))
         yield put(mintingError(`${mintFailed.message}, ${mintFailed.name}`))
@@ -130,7 +135,7 @@ function* mintNFISaga(actionObject: any):any {
 };
 
 function* getGasForMintSaga(actionObject: any):any {
-    const web3 = new Web3(Web3.givenProvider);
+    //const web3 = new Web3(Web3.givenProvider);
     const papermastersNFIContract = new web3.eth.Contract(MintABI.abi as any, MintABI.networks['1666700000'].address);
     const requestWalletArr: string[] = yield select(getRequestWalletArr);
 
@@ -153,7 +158,7 @@ function* getGasForMintSaga(actionObject: any):any {
             value: 100000000000000000
         });
         const getGasPrice = yield call(web3.eth.getGasPrice);
-
+        //const getGasPrice2 = yield call(web3.eth.gas_price);
         // const getGasPriceBN = yield ((getGasPrice:number)=>{const gasPrice = (getGasPrice/=1000000000)});
         //
         // if (getGasPrice > web3.utils.toWei(getGasPrice, 'ether')){
@@ -164,7 +169,7 @@ function* getGasForMintSaga(actionObject: any):any {
         console.log(`estimated gas price getPrice: ${getGasPrice}`);
         //console.log(`estimated gas price getPrice BN: ${getGasPriceBN}`);
 
-        //web3.utils.toWei(gasMintResult, "ether");
+        //console.log('gas converted to ether...', web3.utils.toWei(gasMintResult, "ether"));
 
         yield put(gasForMinting(gasMintResult));
 
@@ -174,41 +179,11 @@ function* getGasForMintSaga(actionObject: any):any {
     }
 }
 
-function* spiderBCforTransactionHashSaga(actionObject: any) {
-    const paramsWalletAcc = actionObject.payload;
-    //const currentBlock = web3.eth.blockNumber;
-    //const n = web3.eth.getTransactionCount(paramsWalletAcc, currentBlock);
-    //const bal = web3.eth.getBalance(paramsWalletAcc, currentBlock);
-    // for (var i = currentBlock; i >= 0 && (n > 0 || bal > 0); --i) {
-    //     try {
-    //         var block = eth.getBlock(i, true);
-    //         if (block && block.transactions) {{
-    //             block.transactions.forEach(function(e) {
-    //                 if (paramsWalletAcc == e.from) {
-    //                     if (e.from != e.to) {
-    //                         bal = bal.plus(e.value);
-    //                         console.log(i, e.from, e.to, e.value.toString(10));
-    //                         --n;
-    //                     }
-    //                     if(paramsWalletAcc = e.to) {
-    //                         if (e.from != e.to)
-    //                             bal = bal.minus(e.value);
-    //                         console.log(i, e.from, e.to, e.value.toString(10));
-    //                     }
-    //                 }
-    //             });
-    //         }}
-    //     } catch(e) {
-    //         console.error("Error for block " + i, e);
-    //     }
-    //}
-}
-
 
 export function* watchMintNFISaga() {
     yield takeLatest(mintNFIAsyncAction.type, mintNFISaga);
     yield takeLatest(gasForMintNFIAsyncAction.type, getGasForMintSaga);
-    yield takeLatest(spiderBCforTransactionHashAction.type, spiderBCforTransactionHashSaga);
+
 }
 
 

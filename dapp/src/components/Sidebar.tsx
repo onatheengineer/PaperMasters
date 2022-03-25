@@ -41,6 +41,9 @@ import {SiSololearn} from "react-icons/si";
 import {useAppSelector} from "../app/hooks";
 import identity from "./pages/Identity";
 import Report from "./pages/Report";
+import {accountsArr} from "../features/UserWalletSlice";
+
+
 
 
 interface InterfaceNavItem {
@@ -59,6 +62,7 @@ interface InterfaceSidebar{
 
 export const NavItem: FC<InterfaceNavItem> = ({ icon, title, active,
                                                   navItemSize, path} ) => {
+
 
     return (
             <Flex
@@ -94,7 +98,7 @@ export const NavItem: FC<InterfaceNavItem> = ({ icon, title, active,
 export const Sidebar: FC<InterfaceSidebar>= ({icon, profileName} ) => {
 
     const addressHasIdentity = useAppSelector((state) => state.minted.addressHasIdentity);
-
+    const accountArr = useAppSelector((state) => state.register.accounts);
 
     const location = useLocation();
     const navigate = useNavigate();
@@ -104,6 +108,7 @@ export const Sidebar: FC<InterfaceSidebar>= ({icon, profileName} ) => {
     const [headerTitle, setHeaderTitle] = useState<string>('');
     const [headerText, setHeaderText] = useState<string>('');
 
+    const {walletAcc} = useParams();
 
     useEffect(() => {
         console.log(location);
@@ -314,6 +319,11 @@ export const Sidebar: FC<InterfaceSidebar>= ({icon, profileName} ) => {
 
                     <Route path={'/identity/:walletAcc'} element={<Identity/>}/>
 
+                    {/*{walletAcc === undefined || walletAcc === 'undefined' || walletAcc.length === 0 ?*/}
+                    {/*    <Route path={'/identity/:walletAcc'} element={<Navigate replace to= "/identity/0x7C097941487f53bBdd39fddea7Bed9AEf3312ED5" />}/>*/}
+
+                    {/*:  <Route path={'/identity/:walletAcc'} element={<Identity/>}/>*/}
+                    {/*}*/}
                     {/*{addressHasIdentity ?*/}
                     {/*    <Route path={'/register'} element={<Navigate replace to="/search" />}/>*/}
                     {/*    :*/}
