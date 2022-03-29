@@ -18,7 +18,7 @@ import {
 import PMLogo from "../../assets/PaperMastersLogoGIMP.png";
 import {Link as ReachLink} from "react-router-dom";
 import {BsHeartFill} from "react-icons/bs";
-import {FaDiscord, FaGithub, FaInstagram, FaLinkedin, FaTwitter, FaYoutube} from "react-icons/fa";
+import {FaDiscord, FaGithub, FaInstagram, FaLinkedin, FaReddit, FaTwitter, FaYoutube} from "react-icons/fa";
 
 
 
@@ -143,7 +143,7 @@ export default function Footer(props: ButtonGroupProps) {
                                                                      color='pmpurple.11'
                                                                      style={{marginRight: "5px", marginLeft: "5px"}}/>
                         by The PaperMasters ~ working to bring protection and legitimacy to the Blockchain.</Text>
-                    <Stack direction={'row'} spacing={7}>
+                    <Stack direction={'row'} spacing={5}>
                         <SocialButton label={'Twitter'} href={'https://twitter.com/ramonajenny_n'}>
                             <FaTwitter/>
                         </SocialButton>
@@ -169,6 +169,9 @@ export default function Footer(props: ButtonGroupProps) {
                         </SocialButton>
                         <SocialButton label={'GitHub'} href={'https://discord.com/channels/ramonajenny#1512'}>
                             <FaDiscord/>
+                        </SocialButton>
+                        <SocialButton label={'GitHub'} href={'https://discord.com/channels/ramonajenny#1512'}>
+                            <FaReddit/>
                         </SocialButton>
                     </Stack>
                 </Container>

@@ -25,11 +25,12 @@ import MintABI from "../abiFiles/PaperMastersNFI.json";
 import {getOneReceiptFromDB, getOneWalletFromDB} from "./UserWalletSlice";
 import {createAction} from "@reduxjs/toolkit";
 
-const web3 = new Web3(Web3.givenProvider);
+const web3 = new Web3('https://api.s0.b.hmny.io');
+
 const papermastersNFIContract = new web3.eth.Contract(MintABI.abi as any, MintABI.networks['1666700000'].address);
 const baseURL = 'https://ociuozqx85.execute-api.us-east-1.amazonaws.com';
 export const requestParamsWallet = (state: any) => state.identUseParams.paramsWalletAcc;
-console.log('this is the requestParamsWallet', requestParamsWallet);
+
 
 function* identUseParamsSaga(actionObject:any):any {
     try {
@@ -69,18 +70,21 @@ function* identUseParamsSaga(actionObject:any):any {
 }
 
 function* addressHasIdentityBoolSaga(actionObject: any):any {
+    console.log('addressHasIdentityBoolSaga', actionObject)
     try {
-        if (actionObject.payload.length === 0) {
+        if(actionObject.payload.length === 0) {
+            console.log("actionObject.payload.length", actionObject.payload.length)
             yield put(addressHasIdentityBC(false))
             return;
         }
         const alreadyMintedBool = yield call(papermastersNFIContract.methods.addressHasTokenBool(actionObject.payload).call, {from: actionObject.payload})
         yield put(addressHasIdentityBC(alreadyMintedBool));
-        if (alreadyMintedBool) {
+        if(alreadyMintedBool) {
             yield put(addressToTokenIDAction(actionObject.payload));
         }
         console.log('have I already minted?:', alreadyMintedBool);
     } catch (addressHasTokenBoolFAILED: any) {
+        console.log('addressHasTokenBoolFAILED',addressHasTokenBoolFAILED.message)
         yield put(addressHasIdentityBC(false))
     }
 };
@@ -116,9 +120,9 @@ function* requestAccountDictionarySaga(actionObject: any): any {
     try{
         const requestAccountDic = yield call(axios.get, `${baseURL}/account/${actionObject.payload}`);
         yield put(requestAccountDictionary(requestAccountDic.data.Item));
-        console.log ('this is the type of requestAccountDictionaryAction:', requestAccountDic);
+        console.log ('requestAccountDictionaryAction:', requestAccountDic);
     } catch (e) {
-        console.log(`this is the requestAccountDictionaryAction ERROR catch: ${e}`);
+        console.log(`requestAccountDictionaryAction ERROR catch: ${e}`);
     }
 };
 
@@ -128,9 +132,9 @@ function* requestReceiptUsingParamsSaga(actionObject: any): any {
         const requestReceiptParams = yield call(axios.get, `${baseURL}/receipt/${actionObject.payload}`);
         console.log('requestReceiptParams from Saga:', requestReceiptParams)
         yield put(requestReceiptUsingParams(requestReceiptParams.data.Item));
-        console.log ('this is the requestReceiptParams:', requestReceiptParams);
+        console.log ('requestReceiptParams:', requestReceiptParams);
     } catch (e) {
-        console.log(`this is the requestReceiptParams ERROR catch: ${e}`);
+        console.log(`requestReceiptParams ERROR catch: ${e}`);
     }
 };
 

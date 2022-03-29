@@ -9,13 +9,25 @@ import {
 } from "@chakra-ui/react";
 import {useMemo} from "react";
 import {useAppSelector} from "../../app/hooks";
-import {FaDiscord, FaFacebook, FaInstagram, FaLinkedin, FaPlus, FaTwitch, FaTwitter, FaYoutube} from "react-icons/fa";
+import {
+    FaDiscord,
+    FaFacebook, FaGithub,
+    FaInstagram,
+    FaLinkedin,
+    FaPlus,
+    FaReddit,
+    FaTwitch,
+    FaTwitter,
+    FaYoutube
+} from "react-icons/fa";
 import {ChevronDownIcon} from "@chakra-ui/icons";
 import {BsFillPersonLinesFill} from "react-icons/bs";
+import {TiSocialAtCircular} from "react-icons/ti";
 import {openseaIcon} from "../../assets/icons/openseaIcon";
 import {openseaIcon2} from "../../assets/icons/openseaIcon2";
 import {IconType} from "react-icons";
 import {openseaIcon3} from "../../assets/icons/openseaIcon3";
+import {MdOutlinePeopleOutline} from "react-icons/md";
 
 interface iconLinkInterface{
     children: any,
@@ -53,6 +65,7 @@ interface socialMediaInterface {
 
 export const SocialMedia:FC<socialMediaInterface>=()=> {
     const {walletAccount} = useParams();
+    const socialMediaDictionaryBool = useAppSelector( (state ) => state.identUseParams.socialMediaDictionaryBool);
 
     return (
         <Box
@@ -65,47 +78,66 @@ export const SocialMedia:FC<socialMediaInterface>=()=> {
             m={'0px'}
         >
             <HStack
-            spacing={4}
-            alignItems={'center'}
+                spacing={4}
+                alignItems={'center'}
             >
+
                 <Stack direction='row' spacing={2}>
-                <IconLinkComponent
-                    hrefLink={'https://papermasters.io'}>
-                    <Icon as={FaDiscord}/>
-                </IconLinkComponent>
+                    {socialMediaDictionaryBool.Discord === "" ?
+                        <IconLinkComponent
+                            hrefLink={'https://papermasters.io'}>
+                            <Icon as={FaDiscord}/>
+                        </IconLinkComponent>
+                        : null
+                    }
+                    <IconLinkComponent
+                        hrefLink={'https://papermasters.io'}>
+                        <Icon as={FaTwitter}/>
+                    </IconLinkComponent>
+                    <IconLinkComponent
+                        hrefLink={'https://papermasters.io'}>
+                        <Icon as={FaLinkedin}/>
+                    </IconLinkComponent>
+                    <IconLinkComponent
+                        hrefLink={'https://papermasters.io'}>
+                        <Icon as={FaYoutube}/>
+                    </IconLinkComponent>
+                    <IconLinkComponent
+                        hrefLink={'https://papermasters.io'}>
+                        <Icon as={FaInstagram}/>
+                    </IconLinkComponent>
+
+                    <IconLinkComponent
+                        hrefLink={'https://papermasters.io'}>
+                        <Icon as={FaTwitch}/>
+                    </IconLinkComponent>
+
+                    <IconLinkComponent
+                        hrefLink={'https://papermasters.io'}>
+                        <Icon as={FaFacebook}/>
+                    </IconLinkComponent>
+                    <IconLinkComponent
+                        hrefLink={'https://papermasters.io'}>
+                        <Icon as={FaReddit}/>
+                    </IconLinkComponent>
+                    <IconLinkComponent
+                        hrefLink={'https://papermasters.io'}>
+                        <Icon as={FaGithub}/>
+                    </IconLinkComponent>
+                    <IconLinkComponent
+                        hrefLink={'https://papermasters.io'}>
+                        <Icon as={openseaIcon}/>
+                    </IconLinkComponent>
+                    <IconLinkComponent
+                        hrefLink={'https://papermasters.io'}>
+                        <Icon as={MdOutlinePeopleOutline}/>
+                    </IconLinkComponent>
+                    <IconLinkComponent
+                        hrefLink={'https://papermasters.io'}>
+                        <Icon as={MdOutlinePeopleOutline}/>
+                    </IconLinkComponent>
+
                 </Stack>
-                <IconLinkComponent
-                    hrefLink={'https://papermasters.io'}>
-                    <Icon as={FaTwitter}/>
-                </IconLinkComponent>
-                <IconLinkComponent
-                    hrefLink={'https://papermasters.io'}>
-                    <Icon as={FaLinkedin}/>
-                </IconLinkComponent>
-
-                <IconLinkComponent
-                    hrefLink={'https://papermasters.io'}>
-                    <Icon as={FaInstagram}/>
-                </IconLinkComponent>
-
-                <IconLinkComponent
-                    hrefLink={'https://papermasters.io'}>
-                    <Icon as={FaTwitch}/>
-                </IconLinkComponent>
-
-                <IconLinkComponent
-                    hrefLink={'https://papermasters.io'}>
-                    <Icon as={FaFacebook}/>
-                </IconLinkComponent>
-                <IconLinkComponent
-                    hrefLink={'https://papermasters.io'}>
-                    <Icon as={FaYoutube}/>
-                </IconLinkComponent>
-                <IconLinkComponent
-                    hrefLink={'https://papermasters.io'}>
-                    <Icon as={openseaIcon}/>
-                </IconLinkComponent>
-
             </HStack>
         </Box>
     )

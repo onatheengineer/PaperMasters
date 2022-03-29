@@ -14,8 +14,13 @@ import {useAppDispatch, useAppSelector} from "../../app/hooks";
 import PMLogo from '../../assets/PMGIMPResized.png';
 import Logo from '../../assets/Logo';
 import {ColorChangeHandler, ColorResult, SketchPicker, GithubPicker, RGBColor} from 'react-color';
-import {getOneReceiptFromDB, requestAccountsAsyncAction} from "../../features/UserWalletSlice";
-import {mintNFIAsyncAction, gasForMintNFIAsyncAction, mintingError} from "../../features/MintNFISlice";
+import {getOneReceiptFromDB, requestAccountsAsyncAction, watchUserWalletChannelAction} from "../../features/UserWalletSlice";
+import {
+    mintNFIAsyncAction,
+    gasForMintNFIAsyncAction,
+    mintingError,
+    gasAccBalanceAction
+} from "../../features/MintNFISlice";
 import mintNFI from "../../abiFiles/PaperMastersNFI.json";
 import {call} from "redux-saga/effects";
 import AvatarNFI from "../AvatarNFI";
@@ -47,10 +52,12 @@ export const Register: FC<InterfaceRegister>=()=> {
 
     const dispatch = useAppDispatch();
     const accountsArr = useAppSelector((state) => state.register.accounts);
-    const status = useAppSelector((state) => state.register.status);
+    const statusBool = useAppSelector((state) => state.register.status);
     const gasPrice = useAppSelector((state) => state.mint.gasPrice);
     const mintSucceeded = useAppSelector((state) => state.mint.mintSucceeded);
     const mintErrorReason = useAppSelector((state) => state.mint.mintErrorReason);
+    const accBalance = useAppSelector((state) => state.mint.accBalance);
+    const accBalanceErr = useAppSelector((state) => state.mint.accBalanceError);
 
     const [name, setName] = useState<string | "">("");
     const [profession, setProfession] = useState<string | "">("");
@@ -181,7 +188,9 @@ export const Register: FC<InterfaceRegister>=()=> {
     useEffect(() => {
         console.log('accountsArr', accountsArr.length)
         if (accountsArr.length === 0) {
+            dispatch(watchUserWalletChannelAction());
             dispatch(requestAccountsAsyncAction());
+            dispatch(gasAccBalanceAction(accountsArr[0]));
         }
     }, [accountsArr]);
 
@@ -204,6 +213,15 @@ const [modalDisplayTitle, modalDisplayText] = useMemo(() => {
         setIsModalOpen(true);
         return ([" Minted Successful!", 'You did it! You are now a registered PaperMaster, please navigate to your Identity page and update your portfolio.'])
     };
+    if (accBalanceErr.length > 0) {
+        setIsModalOpen(true);
+        return (["Account Balance Error", accBalanceErr ])
+    };
+    // if (statusBool === true) {
+    //     setIsModalOpen(true);
+    //     return ([" Minted Successful!", 'You did it! You are now a registered PaperMaster, please navigate to your Identity page and update your portfolio.'])
+    // };
+
     setIsModalOpen(false)
     return ([null,null])
 }, [accountsArr, userTokenIDtoIdentityStruct, getOneReceiptFromDB, addressHasIdentityBool, mintSucceeded ])
@@ -814,10 +832,9 @@ const [modalDisplayTitle, modalDisplayText] = useMemo(() => {
                 />
 
                 <Center>
-                    {name !== "" ?
+                    {name !== "" && accBalanceErr !== "" ?
                         <Button
-                            borderStyle={'solid'}
-                            border={'2px'}
+                            border={'1px solid'}
                             borderColor={'pmpurple.13'}
                             bg={'pmpurple.3'}
                             mt={"20px"}
@@ -828,19 +845,48 @@ const [modalDisplayTitle, modalDisplayText] = useMemo(() => {
                             }}
                             onClick={submitMintHandler}
                             isLoading={submitButtonClicked}
+                            px={'12px'}
                             loadingText='Submitting to the Blockchain for minting, this can take up to 2.5 minutes'
                             color={"pmpurple.13"}
                             variant='outline'
                         >
                             Submit
                         </Button>
-                        : null}
+                        :
+                        <Modal closeOnOverlayClick={false} blockScrollOnMount={true} isOpen={isModalOpen} onClose={() => {
+                            setIsModalOpen(false)
+                        }}>
+                            <ModalOverlay/>
+                            <ModalContent>
+                                <ModalHeader fontWeight="bold" color={'pmpurple.15'}>
+                                    {modalDisplayTitle}
+                                </ModalHeader>
+                                <ModalCloseButton/>
+                                <ModalBody pb={6}>
+                                    <Text mb="1rem" color={'pmpurple.15'}>
+                                        {modalDisplayText}
+                                        <br/>
+                                        <Text color={'gray.100'}>
+                                            {mintErrorReason}
+                                        </Text>
+
+                                    </Text>
+                                </ModalBody>
+                                <ModalFooter>
+                                    <Button color={"pmpurple.13"} mr={3} onClick={() => {
+                                        setIsModalOpen(false)
+                                    }}>
+                                        Close
+                                    </Button>
+                                </ModalFooter>
+                            </ModalContent>
+                        </Modal>
+                    }
                 </Center>
                 <Center>
                     {name !== "" ?
                     <Box
-                        borderStyle={'solid'}
-                        border={'2px'}
+                        border={'1px solid'}
                         borderColor={'pmpurple.13'}
                         bg={'pmpurple.3'}
                         mt={"20px"}

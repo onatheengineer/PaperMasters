@@ -28,6 +28,8 @@ export interface accountDictionaryInterface{
 
 
 interface RegisterState {
+    chainIdProvider: string;
+    chainIdErr:string;
     accounts: string[];
     status: 'idle' | 'loading' | 'success' | 'failed';
     putWalletInDBStatus:'idle' | 'succeeded to create new entry in DB' | 'failed because their is already an entry in DB';
@@ -38,6 +40,8 @@ interface RegisterState {
 }
 
 const initialState: RegisterState = {
+    chainIdProvider:"",
+    chainIdErr: "",
     accounts: [],
     status: 'idle',
     putWalletInDBStatus: "idle",
@@ -62,6 +66,14 @@ const UserWalletSlice = createSlice ({
     name: 'register',
     initialState,
     reducers: {
+        chainIdProvider(state, action){
+            //it's okay to do this because immer makes it immutable under the hood
+            state.chainIdProvider = action.payload;
+        },
+        chainIdErr(state, action){
+            //it's okay to do this because immer makes it immutable under the hood
+            state.chainIdErr = action.payload;
+        },
         accountsArr(state, action){
             //it's okay to do this because immer makes it immutable under the hood
             state.accounts = action.payload;
@@ -88,7 +100,7 @@ const UserWalletSlice = createSlice ({
 });
 
 console.log(UserWalletSlice);
-export const { accountsArr, statusOfArr, putWalletInDBStatus, getAllWalletFromDB, getOneWalletFromDB, getAllReceiptFromDB, getOneReceiptFromDB } = UserWalletSlice.actions;
+export const { chainIdProvider, chainIdErr, accountsArr, statusOfArr, putWalletInDBStatus, getAllWalletFromDB, getOneWalletFromDB, getAllReceiptFromDB, getOneReceiptFromDB } = UserWalletSlice.actions;
 
 export const requestAccountsAsyncAction = createAction("REQUEST_ACCOUNTS_ACTION_SAGA");
 export const putWalletInDBAction = createAction("PUT_WALLET_IN_DB_SAGA");
@@ -96,6 +108,7 @@ export const getAllWalletFromDBAction = createAction("GET_ALL_WALLET_IN_DB_SAGA"
 export const getOneWalletFromDBAction = createAction("GET_ONE_WALLET_IN_DB_SAGA");
 export const getAllReceiptFromDBAction = createAction("GET_ALL_RECEIPT_IN_DB_SAGA");
 export const getOneReceiptFromDBAction = createAction("GET_ONE_RECEIPT_IN_DB_SAGA");
+export const watchUserWalletChannelAction = createAction("WATCH_USER_WALLETCHANNEL");
 
 export default UserWalletSlice.reducer;
 

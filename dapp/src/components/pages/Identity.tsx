@@ -35,6 +35,8 @@ import ValidationsReports from "../identity/ValidationsReports";
 import {paramsWalletAccAction, paramsWalletAcc} from "../../features/IdentityPageUseParamsSlice";
 import ModalForIdentNoUseParams from '../identity/ModalForIdentNoUseParams';
 import {Route} from "react-router";
+import {AccountLedger} from '../identity/AccountLedger'
+
 
 interface Interface {
 
@@ -97,6 +99,12 @@ export const Identity:FC<Interface>=()=> {
     }, [paramsRequestAccountDictionary, paramsWalletAcc, paramsAddressHasIdentityBoolBC, requestReceiptUsingParams])
 
 
+    console.log('paramsWalletAcc.length:', paramsWalletAcc.length)
+    console.log('paramsAddressHasIdentityBoolBC:', paramsAddressHasIdentityBoolBC)
+    console.log('requestStructUsingParamsFromBC.walletAccount.length:', requestStructUsingParamsFromBC.walletAccount.length)
+
+
+
     return (
         <Box
             //border={'4px solid red'}
@@ -139,10 +147,15 @@ export const Identity:FC<Interface>=()=> {
                             {/*</Heading>*/}
                             <Box px="5px">
                                 <Flex direction="column">
+
+
                                     <Text fontSize="md" color={'pmpurple.13'} fontWeight="400" mb="12px"
-                                          align={'left'}>
+                                          align={'left'} >
+
                                         {logicDescriptionMemo}
                                     </Text>
+
+
                                 </Flex>
                             </Box>
                         </Box>
@@ -161,6 +174,7 @@ export const Identity:FC<Interface>=()=> {
                                 <Box w='380px' borderRadius='15px' bg='white' px="16px"
                                      py={'28px'} overflow={'none'} whiteSpace={'break-spaces'}
                                 >
+
                                     {paramsWalletAcc.length !== 0 && paramsAddressHasIdentityBoolBC !== false && requestStructUsingParamsFromBC.walletAccount.length !== 0 ?
 
                                         <AvatarNFI accountNumber={requestStructUsingParamsFromBC.walletAccount}
@@ -182,6 +196,8 @@ export const Identity:FC<Interface>=()=> {
                                                    originDate={parseInt(requestStructUsingParamsFromBC.originDate)}
                                         />
                                         :
+                                        <Center>
+
                                         <Button
                                             w={'100%'}
                                             bg={'pmpurple.2'}
@@ -200,6 +216,7 @@ export const Identity:FC<Interface>=()=> {
                                                   _hover={{textDecor: 'none'}}
                                                   cursor={'pointer'}
                                             >
+
                                                 <Text p='12px' textAlign={'center'} fontSize="xl" color={'pmpurple.13'}
                                                       fontWeight="bold" whiteSpace={'pre-wrap'}>
                                                     NFI will display here, please mint an NFI to your wallet account
@@ -210,6 +227,7 @@ export const Identity:FC<Interface>=()=> {
 
                                             </Link>
                                         </Button>
+                                        </Center>
                                     }
                                 </Box>
 
@@ -224,11 +242,21 @@ export const Identity:FC<Interface>=()=> {
                                         //w={'30vW'}
                                         //border={'4px solid blue'}
                                     >
-                                        <Text borderBottom={'1px solid'} borderColor={'pmpurple.4'} p='12px'
-                                              textAlign={'center'} fontSize="16px" color={'pmpurple.13'}
-                                              whiteSpace={'pre-wrap'}>
-                                            Account Ledger
+                                        {/*{provider === */}
+                                        <Text mb={'5px'} fontSize="17px" color={'pmpurple.13'}  align={'center'}>
+                                            Ethereum Ledger
                                         </Text>
+
+                                        {/*<Text mb={'5px'} fontSize="17px" color={'pmpurple.13'}  align={'center'}>*/}
+                                        {/*    HarmonyOne Ledger*/}
+                                        {/*</Text>*/}
+
+                                        <Divider
+                                        border={'1px solid'}
+                                        borderColor={'pmpurple.8'}
+                                        />
+
+                                        <AccountLedger/>
                                     </Box>
 
                                 </Box>

@@ -1,8 +1,8 @@
-import {Box, Divider, HStack, Spacer, Tooltip, VStack} from "@chakra-ui/react";
+import {Box, Divider, HStack, Spacer, Tooltip, VStack, Flex} from "@chakra-ui/react";
 import moment from "moment";
 import {BsCircleFill} from "react-icons/bs";
 import * as React from "react";
-import {FC} from "react";
+import {FC, useMemo} from "react";
 import {useAppSelector} from "../../../app/hooks";
 
 
@@ -13,29 +13,36 @@ interface Interface {
 export const DisplayMentions: FC<Interface>=({mentionsFullDisplayWindowBool})=> {
 
     const allMentionsArr = useAppSelector((state) => state.mentions.allMentions);
+    const sortedMentionArr = useMemo( ()=>{
+        const sortedMentionsArr = [...allMentionsArr];
+        sortedMentionsArr.sort((a,b)=>{return(b.timeStamp - a.timeStamp)});
+        return(sortedMentionsArr)
+    }, [allMentionsArr])
 
     return (
 
         <Box
-            // border={'1px solid'}
+             //border={'1px solid'}
             // borderColor={'pmpurple.4'}
             // borderRadius={'5px'}
             // bgColor={'pmpurple.2'}
             // p="5px"
             // m={'0px'}
              h={mentionsFullDisplayWindowBool ? '75vH' : '100%'}
-            // w={'100%'}
+             w={'100%'}
             // overflow={'auto'}
         >
-            {allMentionsArr.map((mention) => {
+            {sortedMentionArr.map((mention) => {
+
                     const timeStampFormatted = moment(mention.timeStamp).format('MMM DD YYYY, hh:mm:ss a');
                     const timeStampShortFormatted = moment(mention.timeStamp).format('MMM DD YYYY');
                     return (
+
                         <Box
                             //border={'2px solid red'}
                             // p="0px"
                             // mb={'12px'}
-                            // w={'100%'}
+                             //w={'100%'}
                             // fontSize={'15px'}
                         >
                             <HStack>
@@ -102,9 +109,11 @@ export const DisplayMentions: FC<Interface>=({mentionsFullDisplayWindowBool})=> 
                             </HStack>
                             <Divider/>
                         </Box>
+
                     )
                 }
             )}
+
         </Box>
 
     )

@@ -4,6 +4,22 @@ import {tokenIDtoIdentityStructInterface} from "./MintedNFISlice";
 import {BCReceiptInterface} from "./AccountSlice";
 
 
+
+interface SocialMediaDictionaryInterface{
+    Discord: string,
+    Twitter: string,
+    Linkedin: string,
+    YouTube:string,
+    Instagram:string,
+    Twitch: string,
+    Facebook: string,
+    Reddit:string,
+    GitHub:string,
+    OpenSea:string,
+    socialButtonGeneric1: string,
+    socialButtonGeneric2: string,
+}
+
 interface IdentityPageUseParamsSliceInterface{
     paramsWalletAcc: string,
     requestStructUsingParamsFromBC:tokenIDtoIdentityStructInterface,
@@ -11,7 +27,9 @@ interface IdentityPageUseParamsSliceInterface{
     requestAccountDictionary: accountDictionaryInterface,
     addressHasIdentityBC: boolean,
     addressToTokenID:number,
+    socialMediaDictionaryBool: SocialMediaDictionaryInterface,
 }
+
 
 const initialState: IdentityPageUseParamsSliceInterface = {
     paramsWalletAcc: "",
@@ -31,6 +49,21 @@ const initialState: IdentityPageUseParamsSliceInterface = {
     requestReceiptUsingParams: { walletAccount: "", gasUsed: "", contractAccount: "", transactionHash: "", tokenID: "", timeStamp: "", contractFee: "",   identityStruct: []},
     requestAccountDictionary: {walletAccount: "", walletAccountLink: '', linkToFinishedAvatar: "", ownerName:'', ownerEmail:'', ownerDescription:'', aliasProfileLinks:[], emailReportNotification: false, emailValidationNotification:false},
     addressHasIdentityBC: false,
+    socialMediaDictionaryBool: {
+        Discord: "",
+        Twitter: "",
+        Linkedin: "",
+        YouTube:"",
+        Instagram:"",
+        Twitch: "",
+        Facebook: "",
+        Reddit:"",
+        GitHub:"",
+        OpenSea:"",
+        socialButtonGeneric1: "",
+        socialButtonGeneric2: "",
+
+    }
 }
 
 
@@ -56,11 +89,13 @@ const IdentityPageUseParamsSlice = createSlice ({
         addressToTokenID(state, action) {
             state.addressToTokenID = action.payload
         },
-
+        socialMediaDictionaryBool(state, action) {
+            state.socialMediaDictionaryBool = action.payload
+        },
     }
     });
 
-export const {  paramsWalletAcc, requestStructUsingParamsFromBC, requestReceiptUsingParams, requestAccountDictionary, addressHasIdentityBC, addressToTokenID } = IdentityPageUseParamsSlice.actions;
+export const {  paramsWalletAcc, requestStructUsingParamsFromBC, requestReceiptUsingParams, requestAccountDictionary, addressHasIdentityBC, addressToTokenID, socialMediaDictionaryBool  } = IdentityPageUseParamsSlice.actions;
 
 export const paramsWalletAccAction= createAction<string>("IDENT_USEPARAMS_SAGA");
 export const requestStructUsingParamsFromBCAction= createAction<string>("REQUEST_STRUCT_FROM_BC_SAGA");

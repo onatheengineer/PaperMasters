@@ -6,6 +6,8 @@ interface MintState {
     gasPrice: number;
     mintErrorReason: string;
     statusBC:boolean;
+    accBalanceError:string;
+    accBalance: number;
 }
 
 const initialState: MintState = {
@@ -13,6 +15,8 @@ const initialState: MintState = {
     gasPrice: 0,
     mintErrorReason: "",
     statusBC: false,
+    accBalanceError: "",
+    accBalance: 0,
 };
 
 const MintNFISlice = createSlice ({
@@ -31,13 +35,20 @@ const MintNFISlice = createSlice ({
         statusBC(state, action) {
             state.statusBC = action.payload
         },
+        accBalance(state, action) {
+            state.accBalance = action.payload
+        },
+        accBalanceError(state, action) {
+            state.accBalanceError = action.payload
+        },
     },
 
 });
 
-export const { mintSucceededSuccessful, gasForMinting, mintingError, statusBC } = MintNFISlice.actions;
+export const { mintSucceededSuccessful, gasForMinting, mintingError, statusBC, accBalanceError, accBalance } = MintNFISlice.actions;
 export const mintNFIAsyncAction = createAction<{}>("MINT_NFI_SAGA");
 export const gasForMintNFIAsyncAction = createAction<{}>("GAS_FOR_MINT_NFI_SAGA");
+export const gasAccBalanceAction = createAction<{}>("GAS_ACC_BALANCE");
 
 
 export default MintNFISlice.reducer;

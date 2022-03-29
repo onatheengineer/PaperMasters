@@ -5,7 +5,11 @@ import Web3 from "web3";
 
 
 function* pauseSaga(){
-
+    try{
+        
+    }catch (e) {
+        
+    }
 };
 
 function* setBaseURISaga(){

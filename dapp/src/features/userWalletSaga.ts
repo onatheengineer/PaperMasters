@@ -1,15 +1,16 @@
-import {call, put, takeEvery, delay, all, takeLatest, select} from 'redux-saga/effects';
+import {call, put, take, takeEvery, delay, all, takeLatest, select, actionChannel} from 'redux-saga/effects';
 import Web3 from "web3";
 import {
     accountsArr, getAllWalletFromDB, getOneWalletFromDB,
     getAllWalletFromDBAction, getOneWalletFromDBAction,
     putWalletInDBAction,
     putWalletInDBStatus,
-    statusOfArr, getAllReceiptFromDBAction, getOneReceiptFromDBAction, getAllReceiptFromDB, getOneReceiptFromDB,
+    statusOfArr, getAllReceiptFromDBAction, getOneReceiptFromDBAction, getAllReceiptFromDB, getOneReceiptFromDB, watchUserWalletChannelAction, chainIdErr, chainIdProvider
 } from "./UserWalletSlice";
 import {requestAccountsAsyncAction} from "./UserWalletSlice";
 import axios from "axios";
 import {useParams} from "react-router-dom";
+import MintABI from "../abiFiles/PaperMastersNFI.json";
 
 
 //const walletAccountParamsLink = ()=>{ walletAccountParams = useParams()};
@@ -19,18 +20,40 @@ const baseURL = 'https://ociuozqx85.execute-api.us-east-1.amazonaws.com';
 const statusOfArrArr = (state: any) => state.register.status;
 const requestWalletArr = (state: any) => state.register.accounts;
 
+function* watchUserWalletChannelSaga( ):any{
+    const requestUserWalletChan = yield actionChannel('USER_WALLET_CHANNEL')
 
-function* userWalletSaga() {
+     while(true){
+        const {payload} = yield take(requestUserWalletChan)
+         yield call(handleRequest, payload)
+    }
+ }
+
+ function* handleRequest(payload:any){  console.log('handleRequst', payload) }
+
+
+function* userWalletSaga():any {
     yield put(statusOfArr("loading"));
     try {
         const web3 = new Web3(Web3.givenProvider);
-        const acc: string[] = yield call(web3.eth.requestAccounts as any);
-        const accLower = acc.map(element => {return element.toLowerCase();
-        })
-        console.log(`this is the web3 call for requestaccounts, this should be lowercase: ${accLower}`);
-        yield put(accountsArr(accLower));
-        yield put(statusOfArr('success'));
-        yield call(putWalletInDBSaga);
+        const chainId = yield call(web3.eth.getChainId);
+        yield put(chainIdProvider(chainId));
+        if(!MintABI.networks.hasOwnProperty(`${chainId}`)){
+            console.log('invalid chainId', chainId)
+            yield put(chainIdErr(`${chainId}`))
+            return;
+        }
+        console.log("Web3.givenProvider:", chainId)
+
+            const acc: string[] = yield call(web3.eth.requestAccounts as any);
+            const accLower = acc.map(element => {
+                return element.toLowerCase();
+            })
+            console.log(`this is the web3 call for requestaccounts, this should be lowercase: ${accLower}`);
+            yield put(accountsArr(accLower));
+            yield put(statusOfArr('success'));
+            yield call(putWalletInDBSaga);
+
     } catch (e) {
         console.log(`this is the web3 call for requestaccounts ERROR catch: ${e}`);
         yield put(statusOfArr("failed"));
@@ -104,6 +127,7 @@ export function* watchUserWalletSaga() {
     yield takeEvery(getOneWalletFromDBAction.type, getOneWalletFromDBSaga);
     yield takeEvery(getAllReceiptFromDBAction.type, getAllReceiptsFromDBSaga);
     yield takeEvery(getOneReceiptFromDBAction.type, getOneReceiptFromDBSaga);
+    yield takeEvery(watchUserWalletChannelAction.type, watchUserWalletChannelSaga);
 }
 
 

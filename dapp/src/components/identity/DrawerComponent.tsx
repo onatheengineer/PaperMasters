@@ -21,7 +21,18 @@ import {
 } from "@chakra-ui/react";
 import {useEffect, useMemo, useReducer, useRef, useState} from "react";
 import {useAppDispatch, useAppSelector} from "../../app/hooks";
-import {FaCube, FaFacebook, FaInstagram, FaTwitter, FaRegEdit, FaDiscord, FaLinkedin, FaYoutube, FaTwitch} from "react-icons/fa";
+import {
+    FaCube,
+    FaFacebook,
+    FaInstagram,
+    FaTwitter,
+    FaRegEdit,
+    FaDiscord,
+    FaLinkedin,
+    FaYoutube,
+    FaTwitch,
+    FaGithub, FaReddit
+} from "react-icons/fa";
 import {MdOutlineColorLens, MdOutlineQrCode, MdOutlinePeopleOutline, MdOutlineEmail} from "react-icons/md";
 import {BsFillPersonLinesFill} from "react-icons/bs";
 import {SketchPicker} from "react-color";
@@ -250,22 +261,6 @@ export const DrawerComponent:FC<Interface>=()=> {
                                         <HStack>
                                             <SocialButton label={'GitHub'}
                                                           href={'https://discord.com/channels/ramonajenny#1512'}>
-                                                <Icon as={openseaIcon}/>
-                                            </SocialButton>
-                                            <Input
-                                                focusBorderColor='pmpurple.9'
-                                                border={'1px solid'}
-                                                borderColor={'pmpurple.8'}
-                                                bg={'pmpurple.2'}
-                                                color='pmpurple.15'
-                                                //value={getDBAccountDictionary{${ownerName}}}
-                                                id='account Name'
-                                                //placeholder={getDBAccountDictionary{${ownerName}}}
-                                            />
-                                        </HStack>
-                                        <HStack>
-                                            <SocialButton label={'GitHub'}
-                                                          href={'https://discord.com/channels/ramonajenny#1512'}>
                                                 <FaYoutube/>
                                             </SocialButton>
                                             <Input
@@ -315,6 +310,54 @@ export const DrawerComponent:FC<Interface>=()=> {
                                             <SocialButton label={'GitHub'}
                                                           href={'https://discord.com/channels/ramonajenny#1512'}>
                                                 <FaFacebook/>
+                                            </SocialButton>
+                                            <Input
+                                                focusBorderColor='pmpurple.9'
+                                                border={'1px solid'}
+                                                borderColor={'pmpurple.8'}
+                                                bg={'pmpurple.2'}
+                                                color='pmpurple.15'
+                                                //value={getDBAccountDictionary{${ownerName}}}
+                                                id='account Name'
+                                                //placeholder={getDBAccountDictionary{${ownerName}}}
+                                            />
+                                        </HStack>
+                                        <HStack>
+                                            <SocialButton label={'GitHub'}
+                                                          href={'https://discord.com/channels/ramonajenny#1512'}>
+                                                <FaReddit/>
+                                            </SocialButton>
+                                            <Input
+                                                focusBorderColor='pmpurple.9'
+                                                border={'1px solid'}
+                                                borderColor={'pmpurple.8'}
+                                                bg={'pmpurple.2'}
+                                                color='pmpurple.15'
+                                                //value={getDBAccountDictionary{${ownerName}}}
+                                                id='account Name'
+                                                //placeholder={getDBAccountDictionary{${ownerName}}}
+                                            />
+                                        </HStack>
+                                        <HStack>
+                                            <SocialButton label={'GitHub'}
+                                                          href={'https://discord.com/channels/ramonajenny#1512'}>
+                                                <FaGithub/>
+                                            </SocialButton>
+                                            <Input
+                                                focusBorderColor='pmpurple.9'
+                                                border={'1px solid'}
+                                                borderColor={'pmpurple.8'}
+                                                bg={'pmpurple.2'}
+                                                color='pmpurple.15'
+                                                //value={getDBAccountDictionary{${ownerName}}}
+                                                id='account Name'
+                                                //placeholder={getDBAccountDictionary{${ownerName}}}
+                                            />
+                                        </HStack>
+                                        <HStack>
+                                            <SocialButton label={'GitHub'}
+                                                          href={'https://discord.com/channels/ramonajenny#1512'}>
+                                                <Icon as={openseaIcon}/>
                                             </SocialButton>
                                             <Input
                                                 focusBorderColor='pmpurple.9'

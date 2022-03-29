@@ -44,8 +44,6 @@ function reducer(state:any, action:any) {
     switch (action.type) {
         case 'paramsWallet':
             return {...state, walletAcc: action.payload};
-        case 'connectedWallet':
-            return {...state, fromWallet: action.payload};
         case 'messageBody':
             return {...state, messageBody: action.payload};
         case 'radioType':
@@ -56,6 +54,8 @@ function reducer(state:any, action:any) {
             return {...state, replyToMentionId: action.payload};
         case 'mentionId':
             return {...state, mentionId: action.payload};
+        case 'reset':
+            return {...state, messageBody: "", radioType: -1 };
         default:
             throw new Error();
     }
@@ -93,19 +93,10 @@ export const Mentions: FC<Interface>=()=> {
         }
     }, [walletAcc]);
 
-    useEffect(() => {
-        if (filledAccountsArr.length > 0) {
-            mentionsDictionary({
-                type: 'connectedWallet',
-                payload: filledAccountsArr[0]
-            });
-        }
-    }, [filledAccountsArr]);
-
     const submitMentionsHandler = () => {
         const mentionsSubmitStateDictionary: mentionsStateDictionaryInterface = {
             walletAcc: walletAcc as string,
-            fromWallet: state.fromWallet,
+            fromWallet: filledAccountsArr[0],
             messageBody: state.messageBody,
             radioType: state.radioType,
             fakeDelete: false,
@@ -114,11 +105,13 @@ export const Mentions: FC<Interface>=()=> {
             replyToMentionId: ""
         }
         dispatch(singleMentionAction(mentionsSubmitStateDictionary));
+        mentionsDictionary({
+            type: 'reset'
+        })
         onClose();
     }
     console.log('mentionsSubmitStateDictionary', state.mentionsSubmitStateDictionary)
     console.log('walletAcc', state.walletAcc)
-    console.log('fromWallet', state.fromWallet)
     console.log('messageBody', state.messageBody)
     console.log('radioType', state.radioType)
 
@@ -130,9 +123,9 @@ export const Mentions: FC<Interface>=()=> {
             h={'full'}
         >
             <Box
-            borderBottom={'1px solid'}
-            borderColor={'pmpurple.6'}
+
             >
+
                 <HStack>
                     <Heading mb="18px">
                         <Flex direction="column">
@@ -165,8 +158,12 @@ export const Mentions: FC<Interface>=()=> {
                         </Text>
                     </Button>
                 </HStack>
-            </Box>
 
+            </Box>
+            <Divider
+                border={'1px solid'}
+                borderColor={'pmpurple.8'}
+            />
 
 
             <Box

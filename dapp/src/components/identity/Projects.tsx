@@ -51,8 +51,8 @@ export const Projects:FC<Interface>=()=> {
             >
                 <Box
                     //border={'1px solid blue'}
-                    borderBottom={'1px solid'}
-                    borderColor={'pmpurple.6'}
+                    // borderBottom={'1px solid'}
+                    // borderColor={'pmpurple.6'}
                 >
                     <HStack>
                         <Heading mb="18px">
@@ -84,7 +84,10 @@ export const Projects:FC<Interface>=()=> {
                         </Button>
                     </HStack>
                 </Box>
-
+                <Divider
+                    border={'1px solid'}
+                    borderColor={'pmpurple.8'}
+                />
                 <Box px="5px"
                      //border={'1px solid orange'}
                 >

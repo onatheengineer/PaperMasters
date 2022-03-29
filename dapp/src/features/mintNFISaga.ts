@@ -1,4 +1,4 @@
-import { call, put, takeEvery, delay, all, takeLatest, select} from 'redux-saga/effects';
+import { call, put, takeEvery, delay, all, takeLatest, select, fork, actionChannel} from 'redux-saga/effects';
 import Web3 from "web3";
 import axios from "axios";
 import RegisterSlice, {accountsArr, requestAccountsAsyncAction, statusOfArr} from "./UserWalletSlice";
@@ -7,10 +7,11 @@ import {
     mintSucceededSuccessful,
     gasForMintNFIAsyncAction,
     gasForMinting, statusBC,
-    mintingError,
+    mintingError, gasAccBalanceAction, accBalance, accBalanceError,
 } from "./MintNFISlice";
 import MintABI from '../abiFiles/PaperMastersNFI.json'
 import {useState} from "react";
+import {catchRejection} from "@reduxjs/toolkit/dist/listenerMiddleware/utils";
 
 const web3 = new Web3(Web3.givenProvider);
 //this is a function that gets accounts from the slice
@@ -135,7 +136,7 @@ function* mintNFISaga(actionObject: any):any {
 };
 
 function* getGasForMintSaga(actionObject: any):any {
-    //const web3 = new Web3(Web3.givenProvider);
+
     const papermastersNFIContract = new web3.eth.Contract(MintABI.abi as any, MintABI.networks['1666700000'].address);
     const requestWalletArr: string[] = yield select(getRequestWalletArr);
 
@@ -175,15 +176,36 @@ function* getGasForMintSaga(actionObject: any):any {
 
     } catch (gasEstimationError) {
         yield put(gasForMinting('failed'))
-        console.log(gasEstimationError)
+        console.log('gasEstimationError:',gasEstimationError)
+    }
+}
+
+function* gasAccBalanceSaga(actionObject: any):any {
+
+    const requestWalletArr: string[] = yield select(getRequestWalletArr);
+
+    try {
+        if(requestWalletArr.length > 0) {
+            const getAccBalance = yield web3.eth.getBalance(requestWalletArr[0])
+            console.log('getAccBalance',getAccBalance)
+            yield put(accBalance(getAccBalance));
+        } else{
+            console.log('Account Error')
+        }
+
+    } catch (accBalanceErr:any) {
+        console.log('accBalanceErrorMessage:', accBalanceErr.message)
+        yield put(accBalanceError(accBalanceErr));
     }
 }
 
 
-export function* watchMintNFISaga() {
-    yield takeLatest(mintNFIAsyncAction.type, mintNFISaga);
-    yield takeLatest(gasForMintNFIAsyncAction.type, getGasForMintSaga);
 
-}
+    export function* watchMintNFISaga() {
+        yield takeLatest(mintNFIAsyncAction.type, mintNFISaga);
+        yield takeLatest(gasForMintNFIAsyncAction.type, getGasForMintSaga);
+        yield takeLatest(gasAccBalanceAction.type, gasAccBalanceSaga);
+
+    }
 
 

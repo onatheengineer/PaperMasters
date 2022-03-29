@@ -30,6 +30,7 @@ export const ValidationsReports:FC<Interface>=()=> {
             <Heading>
                 <Tabs isFitted variant='enclosed'>
                     <TabList color={'pmpurple.13'}>
+
                         <Tab>Validations</Tab>
                         <Tab>Reports</Tab>
                     </TabList>
@@ -71,11 +72,7 @@ export const ValidationsReports:FC<Interface>=()=> {
                         </TabPanel>
                     </TabPanels>
                 </Tabs>
-
             </Heading>
-
-
-
     )
 
 };
