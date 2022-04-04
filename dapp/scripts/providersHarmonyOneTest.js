@@ -1,3 +1,4 @@
+import {useAppSelector} from "../src/app/hooks";
 
 const { Harmony } = require('@harmony-js/core');
 const { ChainID, ChainType } = require('@harmony-js/utils');
@@ -16,7 +17,7 @@ const baseURL = 'https://ociuozqx85.execute-api.us-east-1.amazonaws.com';
         ]
     });
 
-        const axiosPOSTtxHistory = await axios.post('https://api.s0.b.hmny.io', {
+        export const axiosPOSTtxHistory = await axios.post('https://api.s0.b.hmny.io', {
             "jsonrpc": "2.0",
             "id": 1,
             "method": "hmyv2_getTransactionsHistory",

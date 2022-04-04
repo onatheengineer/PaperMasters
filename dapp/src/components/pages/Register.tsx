@@ -4,9 +4,37 @@ import Web3 from "web3";
 //import {getFilledAccountsArr}
 import type {FC} from 'react';
 import {
-    FormControl, FormLabel, Input, Stack, Box, Button, Heading, Text, Flex, Center, FormErrorMessage, Divider,
-    InputGroup, InputRightAddon, InputRightElement, PopoverContent, PopoverBody, PopoverTrigger, Popover, Portal, MenuItem,
-    InputLeftElement, Modal, ModalOverlay, ModalContent, ModalHeader, ModalFooter, ModalBody, ModalCloseButton
+    FormControl,
+    FormLabel,
+    Input,
+    Stack,
+    Box,
+    Button,
+    Heading,
+    Text,
+    Flex,
+    Center,
+    FormErrorMessage,
+    Divider,
+    InputGroup,
+    InputRightAddon,
+    InputRightElement,
+    PopoverContent,
+    PopoverBody,
+    PopoverTrigger,
+    Popover,
+    Portal,
+    MenuItem,
+    InputLeftElement,
+    Modal,
+    ModalOverlay,
+    ModalContent,
+    ModalHeader,
+    ModalFooter,
+    ModalBody,
+    ModalCloseButton,
+    Container, VStack, SimpleGrid, GridItem, Select,
+    useBreakpointValue,
 } from '@chakra-ui/react';
 import {FaFacebook, FaGithub, FaGoogle, FaScroll} from 'react-icons/fa';
 import { MdOutlineColorLens} from 'react-icons/md';
@@ -194,743 +222,873 @@ export const Register: FC<InterfaceRegister>=()=> {
         }
     }, [accountsArr]);
 
-const [modalDisplayTitle, modalDisplayText] = useMemo(() => {
-    if (accountsArr.length === 0) {
-        setIsModalOpen(true);
-        return ( [ 'Connect Wallet Account for Access',"Please go to MetaMask and connect your wallet account."] )
-    };
-    if (addressHasIdentityBool && mintSucceeded==='idle') {
-        setIsModalOpen(true);
-        return (['You have already Minted', <span>Connected wallet account is already registered, each wallet account can have only one identity. <br/><br/> In the future, you will be able to mint an NFI for each contract that you own.</span> ]
-        )
-    };
-    if ( mintSucceeded==='failed') {
-        setIsModalOpen(true);
-        return ([ 'Minting failed' , <span> Noooo, what happened! Please email Ramona with the details @ ramonajenny.n@gmail.com.</span>]
-        )
-    };
-    if (mintSucceeded==='succeeded') {
-        setIsModalOpen(true);
-        return ([" Minted Successful!", 'You did it! You are now a registered PaperMaster, please navigate to your Identity page and update your portfolio.'])
-    };
-    if (accBalanceErr.length > 0) {
-        setIsModalOpen(true);
-        return (["Account Balance Error", accBalanceErr ])
-    };
-    // if (statusBool === true) {
-    //     setIsModalOpen(true);
-    //     return ([" Minted Successful!", 'You did it! You are now a registered PaperMaster, please navigate to your Identity page and update your portfolio.'])
-    // };
+    const [modalDisplayTitle, modalDisplayText] = useMemo(() => {
+        if (accountsArr.length === 0) {
+            setIsModalOpen(true);
+            return (['Connect Wallet Account for Access', "Please go to MetaMask and connect your wallet account."])
+        }
+        ;
+        if (addressHasIdentityBool && mintSucceeded === 'idle') {
+            setIsModalOpen(true);
+            return (['You have already Minted',
+                    <span>Connected wallet account is already registered, each wallet account can have only one identity. <br/><br/> In the future, you will be able to mint an NFI for each contract that you own.</span>]
+            )
+        }
+        ;
+        if (mintSucceeded === 'failed') {
+            setIsModalOpen(true);
+            return (['Minting failed',
+                    <span> Noooo, what happened! Please email Ramona with the details @ ramonajenny.n@gmail.com.</span>]
+            )
+        }
+        ;
+        if (mintSucceeded === 'succeeded') {
+            setIsModalOpen(true);
+            return ([" Minted Successful!", 'You did it! You are now a registered PaperMaster, please navigate to your Identity page and update your portfolio.'])
+        }
+        ;
+        if (accBalanceErr.length > 0) {
+            setIsModalOpen(true);
+            return (["Account Balance Error", accBalanceErr])
+        }
+        ;
+        // if (statusBool === true) {
+        //     setIsModalOpen(true);
+        //     return ([" Minted Successful!", 'You did it! You are now a registered PaperMaster, please navigate to your Identity page and update your portfolio.'])
+        // };
 
-    setIsModalOpen(false)
-    return ([null,null])
-}, [accountsArr, userTokenIDtoIdentityStruct, getOneReceiptFromDB, addressHasIdentityBool, mintSucceeded ])
+        setIsModalOpen(false)
+        return ([null, null])
+    }, [accountsArr, userTokenIDtoIdentityStruct, getOneReceiptFromDB, addressHasIdentityBool, mintSucceeded])
 
     return (
-        <Flex
-            w={"100%"}
-            align="center"
-            //border={'2px solid blue'}
-            px={'68px'}
-            py={'20px'}
+        <Box
+            h={'100%'}
+            p={[0, 1, 20]}
+            //border={'2px solid red'}
         >
-            <Box
-                w={"50%"}
-                h={"98%"}
-                border={'2px solid'}
-                borderColor={'pmpurple.13'}
-                mx={{xl: '8px'}}
-                borderRadius='15px'
-                py="22px" px="56px"
-                my={{xl: "16px"}}
-                bg={'pmpurple.1'}
+            <Flex
+                h={{base: 'auto', md: '100%'}}
+                direction={{base: "column", xl: 'row'}}
+                //border={'2px solid blue'}
+                justifyContent={'space-evenly'}
+                alignItems={'flex-center'}
+                alignContent={'space-evenly'}
+                gap={6}
             >
-                <Heading textAlign="center" size="xl" fontWeight="extrabold">
-                    Mint PaperMaster NFI
-                </Heading>
+                <VStack
+                    w={'full'}
+                    py={6}
+                    px={10}
+                    bg={'pmpurple.1'}
+                    borderRadius='15px'
+                    border={'4px solid'}
+                    borderColor={'pmpurple.12'}
+                >
 
-                <Text mt="4" mb="8px" color={'pmpurple.13'} align="center" maxW="100%" fontWeight="medium">
-                    PaperMaster Identities are permanent Blockchain PaperMaster
-                    Non-Fungible-Identity, future changes require additional minting, please proofread! Only one NFI per
-                    account.
-                    If you are minting your company, please make sure you use your company's wallet account.
-                </Text>
-
-                <Divider py={'0px'} color={'pmpurple.8'}/>
-
-                <Stack spacing="5">
-                    <Popover>
-                        <PopoverTrigger>
-                            <Button
-                                //w={'100%'}
-                                mt={'32px'}
-                                bg={bgRGB.hex}
-                                h='2.00rem'
-                                size='mg'
-                                rounded={'md'}
-                                borderStyle={'solid'}
-                                border={'1px'}
-                                borderColor={'pmpurple.4'}
-                                _hover={{
-                                    transform: 'translateY(-2px)',
-                                    boxShadow: 'lg',
-                                }}
-                                onClick={() => {
-                                    setWhichColorField('colorBG')
-                                }}
-                            >
-
-                                <Text px={'20px'} color={"pmpurple.10"}> Set NFI Background Color </Text>
-                                <MdOutlineColorLens fontSize={'20px'} color={"#9c7e9c"}/>
-                                <InputRightElement m='3px' textAlign={'center'}
-                                                   children={<Button bg='pmpurple.9' size='xs' onClick={() => {
-                                                       setbgRGB(defaultColorBG)
-                                                   }}> Reset</Button>}/>
-                            </Button>
-                        </PopoverTrigger>
-
-                        <Portal>
-                            <PopoverContent
-                                bg='transparent'
-                                border={'1px'}
-                                w={'50px'}
-                                p={'0px'}
-                                m={'0px'}
-                                h={'50px'}
-                            >
-                                <PopoverBody>
-                                    <Box position={'absolute'} zIndex={'2'}>
-                                        <SketchPicker
-                                            color={bgRGB.rgb}
-                                            onChange={colorChangeHandler}
-                                            onSwatchHover={(colorHover: any) => {
-                                                console.log(colorHover);
+                    <VStack
+                        alignItems={'center'}
+                        //border={'2px solid green'}
+                    >
+                        <Heading color={'pmpurple.13'} size="xl">
+                            Mint PaperMaster NFI
+                        </Heading>
+                        <Text color={'pmpurple.13'} align="center" fontWeight="medium">
+                            PaperMaster Identities are permanent Blockchain PaperMaster
+                            Non-Fungible-Identity, future changes require additional minting, please proofread! Only one
+                            NFI per
+                            account.
+                            If you are minting your company, please make sure you use your company's wallet account.
+                        </Text>
+                        <Divider color={'pmpurple.8'}/>
+                        <SimpleGrid columns={1} columnGap={1} rowGap={8} w={'full'}>
+                            <GridItem colSpan={1}>
+                                <Popover>
+                                    <PopoverTrigger>
+                                        <Button
+                                            w={'100%'}
+                                            mt={'32px'}
+                                            bg={bgRGB.hex}
+                                            h='2.00rem'
+                                            size='mg'
+                                            rounded={'md'}
+                                            borderStyle={'solid'}
+                                            border={'1px'}
+                                            borderColor={'pmpurple.4'}
+                                            _hover={{
+                                                transform: 'translateY(-2px)',
+                                                boxShadow: 'lg',
                                             }}
+                                            onClick={() => {
+                                                setWhichColorField('colorBG')
+                                            }}
+                                        >
+
+                                            <Text px={'20px'} color={"pmpurple.10"}> Set NFI Background Color </Text>
+                                            <MdOutlineColorLens fontSize={'20px'} color={"#9c7e9c"}/>
+                                            <InputRightElement m='3px' textAlign={'center'}
+                                                               children={<Button bg='pmpurple.9' size='xs'
+                                                                                 onClick={() => {
+                                                                                     setbgRGB(defaultColorBG)
+                                                                                 }}> Reset</Button>}/>
+                                        </Button>
+                                    </PopoverTrigger>
+                                    <Portal>
+                                        <PopoverContent
+                                            bg='transparent'
+                                            border={'1px'}
+                                            w={'50px'}
+                                            p={'0px'}
+                                            m={'0px'}
+                                            h={'50px'}
+                                        >
+                                            <PopoverBody>
+                                                <Box position={'absolute'} zIndex={'2'}>
+                                                    <SketchPicker
+                                                        color={bgRGB.rgb}
+                                                        onChange={colorChangeHandler}
+                                                        onSwatchHover={(colorHover: any) => {
+                                                            console.log(colorHover);
+                                                        }}
+                                                    />
+                                                </Box>
+                                            </PopoverBody>
+                                        </PopoverContent>
+                                    </Portal>
+                                </Popover>
+                            </GridItem>
+                            <GridItem colSpan={1}>
+
+                                <FormControl isRequired>
+                                    <FormLabel htmlFor='name' color={'pmpurple.13'} mb={'2px'}>Name</FormLabel>
+                                    <InputGroup size='md'>
+                                        <Input focusBorderColor='pmpurple.9'
+                                               borderColor={"pmpurple.4"}
+                                               id='name'
+                                               pl={'62px'}
+                                               placeholder='name, company'
+                                               isDisabled={submitButtonClicked}
+                                               onChange={nameHandler}
+                                               color={'pmpurple.15'}
                                         />
-                                    </Box>
-                                </PopoverBody>
-                            </PopoverContent>
-                        </Portal>
-                    </Popover>
-
-
-                    <FormControl isRequired>
-                        <FormLabel htmlFor='name' color={'pmpurple.13'} mb={'2px'}>Name</FormLabel>
-                        <InputGroup size='md'>
-                            <Input focusBorderColor='pmpurple.9' borderColor={"pmpurple.4"} id='name' pl={'62px'}
-                                   placeholder='name, company'
-                                   isDisabled={submitButtonClicked}
-                                   onChange={nameHandler}
-                                   color={'pmpurple.15'}
-                            />
-                            <InputRightAddon p='0' borderColor={"pmpurple.4"} bg={'pmpurple.3'}
-                                             children={<Button size='xs' color={"pmpurple.10"} onClick={() => {
-                                                 setColorTextName(defaultColorText)
-                                             }}> Reset</Button>}/>
-                            <InputLeftElement
-                                width='3.5rem'
-                            >
-                                <Popover>
-                                    <PopoverTrigger>
-                                        <Button
-                                            //w={'100%'}
-                                            borderStyle={'solid'}
-                                            border={'1px'}
-                                            borderColor={'pmpurple.13'}
-                                            m={'4px'}
-                                            bg={colorTextName.hex}
-                                            h='1.75rem'
-                                            size='sm'
-                                            rounded={'md'}
-                                            _hover={{
-                                                transform: 'translateY(-2px)',
-                                                boxShadow: 'lg',
-                                            }}
-                                            onClick={() => {
-                                                setWhichColorField('name')
-                                            }}
+                                        <InputRightAddon p='0' borderColor={"pmpurple.4"} bg={'pmpurple.3'}
+                                                         children={<Button size='xs' color={"pmpurple.10"}
+                                                                           onClick={() => {
+                                                                               setColorTextName(defaultColorText)
+                                                                           }}> Reset</Button>}/>
+                                        <InputLeftElement
+                                            width='3.5rem'
                                         >
-                                            <MdOutlineColorLens fontSize={'20px'}/>
-
-                                        </Button>
-                                    </PopoverTrigger>
-
-                                    <Portal>
-                                        <PopoverContent
-                                            bg='transparent'
-                                            border={'1px'}
-                                            w={'50px'}
-                                            p={'0px'}
-                                            m={'0px'}
-                                            h={'50px'}
-                                        >
-                                            <PopoverBody>
-
-                                                <Box position={'absolute'} zIndex={'2'}>
-                                                    <SketchPicker
-                                                        color={colorTextName.rgb}
-                                                        onChange={colorChangeHandler}
-                                                        onSwatchHover={(colorHover: any) => {
-                                                            console.log(colorHover);
+                                            <Popover>
+                                                <PopoverTrigger>
+                                                    <Button
+                                                        //w={'100%'}
+                                                        borderStyle={'solid'}
+                                                        border={'1px'}
+                                                        borderColor={'pmpurple.13'}
+                                                        m={'4px'}
+                                                        bg={colorTextName.hex}
+                                                        h='1.75rem'
+                                                        size='sm'
+                                                        rounded={'md'}
+                                                        _hover={{
+                                                            transform: 'translateY(-2px)',
+                                                            boxShadow: 'lg',
                                                         }}
-                                                    />
-                                                </Box>
-                                            </PopoverBody>
-                                        </PopoverContent>
-                                    </Portal>
-                                </Popover>
-
-                            </InputLeftElement>
-                        </InputGroup>
-
-                        <FormErrorMessage>Field is required.</FormErrorMessage>
-                    </FormControl>
-
-                    <FormControl isRequired>
-                        <FormLabel htmlFor='email' color={'pmpurple.13'} mb={'2px'}>Email</FormLabel>
-                        <InputGroup size='md'>
-                            <Input focusBorderColor='pmpurple.9' borderColor={"pmpurple.4"} id='email' pl={'62px'}
-                                   placeholder='email'
-                                   isDisabled={submitButtonClicked}
-                                   onChange={emailHandler}
-                                   color={'pmpurple.15'}
-                            />
-                            <InputRightAddon p='0' borderColor={"pmpurple.4"} bg={'pmpurple.3'}
-                                             children={<Button size='xs' color={"pmpurple.10"} onClick={() => {
-                                                 setColorTextEmail(defaultColorText)
-                                             }}> Reset</Button>}/>
-                            <InputLeftElement
-                                width='3.5rem'
-                            >
-                                <Popover>
-                                    <PopoverTrigger>
-                                        <Button
-                                            //w={'100%'}
-                                            borderStyle={'solid'}
-                                            border={'1px'}
-                                            borderColor={'pmpurple.13'}
-                                            m={'4px'}
-                                            bg={colorTextEmail.hex}
-                                            h='1.75rem'
-                                            size='sm'
-                                            rounded={'md'}
-                                            _hover={{
-                                                transform: 'translateY(-2px)',
-                                                boxShadow: 'lg',
-                                            }}
-                                            onClick={() => {
-                                                setWhichColorField('email')
-                                            }}
-                                        >
-                                            <MdOutlineColorLens fontSize={'20px'}/>
-                                        </Button>
-                                    </PopoverTrigger>
-
-                                    <Portal>
-                                        <PopoverContent
-                                            bg='transparent'
-                                            border={'1px'}
-                                            w={'50px'}
-                                            p={'0px'}
-                                            m={'0px'}
-                                            h={'50px'}
-                                        >
-                                            <PopoverBody>
-
-                                                <Box position={'absolute'} zIndex={'2'}>
-
-                                                    <SketchPicker
-                                                        color={colorTextEmail.rgb}
-                                                        onChange={colorChangeHandler}
-                                                        onSwatchHover={(colorHover: any) => {
-                                                            console.log(colorHover);
+                                                        onClick={() => {
+                                                            setWhichColorField('name')
                                                         }}
-                                                    />
-                                                </Box>
-                                            </PopoverBody>
-                                        </PopoverContent>
-                                    </Portal>
-                                </Popover>
-                            </InputLeftElement>
-                        </InputGroup>
+                                                    >
+                                                        <MdOutlineColorLens fontSize={'20px'}/>
 
-                    </FormControl>
+                                                    </Button>
+                                                </PopoverTrigger>
 
-                    <FormControl>
-                        <FormLabel color={'pmpurple.13'} mb={'2px'} htmlFor='profession'>Profession</FormLabel>
-                        <InputGroup size='md'>
-                            <Input focusBorderColor='pmpurple.9' id='profession' pl={'62px'} placeholder='profession'
-                                   isDisabled={submitButtonClicked}
-                                   onChange={professionHandler}
-                                   color={'pmpurple.15'}
-                            />
-                            <InputRightAddon p='0' borderColor={"pmpurple.4"} bg={'pmpurple.3'}
-                                             children={<Button size='xs' color={"pmpurple.10"} onClick={() => {
-                                                 setColorTextProfession(defaultColorText)
-                                             }}> Reset</Button>}/>
-                            <InputLeftElement
-                                width='3.5rem'
-                            >
-                                <Popover>
-                                    <PopoverTrigger>
-                                        <Button
-                                            //w={'100%'}
-                                            borderStyle={'solid'}
-                                            border={'1px'}
-                                            borderColor={'pmpurple.13'}
-                                            m={'4px'}
-                                            bg={colorTextProfession.hex}
-                                            h='1.75rem'
-                                            size='sm'
-                                            rounded={'md'}
-                                            _hover={{
-                                                transform: 'translateY(-2px)',
-                                                boxShadow: 'lg',
-                                            }}
-                                            onClick={() => {
-                                                setWhichColorField('profession')
-                                            }}
+                                                <Portal>
+                                                    <PopoverContent
+                                                        bg='transparent'
+                                                        border={'1px'}
+                                                        w={'50px'}
+                                                        p={'0px'}
+                                                        m={'0px'}
+                                                        h={'50px'}
+                                                    >
+                                                        <PopoverBody>
+
+                                                            <Box position={'absolute'} zIndex={'2'}>
+                                                                <SketchPicker
+                                                                    color={colorTextName.rgb}
+                                                                    onChange={colorChangeHandler}
+                                                                    onSwatchHover={(colorHover: any) => {
+                                                                        console.log(colorHover);
+                                                                    }}
+                                                                />
+                                                            </Box>
+                                                        </PopoverBody>
+                                                    </PopoverContent>
+                                                </Portal>
+                                            </Popover>
+
+                                        </InputLeftElement>
+                                    </InputGroup>
+
+                                    <FormErrorMessage>Field is required.</FormErrorMessage>
+                                </FormControl>
+                            </GridItem>
+                            <GridItem colSpan={1}>
+                                <FormControl isRequired>
+                                    <FormLabel htmlFor='email' color={'pmpurple.13'} mb={'2px'}>Email</FormLabel>
+                                    <InputGroup size='md'>
+                                        <Input focusBorderColor='pmpurple.9' borderColor={"pmpurple.4"} id='email'
+                                               pl={'62px'}
+                                               placeholder='email'
+                                               isDisabled={submitButtonClicked}
+                                               onChange={emailHandler}
+                                               color={'pmpurple.15'}
+                                        />
+                                        <InputRightAddon p='0' borderColor={"pmpurple.4"} bg={'pmpurple.3'}
+                                                         children={<Button size='xs' color={"pmpurple.10"}
+                                                                           onClick={() => {
+                                                                               setColorTextEmail(defaultColorText)
+                                                                           }}> Reset</Button>}/>
+                                        <InputLeftElement
+                                            width='3.5rem'
                                         >
-                                            <MdOutlineColorLens fontSize={'20px'}/>
-                                        </Button>
-                                    </PopoverTrigger>
-
-                                    <Portal>
-                                        <PopoverContent
-                                            bg='transparent'
-                                            border={'1px'}
-                                            w={'50px'}
-                                            p={'0px'}
-                                            m={'0px'}
-                                            h={'50px'}
-                                        >
-                                            <PopoverBody>
-
-                                                <Box position={'absolute'} zIndex={'2'}>
-
-                                                    <SketchPicker
-                                                        color={colorTextProfession.rgb}
-                                                        onChange={colorChangeHandler}
-                                                        onSwatchHover={(colorHover: any) => {
-                                                            console.log(colorHover);
+                                            <Popover>
+                                                <PopoverTrigger>
+                                                    <Button
+                                                        //w={'100%'}
+                                                        borderStyle={'solid'}
+                                                        border={'1px'}
+                                                        borderColor={'pmpurple.13'}
+                                                        m={'4px'}
+                                                        bg={colorTextEmail.hex}
+                                                        h='1.75rem'
+                                                        size='sm'
+                                                        rounded={'md'}
+                                                        _hover={{
+                                                            transform: 'translateY(-2px)',
+                                                            boxShadow: 'lg',
                                                         }}
-                                                    />
-                                                </Box>
-                                            </PopoverBody>
-                                        </PopoverContent>
-                                    </Portal>
-                                </Popover>
-                            </InputLeftElement>
-                        </InputGroup>
-
-                    </FormControl>
-                    <FormControl>
-                        <FormLabel color={'pmpurple.13'} mb={'2px'} htmlFor='slogan'>Slogan</FormLabel>
-                        <InputGroup size='md'>
-                            <Input focusBorderColor='pmpurple.9' id='slogan' pl={'62px'} placeholder='slogan'
-                                   isDisabled={submitButtonClicked}
-                                   onChange={sloganHandler}
-                                   color={'pmpurple.15'}
-                            />
-                            <InputRightAddon p='0' borderColor={"pmpurple.4"} bg={'pmpurple.3'}
-                                             children={<Button size='xs' color={"pmpurple.10"} onClick={() => {
-                                                 setColorTextSlogan(defaultColorText)
-                                             }}> Reset</Button>}/>
-                            <InputLeftElement
-                                width='3.5rem'
-                            >
-                                <Popover>
-                                    <PopoverTrigger>
-                                        <Button
-                                            //w={'100%'}
-                                            borderStyle={'solid'}
-                                            border={'1px'}
-                                            borderColor={'pmpurple.13'}
-                                            m={'4px'}
-                                            bg={colorTextSlogan.hex}
-                                            h='1.75rem'
-                                            size='sm'
-                                            rounded={'md'}
-                                            _hover={{
-                                                transform: 'translateY(-2px)',
-                                                boxShadow: 'lg',
-                                            }}
-                                            onClick={() => {
-                                                setWhichColorField('slogan')
-                                            }}
-                                        >
-                                            <MdOutlineColorLens fontSize={'20px'}/>
-                                        </Button>
-                                    </PopoverTrigger>
-
-                                    <Portal>
-                                        <PopoverContent
-                                            bg='transparent'
-                                            border={'1px'}
-                                            w={'50px'}
-                                            p={'0px'}
-                                            m={'0px'}
-                                            h={'50px'}
-                                        >
-                                            <PopoverBody>
-
-                                                <Box position={'absolute'} zIndex={'2'}>
-                                                    <SketchPicker
-                                                        color={colorTextSlogan.rgb}
-                                                        onChange={colorChangeHandler}
-                                                        onSwatchHover={(colorHover: any) => {
-                                                            console.log(colorHover);
+                                                        onClick={() => {
+                                                            setWhichColorField('email')
                                                         }}
-                                                    />
-                                                </Box>
-                                            </PopoverBody>
-                                        </PopoverContent>
-                                    </Portal>
-                                </Popover>
-                            </InputLeftElement>
-                        </InputGroup>
+                                                    >
+                                                        <MdOutlineColorLens fontSize={'20px'}/>
+                                                    </Button>
+                                                </PopoverTrigger>
 
-                    </FormControl>
+                                                <Portal>
+                                                    <PopoverContent
+                                                        bg='transparent'
+                                                        border={'1px'}
+                                                        w={'50px'}
+                                                        p={'0px'}
+                                                        m={'0px'}
+                                                        h={'50px'}
+                                                    >
+                                                        <PopoverBody>
 
-                    <FormControl>
-                        <FormLabel color={'pmpurple.13'} mb={'2px'} htmlFor='organization'>Organization</FormLabel>
-                        <InputGroup size='md'>
-                            <Input focusBorderColor='pmpurple.9' id='organization' pl={'62px'}
-                                   placeholder='organization'
-                                   isDisabled={submitButtonClicked}
-                                   onChange={organizationHandler}
-                                   color={'pmpurple.15'}
-                            />
-                            <InputRightAddon p='0' borderColor={"pmpurple.4"} bg={'pmpurple.3'}
-                                             children={<Button size='xs' color={"pmpurple.10"} onClick={() => {
-                                                 setColorTextOrganization(defaultColorText)
-                                             }}> Reset</Button>}/>
-                            <InputLeftElement
-                                width='3.5rem'
-                            >
-                                <Popover>
-                                    <PopoverTrigger>
-                                        <Button
-                                            //w={'100%'}
-                                            borderStyle={'solid'}
-                                            border={'1px'}
-                                            borderColor={'pmpurple.13'}
-                                            m={'4px'}
-                                            bg={colorTextOrganization.hex}
-                                            h='1.75rem'
-                                            size='sm'
-                                            rounded={'md'}
-                                            _hover={{
-                                                transform: 'translateY(-2px)',
-                                                boxShadow: 'lg',
-                                            }}
-                                            onClick={() => {
-                                                setWhichColorField('organization')
-                                            }}
+                                                            <Box position={'absolute'} zIndex={'2'}>
+
+                                                                <SketchPicker
+                                                                    color={colorTextEmail.rgb}
+                                                                    onChange={colorChangeHandler}
+                                                                    onSwatchHover={(colorHover: any) => {
+                                                                        console.log(colorHover);
+                                                                    }}
+                                                                />
+                                                            </Box>
+                                                        </PopoverBody>
+                                                    </PopoverContent>
+                                                </Portal>
+                                            </Popover>
+                                        </InputLeftElement>
+                                    </InputGroup>
+
+                                </FormControl>
+                            </GridItem>
+                            <GridItem colSpan={1}>
+                                <FormControl>
+                                    <FormLabel color={'pmpurple.13'} mb={'2px'}
+                                               htmlFor='profession'>Profession</FormLabel>
+                                    <InputGroup size='md'>
+                                        <Input focusBorderColor='pmpurple.9' id='profession' pl={'62px'}
+                                               placeholder='profession'
+                                               isDisabled={submitButtonClicked}
+                                               onChange={professionHandler}
+                                               color={'pmpurple.15'}
+                                        />
+                                        <InputRightAddon p='0' borderColor={"pmpurple.4"} bg={'pmpurple.3'}
+                                                         children={<Button size='xs' color={"pmpurple.10"}
+                                                                           onClick={() => {
+                                                                               setColorTextProfession(defaultColorText)
+                                                                           }}> Reset</Button>}/>
+                                        <InputLeftElement
+                                            width='3.5rem'
                                         >
-                                            <MdOutlineColorLens fontSize={'20px'}/>
-
-                                        </Button>
-                                    </PopoverTrigger>
-
-                                    <Portal>
-                                        <PopoverContent
-                                            bg='transparent'
-                                            border={'1px'}
-                                            w={'50px'}
-                                            p={'0px'}
-                                            m={'0px'}
-                                            h={'50px'}
-                                        >
-                                            <PopoverBody>
-                                                <Box position={'absolute'} zIndex={'2'}>
-                                                    <SketchPicker
-                                                        color={colorTextOrganization.rgb}
-                                                        onChange={colorChangeHandler}
-                                                        onSwatchHover={(colorHover: any) => {
-                                                            console.log(colorHover);
+                                            <Popover>
+                                                <PopoverTrigger>
+                                                    <Button
+                                                        //w={'100%'}
+                                                        borderStyle={'solid'}
+                                                        border={'1px'}
+                                                        borderColor={'pmpurple.13'}
+                                                        m={'4px'}
+                                                        bg={colorTextProfession.hex}
+                                                        h='1.75rem'
+                                                        size='sm'
+                                                        rounded={'md'}
+                                                        _hover={{
+                                                            transform: 'translateY(-2px)',
+                                                            boxShadow: 'lg',
                                                         }}
-                                                    />
-                                                </Box>
-                                            </PopoverBody>
-                                        </PopoverContent>
-                                    </Portal>
-                                </Popover>
-                            </InputLeftElement>
-                        </InputGroup>
-
-                    </FormControl>
-                    <FormControl>
-                        <FormLabel color={'pmpurple.13'} mb={'2px'} htmlFor='website'>website</FormLabel>
-                        <InputGroup size='md'>
-                            <Input focusBorderColor='pmpurple.9' id='website' pl={'62px'} placeholder='website'
-                                   isDisabled={submitButtonClicked}
-                                   onChange={websiteHandler}
-                                   color={'pmpurple.15'}
-                            />
-                            <InputRightAddon p='0' borderColor={"pmpurple.4"} bg={'pmpurple.3'}
-                                             children={<Button size='xs' color={"pmpurple.10"} onClick={() => {
-                                                 setColorTextWebsite(defaultColorText)
-                                             }}> Reset</Button>}/>
-                            <InputLeftElement
-                                width='3.5rem'
-                            >
-                                <Popover>
-                                    <PopoverTrigger>
-                                        <Button
-                                            //w={'100%'}
-                                            borderStyle={'solid'}
-                                            border={'1px'}
-                                            borderColor={'pmpurple.13'}
-                                            m={'4px'}
-                                            bg={colorTextWebsite.hex}
-                                            h='1.75rem'
-                                            size='sm'
-                                            rounded={'md'}
-                                            _hover={{
-                                                transform: 'translateY(-2px)',
-                                                boxShadow: 'lg',
-                                            }}
-                                            onClick={() => {
-                                                setWhichColorField('website')
-                                            }}
-                                        >
-                                            <MdOutlineColorLens fontSize={'20px'}/>
-
-                                        </Button>
-                                    </PopoverTrigger>
-
-                                    <Portal>
-                                        <PopoverContent
-                                            bg='transparent'
-                                            border={'1px'}
-                                            w={'50px'}
-                                            p={'0px'}
-                                            m={'0px'}
-                                            h={'50px'}
-                                        >
-                                            <PopoverBody>
-                                                <Box position={'absolute'} zIndex={'2'}>
-                                                    <SketchPicker
-                                                        color={colorTextWebsite.rgb}
-                                                        onChange={colorChangeHandler}
-                                                        onSwatchHover={(colorHover: any) => {
-                                                            console.log(colorHover);
+                                                        onClick={() => {
+                                                            setWhichColorField('profession')
                                                         }}
-                                                    />
-                                                </Box>
-                                            </PopoverBody>
-                                        </PopoverContent>
-                                    </Portal>
-                                </Popover>
-                            </InputLeftElement>
-                        </InputGroup>
-                    </FormControl>
+                                                    >
+                                                        <MdOutlineColorLens fontSize={'20px'}/>
+                                                    </Button>
+                                                </PopoverTrigger>
 
-                    <FormControl>
-                        <FormLabel color={'pmpurple.13'} mb={'2px'} htmlFor='uniqueYou'>Your Uniqueness</FormLabel>
-                        <InputGroup size='md'>
-                            <Input focusBorderColor='pmpurple.9' id='uniqueYou' pl={'62px'}
-                                   placeholder='unique you, date of birth, anything goes here'
-                                   isDisabled={submitButtonClicked} onChange={uniqueYouHandler} color={'pmpurple.15'}
-                                   mb={'18px'}
-                            />
-                            <InputRightAddon p='0' borderColor={"pmpurple.4"} bg={'pmpurple.3'}
-                                             children={<Button size='xs' color={"pmpurple.10"} onClick={() => {
-                                                 setColorTextUniqueYou(defaultColorText)
-                                             }}> Reset</Button>}/>
-                            <InputLeftElement
-                                width='3.5rem'
-                            >
-                                <Popover>
-                                    <PopoverTrigger>
-                                        <Button
-                                            //w={'100%'}
-                                            borderStyle={'solid'}
-                                            border={'1px'}
-                                            borderColor={'pmpurple.13'}
-                                            m={'4px'}
-                                            bg={colorTextUniqueYou.hex}
-                                            h='1.75rem'
-                                            size='sm'
-                                            rounded={'md'}
-                                            _hover={{
-                                                transform: 'translateY(-2px)',
-                                                boxShadow: 'lg',
-                                            }}
-                                            onClick={() => {
-                                                setWhichColorField('uniqueYou')
-                                            }}
+                                                <Portal>
+                                                    <PopoverContent
+                                                        bg='transparent'
+                                                        border={'1px'}
+                                                        w={'50px'}
+                                                        p={'0px'}
+                                                        m={'0px'}
+                                                        h={'50px'}
+                                                    >
+                                                        <PopoverBody>
+
+                                                            <Box position={'absolute'} zIndex={'2'}>
+
+                                                                <SketchPicker
+                                                                    color={colorTextProfession.rgb}
+                                                                    onChange={colorChangeHandler}
+                                                                    onSwatchHover={(colorHover: any) => {
+                                                                        console.log(colorHover);
+                                                                    }}
+                                                                />
+                                                            </Box>
+                                                        </PopoverBody>
+                                                    </PopoverContent>
+                                                </Portal>
+                                            </Popover>
+                                        </InputLeftElement>
+                                    </InputGroup>
+
+                                </FormControl>
+                            </GridItem>
+                            <GridItem colSpan={1}>
+                                <FormControl>
+                                    <FormLabel color={'pmpurple.13'} mb={'2px'} htmlFor='slogan'>Slogan</FormLabel>
+                                    <InputGroup size='md'>
+                                        <Input focusBorderColor='pmpurple.9' id='slogan' pl={'62px'}
+                                               placeholder='slogan'
+                                               isDisabled={submitButtonClicked}
+                                               onChange={sloganHandler}
+                                               color={'pmpurple.15'}
+                                        />
+                                        <InputRightAddon p='0' borderColor={"pmpurple.4"} bg={'pmpurple.3'}
+                                                         children={<Button size='xs' color={"pmpurple.10"}
+                                                                           onClick={() => {
+                                                                               setColorTextSlogan(defaultColorText)
+                                                                           }}> Reset</Button>}/>
+                                        <InputLeftElement
+                                            width='3.5rem'
                                         >
-                                            <MdOutlineColorLens fontSize={'20px'}/>
-
-                                        </Button>
-                                    </PopoverTrigger>
-
-                                    <Portal>
-                                        <PopoverContent
-                                            bg='transparent'
-                                            border={'1px'}
-                                            w={'50px'}
-                                            p={'0px'}
-                                            m={'0px'}
-                                            h={'50px'}
-                                        >
-                                            <PopoverBody>
-                                                <Box position={'absolute'} zIndex={'2'}>
-                                                    <SketchPicker
-                                                        color={colorTextUniqueYou.rgb}
-                                                        onChange={colorChangeHandler}
-                                                        onSwatchHover={(colorHover: any) => {
-                                                            console.log(colorHover);
+                                            <Popover>
+                                                <PopoverTrigger>
+                                                    <Button
+                                                        //w={'100%'}
+                                                        borderStyle={'solid'}
+                                                        border={'1px'}
+                                                        borderColor={'pmpurple.13'}
+                                                        m={'4px'}
+                                                        bg={colorTextSlogan.hex}
+                                                        h='1.75rem'
+                                                        size='sm'
+                                                        rounded={'md'}
+                                                        _hover={{
+                                                            transform: 'translateY(-2px)',
+                                                            boxShadow: 'lg',
                                                         }}
-                                                    />
-                                                </Box>
-                                            </PopoverBody>
-                                        </PopoverContent>
-                                    </Portal>
-                                </Popover>
-                            </InputLeftElement>
-                        </InputGroup>
-                    </FormControl>
-                </Stack>
-            </Box>
+                                                        onClick={() => {
+                                                            setWhichColorField('slogan')
+                                                        }}
+                                                    >
+                                                        <MdOutlineColorLens fontSize={'20px'}/>
+                                                    </Button>
+                                                </PopoverTrigger>
 
-            <Box
-                w={"50%"}
-                h={"98%"}
-                border={'2px'}
-                borderStyle={'solid'}
-                borderColor={'pmpurple.13'}
-                mx={{xl: '8px'}}
-                borderRadius='15px'
-                py="22px" px="56px"
-                bg={'pmpurple.1'}
-                my={{xl: "16px"}}
-            >
-                <Heading mb="54px" textAlign="center" size="xl" fontWeight="extrabold">
-                    Your PaperMaster Non-Fungible-Identity
-                </Heading>
+                                                <Portal>
+                                                    <PopoverContent
+                                                        bg='transparent'
+                                                        border={'1px'}
+                                                        w={'50px'}
+                                                        p={'0px'}
+                                                        m={'0px'}
+                                                        h={'50px'}
+                                                    >
+                                                        <PopoverBody>
 
-                <Text mt="4" mb="8px" color={'pmpurple.13'} align="center" maxW="100%" fontWeight="medium">
-                    Below is what your Non-Fungible-Identification will
-                    look like, <br/> please make sure you love it!
-                </Text>
+                                                            <Box position={'absolute'} zIndex={'2'}>
+                                                                <SketchPicker
+                                                                    color={colorTextSlogan.rgb}
+                                                                    onChange={colorChangeHandler}
+                                                                    onSwatchHover={(colorHover: any) => {
+                                                                        console.log(colorHover);
+                                                                    }}
+                                                                />
+                                                            </Box>
+                                                        </PopoverBody>
+                                                    </PopoverContent>
+                                                </Portal>
+                                            </Popover>
+                                        </InputLeftElement>
+                                    </InputGroup>
 
-                <Divider py={'0px'} mb="54px" color={'pmpurple.8'}/>
+                                </FormControl>
+                            </GridItem>
+                            <GridItem colSpan={1}>
+                                <FormControl>
+                                    <FormLabel color={'pmpurple.13'} mb={'2px'}
+                                               htmlFor='organization'>Organization</FormLabel>
+                                    <InputGroup size='md'>
+                                        <Input focusBorderColor='pmpurple.9' id='organization' pl={'62px'}
+                                               placeholder='organization'
+                                               isDisabled={submitButtonClicked}
+                                               onChange={organizationHandler}
+                                               color={'pmpurple.15'}
+                                        />
+                                        <InputRightAddon p='0' borderColor={"pmpurple.4"} bg={'pmpurple.3'}
+                                                         children={<Button size='xs' color={"pmpurple.10"}
+                                                                           onClick={() => {
+                                                                               setColorTextOrganization(defaultColorText)
+                                                                           }}> Reset</Button>}/>
+                                        <InputLeftElement
+                                            width='3.5rem'
+                                        >
+                                            <Popover>
+                                                <PopoverTrigger>
+                                                    <Button
+                                                        //w={'100%'}
+                                                        borderStyle={'solid'}
+                                                        border={'1px'}
+                                                        borderColor={'pmpurple.13'}
+                                                        m={'4px'}
+                                                        bg={colorTextOrganization.hex}
+                                                        h='1.75rem'
+                                                        size='sm'
+                                                        rounded={'md'}
+                                                        _hover={{
+                                                            transform: 'translateY(-2px)',
+                                                            boxShadow: 'lg',
+                                                        }}
+                                                        onClick={() => {
+                                                            setWhichColorField('organization')
+                                                        }}
+                                                    >
+                                                        <MdOutlineColorLens fontSize={'20px'}/>
 
-                <AvatarNFI name={name} nameColor={ColorRGBToString(colorTextName)}
-                           email={email} emailColor={ColorRGBToString(colorTextEmail)}
-                           profession={profession} professionColor={ColorRGBToString(colorTextProfession)}
-                           organization={organization} organizationColor={ColorRGBToString(colorTextOrganization)}
-                           slogan={slogan} sloganColor={ColorRGBToString(colorTextSlogan)}
-                           website={website} websiteColor={ColorRGBToString(colorTextWebsite)}
-                           uniqueYou={uniqueYou} uniqueYouColor={ColorRGBToString(colorTextUniqueYou)}
-                           avatarBG={ColorRGBToString(bgRGB)}
-                           originDate={originDate}
-                           accountNumber={accountsArr[0]}
-                />
+                                                    </Button>
+                                                </PopoverTrigger>
 
-                <Center>
-                    {name !== "" && accBalanceErr !== "" ?
-                        <Button
-                            border={'1px solid'}
-                            borderColor={'pmpurple.13'}
-                            bg={'pmpurple.3'}
-                            mt={"20px"}
-                            mb={"2px"}
-                            _hover={{
-                                transform: 'translateY(-2px)',
-                                boxShadow: 'md',
-                            }}
-                            onClick={submitMintHandler}
-                            isLoading={submitButtonClicked}
-                            px={'12px'}
-                            loadingText='Submitting to the Blockchain for minting, this can take up to 2.5 minutes'
-                            color={"pmpurple.13"}
-                            variant='outline'
+                                                <Portal>
+                                                    <PopoverContent
+                                                        bg='transparent'
+                                                        border={'1px'}
+                                                        w={'50px'}
+                                                        p={'0px'}
+                                                        m={'0px'}
+                                                        h={'50px'}
+                                                    >
+                                                        <PopoverBody>
+                                                            <Box position={'absolute'} zIndex={'2'}>
+                                                                <SketchPicker
+                                                                    color={colorTextOrganization.rgb}
+                                                                    onChange={colorChangeHandler}
+                                                                    onSwatchHover={(colorHover: any) => {
+                                                                        console.log(colorHover);
+                                                                    }}
+                                                                />
+                                                            </Box>
+                                                        </PopoverBody>
+                                                    </PopoverContent>
+                                                </Portal>
+                                            </Popover>
+                                        </InputLeftElement>
+                                    </InputGroup>
+
+                                </FormControl>
+                            </GridItem>
+                            <GridItem colSpan={1}>
+                                <FormControl>
+                                    <FormLabel color={'pmpurple.13'} mb={'2px'} htmlFor='website'>website</FormLabel>
+                                    <InputGroup size='md'>
+                                        <Input focusBorderColor='pmpurple.9' id='website' pl={'62px'}
+                                               placeholder='website'
+                                               isDisabled={submitButtonClicked}
+                                               onChange={websiteHandler}
+                                               color={'pmpurple.15'}
+                                        />
+                                        <InputRightAddon p='0' borderColor={"pmpurple.4"} bg={'pmpurple.3'}
+                                                         children={<Button size='xs' color={"pmpurple.10"}
+                                                                           onClick={() => {
+                                                                               setColorTextWebsite(defaultColorText)
+                                                                           }}> Reset</Button>}/>
+                                        <InputLeftElement
+                                            width='3.5rem'
+                                        >
+                                            <Popover>
+                                                <PopoverTrigger>
+                                                    <Button
+                                                        //w={'100%'}
+                                                        borderStyle={'solid'}
+                                                        border={'1px'}
+                                                        borderColor={'pmpurple.13'}
+                                                        m={'4px'}
+                                                        bg={colorTextWebsite.hex}
+                                                        h='1.75rem'
+                                                        size='sm'
+                                                        rounded={'md'}
+                                                        _hover={{
+                                                            transform: 'translateY(-2px)',
+                                                            boxShadow: 'lg',
+                                                        }}
+                                                        onClick={() => {
+                                                            setWhichColorField('website')
+                                                        }}
+                                                    >
+                                                        <MdOutlineColorLens fontSize={'20px'}/>
+
+                                                    </Button>
+                                                </PopoverTrigger>
+
+                                                <Portal>
+                                                    <PopoverContent
+                                                        bg='transparent'
+                                                        border={'1px'}
+                                                        w={'50px'}
+                                                        p={'0px'}
+                                                        m={'0px'}
+                                                        h={'50px'}
+                                                    >
+                                                        <PopoverBody>
+                                                            <Box position={'absolute'} zIndex={'2'}>
+                                                                <SketchPicker
+                                                                    color={colorTextWebsite.rgb}
+                                                                    onChange={colorChangeHandler}
+                                                                    onSwatchHover={(colorHover: any) => {
+                                                                        console.log(colorHover);
+                                                                    }}
+                                                                />
+                                                            </Box>
+                                                        </PopoverBody>
+                                                    </PopoverContent>
+                                                </Portal>
+                                            </Popover>
+                                        </InputLeftElement>
+                                    </InputGroup>
+                                </FormControl>
+                            </GridItem>
+                            <GridItem colSpan={1}>
+                                <FormControl>
+                                    <FormLabel color={'pmpurple.13'} mb={'2px'} htmlFor='uniqueYou'>Your
+                                        Uniqueness</FormLabel>
+                                    <InputGroup size='md'>
+                                        <Input focusBorderColor='pmpurple.9' id='uniqueYou' pl={'62px'}
+                                               placeholder='unique you, date of birth, anything goes here'
+                                               isDisabled={submitButtonClicked} onChange={uniqueYouHandler}
+                                               color={'pmpurple.15'}
+                                               mb={'18px'}
+                                        />
+                                        <InputRightAddon p='0' borderColor={"pmpurple.4"} bg={'pmpurple.3'}
+                                                         children={<Button size='xs' color={"pmpurple.10"}
+                                                                           onClick={() => {
+                                                                               setColorTextUniqueYou(defaultColorText)
+                                                                           }}> Reset</Button>}/>
+                                        <InputLeftElement
+                                            width='3.5rem'
+                                        >
+                                            <Popover>
+                                                <PopoverTrigger>
+                                                    <Button
+                                                        //w={'100%'}
+                                                        borderStyle={'solid'}
+                                                        border={'1px'}
+                                                        borderColor={'pmpurple.13'}
+                                                        m={'4px'}
+                                                        bg={colorTextUniqueYou.hex}
+                                                        h='1.75rem'
+                                                        size='sm'
+                                                        rounded={'md'}
+                                                        _hover={{
+                                                            transform: 'translateY(-2px)',
+                                                            boxShadow: 'lg',
+                                                        }}
+                                                        onClick={() => {
+                                                            setWhichColorField('uniqueYou')
+                                                        }}
+                                                    >
+                                                        <MdOutlineColorLens fontSize={'20px'}/>
+
+                                                    </Button>
+                                                </PopoverTrigger>
+
+                                                <Portal>
+                                                    <PopoverContent
+                                                        bg='transparent'
+                                                        border={'1px'}
+                                                        w={'50px'}
+                                                        p={'0px'}
+                                                        m={'0px'}
+                                                        h={'50px'}
+                                                    >
+                                                        <PopoverBody>
+                                                            <Box position={'absolute'} zIndex={'2'}>
+                                                                <SketchPicker
+                                                                    color={colorTextUniqueYou.rgb}
+                                                                    onChange={colorChangeHandler}
+                                                                    onSwatchHover={(colorHover: any) => {
+                                                                        console.log(colorHover);
+                                                                    }}
+                                                                />
+                                                            </Box>
+                                                        </PopoverBody>
+                                                    </PopoverContent>
+                                                </Portal>
+                                            </Popover>
+                                        </InputLeftElement>
+                                    </InputGroup>
+                                </FormControl>
+                            </GridItem>
+                            {/*<GridItem colSpan={1}>*/}
+                            {/*    <FormControl>*/}
+                            {/*        <FormLabel color={'pmpurple.13'} mb={'2px'} htmlFor='uniqueYou'>Your*/}
+                            {/*            Country</FormLabel>*/}
+                            {/*        <InputGroup size='md'>*/}
+                            {/*            <Select focusBorderColor='pmpurple.9' id='uniqueYou' pl={'62px'}*/}
+                            {/*                   placeholder='unique you, date of birth, anything goes here'*/}
+                            {/*                   isDisabled={submitButtonClicked} onChange={uniqueYouHandler}*/}
+                            {/*                   color={'pmpurple.15'}*/}
+                            {/*                   mb={'18px'}*/}
+                            {/*            >*/}
+                            {/*                <option value={'usa'}> United States of America </option>*/}
+                            {/*                <option value={'uae'}> United Arab Emirates </option>*/}
+                            {/*                <option value={'de'}> Germany </option>*/}
+                            {/*            </Select>*/}
+                            {/*            <InputRightAddon p='0' borderColor={"pmpurple.4"} bg={'pmpurple.3'}*/}
+                            {/*                             children={<Button size='xs' color={"pmpurple.10"}*/}
+                            {/*                                               onClick={() => {*/}
+                            {/*                                                   setColorTextUniqueYou(defaultColorText)*/}
+                            {/*                                               }}> Reset</Button>}/>*/}
+                            {/*            <InputLeftElement*/}
+                            {/*                width='3.5rem'*/}
+                            {/*            >*/}
+                            {/*                <Popover>*/}
+                            {/*                    <PopoverTrigger>*/}
+                            {/*                        <Button*/}
+                            {/*                            //w={'100%'}*/}
+                            {/*                            borderStyle={'solid'}*/}
+                            {/*                            border={'1px'}*/}
+                            {/*                            borderColor={'pmpurple.13'}*/}
+                            {/*                            m={'4px'}*/}
+                            {/*                            bg={colorTextUniqueYou.hex}*/}
+                            {/*                            h='1.75rem'*/}
+                            {/*                            size='sm'*/}
+                            {/*                            rounded={'md'}*/}
+                            {/*                            _hover={{*/}
+                            {/*                                transform: 'translateY(-2px)',*/}
+                            {/*                                boxShadow: 'lg',*/}
+                            {/*                            }}*/}
+                            {/*                            onClick={() => {*/}
+                            {/*                                setWhichColorField('uniqueYou')*/}
+                            {/*                            }}*/}
+                            {/*                        >*/}
+                            {/*                            <MdOutlineColorLens fontSize={'20px'}/>*/}
+
+                            {/*                        </Button>*/}
+                            {/*                    </PopoverTrigger>*/}
+
+                            {/*                    <Portal>*/}
+                            {/*                        <PopoverContent*/}
+                            {/*                            bg='transparent'*/}
+                            {/*                            border={'1px'}*/}
+                            {/*                            w={'50px'}*/}
+                            {/*                            p={'0px'}*/}
+                            {/*                            m={'0px'}*/}
+                            {/*                            h={'50px'}*/}
+                            {/*                        >*/}
+                            {/*                            <PopoverBody>*/}
+                            {/*                                <Box position={'absolute'} zIndex={'2'}>*/}
+                            {/*                                    <SketchPicker*/}
+                            {/*                                        color={colorTextUniqueYou.rgb}*/}
+                            {/*                                        onChange={colorChangeHandler}*/}
+                            {/*                                        onSwatchHover={(colorHover: any) => {*/}
+                            {/*                                            console.log(colorHover);*/}
+                            {/*                                        }}*/}
+                            {/*                                    />*/}
+                            {/*                                </Box>*/}
+                            {/*                            </PopoverBody>*/}
+                            {/*                        </PopoverContent>*/}
+                            {/*                    </Portal>*/}
+                            {/*                </Popover>*/}
+                            {/*            </InputLeftElement>*/}
+                            {/*        </InputGroup>*/}
+                            {/*    </FormControl>*/}
+                            {/*</GridItem>*/}
+                        </SimpleGrid>
+                    </VStack>
+                </VStack>
+
+                <VStack
+                    w={'full'}
+                    py={6}
+                    px={10}
+                    spacing={10}
+                    bg={'pmpurple.1'}
+                    borderRadius='15px'
+                    border={'4px solid'}
+                    borderColor={'pmpurple.12'}
+                >
+                    <VStack
+                        spacing={3}
+                        //border={'2px solid green'}
+                    >
+                            <Heading color={'pmpurple.13'} size="xl">
+                                Your PaperMaster NFI
+                            </Heading>
+                         <Text color={'pmpurple.13'} align="center" fontWeight="medium">
+                             Below is what your NFI will look like, please make sure you love it!
+                         </Text>
+                        <Divider color={'pmpurple.8'}/>
+                        <Box
+                            p={{base: 0, xl: 20}}
                         >
-                            Submit
-                        </Button>
-                        :
-                        <Modal closeOnOverlayClick={false} blockScrollOnMount={true} isOpen={isModalOpen} onClose={() => {
+
+                                <AvatarNFI name={name} nameColor={ColorRGBToString(colorTextName)}
+                                           email={email} emailColor={ColorRGBToString(colorTextEmail)}
+                                           profession={profession}
+                                           professionColor={ColorRGBToString(colorTextProfession)}
+                                           organization={organization}
+                                           organizationColor={ColorRGBToString(colorTextOrganization)}
+                                           slogan={slogan} sloganColor={ColorRGBToString(colorTextSlogan)}
+                                           website={website} websiteColor={ColorRGBToString(colorTextWebsite)}
+                                           uniqueYou={uniqueYou} uniqueYouColor={ColorRGBToString(colorTextUniqueYou)}
+                                           avatarBG={ColorRGBToString(bgRGB)}
+                                           originDate={originDate}
+                                           accountNumber={accountsArr[0]}
+                                />
+
+                                <Center>
+                                    {/*&& accBalanceErr !== ""*/}
+                                    {name !== "" ?
+                                        <Button
+                                            border={'1px solid'}
+                                            borderColor={'pmpurple.13'}
+                                            bg={'pmpurple.3'}
+                                            mt={"20px"}
+                                            mb={"2px"}
+                                            _hover={{
+                                                transform: 'translateY(-2px)',
+                                                boxShadow: 'md',
+                                            }}
+                                            onClick={submitMintHandler}
+                                            isLoading={submitButtonClicked}
+                                            px={'12px'}
+                                            loadingText='Submitting to the Blockchain for minting, this can take up to 2.5 minutes'
+                                            color={"pmpurple.13"}
+                                            variant='outline'
+                                        >
+                                            Submit
+                                        </Button>
+                                        :
+                                        <Modal closeOnOverlayClick={false} blockScrollOnMount={true}
+                                               isOpen={isModalOpen}
+                                               onClose={() => {
+                                                   setIsModalOpen(false)
+                                               }}>
+                                            <ModalOverlay/>
+                                            <ModalContent>
+                                                <ModalHeader fontWeight="bold" color={'pmpurple.15'}>
+                                                    {modalDisplayTitle}
+                                                </ModalHeader>
+                                                <ModalCloseButton/>
+                                                <ModalBody pb={6}>
+                                                    <Text mb="1rem" color={'pmpurple.15'}>
+                                                        {modalDisplayText}
+                                                        <br/>
+                                                        <Text color={'gray.100'}>
+                                                            {mintErrorReason}
+                                                        </Text>
+
+                                                    </Text>
+                                                </ModalBody>
+                                                <ModalFooter>
+                                                    <Button color={"pmpurple.13"} mr={3} onClick={() => {
+                                                        setIsModalOpen(false)
+                                                    }}>
+                                                        Close
+                                                    </Button>
+                                                </ModalFooter>
+                                            </ModalContent>
+                                        </Modal>
+                                    }
+                                </Center>
+                                <Center>
+                                    {name !== "" ?
+                                        <Box
+                                            border={'1px solid'}
+                                            borderColor={'pmpurple.13'}
+                                            bg={'pmpurple.3'}
+                                            mt={"20px"}
+                                            mb={"2px"}
+                                            px={'6px'}
+                                            //loadingText='Waiting to get cost estimates for gas'
+                                            color={"pmpurple.13"}
+                                        >
+                                            <Text as='u'>Estimated Gas: {gasPrice}</Text>
+                                            {/*{estimateGasHandler}*/}
+                                        </Box>
+                                        : null}
+                                </Center>
+                        </Box>
+                    </VStack>
+                </VStack>
+            </Flex>
+            <Modal motionPreset="slideInBottom" closeOnOverlayClick={false} blockScrollOnMount={true} isOpen={isModalOpen}
+                   onClose={() => {
+                       setIsModalOpen(false)
+                   }}>
+                <ModalOverlay/>
+                <ModalContent>
+                    <ModalHeader fontWeight="bold" color={'pmpurple.15'}>
+                        {modalDisplayTitle}
+                    </ModalHeader>
+                    <ModalCloseButton/>
+                    <ModalBody pb={6}>
+                        <Text mb="1rem" color={'pmpurple.15'}>
+                            {modalDisplayText}
+                            <br/>
+                            <Text color={'gray.100'}>
+                                {mintErrorReason}
+                            </Text>
+
+                        </Text>
+                    </ModalBody>
+                    <ModalFooter>
+                        <Button color={"pmpurple.13"} mr={3} onClick={() => {
                             setIsModalOpen(false)
                         }}>
-                            <ModalOverlay/>
-                            <ModalContent>
-                                <ModalHeader fontWeight="bold" color={'pmpurple.15'}>
-                                    {modalDisplayTitle}
-                                </ModalHeader>
-                                <ModalCloseButton/>
-                                <ModalBody pb={6}>
-                                    <Text mb="1rem" color={'pmpurple.15'}>
-                                        {modalDisplayText}
-                                        <br/>
-                                        <Text color={'gray.100'}>
-                                            {mintErrorReason}
-                                        </Text>
-
-                                    </Text>
-                                </ModalBody>
-                                <ModalFooter>
-                                    <Button color={"pmpurple.13"} mr={3} onClick={() => {
-                                        setIsModalOpen(false)
-                                    }}>
-                                        Close
-                                    </Button>
-                                </ModalFooter>
-                            </ModalContent>
-                        </Modal>
-                    }
-                </Center>
-                <Center>
-                    {name !== "" ?
-                    <Box
-                        border={'1px solid'}
-                        borderColor={'pmpurple.13'}
-                        bg={'pmpurple.3'}
-                        mt={"20px"}
-                        mb={"2px"}
-                        px={'6px'}
-                        //loadingText='Waiting to get cost estimates for gas'
-                        color={"pmpurple.13"}
-                    >
-                        <Text as='u'>Estimated Gas: {gasPrice}</Text>
-                        {/*{estimateGasHandler}*/}
-                    </Box>
-                    : null}
-                </Center>
-
-                    <Modal closeOnOverlayClick={false} blockScrollOnMount={true} isOpen={isModalOpen} onClose={() => {
-                        setIsModalOpen(false)
-                    }}>
-                        <ModalOverlay/>
-                        <ModalContent>
-                            <ModalHeader fontWeight="bold" color={'pmpurple.15'}>
-                                {modalDisplayTitle}
-                            </ModalHeader>
-                            <ModalCloseButton/>
-                            <ModalBody pb={6}>
-                                <Text mb="1rem" color={'pmpurple.15'}>
-                                    {modalDisplayText}
-                                    <br/>
-                                    <Text color={'gray.100'}>
-                                        {mintErrorReason}
-                                    </Text>
-
-                                </Text>
-                            </ModalBody>
-                            <ModalFooter>
-                                <Button color={"pmpurple.13"} mr={3} onClick={() => {
-                                    setIsModalOpen(false)
-                                }}>
-                                    Close
-                                </Button>
-                            </ModalFooter>
-                        </ModalContent>
-                    </Modal>
-            </Box>
-        </Flex>
+                            Close
+                        </Button>
+                    </ModalFooter>
+                </ModalContent>
+            </Modal>
+        </Box>
     )
 };
 

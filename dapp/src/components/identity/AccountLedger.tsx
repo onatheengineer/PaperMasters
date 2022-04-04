@@ -17,8 +17,8 @@ interface Interface {
 
 export const AccountLedger:FC<Interface>=()=> {
 
-const {walletAcc} = useParams();
-const dispatch = useAppDispatch();
+    const {walletAcc} = useParams();
+    const dispatch = useAppDispatch();
 //const timeStampFormatted = moment(txHash.timeStamp).format('MMM DD YYYY, hh:mm:ss a');
 
     useEffect(() => {
@@ -41,113 +41,106 @@ const dispatch = useAppDispatch();
 
     return (
 
-                        <Flex align="center" mb="20px">
-                            <Stack>
-                                <HStack>
-                                {/*    <Text*/}
-                                {/*        noOfLines={1}*/}
-                                {/*        fontSize="md"*/}
-                                {/*        color="gray.500"*/}
-                                {/*        fontWeight="400"*/}
-                                {/*    >*/}
-                                {/*    this could also show the actual name if the account assuming they've registered their account or contract address*/}
-                                {/*        From: {fromAcc}*/}
-                                {/*    </Text>*/}
-                                {/*    <Spacer/>*/}
-                                {/*    <Text*/}
-                                {/*        noOfLines={1}*/}
-                                {/*        fontSize="md"*/}
-                                {/*        color="gray.500"*/}
-                                {/*        fontWeight="400"*/}
-                                {/*    >*/}
-                                {/*       {timeStampFormatted}*/}
-                                {/*    </Text>*/}
+        <Flex align="center" mb="20px">
+            <Stack>
+                <HStack>
+                    {/*    <Text*/}
+                    {/*        noOfLines={1}*/}
+                    {/*        fontSize="md"*/}
+                    {/*        color="gray.500"*/}
+                    {/*        fontWeight="400"*/}
+                    {/*    >*/}
+                    {/*    this could also show the actual name if the account assuming they've registered their account or contract address*/}
+                    {/*        From: {fromAcc}*/}
+                    {/*    </Text>*/}
+                    {/*    <Spacer/>*/}
+                    {/*    <Text*/}
+                    {/*        noOfLines={1}*/}
+                    {/*        fontSize="md"*/}
+                    {/*        color="gray.500"*/}
+                    {/*        fontWeight="400"*/}
+                    {/*    >*/}
+                    {/*       {timeStampFormatted}*/}
+                    {/*    </Text>*/}
 
-                                    {/*</HStack>*/}
+                    {/*</HStack>*/}
 
-                                        <Stack>
-                                {/*<HStack>*/}
-                                {/*    <Text*/}
-                                {/*        noOfLines={1}*/}
-                                {/*        fontSize="md"*/}
-                                {/*        color="gray.500"*/}
-                                {/*        fontWeight="400"*/}
-                                {/*    >*/}
-                                    {/*    this could also show the actual name if the account assuming they've registered their account or contract address OR get the name of the contract from the contract*/}
-                                {/*        To: {toAcc}*/}
-                                {/*    </Text>*/}
-                                {/*    <Spacer/>*/}
-                                {/*    <Text*/}
-                                {/*        noOfLines={1}*/}
-                                {/*        fontSize="md"*/}
-                                {/*        color="gray.500"*/}
-                                {/*        fontWeight="400"*/}
-                                {/*    >*/}
-                                {/*        txHash: {txHash}*/}
-                                {/*    </Text>*/}
+                    <Stack>
+                        {/*<HStack>*/}
+                        {/*    <Text*/}
+                        {/*        noOfLines={1}*/}
+                        {/*        fontSize="md"*/}
+                        {/*        color="gray.500"*/}
+                        {/*        fontWeight="400"*/}
+                        {/*    >*/}
+                        {/*    this could also show the actual name if the account assuming they've registered their account or contract address OR get the name of the contract from the contract*/}
+                        {/*        To: {toAcc}*/}
+                        {/*    </Text>*/}
+                        {/*    <Spacer/>*/}
+                        {/*    <Text*/}
+                        {/*        noOfLines={1}*/}
+                        {/*        fontSize="md"*/}
+                        {/*        color="gray.500"*/}
+                        {/*        fontWeight="400"*/}
+                        {/*    >*/}
+                        {/*        txHash: {txHash}*/}
+                        {/*    </Text>*/}
 
-                                {/*</HStack>*/}
-                                        </Stack>
-                                    <Stack>
-
-
-                                {/*<HStack>*/}
-                                {/*    <Text*/}
-                                {/*        noOfLines={1}*/}
-                                {/*        fontSize="md"*/}
-                                {/*        color="gray.500"*/}
-                                {/*        fontWeight="400"*/}
-                                {/*    >*/}
-                                {/*    //show red or green depending on in or out*/}
-                                {/*         {cost}*/}
-                                {/*    </Text>*/}
-                                {/*    <Spacer/>*/}
-                                {/*    <Text*/}
-                                {/*        noOfLines={1}*/}
-                                {/*        fontSize="md"*/}
-                                {/*        color="gray.500"*/}
-                                {/*        fontWeight="400"*/}
-                                {/*    >*/}
-                                {/*        Something here: { something here}*/}
-                                {/*    </Text>*/}
-                                    {/*</HStack>*/}
-                                    </Stack>
-
-                                        <Stack>
+                        {/*</HStack>*/}
+                    </Stack>
+                    <Stack>
 
 
-                                    {/*<HStack>*/}
-                                    {/*    <Text*/}
-                                    {/*        noOfLines={1}*/}
-                                    {/*        fontSize="md"*/}
-                                    {/*        color="gray.500"*/}
-                                    {/*        fontWeight="400"*/}
-                                    {/*    >*/}
-                                    {/*    //show red or green depending on in or out*/}
-                                    {/*         {addressName}*/}
-                                    {/*    </Text>*/}
-                                    {/*    <Spacer/>*/}
-                                    {/*    <Text*/}
-                                    {/*        noOfLines={1}*/}
-                                    {/*        fontSize="md"*/}
-                                    {/*        color="gray.500"*/}
-                                    {/*        fontWeight="400"*/}
-                                    {/*    >*/}
-                                    {/*        tx count: {txCount}*/}
-                                    {/*    </Text>*/}
-                                {/*</HStack>*/}
-                                        </Stack>
-                            </HStack>
+                        {/*<HStack>*/}
+                        {/*    <Text*/}
+                        {/*        noOfLines={1}*/}
+                        {/*        fontSize="md"*/}
+                        {/*        color="gray.500"*/}
+                        {/*        fontWeight="400"*/}
+                        {/*    >*/}
+                        {/*    //show red or green depending on in or out*/}
+                        {/*         {cost}*/}
+                        {/*    </Text>*/}
+                        {/*    <Spacer/>*/}
+                        {/*    <Text*/}
+                        {/*        noOfLines={1}*/}
+                        {/*        fontSize="md"*/}
+                        {/*        color="gray.500"*/}
+                        {/*        fontWeight="400"*/}
+                        {/*    >*/}
+                        {/*        Something here: { something here}*/}
+                        {/*    </Text>*/}
+                        {/*</HStack>*/}
+                    </Stack>
+
+                    <Stack>
 
 
-                            </Stack>
-
-                        </Flex>
-
-
-
+                        {/*<HStack>*/}
+                        {/*    <Text*/}
+                        {/*        noOfLines={1}*/}
+                        {/*        fontSize="md"*/}
+                        {/*        color="gray.500"*/}
+                        {/*        fontWeight="400"*/}
+                        {/*    >*/}
+                        {/*    //show red or green depending on in or out*/}
+                        {/*         {addressName}*/}
+                        {/*    </Text>*/}
+                        {/*    <Spacer/>*/}
+                        {/*    <Text*/}
+                        {/*        noOfLines={1}*/}
+                        {/*        fontSize="md"*/}
+                        {/*        color="gray.500"*/}
+                        {/*        fontWeight="400"*/}
+                        {/*    >*/}
+                        {/*        tx count: {txCount}*/}
+                        {/*    </Text>*/}
+                        {/*</HStack>*/}
+                    </Stack>
+                </HStack>
+            </Stack>
+        </Flex>
     )
-
 }
 
 export default AccountLedger;

@@ -4,10 +4,10 @@ import {useAppDispatch, useAppSelector} from './app/hooks';
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footers/Footer";
 import {Routes, Route} from "react-router-dom";
-
+import "focus-visible/dist/focus-visible";
 import Web3 from "web3";
 import type {FC} from 'react';
-import { Box, Flex} from '@chakra-ui/react';
+import {Box, Flex, VStack} from '@chakra-ui/react';
 import Sidebar, {NavItem} from './components/Sidebar'
 import {accountsArr, requestAccountsAsyncAction} from "./features/UserWalletSlice";
 import {mintNFIAsyncAction} from "./features/MintNFISlice";
@@ -56,10 +56,29 @@ function App() {
 
     return (
         <Box
-            border={'2px solid'} borderColor={"pmpurple.8"} bg={'pmpurple.6'}
+            border={'2px solid'}
+            borderColor={"pmpurple.8"}
+            bg={'pmpurple.6'}
+            overflow={'hidden'}
         >
-            <Navbar/>
-            <Sidebar/>
+                <Flex
+                minH={'100vH'}
+                flexDirection={'column'}
+                //border={'2px solid red'}
+                >
+                    <Box>
+                        <Navbar/>
+                    </Box>
+<Box
+    flexGrow={1}
+    //border={'2px solid yellow'}
+    display={'flex'}
+>
+    <Sidebar/>
+</Box>
+
+                </Flex>
+
             <Footer/>
         </Box>
     )

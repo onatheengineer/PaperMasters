@@ -35,7 +35,7 @@ export const CloudHWM: FC<Interface>=()=> {
                             fontWeight={600}
                             lineHeight={1.2}
                             fontSize={useBreakpointValue({base: '3xl', md: '6xl'})}>
-                            CloudHWM
+                            CloudHWM (coming soon)
                         </Text>
                         <Text
                             color={'white'}

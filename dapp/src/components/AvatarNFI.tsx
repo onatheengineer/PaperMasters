@@ -149,7 +149,7 @@ export const AvatarNFI:FC<AvatarNFIInterface>=( {accountNumber,
                         <Divider pt={'0px'} css={{borderColor: '#a88ea8'}}/>
 
                             <Flex
-                                flexGrow={'1'}
+                                flexGrow={1}
                                 flexDirection={'row'}
                                 textAlign={'center'}
                             >

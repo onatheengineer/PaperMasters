@@ -199,8 +199,6 @@ function* gasAccBalanceSaga(actionObject: any):any {
     }
 }
 
-
-
     export function* watchMintNFISaga() {
         yield takeLatest(mintNFIAsyncAction.type, mintNFISaga);
         yield takeLatest(gasForMintNFIAsyncAction.type, getGasForMintSaga);

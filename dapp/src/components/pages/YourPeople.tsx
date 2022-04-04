@@ -3,6 +3,7 @@ import {useState, useEffect} from "react";
 import type {FC} from 'react'
 import {Button, FormControl, FormLabel, Grid, GridItem, Input, Stack} from '@chakra-ui/react';
 import {Text} from '@chakra-ui/layout';
+import PageForum from "./PageForum";
 
 
 interface Interface {
@@ -10,12 +11,12 @@ interface Interface {
 }
 
 export const YourPeople:FC<Interface>=()=>{
-    // const YourPeopleForumPage = [
-    //     <ForumPages title={'We want you to know who we are'} body={'dfgfdhdftgyertg'}/>,
-    //     <ForumPages title={'About Us'} body={'dfgfdhdftgyertg'}/>,
-    //     <ForumPages title={'Contact Us'} body={'dfgfdhdftgyertg'}/>,
-    //     <ForumPages title={'Support Project'} body={'bdfkljgiuertywrebfbfshjteruerter'}/>,
-    // ]
+    const YourPeopleForumPage = [
+        // <PageForum title={'We want you to know who we are'} body={'dfgfdhdftgyertg'}/>,
+        // <PageForum title={'About Us'} body={'dfgfdhdftgyertg'}/>,
+        // <PageForum title={'Contact Us'} body={'dfgfdhdftgyertg'}/>,
+        // <PageForum title={'Support Project'} body={'bdfkljgiuertywrebfbfshjteruerter'}/>,
+    ]
     return(
 <Text>
 

@@ -8,11 +8,17 @@ import SecondFooter from '../Footers/SecondFooterHome'
 
 export default function Home() {
     return (
-        <Box>
+        <Flex
+        h={'100%'}
+        border={'1px solid green'}
+        flexDirection={'column'}
+        >
 
             <Flex
-                w={'100vw'}
-                h={'70vh'}
+                w={'100vW'}
+                alignItems={'stretch'}
+                flexGrow = {1}
+                //h={'80vh'}
                 backgroundImage={BackgroundLogo}
                 backgroundSize={'cover'}
                 backgroundPosition={'center center'}
@@ -37,21 +43,17 @@ export default function Home() {
                             fontSize={useBreakpointValue({base: '4xl', md: '3xl'})}>
                             Providing protection and legitimacy for People, Companies and Contracts by bringing Non-Fungable-Identities (NFIs) to the Blockchain
                         </Text>
-                        <Stack direction={'row'}>
-                            {/*<Button*/}
-                            {/*    bg={'whiteAlpha.300'}*/}
-                            {/*    rounded={'full'}*/}
-                            {/*    color={'white'}*/}
-                            {/*    _hover={{bg: 'whiteAlpha.500'}}>*/}
-                            {/*    Show me more*/}
-                            {/*</Button>*/}
-                        </Stack>
                     </Stack>
-
                 </VStack>
+
             </Flex>
-    <SecondFooter/>
-        </Box>
+            <Flex
+            flexShrink={1}
+            >
+                <SecondFooter/>
+            </Flex>
+
+        </Flex>
     )
 
 };

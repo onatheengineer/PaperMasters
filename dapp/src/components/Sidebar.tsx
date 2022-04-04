@@ -30,7 +30,7 @@ import {BsCalendar2Event} from "react-icons/bs";
 import Home from "./pages/Home";
 import Identity from "./pages/Identity";
 import CloudHWM from "./pages/CloudHWM";
-import ForumPages from "./pages/ForumPages";
+import PageForum from "./pages/PageForum";
 import YourPeople from "./pages/YourPeople";
 import Validate from "./pages/Validate";
 import Analytics from "./pages/Analytics";
@@ -42,7 +42,6 @@ import {useAppSelector} from "../app/hooks";
 import identity from "./pages/Identity";
 import Report from "./pages/Report";
 import {accountsArr} from "../features/UserWalletSlice";
-
 
 
 
@@ -118,7 +117,7 @@ export const Sidebar: FC<InterfaceSidebar>= ({icon, profileName} ) => {
             <NavItem navItemSize={navSize} icon={BiBookmarkHeart} title="Register" path={'/register'}/>,
             <NavItem navItemSize={navSize} icon={IoMdCheckmarkCircleOutline} title="Validate NFI" path={'/validate'}/>,
             <NavItem navItemSize={navSize} icon={MdOutlineReport} title="Report NFI" path={'/report'}/>,
-            <NavItem navItemSize={navSize} icon={MdOutlineWarningAmber} title="Report suss" path={'/forumPages'}/>,
+            <NavItem navItemSize={navSize} icon={MdOutlineWarningAmber} title="Report suss" path={'/learn'}/>,
             <NavItem navItemSize={navSize} icon={GiBookCover} title="Learn" path={'/learn'}/>,
             <NavItem navItemSize={navSize} icon={FiTrendingUp} title="Analytics" path={'/analytics'}/>,
         ]
@@ -128,16 +127,16 @@ export const Sidebar: FC<InterfaceSidebar>= ({icon, profileName} ) => {
             <NavItem navItemSize={navSize} icon={BiBookmarkHeart} title="Register" path={'/register'}/>,
             <NavItem navItemSize={navSize} icon={IoMdCheckmarkCircleOutline} title="Validate NFI" path={'/validate'}/>,
             <NavItem navItemSize={navSize} icon={MdOutlineReport} title="Report NFI" path={'/report'}/>,
-            <NavItem navItemSize={navSize} icon={MdOutlineWarningAmber} title="Report suss" path={'/forumPages'}/>,
+            <NavItem navItemSize={navSize} icon={MdOutlineWarningAmber} title="Report suss" path={'/learn'}/>,
             <NavItem navItemSize={navSize} icon={GiBookCover} title="Learn" path={'/learn'}/>,
             <NavItem navItemSize={navSize} icon={FiTrendingUp} title="Analytics" path={'/analytics'}/>,
 
         ]
 
         const SidebarCommunityForum = [
-            <NavItem navItemSize={navSize} icon={BiHomeHeart} title="Community Guidelines" path={'/forumPages'}/>,
+            <NavItem navItemSize={navSize} icon={BiHomeHeart} title="Community Guidelines" path={'/learn'}/>,
             <NavItem navItemSize={navSize} icon={MdOutlineWarningAmber} title="Report Suspicious Activity"
-                     path={'/forumPages'}/>,
+                     path={'/learn'}/>,
 
         ]
 
@@ -188,7 +187,7 @@ export const Sidebar: FC<InterfaceSidebar>= ({icon, profileName} ) => {
                 setHeaderTitle("Search");
                 //setHeaderText("sdfsdfssdfsddf");
                 break;
-            case '/communityforum':
+            case '/learn':
                 setNavItemRender(SidebarCommunityForum);
                 setHeaderTitle("Community");
                 setHeaderText("sdfsdfssdfsddf");
@@ -239,8 +238,6 @@ export const Sidebar: FC<InterfaceSidebar>= ({icon, profileName} ) => {
 
         <Flex
             //border ={'1px solid blue'}
-            w="100%"
-            h={'100%'}
         >
             {/*{navItemsRender == null ? null :*/}
             {/*    <Box*/}
@@ -339,7 +336,6 @@ export const Sidebar: FC<InterfaceSidebar>= ({icon, profileName} ) => {
                     <Route path={'/news'} element={<News/>}/>
                     <Route path={'/security'} element={<Security/>}/>
                     <Route path={'/CloudHWM'} element={<CloudHWM/>}/>
-                    {/*<Route path={'/community'} element={ <ForumPages/>}/>*/}
                     <Route path={'/yourpeople'} element={<YourPeople/>}/>
                 </Routes>
             </Flex>

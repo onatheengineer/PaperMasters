@@ -36,6 +36,7 @@ import {paramsWalletAccAction, paramsWalletAcc} from "../../features/IdentityPag
 import ModalForIdentNoUseParams from '../identity/ModalForIdentNoUseParams';
 import {Route} from "react-router";
 import {AccountLedger} from '../identity/AccountLedger'
+import {apiHarmonyOneAction} from "../../features/ApiBCMethodsSlice";
 
 
 interface Interface {
@@ -71,6 +72,7 @@ export const Identity:FC<Interface>=()=> {
     useEffect(() => {
         if (walletAcc !== undefined && walletAcc !== "" && walletAcc !== 'undefined') {
             dispatch(paramsWalletAccAction(walletAcc));
+            dispatch(apiHarmonyOneAction(walletAcc));
         }
     }, [walletAcc]);
 

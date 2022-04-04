@@ -19,7 +19,7 @@ forumPageHeader: string;
 }
 
 
-export const ForumPages=forwardRef<HTMLDivElement | null, InterfaceFORUM>(({forumPageHeader, title, body }, ref)=> {
+export const PageForum=forwardRef<HTMLDivElement | null, InterfaceFORUM>(({forumPageHeader, title, body }, ref)=> {
 
     const [isOpen, setIsOpen] = useState<boolean>(false);
 
@@ -29,11 +29,11 @@ export const ForumPages=forwardRef<HTMLDivElement | null, InterfaceFORUM>(({foru
     const refReportSus = useRef<HTMLDivElement>( null)
 
     const CommunityForumPage = [
-        // <ForumPages title={'Community Forum'} body={'dfgfdhdftgyertg'}/>,
-        // <ForumPages title={'Community Discussion'} body={'dfgfdhdftgyertg'}/>,
-        // <ForumPages title={'Community Events'} body={'dfgfdhdftgyertg'}/>,
-        // <ForumPages title={'Report Suspicious Activity'} body={'dfgfdhdftgyertg'}/>,
-        // <ForumPages title={'Papermaster project Feedback'} body={'bdfkljgiuertywrebfbfshjteruerter'}/>,
+        // <PageForum title={'Community Forum'} body={'dfgfdhdftgyertg'}/>,
+        // <PageForum title={'Community Discussion'} body={'dfgfdhdftgyertg'}/>,
+        // <PageForum title={'Community Events'} body={'dfgfdhdftgyertg'}/>,
+        // <PageForum title={'Report Suspicious Activity'} body={'dfgfdhdftgyertg'}/>,
+        // <PageForum title={'Papermaster project Feedback'} body={'bdfkljgiuertywrebfbfshjteruerter'}/>,
     ]
 
 
@@ -51,7 +51,7 @@ export const ForumPages=forwardRef<HTMLDivElement | null, InterfaceFORUM>(({foru
 
         <Flex ref={ref} justify-content={'space-between'}>
 
-            <Box flex='auto' mx={{sm: '12px', xl: '18px'}} borderRadius='15px' bg='white' p="26px"
+            <Box flex='auto' w="100%" mx={{sm: '12px', xl: '18px'}} borderRadius='15px' bg='white' p="26px"
                  px="24px" my={{sm: "14px", xl: "16px"}}>
 
                 <Stack
@@ -61,7 +61,7 @@ export const ForumPages=forwardRef<HTMLDivElement | null, InterfaceFORUM>(({foru
                     px={'24px'}
                 >
                     <Menu>
-                        <Heading fontSize={'26px'}>
+                        <Heading fontSize={'20px'}>
                             {forumPageHeader}
                         </Heading>
 
@@ -91,7 +91,7 @@ export const ForumPages=forwardRef<HTMLDivElement | null, InterfaceFORUM>(({foru
                             </Text>
 
                         </MenuButton>
-                        {/*<Collapse in={isOpen} animateOpacity>*/}
+                        <Collapse in={isOpen} animateOpacity>
                             <Box
                                 p='26px'
                                 color='pmpurple.10'
@@ -104,7 +104,7 @@ export const ForumPages=forwardRef<HTMLDivElement | null, InterfaceFORUM>(({foru
                                     {body}
                                 </Text>
                             </Box>
-                        {/*</Collapse>*/}
+                        </Collapse>
                     </Menu>
 
                     <StackDivider borderColor='pmpurple.3'/>
@@ -116,5 +116,5 @@ export const ForumPages=forwardRef<HTMLDivElement | null, InterfaceFORUM>(({foru
     )
 });
 
-export default ForumPages;
+export default PageForum;
 

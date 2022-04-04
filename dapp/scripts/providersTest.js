@@ -19,7 +19,6 @@ const { ethers } = require("ethers");
             projectSecret: 'b3dd75968bba439d80769d163ce14fc9',
         },
 
-
         //Alchemy homestead, ropsten, rinkeby, goerli, kovan, matic, maticmum, optimism, optimism-kovan, arbitrum and arbitrum-rinkeby.
         alchemy: 'mEUzvPVY6xECwMieu01t9D3fuYyOYGCl',
         //endpoints:

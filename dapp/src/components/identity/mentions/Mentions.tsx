@@ -165,7 +165,6 @@ export const Mentions: FC<Interface>=()=> {
                 borderColor={'pmpurple.8'}
             />
 
-
             <Box
                 //position={'relative'}
                 //h={'100%'}
@@ -222,7 +221,7 @@ export const Mentions: FC<Interface>=()=> {
                                         <HStack>
 
                                             <RadioGroup
-                                                defaultValue='3'
+                                                defaultValue='neutral'
                                             >
                                                 <Stack direction='row' spacing={5}>
                                                     <Radio
@@ -264,7 +263,7 @@ export const Mentions: FC<Interface>=()=> {
                                                         // bg={'pmpurple.6'}
                                                         colorScheme='blue'
                                                         //value={state.radioType}
-                                                        //value = {-1}
+                                                        value = {'neutral'}
                                                         onChange={(e) => {
                                                             mentionsDictionary({
                                                                 type: 'radioType',

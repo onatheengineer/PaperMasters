@@ -13,12 +13,12 @@ interface Interface {
 
 export const CommunityForum: FC<Interface>=()=> {
     // const SecurityForumPage = [
-    //     <ForumPages title={'Security and Protection'} body={'Security and Protectionis Everything, it provides trust'}/>,
-    //     <ForumPages title={'Blockchain Protection'} body={'dfgfdhdftgyertg'}/>,
-    //     <ForumPages title={'Blockchain Legitimacy'} body={'dfgfdhdftgyertg'}/>,
-    //     <ForumPages title={'Privacy Policy'} body={'bdfkljgiuertywrebfbfshjteruerter'}/>,
-    //     <ForumPages title={'Terms of Service'} body={'bdfkljgiuertywrebfbfshjteruerter'}/>,
-    //     <ForumPages title={'Community Guidelines'} body={'bdfkljgiuertywrebfbfshjteruerter'}/>,
+    //     <PageForum title={'Security and Protection'} body={'Security and Protectionis Everything, it provides trust'}/>,
+    //     <PageForum title={'Blockchain Protection'} body={'dfgfdhdftgyertg'}/>,
+    //     <PageForum title={'Blockchain Legitimacy'} body={'dfgfdhdftgyertg'}/>,
+    //     <PageForum title={'Privacy Policy'} body={'bdfkljgiuertywrebfbfshjteruerter'}/>,
+    //     <PageForum title={'Terms of Service'} body={'bdfkljgiuertywrebfbfshjteruerter'}/>,
+    //     <PageForum title={'Community Guidelines'} body={'bdfkljgiuertywrebfbfshjteruerter'}/>,
     // ]
     return (
 
