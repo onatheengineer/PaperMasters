@@ -1,13 +1,23 @@
 import {call, put, take, takeEvery, delay, all, takeLatest, select, actionChannel} from 'redux-saga/effects';
 import Web3 from "web3";
 import {
-    accountsArr, getAllWalletFromDB, getOneWalletFromDB,
-    getAllWalletFromDBAction, getOneWalletFromDBAction,
+    accountsArr,
+    getAllWalletFromDB,
+    getOneWalletFromDB,
+    getAllWalletFromDBAction,
+    getOneWalletFromDBAction,
     putWalletInDBAction,
     putWalletInDBStatus,
-    statusOfArr, getAllReceiptFromDBAction, getOneReceiptFromDBAction, getAllReceiptFromDB, getOneReceiptFromDB, watchUserWalletChannelAction, chainIdErr, chainIdProvider
+    statusOfArr,
+    getAllReceiptFromDBAction,
+    getOneReceiptFromDBAction,
+    getAllReceiptFromDB,
+    getOneReceiptFromDB,
+    watchUserWalletChannelAction,
+    chainIdErr,
+    chainIdProvider,
+    requestUserWalletAction
 } from "./UserWalletSlice";
-import {requestAccountsAsyncAction} from "./UserWalletSlice";
 import axios from "axios";
 import {useParams} from "react-router-dom";
 import MintABI from "../abiFiles/PaperMastersNFI.json";
@@ -121,7 +131,7 @@ function* getOneReceiptFromDBSaga(actionObject: any): any {
 
 
 export function* watchUserWalletSaga() {
-    yield takeEvery(requestAccountsAsyncAction.type, userWalletSaga);
+    yield takeEvery(requestUserWalletAction.type, userWalletSaga);
     yield takeEvery(putWalletInDBAction.type, putWalletInDBSaga);
     yield takeEvery(getAllWalletFromDBAction.type, getAllWalletFromDBSaga);
     yield takeEvery(getOneWalletFromDBAction.type, getOneWalletFromDBSaga);

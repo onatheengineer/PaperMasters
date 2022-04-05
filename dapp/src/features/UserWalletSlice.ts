@@ -102,7 +102,7 @@ const UserWalletSlice = createSlice ({
 console.log(UserWalletSlice);
 export const { chainIdProvider, chainIdErr, accountsArr, statusOfArr, putWalletInDBStatus, getAllWalletFromDB, getOneWalletFromDB, getAllReceiptFromDB, getOneReceiptFromDB } = UserWalletSlice.actions;
 
-export const requestAccountsAsyncAction = createAction("REQUEST_ACCOUNTS_ACTION_SAGA");
+export const requestUserWalletAction = createAction("REQUEST_WALLET_ACTION_SAGA");
 export const putWalletInDBAction = createAction("PUT_WALLET_IN_DB_SAGA");
 export const getAllWalletFromDBAction = createAction("GET_ALL_WALLET_IN_DB_SAGA");
 export const getOneWalletFromDBAction = createAction("GET_ONE_WALLET_IN_DB_SAGA");

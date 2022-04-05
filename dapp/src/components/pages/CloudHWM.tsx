@@ -35,14 +35,14 @@ export const CloudHWM: FC<Interface>=()=> {
                             fontWeight={600}
                             lineHeight={1.2}
                             fontSize={useBreakpointValue({base: '3xl', md: '6xl'})}>
-                            CloudHWM (coming soon)
+                            CloudHWM
                         </Text>
                         <Text
                             color={'white'}
                             fontWeight={300}
                             lineHeight={1.2}
                             fontSize={useBreakpointValue({base: '4xl', md: '3xl'})}>
-                            Bringing Hardware Protection to Blockchain Miners
+                            Bringing Hardware Protection to Blockchain Miners (coming soon)
                         </Text>
                         <Stack direction={'row'}>
                             <Button

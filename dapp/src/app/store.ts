@@ -9,6 +9,7 @@ import logger from 'redux-logger';
 import accountSlice from "../features/AccountSlice";
 import {watchIdentUseParamsSaga} from "../features/identityPageUseParamsSaga";
 import mentionsSlice from "../features/MentionsSlice";
+import contractFunctionsSlice from '../features/ContractFunctionsSlice'
 
 
 
@@ -23,6 +24,7 @@ export const store = configureStore({
     account: accountSlice,
     identUseParams: identUseParamsSlice,
     mentions: mentionsSlice,
+    functions: contractFunctionsSlice,
   },
 });
 

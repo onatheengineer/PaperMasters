@@ -1,13 +1,13 @@
 import { call, put, takeEvery, delay, all, takeLatest, select, fork, actionChannel} from 'redux-saga/effects';
 import Web3 from "web3";
 import axios from "axios";
-import RegisterSlice, {accountsArr, requestAccountsAsyncAction, statusOfArr} from "./UserWalletSlice";
+import RegisterSlice, {accountsArr, requestUserWalletAction, statusOfArr} from "./UserWalletSlice";
 import {
     mintNFIAsyncAction,
     mintSucceededSuccessful,
     gasForMintNFIAsyncAction,
     gasForMinting, statusBC,
-    mintingError, gasAccBalanceAction, accBalance, accBalanceError,
+    mintingError, gasAccBalanceAction, accBalance, accBalanceError, tokenURIAction,
 } from "./MintNFISlice";
 import MintABI from '../abiFiles/PaperMastersNFI.json'
 import {useState} from "react";
@@ -199,10 +199,15 @@ function* gasAccBalanceSaga(actionObject: any):any {
     }
 }
 
+function* tokenURISaga(){
+
+};
+
     export function* watchMintNFISaga() {
         yield takeLatest(mintNFIAsyncAction.type, mintNFISaga);
         yield takeLatest(gasForMintNFIAsyncAction.type, getGasForMintSaga);
         yield takeLatest(gasAccBalanceAction.type, gasAccBalanceSaga);
+        yield takeLatest(tokenURIAction.type, tokenURISaga);
 
     }
 

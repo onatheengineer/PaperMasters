@@ -106,7 +106,6 @@ export const Identity:FC<Interface>=()=> {
     console.log('requestStructUsingParamsFromBC.walletAccount.length:', requestStructUsingParamsFromBC.walletAccount.length)
 
 
-
     return (
         <Box
             //border={'4px solid red'}
@@ -114,12 +113,13 @@ export const Identity:FC<Interface>=()=> {
             px='0px'
             display='flex'
             flexDirection='column'
-            justifyContent='center'
             //align='center'
         >
             {paramsWalletAcc !== undefined && walletAcc !== 'undefined' && walletAcc !== "" && paramsWalletAcc.length !== 0 ?
 
-                <Stack>
+                <Stack
+                    //border={'4px solid yellow'}
+                >
                     <Box
                         bgImage={bgImage}
                         w="100%"
@@ -147,17 +147,16 @@ export const Identity:FC<Interface>=()=> {
                             {/*        Description*/}
                             {/*    </Text>*/}
                             {/*</Heading>*/}
-                            <Box px="5px">
+                            <Box px="5px"
+                                //justifyContent={'space-evenly'}
+                                //alignItems={'flex-start'}
+                                //alignContent={'space-evenly'}
+                            >
                                 <Flex direction="column">
-
-
-                                    <Text fontSize="md" color={'pmpurple.13'} fontWeight="400" mb="12px"
-                                          align={'left'} >
-
+                                    <Text fontSize="md" color={'pmpurple.13'} fontWeight="400"
+                                          align={'left'}>
                                         {logicDescriptionMemo}
                                     </Text>
-
-
                                 </Flex>
                             </Box>
                         </Box>
@@ -165,7 +164,7 @@ export const Identity:FC<Interface>=()=> {
                             <HStack spacing={'10px'}
                                     align='stretch'
                                     justify={'space-evenly'}
-                                    maxH={"470px"}
+                                    minH={"400px"}
                             >
                                 <Box w='38%' borderRadius='15px' bg='white' p="16px" overflow={'none'}
                                      whiteSpace={"pre-line"}
@@ -173,8 +172,10 @@ export const Identity:FC<Interface>=()=> {
                                     <ValidationsReports/>
                                 </Box>
 
-                                <Box w='380px' borderRadius='15px' bg='white' px="16px"
-                                     py={'28px'} overflow={'none'} whiteSpace={'break-spaces'}
+                                <Box w='380px' borderRadius='15px' bg='white'
+                                     px="16px"
+                                     py={'28px'}
+                                     overflow={'none'} whiteSpace={'break-spaces'}
                                 >
 
                                     {paramsWalletAcc.length !== 0 && paramsAddressHasIdentityBoolBC !== false && requestStructUsingParamsFromBC.walletAccount.length !== 0 ?
@@ -198,38 +199,36 @@ export const Identity:FC<Interface>=()=> {
                                                    originDate={parseInt(requestStructUsingParamsFromBC.originDate)}
                                         />
                                         :
-                                        <Center>
 
-                                        <Button
-                                            w={'100%'}
-                                            bg={'pmpurple.2'}
-                                            h='10.00rem'
-                                            //size='lg'
-                                            borderRadius={'20px'}
-                                            borderStyle={'4px solid'}
-                                            borderColor={'pmpurple.6'}
-                                            textDecoration={'none'}
-                                            _hover={{
-                                                transform: 'translateY(-2px)',
-                                                boxShadow: 'xl',
-                                            }}
-                                        >
-                                            <Link as={ReachLink} to='/register'
-                                                  _hover={{textDecor: 'none'}}
-                                                  cursor={'pointer'}
+                                            <Button
+                                                as={ReachLink}
+                                                to={'/register'}
+                                                w={'100%'}
+                                                bg={'pmpurple.2'}
+                                                h='10.00rem'
+                                                //size='lg'
+                                                borderRadius={'20px'}
+                                                borderStyle={'4px solid'}
+                                                borderColor={'pmpurple.6'}
+                                                textDecoration={'none'}
+                                                cursor={'pointer'}
+                                                alignItems={'center'}
+                                                _hover={{
+                                                    transform: 'translateY(-2px)',
+                                                    boxShadow: 'xl',
+                                                    textDecoration: 'none'
+                                                }}
                                             >
+                                                    <Text p='12px' textAlign={'center'} fontSize="xl"
+                                                          color={'pmpurple.13'}
+                                                          fontWeight="bold" whiteSpace={'pre-wrap'}>
+                                                        NFI will display here, please mint an NFI to your wallet account
+                                                    </Text>
+                                                    <Box position={"absolute"} bottom={'10px'} right={"10px"} color={'pmpurple.13'}>
+                                                        <RiShareForwardLine fontSize={'40px'}/>
+                                                    </Box>
 
-                                                <Text p='12px' textAlign={'center'} fontSize="xl" color={'pmpurple.13'}
-                                                      fontWeight="bold" whiteSpace={'pre-wrap'}>
-                                                    NFI will display here, please mint an NFI to your wallet account
-                                                </Text>
-                                                <Box position={"absolute"} bottom={'10px'} right={"10px"}>
-                                                    <RiShareForwardLine fontSize={'40px'}/>
-                                                </Box>
-
-                                            </Link>
-                                        </Button>
-                                        </Center>
+                                            </Button>
                                     }
                                 </Box>
 
@@ -245,19 +244,18 @@ export const Identity:FC<Interface>=()=> {
                                         //border={'4px solid blue'}
                                     >
                                         {/*{provider === */}
-                                        <Text mb={'5px'} fontSize="17px" color={'pmpurple.13'}  align={'center'}>
-                                            Ethereum Ledger
-                                        </Text>
-
-                                        {/*<Text mb={'5px'} fontSize="17px" color={'pmpurple.13'}  align={'center'}>*/}
-                                        {/*    HarmonyOne Ledger*/}
+                                        {/*<Text mb={'5px'} fontSize="17px" color={'pmpurple.13'} align={'center'}>*/}
+                                        {/*    Ethereum Ledger*/}
                                         {/*</Text>*/}
 
-                                        <Divider
-                                        border={'1px solid'}
-                                        borderColor={'pmpurple.8'}
-                                        />
+                                        <Text mb={'5px'} fontSize="16px" color={'pmpurple.13'}  align={'center'}>
+                                            Harmony Ledger
+                                        </Text>
 
+                                        <Divider
+                                            border={'1px solid'}
+                                            borderColor={'pmpurple.8'}
+                                        />
                                         <AccountLedger/>
                                     </Box>
 

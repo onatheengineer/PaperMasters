@@ -49,6 +49,7 @@ export const { mintSucceededSuccessful, gasForMinting, mintingError, statusBC, a
 export const mintNFIAsyncAction = createAction<{}>("MINT_NFI_SAGA");
 export const gasForMintNFIAsyncAction = createAction<{}>("GAS_FOR_MINT_NFI_SAGA");
 export const gasAccBalanceAction = createAction<{}>("GAS_ACC_BALANCE");
+export const tokenURIAction = createAction<{}>("TOKEN_URL");
 
 
 export default MintNFISlice.reducer;

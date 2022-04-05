@@ -4,10 +4,10 @@ import {watchMintNFISaga} from "./mintNFISaga";
 import {watchMintedNFISaga} from "./mintedNFISaga";
 import {watchAccountSaga} from "./accountSaga";
 import {watchIdentUseParamsSaga} from "./identityPageUseParamsSaga";
-import {watchMoniesSaga} from "./moniesSaga";
+import {watchContractFunctionsSaga} from "./contractsFunctionsSaga";
 import {watchMentionsSaga} from "./mentionsSaga";
 
 export default function* rootSaga() {
     yield all([ call(watchUserWalletSaga), call(watchMintNFISaga), call(watchMintedNFISaga), call(watchAccountSaga),
-        call(watchIdentUseParamsSaga), call(watchMentionsSaga), call(watchMoniesSaga)]);
+        call(watchIdentUseParamsSaga), call(watchMentionsSaga), call(watchContractFunctionsSaga)]);
 }

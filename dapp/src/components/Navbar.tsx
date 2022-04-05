@@ -1,83 +1,63 @@
-// import React, {FC, ReactNode, useEffect} from 'react';
-// import Sparkle from 'react-sparkle';
-// import {
-//     Box,
-//     Flex,
-//     Avatar,
-//     HStack,
-//     Link,
-//     IconButton,
-//     Button,
-//     Menu,
-//     MenuButton,
-//     MenuList,
-//     MenuItem,
-//     MenuDivider,
-//     useDisclosure,
-//     useColorModeValue,
-//     Stack, Text, Container,
-//     MenuIcon, Spacer,
-// } from '@chakra-ui/react';
-// import { extendTheme } from '@chakra-ui/react';
-// import {Link as ReachLink, To, useParams} from "react-router-dom";
-// import {HamburgerIcon, CloseIcon, AddIcon, EditIcon, LinkIcon} from '@chakra-ui/icons';
-// import { Icon } from '@chakra-ui/react';
-// import { FaScroll } from "react-icons/fa";
-// import { SiSololearn } from "react-icons/si";
-// import { ImBooks } from "react-icons/im";
-// import {GiBookshelf, GiNewShoot, GiHeatHaze, GiDiscussion, GiBookCover, GiFlowerPot, GiFlowerHat} from "react-icons/gi";
-// import {MdManageAccounts, MdOutlineReport, MdOutlineWarningAmber, MdOutlineNaturePeople} from "react-icons/md";
-// import Logo from '../assets/PaperMastersLogoGIMP.png';
-// import PMLogo from '../assets/legoLavendar.png';
-// import PMGIMPResized from '../assets/PMGIMPResized.png';
-// import {IoMdCheckmarkCircleOutline} from "react-icons/io";
-// import {RiPlantFill} from "react-icons/ri";
-// import {FiTrendingUp} from "react-icons/fi";
-// import Web3 from "web3";
-// import { useAppSelector, useAppDispatch } from '../app/hooks';
-// import RegisterSlice, {accountsArr, requestAccountsAsyncAction, statusOfArr} from '../features/UserWalletSlice';
-// import detectEthereumProvider from "@metamask/detect-provider";
-// import identity from "./pages/Identity";
-// import {AiOutlineFileSearch} from "react-icons/ai";
-// import {BiBookmarkHeart, BiHomeHeart} from "react-icons/bi";
-//
-// export const SparklyComponent = () => (
-//     // Note: the parent of Sparkle must be positioned relatively or absolutely
-//     <div style={{ position: 'relative' }}>
-//         <Sparkle />
-//     </div>
-// )
-//
-// interface navSubItemInterface {
-//     reachSubLink: To,
-//     menuSubName: string,
-//     iconSubItem: JSX.Element,
-// }
-//     export const NavSubItem:FC<navSubItemInterface> = ({reachSubLink, menuSubName, iconSubItem}) =>{
-//     return(
-//         <Box
-//             textAlign={'center'}
-//             _focus={
-//                 {boxShadow: "none !important"}}
-//         >
-//         <MenuItem
-//             as={ReachLink} to={reachSubLink}
-//             _hover={{color: 'pmpurple.9'}}
-//             //_expanded={{ bg: 'none !important' }}
-//             _active={{
-//                 color: 'pmpurple.9',
-//                 transform: 'scale(0.98)',
-//             }}
-//             pl={'20px'}
-//             color={'pmpurple.13'}
-//             icon={iconSubItem}
-//         >
-//             <Text fontSize="md" color={'pmpurple.13'} fontWeight="semi-bold">
-//                 {menuSubName}
-//             </Text>
-//         </MenuItem>
-//         </Box>
-//     ) }
+import React, {FC, ReactNode, useEffect} from 'react';
+import Sparkle from 'react-sparkle';
+import {
+    Box,
+    Flex,
+    Avatar,
+    HStack,
+    Link,
+    IconButton,
+    Button,
+    Menu,
+    MenuButton,
+    MenuList,
+    MenuItem,
+    MenuDivider,
+    useDisclosure,
+    useColorModeValue,
+    Stack, Text, Container,
+    Collapse,
+    Popover,
+    PopoverTrigger,
+    PopoverContent,
+
+    useBreakpointValue,
+    MenuIcon, Spacer, Icon, Tooltip,
+} from '@chakra-ui/react';
+import { extendTheme } from '@chakra-ui/react';
+import { AddIcon, EditIcon, LinkIcon} from '@chakra-ui/icons';
+import { FaScroll } from "react-icons/fa";
+import { SiSololearn } from "react-icons/si";
+import { ImBooks } from "react-icons/im";
+import {GiBookshelf, GiNewShoot, GiHeatHaze, GiDiscussion, GiBookCover, GiFlowerPot, GiFlowerHat} from "react-icons/gi";
+import Logo from '../assets/PaperMastersLogoGIMP.png';
+import PMLogo from '../assets/legoLavendar.png';
+import {IoMdCheckmarkCircleOutline} from "react-icons/io";
+import {RiPlantFill} from "react-icons/ri";
+import {FiTrendingUp} from "react-icons/fi";
+import Web3 from "web3";
+import RegisterSlice, {
+    requestUserWalletAction,
+    statusOfArr
+} from '../features/UserWalletSlice';
+import detectEthereumProvider from "@metamask/detect-provider";
+import identity from "./pages/Identity";
+import {AiOutlineFileSearch} from "react-icons/ai";
+import {BiBookmarkHeart, BiHomeHeart} from "react-icons/bi";
+import {
+    HamburgerIcon,
+    CloseIcon,
+    ChevronDownIcon,
+    ChevronRightIcon,
+} from '@chakra-ui/icons';
+import {MdManageAccounts, MdOutlineReport, MdOutlineWarningAmber, MdOutlineNaturePeople} from "react-icons/md";
+import PMGIMPResized from '../assets/PMGIMPResized.png';
+import {useAppDispatch, useAppSelector} from "../app/hooks";
+import {Link as ReachLink, To, useParams} from "react-router-dom";
+import PMLogoFull from '../assets/icons/PMLogoFull';
+
+
+
 //
 //
 // interface navMenuItem {
@@ -265,35 +245,42 @@
 //     )
 // };
 
-import {
-    Box,
-    Flex,
-    Text,
-    IconButton,
-    Button,
-    Stack,
-    Collapse,
-    Icon,
-    Link,
-    Popover,
-    PopoverTrigger,
-    PopoverContent,
-    useColorModeValue,
-    useBreakpointValue,
-    useDisclosure,
-} from '@chakra-ui/react';
-import {
-    HamburgerIcon,
-    CloseIcon,
-    ChevronDownIcon,
-    ChevronRightIcon,
-} from '@chakra-ui/icons';
-import {MdManageAccounts, MdOutlineReport, MdOutlineWarningAmber, MdOutlineNaturePeople} from "react-icons/md";
-import Sparkle from 'react-sparkle';
-import PMGIMPResized from '../assets/PMGIMPResized.png';
-import {useAppDispatch, useAppSelector} from "../app/hooks";
-import {useParams} from "react-router-dom";
-import {accountsArr} from "../features/UserWalletSlice";
+
+
+// interface navSubItemInterface {
+//     reachSubLink: To,
+//     menuSubName: string,
+//     iconSubItem: JSX.Element,
+// }
+//     export const NavSubItem:FC<navSubItemInterface> = ({reachSubLink, menuSubName, iconSubItem}) =>{
+//     return(
+//         <Box
+//             textAlign={'center'}
+//             _focus={
+//                 {boxShadow: "none !important"}}
+//         >
+//         <MenuItem
+//             as={ReachLink} to={reachSubLink}
+//             _hover={{color: 'pmpurple.9'}}
+//             //_expanded={{ bg: 'none !important' }}
+//             _active={{
+//                 color: 'pmpurple.9',
+//                 transform: 'scale(0.98)',
+//             }}
+//             pl={'20px'}
+//             color={'pmpurple.13'}
+//             icon={iconSubItem}
+//         >
+//             <Text fontSize="md" color={'pmpurple.13'} fontWeight="semi-bold">
+//                 {menuSubName}
+//             </Text>
+//         </MenuItem>
+//         </Box>
+//     ) }
+
+
+
+
 
 export default function WithSubnavigation() {
     const {isOpen, onToggle} = useDisclosure();
@@ -301,6 +288,7 @@ export default function WithSubnavigation() {
     const {walletAccount} = useParams();
     const requestAccountsArr = useAppSelector((state) => state.register.accounts);
     const dispatch = useAppDispatch();
+
 
     return (
         <Box>
@@ -317,7 +305,8 @@ export default function WithSubnavigation() {
                 <Flex
                     flex={{base: 1, md: 'auto'}}
                     ml={{base: -2}}
-                    display={{base: 'flex', md: 'flex', lg: 'none'}}>
+                    //border={'1px solid blue'}
+                    display={{base: 'flex', md: 'flex', lg: 'flex', xl: 'none'}}>
                     <IconButton
                         onClick={onToggle}
                         icon={
@@ -328,52 +317,61 @@ export default function WithSubnavigation() {
                     />
                 </Flex>
                 <Flex flex={{base: 1}} justify={{base: 'center', md: 'start'}}>
-                    <Text
+                    <Link
+                        as={ReachLink}
+                        to={'/'}
                         textAlign={useBreakpointValue({base: 'center', md: 'left'})}
                         fontFamily={'heading'}
                         color={useColorModeValue('pmpurple.13', 'white')}
                     >
-                        PM PaperMasters
-                    </Text>
+                        <PMLogoFull fill={'#5c415c'} width={'155px'}/>
+                    </Link>
 
-                    <Flex display={{base: 'none', lg: 'flex'}} ml={10}>
+                    <Flex display={{base: 'none', xl: 'flex'}} ml={10}>
                         <DesktopNav/>
                     </Flex>
                 </Flex>
-
                 <Stack
                     flex={{base: 1, md: 0}}
                     justify={'flex-end'}
                     direction={'row'}
                     spacing={6}>
-                    <Button
-                        as={'a'}
-                        fontSize={'sm'}
-                        fontWeight={400}
-                        variant={'link'}
-                        href={'#'}>
-                        Sign In
-                    </Button>
-
-
                     {/*this box in necessary for sparkle to work correctly*/}
                     <Box>
-                        {accountsArr.length === 0 ?
+                        {requestAccountsArr.length === 0 ?
+                            <Tooltip hasArrow label='Metamask is waiting for you to make a move' placement={'bottom-end'} border={'1px solid #694b69'}
+                                     borderRadius={'3px'} bg='pmpurple.5' color='pmpurple.13' m={'-10px'} >
                             <Box style={{position: 'relative'}}
                                 //border={'1px solid red'}
                             >
+
                             <Button
-                                display={{base: 'none', md: 'inline-flex'}}
+                                display={{base: 'inline-flex', md: 'inline-flex'}}
                                 fontSize={'md'}
                                 fontWeight={600}
-                                color={'pmpurple.11'}
-                                bg={'pmpurple.5'}
+                                color={'pmpurple.13'}
+                                bg={'pmpurple.2'}
                                 //href={'#'}
                                 _hover={{
-                                    bg: 'pmpurple.4',
-                                }}>
-                                Connect Wallet
+                                    bg: 'pmpurple.3',
+                                }}
+                                onClick={() => {
+                                         console.log('i am clicked')
+                                         dispatch(requestUserWalletAction());
+                                     }}
+                            >
+
+                                    <HStack>
+                                        <SiSololearn fontSize={'16px'}/>
+                                        <Text
+                                            pl={2}
+                                        >
+                                            Connect Wallet
+                                        </Text>
+                                    </HStack>
+
                             </Button>
+
                             <Sparkle
                                 color="#694b69"
                                 count={15}
@@ -386,25 +384,31 @@ export default function WithSubnavigation() {
                                 //flickerSpeed="fast"
                             />
                             </Box>
-
+                            </Tooltip>
                             :
-                            <Button
-                            display={{base: 'none', md: 'inline-flex'}}
-                            fontSize={'md'}
-                            fontWeight={600}
-                            color={'pmpurple.11'}
-                            bg={'pmpurple.5'}
-                            //href={'#'}
-                            _hover={{
-                            bg: 'pmpurple.4',
-                        }}>
-                            Connected
-                            </Button>
+                            <Box
+                                display={{base: 'inline-flex', md: 'inline-flex'}}
+                                fontSize={'md'}
+                                fontWeight={600}
+                                color={'pmpurple.8'}
+                                bg={'pmpurple.2'}
+                                //href={'#'}
+                        //         _hover={{
+                        //             bg: 'pmpurple.3',
+                        // }}
+                            >
+
+                                <HStack>
+                                    <SiSololearn fontSize={'16px'}/>
+                                    <Text>
+                                        Connected
+                                    </Text>
+                                </HStack>
+                            </Box>
                         }
                     </Box>
                 </Stack>
             </Flex>
-
             <Collapse in={isOpen} animateOpacity>
                 <MobileNav/>
             </Collapse>
@@ -413,33 +417,75 @@ export default function WithSubnavigation() {
 }
 
 const DesktopNav = () => {
-    const linkColor = 'pmpurple.11';
+    const linkColor = 'pmpurple.13';
     const linkHoverColor = 'pmpurple.8';
-    const popoverContentBgColor = 'pmpurple.2';
+    const popoverContentBgColor = 'pmpurple.4';
 
     return (
-        <Stack direction={'row'} spacing={4}>
+        <Stack direction={'row'} spacing={8}
+        alignItems={'center'}
+        >
             {NAV_ITEMS.map((navItem) => (
                 <Box key={navItem.label}>
                     <Popover trigger={'hover'} placement={'bottom-start'}>
                         <PopoverTrigger>
-                            <Link
-                                p={2}
-                                href={navItem.href ?? '#'}
-                                fontSize={'md'}
-                                fontWeight={500}
-                                color={linkColor}
-                                _hover={{
-                                    textDecoration: 'none',
-                                    color: linkHoverColor,
-                                }}>
-                                {navItem.label}
-                            </Link>
+                            <HStack
+                            //spacing={5}
+                            >
+                                {!navItem.navLink ?
+                                    <Link
+                                        as={Link}
+                                        display={'inline'}
+                                        p={2}
+                                        fontSize={'md'}
+                                        fontWeight={500}
+                                        color={linkColor}
+                                        _hover={{
+                                            textDecoration: 'none',
+                                            color: linkHoverColor,
+                                        }}>
+                                        <HStack
+                                            //border={'1px solid blue'}
+                                        >
+                                            {navItem.navIcon}
+                                            <Text>
+                                                {navItem.label}
+                                            </Text>
+                                        </HStack>
+
+                                    </Link>
+                                    :
+                                    <Link
+                                        as={ReachLink}
+                                        to={navItem.navLink}
+                                        p={2}
+                                        fontSize={'md'}
+                                        fontWeight={500}
+                                        color={linkColor}
+                                        _hover={{
+                                            textDecoration: 'none',
+                                            color: linkHoverColor,
+                                        }}>
+                                        <HStack
+                                            //border={'1px solid blue'}
+                                        >
+                                            {navItem.navIcon}
+                                            <Text>
+                                                {navItem.label}
+                                            </Text>
+                                        </HStack>
+                                    </Link>
+                                }
+
+                            </HStack>
+
                         </PopoverTrigger>
+
 
                         {navItem.children && (
                             <PopoverContent
-                                border={0}
+                                border={'1px solid'}
+                                borderColor={'pmpurple.10'}
                                 boxShadow={'xl'}
                                 bg={popoverContentBgColor}
                                 p={4}
@@ -459,35 +505,30 @@ const DesktopNav = () => {
     );
 };
 
-const DesktopSubNav = ({ label, href, subLabel }: NavItem) => {
+const DesktopSubNav = ({ label, subLabel, navLink, navIcon }: NavItem) => {
+
     return (
+
         <Link
-            href={href}
+            as={ReachLink}
+            to={navLink as To}
             role={'group'}
             display={'block'}
             p={2}
             rounded={'md'}
-            _hover={{ bg: useColorModeValue('pmpurple.8', 'gray.900') }}>
+            _hover={{ bg: useColorModeValue('pmpurple.5', 'gray.900'),
+                textDecoration: 'none'
+            }}>
             <Stack direction={'row'} align={'center'}>
                 <Box>
                     <Text
                         transition={'all .3s ease'}
-                        _groupHover={{ color: 'pmpurple.4' }}
+                        // _groupHover={{ color: 'pmpurple.13' }}
                         fontWeight={500}>
                         {label}
                     </Text>
                     <Text fontSize={'sm'}>{subLabel}</Text>
                 </Box>
-                <Flex
-                    transition={'all .3s ease'}
-                    transform={'translateX(-10px)'}
-                    opacity={0}
-                    _groupHover={{ opacity: '100%', transform: 'translateX(0)' }}
-                    justify={'flex-end'}
-                    align={'center'}
-                    flex={1}>
-                    <Icon color={'pmpurple.4'} w={5} h={5} as={ChevronRightIcon} />
-                </Flex>
             </Stack>
         </Link>
     );
@@ -496,7 +537,7 @@ const DesktopSubNav = ({ label, href, subLabel }: NavItem) => {
 const MobileNav = () => {
     return (
         <Stack
-            bg={useColorModeValue('pmpurple.6', 'pmpurple.6')}
+            bg={useColorModeValue('pmpurple.13', 'pmpurple.6')}
             p={4}
             display={{ lg: 'none' }}>
             {NAV_ITEMS.map((navItem) => (
@@ -506,15 +547,14 @@ const MobileNav = () => {
     );
 };
 
-const MobileNavItem = ({ label, children, href }: NavItem) => {
+const MobileNavItem = ({ label, children, navLink, navIcon }: NavItem) => {
     const { isOpen, onToggle } = useDisclosure();
-
     return (
         <Stack spacing={4} onClick={children && onToggle}>
             <Flex
                 py={2}
                 as={Link}
-                href={href ?? '#'}
+                // to={navLink ? navLink : null}
                 justify={'space-between'}
                 align={'center'}
                 _hover={{
@@ -523,6 +563,7 @@ const MobileNavItem = ({ label, children, href }: NavItem) => {
                 <Text
                     fontWeight={600}
                     color={useColorModeValue('pmpurple.13', 'pmpurple.13')}>
+                    {navIcon}
                     {label}
                 </Text>
                 {children && (
@@ -535,7 +576,6 @@ const MobileNavItem = ({ label, children, href }: NavItem) => {
                     />
                 )}
             </Flex>
-
             <Collapse in={isOpen} animateOpacity style={{ marginTop: '0!important' }}>
                 <Stack
                     mt={2}
@@ -546,7 +586,10 @@ const MobileNavItem = ({ label, children, href }: NavItem) => {
                     align={'start'}>
                     {children &&
                         children.map((child) => (
-                            <Link key={child.label} py={2} href={child.href}>
+                            <Link
+                                  // to={child.navLink}
+                                  key={child.label} py={2} >
+                                {navIcon}
                                 {child.label}
                             </Link>
                         ))}
@@ -560,73 +603,103 @@ interface NavItem {
     label: string;
     subLabel?: string;
     children?: Array<NavItem>;
-    href?: string;
-    // iconNav: JSX.Element;
+    navIcon?: JSX.Element;
+    navLink?: To,
 }
 
 const NAV_ITEMS: Array<NavItem> = [
+    // {
+    //     label: '',
+    //     navIcon: <PMLogoFull fill={'#5c415c'} width={'170px'}/>,
+    //     navLink: '/',
+    // },
     {
         label: 'Non-Fungible Identity',
+        navIcon: <MdManageAccounts fontSize={'18px'}/>,
         children: [
             {
-                label: 'Profile',
-                subLabel: 'Your Blockchain Identity',
-                href: '#={`/identity/${requestAccountsArr[0]}`}',
+                label: 'Identity',
+                subLabel: 'Your Authentic Identity',
+                navIcon: <MdManageAccounts fontSize={'18px'}/>,
+                navLink: '/identity/${requestAccountsArr[0]}',
             },
             {
                 label: 'Register',
-                subLabel: 'Up-and-coming Designers',
-                href: '#',
+                subLabel: 'Register your wallet account',
+                navIcon: <BiBookmarkHeart fontSize={'18px'}/>,
+                navLink: '/register',
             },
             {
-                label: 'Validate',
-                subLabel: 'Up-and-coming Designers',
-                href: '#',
+                label: 'Validate (coming soon)',
+                subLabel: 'Authenticate a wallet account',
+                navIcon: <IoMdCheckmarkCircleOutline fontSize={'18px'}/>,
+                navLink: '/validate',
             },
             {
-                label: 'Report',
-                subLabel: 'Up-and-coming Designers',
-                href: '#',
-            },
-        ],
-    },
-    {
-        label: 'Learning Center',
-        children: [
-            {
-                label: 'Job Board',
-                subLabel: 'Find your dream design job',
-                href: '#',
-            },
-            {
-                label: 'Freelance Projects',
-                subLabel: 'An exclusive list for contract work',
-                href: '#',
-            },
-        ],
-    },
-    {
-        label: 'Your People',
-        children: [
-            {
-                label: 'Job Board',
-                subLabel: 'Find your dream design job',
-                href: '#',
-            },
-            {
-                label: 'Freelance Projects',
-                subLabel: 'An exclusive list for contract work',
-                href: '#',
-
+                label: 'Report (coming soon)',
+                subLabel: 'Report a wallet account for wrongful activity',
+                navIcon: <MdOutlineReport fontSize={'18px'}/>,
+                navLink: 'report',
             },
         ],
     },
     {
         label: 'Search',
-        href: '#',
+        navIcon: <MdOutlineNaturePeople fontSize={'18px'} fontWeight={'bolder'}/>,
+        navLink: '/search',
+    },
+    {
+        label: 'Learning Center',
+        navIcon: <ImBooks fontSize={'18px'}/>,
+        children: [
+            {
+                label: 'FAQ',
+                subLabel: 'Frequently Asked Questions',
+                navIcon: <GiDiscussion fontSize={'18px'}/>,
+                navLink: '/learn',
+            },
+            {
+                label: 'New & Updated Features',
+                subLabel: 'Stories to come',
+                navIcon: <GiFlowerPot fontSize={'18px'}/>,
+                navLink: '/learn',
+            },
+            // {
+            //     label: 'Report Suspicious Activity',
+            //     subLabel: 'An exclusive list for contract work',
+            //     navIcon: <MdOutlineWarningAmber fontSize={'18px'}/>,
+            //     navLink: '/learn',
+            // },
+        ],
     },
     {
         label: 'CloudHWM',
-        href: '#',
+        navIcon: <GiHeatHaze fontSize={'18px'}/>,
+        navLink: '/cloudhwm',
+    },
+    {
+        label: 'Your People',
+        navIcon: <FaScroll fontSize={'18px'}/>,
+        children: [
+            {
+                label: 'About Us',
+                subLabel: 'Were not going anywhere',
+                navIcon: <GiFlowerHat fontSize={'18px'}/>,
+                navLink: '/yourpeople',
+            },
+            {
+                label: 'Support',
+                subLabel: 'Support the project',
+                navIcon: <RiPlantFill fontSize={'18px'}/>,
+                navLink: '/yourpeople',
+
+            },
+            {
+                label: 'Analytics',
+                navIcon: <FiTrendingUp fontSize={'18px'}/>,
+                subLabel: 'Project Statistics',
+                navLink: '/analytics'
+            },
+        ],
     },
 ];

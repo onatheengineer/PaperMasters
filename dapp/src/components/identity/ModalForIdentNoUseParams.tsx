@@ -15,7 +15,7 @@ import {
     Text, MenuButton, MenuItem, HStack,
 } from "@chakra-ui/react";
 import {Link as ReachLink} from "react-router-dom";
-import {requestAccountsAsyncAction} from "../../features/UserWalletSlice";
+import {requestUserWalletAction} from "../../features/UserWalletSlice";
 import {SiSololearn} from "react-icons/si";
 import Sparkle from "react-sparkle";
 import {useAppDispatch} from "../../app/hooks";
@@ -66,7 +66,7 @@ export const ModalForIdentNoUseParams:FC<Interface>=()=> {
                         borderColor={'pmpurple.6'}
                         onClick={() => {
                             console.log('i am clicked')
-                            dispatch(requestAccountsAsyncAction());
+                            dispatch(requestUserWalletAction());
                         }}
                         _hover={{color: 'pmpurple.9'}}
                         // _active={{

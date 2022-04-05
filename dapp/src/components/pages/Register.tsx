@@ -42,7 +42,7 @@ import {useAppDispatch, useAppSelector} from "../../app/hooks";
 import PMLogo from '../../assets/PMGIMPResized.png';
 import Logo from '../../assets/Logo';
 import {ColorChangeHandler, ColorResult, SketchPicker, GithubPicker, RGBColor} from 'react-color';
-import {getOneReceiptFromDB, requestAccountsAsyncAction, watchUserWalletChannelAction} from "../../features/UserWalletSlice";
+import {getOneReceiptFromDB, requestUserWalletAction, watchUserWalletChannelAction} from "../../features/UserWalletSlice";
 import {
     mintNFIAsyncAction,
     gasForMintNFIAsyncAction,
@@ -217,7 +217,7 @@ export const Register: FC<InterfaceRegister>=()=> {
         console.log('accountsArr', accountsArr.length)
         if (accountsArr.length === 0) {
             dispatch(watchUserWalletChannelAction());
-            dispatch(requestAccountsAsyncAction());
+            dispatch(requestUserWalletAction());
             dispatch(gasAccBalanceAction(accountsArr[0]));
         }
     }, [accountsArr]);
@@ -278,7 +278,7 @@ export const Register: FC<InterfaceRegister>=()=> {
             >
                 <VStack
                     w={'full'}
-                    py={6}
+                    py={8}
                     px={10}
                     bg={'pmpurple.1'}
                     borderRadius='15px'
@@ -290,7 +290,7 @@ export const Register: FC<InterfaceRegister>=()=> {
                         alignItems={'center'}
                         //border={'2px solid green'}
                     >
-                        <Heading color={'pmpurple.13'} size="xl">
+                        <Heading color={'pmpurple.13'} size="xl" >
                             Mint PaperMaster NFI
                         </Heading>
                         <Text color={'pmpurple.13'} align="center" fontWeight="medium">
@@ -946,7 +946,7 @@ export const Register: FC<InterfaceRegister>=()=> {
 
                 <VStack
                     w={'full'}
-                    py={6}
+                    py={8}
                     px={10}
                     spacing={10}
                     bg={'pmpurple.1'}
@@ -983,7 +983,15 @@ export const Register: FC<InterfaceRegister>=()=> {
                                            accountNumber={accountsArr[0]}
                                 />
 
+                            <Stack>
+                                <Box
+                                pt={'160px'}
+                                >
+                                    <Divider color = 'pmpurple.8'/>
+                                </Box>
+
                                 <Center>
+
                                     {/*&& accBalanceErr !== ""*/}
                                     {name !== "" ?
                                         <Button
@@ -1055,6 +1063,7 @@ export const Register: FC<InterfaceRegister>=()=> {
                                         </Box>
                                         : null}
                                 </Center>
+                        </Stack>
                         </Box>
                     </VStack>
                 </VStack>

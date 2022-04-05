@@ -39,17 +39,17 @@ export const ValidationsReports:FC<Interface>=()=> {
                             <Text textAlign={'left'} fontSize="sm" color={'pmpurple.8'} fontWeight="600" mb="12px">
                                 GIFTED BY ACCOUNT:
                             </Text>
-                            <Flex align="center" mb="20px">
-                                <Switch colorScheme="purple" me="10px"/>
-                                <Text
-                                    noOfLines={1}
-                                    fontSize="md"
-                                    color="gray.500"
-                                    fontWeight="400"
-                                >
-                                    Email me when someone Validates me
-                                </Text>
-                            </Flex>
+                            {/*<Flex align="center" mb="20px">*/}
+                            {/*    <Switch colorScheme="purple" me="10px"/>*/}
+                            {/*    <Text*/}
+                            {/*        noOfLines={1}*/}
+                            {/*        fontSize="md"*/}
+                            {/*        color="gray.500"*/}
+                            {/*        fontWeight="400"*/}
+                            {/*    >*/}
+                            {/*        Email me when someone Validates me*/}
+                            {/*    </Text>*/}
+                            {/*</Flex>*/}
 
 
                         </TabPanel>
@@ -57,17 +57,17 @@ export const ValidationsReports:FC<Interface>=()=> {
                             <Text textAlign={'left'} fontSize="sm" color={'pmpurple.8'} fontWeight="600" mb="12px">
                                 REPORTED BY ACCOUNT:
                             </Text>
-                            <Flex align="center" mb="20px">
-                                <Switch colorScheme="purple" me="10px"/>
-                                <Text
-                                    noOfLines={1}
-                                    fontSize="md"
-                                    color="gray.500"
-                                    fontWeight="400"
-                                >
-                                    Email me when someone REPORTS me
-                                </Text>
-                            </Flex>
+                            {/*<Flex align="center" mb="20px">*/}
+                            {/*    <Switch colorScheme="purple" me="10px"/>*/}
+                            {/*    <Text*/}
+                            {/*        noOfLines={1}*/}
+                            {/*        fontSize="md"*/}
+                            {/*        color="gray.500"*/}
+                            {/*        fontWeight="400"*/}
+                            {/*    >*/}
+                            {/*        Email me when someone REPORTS me*/}
+                            {/*    </Text>*/}
+                            {/*</Flex>*/}
 
                         </TabPanel>
                     </TabPanels>

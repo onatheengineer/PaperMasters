@@ -9,7 +9,7 @@ import Web3 from "web3";
 import type {FC} from 'react';
 import {Box, Flex, VStack} from '@chakra-ui/react';
 import Sidebar, {NavItem} from './components/Sidebar'
-import {accountsArr, requestAccountsAsyncAction} from "./features/UserWalletSlice";
+import {accountsArr, requestUserWalletAction} from "./features/UserWalletSlice";
 import {mintNFIAsyncAction} from "./features/MintNFISlice";
 import {addressHasIdentityBoolAction} from "./features/MintedNFISlice";
 import { createBreakpoints } from '@chakra-ui/theme-tools'
@@ -26,7 +26,7 @@ function App() {
 
     useEffect(  () => {
         console.log("is this dispatch metamask useEffect running?")
-        dispatch(requestAccountsAsyncAction());
+        dispatch(requestUserWalletAction());
 
         const provider: any = detectEthereumProvider();
         console.log("this is provider:", provider);
@@ -35,7 +35,7 @@ function App() {
             actualProvider.on('accountsChanged', (accounts: any) => {
                 console.log('account changed!')
                 dispatch(accountsArr([]));
-                dispatch(requestAccountsAsyncAction());
+                dispatch(requestUserWalletAction());
                 window.location.reload();
             });
             actualProvider.on('chainChanged', (chainId:any) => {

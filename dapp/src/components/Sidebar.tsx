@@ -199,7 +199,6 @@ export const Sidebar: FC<InterfaceSidebar>= ({icon, profileName} ) => {
                 break;
             case '/yourpeople':
             case '/aboutus':
-            case '/contactus':
             case '/supportus':
                 setNavItemRender(SidebarYourPeople);
                 setHeaderTitle("Your People");

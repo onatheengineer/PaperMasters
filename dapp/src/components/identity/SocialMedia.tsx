@@ -24,9 +24,7 @@ import {ChevronDownIcon} from "@chakra-ui/icons";
 import {BsFillPersonLinesFill} from "react-icons/bs";
 import {TiSocialAtCircular} from "react-icons/ti";
 import {openseaIcon} from "../../assets/icons/openseaIcon";
-import {openseaIcon2} from "../../assets/icons/openseaIcon2";
 import {IconType} from "react-icons";
-import {openseaIcon3} from "../../assets/icons/openseaIcon3";
 import {MdOutlinePeopleOutline} from "react-icons/md";
 
 interface iconLinkInterface{

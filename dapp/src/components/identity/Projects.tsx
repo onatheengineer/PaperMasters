@@ -36,7 +36,7 @@ export const Projects:FC<Interface>=()=> {
 
     return (
         <HStack
-        h={'455px'}
+        maxH={'455px'}
         >
             <Box
                 w={'50%'}
@@ -89,6 +89,7 @@ export const Projects:FC<Interface>=()=> {
                     borderColor={'pmpurple.8'}
                 />
                 <Box px="5px"
+                     mt={'5px'}
                      //border={'1px solid orange'}
                 >
                     <Grid
