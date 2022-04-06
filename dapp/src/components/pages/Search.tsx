@@ -12,7 +12,7 @@ import {
     InputGroup,
     InputRightAddon,
     Text,
-    FormControl
+    FormControl, Tooltip
 } from '@chakra-ui/react';
 import {useAppDispatch, useAppSelector} from "../../app/hooks";
 import DataTable, {ExpanderComponentProps, TableColumn} from 'react-data-table-component';
@@ -28,9 +28,10 @@ import {getReceiptDBCurrentUser} from "../../features/AccountSlice";
 import {
     getAllReceiptFromDBAction,
     getAllWalletFromDBAction,
-    putWalletInDBStatus
+    putWalletInDBStatus, requestUserWalletAction
 } from "../../features/UserWalletSlice";
 import AvatarNFI from "../AvatarNFI";
+import Sparkle from "react-sparkle";
 
 
 interface DataRow {
@@ -56,12 +57,18 @@ const FilterComponent: FC<interfaceFilterComponent> = ( { filterText, onClick, o
 
     <Box>
         <HStack>
+
             <InputGroup>
             <Input focusBorderColor='pmpurple.8' color={'pmpurple.13'} border={'1px solid'} borderColor={'pmpurple.3'} id={idType} type="text" placeholder={placeHolder} aria-label="Search Input" value={filterText} onChange={onFilter} />
+                <Tooltip hasArrow label='Please type at minimum 32 characters to add a wallet account'
+                         placement={'bottom-end'} border={'1px solid #694b69'}
+                         borderRadius={'3px'} bg='pmpurple.5' color='pmpurple.13' m={'-10px'}>
                 <InputRightAddon
                     p='0' borderColor={"pmpurple.4"} bg={'pmpurple.2'}
                     children={<Button bg={'pmpurple.5'} color={"pmpurple.13"} disabled={activateButton} onClick={onClick} >{text}</Button>} />
-            </InputGroup>
+                </Tooltip>
+                </InputGroup>
+
         </HStack>
     </Box>
 )
@@ -308,10 +315,11 @@ export const Search: FC=()=> {
                                      filterText={filterText} text={"reset"} placeHolder={"Search NFI"}
                                      idType={"Search"}/>
 
-                    <FilterComponent onFilter={(e: any) => setWalletAccount(e.target.value)}
-                                     onClick={addWalletAccountHandler} activateButton={(filteredItems.length !== 0)}
-                                     filterText={searchWalletAccount} text={"Add Wallet Account"}
-                                     placeHolder={"Search Wallet Account"} idType={"WalletAccount"}/>
+
+                        <FilterComponent onFilter={(e: any) => setWalletAccount(e.target.value)}
+                                         onClick={addWalletAccountHandler} activateButton={(filteredItems.length !== 0)}
+                                         filterText={searchWalletAccount} text={"Add Wallet Account"}
+                                         placeHolder={"Search Wallet Account"} idType={"WalletAccount"}/>
 
                     <IdentityEntryModal title={'Create a profile for a Non-Registered'} text={'Enter Wallet Account'}
                                         placeHolder={'wallet account'}

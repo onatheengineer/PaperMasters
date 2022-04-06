@@ -149,7 +149,10 @@ export default function LargeWithLogoCentered() {
                 <Stack direction={{base: 'column', md: 'row'}}
 
                 >
-                        <Text color='pmpurple.13'>© 2022 Made with
+                        <Text
+                            //border={'1px solid blue'}
+                            //width={{ base: 'flex', md: 'none'}}
+                            color='pmpurple.13'>© 2022 Made with
                             <span
                                 style={{padding: '8px'}}
                             >
@@ -168,7 +171,9 @@ export default function LargeWithLogoCentered() {
                             md: 'repeat(3, 1fr)',
                             lg: 'repeat(9, 1fr)',
                         }}
-                        gap={{ base: '2', lg: '8'}}>
+                        gap={{ base: '2', lg: '8'}}
+                        justifyContent={{ base: 'center', md: 'none'}}
+                    >
 
                         <SocialButton label={'Twitter'} href={'https://twitter.com/ramonajenny_n'}>
                             <FaTwitter/>

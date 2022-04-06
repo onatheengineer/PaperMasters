@@ -21,6 +21,7 @@ import {
 import axios from "axios";
 import {useParams} from "react-router-dom";
 import MintABI from "../abiFiles/PaperMastersNFI.json";
+import {SagaIterator} from "redux-saga";
 
 
 //const walletAccountParamsLink = ()=>{ walletAccountParams = useParams()};
@@ -130,7 +131,7 @@ function* getOneReceiptFromDBSaga(actionObject: any): any {
 };
 
 
-export function* watchUserWalletSaga() {
+export function* watchUserWalletSaga(): SagaIterator {
     yield takeEvery(requestUserWalletAction.type, userWalletSaga);
     yield takeEvery(putWalletInDBAction.type, putWalletInDBSaga);
     yield takeEvery(getAllWalletFromDBAction.type, getAllWalletFromDBSaga);

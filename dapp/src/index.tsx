@@ -16,15 +16,17 @@ console.log(theme)
 
 ReactDOM.render(
   <React.StrictMode>
+      <BrowserRouter>
       <ChakraProvider theme={theme}>
           <Provider store={store}>
         <MetamaskStateProvider>
-        <BrowserRouter>
+
       <App />
-        </BrowserRouter>
+
     </MetamaskStateProvider>
     </Provider>
 </ChakraProvider>
+</BrowserRouter>
   </React.StrictMode>,
 
   document.getElementById('root')

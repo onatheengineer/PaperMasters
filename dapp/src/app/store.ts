@@ -10,6 +10,7 @@ import accountSlice from "../features/AccountSlice";
 import {watchIdentUseParamsSaga} from "../features/identityPageUseParamsSaga";
 import mentionsSlice from "../features/MentionsSlice";
 import contractFunctionsSlice from '../features/ContractFunctionsSlice'
+import toastSlice from "../features/toast/redux/toastSlice";
 
 
 
@@ -25,6 +26,7 @@ export const store = configureStore({
     identUseParams: identUseParamsSlice,
     mentions: mentionsSlice,
     functions: contractFunctionsSlice,
+    toast: toastSlice,
   },
 });
 

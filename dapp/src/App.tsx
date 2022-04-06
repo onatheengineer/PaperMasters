@@ -3,7 +3,7 @@ import './App.css';
 import {useAppDispatch, useAppSelector} from './app/hooks';
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footers/Footer";
-import {Routes, Route} from "react-router-dom";
+import {Routes, Route, BrowserRouter} from "react-router-dom";
 import "focus-visible/dist/focus-visible";
 import Web3 from "web3";
 import type {FC} from 'react';
@@ -18,13 +18,14 @@ import Identity from "./components/pages/Identity";
 import detectEthereumProvider from '@metamask/detect-provider';
 import Search from "./components/pages/Search";
 import Register from "./components/pages/Register";
-
+import { useGlobalToast } from './features/toast/hooks/useGlobalToast';
 
 function App() {
+    useGlobalToast();
     const dispatch = useAppDispatch();
     const requestWalletArr = useAppSelector((state) => state.register.accounts);
 
-    useEffect(  () => {
+    useEffect(() => {
         console.log("is this dispatch metamask useEffect running?")
         dispatch(requestUserWalletAction());
 
@@ -38,49 +39,57 @@ function App() {
                 dispatch(requestUserWalletAction());
                 window.location.reload();
             });
-            actualProvider.on('chainChanged', (chainId:any) => {
+            actualProvider.on('chainChanged', (chainId: any) => {
                 window.location.reload();
             })
         });
-    }, [] )
+    }, [])
 
 
-    useEffect( () => {
+    useEffect(() => {
         console.log("is there a wallet account connected? Now check for NFI")
         if (requestWalletArr.length !== 0) {
             dispatch(addressHasIdentityBoolAction(requestWalletArr[0]));
             dispatch(getReceiptDBConnectUserAction());
         }
-    }, [requestWalletArr] )
+    }, [requestWalletArr])
 
 
     return (
-        <Box
-            border={'2px solid'}
-            borderColor={"pmpurple.8"}
-            bg={'pmpurple.6'}
-            overflow={'hidden'}
-        >
+
+
+
+
+            <Box
+                border={'2px solid'}
+                borderColor={"pmpurple.8"}
+                bg={'pmpurple.6'}
+                overflow={'hidden'}
+            >
                 <Flex
-                minH={'100vH'}
-                flexDirection={'column'}
-                //border={'2px solid red'}
+                    minH={'100vH'}
+                    flexDirection={'column'}
+                    //border={'2px solid red'}
                 >
                     <Box>
                         <Navbar/>
                     </Box>
-<Box
-    flexGrow={1}
-    //border={'2px solid yellow'}
-    display={'flex'}
->
-    <Sidebar/>
-</Box>
+
+                        <Box
+                            flexGrow={1}
+                            //border={'2px solid yellow'}
+                            display={'flex'}
+                        >
+                            <Sidebar/>
+                        </Box>
+
 
                 </Flex>
 
-            <Footer/>
-        </Box>
+                <Footer/>
+
+            </Box>
+
     )
 };
 
