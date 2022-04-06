@@ -13,15 +13,17 @@ import {
     getOneReceiptFromDBAction,
     getAllReceiptFromDB,
     getOneReceiptFromDB,
-    watchUserWalletChannelAction,
+    // watchUserWalletChannelAction,
     chainIdErr,
     chainIdProvider,
-    requestUserWalletAction
+    requestUserWalletAction, accountDictionaryInterface, IdentityDictionaryInterface
 } from "./UserWalletSlice";
 import axios from "axios";
 import {useParams} from "react-router-dom";
 import MintABI from "../abiFiles/PaperMastersNFI.json";
 import {SagaIterator} from "redux-saga";
+import {PayloadAction} from "@reduxjs/toolkit";
+import {ToastOptions} from "./toast/redux/toastSlice.types";
 
 
 //const walletAccountParamsLink = ()=>{ walletAccountParams = useParams()};
@@ -31,19 +33,21 @@ const baseURL = 'https://ociuozqx85.execute-api.us-east-1.amazonaws.com';
 const statusOfArrArr = (state: any) => state.register.status;
 const requestWalletArr = (state: any) => state.register.accounts;
 
-function* watchUserWalletChannelSaga( ):any{
-    const requestUserWalletChan = yield actionChannel('USER_WALLET_CHANNEL')
-
-     while(true){
-        const {payload} = yield take(requestUserWalletChan)
-         yield call(handleRequest, payload)
-    }
- }
+// function* watchUserWalletChannelSaga({
+//                                          payload,
+//                                      }: PayloadAction<   >): SagaIterator{
+//     const requestUserWalletChan = yield actionChannel('USER_WALLET_CHANNEL')
+//
+//      while(true){
+//         const {payload} = yield take(requestUserWalletChan)
+//          yield call(handleRequest, payload)
+//     }
+//  }
 
  function* handleRequest(payload:any){  console.log('handleRequst', payload) }
 
 
-function* userWalletSaga():any {
+function* userWalletSaga(): SagaIterator {
     yield put(statusOfArr("loading"));
     try {
         const web3 = new Web3(Web3.givenProvider);
@@ -71,7 +75,7 @@ function* userWalletSaga():any {
     }
 };
 
-function* putWalletInDBSaga():any {
+function* putWalletInDBSaga(): SagaIterator {
     try{
         const requestStatus = yield select(statusOfArrArr);
         console.log("this is the requestStatus:", requestStatus);
@@ -90,40 +94,40 @@ function* putWalletInDBSaga():any {
     console.log("this is the status of my putWalletInBD status action: ", putWalletInDBStatus)
 };
 
-function* getAllWalletFromDBSaga(): any {
+function* getAllWalletFromDBSaga(): SagaIterator {
     try{
         const getDBWallet = yield call(axios.get, `${baseURL}/account`);
-        yield put(getAllWalletFromDB(getDBWallet.data.Items));
+        yield put(getAllWalletFromDB(getDBWallet.data.Items as accountDictionaryInterface[]));
         console.log ('this is the type of getBDWallet:', getDBWallet);
     } catch (e) {
         console.log(`this is the getWalletFromDBSaga ERROR catch: ${e}`);
     }
 };
 
-function* getOneWalletFromDBSaga(actionObject: any): any {
+function* getOneWalletFromDBSaga(): SagaIterator {
     try{
         const getOneDBWallet = yield call(axios.get, `${baseURL}/account/{walletAccount}`);
-        yield put(getOneWalletFromDB(getOneDBWallet.data.Items[0]));
+        yield put(getOneWalletFromDB(getOneDBWallet.data.Items[0] as accountDictionaryInterface));
         console.log ('this is the type of getOneDBWallet:', getOneDBWallet);
     } catch (e) {
         console.log(`this is the getOneWalletFromDBSaga ERROR catch: ${e}`);
     }
 };
 
-function* getAllReceiptsFromDBSaga(): any {
+function* getAllReceiptsFromDBSaga(): SagaIterator {
     try{
         const getAllDBReceipt = yield call(axios.get, `${baseURL}/receipt`);
-        yield put(getAllReceiptFromDB(getAllDBReceipt.data.Items));
+        yield put(getAllReceiptFromDB(getAllDBReceipt.data.Items as IdentityDictionaryInterface[]));
         console.log ('this is the type of getAllDBreceipt:', getAllDBReceipt);
     } catch (e) {
         console.log(`this is the getAllReceiptsFromDBSaga ERROR catch: ${e}`);
     }
 };
 
-function* getOneReceiptFromDBSaga(actionObject: any): any {
+function* getOneReceiptFromDBSaga({ payload }: PayloadAction<string>): SagaIterator {
     try{
-        const getOneDBReceipt = yield call(axios.get, `${baseURL}/receipt/${actionObject.payload}`);
-        yield put(getOneReceiptFromDB(getOneDBReceipt.data.Items[0]));
+        const getOneDBReceipt = yield call(axios.get, `${baseURL}/receipt/${payload}`);
+        yield put(getOneReceiptFromDB(getOneDBReceipt.data.Items[0] as IdentityDictionaryInterface));
         console.log ('this is the type of getOneDBreceipt:', getOneDBReceipt);
     } catch (e) {
         console.log(`this is the getOneReceiptFromDBSaga ERROR catch: ${e}`);
@@ -138,7 +142,7 @@ export function* watchUserWalletSaga(): SagaIterator {
     yield takeEvery(getOneWalletFromDBAction.type, getOneWalletFromDBSaga);
     yield takeEvery(getAllReceiptFromDBAction.type, getAllReceiptsFromDBSaga);
     yield takeEvery(getOneReceiptFromDBAction.type, getOneReceiptFromDBSaga);
-    yield takeEvery(watchUserWalletChannelAction.type, watchUserWalletChannelSaga);
+    //yield takeEvery(watchUserWalletChannelAction.type, watchUserWalletChannelSaga);
 }
 
 

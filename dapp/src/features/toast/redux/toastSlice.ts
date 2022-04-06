@@ -25,4 +25,5 @@ export const startToast = createAction<ToastOptions>("startToast");
 
 const toastSlice = createToastSlice({ toastOptions: null });
 export const { showToast, resetToast } = toastSlice.actions;
+
 export default toastSlice.reducer;

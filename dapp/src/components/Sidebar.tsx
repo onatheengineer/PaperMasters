@@ -291,7 +291,6 @@ export const Sidebar: FC<InterfaceSidebar>= ({icon, profileName} ) => {
             {/*            <Divider display={navSize == "small" ? "none" : "flex"}/>*/}
 
 
-
             {/*            <Flex mt={4} mb={4} align="center">*/}
             {/*                <Avatar size="sm" src="avatar-1.jpg"/>*/}
             {/*                <Flex flexDir="column" ml={4} display={navSize == "small" ? "none" : "flex"}>*/}
@@ -310,39 +309,37 @@ export const Sidebar: FC<InterfaceSidebar>= ({icon, profileName} ) => {
             {/*    </Box>*/}
             {/*}*/}
 
-<BrowserRouter>
-<Navbar/>
-    <Routes>
-        <Route path="/" element={<Home/>}/>
 
-        <Route path={'/identity/:walletAcc'} element={<Identity/>}/>
+            <Navbar/>
+            <Routes>
+                <Route path="/" element={<Home/>}/>
 
-        {/*{walletAcc === undefined || walletAcc === 'undefined' || walletAcc.length === 0 ?*/}
-        {/*    <Route path={'/identity/:walletAcc'} element={<Navigate replace to= "/identity/0x7C097941487f53bBdd39fddea7Bed9AEf3312ED5" />}/>*/}
+                <Route path={'/identity/:walletAcc'} element={<Identity/>}/>
 
-        {/*:  <Route path={'/identity/:walletAcc'} element={<Identity/>}/>*/}
-        {/*}*/}
-        {/*{addressHasIdentity ?*/}
-        {/*    <Route path={'/register'} element={<Navigate replace to="/search" />}/>*/}
-        {/*    :*/}
-        {/*    <Route path={'/register'} element={<Register/>}/>*/}
-        {/*}*/}
+                {/*{walletAcc === undefined || walletAcc === 'undefined' || walletAcc.length === 0 ?*/}
+                {/*    <Route path={'/identity/:walletAcc'} element={<Navigate replace to= "/identity/0x7C097941487f53bBdd39fddea7Bed9AEf3312ED5" />}/>*/}
 
-        <Route path={'/register'} element={<Register/>}/>
-        <Route path={'/validate'} element={<Validate/>}/>
-        <Route path={'/report'} element={<Report/>}/>
-        <Route path={'/analytics'} element={<Analytics/>}/>
-        <Route path={'/search'} element={<Search/>}/>
-        <Route path={'/learn'} element={<Learn/>}/>
-        <Route path={'/news'} element={<News/>}/>
-        <Route path={'/security'} element={<Security/>}/>
-        <Route path={'/CloudHWM'} element={<CloudHWM/>}/>
-        <Route path={'/yourpeople'} element={<YourPeople/>}/>
-    </Routes>
+                {/*:  <Route path={'/identity/:walletAcc'} element={<Identity/>}/>*/}
+                {/*}*/}
+                {/*{addressHasIdentity ?*/}
+                {/*    <Route path={'/register'} element={<Navigate replace to="/search" />}/>*/}
+                {/*    :*/}
+                {/*    <Route path={'/register'} element={<Register/>}/>*/}
+                {/*}*/}
 
-</BrowserRouter>
+                <Route path={'/register'} element={<Register/>}/>
+                <Route path={'/validate'} element={<Validate/>}/>
+                <Route path={'/report'} element={<Report/>}/>
+                <Route path={'/analytics'} element={<Analytics/>}/>
+                <Route path={'/search'} element={<Search/>}/>
+                <Route path={'/learn'} element={<Learn/>}/>
+                <Route path={'/news'} element={<News/>}/>
+                <Route path={'/security'} element={<Security/>}/>
+                <Route path={'/CloudHWM'} element={<CloudHWM/>}/>
+                <Route path={'/yourpeople'} element={<YourPeople/>}/>
+            </Routes>
 
-            </Flex>
+        </Flex>
     )
 };
 

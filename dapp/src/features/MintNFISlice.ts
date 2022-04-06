@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction, createAction } from "@reduxjs/toolkit";
-
+import {ToastOptions} from "./toast/redux/toastSlice.types";
+import {MintNFISagaTypes} from './mintNFISaga.types'
 
 interface MintState {
     mintSucceeded: 'idle' | 'loading' | 'succeeded' | 'failed';
@@ -23,33 +24,33 @@ const MintNFISlice = createSlice ({
     name: 'mint',
     initialState,
     reducers: {
-        mintSucceededSuccessful(state, action) {
+        mintSucceededSuccessful(state, action: PayloadAction<'idle' | 'loading' | 'succeeded' | 'failed'>) {
             state.mintSucceeded = action.payload
         },
-        gasForMinting(state, action) {
+        gasForMinting(state, action: PayloadAction<number>) {
             state.gasPrice = action.payload
         },
-        mintingError(state, action) {
+        mintingError(state, action: PayloadAction<string>) {
             state.mintErrorReason = action.payload
         },
-        statusBC(state, action) {
+        statusBC(state, action: PayloadAction<boolean>) {
             state.statusBC = action.payload
         },
-        accBalance(state, action) {
-            state.accBalance = action.payload
-        },
-        accBalanceError(state, action) {
+        accBalanceError(state, action: PayloadAction<string>) {
             state.accBalanceError = action.payload
+        },
+        accBalance(state, action: PayloadAction<number>) {
+            state.accBalance = action.payload
         },
     },
 
 });
 
 export const { mintSucceededSuccessful, gasForMinting, mintingError, statusBC, accBalanceError, accBalance } = MintNFISlice.actions;
-export const mintNFIAsyncAction = createAction<{}>("MINT_NFI_SAGA");
-export const gasForMintNFIAsyncAction = createAction<{}>("GAS_FOR_MINT_NFI_SAGA");
-export const gasAccBalanceAction = createAction<{}>("GAS_ACC_BALANCE");
-export const tokenURIAction = createAction<{}>("TOKEN_URL");
+export const mintNFIAction = createAction<MintNFISagaTypes>("MINT_NFI_SAGA");
+export const gasForMintNFIAction = createAction<MintNFISagaTypes>("GAS_FOR_MINT_NFI_SAGA");
+export const gasAccBalanceAction = createAction("GAS_ACC_BALANCE");
+export const tokenURIAction = createAction("TOKEN_URL");
 
 
 export default MintNFISlice.reducer;

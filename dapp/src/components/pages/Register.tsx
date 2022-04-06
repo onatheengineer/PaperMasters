@@ -42,10 +42,10 @@ import {useAppDispatch, useAppSelector} from "../../app/hooks";
 import PMLogo from '../../assets/PMGIMPResized.png';
 import Logo from '../../assets/Logo';
 import {ColorChangeHandler, ColorResult, SketchPicker, GithubPicker, RGBColor} from 'react-color';
-import {getOneReceiptFromDB, requestUserWalletAction, watchUserWalletChannelAction} from "../../features/UserWalletSlice";
+import {getOneReceiptFromDB, requestUserWalletAction} from "../../features/UserWalletSlice";
 import {
-    mintNFIAsyncAction,
-    gasForMintNFIAsyncAction,
+    mintNFIAction,
+    gasForMintNFIAction,
     mintingError,
     gasAccBalanceAction
 } from "../../features/MintNFISlice";
@@ -54,7 +54,7 @@ import {call} from "redux-saga/effects";
 import AvatarNFI from "../AvatarNFI";
 import {paramsWalletAccAction} from "../../features/IdentityPageUseParamsSlice";
 import {addressHasIdentityBool} from "../../features/MintedNFISlice";
-
+import {MintNFISagaTypes} from '../../features/mintNFISaga.types'
 
 interface InterfaceRegister {
 
@@ -181,7 +181,7 @@ export const Register: FC<InterfaceRegister>=()=> {
     }, [accountsArr, name, email, profession, slogan, website, organization, uniqueYou]);
 
     const submitMintHandler = () => {
-        const mintPayload: {} = {
+        const mintPayload: MintNFISagaTypes = {
             name: `${name}|||${ColorRGBToString(colorTextName)}`,
             email: `${email}|||${ColorRGBToString(colorTextEmail)}`,
             profession: `${profession}|||${ColorRGBToString(colorTextProfession)}`,
@@ -194,11 +194,11 @@ export const Register: FC<InterfaceRegister>=()=> {
         }
         console.table(mintPayload);
         setSubmitButtonClicked(true)
-        dispatch(mintNFIAsyncAction(mintPayload));
+        dispatch(mintNFIAction(mintPayload));
     };
 
     const estimateGasHandler = () => {
-        const mintPayload: {} = {
+        const mintPayload: MintNFISagaTypes = {
             name: `${name}|||${ColorRGBToString(colorTextName)}`,
             email: `${email}|||${ColorRGBToString(colorTextEmail)}`,
             profession: `${profession}|||${ColorRGBToString(colorTextProfession)}`,
@@ -209,14 +209,13 @@ export const Register: FC<InterfaceRegister>=()=> {
             bgRGB: `${ColorRGBToString(bgRGB)}`,
             originDate: originDate,
         }
-        dispatch(gasForMintNFIAsyncAction(mintPayload));
+        dispatch(gasForMintNFIAction(mintPayload));
     };
 
 
     useEffect(() => {
         console.log('accountsArr', accountsArr.length)
         if (accountsArr.length === 0) {
-            dispatch(watchUserWalletChannelAction());
             dispatch(requestUserWalletAction());
             dispatch(gasAccBalanceAction(accountsArr[0]));
         }
