@@ -4,19 +4,12 @@ import {FC, useEffect, useMemo} from "react";
 import {paramsWalletAccAction} from "../../features/IdentityPageUseParamsSlice";
 import {useAppDispatch} from "../../app/hooks";
 import {useParams} from "react-router-dom";
-import moment from "moment";
-
-
-
-
 
 interface Interface {
 
 }
 
-
 export const AccountLedger:FC<Interface>=()=> {
-
     const {walletAcc} = useParams();
     const dispatch = useAppDispatch();
 //const timeStampFormatted = moment(txHash.timeStamp).format('MMM DD YYYY, hh:mm:ss a');
@@ -38,9 +31,7 @@ export const AccountLedger:FC<Interface>=()=> {
     //         }
     // }, [])
 
-
     return (
-
         <Flex align="center" mb="20px">
             <Stack>
                 <HStack>
@@ -64,7 +55,6 @@ export const AccountLedger:FC<Interface>=()=> {
                     {/*    </Text>*/}
 
                     {/*</HStack>*/}
-
                     <Stack>
                         {/*<HStack>*/}
                         {/*    <Text*/}
@@ -89,8 +79,6 @@ export const AccountLedger:FC<Interface>=()=> {
                         {/*</HStack>*/}
                     </Stack>
                     <Stack>
-
-
                         {/*<HStack>*/}
                         {/*    <Text*/}
                         {/*        noOfLines={1}*/}
@@ -112,10 +100,7 @@ export const AccountLedger:FC<Interface>=()=> {
                         {/*    </Text>*/}
                         {/*</HStack>*/}
                     </Stack>
-
                     <Stack>
-
-
                         {/*<HStack>*/}
                         {/*    <Text*/}
                         {/*        noOfLines={1}*/}
@@ -141,6 +126,6 @@ export const AccountLedger:FC<Interface>=()=> {
             </Stack>
         </Flex>
     )
-}
+};
 
 export default AccountLedger;

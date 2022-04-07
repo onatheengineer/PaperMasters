@@ -1,23 +1,19 @@
-import { configureStore, ThunkAction, Action} from '@reduxjs/toolkit';
-import registerSlice from "../features/UserWalletSlice";
-import mintSlice from '../features/MintNFISlice';
+import { configureStore} from '@reduxjs/toolkit';
+import registerSlice from "../features/accountArr/getAccountArrSlice";
+import mintSlice from '../features/mintNFI/MintNFISlice';
 import mintedSlice from '../features/MintedNFISlice';
 import identUseParamsSlice from '../features/IdentityPageUseParamsSlice';
 import createSaga from "redux-saga";
 import rootSaga from "../features/rootSagas";
-import logger from 'redux-logger';
-import accountSlice from "../features/AccountSlice";
-import {watchIdentUseParamsSaga} from "../features/identityPageUseParamsSaga";
-import mentionsSlice from "../features/MentionsSlice";
-import contractFunctionsSlice from '../features/ContractFunctionsSlice'
+import accountSlice from "../features/account/AccountSlice";
+import mentionsSlice from "../features/mentions/MentionsSlice";
+import contractFunctionsSlice from '../features/mintNFI/MintNFIFunctionsSlice'
 import toastSlice from "../features/toast/redux/toastSlice";
-
-
 
 const sagaMiddleware = createSaga();
 
 export const store = configureStore({
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger).concat(sagaMiddleware),
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(sagaMiddleware),
   reducer: {
     register: registerSlice,
     mint: mintSlice,
@@ -34,10 +30,5 @@ sagaMiddleware.run(rootSaga);
 
 export type AppDispatch = typeof store.dispatch;
 export type RootState = ReturnType<typeof store.getState>;
-export type AppThunk<ReturnType = void> = ThunkAction<
-  ReturnType,
-  RootState,
-  unknown,
-  Action<string>
->;
+
 

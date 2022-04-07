@@ -3,7 +3,7 @@ import {
 import React from "react";
 import {} from '@chakra-ui/react';
 import WithAction from "../Navbar";
-import BackgroundLogo from '../../assets/legoLavendarheadercroped.png';
+import BackgroundLogo from "../../assets/legoLavendarheadercroped.png";
 import SecondFooter from '../Footers/SecondFooterHome'
 
 export default function Home() {

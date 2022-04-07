@@ -5,7 +5,6 @@ import * as React from "react";
 import {FC, useMemo} from "react";
 import {useAppSelector} from "../../../app/hooks";
 
-
 interface Interface {
     mentionsFullDisplayWindowBool: boolean
 }
@@ -13,36 +12,35 @@ interface Interface {
 export const DisplayMentions: FC<Interface>=({mentionsFullDisplayWindowBool})=> {
 
     const allMentionsArr = useAppSelector((state) => state.mentions.allMentions);
-    const sortedMentionArr = useMemo( ()=>{
+    const sortedMentionArr = useMemo(() => {
         const sortedMentionsArr = [...allMentionsArr];
-        sortedMentionsArr.sort((a,b)=>{return(b.timeStamp - a.timeStamp)});
-        return(sortedMentionsArr)
+        sortedMentionsArr.sort((a, b) => {
+            return (b.timeStamp - a.timeStamp)
+        });
+        return (sortedMentionsArr)
     }, [allMentionsArr])
 
     return (
-
         <Box
-             //border={'1px solid'}
+            //border={'1px solid'}
             // borderColor={'pmpurple.4'}
             // borderRadius={'5px'}
             // bgColor={'pmpurple.2'}
             // p="5px"
             // m={'0px'}
-             h={mentionsFullDisplayWindowBool ? '75vH' : '100%'}
-             w={'100%'}
+            h={mentionsFullDisplayWindowBool ? '75vH' : '100%'}
+            w={'100%'}
             // overflow={'auto'}
         >
             {sortedMentionArr.map((mention) => {
-
                     const timeStampFormatted = moment(mention.timeStamp).format('MMM DD YYYY, hh:mm:ss a');
                     const timeStampShortFormatted = moment(mention.timeStamp).format('MMM DD YYYY');
                     return (
-
                         <Box
                             //border={'2px solid red'}
                             // p="0px"
                             // mb={'12px'}
-                             //w={'100%'}
+                            //w={'100%'}
                             // fontSize={'15px'}
                         >
                             <HStack>
@@ -55,19 +53,18 @@ export const DisplayMentions: FC<Interface>=({mentionsFullDisplayWindowBool})=> 
                                 </Box>
                                 <Spacer/>
                                 <Tooltip label={timeStampFormatted} aria-label='A tooltip'>
-                                <Box
-                                    //border={'2px solid red'}
-                                    color={'pmpurple.8'}
-                                    fontSize={'12px'}
-                                    overflow={'none'}
-                                >
-                                    {timeStampShortFormatted}
-                                </Box>
-                            </Tooltip>
+                                    <Box
+                                        //border={'2px solid red'}
+                                        color={'pmpurple.8'}
+                                        fontSize={'12px'}
+                                        overflow={'none'}
+                                    >
+                                        {timeStampShortFormatted}
+                                    </Box>
+                                </Tooltip>
                             </HStack>
-
                             <HStack
-                            alignItems={'start'}
+                                alignItems={'start'}
                             >
                                 <Box
                                     isTruncated={true}
@@ -86,9 +83,9 @@ export const DisplayMentions: FC<Interface>=({mentionsFullDisplayWindowBool})=> 
                                     {mention.radioType === 1 ?
                                         <HStack>
 
-                                                <BsCircleFill color={'green'} size={'8px'}/>
-                                                <BsCircleFill color={'grey'} size={'8px'}/>
-                                                <BsCircleFill color={'grey'} size={'8px'}/>
+                                            <BsCircleFill color={'green'} size={'8px'}/>
+                                            <BsCircleFill color={'grey'} size={'8px'}/>
+                                            <BsCircleFill color={'grey'} size={'8px'}/>
                                         </HStack>
                                         :
                                         mention.radioType === 0 ?
@@ -104,19 +101,15 @@ export const DisplayMentions: FC<Interface>=({mentionsFullDisplayWindowBool})=> 
                                                 <BsCircleFill color={'blue'} size={'8px'}/>
                                             </HStack>
                                     }
-
                                 </Box>
                             </HStack>
                             <Divider/>
                         </Box>
-
                     )
                 }
             )}
-
         </Box>
-
     )
-}
+};
 
 export default DisplayMentions;

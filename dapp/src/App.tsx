@@ -9,11 +9,11 @@ import Web3 from "web3";
 import type {FC} from 'react';
 import {Box, Flex, VStack} from '@chakra-ui/react';
 import Sidebar, {NavItem} from './components/Sidebar'
-import {accountsArr, requestUserWalletAction} from "./features/UserWalletSlice";
-import {mintNFIAsyncAction} from "./features/MintNFISlice";
+import {accountsArr, requestUserWalletAction} from "./features/accountArr/getAccountArrSlice";
+import {mintNFIAction} from "./features/mintNFI/MintNFISlice";
 import {addressHasIdentityBoolAction} from "./features/MintedNFISlice";
 import { createBreakpoints } from '@chakra-ui/theme-tools'
-import {getReceiptDBConnectUserAction} from "./features/AccountSlice";
+import {getReceiptDBConnectUserAction} from "./features/account/AccountSlice";
 import Identity from "./components/pages/Identity";
 import detectEthereumProvider from '@metamask/detect-provider';
 import Search from "./components/pages/Search";
@@ -49,48 +49,37 @@ function App() {
     useEffect(() => {
         console.log("is there a wallet account connected? Now check for NFI")
         if (requestWalletArr.length !== 0) {
-            dispatch(addressHasIdentityBoolAction(requestWalletArr[0]));
+            dispatch(addressHasIdentityBoolAction());
             dispatch(getReceiptDBConnectUserAction());
         }
     }, [requestWalletArr])
 
-
     return (
-
-
-
-
-            <Box
-                border={'2px solid'}
-                borderColor={"pmpurple.8"}
-                bg={'pmpurple.6'}
-                overflow={'hidden'}
+        <Box
+            border={'2px solid'}
+            borderColor={"pmpurple.8"}
+            bg={'pmpurple.6'}
+            overflow={'hidden'}
+        >
+            <Flex
+                minH={'100vH'}
+                flexDirection={'column'}
+                //border={'2px solid red'}
             >
-                <Flex
-                    minH={'100vH'}
-                    flexDirection={'column'}
-                    //border={'2px solid red'}
+                <Box>
+                    <Navbar/>
+                </Box>
+                <Box
+                    flexGrow={1}
+                    //border={'2px solid yellow'}
+                    display={'flex'}
                 >
-                    <Box>
-                        <Navbar/>
-                    </Box>
-
-                        <Box
-                            flexGrow={1}
-                            //border={'2px solid yellow'}
-                            display={'flex'}
-                        >
-                            <Sidebar/>
-                        </Box>
-
-
-                </Flex>
-
-                <Footer/>
-
-            </Box>
-
+                    <Sidebar/>
+                </Box>
+            </Flex>
+            <Footer/>
+        </Box>
     )
-};
+}
 
 export default App;

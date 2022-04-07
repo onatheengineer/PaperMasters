@@ -1,7 +1,6 @@
 import { useToast, UseToastOptions } from "@chakra-ui/react";
 import React, {useEffect} from "react";
-
-import { useAppDispatch, useAppSelector } from "../../../app/hooks"
+import { useAppDispatch, useAppSelector } from "../../../app/hooks";
 import { resetToast } from "../redux/toastSlice";
 
 export const toastConfig: UseToastOptions = {
@@ -15,7 +14,7 @@ export function useGlobalToast(): null {
     const toast = useToast(toastConfig);
     const toastOptions = useAppSelector((state) => state.toast.toastOptions);
 
-   useEffect(() => {
+    useEffect(() => {
         if (toastOptions !== null) {
             const { title, status } = toastOptions;
             toast({ title, status });

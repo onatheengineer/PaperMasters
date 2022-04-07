@@ -8,27 +8,11 @@ import {
     TabPanel, TabPanels, TabList, Tabs, Tab, Select, Heading,
 } from "@chakra-ui/react";
 import { RiShareForwardLine} from 'react-icons/ri';
-import { Navigate } from "react-router-dom";
 
-// Custom components
-import { BsFillCloudRainFill } from 'react-icons/bs'
-// Assets
-import { FaCube, FaFacebook, FaInstagram, FaPenFancy, FaPlus, FaTwitter,} from "react-icons/fa";
-import { IoDocumentsSharp } from "react-icons/io5";
-import Sidebar from "../Sidebar";
-import {GiNewShoot} from "react-icons/gi";
 import {useAppSelector, useAppDispatch} from "../../app/hooks";
-import {SiSololearn} from "react-icons/si";
-import {accountsArr} from "../../features/UserWalletSlice";
-import {addressHasIdentityBool} from "../../features/MintedNFISlice";
-import {MdOutlineColorLens, MdOutlineEmail} from "react-icons/md";
 import AvatarNFI from "../AvatarNFI";
 import bgImage from '../../assets/legoLavendarheadercroped.png'
 import {FormEvent, useEffect, useMemo, useReducer, useState} from "react";
-import Mentions from "../identity/mentions/Mentions";
-import {AiOutlineComment} from "react-icons/ai";
-import { createBreakpoints } from '@chakra-ui/theme-tools';
-import {filledInputClasses} from "@mui/material";
 import Header, {Mailto} from "../identity/Header";
 import Projects from "../identity/Projects";
 import ValidationsReports from "../identity/ValidationsReports";
@@ -36,26 +20,16 @@ import {paramsWalletAccAction, paramsWalletAcc} from "../../features/IdentityPag
 import ModalForIdentNoUseParams from '../identity/ModalForIdentNoUseParams';
 import {Route} from "react-router";
 import {AccountLedger} from '../identity/AccountLedger'
-import {apiHarmonyOneAction} from "../../features/ApiBCMethodsSlice";
-
+import {apiHarmonyOneAction} from "../../features/ledger/LedgerSlice";
 
 interface Interface {
 
 }
 
-
 export const Identity:FC<Interface>=()=> {
 
-    const {isOpen, onOpen, onClose} = useDisclosure()
-    const initialRef = React.useRef()
-    const finalRef = React.useRef()
     const {walletAcc} = useParams();
     console.log(`this is walletAccparams: ${walletAcc}`)
-
-    const userRequestWalletArr = useAppSelector((state) => state.register.accounts);
-    const userTokenIDtoIdentityStruct = useAppSelector((state) => state.minted.tokenIDtoIdentityStruct);
-    const userAccountDictionary = useAppSelector((state) => state.account.getDBAccountDictionary);
-    const userWalletAccount = useAppSelector((state) => state.account.getDBAccountDictionary.walletAccount);
 
     const paramsWalletAcc = useAppSelector((state) => state.identUseParams.paramsWalletAcc);
     const paramsAddressHasIdentityBoolBC = useAppSelector((state) => state.identUseParams.addressHasIdentityBC);
@@ -64,7 +38,7 @@ export const Identity:FC<Interface>=()=> {
     const paramsRequestAccountDictionary = useAppSelector((state) => state.identUseParams.requestAccountDictionary);
 
     console.log('paramsRequestAccountDictionary:', paramsRequestAccountDictionary)
-    console.log(`this is the tokenIDtoIdentityStruct[0]: ${userTokenIDtoIdentityStruct.walletAccount}`);
+
     const dispatch = useAppDispatch();
 
     const navigate = useNavigate();
@@ -100,11 +74,9 @@ export const Identity:FC<Interface>=()=> {
 
     }, [paramsRequestAccountDictionary, paramsWalletAcc, paramsAddressHasIdentityBoolBC, requestReceiptUsingParams])
 
-
     console.log('paramsWalletAcc.length:', paramsWalletAcc.length)
     console.log('paramsAddressHasIdentityBoolBC:', paramsAddressHasIdentityBoolBC)
     console.log('requestStructUsingParamsFromBC.walletAccount.length:', requestStructUsingParamsFromBC.walletAccount.length)
-
 
     return (
         <Box
@@ -177,7 +149,6 @@ export const Identity:FC<Interface>=()=> {
                                      py={'28px'}
                                      overflow={'none'} whiteSpace={'break-spaces'}
                                 >
-
                                     {paramsWalletAcc.length !== 0 && paramsAddressHasIdentityBoolBC !== false && requestStructUsingParamsFromBC.walletAccount.length !== 0 ?
 
                                         <AvatarNFI accountNumber={requestStructUsingParamsFromBC.walletAccount}
@@ -199,39 +170,37 @@ export const Identity:FC<Interface>=()=> {
                                                    originDate={parseInt(requestStructUsingParamsFromBC.originDate)}
                                         />
                                         :
-
-                                            <Button
-                                                as={ReachLink}
-                                                to={'/register'}
-                                                w={'100%'}
-                                                bg={'pmpurple.2'}
-                                                h='10.00rem'
-                                                //size='lg'
-                                                borderRadius={'20px'}
-                                                borderStyle={'4px solid'}
-                                                borderColor={'pmpurple.6'}
-                                                textDecoration={'none'}
-                                                cursor={'pointer'}
-                                                alignItems={'center'}
-                                                _hover={{
-                                                    transform: 'translateY(-2px)',
-                                                    boxShadow: 'xl',
-                                                    textDecoration: 'none'
-                                                }}
-                                            >
-                                                    <Text p='12px' textAlign={'center'} fontSize="xl"
-                                                          color={'pmpurple.13'}
-                                                          fontWeight="bold" whiteSpace={'pre-wrap'}>
-                                                        NFI will display here, please mint an NFI to your wallet account
-                                                    </Text>
-                                                    <Box position={"absolute"} bottom={'10px'} right={"10px"} color={'pmpurple.13'}>
-                                                        <RiShareForwardLine fontSize={'40px'}/>
-                                                    </Box>
-
-                                            </Button>
+                                        <Button
+                                            as={ReachLink}
+                                            to={'/register'}
+                                            w={'100%'}
+                                            bg={'pmpurple.2'}
+                                            h='10.00rem'
+                                            //size='lg'
+                                            borderRadius={'20px'}
+                                            borderStyle={'4px solid'}
+                                            borderColor={'pmpurple.6'}
+                                            textDecoration={'none'}
+                                            cursor={'pointer'}
+                                            alignItems={'center'}
+                                            _hover={{
+                                                transform: 'translateY(-2px)',
+                                                boxShadow: 'xl',
+                                                textDecoration: 'none'
+                                            }}
+                                        >
+                                            <Text p='12px' textAlign={'center'} fontSize="xl"
+                                                  color={'pmpurple.13'}
+                                                  fontWeight="bold" whiteSpace={'pre-wrap'}>
+                                                NFI will display here, please mint an NFI to your wallet account
+                                            </Text>
+                                            <Box position={"absolute"} bottom={'10px'} right={"10px"}
+                                                 color={'pmpurple.13'}>
+                                                <RiShareForwardLine fontSize={'40px'}/>
+                                            </Box>
+                                        </Button>
                                     }
                                 </Box>
-
                                 <Box w='38%' borderRadius='15px' bg='white' p="12px" pb={'16px'}
                                      overflow={'none'}
                                      whiteSpace={"pre-line"}
@@ -248,17 +217,15 @@ export const Identity:FC<Interface>=()=> {
                                         {/*    Ethereum Ledger*/}
                                         {/*</Text>*/}
 
-                                        <Text mb={'5px'} fontSize="16px" color={'pmpurple.13'}  align={'center'}>
+                                        <Text mb={'5px'} fontSize="16px" color={'pmpurple.13'} align={'center'}>
                                             Harmony Ledger
                                         </Text>
-
                                         <Divider
                                             border={'1px solid'}
                                             borderColor={'pmpurple.8'}
                                         />
                                         <AccountLedger/>
                                     </Box>
-
                                 </Box>
                             </HStack>
                         </Box>

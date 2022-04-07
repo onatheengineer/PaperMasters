@@ -1,6 +1,5 @@
 import React, { ReactNode, ReactText, useState, useEffect } from 'react';
 import {Route, Routes, useLocation, useParams, useNavigate, Navigate, BrowserRouter} from 'react-router-dom';
-import PMLogo from '../assets/PMGIMPResized.png';
 import { AiOutlineFileSearch } from "react-icons/ai";
 import { GiFlowerPot } from "react-icons/gi";
 import { BiHomeHeart, BiBookmarkHeart } from 'react-icons/bi';
@@ -41,7 +40,7 @@ import {SiSololearn} from "react-icons/si";
 import {useAppSelector} from "../app/hooks";
 import identity from "./pages/Identity";
 import Report from "./pages/Report";
-import {accountsArr} from "../features/UserWalletSlice";
+import {accountsArr} from "../features/accountArr/getAccountArrSlice";
 import Navbar from './Navbar'
 
 
@@ -309,13 +308,9 @@ export const Sidebar: FC<InterfaceSidebar>= ({icon, profileName} ) => {
             {/*    </Box>*/}
             {/*}*/}
 
-
-            <Navbar/>
             <Routes>
                 <Route path="/" element={<Home/>}/>
-
                 <Route path={'/identity/:walletAcc'} element={<Identity/>}/>
-
                 {/*{walletAcc === undefined || walletAcc === 'undefined' || walletAcc.length === 0 ?*/}
                 {/*    <Route path={'/identity/:walletAcc'} element={<Navigate replace to= "/identity/0x7C097941487f53bBdd39fddea7Bed9AEf3312ED5" />}/>*/}
 
@@ -326,7 +321,6 @@ export const Sidebar: FC<InterfaceSidebar>= ({icon, profileName} ) => {
                 {/*    :*/}
                 {/*    <Route path={'/register'} element={<Register/>}/>*/}
                 {/*}*/}
-
                 <Route path={'/register'} element={<Register/>}/>
                 <Route path={'/validate'} element={<Validate/>}/>
                 <Route path={'/report'} element={<Report/>}/>
@@ -338,7 +332,6 @@ export const Sidebar: FC<InterfaceSidebar>= ({icon, profileName} ) => {
                 <Route path={'/CloudHWM'} element={<CloudHWM/>}/>
                 <Route path={'/yourpeople'} element={<YourPeople/>}/>
             </Routes>
-
         </Flex>
     )
 };

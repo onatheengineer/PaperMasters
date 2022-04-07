@@ -4,15 +4,7 @@ import Web3 from "web3";
 //import {getFilledAccountsArr}
 import type {FC} from 'react';
 import {
-    FormControl,
-    FormLabel,
-    Input,
-    Stack,
-    Box,
-    Button,
-    Heading,
-    Text,
-    Flex,
+    FormControl, FormLabel, Input, Stack, Box, Button, Heading, Text, Flex,
     Center,
     FormErrorMessage,
     Divider,
@@ -42,19 +34,19 @@ import {useAppDispatch, useAppSelector} from "../../app/hooks";
 import PMLogo from '../../assets/PMGIMPResized.png';
 import Logo from '../../assets/Logo';
 import {ColorChangeHandler, ColorResult, SketchPicker, GithubPicker, RGBColor} from 'react-color';
-import {getOneReceiptFromDB, requestUserWalletAction} from "../../features/UserWalletSlice";
+import {getOneReceiptFromDB, requestUserWalletAction} from "../../features/accountArr/getAccountArrSlice";
 import {
     mintNFIAction,
     gasForMintNFIAction,
     mintingError,
     gasAccBalanceAction
-} from "../../features/MintNFISlice";
+} from "../../features/mintNFI/MintNFISlice";
 import mintNFI from "../../abiFiles/PaperMastersNFI.json";
 import {call} from "redux-saga/effects";
 import AvatarNFI from "../AvatarNFI";
 import {paramsWalletAccAction} from "../../features/IdentityPageUseParamsSlice";
 import {addressHasIdentityBool} from "../../features/MintedNFISlice";
-import {MintNFISagaTypes} from '../../features/mintNFISaga.types'
+import {MintNFISagaTypes} from '../../features/mintNFI/mintNFISaga.types'
 
 interface InterfaceRegister {
 
@@ -68,7 +60,7 @@ const ColorRGBToString=(colorResultRGB: ColorResult)=>{
 
 export const Register: FC<InterfaceRegister>=()=> {
 
-    const userTokenIDtoIdentityStruct = useAppSelector((state) => state.minted.tokenIDtoIdentityStruct);
+    const tokenIDtoIdentityStruct = useAppSelector((state) => state.minted.tokenIDtoIdentityStruct);
 
     const paramsWalletAcc = useAppSelector((state) => state.identUseParams.paramsWalletAcc);
     const paramsAddressHasIdentityBoolBC = useAppSelector((state) => state.identUseParams.addressHasIdentityBC);
@@ -217,7 +209,7 @@ export const Register: FC<InterfaceRegister>=()=> {
         console.log('accountsArr', accountsArr.length)
         if (accountsArr.length === 0) {
             dispatch(requestUserWalletAction());
-            dispatch(gasAccBalanceAction(accountsArr[0]));
+            dispatch(gasAccBalanceAction());
         }
     }, [accountsArr]);
 
@@ -226,31 +218,31 @@ export const Register: FC<InterfaceRegister>=()=> {
             setIsModalOpen(true);
             return (['Connect Wallet Account for Access', "Please go to MetaMask and connect your wallet account."])
         }
-        ;
+        
         if (addressHasIdentityBool && mintSucceeded === 'idle') {
             setIsModalOpen(true);
             return (['You have already Minted',
                     <span>Connected wallet account is already registered, each wallet account can have only one identity. <br/><br/> In the future, you will be able to mint an NFI for each contract that you own.</span>]
             )
         }
-        ;
+        
         if (mintSucceeded === 'failed') {
             setIsModalOpen(true);
             return (['Minting failed',
                     <span> Noooo, what happened! Please email Ramona with the details @ ramonajenny.n@gmail.com.</span>]
             )
         }
-        ;
+        
         if (mintSucceeded === 'succeeded') {
             setIsModalOpen(true);
             return ([" Minted Successful!", 'You did it! You are now a registered PaperMaster, please navigate to your Identity page and update your portfolio.'])
         }
-        ;
+        
         if (accBalanceErr.length > 0) {
             setIsModalOpen(true);
             return (["Account Balance Error", accBalanceErr])
         }
-        ;
+        
         // if (statusBool === true) {
         //     setIsModalOpen(true);
         //     return ([" Minted Successful!", 'You did it! You are now a registered PaperMaster, please navigate to your Identity page and update your portfolio.'])
@@ -258,7 +250,7 @@ export const Register: FC<InterfaceRegister>=()=> {
 
         setIsModalOpen(false)
         return ([null, null])
-    }, [accountsArr, userTokenIDtoIdentityStruct, getOneReceiptFromDB, addressHasIdentityBool, mintSucceeded])
+    }, [accountsArr, tokenIDtoIdentityStruct, getOneReceiptFromDB, addressHasIdentityBool, mintSucceeded])
 
     return (
         <Box
@@ -289,7 +281,7 @@ export const Register: FC<InterfaceRegister>=()=> {
                         alignItems={'center'}
                         //border={'2px solid green'}
                     >
-                        <Heading color={'pmpurple.13'} size="xl" >
+                        <Heading color={'pmpurple.13'} size="xl">
                             Mint PaperMaster NFI
                         </Heading>
                         <Text color={'pmpurple.13'} align="center" fontWeight="medium">
@@ -957,36 +949,36 @@ export const Register: FC<InterfaceRegister>=()=> {
                         spacing={3}
                         //border={'2px solid green'}
                     >
-                            <Heading color={'pmpurple.13'} size="xl">
-                                Your PaperMaster NFI
-                            </Heading>
-                         <Text color={'pmpurple.13'} align="center" fontWeight="medium">
-                             Below is what your NFI will look like, please make sure you love it!
-                         </Text>
+                        <Heading color={'pmpurple.13'} size="xl">
+                            Your PaperMaster NFI
+                        </Heading>
+                        <Text color={'pmpurple.13'} align="center" fontWeight="medium">
+                            Below is what your NFI will look like, please make sure you love it!
+                        </Text>
                         <Divider color={'pmpurple.8'}/>
                         <Box
                             p={{base: 0, xl: 20}}
                         >
 
-                                <AvatarNFI name={name} nameColor={ColorRGBToString(colorTextName)}
-                                           email={email} emailColor={ColorRGBToString(colorTextEmail)}
-                                           profession={profession}
-                                           professionColor={ColorRGBToString(colorTextProfession)}
-                                           organization={organization}
-                                           organizationColor={ColorRGBToString(colorTextOrganization)}
-                                           slogan={slogan} sloganColor={ColorRGBToString(colorTextSlogan)}
-                                           website={website} websiteColor={ColorRGBToString(colorTextWebsite)}
-                                           uniqueYou={uniqueYou} uniqueYouColor={ColorRGBToString(colorTextUniqueYou)}
-                                           avatarBG={ColorRGBToString(bgRGB)}
-                                           originDate={originDate}
-                                           accountNumber={accountsArr[0]}
-                                />
+                            <AvatarNFI name={name} nameColor={ColorRGBToString(colorTextName)}
+                                       email={email} emailColor={ColorRGBToString(colorTextEmail)}
+                                       profession={profession}
+                                       professionColor={ColorRGBToString(colorTextProfession)}
+                                       organization={organization}
+                                       organizationColor={ColorRGBToString(colorTextOrganization)}
+                                       slogan={slogan} sloganColor={ColorRGBToString(colorTextSlogan)}
+                                       website={website} websiteColor={ColorRGBToString(colorTextWebsite)}
+                                       uniqueYou={uniqueYou} uniqueYouColor={ColorRGBToString(colorTextUniqueYou)}
+                                       avatarBG={ColorRGBToString(bgRGB)}
+                                       originDate={originDate}
+                                       accountNumber={accountsArr[0]}
+                            />
 
                             <Stack>
                                 <Box
-                                pt={'160px'}
+                                    pt={'160px'}
                                 >
-                                    <Divider color = 'pmpurple.8'/>
+                                    <Divider color='pmpurple.8'/>
                                 </Box>
 
                                 <Center>
@@ -1062,12 +1054,13 @@ export const Register: FC<InterfaceRegister>=()=> {
                                         </Box>
                                         : null}
                                 </Center>
-                        </Stack>
+                            </Stack>
                         </Box>
                     </VStack>
                 </VStack>
             </Flex>
-            <Modal motionPreset="slideInBottom" closeOnOverlayClick={false} blockScrollOnMount={true} isOpen={isModalOpen}
+            <Modal motionPreset="slideInBottom" closeOnOverlayClick={false} blockScrollOnMount={true}
+                   isOpen={isModalOpen}
                    onClose={() => {
                        setIsModalOpen(false)
                    }}>

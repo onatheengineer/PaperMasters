@@ -100,68 +100,68 @@ export default function LargeWithLogoCentered() {
                     md: 'repeat(4, 1fr)',
                     lg: 'repeat(5, 1fr)'
                 }}
-                gap={{ base: '8', sm: '12', md: '16' }}>
+                gap={{base: '8', sm: '12', md: '16'}}>
                 {/*<SimpleGrid columns={{base: 1, sm: 2, md: 5}} spacing={8}>*/}
-                    <Stack display={{base: 'none', lg: 'block'}}>
-                        <PMsvgIcon/>
-                    </Stack>
+                <Stack display={{base: 'none', lg: 'block'}}>
+                    <PMsvgIcon/>
+                </Stack>
 
-                    <Stack alignItems={'flex-start'}>
-                        <ListHeader>Services</ListHeader>
-                        <Link as={ReachLink} to="/">Non-Fungible Identities</Link>
-                        <Link as={ReachLink} to="/">Search</Link>
-                        <Link as={ReachLink} to="/">Validation</Link>
-                        <Link as={ReachLink} to="/">Report</Link>
-                        <Link as={ReachLink} to="/">CloudHWM</Link>
-                    </Stack>
-                    <Stack alignItems={'flex-start'}>
-                        <ListHeader>Community Support</ListHeader>
-                        <Link as={ReachLink} to="/">Learning Center</Link>
-                        <Link as={ReachLink} to="/">Authentic PM Identities</Link>
-                        <Link as={ReachLink} to="/">Community Guidelines</Link>
-                        <Link as={ReachLink} to="/">New & Updated Features</Link>
-                        <Link as={ReachLink} to="/">Future Stories</Link>
-                    </Stack>
-                    <Stack alignItems={'flex-start'}>
-                        <ListHeader>Security</ListHeader>
-                        <Link as={ReachLink} to="/">Blockchain Protection</Link>
-                        <Link as={ReachLink} to="/">Blockchain Legitimacy</Link>
-                        <Link as={ReachLink} to="/">Privacy Policy</Link>
-                        <Link as={ReachLink} to="/">Terms of Service</Link>
-                    </Stack>
-                    <Stack alignItems={'flex-start'}>
-                        <ListHeader>Your People</ListHeader>
-                        <Link as={ReachLink} to="/Analytics">Analytics</Link>
-                        <Link as={ReachLink} to="/AboutUs">About Us</Link>
-                        <Link as={ReachLink} to="/SupportProject">Support the Project</Link>
-                        <Link as={ReachLink} to="/Logokit">Logo Kit</Link>
-                    </Stack>
-                </Grid>
-                {/*</SimpleGrid>*/}
+                <Stack alignItems={'flex-start'}>
+                    <ListHeader>Services</ListHeader>
+                    <Link as={ReachLink} to="/">Non-Fungible Identities</Link>
+                    <Link as={ReachLink} to="/">Search</Link>
+                    <Link as={ReachLink} to="/">Validation</Link>
+                    <Link as={ReachLink} to="/">Report</Link>
+                    <Link as={ReachLink} to="/">CloudHWM</Link>
+                </Stack>
+                <Stack alignItems={'flex-start'}>
+                    <ListHeader>Community Support</ListHeader>
+                    <Link as={ReachLink} to="/">Learning Center</Link>
+                    <Link as={ReachLink} to="/">Authentic PM Identities</Link>
+                    <Link as={ReachLink} to="/">Community Guidelines</Link>
+                    <Link as={ReachLink} to="/">New & Updated Features</Link>
+                    <Link as={ReachLink} to="/">Future Stories</Link>
+                </Stack>
+                <Stack alignItems={'flex-start'}>
+                    <ListHeader>Security</ListHeader>
+                    <Link as={ReachLink} to="/">Blockchain Protection</Link>
+                    <Link as={ReachLink} to="/">Blockchain Legitimacy</Link>
+                    <Link as={ReachLink} to="/">Privacy Policy</Link>
+                    <Link as={ReachLink} to="/">Terms of Service</Link>
+                </Stack>
+                <Stack alignItems={'flex-start'}>
+                    <ListHeader>Your People</ListHeader>
+                    <Link as={ReachLink} to="/Analytics">Analytics</Link>
+                    <Link as={ReachLink} to="/AboutUs">About Us</Link>
+                    <Link as={ReachLink} to="/SupportProject">Support the Project</Link>
+                    <Link as={ReachLink} to="/Logokit">Logo Kit</Link>
+                </Stack>
+            </Grid>
+            {/*</SimpleGrid>*/}
 
             <Box
                 p={4}
-               //border={'1px solid blue'}
-                 borderTop={'1px solid'}
-                 borderColor={'pmpurple.4'}
+                //border={'1px solid blue'}
+                borderTop={'1px solid'}
+                borderColor={'pmpurple.4'}
             >
 
                 <Stack direction={{base: 'column', md: 'row'}}
 
                 >
-                        <Text
-                            //border={'1px solid blue'}
-                            //width={{ base: 'flex', md: 'none'}}
-                            color='pmpurple.13'>© 2022 Made with
-                            <span
-                                style={{padding: '8px'}}
-                            >
+                    <Text
+                        //border={'1px solid blue'}
+                        //width={{ base: 'flex', md: 'none'}}
+                        color='pmpurple.13'>© 2022 Made with
+                        <span
+                            style={{padding: '8px'}}
+                        >
                                 <Icon as={BsHeartFill} fontSize={'13px'}/>
                             </span>
 
-                            by The PaperMasters ~ working to bring protection and legitimacy to the
-                            Blockchain.
-                        </Text>
+                        by The PaperMasters ~ working to bring protection and legitimacy to the
+                        Blockchain.
+                    </Text>
 
                     <Spacer/>
                     <Grid
@@ -171,8 +171,8 @@ export default function LargeWithLogoCentered() {
                             md: 'repeat(3, 1fr)',
                             lg: 'repeat(9, 1fr)',
                         }}
-                        gap={{ base: '2', lg: '8'}}
-                        justifyContent={{ base: 'center', md: 'none'}}
+                        gap={{base: '2', lg: '8'}}
+                        justifyContent={{base: 'center', md: 'none'}}
                     >
 
                         <SocialButton label={'Twitter'} href={'https://twitter.com/ramonajenny_n'}>
@@ -205,13 +205,13 @@ export default function LargeWithLogoCentered() {
                             <FaReddit/>
                         </SocialButton>
 
-                        </Grid>
+                    </Grid>
 
                 </Stack>
             </Box>
         </Box>
-    );
-}
+    )
+};
 
 
 

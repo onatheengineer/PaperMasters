@@ -24,12 +24,12 @@ import {HiOutlineDocumentReport} from "react-icons/hi";
 import {MdOutlineLibraryAddCheck} from "react-icons/md";
 import {SiSololearn} from "react-icons/si";
 import IdentityEntryModal from "../../utils/IdentityEntryModal";
-import {getReceiptDBCurrentUser} from "../../features/AccountSlice";
+import {getReceiptDBCurrentUser} from "../../features/account/AccountSlice";
 import {
     getAllReceiptFromDBAction,
     getAllWalletFromDBAction,
     putWalletInDBStatus, requestUserWalletAction
-} from "../../features/UserWalletSlice";
+} from "../../features/accountArr/getAccountArrSlice";
 import AvatarNFI from "../AvatarNFI";
 import Sparkle from "react-sparkle";
 
@@ -41,7 +41,7 @@ interface DataRow {
     originDate: string;
     profession: string;
     reported: number;
-};
+}
 
 interface interfaceFilterComponent{
     filterText: string,
@@ -151,7 +151,7 @@ export const Search: FC=()=> {
         getAllWalletFromDB.map((element) => {
             let name = "";
             let profession = "";
-            let originDateFormatted:string = "";
+            let originDateFormatted = "";
             let identityStruct:any[] = [];
             if (receiptDictionary.hasOwnProperty(element.walletAccount)) {
                 console.log('this is the receiptdictionary walletaccount', receiptDictionary[element.walletAccount])

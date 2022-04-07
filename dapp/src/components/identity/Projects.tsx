@@ -8,20 +8,17 @@ import {
     TabPanel, TabPanels, TabList, Tabs, Tab, Select, Heading, Spacer,
      IconButton, useBreakpointValue,
 } from "@chakra-ui/react";
-import {useMemo} from "react";
+import {useMemo, useState} from "react";
 import {useAppDispatch, useAppSelector} from "../../app/hooks";
 import {FaFacebook, FaInstagram, FaPlus, FaTwitter} from "react-icons/fa";
 import {AiOutlineComment} from "react-icons/ai";
 import ImageArchitect1 from "../../assets/img/ImageArchitect1.png";
-import ImageArchitect2 from "../../assets/img/ImageArchitect2.png";
-import ImageArchitect3 from "../../assets/img/ImageArchitect3.png";
 import {Carousel } from 'react-responsive-carousel';
 import Mentions from "./mentions/Mentions";
 import DisplayMentions from "./mentions/DisplayMentions";
 // Here we have used react-icons package for the icons
 import { BiLeftArrowAlt, BiRightArrowAlt } from 'react-icons/bi';
-// And react-slick as our Carousel Lib
-import Slider from 'react-slick';
+//import Slider from 'react-slick';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
@@ -50,7 +47,7 @@ export const Projects:FC<Interface>=()=> {
         slidesToScroll: 1,
     };
 
-    const [slider, setSlider] = React.useState<Slider | null>(null);
+    // const [slider, setSlider] = useState<Slider | null>(null);
 
     // These are the breakpoints which changes the position of the
     // buttons as the screen size changes
@@ -61,8 +58,7 @@ export const Projects:FC<Interface>=()=> {
             title: 'Contract actual BC name',
             text:
                 "Contract description coming from the owner of the contract",
-            image:
-            ImageArchitect1,
+
         },
         // {
         //     title: 'Contract actual BC name',

@@ -2,32 +2,17 @@ import * as React from 'react';
 import {FC, useEffect, useRef, useState} from "react";
 import moment from 'moment';
 import {
-    Avatar, AvatarGroup, Box, Button, Flex, Grid, GridItem, Icon, Image, Link, MenuItem,
-    Stack, Switch, Text, useColorModeValue, HStack, useDisclosure, Tooltip, VStack,
-    Container, AspectRatio, AvatarBadge, Divider, Center, InputRightElement, useStyleConfig,
-    TabPanel, TabPanels, TabList, Tabs, Tab, Select, RadioGroup, Radio, Textarea,
-   FormLabel, InputGroup, InputLeftAddon, InputRightAddon, Input, Heading, Spacer,
-    Modal,
-    ModalOverlay,
-    ModalContent,
-    ModalHeader,
-    ModalFooter,
-    ModalBody,
-    ModalCloseButton,
+   Box, Button,  Text, useDisclosure,  Textarea,
+   FormLabel, Input,
     Drawer,
     DrawerBody,
     DrawerFooter,
     DrawerHeader,
     DrawerOverlay,
     DrawerContent,
-    DrawerCloseButton,
 } from "@chakra-ui/react";
-import {AiOutlineComment} from "react-icons/ai";
+
 import {useAppDispatch, useAppSelector} from "../../../app/hooks";
-import {useParams} from "react-router-dom";
-import {paramsWalletAccAction} from "../../../features/IdentityPageUseParamsSlice";
-
-
 
 interface Interface {
 
@@ -38,16 +23,10 @@ export const ReplyMentions: FC<Interface>=()=> {
     const dateFormated = moment().format('MMM DD YYYY, hh:mm:ss a');
     const {isOpen, onOpen, onClose} = useDisclosure()
 
-    const filledAccountsArr = useAppSelector((state) => state.register.accounts);
-
-
-
     const handleClick = (newSize: any) => {
         // setSize(newSize)
         onOpen()
     }
-
-    // const sizes = ['xs', 'sm', 'md', 'lg', 'xl', 'full']
 
     return (
         <>
@@ -65,10 +44,7 @@ export const ReplyMentions: FC<Interface>=()=> {
                         Mentions
                     </Text>
                 </Button>
-
             </Box>
-
-
             <Drawer onClose={onClose} isOpen={isOpen} size='xl'>
                 <DrawerOverlay/>
                 <DrawerContent>
@@ -95,7 +71,6 @@ export const ReplyMentions: FC<Interface>=()=> {
                             />
                         </Box>
                         <Box>
-
                             <Input
                                 isDisabled={true}
                                 border={'1px solid'}
@@ -106,10 +81,8 @@ export const ReplyMentions: FC<Interface>=()=> {
                                 id='username'
                                 placeholder={'Date'}
                             />
-
                         </Box>
                     </DrawerBody>
-
                     <DrawerFooter borderTopWidth='1px'>
                         <Button
                             variant='outline'
@@ -127,15 +100,11 @@ export const ReplyMentions: FC<Interface>=()=> {
                             borderColor={'pmpurple.6'}
                             bg={'pmpurple.4'}
                         > Submit </Button>
-
                     </DrawerFooter>
-
                 </DrawerContent>
             </Drawer>
-
-
         </>
     )
-}
+};
 
 export default ReplyMentions;

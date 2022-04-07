@@ -1,8 +1,7 @@
 import React from 'react';
 import {useState, useEffect} from "react";
 import type {FC} from 'react'
-import {Button, FormControl, FormLabel, Grid, GridItem, Input, Stack} from '@chakra-ui/react';
-import {Text} from '@chakra-ui/layout';
+import {Button, FormControl, FormLabel, Grid, GridItem, Input, Stack, Text} from '@chakra-ui/react';
 import PageForum from "./PageForum";
 
 

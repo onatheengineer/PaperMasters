@@ -24,7 +24,7 @@ import {
     singleMention,
     allMentionsAction,
     singleMentionAction
-} from '../../../features/MentionsSlice'
+} from '../../../features/mentions/MentionsSlice'
 import DisplayMentions from "./DisplayMentions";
 
 function initialState():mentionsStateDictionaryInterface {
@@ -55,7 +55,7 @@ function reducer(state:any, action:any) {
         case 'mentionId':
             return {...state, mentionId: action.payload};
         case 'reset':
-            return {...state, messageBody: "", radioType: -1 };
+            return {...state, messageBody: "", radioType: -1};
         default:
             throw new Error();
     }
@@ -117,15 +117,11 @@ export const Mentions: FC<Interface>=()=> {
 
 
     return (
-
         <Flex
             flexDirection={'column'}
             h={'full'}
         >
-            <Box
-
-            >
-
+            <Box>
                 <HStack>
                     <Heading mb="18px">
                         <Flex direction="column">
@@ -158,13 +154,11 @@ export const Mentions: FC<Interface>=()=> {
                         </Text>
                     </Button>
                 </HStack>
-
             </Box>
             <Divider
                 border={'1px solid'}
                 borderColor={'pmpurple.8'}
             />
-
             <Box
                 //position={'relative'}
                 //h={'100%'}
@@ -176,7 +170,6 @@ export const Mentions: FC<Interface>=()=> {
             >
                 <DisplayMentions mentionsFullDisplayWindowBool={false}/>
             </Box>
-
             <Box>
                 <Drawer
                     size='xl'
@@ -205,13 +198,10 @@ export const Mentions: FC<Interface>=()=> {
                                 //flickerSpeed="fast"
                             />
                         </DrawerHeader>
-
                         <DrawerBody>
                             <DisplayMentions mentionsFullDisplayWindowBool={true}/>
-
                             <Stack spacing='24px'>
                                 {filledAccountsArr.length !== 0 ?
-
                                     <Box
                                         flex={'max-content'}
                                         mt={'18px'}
@@ -219,7 +209,6 @@ export const Mentions: FC<Interface>=()=> {
                                         position={'sticky'}
                                     >
                                         <HStack>
-
                                             <RadioGroup
                                                 defaultValue='neutral'
                                             >
@@ -241,7 +230,7 @@ export const Mentions: FC<Interface>=()=> {
                                                                 payload: 1
                                                             })
                                                         }}
-                                                    >Postive</Radio>
+                                                    >Positive</Radio>
                                                     <Radio
                                                         isChecked={(state.radioType === 0)}
                                                         //color='pmpurple.15'
@@ -263,7 +252,7 @@ export const Mentions: FC<Interface>=()=> {
                                                         // bg={'pmpurple.6'}
                                                         colorScheme='blue'
                                                         //value={state.radioType}
-                                                        value = {'neutral'}
+                                                        value={'neutral'}
                                                         onChange={(e) => {
                                                             mentionsDictionary({
                                                                 type: 'radioType',
@@ -274,7 +263,6 @@ export const Mentions: FC<Interface>=()=> {
                                                 </Stack>
                                             </RadioGroup>
                                         </HStack>
-
                                         <Textarea
                                             mt={'0px'}
                                             color='pmpurple.13'
@@ -294,9 +282,7 @@ export const Mentions: FC<Interface>=()=> {
                                             }}
                                         />
                                     </Box>
-
                                     :
-
                                     <Box
                                         color='pmpurple.15'
                                         border={'2px solid'}
@@ -310,13 +296,11 @@ export const Mentions: FC<Interface>=()=> {
                                             p={'14px'} fontSize={'16px'} fontWeight={'bold'} color={'pmpurple.13'}
                                         >
                                             Please connect your wallet account.
-
                                         </Text>
                                     </Box>
                                 }
                             </Stack>
                         </DrawerBody>
-
                         <DrawerFooter borderTopWidth='1px'>
                             <Button
                                 variant='outline'
@@ -338,7 +322,6 @@ export const Mentions: FC<Interface>=()=> {
 
                                 > Submit </Button>
                                 : null}
-
                         </DrawerFooter>
                     </DrawerContent>
                 </Drawer>

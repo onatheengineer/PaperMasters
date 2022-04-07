@@ -8,11 +8,6 @@ import {
     Link,
     IconButton,
     Button,
-    Menu,
-    MenuButton,
-    MenuList,
-    MenuItem,
-    MenuDivider,
     useDisclosure,
     useColorModeValue,
     Stack, Text, Container,
@@ -24,14 +19,10 @@ import {
     useBreakpointValue,
     MenuIcon, Spacer, Icon, Tooltip,
 } from '@chakra-ui/react';
-import { extendTheme } from '@chakra-ui/react';
-import { AddIcon, EditIcon, LinkIcon} from '@chakra-ui/icons';
+
 import { FaScroll } from "react-icons/fa";
-import { SiSololearn } from "react-icons/si";
-import { ImBooks } from "react-icons/im";
+import { SiSololearn } from "react-icons/si";import { ImBooks } from "react-icons/im";
 import {GiBookshelf, GiNewShoot, GiHeatHaze, GiDiscussion, GiBookCover, GiFlowerPot, GiFlowerHat} from "react-icons/gi";
-import Logo from '../assets/PaperMastersLogoGIMP.png';
-import PMLogo from '../assets/legoLavendar.png';
 import {IoMdCheckmarkCircleOutline} from "react-icons/io";
 import {RiPlantFill} from "react-icons/ri";
 import {FiTrendingUp} from "react-icons/fi";
@@ -39,19 +30,14 @@ import Web3 from "web3";
 import RegisterSlice, {
     requestUserWalletAction,
     statusOfArr
-} from '../features/UserWalletSlice';
-import detectEthereumProvider from "@metamask/detect-provider";
-import identity from "./pages/Identity";
-import {AiOutlineFileSearch} from "react-icons/ai";
+} from '../features/accountArr/getAccountArrSlice';
+
 import {BiBookmarkHeart, BiHomeHeart} from "react-icons/bi";
 import {
     HamburgerIcon,
     CloseIcon,
-    ChevronDownIcon,
-    ChevronRightIcon,
 } from '@chakra-ui/icons';
 import {MdManageAccounts, MdOutlineReport, MdOutlineWarningAmber, MdOutlineNaturePeople} from "react-icons/md";
-import PMGIMPResized from '../assets/PMGIMPResized.png';
 import {useAppDispatch, useAppSelector} from "../app/hooks";
 import {Link as ReachLink, To, useParams} from "react-router-dom";
 import PMLogoFull from '../assets/icons/PMLogoFull';

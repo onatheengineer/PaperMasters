@@ -29,8 +29,8 @@ import {BsFillPersonLinesFill} from "react-icons/bs";
 import {SketchPicker} from "react-color";
 import {SocialButton} from "../Footers/Footer";
 import {openseaIcon} from '../../assets/icons/openseaIcon';
-import {putDBAccountDictionary, putDBAccountDictionaryAction} from '../../features/AccountSlice';
-import {accountDictionaryInterface} from "../../features/UserWalletSlice";
+import {putDBAccountDictionary, putDBAccountDictionaryAction} from '../../features/account/AccountSlice';
+import {accountDictionaryInterface} from "../../features/accountArr/getAccountArrSlice";
 import {ChevronDownIcon} from "@chakra-ui/icons";
 import {paramsWalletAccAction} from "../../features/IdentityPageUseParamsSlice";
 import DrawerComponent from "./DrawerComponent";
@@ -76,17 +76,11 @@ export const Mailto:FC<mailToInterface> = ({ email, subject, body, ...props })=>
     );
 }
 
-
 interface Interface {
 
 }
 
 export const Header:FC<Interface>=()=> {
-
-    const userRequestWalletArr = useAppSelector((state) => state.register.accounts);
-    const userTokenIDtoIdentityStruct = useAppSelector((state) => state.minted.tokenIDtoIdentityStruct);
-    const userAccountDictionary = useAppSelector((state) => state.account.getDBAccountDictionary);
-    const userWalletAccount = useAppSelector((state) => state.account.getDBAccountDictionary.walletAccount);
 
     const paramsWalletAcc = useAppSelector((state) => state.identUseParams.paramsWalletAcc);
     const paramsAddressHasIdentityBoolBC = useAppSelector((state) => state.identUseParams.addressHasIdentityBC);
@@ -94,8 +88,6 @@ export const Header:FC<Interface>=()=> {
     const requestStructUsingParamsFromBC = useAppSelector((state) => state.identUseParams.requestStructUsingParamsFromBC);
     const paramsRequestAccountDictionary = useAppSelector((state) => state.identUseParams.requestAccountDictionary);
 
-
-    console.log('this is the tokenIDtoIdentityStruct[0]:', userTokenIDtoIdentityStruct.walletAccount);
     console.log('requestReceiptUsingParams:', requestReceiptUsingParams);
 
     const [state, dispatchAccountProfileDictionary] = useReducer(reducer, paramsRequestAccountDictionary, initialState);

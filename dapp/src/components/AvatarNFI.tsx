@@ -13,8 +13,7 @@ import {
     Stack,
     Text, VStack
 } from "@chakra-ui/react";
-import legoLavendarheadercroped from '../assets/legoLavendarheadercroped.png';
-import PMlogo from '../assets/PMlogo.png';
+import legoLavendarheadercroped from "../assets/legoLavendarheadercroped.png";
 import {PMsvgIcon} from "../assets/icons/PMSvgIcon";
 
 interface AvatarNFIInterface{
@@ -54,7 +53,6 @@ export const AvatarNFI:FC<AvatarNFIInterface>=( {accountNumber,
                                                 uniqueYouColor,
                                                 avatarBG,
                                                 originDate} )=> {
-
     const originDateObject = new Date(originDate);
     const originDateFormatted: string = `${originDateObject.toLocaleString('en-us', {month: 'long'})} ${originDateObject.getDate()}, ${originDateObject.getFullYear()}`
 
@@ -104,12 +102,12 @@ export const AvatarNFI:FC<AvatarNFIInterface>=( {accountNumber,
                                 //backgroundPosition="center"
                                 //src={legoLavendarheadercroped}
                                 //objectFit={'cover'}
-                                >
+                            >
                                 {/*<PMsvgIcon/>*/}
                             </Image>
                             <Avatar
                                 mt={'22px'}
-                                icon={<PMsvgIcon />}
+                                icon={<PMsvgIcon/>}
                                 boxSize='3.05em'
                                 variant={"square"}
                                 showBorder={false}
@@ -148,46 +146,46 @@ export const AvatarNFI:FC<AvatarNFIInterface>=( {accountNumber,
 
                         <Divider pt={'0px'} css={{borderColor: '#a88ea8'}}/>
 
-                            <Flex
-                                flexGrow={1}
-                                flexDirection={'row'}
-                                textAlign={'center'}
-                            >
-                                <Center>
-                                    <VStack
-                                        align={'center'}
-                                        fontSize={'16px'}
-                                        px={'18px'}
-                                        spacing={0}
-                                        alignItems={"center"}
-                                    >
-                                        <Text noOfLines={1}
-                                              color={emailColor}>
-                                            {email}
-                                        </Text>
-                                        <Text noOfLines={1}
-                                              color={professionColor}>
-                                            {profession}
-                                        </Text>
-                                        <Text noOfLines={1}
-                                              color={organizationColor}>
-                                            {organization}
-                                        </Text>
-                                        <Text noOfLines={1}
-                                              color={sloganColor}>
-                                            {slogan}
-                                        </Text>
-                                        <Text noOfLines={1}
-                                              color={websiteColor}>
-                                            {website}
-                                        </Text>
-                                        <Text noOfLines={3}
-                                              color={uniqueYouColor}>
-                                            {uniqueYou}
-                                        </Text>
-                                    </VStack>
-                                </Center>
-                            </Flex>
+                        <Flex
+                            flexGrow={1}
+                            flexDirection={'row'}
+                            textAlign={'center'}
+                        >
+                            <Center>
+                                <VStack
+                                    align={'center'}
+                                    fontSize={'16px'}
+                                    px={'18px'}
+                                    spacing={0}
+                                    alignItems={"center"}
+                                >
+                                    <Text noOfLines={1}
+                                          color={emailColor}>
+                                        {email}
+                                    </Text>
+                                    <Text noOfLines={1}
+                                          color={professionColor}>
+                                        {profession}
+                                    </Text>
+                                    <Text noOfLines={1}
+                                          color={organizationColor}>
+                                        {organization}
+                                    </Text>
+                                    <Text noOfLines={1}
+                                          color={sloganColor}>
+                                        {slogan}
+                                    </Text>
+                                    <Text noOfLines={1}
+                                          color={websiteColor}>
+                                        {website}
+                                    </Text>
+                                    <Text noOfLines={3}
+                                          color={uniqueYouColor}>
+                                        {uniqueYou}
+                                    </Text>
+                                </VStack>
+                            </Center>
+                        </Flex>
                         <Box>
                             <Stack
                                 textAlign={'center'}

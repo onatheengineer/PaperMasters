@@ -2,19 +2,9 @@ import * as React from 'react';
 import type {FC} from 'react';
 import {Link as ReachLink, useParams} from "react-router-dom";
 import {
-    Avatar, AvatarGroup, Box, Button, Flex, Grid, GridItem, Icon, Image, Link, MenuItem,
-    Stack, Switch, Text, useColorModeValue, HStack, useDisclosure, Tooltip, VStack,
-    Container, AspectRatio, AvatarBadge, Divider, Center, InputRightElement, useStyleConfig,
-    TabPanel, TabPanels, TabList, Tabs, Tab, Select, Heading,
+    Text, TabPanel, TabPanels, TabList, Tabs, Tab, Select, Heading,
 } from "@chakra-ui/react";
-import {useMemo} from "react";
 import {useAppSelector} from "../../app/hooks";
-import {FaFacebook, FaInstagram, FaPlus, FaTwitter} from "react-icons/fa";
-import ImageArchitect1 from "../../assets/img/ImageArchitect1.png";
-import ImageArchitect2 from "../../assets/img/ImageArchitect2.png";
-import ImageArchitect3 from "../../assets/img/ImageArchitect3.png";
-
-
 
 interface Interface {
 

@@ -1,11 +1,11 @@
 import {all, call} from "redux-saga/effects";
-import {watchUserWalletSaga} from './userWalletSaga';
-import {watchMintNFISaga} from "./mintNFISaga";
+import {watchUserWalletSaga} from './accountArr/getAccountArrSaga';
+import {watchMintNFISaga} from "./mintNFI/mintNFISaga";
 import {watchMintedNFISaga} from "./mintedNFISaga";
-import {watchAccountSaga} from "./accountSaga";
+import {watchAccountSaga} from "./account/accountSaga";
 import {watchIdentUseParamsSaga} from "./identityPageUseParamsSaga";
-import {watchContractFunctionsSaga} from "./contractsFunctionsSaga";
-import {watchMentionsSaga} from "./mentionsSaga";
+import {watchContractFunctionsSaga} from "./mintNFI/mintNFIFunctionsSaga";
+import {watchMentionsSaga} from "./mentions/mentionsSaga";
 
 export default function* rootSaga() {
     yield all([ call(watchUserWalletSaga), call(watchMintNFISaga), call(watchMintedNFISaga), call(watchAccountSaga),

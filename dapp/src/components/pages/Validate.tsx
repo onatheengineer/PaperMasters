@@ -26,14 +26,6 @@ import {
     BoxProps,
     FlexProps,
 } from '@chakra-ui/react';
-import { FaFacebook, FaGithub, FaGoogle } from 'react-icons/fa';
-import { Link } from '../../Link';
-import {useAppSelector} from "../../app/hooks";
-import { ReactNode, ReactText } from 'react';
-import PMLogo from '../../assets/PMGIMPResized.png';
-import Logo from '../../assets/Logo';
-import Sidebar from "../Sidebar";
-
 
 interface Interface {
 
