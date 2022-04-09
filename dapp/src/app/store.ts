@@ -1,11 +1,9 @@
 import { configureStore} from '@reduxjs/toolkit';
 import registerSlice from "../features/accountArr/getAccountArrSlice";
 import mintSlice from '../features/mintNFI/MintNFISlice';
-import mintedSlice from '../features/MintedNFISlice';
-import identUseParamsSlice from '../features/IdentityPageUseParamsSlice';
 import createSaga from "redux-saga";
 import rootSaga from "../features/rootSagas";
-import accountSlice from "../features/account/AccountSlice";
+import accountSlice from "../features/account/IdentityPageSlice";
 import mentionsSlice from "../features/mentions/MentionsSlice";
 import contractFunctionsSlice from '../features/mintNFI/MintNFIFunctionsSlice'
 import toastSlice from "../features/toast/redux/toastSlice";
@@ -17,7 +15,7 @@ export const store = configureStore({
   reducer: {
     register: registerSlice,
     mint: mintSlice,
-    minted: mintedSlice,
+    structBC: structBCSlice,
     account: accountSlice,
     identUseParams: identUseParamsSlice,
     mentions: mentionsSlice,

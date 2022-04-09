@@ -24,12 +24,6 @@ import {HiOutlineDocumentReport} from "react-icons/hi";
 import {MdOutlineLibraryAddCheck} from "react-icons/md";
 import {SiSololearn} from "react-icons/si";
 import IdentityEntryModal from "../../utils/IdentityEntryModal";
-import {getReceiptDBCurrentUser} from "../../features/account/AccountSlice";
-import {
-    getAllReceiptFromDBAction,
-    getAllWalletFromDBAction,
-    putWalletInDBStatus, requestUserWalletAction
-} from "../../features/accountArr/getAccountArrSlice";
 import AvatarNFI from "../AvatarNFI";
 import Sparkle from "react-sparkle";
 
@@ -143,12 +137,12 @@ export const Search: FC=()=> {
     const rowsTable = useMemo(() => {
         const receiptDictionary: any = {};
         console.log('get all receipts from db', getAllReceiptFromDB)
-        getAllReceiptFromDB.map((el) => {
+        getAllReceiptFromDB.map((el:any) => {
             receiptDictionary[el.walletAccount] = el;
         })
         console.log('this is the receiptDictionary:', receiptDictionary);
         const datarow: DataRow[] = [];
-        getAllWalletFromDB.map((element) => {
+        getAllWalletFromDB.map((element:any) => {
             let name = "";
             let profession = "";
             let originDateFormatted = "";

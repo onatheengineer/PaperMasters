@@ -34,23 +34,14 @@ import {useAppDispatch, useAppSelector} from "../../app/hooks";
 import PMLogo from '../../assets/PMGIMPResized.png';
 import Logo from '../../assets/Logo';
 import {ColorChangeHandler, ColorResult, SketchPicker, GithubPicker, RGBColor} from 'react-color';
-import {getOneReceiptFromDB, requestUserWalletAction} from "../../features/accountArr/getAccountArrSlice";
 import {
     mintNFIAction,
     gasForMintNFIAction,
-    mintingError,
     gasAccBalanceAction
 } from "../../features/mintNFI/MintNFISlice";
-import mintNFI from "../../abiFiles/PaperMastersNFI.json";
-import {call} from "redux-saga/effects";
 import AvatarNFI from "../AvatarNFI";
-import {paramsWalletAccAction} from "../../features/IdentityPageUseParamsSlice";
-import {addressHasIdentityBool} from "../../features/MintedNFISlice";
-import {MintNFISagaTypes} from '../../features/mintNFI/mintNFISaga.types'
 
-interface InterfaceRegister {
 
-}
 
 const ColorRGBToString=(colorResultRGB: ColorResult)=>{
     const colorStringRGB = `rgba(${colorResultRGB.rgb.r}, ${colorResultRGB.rgb.g}, ${colorResultRGB.rgb.b}, ${colorResultRGB.rgb.a})`
@@ -58,26 +49,26 @@ const ColorRGBToString=(colorResultRGB: ColorResult)=>{
 }
 
 
-export const Register: FC<InterfaceRegister>=()=> {
+export const Register=()=> {
 
-    const tokenIDtoIdentityStruct = useAppSelector((state) => state.minted.tokenIDtoIdentityStruct);
+    const tokenIDtoIdentityStruct = useAppSelector((state) => state.account.tokenIDtoIdentityStruct);
 
-    const paramsWalletAcc = useAppSelector((state) => state.identUseParams.paramsWalletAcc);
-    const paramsAddressHasIdentityBoolBC = useAppSelector((state) => state.identUseParams.addressHasIdentityBC);
-    const requestReceiptUsingParams = useAppSelector((state) => state.identUseParams.requestReceiptUsingParams);
-    const requestStructUsingParamsFromBC = useAppSelector((state) => state.identUseParams.requestStructUsingParamsFromBC);
-    const addressHasIdentityBool = useAppSelector((state) => state.minted.addressHasIdentity);
-    const getOneReceiptFromDB = useAppSelector((state) => state.register.getOneReceiptFromDB);
+    const paramsWalletAcc = useAppSelector((state) => state.account.paramsWalletAcc);
+    const paramsAddressHasIdentityBoolBC = useAppSelector((state) => state.account.addressHasIdentityBC);
+    const requestReceiptUsingParams = useAppSelector((state) => state.account.requestReceiptUsingParams);
+    const requestStructUsingParamsFromBC = useAppSelector((state) => state.account.requestStructUsingParamsFromBC);
+    const addressHasIdentityBool = useAppSelector((state) => state.account.addressHasIdentity);
+    const getOneStructFromDB = useAppSelector((state) => state.account.getOneStructFromDB);
 
 
     const dispatch = useAppDispatch();
-    const accountsArr = useAppSelector((state) => state.register.accounts);
-    const statusBool = useAppSelector((state) => state.register.status);
+    const accountsArr = useAppSelector((state) => state.account.getAccountsArr);
+    const statusBool = useAppSelector((state) => state.mint.statusBC);
     const gasPrice = useAppSelector((state) => state.mint.gasPrice);
     const mintSucceeded = useAppSelector((state) => state.mint.mintSucceeded);
     const mintErrorReason = useAppSelector((state) => state.mint.mintErrorReason);
     const accBalance = useAppSelector((state) => state.mint.accBalance);
-    const accBalanceErr = useAppSelector((state) => state.mint.accBalanceError);
+    const accBalanceErr = useAppSelector((state) => state.mint.accBalanceErr);
 
     const [name, setName] = useState<string | "">("");
     const [profession, setProfession] = useState<string | "">("");

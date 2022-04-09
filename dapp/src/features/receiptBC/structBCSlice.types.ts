@@ -1,4 +1,5 @@
-export interface tokenIDtoIdentityStructInterface{
+//this is coming from the BC
+export interface BCStruct{
     walletAccount: string;
     name: string;
     email: string;
@@ -10,3 +11,6 @@ export interface tokenIDtoIdentityStructInterface{
     bgRGB: string;
     originDate: string | number;
 }
+
+
+

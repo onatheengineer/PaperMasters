@@ -5,38 +5,29 @@ import Navbar from "./components/Navbar";
 import Footer from "./components/Footers/Footer";
 import {Routes, Route, BrowserRouter} from "react-router-dom";
 import "focus-visible/dist/focus-visible";
-import Web3 from "web3";
-import type {FC} from 'react';
 import {Box, Flex, VStack} from '@chakra-ui/react';
 import Sidebar, {NavItem} from './components/Sidebar'
-import {accountsArr, requestUserWalletAction} from "./features/accountArr/getAccountArrSlice";
-import {mintNFIAction} from "./features/mintNFI/MintNFISlice";
-import {addressHasIdentityBoolAction} from "./features/MintedNFISlice";
-import { createBreakpoints } from '@chakra-ui/theme-tools'
-import {getReceiptDBConnectUserAction} from "./features/account/AccountSlice";
-import Identity from "./components/pages/Identity";
+import {accountArr, getAccountArrAction} from "./features/accountArr/getAccountArrSlice";
+import {getReceiptDBConnectUserAction} from "./features/account/IdentityPageSlice";
 import detectEthereumProvider from '@metamask/detect-provider';
-import Search from "./components/pages/Search";
-import Register from "./components/pages/Register";
 import { useGlobalToast } from './features/toast/hooks/useGlobalToast';
+import {addressHasIdentityBoolAction} from "./features/accountArr/getAccountArrSlice";
 
 function App() {
     useGlobalToast();
     const dispatch = useAppDispatch();
-    const requestWalletArr = useAppSelector((state) => state.register.accounts);
 
     useEffect(() => {
         console.log("is this dispatch metamask useEffect running?")
-        dispatch(requestUserWalletAction());
-
+        dispatch(getAccountArrAction());
         const provider: any = detectEthereumProvider();
         console.log("this is provider:", provider);
         provider.then((actualProvider: any) => {
             console.log('what is this actual provider?', actualProvider);
             actualProvider.on('accountsChanged', (accounts: any) => {
                 console.log('account changed!')
-                dispatch(accountsArr([]));
-                dispatch(requestUserWalletAction());
+                dispatch(accountArr([]));
+                dispatch(getAccountArrAction());
                 window.location.reload();
             });
             actualProvider.on('chainChanged', (chainId: any) => {
@@ -45,14 +36,13 @@ function App() {
         });
     }, [])
 
-
     useEffect(() => {
         console.log("is there a wallet account connected? Now check for NFI")
-        if (requestWalletArr.length !== 0) {
+        if (accountArr.length !== 0) {
             dispatch(addressHasIdentityBoolAction());
             dispatch(getReceiptDBConnectUserAction());
         }
-    }, [requestWalletArr])
+    }, [accountArr])
 
     return (
         <Box

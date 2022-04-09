@@ -130,7 +130,7 @@ function* spiderBCforTransactionHashSaga(actionObject: any) {
     //}
 }
 
-export function* watchApiBCMethodsSaga() {
+export function* watchLedgerSaga() {
     yield takeLatest(spiderBCforTransactionHashAction.type, spiderBCforTransactionHashSaga);
     yield takeLatest(checkTransEthereumAddressAction.type, checkTransEthereumAddressActionSaga);
     yield takeLatest(apiHarmonyOneAction.type, apiHarmonyOneSaga);

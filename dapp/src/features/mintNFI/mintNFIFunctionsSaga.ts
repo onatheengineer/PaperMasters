@@ -67,7 +67,7 @@ function* totalSupplySaga(){
 
 }
 
-export function* watchContractFunctionsSaga() {
+export function* watchNFIFunctionsSaga() {
     yield takeLatest(depositsToContractAction.type, depositSaga);
     yield takeLatest(mintFeeAction.type, mintFeeSaga);
     yield takeLatest(reportNFIFeeAction.type, reportNFIFeeSaga);

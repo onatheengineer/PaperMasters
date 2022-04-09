@@ -3,11 +3,8 @@ import type {FC} from 'react';
 import {Link as ReachLink, useParams} from "react-router-dom";
 import {
     Avatar, AvatarGroup, Box, Button, Flex, Grid, GridItem, Icon, Image, Link, MenuItem,
-    Stack, Switch, Text, useColorModeValue, HStack, useDisclosure, Tooltip, VStack,
-    Container, AspectRatio, AvatarBadge, Divider, Center, InputRightElement, useStyleConfig,
-    TabPanel, TabPanels, TabList, Tabs, Tab, Select, Heading, Menu, MenuButton, MenuList, MenuDivider,
+    Stack, Switch, Text, useColorModeValue, HStack,
 } from "@chakra-ui/react";
-import {useMemo} from "react";
 import {useAppSelector} from "../../app/hooks";
 import {
     FaDiscord,
@@ -20,11 +17,7 @@ import {
     FaTwitter,
     FaYoutube
 } from "react-icons/fa";
-import {ChevronDownIcon} from "@chakra-ui/icons";
-import {BsFillPersonLinesFill} from "react-icons/bs";
-import {TiSocialAtCircular} from "react-icons/ti";
 import {openseaIcon} from "../../assets/icons/openseaIcon";
-import {IconType} from "react-icons";
 import {MdOutlinePeopleOutline} from "react-icons/md";
 
 interface iconLinkInterface{
@@ -55,15 +48,8 @@ export const IconLinkComponent: FC<iconLinkInterface> = ({children, hrefLink}) =
     )
 }
 
-
-interface socialMediaInterface {
-
-}
-
-
-export const SocialMedia:FC<socialMediaInterface>=()=> {
-    const {walletAccount} = useParams();
-    const socialMediaDictionaryBool = useAppSelector( (state ) => state.identUseParams.socialMediaDictionaryBool);
+export const SocialMedia=()=> {
+    const socialMediaDictionaryBool = useAppSelector( (state ) => state.account.socialMediaDictionaryBool);
 
     return (
         <Box

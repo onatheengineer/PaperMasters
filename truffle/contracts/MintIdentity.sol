@@ -1,6 +1,5 @@
 // SPDX-License-Identifier: GPL-3.0
 pragma solidity >=0.8.0 <0.9.0;
-
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/token/ERC721/extensions/IERC721Metadata.sol";
@@ -9,7 +8,6 @@ contract PaperMastersNFI is ERC721, Ownable {
 //do I need to bring in SafeMath???
     string private _setBaseURI;
     uint256 private identityFee;
-
     struct identity
     {
         address walletAccount;
@@ -23,10 +21,9 @@ contract PaperMastersNFI is ERC721, Ownable {
         string bgRGB;
         uint originDate;
     }
+    identity[] _dictionaryNFIs;
 
-    identity[] totalIdentities;
-
-    mapping(address => uint256) _dictionaryNFIs;
+    mapping(address => uint256) totalIdentities;
     mapping(address => uint256) _supportPMDonations;
 
     //prevents ren-entry when modifier is added to a function
@@ -37,24 +34,27 @@ contract PaperMastersNFI is ERC721, Ownable {
         _;
         locked = false;
     }
-
     constructor() ERC721("papermasters.io", "NFI") {
         _setBaseURI = "www.papermasters.io/identity";
         identityFee = 100000000000000000;
-        totalIdentities.push(identity(address(this),'','','','','','','','',0));
+        _dictionaryNFIs.push(identity(address(this),'','','','','','','','',0));
     }
 
     function addressToTokenID(address walletAddress) public view returns(uint256) {
-        return _dictionaryNFIs[walletAddress];
+        return totalIdentities[walletAddress];
     }
 
     function tokenIDtoIdentityStruct(uint256 _tokenid) public view returns(identity memory) {
-        return totalIdentities[_tokenid];
+        return _dictionaryNFIs[_tokenid];
     }
 
     function addressHasTokenBool(address walletAddress) public view returns(bool) {
         uint256 _tokenId = addressToTokenID(walletAddress);
         return _tokenId >= 1;
+    }
+
+    function allIdentityStructs() public view returns(identity[] memory){
+        return _dictionaryNFIs;
     }
 
     function setBaseURI(string memory changeBaseURI) public onlyOwner{
@@ -103,7 +103,6 @@ contract PaperMastersNFI is ERC721, Ownable {
     }
         event DonationMade(uint256 amount, uint balance, address donationSender, uint totalDonationsBySender);
 
-
     function getBalance() public view onlyOwner returns (uint) {
         return address(this).balance;
     }
@@ -118,7 +117,7 @@ contract PaperMastersNFI is ERC721, Ownable {
     event Withdraw(uint256 amount, uint256 balance, address withdrawAddress);
 
     function totalSupply() public view returns (uint256) {
-        return totalIdentities.length;
+        return _dictionaryNFIs.length;
     }
 
     event Pause();
@@ -174,16 +173,15 @@ contract PaperMastersNFI is ERC721, Ownable {
         originDate: _originDate
         });
 
-        totalIdentities.push(_identity);
+        _dictionaryNFIs.push(_identity);
 
-        uint256 newTokenID = totalIdentities.length - 1;
+        uint256 newTokenID = _dictionaryNFIs.length - 1;
 
-        _dictionaryNFIs[msg.sender] = newTokenID;
+        totalIdentities[msg.sender] = newTokenID;
 
         _safeMint(msg.sender, newTokenID);
 
-        emit NFIMinted(msg.sender, newTokenID, block.timestamp, msg.value, _identity );
-
+        emit NFIMinted(newTokenID, block.timestamp, msg.value, _identity);
     }
     event NFIMinted(address indexed _from, uint256 tokenId, uint256 timeStamp, uint256 contractFee, identity identityStruct);
 

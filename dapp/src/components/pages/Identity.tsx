@@ -2,13 +2,9 @@ import * as React from 'react';
 import type {FC} from 'react';
 import {Link as ReachLink, useNavigate, useParams} from "react-router-dom";
 import {
-    Avatar, AvatarGroup, Box, Button, Flex, Grid, GridItem, Icon, Image, Link, MenuItem,
-    Stack, Switch, Text, useColorModeValue, HStack, useDisclosure, Tooltip, VStack,
-    Container, AspectRatio, AvatarBadge, Divider, Center, InputRightElement, useStyleConfig,
-    TabPanel, TabPanels, TabList, Tabs, Tab, Select, Heading,
+    Box, Button, Flex, Stack, Text, HStack,  Divider,
 } from "@chakra-ui/react";
 import { RiShareForwardLine} from 'react-icons/ri';
-
 import {useAppSelector, useAppDispatch} from "../../app/hooks";
 import AvatarNFI from "../AvatarNFI";
 import bgImage from '../../assets/legoLavendarheadercroped.png'
@@ -16,32 +12,22 @@ import {FormEvent, useEffect, useMemo, useReducer, useState} from "react";
 import Header, {Mailto} from "../identity/Header";
 import Projects from "../identity/Projects";
 import ValidationsReports from "../identity/ValidationsReports";
-import {paramsWalletAccAction, paramsWalletAcc} from "../../features/IdentityPageUseParamsSlice";
 import ModalForIdentNoUseParams from '../identity/ModalForIdentNoUseParams';
-import {Route} from "react-router";
 import {AccountLedger} from '../identity/AccountLedger'
 import {apiHarmonyOneAction} from "../../features/ledger/LedgerSlice";
 
-interface Interface {
 
-}
-
-export const Identity:FC<Interface>=()=> {
-
+export const Identity=()=> {
+//TODO as soon as they connect - redirect them to their identity page - this is important for the hasIdentityBool slice to work
     const {walletAcc} = useParams();
     console.log(`this is walletAccparams: ${walletAcc}`)
-
+    const dispatch = useAppDispatch();
     const paramsWalletAcc = useAppSelector((state) => state.identUseParams.paramsWalletAcc);
     const paramsAddressHasIdentityBoolBC = useAppSelector((state) => state.identUseParams.addressHasIdentityBC);
     const requestReceiptUsingParams = useAppSelector((state) => state.identUseParams.requestReceiptUsingParams);
     const requestStructUsingParamsFromBC = useAppSelector((state) => state.identUseParams.requestStructUsingParamsFromBC);
     const paramsRequestAccountDictionary = useAppSelector((state) => state.identUseParams.requestAccountDictionary);
-
     console.log('paramsRequestAccountDictionary:', paramsRequestAccountDictionary)
-
-    const dispatch = useAppDispatch();
-
-    const navigate = useNavigate();
 
     useEffect(() => {
         if (walletAcc !== undefined && walletAcc !== "" && walletAcc !== 'undefined') {
@@ -71,7 +57,6 @@ export const Identity:FC<Interface>=()=> {
         return (
             " Mathematics may not teach us how to add love or subtract hate, but it gives us every reason to hope that every problem has a solution."
         );
-
     }, [paramsRequestAccountDictionary, paramsWalletAcc, paramsAddressHasIdentityBoolBC, requestReceiptUsingParams])
 
     console.log('paramsWalletAcc.length:', paramsWalletAcc.length)
@@ -88,7 +73,6 @@ export const Identity:FC<Interface>=()=> {
             //align='center'
         >
             {paramsWalletAcc !== undefined && walletAcc !== 'undefined' && walletAcc !== "" && paramsWalletAcc.length !== 0 ?
-
                 <Stack
                     //border={'4px solid yellow'}
                 >
@@ -150,7 +134,6 @@ export const Identity:FC<Interface>=()=> {
                                      overflow={'none'} whiteSpace={'break-spaces'}
                                 >
                                     {paramsWalletAcc.length !== 0 && paramsAddressHasIdentityBoolBC !== false && requestStructUsingParamsFromBC.walletAccount.length !== 0 ?
-
                                         <AvatarNFI accountNumber={requestStructUsingParamsFromBC.walletAccount}
                                                    name={requestStructUsingParamsFromBC.name.split("|||")[0]}
                                                    nameColor={requestStructUsingParamsFromBC.name.split("|||")[1]}

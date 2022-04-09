@@ -15,22 +15,16 @@ import {
     Popover,
     PopoverTrigger,
     PopoverContent,
-
     useBreakpointValue,
     MenuIcon, Spacer, Icon, Tooltip,
 } from '@chakra-ui/react';
-
 import { FaScroll } from "react-icons/fa";
-import { SiSololearn } from "react-icons/si";import { ImBooks } from "react-icons/im";
+import { SiSololearn } from "react-icons/si";
+import { ImBooks } from "react-icons/im";
 import {GiBookshelf, GiNewShoot, GiHeatHaze, GiDiscussion, GiBookCover, GiFlowerPot, GiFlowerHat} from "react-icons/gi";
 import {IoMdCheckmarkCircleOutline} from "react-icons/io";
 import {RiPlantFill} from "react-icons/ri";
 import {FiTrendingUp} from "react-icons/fi";
-import Web3 from "web3";
-import RegisterSlice, {
-    requestUserWalletAction,
-    statusOfArr
-} from '../features/accountArr/getAccountArrSlice';
 
 import {BiBookmarkHeart, BiHomeHeart} from "react-icons/bi";
 import {
@@ -41,7 +35,6 @@ import {MdManageAccounts, MdOutlineReport, MdOutlineWarningAmber, MdOutlineNatur
 import {useAppDispatch, useAppSelector} from "../app/hooks";
 import {Link as ReachLink, To, useParams} from "react-router-dom";
 import PMLogoFull from '../assets/icons/PMLogoFull';
-
 
 export default function WithSubnavigation() {
     const {isOpen, onToggle} = useDisclosure();

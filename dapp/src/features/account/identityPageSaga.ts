@@ -1,10 +1,7 @@
 import {SagaIterator} from "redux-saga";
 import axios from "axios";
 import {PayloadAction} from "@reduxjs/toolkit";
-import { call, put, takeEvery, delay, all, takeLatest, select} from 'redux-saga/effects';
-
-
-//import Web3 from "web3";
+import { call, put, takeEvery, takeLatest, select} from 'redux-saga/effects';
 import MintABI from "../../abiFiles/PaperMastersNFI.json";
 import {
     paramsWalletAcc,
@@ -20,17 +17,14 @@ import {
     userSameAccountBoolAction,
     getReceiptDBConnectUserAction,
     getReceiptDBCurrentUser, putDBAccountDictionaryAction, accountError,
-} from "./AccountSlice";
-
-
-import {requestWalletArr} from "./accountSaga";
-
+} from "./IdentityPageSlice";
+import Web3 from "web3";
+import {BCStruct} from "../receiptBC/structBCSlice.types";
+import {accountArr} from "../accountArr/getAccountArrSlice";
+import {identityStruct, resetAddressHasIdentityLookup, tokenToIdentityErrMessage} from "../receiptBC/structBCSlice";
 const web3 = new Web3('https://api.s0.b.hmny.io');
-const papermastersNFIContract = new web3.eth.Contract(MintABI.abi as any, MintABI.networks['1666700000'].address);
 const baseURL = 'https://ociuozqx85.execute-api.us-east-1.amazonaws.com';
-export const requestParamsWallet = (state: any) => state.identUseParams.paramsWalletAcc;
-
-
+const NFIContract = new web3.eth.Contract(MintABI.abi as any, MintABI.networks['1666700000'].address);
 
 function* getOneAccountFromDBSaga(): SagaIterator {
     try{
@@ -42,7 +36,6 @@ function* getOneAccountFromDBSaga(): SagaIterator {
     }
 }
 
-
 function* getAllAccountFromDBSaga(): SagaIterator {
     try{
         const getDBWallet = yield call(axios.get, `${baseURL}/account`);
@@ -50,17 +43,6 @@ function* getAllAccountFromDBSaga(): SagaIterator {
         console.log ('this is the type of getBDWallet:', getDBWallet);
     } catch (e) {
         console.log(`this is the getWalletFromDBSaga ERROR catch: ${e}`);
-    }
-}
-
-
-function* getAllReceiptsFromDBSaga(): SagaIterator {
-    try{
-        const getAllDBReceipt = yield call(axios.get, `${baseURL}/receipt`);
-        yield put(getAllReceiptFromDB(getAllDBReceipt.data.Items as IdentityDictionaryInterface[]));
-        console.log ('this is the type of getAllDBreceipt:', getAllDBReceipt);
-    } catch (e) {
-        console.log(`this is the getAllReceiptsFromDBSaga ERROR catch: ${e}`);
     }
 }
 
@@ -74,8 +56,17 @@ function* getOneReceiptFromDBSaga({ payload }: PayloadAction<string>): SagaItera
     }
 }
 
+function* getAllReceiptsFromDBSaga(): SagaIterator {
+    try{
+        const getAllDBReceipt = yield call(axios.get, `${baseURL}/receipt`);
+        yield put(getAllReceiptFromDB(getAllDBReceipt.data.Items as IdentityDictionaryInterface[]));
+        console.log ('this is the type of getAllDBreceipt:', getAllDBReceipt);
+    } catch (e) {
+        console.log(`this is the getAllReceiptsFromDBSaga ERROR catch: ${e}`);
+    }
+}
 
-function* identUseParamsSaga({payload}: PayloadAction<string>): SagaIterator {
+function* identPageSaga({payload}: PayloadAction<string>): SagaIterator {
     try {
         yield put(paramsWalletAcc(""));
         yield put(requestStructUsingParamsFromBC({
@@ -120,7 +111,7 @@ function* addressHasIdentityBoolSaga({payload}: PayloadAction<string>): SagaIter
             yield put(addressHasIdentityBC(false))
             return;
         }
-        const alreadyMintedBool = yield call(papermastersNFIContract.methods.addressHasTokenBool(payload).call, {from: payload})
+        const alreadyMintedBool = yield call(NFIContract.methods.addressHasTokenBool(payload).call, {from: payload})
         yield put(addressHasIdentityBC(alreadyMintedBool));
         if(alreadyMintedBool) {
             yield put(addressToTokenIDAction(payload));
@@ -134,7 +125,7 @@ function* addressHasIdentityBoolSaga({payload}: PayloadAction<string>): SagaIter
 
 function* addressToTokenIDSaga({payload}: PayloadAction<string>): SagaIterator {
     try {
-        const tokenFromAddress = yield call(papermastersNFIContract.methods.addressToTokenID(payload).call, {from: payload});
+        const tokenFromAddress = yield call(NFIContract.methods.addressToTokenID(payload).call, {from: payload});
         //tokenID 0 is the constructor
         if (tokenFromAddress >= 1) {
             yield put(addressToTokenID(tokenFromAddress));
@@ -151,7 +142,7 @@ function* addressToTokenIDSaga({payload}: PayloadAction<string>): SagaIterator {
 function* tokenIDtoIdentityStructSaga({payload}: PayloadAction<number>): SagaIterator {
     try{
         console.log('this should be the tokenID of the useParams account:', payload)
-        const getTokenIDtoIdentityStruct = yield call(papermastersNFIContract.methods.tokenIDtoIdentityStruct(payload).call)
+        const getTokenIDtoIdentityStruct = yield call(NFIContract.methods.tokenIDtoIdentityStruct(payload).call)
         console.log('this is the output for the getTokenIDtoIdentityStruct:', getTokenIDtoIdentityStruct);
         yield put(requestStructUsingParamsFromBC(getTokenIDtoIdentityStruct));
     } catch(tokenIDtoIdentityStructSagaFailed: unknown){
@@ -181,11 +172,11 @@ function* requestReceiptSaga({payload}: PayloadAction<   >): SagaIterator {
     }
 }
 
-function* getReceiptDBConnectedUserSaga(): any {
+function* getReceiptDBConnectedUserSaga({payload}: PayloadAction<   >): SagaIterator {
     try {
-        const requestWallet: string[] = yield select(requestWalletArr);
-        if (requestWallet.length !== 0) {
-            const receiptDBCurrentUser = yield call(axios.get, `${baseURL}/receipt/${requestWallet[0]}`);
+        const requestAccountArr: string[] = yield select(accountArr);
+        if (requestaccountArr.length !== 0) {
+            const receiptDBCurrentUser = yield call(axios.get, `${baseURL}/receipt/${requestAccountArr[0]}`);
             console.log("this is the receipt from DB:");
             console.table(receiptDBCurrentUser);
             yield put(getReceiptDBCurrentUser(receiptDBCurrentUser.data.Item))
@@ -195,7 +186,7 @@ function* getReceiptDBConnectedUserSaga(): any {
     }
 }
 
-function* putDBAccountDictionarySaga(actionObject: any): { } {
+function* putDBAccountDictionarySaga({payload}: PayloadAction<   >): SagaIterator { } {
     console.log("this is the actionObject:")
     console.log(typeof (actionObject))
     console.log(actionObject)
@@ -207,11 +198,9 @@ function* putDBAccountDictionarySaga(actionObject: any): { } {
         yield put(accountError(createBDFailed.message))
         console.log(createBDFailed);
     }
-
 }
 
-
-export function* watchUserWalletSaga(): SagaIterator {
+export function* watchAccountSaga(): SagaIterator {
     yield takeEvery(getAccountArrAction.type, getAccountArrSaga);
     yield takeEvery(putAccountArrInDBAction.type, putAccountArrInDBSaga);
 
@@ -221,7 +210,7 @@ export function* watchUserWalletSaga(): SagaIterator {
     yield takeEvery(getOneReceiptFromDBAction.type, getOneReceiptFromDBSaga);
     yield takeEvery(getAllReceiptFromDBAction.type, getAllReceiptsFromDBSaga);
 
-    yield takeLatest(paramsWalletAccAction.type, identUseParamsSaga);
+    yield takeLatest(paramsWalletAccAction.type, identPageSaga);
     yield takeLatest(tokenIDtoIdentityStructAction.type, tokenIDtoIdentityStructSaga);
     yield takeLatest(requestReceiptSagaAction.type, requestReceiptSaga);
     yield takeLatest(requestAccountDictionaryAction.type, requestAccountDictionarySaga);
@@ -230,8 +219,6 @@ export function* watchUserWalletSaga(): SagaIterator {
 
     yield takeLatest(putDBAccountDictionaryAction.type, putDBAccountDictionarySaga);
     yield takeLatest(getReceiptDBConnectUserAction.type, getReceiptDBConnectedUserSaga);
-
-    //yield takeEvery(watchUserWalletChannelAction.type, watchUserWalletChannelSaga);
 }
 
 

@@ -1,38 +1,14 @@
 import { createSlice, PayloadAction, createAction } from "@reduxjs/toolkit";
-import {tokenIDtoIdentityStructInterface} from '../mintNFI/identityStruct.types';
-import {identityPageDictionaryInterface} from "./accountSaga.types";
-import {BCReceiptInterface} from "./AccountSlice";
-import {accountDictionaryInterface} from "../accountArr/getAccountArrSlice";
-
-interface IdentityPageState {
-    getAccountArrDB: identityPageDictionaryInterface;
-    getAllAccountArrDB: identityPageDictionaryInterface[];
-    getReceiptDB: tokenIDtoIdentityStructInterface;
-    getAllReceiptDB: tokenIDtoIdentityStructInterface[];
-
-}
 
 
-
-interface IdentityPageUseParamsSliceInterface{
-    paramsWalletAcc: string,
-    requestStructUsingParamsFromBC:tokenIDtoIdentityStructInterface,
-    requestReceiptUsingParams:BCReceiptInterface,
-    requestAccountDictionary: identityPageDictionaryInterface,
-    addressHasIdentityBC: boolean,
-    addressToTokenID:number,
-}
-
-
-const initialState: IdentityPageState = {
+const initialStateIdenPage: IdentityPageState = {
     getAccountArrDB: {
         walletAccount: "",
-        walletAccountLink: '',
         linkToFinishedAvatar: "",
-        ownerName:'',
-        ownerEmail:'',
-        ownerDescription:'',
-        aliasProfileLinks: {
+        ownerName: '',
+        ownerEmail: '',
+        ownerDescription: '',
+        socialMediaLinks: {
             Discord: "",
             Twitter: "",
             Linkedin: "",
@@ -47,7 +23,11 @@ const initialState: IdentityPageState = {
             socialButtonGeneric2: ""
         },
         emailReportNotification: false,
-        emailValidationNotification:false},
+        emailValidationNotification: false
+    },
+}
+
+const initialStateMintReceipt: MintReceiptState = {
     getAllAccountArrDB: [],
     getReceiptDB: {
         walletAccount: "",
@@ -64,9 +44,7 @@ const initialState: IdentityPageState = {
     getAllReceiptDB: [],
 };
 
-
 const initialState: IdentityPageUseParamsSliceInterface = {
-    paramsWalletAcc: "",
     addressToTokenID:0,
     requestStructUsingParamsFromBC: {
         walletAccount: "",
@@ -96,29 +74,7 @@ const initialState: IdentityPageUseParamsSliceInterface = {
         OpenSea:"",
         socialButtonGeneric1: "",
         socialButtonGeneric2: "",
-
     }
-}
-//TODO: change the BCReceipt types to the ones that actually be of the correct type
-
-export interface BCReceiptInterface {
-    walletAccount: string,
-    gasUsed: string,
-    contractAccount: string,
-    transactionHash: string,
-    tokenID: string,
-    timeStamp: string
-    contractFee: string,
-    identityStruct: any[],
-}
-
-
-interface AccountSlice {
-    putDBAccountDictionary: {};
-    getDBAccountDictionary: accountDictionaryInterface;
-    userSameAccountBool: boolean;
-    accountError: string,
-    getReceiptDBCurrentUser:BCReceiptInterface;
 }
 
 const initialState: AccountSlice = {
@@ -129,14 +85,13 @@ const initialState: AccountSlice = {
     getReceiptDBCurrentUser: { walletAccount: "", gasUsed: "", contractAccount: "", transactionHash: "", tokenID: "", timeStamp: "", contractFee: "", identityStruct: []},
 };
 
-
-
-
-
-const GetIdentityPageSlice = createSlice ({
+const IdentityPageSlice = createSlice ({
     name: 'identityPage',
     initialState,
     reducers: {
+        paramsWalletAcc(state, action: PayloadAction<string> ) {
+            state.paramsWalletAcc = action.payload
+        },
         getAccountArrDB(state, action: PayloadAction<identityPageDictionaryInterface>){
             state.getAccountArrDB = action.payload;
         },
@@ -148,9 +103,6 @@ const GetIdentityPageSlice = createSlice ({
         },
         getAllReceiptDB(state, action: PayloadAction<tokenIDtoIdentityStructInterface[]>){
             state.getAllReceiptDB = action.payload;
-        },
-        paramsWalletAcc(state, action: PayloadAction<string> ) {
-            state.paramsWalletAcc = action.payload
         },
         requestStructUsingParamsFromBC(state, action: PayloadAction<tokenIDtoIdentityStructInterface>) {
             state.requestStructUsingParamsFromBC = action.payload
@@ -191,7 +143,7 @@ const GetIdentityPageSlice = createSlice ({
 export const {getAccountArrDB, getAllAccountArrDB, getReceiptDB, getAllReceiptDB, paramsWalletAcc,
     requestStructUsingParamsFromBC, requestReceiptUsingParams, requestAccountDictionary, addressHasIdentityBC,
     addressToTokenID, socialMediaDictionary, putDBAccountDictionary, getDBAccountDictionary,
-    getReceiptDBCurrentUser, userSameAccountBool, accountError } = GetIdentityPageSlice.actions;
+    getReceiptDBCurrentUser, userSameAccountBool, accountError } = IdentityPageSlice.actions;
 
 export const getOneAccountFromDBAction = createAction("GET_ONE_WALLET_IN_DB_SAGA");
 export const getAllAccountFromDBAction = createAction("GET_ALL_ACCOUNT_IN_DB_SAGA");
@@ -208,8 +160,6 @@ export const getDBAccountDictionaryAction= createAction<string>("GET_ACCOUNT_DIC
 export const userSameAccountBoolAction= createAction<string>("USER_SAME_ACCOUNT_BOOL_SAGA");
 export const getReceiptDBConnectUserAction = createAction("GET_RECEIPT_DB_SAGA");
 
-
-
-export default GetIdentityPageSlice.reducer;
+export default IdentityPageSlice.reducer;
 
 

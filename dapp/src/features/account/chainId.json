@@ -1,0 +1,11 @@
+{
+  "1": {"type": "production" },
+  "1666600000": {"type": "production" },
+  "1666600001": {"type": "production" },
+  "1666600002": {"type": "production" },
+  "1666600003": {"type": "production" },
+  "1666700000": {"type": "test" },
+  "1666700001": {"type": "test" },
+  "1666700002": {"type": "test" },
+  "1666700003": {"type": "test" }
+}

@@ -29,7 +29,7 @@ import {BsFillPersonLinesFill} from "react-icons/bs";
 import {SketchPicker} from "react-color";
 import {SocialButton} from "../Footers/Footer";
 import {openseaIcon} from '../../assets/icons/openseaIcon';
-import {putDBAccountDictionary, putDBAccountDictionaryAction} from '../../features/account/AccountSlice';
+import {putDBAccountDictionary, putDBAccountDictionaryAction} from '../../features/account/IdentityPageSlice';
 import {accountDictionaryInterface} from "../../features/accountArr/getAccountArrSlice";
 import {ChevronDownIcon} from "@chakra-ui/icons";
 import {paramsWalletAccAction} from "../../features/IdentityPageUseParamsSlice";

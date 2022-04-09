@@ -21,18 +21,11 @@ import { BiLeftArrowAlt, BiRightArrowAlt } from 'react-icons/bi';
 //import Slider from 'react-slick';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import {select} from "redux-saga/effects";
 
 
-interface Interface {
+export const Projects=()=> {
 
-}
-
-
-export const Projects:FC<Interface>=()=> {
-
-    const {walletAccount} = useParams();
-    const filledAccountsArr = useAppSelector((state) => state.register.accounts);
-    const dispatch = useAppDispatch();
 
 // Settings for the slider
     const settings = {

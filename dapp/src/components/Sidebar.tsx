@@ -25,24 +25,18 @@ import Search from './pages/Search'
 import {Link as ReachLink, To} from "react-router-dom";
 import {MdOutlineFeedback, MdOutlineReport, MdOutlineWarningAmber} from "react-icons/md";
 import {GiBookCover, GiBookmark, GiDiscussion, GiSuspicious} from "react-icons/gi";
-import {BsCalendar2Event} from "react-icons/bs";
 import Home from "./pages/Home";
 import Identity from "./pages/Identity";
 import CloudHWM from "./pages/CloudHWM";
-import PageForum from "./pages/PageForum";
 import YourPeople from "./pages/YourPeople";
 import Validate from "./pages/Validate";
 import Analytics from "./pages/Analytics";
 import Learn from "./pages/Learn";
 import News from "./pages/News";
 import Security from "./pages/Security";
-import {SiSololearn} from "react-icons/si";
 import {useAppSelector} from "../app/hooks";
-import identity from "./pages/Identity";
 import Report from "./pages/Report";
-import {accountsArr} from "../features/accountArr/getAccountArrSlice";
-import Navbar from './Navbar'
-
+import {accountArr} from "../features/accountArr/getAccountArrSlice";
 
 
 interface InterfaceNavItem {
@@ -96,18 +90,11 @@ export const NavItem: FC<InterfaceNavItem> = ({ icon, title, active,
 
 export const Sidebar: FC<InterfaceSidebar>= ({icon, profileName} ) => {
 
-    const addressHasIdentity = useAppSelector((state) => state.minted.addressHasIdentity);
-    const accountArr = useAppSelector((state) => state.register.accounts);
-
     const location = useLocation();
-    const navigate = useNavigate();
-
     const [navSize, changeNavSize] = useState<'small' | 'large'>("small");
     const [navItemsRender, setNavItemRender] = useState<JSX.Element[] | null>([]);
     const [headerTitle, setHeaderTitle] = useState<string>('');
     const [headerText, setHeaderText] = useState<string>('');
-
-    const {walletAcc} = useParams();
 
     useEffect(() => {
         console.log(location);
@@ -212,11 +199,6 @@ export const Sidebar: FC<InterfaceSidebar>= ({icon, profileName} ) => {
             case '/security':
                 setNavItemRender(SidebarSecurity);
                 setHeaderTitle("Security");
-                //setHeaderText("sdfsdfssdfsddf");
-                break;
-            case '/learn':
-                setNavItemRender(SidebarLearn);
-                setHeaderTitle("Learn");
                 //setHeaderText("sdfsdfssdfsddf");
                 break;
             default:
