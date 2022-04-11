@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction, createAction } from "@reduxjs/toolkit";
-import {ToastOptions} from "../toast/redux/toastSlice.types";
+import {ToastOptions} from "../../toast/redux/toastSlice.types";
 
 export interface mentionsStateDictionaryInterface {
     walletAcc: string;

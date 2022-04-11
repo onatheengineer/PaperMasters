@@ -271,23 +271,23 @@ export default defineConfig({
     {
       name: 'account',
       icon: 'user',
-      path: '/account',
+      path: '/accountDB',
       routes: [
         {
-          path: '/account',
-          redirect: '/account/center',
+          path: '/accountDB',
+          redirect: '/accountDB/center',
         },
         {
           name: 'center',
           icon: 'smile',
-          path: '/account/center',
-          component: './account/center',
+          path: '/accountDB/center',
+          component: './accountDB/center',
         },
         {
           name: 'settings',
           icon: 'smile',
-          path: '/account/settings',
-          component: './account/settings',
+          path: '/accountDB/settings',
+          component: './accountDB/settings',
         },
       ],
     },

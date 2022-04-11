@@ -38,8 +38,8 @@ import {BsFillPersonLinesFill} from "react-icons/bs";
 import {SketchPicker} from "react-color";
 import {SocialButton} from "../Footers/Footer";
 import {openseaIcon} from '../../assets/icons/openseaIcon';
-import {putDBAccountDictionary, putDBAccountDictionaryAction} from '../../features/account/IdentityPageSlice';
-import {accountDictionaryInterface} from "../../features/accountArr/getAccountArrSlice";
+import {putDBAccountDictionary, putDBAccountDictionaryAction} from '../../features/accountDB/AccountDBSlice';
+import {accountDictionaryInterface} from "../../features/accountBC/AccountBCSlice";
 import {ChevronDownIcon} from "@chakra-ui/icons";
 import {paramsWalletAccAction} from "../../features/IdentityPageUseParamsSlice";
 
@@ -232,7 +232,7 @@ export const DrawerComponent:FC<Interface>=()=> {
                                                 bg={'pmpurple.2'}
                                                 color='pmpurple.15'
                                                 //value={getDBAccountDictionary{${ownerName}}}
-                                                // id='account Name'
+                                                // id='accountDB Name'
                                                 //placeholder={getDBAccountDictionary{${ownerName}}}
                                             />
                                         </HStack>

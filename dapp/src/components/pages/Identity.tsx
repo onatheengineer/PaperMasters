@@ -14,7 +14,7 @@ import Projects from "../identity/Projects";
 import ValidationsReports from "../identity/ValidationsReports";
 import ModalForIdentNoUseParams from '../identity/ModalForIdentNoUseParams';
 import {AccountLedger} from '../identity/AccountLedger'
-import {apiHarmonyOneAction} from "../../features/ledger/LedgerSlice";
+import {apiHarmonyOneAction} from "../../features/accountBC/ledger/LedgerSlice";
 
 
 export const Identity=()=> {

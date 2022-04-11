@@ -36,7 +36,7 @@ import News from "./pages/News";
 import Security from "./pages/Security";
 import {useAppSelector} from "../app/hooks";
 import Report from "./pages/Report";
-import {accountArr} from "../features/accountArr/getAccountArrSlice";
+import {accountArr} from "../features/accountBC/AccountBCSlice";
 
 
 interface InterfaceNavItem {

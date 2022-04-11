@@ -11,6 +11,3 @@ export interface BCStruct{
     bgRGB: string;
     originDate: string | number;
 }
-
-
-

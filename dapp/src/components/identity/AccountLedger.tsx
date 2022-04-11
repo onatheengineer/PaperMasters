@@ -41,7 +41,7 @@ export const AccountLedger:FC<Interface>=()=> {
                     {/*        color="gray.500"*/}
                     {/*        fontWeight="400"*/}
                     {/*    >*/}
-                    {/*    this could also show the actual name if the account assuming they've registered their account or contract address*/}
+                    {/*    this could also show the actual name if the accountDB assuming they've registered their accountDB or contract address*/}
                     {/*        From: {fromAcc}*/}
                     {/*    </Text>*/}
                     {/*    <Spacer/>*/}
@@ -63,7 +63,7 @@ export const AccountLedger:FC<Interface>=()=> {
                         {/*        color="gray.500"*/}
                         {/*        fontWeight="400"*/}
                         {/*    >*/}
-                        {/*    this could also show the actual name if the account assuming they've registered their account or contract address OR get the name of the contract from the contract*/}
+                        {/*    this could also show the actual name if the accountDB assuming they've registered their accountDB or contract address OR get the name of the contract from the contract*/}
                         {/*        To: {toAcc}*/}
                         {/*    </Text>*/}
                         {/*    <Spacer/>*/}

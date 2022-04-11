@@ -4,24 +4,15 @@ import {PayloadAction} from "@reduxjs/toolkit";
 import { call, put, takeEvery, takeLatest, select} from 'redux-saga/effects';
 import MintABI from "../../abiFiles/PaperMastersNFI.json";
 import {
-    paramsWalletAcc,
-    paramsWalletAccAction,
-    requestAccountDictionaryAction,
-    requestReceiptUsingParams,
-    tokenIDtoIdentityStructAction,
-    requestReceiptSagaAction,
-    requestStructUsingParamsFromBC,
+    paramsWalletAcc, paramsWalletAccAction, requestAccountDictionaryAction, requestReceiptUsingParams,
+     requestReceiptSagaAction,
     requestAccountDictionary,
-    addressHasTokenBoolAction, addressHasIdentityBC, addressToTokenIDAction, addressToTokenID,
-    getDBAccountDictionaryAction,
-    userSameAccountBoolAction,
-    getReceiptDBConnectUserAction,
-    getReceiptDBCurrentUser, putDBAccountDictionaryAction, accountError,
-} from "./IdentityPageSlice";
+     getReceiptDBConnectUserAction, getReceiptDBCurrentUser, putDBAccountDictionaryAction,
+    accountError,
+} from "./AccountDBSlice";
 import Web3 from "web3";
 import {BCStruct} from "../receiptBC/structBCSlice.types";
-import {accountArr} from "../accountArr/getAccountArrSlice";
-import {identityStruct, resetAddressHasIdentityLookup, tokenToIdentityErrMessage} from "../receiptBC/structBCSlice";
+import {accountArr} from "../accountBC/AccountBCSlice";
 const web3 = new Web3('https://api.s0.b.hmny.io');
 const baseURL = 'https://ociuozqx85.execute-api.us-east-1.amazonaws.com';
 const NFIContract = new web3.eth.Contract(MintABI.abi as any, MintABI.networks['1666700000'].address);
@@ -103,52 +94,6 @@ function* identPageSaga({payload}: PayloadAction<string>): SagaIterator {
     }
 }
 
-function* addressHasIdentityBoolSaga({payload}: PayloadAction<string>): SagaIterator {
-    console.log('addressHasIdentityBoolSaga', payload)
-    try {
-        if(payload.length === 0) {
-            console.log("payload.length", payload.length)
-            yield put(addressHasIdentityBC(false))
-            return;
-        }
-        const alreadyMintedBool = yield call(NFIContract.methods.addressHasTokenBool(payload).call, {from: payload})
-        yield put(addressHasIdentityBC(alreadyMintedBool));
-        if(alreadyMintedBool) {
-            yield put(addressToTokenIDAction(payload));
-        }
-        console.log('have I already minted?:', alreadyMintedBool);
-    } catch (addressHasTokenBoolFAILED: any) {
-        console.log('addressHasTokenBoolFAILED',addressHasTokenBoolFAILED.message)
-        yield put(addressHasIdentityBC(false))
-    }
-}
-
-function* addressToTokenIDSaga({payload}: PayloadAction<string>): SagaIterator {
-    try {
-        const tokenFromAddress = yield call(NFIContract.methods.addressToTokenID(payload).call, {from: payload});
-        //tokenID 0 is the constructor
-        if (tokenFromAddress >= 1) {
-            yield put(addressToTokenID(tokenFromAddress));
-            yield put(tokenIDtoIdentityStructAction(tokenFromAddress))
-        }
-        if (tokenFromAddress === 0) {
-            yield put(addressHasIdentityBC(false))
-        }
-    } catch (addressToTokenSagaFailed: any) {
-        yield put(addressHasIdentityBC(false))
-    }
-}
-
-function* tokenIDtoIdentityStructSaga({payload}: PayloadAction<number>): SagaIterator {
-    try{
-        console.log('this should be the tokenID of the useParams account:', payload)
-        const getTokenIDtoIdentityStruct = yield call(NFIContract.methods.tokenIDtoIdentityStruct(payload).call)
-        console.log('this is the output for the getTokenIDtoIdentityStruct:', getTokenIDtoIdentityStruct);
-        yield put(requestStructUsingParamsFromBC(getTokenIDtoIdentityStruct));
-    } catch(tokenIDtoIdentityStructSagaFailed: unknown){
-        console.log(tokenIDtoIdentityStructSagaFailed)
-    }
-}
 
 function* requestAccountDictionarySaga({payload}: PayloadAction<string>): SagaIterator {
     try{
@@ -211,11 +156,8 @@ export function* watchAccountSaga(): SagaIterator {
     yield takeEvery(getAllReceiptFromDBAction.type, getAllReceiptsFromDBSaga);
 
     yield takeLatest(paramsWalletAccAction.type, identPageSaga);
-    yield takeLatest(tokenIDtoIdentityStructAction.type, tokenIDtoIdentityStructSaga);
     yield takeLatest(requestReceiptSagaAction.type, requestReceiptSaga);
     yield takeLatest(requestAccountDictionaryAction.type, requestAccountDictionarySaga);
-    yield takeLatest(addressHasTokenBoolAction.type, addressHasIdentityBoolSaga);
-    yield takeLatest(addressToTokenIDAction.type, addressToTokenIDSaga);
 
     yield takeLatest(putDBAccountDictionaryAction.type, putDBAccountDictionarySaga);
     yield takeLatest(getReceiptDBConnectUserAction.type, getReceiptDBConnectedUserSaga);

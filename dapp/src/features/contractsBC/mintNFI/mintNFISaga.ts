@@ -4,13 +4,13 @@ import {
     mintNFIAction, mintSucceeded, gasForMintNFIAction, gasForMinting, mintStatusBC,
     mintingErr, gasAccBalanceAction, accBalance, accBalanceErr, tokenURIAction,
 } from "./MintNFISlice";
-import {addressHasIdentityBool} from "../accountArr/getAccountArrSlice";
-import MintABI from '../../abiFiles/PaperMastersNFI.json'
+import {addressHasIdentityBool} from "../../accountBC/AccountBCSlice";
+import MintABI from '../../../abiFiles/PaperMastersNFI.json'
 import {PayloadAction} from "@reduxjs/toolkit";
 import {SagaIterator} from "redux-saga";
 import {MintingNFIStruct} from "./mintNFISlice.types";
 import Web3 from "web3";
-import {chainIdProvider, accountArr, chainIdErr} from "../accountArr/getAccountArrSlice";
+import {chainIdProvider, accountArr, chainIdErr} from "../../accountBC/AccountBCSlice";
 
 const web3 = new Web3('https://api.s0.b.hmny.io');
 const baseURL = 'https://ociuozqx85.execute-api.us-east-1.amazonaws.com';
@@ -22,7 +22,7 @@ function* mintNFISaga({payload}: PayloadAction<MintingNFIStruct>): SagaIterator 
         const addressHasIdentityBoolBool = yield select(addressHasIdentityBool);
         if (addressHasIdentityBoolBool) {
             yield put(mintSucceeded('alreadyMinted'));
-            yield put(mintingErr('Sorry, only one NFI per account'));
+            yield put(mintingErr('Sorry, only one NFI per accountDB'));
             return;
         }
         const chainIdProviderProvider = yield select(chainIdProvider);

@@ -38,7 +38,7 @@ import {
     mintNFIAction,
     gasForMintNFIAction,
     gasAccBalanceAction
-} from "../../features/mintNFI/MintNFISlice";
+} from "../../features/contractsBC/mintNFI/MintNFISlice";
 import AvatarNFI from "../AvatarNFI";
 
 
@@ -207,7 +207,7 @@ export const Register=()=> {
     const [modalDisplayTitle, modalDisplayText] = useMemo(() => {
         if (accountsArr.length === 0) {
             setIsModalOpen(true);
-            return (['Connect Wallet Account for Access', "Please go to MetaMask and connect your wallet account."])
+            return (['Connect Wallet Account for Access', "Please go to MetaMask and connect your wallet accountDB."])
         }
         
         if (addressHasIdentityBool && mintSucceeded === 'idle') {

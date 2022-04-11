@@ -1,11 +1,11 @@
 import { configureStore} from '@reduxjs/toolkit';
-import registerSlice from "../features/accountArr/getAccountArrSlice";
-import mintSlice from '../features/mintNFI/MintNFISlice';
+import registerSlice from "../features/accountBC/AccountBCSlice";
+import mintSlice from '../features/contractsBC/mintNFI/MintNFISlice';
 import createSaga from "redux-saga";
 import rootSaga from "../features/rootSagas";
-import accountSlice from "../features/account/IdentityPageSlice";
-import mentionsSlice from "../features/mentions/MentionsSlice";
-import contractFunctionsSlice from '../features/mintNFI/MintNFIFunctionsSlice'
+import accountSlice from "../features/accountDB/AccountDBSlice";
+import mentionsSlice from "../features/accountDB/mentions/MentionsSlice";
+import contractFunctionsSlice from '../features/contractsBC/mintNFI/MintNFIFunctionsSlice'
 import toastSlice from "../features/toast/redux/toastSlice";
 
 const sagaMiddleware = createSaga();

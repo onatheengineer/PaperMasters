@@ -1,6 +1,5 @@
 import { createSlice, PayloadAction, createAction } from "@reduxjs/toolkit";
 
-
 const initialStateIdenPage: IdentityPageState = {
     getAccountArrDB: {
         walletAccount: "",
@@ -60,7 +59,6 @@ const initialState: IdentityPageUseParamsSliceInterface = {
     },
     requestReceiptUsingParams: { walletAccount: "", gasUsed: "", contractAccount: "", transactionHash: "", tokenID: "", timeStamp: "", contractFee: "",   identityStruct: []},
     requestAccountDictionary: {walletAccount: "", walletAccountLink: '', linkToFinishedAvatar: "", ownerName:'', ownerEmail:'', ownerDescription:'', aliasProfileLinks:[], emailReportNotification: false, emailValidationNotification:false},
-    addressHasIdentityBC: false,
     socialMediaDictionary: {
         Discord: "",
         Twitter: "",
@@ -85,8 +83,8 @@ const initialState: AccountSlice = {
     getReceiptDBCurrentUser: { walletAccount: "", gasUsed: "", contractAccount: "", transactionHash: "", tokenID: "", timeStamp: "", contractFee: "", identityStruct: []},
 };
 
-const IdentityPageSlice = createSlice ({
-    name: 'identityPage',
+const AccountDBSlice = createSlice ({
+    name: 'accountDB',
     initialState,
     reducers: {
         paramsWalletAcc(state, action: PayloadAction<string> ) {
@@ -104,20 +102,11 @@ const IdentityPageSlice = createSlice ({
         getAllReceiptDB(state, action: PayloadAction<tokenIDtoIdentityStructInterface[]>){
             state.getAllReceiptDB = action.payload;
         },
-        requestStructUsingParamsFromBC(state, action: PayloadAction<tokenIDtoIdentityStructInterface>) {
-            state.requestStructUsingParamsFromBC = action.payload
-        },
         requestReceiptUsingParams(state, action: PayloadAction<BCReceiptInterface>) {
             state.requestReceiptUsingParams = action.payload
         },
         requestAccountDictionary(state, action: PayloadAction<accountDictionaryInterface>) {
             state.requestAccountDictionary = action.payload
-        },
-        addressHasIdentityBC(state, action: PayloadAction<boolean>) {
-            state.addressHasIdentityBC = action.payload
-        },
-        addressToTokenID(state, action: PayloadAction<number>) {
-            state.addressToTokenID = action.payload
         },
         socialMediaDictionary(state, action: PayloadAction<SocialMediaDictionaryInterface>) {
             state.socialMediaDictionary = action.payload
@@ -143,16 +132,13 @@ const IdentityPageSlice = createSlice ({
 export const {getAccountArrDB, getAllAccountArrDB, getReceiptDB, getAllReceiptDB, paramsWalletAcc,
     requestStructUsingParamsFromBC, requestReceiptUsingParams, requestAccountDictionary, addressHasIdentityBC,
     addressToTokenID, socialMediaDictionary, putDBAccountDictionary, getDBAccountDictionary,
-    getReceiptDBCurrentUser, userSameAccountBool, accountError } = IdentityPageSlice.actions;
+    getReceiptDBCurrentUser, userSameAccountBool, accountError } = AccountDBSlice.actions;
 
 export const getOneAccountFromDBAction = createAction("GET_ONE_WALLET_IN_DB_SAGA");
 export const getAllAccountFromDBAction = createAction("GET_ALL_ACCOUNT_IN_DB_SAGA");
 export const getOneReceiptFromDBAction = createAction("GET_ONE_RECEIPT_IN_DB_SAGA");
 export const getAllReceiptFromDBAction = createAction("GET_ALL_RECEIPT_IN_DB_SAGA");
 export const paramsWalletAccAction= createAction<string>("IDENT_USEPARAMS_SAGA");
-export const addressHasTokenBoolAction= createAction<string>("REQUEST_STRUCT_BC_BOOL_SAGA");
-export const addressToTokenIDAction= createAction<string>("ADDRESS_TO_TOKEN_ID_SAGA");
-export const tokenIDtoIdentityStructAction= createAction<number>("REQUEST_STRUCT_FROM_BC_SAGA");
 export const requestAccountDictionaryAction= createAction<string>("REQUEST_ACCOUNT_DICTIONARY_SAGA");
 export const requestReceiptSagaAction= createAction<string>("REQUEST_RECEIPT_USING_PARAMS_SAGA");
 export const putDBAccountDictionaryAction= createAction<accountDictionaryInterface>("CREATE_ACCOUNT_DICTIONARY_SAGA");
@@ -160,6 +146,6 @@ export const getDBAccountDictionaryAction= createAction<string>("GET_ACCOUNT_DIC
 export const userSameAccountBoolAction= createAction<string>("USER_SAME_ACCOUNT_BOOL_SAGA");
 export const getReceiptDBConnectUserAction = createAction("GET_RECEIPT_DB_SAGA");
 
-export default IdentityPageSlice.reducer;
+export default AccountDBSlice.reducer;
 
 

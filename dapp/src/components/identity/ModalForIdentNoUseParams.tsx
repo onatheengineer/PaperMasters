@@ -15,7 +15,7 @@ import {
     Text, MenuButton, MenuItem, HStack,
 } from "@chakra-ui/react";
 import {Link as ReachLink} from "react-router-dom";
-import {requestUserWalletAction} from "../../features/accountArr/getAccountArrSlice";
+import {requestUserWalletAction} from "../../features/accountBC/AccountBCSlice";
 import {SiSololearn} from "react-icons/si";
 import Sparkle from "react-sparkle";
 import {useAppDispatch} from "../../app/hooks";

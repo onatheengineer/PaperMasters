@@ -4,7 +4,7 @@ import {
     singleMentionAction, allMentionsAction, errorMessage, allMentions, mentionsStateDictionaryInterface
 } from "./MentionsSlice";
 import {PayloadAction} from "@reduxjs/toolkit";
-import {ToastOptions} from "../toast/redux/toastSlice.types";
+import {ToastOptions} from "../../toast/redux/toastSlice.types";
 import {SagaIterator} from "redux-saga";
 
 const baseURL = 'https://ociuozqx85.execute-api.us-east-1.amazonaws.com';

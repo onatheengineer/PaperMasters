@@ -24,7 +24,7 @@ import {
     singleMention,
     allMentionsAction,
     singleMentionAction
-} from '../../../features/mentions/MentionsSlice'
+} from '../../../features/accountDB/mentions/MentionsSlice'
 import DisplayMentions from "./DisplayMentions";
 
 function initialState():mentionsStateDictionaryInterface {

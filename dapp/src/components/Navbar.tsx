@@ -436,19 +436,19 @@ const NAV_ITEMS: Array<NavItem> = [
             },
             {
                 label: 'Register',
-                subLabel: 'Register your wallet account',
+                subLabel: 'Register your wallet accountDB',
                 navIcon: <BiBookmarkHeart fontSize={'18px'}/>,
                 navLink: '/register',
             },
             {
                 label: 'Validate (coming soon)',
-                subLabel: 'Authenticate a wallet account',
+                subLabel: 'Authenticate a wallet accountDB',
                 navIcon: <IoMdCheckmarkCircleOutline fontSize={'18px'}/>,
                 navLink: '/validate',
             },
             {
                 label: 'Report (coming soon)',
-                subLabel: 'Report a wallet account for wrongful activity',
+                subLabel: 'Report a wallet accountDB for wrongful activity',
                 navIcon: <MdOutlineReport fontSize={'18px'}/>,
                 navLink: 'report',
             },

@@ -7,7 +7,7 @@ import {
 } from "./LedgerSlice";
 import Web3 from "web3";
 import axios from "axios";
-import {useAppSelector} from "../../app/hooks";
+import {useAppSelector} from "../../../app/hooks";
 
 //const web3 = new Web3(new Web3.providers.HttpProvider(`https://api.s0.b.hmny.io`));
 //console.log("web33.eth.accounts:", web3.eth.accounts);

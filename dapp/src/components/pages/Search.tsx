@@ -316,7 +316,7 @@ export const Search: FC=()=> {
                                          placeHolder={"Search Wallet Account"} idType={"WalletAccount"}/>
 
                     <IdentityEntryModal title={'Create a profile for a Non-Registered'} text={'Enter Wallet Account'}
-                                        placeHolder={'wallet account'}
+                                        placeHolder={'wallet accountDB'}
                                         buttonText={'Create'} isOpen={isIdentityModalOpen} onClose={() => {
                         setIdentityModalOpen(false)
                     }}/>
