@@ -3,15 +3,12 @@ import './App.css';
 import {useAppDispatch, useAppSelector} from './app/hooks';
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footers/Footer";
-import {Routes, Route, BrowserRouter} from "react-router-dom";
 import "focus-visible/dist/focus-visible";
 import {Box, Flex, VStack} from '@chakra-ui/react';
 import Sidebar, {NavItem} from './components/Sidebar'
 import {accountArr, getAccountArrAction} from "./features/accountBC/AccountBCSlice";
-import {getReceiptDBConnectUserAction} from "./features/accountDB/AccountDBSlice";
 import detectEthereumProvider from '@metamask/detect-provider';
 import { useGlobalToast } from './features/toast/hooks/useGlobalToast';
-import {addressHasIdentityBoolAction} from "./features/accountBC/AccountBCSlice";
 
 function App() {
     useGlobalToast();
@@ -35,14 +32,6 @@ function App() {
             })
         });
     }, [])
-
-    useEffect(() => {
-        console.log("is there a wallet accountDB connected? Now check for NFI")
-        if (accountArr.length !== 0) {
-            dispatch(addressHasIdentityBoolAction());
-            dispatch(getReceiptDBConnectUserAction());
-        }
-    }, [accountArr])
 
     return (
         <Box

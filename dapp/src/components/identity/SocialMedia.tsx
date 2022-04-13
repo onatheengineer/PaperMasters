@@ -1,6 +1,5 @@
 import * as React from 'react';
 import type {FC} from 'react';
-import {Link as ReachLink, useParams} from "react-router-dom";
 import {
     Avatar, AvatarGroup, Box, Button, Flex, Grid, GridItem, Icon, Image, Link, MenuItem,
     Stack, Switch, Text, useColorModeValue, HStack,
@@ -19,6 +18,7 @@ import {
 } from "react-icons/fa";
 import {openseaIcon} from "../../assets/icons/openseaIcon";
 import {MdOutlinePeopleOutline} from "react-icons/md";
+import {SocialMediaInterface} from "../../features/accountDB/AccountDBSlice.types";
 
 interface iconLinkInterface{
     children: any,
@@ -49,9 +49,7 @@ export const IconLinkComponent: FC<iconLinkInterface> = ({children, hrefLink}) =
 }
 
 export const SocialMedia=()=> {
-    const socialMediaDictionaryBool = useAppSelector( (state ) => state.account.socialMediaDictionaryBool);
-
-    return (
+     return (
         <Box
             //border={'1px solid'}
             //borderColor={'pmpurple.6'}
@@ -67,7 +65,7 @@ export const SocialMedia=()=> {
             >
 
                 <Stack direction='row' spacing={2}>
-                    {socialMediaDictionaryBool.Discord === "" ?
+                    {SocialMediaInterface.Discord === "" ?
                         <IconLinkComponent
                             hrefLink={'https://papermasters.io'}>
                             <Icon as={FaDiscord}/>
@@ -90,7 +88,6 @@ export const SocialMedia=()=> {
                         hrefLink={'https://papermasters.io'}>
                         <Icon as={FaInstagram}/>
                     </IconLinkComponent>
-
                     <IconLinkComponent
                         hrefLink={'https://papermasters.io'}>
                         <Icon as={FaTwitch}/>
@@ -120,7 +117,6 @@ export const SocialMedia=()=> {
                         hrefLink={'https://papermasters.io'}>
                         <Icon as={MdOutlinePeopleOutline}/>
                     </IconLinkComponent>
-
                 </Stack>
             </HStack>
         </Box>

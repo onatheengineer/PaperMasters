@@ -53,6 +53,11 @@ contract PaperMastersNFI is ERC721, Ownable {
         return _tokenId >= 1;
     }
 
+    function addressToIdentityStruct(address walletAddress) public view returns(identity memory){
+        uint256 tokenId = addressToTokenID(walletAddress);
+        return _dictionaryNFIs[tokenId];
+    }
+
     function allIdentityStructs() public view returns(identity[] memory){
         return _dictionaryNFIs;
     }

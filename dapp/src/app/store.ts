@@ -1,23 +1,21 @@
 import { configureStore} from '@reduxjs/toolkit';
-import registerSlice from "../features/accountBC/AccountBCSlice";
-import mintSlice from '../features/contractsBC/mintNFI/MintNFISlice';
 import createSaga from "redux-saga";
 import rootSaga from "../features/rootSagas";
-import accountSlice from "../features/accountDB/AccountDBSlice";
+import accountDBSlice from "../features/accountDB/AccountDBSlice";
+import accountBCSlice from "../features/accountBC/AccountBCSlice";
 import mentionsSlice from "../features/accountDB/mentions/MentionsSlice";
 import contractFunctionsSlice from '../features/contractsBC/mintNFI/MintNFIFunctionsSlice'
 import toastSlice from "../features/toast/redux/toastSlice";
+import nfiSlice from '../features/contractsBC/mintNFI/MintNFISlice';
 
 const sagaMiddleware = createSaga();
 
 export const store = configureStore({
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(sagaMiddleware),
   reducer: {
-    register: registerSlice,
-    mint: mintSlice,
-    structBC: structBCSlice,
-    account: accountSlice,
-    identUseParams: identUseParamsSlice,
+    accountBC: accountBCSlice,
+    accountDB: accountDBSlice,
+    nfi: nfiSlice,
     mentions: mentionsSlice,
     functions: contractFunctionsSlice,
     toast: toastSlice,

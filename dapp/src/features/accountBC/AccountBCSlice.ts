@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction, createAction } from "@reduxjs/toolkit";
 import {BCStruct} from "./AccountBCSlice.types"
+import {ParamsURLInterface} from "../accountDB/AccountDBSlice.types";
 
 export interface AccountArrState {
     chainIdProvider: string;
@@ -9,7 +10,7 @@ export interface AccountArrState {
     accountArrStatus: 'idle' | 'loading' | 'success' | 'failed';
     putAccountArrInDBStatus:'idle' | 'succeeded new entry in DB' | 'failed entry already in DB';
     addressHasTokenBool: boolean;
-    addressHasIdentityBC: boolean,
+    addressToTokenID: number;
     getStructBC: BCStruct | null,
     getAllStructBC: BCStruct[] | null,
 }
@@ -22,9 +23,10 @@ const initialState: AccountArrState = {
     accountArrStatus: 'idle',
     putAccountArrInDBStatus: "idle",
     addressHasTokenBool: false,
+    addressToTokenID: 0,
     getStructBC: null,
     getAllStructBC: null,
-    addressHasIdentityBC: false,
+
 }
 
 const AccountBCSlice = createSlice ({
@@ -46,42 +48,28 @@ const AccountBCSlice = createSlice ({
         accountsArrStatus(state, action: PayloadAction<'idle' | 'loading' | 'success' | 'failed'>){
             state.accountArrStatus = action.payload;
         },
-        putAccountArrInDBStatus(state, action: PayloadAction<'idle' | 'succeeded new entry in DB' |
-            'failed entry already in DB'>){
-            state.putAccountArrInDBStatus = action.payload;
-        },
         addressHasIdentityBool(state, action: PayloadAction<boolean>) {
             state.addressHasTokenBool = action.payload
         },
-        getStructBC(state, action: PayloadAction<BCStruct>) {
+        addressToTokenID(state, action: PayloadAction<number>) {
+            state.addressToTokenID = action.payload
+        },
+        getStructBC(state, action: PayloadAction<BCStruct | null>) {
             state.getStructBC = action.payload
         },
         getAllStructBC(state, action: PayloadAction<BCStruct[]>) {
             state.getAllStructBC = action.payload
         },
-        requestStructUsingParamsFromBC(state, action: PayloadAction<tokenIDtoIdentityStructInterface>) {
-            state.requestStructUsingParamsFromBC = action.payload
-        },
-        addressHasIdentityBC(state, action: PayloadAction<boolean>) {
-            state.addressHasIdentityBC = action.payload
-        },
-        addressToTokenID(state, action: PayloadAction<number>) {
-            state.addressToTokenID = action.payload
-        },
     }
 });
 
 export const { chainIdProvider, chainIdSupportedBool, chainIdStatus, accountArr, accountsArrStatus,
-    addressHasIdentityBool, putAccountArrInDBStatus, getAllStructBC, getStructBC} = AccountBCSlice.actions;
+    addressHasIdentityBool, getAllStructBC, getStructBC, addressToTokenID} = AccountBCSlice.actions;
 
-export const getAccountArrAction = createAction("GET_ACCOUNT_ARR_ACTION_SAGA");
-export const putAccountArrInDBAction = createAction<string>("PUT_ACCOUNT_IN_DB_SAGA");
-export const addressHasIdentityBoolAction = createAction<string>("ADDRESS_HAS_IDENTITY_BOOL_SAGA");
+export const accountArrAction = createAction("GET_ACCOUNT_ARR_ACTION_SAGA");
+export const addressToTokenAction = createAction<string>("ADDRESS_TO_TOKEN_SAGA");
 //TODO: update which action I am passing through
-export const singleStructBCAction = createAction<number>("STRUCT_BC_SAGA");
+export const singleStructBCAction = createAction<ParamsURLInterface>("STRUCT_BC_SAGA");
 export const allStructBCAction = createAction("ALL_STRUCT_BC_SAGA");
-export const addressHasTokenBoolAction= createAction<string>("REQUEST_STRUCT_BC_BOOL_SAGA");
-export const addressToTokenIDAction= createAction<string>("ADDRESS_TO_TOKEN_ID_SAGA");
-export const tokenIDtoIdentityStructAction= createAction<number>("REQUEST_STRUCT_FROM_BC_SAGA");
 
 export default AccountBCSlice.reducer;

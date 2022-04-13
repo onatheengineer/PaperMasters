@@ -1,8 +1,15 @@
 import { createSlice, PayloadAction, createAction } from "@reduxjs/toolkit";
+import {
+    AccountDBInterface,
+    AccountPageInterface,
+    NFIReceiptInterface,
+    ParamsURLInterface
+} from "./AccountDBSlice.types";
 
-const initialStateIdenPage: IdentityPageState = {
-    getAccountArrDB: {
-        walletAccount: "",
+const initialStateAccountDB: AccountDBInterface = {
+    wallet_chain_Pkey: "",
+    chainId: "",
+    walletAccount: "",
         linkToFinishedAvatar: "",
         ownerName: '',
         ownerEmail: '',
@@ -23,128 +30,75 @@ const initialStateIdenPage: IdentityPageState = {
         },
         emailReportNotification: false,
         emailValidationNotification: false
-    },
-}
-
-const initialStateMintReceipt: MintReceiptState = {
-    getAllAccountArrDB: [],
-    getReceiptDB: {
-        walletAccount: "",
-        name: "",
-        email: "",
-        profession: "",
-        organization: "",
-        slogan: "",
-        website: "",
-        uniqueYou: "",
-        bgRGB: "",
-        originDate: 0,
-    },
-    getAllReceiptDB: [],
-};
-
-const initialState: IdentityPageUseParamsSliceInterface = {
-    addressToTokenID:0,
-    requestStructUsingParamsFromBC: {
-        walletAccount: "",
-        name: "",
-        email: "",
-        profession: "",
-        organization: "",
-        slogan: "",
-        website: "",
-        uniqueYou: "",
-        bgRGB: "",
-        originDate: "",
-    },
-    requestReceiptUsingParams: { walletAccount: "", gasUsed: "", contractAccount: "", transactionHash: "", tokenID: "", timeStamp: "", contractFee: "",   identityStruct: []},
-    requestAccountDictionary: {walletAccount: "", walletAccountLink: '', linkToFinishedAvatar: "", ownerName:'', ownerEmail:'', ownerDescription:'', aliasProfileLinks:[], emailReportNotification: false, emailValidationNotification:false},
-    socialMediaDictionary: {
-        Discord: "",
-        Twitter: "",
-        Linkedin: "",
-        YouTube:"",
-        Instagram:"",
-        Twitch: "",
-        Facebook: "",
-        Reddit:"",
-        GitHub:"",
-        OpenSea:"",
-        socialButtonGeneric1: "",
-        socialButtonGeneric2: "",
     }
+
+const initialStateNFIReceipt: NFIReceiptInterface = {
+    walletAccount: "",
+    chainId: "",
+    receipt: { },
+    transactionHash: "",
 }
 
-const initialState: AccountSlice = {
-    putDBAccountDictionary: {},
-    getDBAccountDictionary: {walletAccount: "", walletAccountLink: '', linkToFinishedAvatar: "",  ownerName: "", ownerEmail: "", ownerDescription: "", aliasProfileLinks: [], emailValidationNotification: false, emailReportNotification: false },
+const initialState: AccountPageInterface = {
+    accountArrDB: "",
+    accountArrError: "",
+    paramsWallet: "",
+    paramsChainId: "",
+    singleAccountDictionaryDB: initialStateAccountDB,
+    allAccountDictionaryDB: [],
+    singleNFIReceiptDB: initialStateNFIReceipt,
+    allNFIReceiptDB: initialStateNFIReceipt[],
+    accountDBStatus: "idle",
     userSameAccountBool: false,
-    accountError: "",
-    getReceiptDBCurrentUser: { walletAccount: "", gasUsed: "", contractAccount: "", transactionHash: "", tokenID: "", timeStamp: "", contractFee: "", identityStruct: []},
 };
 
 const AccountDBSlice = createSlice ({
     name: 'accountDB',
     initialState,
     reducers: {
-        paramsWalletAcc(state, action: PayloadAction<string> ) {
-            state.paramsWalletAcc = action.payload
+        accountArrDB(state, action: PayloadAction<string>) {
+            state.accountArrDB = action.payload
         },
-        getAccountArrDB(state, action: PayloadAction<identityPageDictionaryInterface>){
-            state.getAccountArrDB = action.payload;
+        accountArrError(state, action) {
+            state.accountArrError = action.payload
         },
-        getAllAccountArrDB(state, action: PayloadAction<identityPageDictionaryInterface[]>){
-            state.getAllAccountArrDB = action.payload;
+        paramsWallet(state, action: PayloadAction<string>) {
+            state.paramsWallet = action.payload
         },
-        getReceiptDB(state, action: PayloadAction<tokenIDtoIdentityStructInterface>){
-            state.getReceiptDB = action.payload;
+        paramsChainId(state, action: PayloadAction<string | undefined>) {
+            state.paramsChainId = action.payload
         },
-        getAllReceiptDB(state, action: PayloadAction<tokenIDtoIdentityStructInterface[]>){
-            state.getAllReceiptDB = action.payload;
+        accountDBStatus(state, action: PayloadAction<'idle' | 'succeeded new entry in DB' |
+            'failed entry already in DB'>){
+            state.accountDBStatus = action.payload;
         },
-        requestReceiptUsingParams(state, action: PayloadAction<BCReceiptInterface>) {
-            state.requestReceiptUsingParams = action.payload
+        singleAccountDictionaryDB(state, action: PayloadAction<AccountDBInterface>){
+            state.singleAccountDictionaryDB = action.payload;
         },
-        requestAccountDictionary(state, action: PayloadAction<accountDictionaryInterface>) {
-            state.requestAccountDictionary = action.payload
+        allAccountDictionaryDB(state, action: PayloadAction<AccountDBInterface[]>){
+            state.allAccountDictionaryDB = action.payload;
         },
-        socialMediaDictionary(state, action: PayloadAction<SocialMediaDictionaryInterface>) {
-            state.socialMediaDictionary = action.payload
+        singleNFIReceiptDB(state, action: PayloadAction<NFIReceiptInterface>){
+            state.singleNFIReceiptDB = action.payload;
         },
-        putDBAccountDictionary(state, action) {
-            state.putDBAccountDictionary = action.payload
+        allNFIReceiptDB(state, action: PayloadAction<NFIReceiptInterface[]>){
+            state.allNFIReceiptDB = action.payload;
         },
-        getDBAccountDictionary(state, action) {
-            state.getDBAccountDictionary = action.payload
-        },
-        userSameAccountBool(state, action) {
+        userSameAccountBool(state, action: PayloadAction<boolean>) {
             state.userSameAccountBool = action.payload
-        },
-        accountError(state, action) {
-            state.accountError = action.payload
-        },
-        getReceiptDBCurrentUser(state, action) {
-            state.getReceiptDBCurrentUser = action.payload
-        },
+        }
     }
 });
 
-export const {getAccountArrDB, getAllAccountArrDB, getReceiptDB, getAllReceiptDB, paramsWalletAcc,
-    requestStructUsingParamsFromBC, requestReceiptUsingParams, requestAccountDictionary, addressHasIdentityBC,
-    addressToTokenID, socialMediaDictionary, putDBAccountDictionary, getDBAccountDictionary,
-    getReceiptDBCurrentUser, userSameAccountBool, accountError } = AccountDBSlice.actions;
+export const { accountArrDB, paramsWallet, accountDBStatus, singleAccountDictionaryDB, allAccountDictionaryDB,
+    singleNFIReceiptDB, allNFIReceiptDB, userSameAccountBool, accountArrError, paramsChainId } = AccountDBSlice.actions;
 
-export const getOneAccountFromDBAction = createAction("GET_ONE_WALLET_IN_DB_SAGA");
-export const getAllAccountFromDBAction = createAction("GET_ALL_ACCOUNT_IN_DB_SAGA");
-export const getOneReceiptFromDBAction = createAction("GET_ONE_RECEIPT_IN_DB_SAGA");
-export const getAllReceiptFromDBAction = createAction("GET_ALL_RECEIPT_IN_DB_SAGA");
-export const paramsWalletAccAction= createAction<string>("IDENT_USEPARAMS_SAGA");
-export const requestAccountDictionaryAction= createAction<string>("REQUEST_ACCOUNT_DICTIONARY_SAGA");
-export const requestReceiptSagaAction= createAction<string>("REQUEST_RECEIPT_USING_PARAMS_SAGA");
-export const putDBAccountDictionaryAction= createAction<accountDictionaryInterface>("CREATE_ACCOUNT_DICTIONARY_SAGA");
-export const getDBAccountDictionaryAction= createAction<string>("GET_ACCOUNT_DICTIONARY_SAGA");
-export const userSameAccountBoolAction= createAction<string>("USER_SAME_ACCOUNT_BOOL_SAGA");
-export const getReceiptDBConnectUserAction = createAction("GET_RECEIPT_DB_SAGA");
+export const accountArrDBAction= createAction<string>("USEPARAMS_SAGA");
+export const singleAccountDictionaryDBAction = createAction<ParamsURLInterface>("ACCOUNT_DB_SAGA");
+export const postSingleAccountDictionaryDBAction = createAction<AccountDBInterface>("POST_ACCOUNT_DB_SAGA");
+export const allAccountDictionaryDBAction = createAction<ParamsURLInterface[]>("ALL_ACCOUNT_DB_SAGA");
+export const singleNFIReceiptDBAction = createAction<NFIReceiptInterface>("SINGLE_RECEIPT_DB_SAGA");
+export const allNFIReceiptDBAction = createAction<NFIReceiptInterface[]>("ALL_RECEIPT_DB_SAGA");
 
 export default AccountDBSlice.reducer;
 

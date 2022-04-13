@@ -1,4 +1,4 @@
-interface SocialMediaInterface{
+export interface SocialMediaInterface{
     Discord: string,
     Twitter: string,
     Linkedin: string,
@@ -13,7 +13,10 @@ interface SocialMediaInterface{
     socialButtonGeneric2: string,
 }
 
-export interface identityPageInterface {
+export interface AccountDBInterface {
+    //this is what is coming OUT of my interface
+    wallet_chain_Pkey?: string,
+    chainId: string,
     walletAccount: string,
     linkToFinishedAvatar?: string,
     ownerName: string,
@@ -24,11 +27,30 @@ export interface identityPageInterface {
     emailReportNotification: boolean,
 }
 
-interface AccountSlice {
-    putDBAccountDictionary: identityPageInterface;
-    getDBAccountDictionary: identityPageInterface;
+export interface NFIReceiptInterface {
+    wallet_chain_Pkey?: string;
+    walletAccount: string;
+    chainId: string;
+    transactionHash: string;
+    receipt: object;
+}
+
+export interface AccountPageInterface {
+    accountArrDB: string;
+    accountArrError: string;
+    paramsWallet: string;
+    paramsChainId: string | undefined;
+    singleAccountDictionaryDB: AccountDBInterface;
+    allAccountDictionaryDB: AccountDBInterface[];
+    singleNFIReceiptDB: NFIReceiptInterface;
+    allNFIReceiptDB: NFIReceiptInterface[];
+    accountDBStatus: 'idle' | 'succeeded new entry in DB' | 'failed entry already in DB';
     userSameAccountBool: boolean;
-    accountError: string,
+}
+
+export interface ParamsURLInterface {
+    chainIdURL: string;
+    paramsWalletURL: string;
 }
 
 

@@ -11,7 +11,7 @@ import {useAppSelector} from "../../../app/hooks";
 
 //const web3 = new Web3(new Web3.providers.HttpProvider(`https://api.s0.b.hmny.io`));
 //console.log("web33.eth.accounts:", web3.eth.accounts);
-const walletAcc = useAppSelector((state)=> state.identUseParams.paramsWalletAcc)
+const walletAcc = useAppSelector((state)=> state.accountDB.paramsWallet)
 
 function* checkTransEthereumAddressActionSaga(actionObject: any) {
 

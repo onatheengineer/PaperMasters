@@ -292,7 +292,7 @@ export const Sidebar: FC<InterfaceSidebar>= ({icon, profileName} ) => {
 
             <Routes>
                 <Route path="/" element={<Home/>}/>
-                <Route path={'/identity/:walletAcc'} element={<Identity/>}/>
+                <Route path={'/identity/:chainId/:walletAcc'} element={<Identity/>}/>
                 {/*{walletAcc === undefined || walletAcc === 'undefined' || walletAcc.length === 0 ?*/}
                 {/*    <Route path={'/identity/:walletAcc'} element={<Navigate replace to= "/identity/0x7C097941487f53bBdd39fddea7Bed9AEf3312ED5" />}/>*/}
 

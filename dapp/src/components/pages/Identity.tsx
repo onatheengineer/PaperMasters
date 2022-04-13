@@ -15,41 +15,40 @@ import ValidationsReports from "../identity/ValidationsReports";
 import ModalForIdentNoUseParams from '../identity/ModalForIdentNoUseParams';
 import {AccountLedger} from '../identity/AccountLedger'
 import {apiHarmonyOneAction} from "../../features/accountBC/ledger/LedgerSlice";
+import {ParamsURLInterface} from "../../features/accountDB/AccountDBSlice.types";
+import {paramsChainId, paramsWallet, singleAccountDictionaryDBAction} from "../../features/accountDB/AccountDBSlice";
 
 
 export const Identity=()=> {
 //TODO as soon as they connect - redirect them to their identity page - this is important for the hasIdentityBool slice to work
-    const {walletAcc} = useParams();
-    console.log(`this is walletAccparams: ${walletAcc}`)
+    const {chainId, walletAcc} = useParams();
     const dispatch = useAppDispatch();
-    const paramsWalletAcc = useAppSelector((state) => state.identUseParams.paramsWalletAcc);
-    const paramsAddressHasIdentityBoolBC = useAppSelector((state) => state.identUseParams.addressHasIdentityBC);
-    const requestReceiptUsingParams = useAppSelector((state) => state.identUseParams.requestReceiptUsingParams);
-    const requestStructUsingParamsFromBC = useAppSelector((state) => state.identUseParams.requestStructUsingParamsFromBC);
-    const paramsRequestAccountDictionary = useAppSelector((state) => state.identUseParams.requestAccountDictionary);
-    console.log('paramsRequestAccountDictionary:', paramsRequestAccountDictionary)
-
     useEffect(() => {
         if (walletAcc !== undefined && walletAcc !== "" && walletAcc !== 'undefined') {
-            dispatch(paramsWalletAccAction(walletAcc));
+            dispatch(paramsChainId(chainId));
+            dispatch(paramsWallet(walletAcc));
             dispatch(apiHarmonyOneAction(walletAcc));
-        }
-    }, [walletAcc]);
+            dispatch(singleAccountDictionaryDBAction({ chainIdURL: chainId, paramsWalletURL: walletAcc } as ParamsURLInterface))}
+    }, [walletAcc, chainId]);
+
+    const addressHasTokenBoolBool = useAppSelector((state) => state.accountBC.addressHasTokenBool);
+    const singleStructBC = useAppSelector((state) => state.accountBC.getStructBC);
+    const singleAccountDictionaryDBDB = useAppSelector((state) => state.accountDB.singleAccountDictionaryDB);
 
     const logicDescriptionMemo = useMemo(() => {
-        console.log(paramsRequestAccountDictionary, paramsWalletAcc, paramsAddressHasIdentityBoolBC, requestReceiptUsingParams)
-        if (paramsAddressHasIdentityBoolBC && requestReceiptUsingParams !== undefined && paramsRequestAccountDictionary.ownerDescription !== undefined) {
-            if (paramsRequestAccountDictionary.ownerDescription.length > 0) {
+        console.log(singleAccountDictionaryDBDB, walletAcc, addressHasTokenBoolBool, singleStructBC)
+        if (addressHasTokenBoolBool && singleStructBC !== undefined && singleAccountDictionaryDBDB.ownerDescription !== undefined) {
+            if (singleAccountDictionaryDBDB.ownerDescription.length > 0) {
                 return (
-                    paramsRequestAccountDictionary['ownerDescription']
+                    singleAccountDictionaryDBDB['ownerDescription']
                 )
             }
         }
-        if (paramsAddressHasIdentityBoolBC && requestReceiptUsingParams !== undefined) {
-            if (requestReceiptUsingParams.hasOwnProperty('identityStruct') && requestReceiptUsingParams['identityStruct'].length > 0 && requestReceiptUsingParams['identityStruct'][7].length > 0) {
-                if (requestReceiptUsingParams.identityStruct[7].split("|||")[0].length > 0) {
+        if (addressHasTokenBoolBool && singleStructBC !== undefined) {
+            if (Object.prototype.hasOwnProperty.call(singleStructBC,'identityStruct') && singleStructBC['identityStruct'].length > 0 && requestReceiptUsingParams['identityStruct'][7].length > 0) {
+                if (singleStructBC.identityStruct[7].split("|||")[0].length > 0) {
                     return (
-                        requestReceiptUsingParams.identityStruct[7].split("|||")[0]
+                        singleStructBC.identityStruct[7].split("|||")[0]
                     )
                 }
             }
@@ -57,11 +56,8 @@ export const Identity=()=> {
         return (
             " Mathematics may not teach us how to add love or subtract hate, but it gives us every reason to hope that every problem has a solution."
         );
-    }, [paramsRequestAccountDictionary, paramsWalletAcc, paramsAddressHasIdentityBoolBC, requestReceiptUsingParams])
+    }, [singleAccountDictionaryDBDB, walletAcc, addressHasTokenBoolBool, singleStructBC])
 
-    console.log('paramsWalletAcc.length:', paramsWalletAcc.length)
-    console.log('paramsAddressHasIdentityBoolBC:', paramsAddressHasIdentityBoolBC)
-    console.log('requestStructUsingParamsFromBC.walletAccount.length:', requestStructUsingParamsFromBC.walletAccount.length)
 
     return (
         <Box
@@ -72,7 +68,7 @@ export const Identity=()=> {
             flexDirection='column'
             //align='center'
         >
-            {paramsWalletAcc !== undefined && walletAcc !== 'undefined' && walletAcc !== "" && paramsWalletAcc.length !== 0 ?
+            {walletAcc !== undefined && walletAcc !== 'undefined' && walletAcc !== "" && walletAcc.length !== 0 ?
                 <Stack
                     //border={'4px solid yellow'}
                 >
@@ -133,24 +129,24 @@ export const Identity=()=> {
                                      py={'28px'}
                                      overflow={'none'} whiteSpace={'break-spaces'}
                                 >
-                                    {paramsWalletAcc.length !== 0 && paramsAddressHasIdentityBoolBC !== false && requestStructUsingParamsFromBC.walletAccount.length !== 0 ?
-                                        <AvatarNFI accountNumber={requestStructUsingParamsFromBC.walletAccount}
-                                                   name={requestStructUsingParamsFromBC.name.split("|||")[0]}
-                                                   nameColor={requestStructUsingParamsFromBC.name.split("|||")[1]}
-                                                   email={requestStructUsingParamsFromBC.email.split("|||")[0]}
-                                                   emailColor={requestStructUsingParamsFromBC.email.split("|||")[1]}
-                                                   profession={requestStructUsingParamsFromBC.profession.split("|||")[0]}
-                                                   professionColor={requestStructUsingParamsFromBC.profession.split("|||")[1]}
-                                                   organization={requestStructUsingParamsFromBC.organization.split("|||")[0]}
-                                                   organizationColor={requestStructUsingParamsFromBC.organization.split("|||")[1]}
-                                                   slogan={requestStructUsingParamsFromBC.slogan.split("|||")[0]}
-                                                   sloganColor={requestStructUsingParamsFromBC.slogan.split("|||")[1]}
-                                                   website={requestStructUsingParamsFromBC.website.split("|||")[0]}
-                                                   websiteColor={requestStructUsingParamsFromBC.website.split("|||")[1]}
-                                                   uniqueYou={requestStructUsingParamsFromBC.uniqueYou.split("|||")[0]}
-                                                   uniqueYouColor={requestStructUsingParamsFromBC.uniqueYou.split("|||")[1]}
-                                                   avatarBG={requestStructUsingParamsFromBC.bgRGB}
-                                                   originDate={parseInt(requestStructUsingParamsFromBC.originDate)}
+                                    {walletAcc.length !== 0 && addressHasTokenBoolBool !== false && singleStructBC !== null && singleStructBC.walletAccount.length !== 0 ?
+                                        <AvatarNFI accountNumber={singleStructBC.walletAccount}
+                                                   name={singleStructBC.name.split("|||")[0]}
+                                                   nameColor={singleStructBC.name.split("|||")[1]}
+                                                   email={singleStructBC.email.split("|||")[0]}
+                                                   emailColor={singleStructBC.email.split("|||")[1]}
+                                                   profession={singleStructBC.profession.split("|||")[0]}
+                                                   professionColor={singleStructBC.profession.split("|||")[1]}
+                                                   organization={singleStructBC.organization.split("|||")[0]}
+                                                   organizationColor={singleStructBC.organization.split("|||")[1]}
+                                                   slogan={singleStructBC.slogan.split("|||")[0]}
+                                                   sloganColor={singleStructBC.slogan.split("|||")[1]}
+                                                   website={singleStructBC.website.split("|||")[0]}
+                                                   websiteColor={singleStructBC.website.split("|||")[1]}
+                                                   uniqueYou={singleStructBC.uniqueYou.split("|||")[0]}
+                                                   uniqueYouColor={singleStructBC.uniqueYou.split("|||")[1]}
+                                                   avatarBG={singleStructBC.bgRGB}
+                                                   originDate={parseInt(singleStructBC.originDate)}
                                         />
                                         :
                                         <Button

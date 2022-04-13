@@ -53,9 +53,9 @@ export const Register=()=> {
 
     const tokenIDtoIdentityStruct = useAppSelector((state) => state.account.tokenIDtoIdentityStruct);
 
-    const paramsWalletAcc = useAppSelector((state) => state.account.paramsWalletAcc);
-    const paramsAddressHasIdentityBoolBC = useAppSelector((state) => state.account.addressHasIdentityBC);
-    const requestReceiptUsingParams = useAppSelector((state) => state.account.requestReceiptUsingParams);
+    const paramsWalletAcc = useAppSelector((state) => state.accountDB.paramsWallet);
+    const paramsAddressHasIdentityBoolBC = useAppSelector((state) => state.accountDB.addressHasIdentityBC);
+    const requestReceiptUsingParams = useAppSelector((state) => state.accountDB.requestReceiptUsingParams);
     const requestStructUsingParamsFromBC = useAppSelector((state) => state.account.requestStructUsingParamsFromBC);
     const addressHasIdentityBool = useAppSelector((state) => state.account.addressHasIdentity);
     const getOneStructFromDB = useAppSelector((state) => state.account.getOneStructFromDB);
@@ -63,12 +63,12 @@ export const Register=()=> {
 
     const dispatch = useAppDispatch();
     const accountsArr = useAppSelector((state) => state.account.getAccountsArr);
-    const statusBool = useAppSelector((state) => state.mint.statusBC);
-    const gasPrice = useAppSelector((state) => state.mint.gasPrice);
-    const mintSucceeded = useAppSelector((state) => state.mint.mintSucceeded);
-    const mintErrorReason = useAppSelector((state) => state.mint.mintErrorReason);
-    const accBalance = useAppSelector((state) => state.mint.accBalance);
-    const accBalanceErr = useAppSelector((state) => state.mint.accBalanceErr);
+    const statusBool = useAppSelector((state) => state.nfi.statusBC);
+    const gasPrice = useAppSelector((state) => state.nfi.gasPrice);
+    const mintSucceeded = useAppSelector((state) => state.nfi.mintSucceeded);
+    const mintErrorReason = useAppSelector((state) => state.nfi.mintErrorReason);
+    const accBalance = useAppSelector((state) => state.nfi.accBalance);
+    const accBalanceErr = useAppSelector((state) => state.nfi.accBalanceErr);
 
     const [name, setName] = useState<string | "">("");
     const [profession, setProfession] = useState<string | "">("");

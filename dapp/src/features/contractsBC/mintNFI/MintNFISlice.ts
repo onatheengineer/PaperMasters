@@ -6,6 +6,7 @@ import {
 export type MintState = {
     mintingNFIStruct : MintingNFIStruct | null;
     mintNFI: MintNFI;
+    axiosPOSTReceiptStatus: number;
 }
 
 const initialStateMint: MintNFI = {
@@ -21,10 +22,11 @@ const initialStateMint: MintNFI = {
 const initialState: MintState = {
     mintingNFIStruct : null,
     mintNFI: initialStateMint,
+    axiosPOSTReceiptStatus: 0
 }
 
 const MintNFISlice = createSlice ({
-    name: 'mint',
+    name: 'nfi',
     initialState,
     reducers: {
         mintSucceeded(state, action: PayloadAction<'idle' | 'loading' | 'succeeded' | 'failed' | 'alreadyMinted'>) {
@@ -45,11 +47,14 @@ const MintNFISlice = createSlice ({
         accBalance(state, action: PayloadAction<number>) {
             state.mintNFI.accBalance = action.payload
         },
+        axiosPOSTReceiptStatus(state, action: PayloadAction<number>) {
+            state.axiosPOSTReceiptStatus = action.payload
+        },
     },
 
 });
 
-export const {mintSucceeded, gasForMinting, mintingErr, mintStatusBC, accBalanceErr, accBalance} = MintNFISlice.actions;
+export const {mintSucceeded, gasForMinting, mintingErr, mintStatusBC, accBalanceErr, accBalance, axiosPOSTReceiptStatus} = MintNFISlice.actions;
 
 //TODO: update which action I am passing through
 export const mintNFIAction = createAction<MintingNFIStruct>("MINT_NFI_SAGA");

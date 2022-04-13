@@ -2,7 +2,6 @@ import {
     Stack, Box, Flex, Button, Text, VStack, useBreakpointValue } from '@chakra-ui/react';
 import React from "react";
 import {} from '@chakra-ui/react';
-import WithAction from "../Navbar";
 import BackgroundLogo from "../../assets/legoLavendarheadercroped.png";
 import SecondFooter from '../Footers/SecondFooterHome'
 
@@ -13,7 +12,6 @@ export default function Home() {
         border={'1px solid green'}
         flexDirection={'column'}
         >
-
             <Flex
                 w={'100vW'}
                 alignItems={'stretch'}
@@ -55,5 +53,4 @@ export default function Home() {
 
         </Flex>
     )
-
-};
+}

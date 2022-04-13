@@ -1,9 +1,22 @@
 {
-  "1": {"type": "production" },
-  "61": {"type": "production" },
-  "1666600000": {"type": "production" },
-  "1666600001": {"type": "production" },
-  "1666600002": {"type": "production" },
-  "1666600003": {"type": "production" },
-  "1666700000": {"type": "test" }
+  "1":
+  {
+    "type": "production",
+    "rpc": null
+  },
+  "61":
+  {
+    "type": "production",
+    "rpc": null
+  },
+  "1666600000":
+  {
+    "type": "production",
+    "rpc": null
+  },
+  "1666700000":
+  {
+    "type": "test",
+    "rpc": "https://api.s0.b.hmny.io"
+  }
 }

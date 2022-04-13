@@ -1,5 +1,4 @@
 import {createAction, createSlice, PayloadAction} from "@reduxjs/toolkit";
-import {watchContractFunctionsSaga} from "./mintNFIFunctionsSaga";
 
 interface FeeState{
     supportDeposit: number;
@@ -31,12 +30,12 @@ const MintNFIFunctionsSlice = createSlice( {
 
 export const { supportDeposit, NFIMintFee } = MintNFIFunctionsSlice.actions;
 
-export const depositsToContractAction = createAction<{}>('DEPOSIT_TO_CONTRACT_SAGA');
-export const withdrawAction = createAction<{}>('WITHDRAW__SAGA');
-export const mintFeeAction = createAction<{}>('BASE_MINT_FEE_SAGA');
-export const   reportNFIFeeAction = createAction<{}>('REPORT_NFI_FEE_SAGA');
-export const   validateNFIFeeAction = createAction<{}>('VALIDATE_NFI_FEE_SAGA');
-export const   validationFeeToNFIOwnerAction = createAction<{}>('VALIDATE_NFI_FEE_TO_OWNER_SAGA');
-export const   totalDonationsToPMAction = createAction<{}>('DONATIONS_TO_PM_SAGA');
+export const depositsToContractAction = createAction('DEPOSIT_TO_CONTRACT_SAGA');
+export const withdrawAction = createAction('WITHDRAW__SAGA');
+export const mintFeeAction = createAction('BASE_MINT_FEE_SAGA');
+export const   reportNFIFeeAction = createAction('REPORT_NFI_FEE_SAGA');
+export const   validateNFIFeeAction = createAction('VALIDATE_NFI_FEE_SAGA');
+export const   validationFeeToNFIOwnerAction = createAction('VALIDATE_NFI_FEE_TO_OWNER_SAGA');
+export const   totalDonationsToPMAction = createAction('DONATIONS_TO_PM_SAGA');
 
 export default MintNFIFunctionsSlice.reducer;

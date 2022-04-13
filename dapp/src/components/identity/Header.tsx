@@ -23,19 +23,12 @@ import {
 } from "@chakra-ui/react";
 import {useEffect, useMemo, useReducer, useRef, useState} from "react";
 import {useAppDispatch, useAppSelector} from "../../app/hooks";
-import {FaCube, FaFacebook, FaInstagram, FaTwitter, FaRegEdit, FaDiscord, FaLinkedin, FaYoutube, FaTwitch} from "react-icons/fa";
-import {MdOutlineColorLens, MdOutlineQrCode, MdOutlinePeopleOutline, MdOutlineEmail} from "react-icons/md";
-import {BsFillPersonLinesFill} from "react-icons/bs";
-import {SketchPicker} from "react-color";
-import {SocialButton} from "../Footers/Footer";
-import {openseaIcon} from '../../assets/icons/openseaIcon';
-import {putDBAccountDictionary, putDBAccountDictionaryAction} from '../../features/accountDB/AccountDBSlice';
-import {accountDictionaryInterface} from "../../features/accountBC/AccountBCSlice";
-import {ChevronDownIcon} from "@chakra-ui/icons";
-import {paramsWalletAccAction} from "../../features/IdentityPageUseParamsSlice";
+import {FaCube} from "react-icons/fa";
+import {MdOutlineEmail} from "react-icons/md";
 import DrawerComponent from "./DrawerComponent";
 import {SocialMedia} from "./SocialMedia";
-
+import {AccountDBInterface, ParamsURLInterface} from "../../features/accountDB/AccountDBSlice.types";
+import {postSingleAccountDictionaryDBAction} from "../../features/accountDB/AccountDBSlice";
 
 function initialState(paramsRequestAccountDictionary:any) {
         return {
@@ -76,35 +69,30 @@ export const Mailto:FC<mailToInterface> = ({ email, subject, body, ...props })=>
     );
 }
 
-interface Interface {
+export const Header = ()=> {
+    const paramsWalletWallet = useAppSelector((state) => state.accountDB.paramsWallet);
+    const chainIdProviderProvider = useAppSelector((state)=>state.accountBC.chainIdProvider);
+    const addressHasTokenBoolBool = useAppSelector((state) => state.accountBC.addressHasTokenBool);
+    const NFIReceiptDBDB = useAppSelector((state) => state.accountDB.NFIReceiptDB);
+    const getStructBCBC = useAppSelector((state) => state.accountBC.getStructBC);
+    const singleAccountDictionaryDBDB = useAppSelector((state) => state.accountDB.singleAccountDictionaryDB);
 
-}
-
-export const Header:FC<Interface>=()=> {
-
-    const paramsWalletAcc = useAppSelector((state) => state.identUseParams.paramsWalletAcc);
-    const paramsAddressHasIdentityBoolBC = useAppSelector((state) => state.identUseParams.addressHasIdentityBC);
-    const requestReceiptUsingParams = useAppSelector((state) => state.identUseParams.requestReceiptUsingParams);
-    const requestStructUsingParamsFromBC = useAppSelector((state) => state.identUseParams.requestStructUsingParamsFromBC);
-    const paramsRequestAccountDictionary = useAppSelector((state) => state.identUseParams.requestAccountDictionary);
-
-    console.log('requestReceiptUsingParams:', requestReceiptUsingParams);
-
-    const [state, dispatchAccountProfileDictionary] = useReducer(reducer, paramsRequestAccountDictionary, initialState);
+    const [state, dispatchAccountProfileDictionary] = useReducer(reducer, singleAccountDictionaryDBDB, initialState);
     console.log('this is the state in my useReducer:', state);
     const dispatch = useAppDispatch();
 
     const submitHandler = () => {
-        const accountProfileDictionary: accountDictionaryInterface = {
-            walletAccount: paramsWalletAcc as string,
+        const accountProfileDictionary: AccountDBInterface = {
+            chainId: chainIdProviderProvider as string,
+            walletAccount: paramsWalletWallet as string,
             ownerName: state.ownerName,
             ownerEmail: state.ownerEmail,
             ownerDescription: state.ownerDescription,
-            aliasProfileLinks: state.aliasProfileLinks,
+            socialMediaLinks: state.socialMediaLinks,
             emailValidationNotification: false,
             emailReportNotification: false
         }
-        dispatch(putDBAccountDictionaryAction(accountProfileDictionary));
+        dispatch(postSingleAccountDictionaryDBAction(accountProfileDictionary));
         onClose();
     }
 
@@ -113,23 +101,22 @@ export const Header:FC<Interface>=()=> {
     const [resize, setResize] = useState('horizontal')
 
     const logicTransactionHashMemo = useMemo(() => {
-        console.log(paramsWalletAcc, paramsAddressHasIdentityBoolBC, requestReceiptUsingParams)
-        if (paramsWalletAcc.length > 0 && paramsAddressHasIdentityBoolBC && requestReceiptUsingParams !== undefined) {
-            if(requestReceiptUsingParams.transactionHash !== undefined){
-                if(requestReceiptUsingParams.transactionHash.length){
+        console.log(paramsWalletWallet, addressHasTokenBoolBool, getStructBCBC)
+        if (paramsWalletWallet.length > 0 && addressHasTokenBoolBool && getStructBCBC !== undefined) {
+            if(NFIReceiptDBDB.transactionHash !== undefined){
+                if(NFIReceiptDBDB.transactionHash.length){
                     return (
                         <Text fontSize={'16px'} color={'pmpurple.10'} letterSpacing={'1px'}
                               textShadow={'#F7FAFC 0px 0px 10px'}>
-                            <Link href={`https://explorer.pops.one/tx/${requestReceiptUsingParams.transactionHash}` }>
-
-                            {requestReceiptUsingParams.transactionHash}
+                            <Link href={`https://explorer.pops.one/tx/${NFIReceiptDBDB.transactionHash}` }>
+                            {NFIReceiptDBDB.transactionHash}
                             </Link>
                         </Text>
                     )
                 }
             }
         }
-        if (paramsAddressHasIdentityBoolBC ){
+        if (addressHasTokenBoolBool){
             return (
                 <Text fontSize={'16px'} color={'pmpurple.13'} letterSpacing={'1px'}
                           textShadow={'#F7FAFC 0px 0px 10px'}>
@@ -143,50 +130,49 @@ export const Header:FC<Interface>=()=> {
                     Non-Registered Wallet Account
                 </Text>
             )
-    }, [paramsWalletAcc, paramsAddressHasIdentityBoolBC, requestReceiptUsingParams])
+    }, [paramsWalletWallet, addressHasTokenBoolBool, getStructBCBC])
 
     const logicNameMemo = useMemo(() => {
-        console.log(paramsRequestAccountDictionary, paramsWalletAcc, paramsAddressHasIdentityBoolBC, requestReceiptUsingParams)
-        if(paramsAddressHasIdentityBoolBC && requestReceiptUsingParams !== undefined && paramsRequestAccountDictionary.ownerName !== undefined ) {
-            if(paramsRequestAccountDictionary.ownerName.length > 0 ) {
+        console.log(singleAccountDictionaryDBDB, paramsWalletWallet, addressHasTokenBoolBool, getStructBCBC)
+        if(addressHasTokenBoolBool && getStructBCBC !== undefined && singleAccountDictionaryDBDB.ownerName !== undefined ) {
+            if(singleAccountDictionaryDBDB.ownerName.length > 0 ) {
                 return (
-                    paramsRequestAccountDictionary['ownerName']
+                    singleAccountDictionaryDBDB['ownerName']
                 )
             }
         }
-        if(paramsAddressHasIdentityBoolBC && requestReceiptUsingParams !== undefined ){
-            if(requestReceiptUsingParams.hasOwnProperty('identityStruct') && requestReceiptUsingParams['identityStruct'].length > 0 && requestReceiptUsingParams['identityStruct'][1].length > 0 ) {
-                if(requestReceiptUsingParams.identityStruct[1].split("|||")[0].length > 0 ){
+        if(addressHasTokenBoolBool && getStructBCBC !== undefined ){
+            if(getStructBCBC.hasOwnProperty('identityStruct') && getStructBCBC['identityStruct'].length > 0
+                && getStructBCBC['identityStruct'][1].length > 0 ) {
+                if(getStructBCBC.identityStruct[1].split("|||")[0].length > 0 ){
                     return (
-                        requestReceiptUsingParams.identityStruct[1].split("|||")[0]
+                        getStructBCBC.identityStruct[1].split("|||")[0]
                     )}
             }
         }
         return (
-            paramsWalletAcc
+            paramsWalletWallet
         );
-
-    }, [paramsRequestAccountDictionary, paramsWalletAcc, paramsAddressHasIdentityBoolBC, requestReceiptUsingParams])
-
-
+    }, [singleAccountDictionaryDBDB, paramsWalletWallet, addressHasTokenBoolBool, getStructBCBC])
     const logicEmailMemo = useMemo(() => {
-
-        if(paramsAddressHasIdentityBoolBC && requestReceiptUsingParams !== undefined && paramsRequestAccountDictionary.ownerEmail !== undefined ){
+        if(addressHasTokenBoolBool && getStructBCBC !== undefined && singleAccountDictionaryDBDB.ownerEmail !== undefined ){
                 return(
                     <Mailto
-                        email={paramsRequestAccountDictionary['ownerEmail']}
+                        email={singleAccountDictionaryDBDB['ownerEmail']}
                         subject="Hello PaperMaster"
                         body="Nice to meet you PaperMaster!">
                         <MdOutlineEmail fontSize={'20px'} color={'#5c415c'}/>
                     </Mailto>
                 )
             }
-
-        if(paramsAddressHasIdentityBoolBC && requestReceiptUsingParams !== undefined ){
-            if(requestReceiptUsingParams.hasOwnProperty('identityStruct') && requestReceiptUsingParams['identityStruct'].length > 0 && requestReceiptUsingParams['identityStruct'][3].length > 0 ) {
+        if(addressHasTokenBoolBool && getStructBCBC !== undefined ){
+            if(getStructBCBC[3] !== null && getStructBCBC[3].length > 0)
+            if(Object.prototype.hasOwnProperty.call(getStructBCBC, getStructBCBC[3])
+                && getStructBCBC['identityStruct'][3].length > 0 ) {
                 return (
                     <Mailto
-                        email={requestReceiptUsingParams.identityStruct[3].split("|||")[0]}
+                        email={getStructBCBC[3].split("|||")[0]}
+                        //email={getStructBCBC.identityStruct[3].split("|||")[0]}
                         subject="Hello PaperMaster"
                         body="Nice to meet you PaperMaster!">
                         <MdOutlineEmail fontSize={'20px'} color={'#5c415c'}/>
@@ -197,12 +183,9 @@ export const Header:FC<Interface>=()=> {
         return (
             <MdOutlineEmail fontSize={'20px'} color={'#5c415c'}/>
         );
-    }, [paramsWalletAcc, paramsAddressHasIdentityBoolBC, requestReceiptUsingParams])
-
-
+    }, [paramsWalletWallet, addressHasTokenBoolBool, getStructBCBC])
 
     return (
-
         <Flex
             direction={{ sm: "column", md: "row" }}
             //w={{ sm: "90%", xl: "95%" }}
@@ -337,8 +320,6 @@ export const Header:FC<Interface>=()=> {
                                             {logicTransactionHashMemo}
 
                                     </Text>
-
-
                             </Flex>
                         </Button>
 
