@@ -3,7 +3,7 @@ import axios from "axios";
 import {PayloadAction} from "@reduxjs/toolkit";
 import { call, put, takeEvery, takeLatest, select} from 'redux-saga/effects';
 import {
-    accountError,
+    accountArrError,
     accountArrDBAction,
     accountDBStatus,
     userSameAccountBool,
@@ -21,7 +21,6 @@ import {
     chainIdSupportedBool,
 } from "../accountBC/AccountBCSlice";
 import {AccountDBInterface, NFIReceiptInterface, ParamsURLInterface} from "./AccountDBSlice.types";
-import {mintStatusBC} from "../contractsBC/mintNFI/MintNFISlice";
 
 const baseURL = 'https://ociuozqx85.execute-api.us-east-1.amazonaws.com';
 
@@ -45,7 +44,7 @@ function* accountArrDBSaga({payload}: PayloadAction<string>): SagaIterator {
         }
     } catch (e) {
         console.error('this is the putAccountArrInDBSaga ERROR catch: ', e);
-        yield put(accountError(e));
+        yield put(accountArrError(e));
     }
 }
 
@@ -76,7 +75,7 @@ function* singleAccountDictionaryDBSaga({payload}: PayloadAction<ParamsURLInterf
     }
 }
 
-function* allAccountDictionaryDBSaga({payload}: PayloadAction<ParamsURLInterface>): SagaIterator {
+function* allAccountDictionaryDBSaga(): SagaIterator {
     try{
         const getAccountDBDB = yield call(axios.get, `${baseURL}/account`);
         console.log ('this is the type of getBDWallet:', getAccountDBDB);
@@ -100,7 +99,7 @@ function* singleNFIReceiptDBSaga({ payload }: PayloadAction<ParamsURLInterface>)
     }
 }
 
-function* allNFIReceiptDBSaga({ payload }: PayloadAction<ParamsURLInterface[]>): SagaIterator {
+function* allNFIReceiptDBSaga(): SagaIterator {
     try{
         //TODO fix lambda and api endpoints
         const getAllReceiptDB = yield call(axios.get, `${baseURL}/receipt`);

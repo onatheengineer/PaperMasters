@@ -40,35 +40,28 @@ import {
     gasAccBalanceAction
 } from "../../features/contractsBC/mintNFI/MintNFISlice";
 import AvatarNFI from "../AvatarNFI";
-
-
+import {accountArrAction} from "../../features/accountBC/AccountBCSlice";
+import {BCStruct} from "../../features/accountBC/AccountBCSlice.types";
+import {MintingNFIStruct} from "../../features/contractsBC/mintNFI/mintNFISlice.types";
 
 const ColorRGBToString=(colorResultRGB: ColorResult)=>{
     const colorStringRGB = `rgba(${colorResultRGB.rgb.r}, ${colorResultRGB.rgb.g}, ${colorResultRGB.rgb.b}, ${colorResultRGB.rgb.a})`
     return colorStringRGB;
 }
 
-
-export const Register=()=> {
-
-    const tokenIDtoIdentityStruct = useAppSelector((state) => state.account.tokenIDtoIdentityStruct);
-
-    const paramsWalletAcc = useAppSelector((state) => state.accountDB.paramsWallet);
-    const paramsAddressHasIdentityBoolBC = useAppSelector((state) => state.accountDB.addressHasIdentityBC);
-    const requestReceiptUsingParams = useAppSelector((state) => state.accountDB.requestReceiptUsingParams);
-    const requestStructUsingParamsFromBC = useAppSelector((state) => state.account.requestStructUsingParamsFromBC);
-    const addressHasIdentityBool = useAppSelector((state) => state.account.addressHasIdentity);
-    const getOneStructFromDB = useAppSelector((state) => state.account.getOneStructFromDB);
-
-
+export const Register:FC=()=> {
     const dispatch = useAppDispatch();
-    const accountsArr = useAppSelector((state) => state.account.getAccountsArr);
-    const statusBool = useAppSelector((state) => state.nfi.statusBC);
-    const gasPrice = useAppSelector((state) => state.nfi.gasPrice);
-    const mintSucceeded = useAppSelector((state) => state.nfi.mintSucceeded);
-    const mintErrorReason = useAppSelector((state) => state.nfi.mintErrorReason);
-    const accBalance = useAppSelector((state) => state.nfi.accBalance);
-    const accBalanceErr = useAppSelector((state) => state.nfi.accBalanceErr);
+    const paramsWalletWallet = useAppSelector((state) => state.accountDB.paramsWallet);
+    const singleNFIReceiptDBDB = useAppSelector((state) => state.accountDB.singleNFIReceiptDB);
+    const addressHasIdentityBoolBool = useAppSelector((state) => state.accountBC.addressHasIdentityBool);
+    const getStructBCBC = useAppSelector((state) => state.accountBC.getStructBC);
+    const accountArrArr = useAppSelector((state) => state.accountBC.accountArr);
+    const mintStatusBCBC = useAppSelector((state) => state.nfi.mintNFI.mintStatusBC);
+    const gasPricePrice = useAppSelector((state) => state.nfi.mintNFI.gasPrice);
+    const mintSucceededSucceeded = useAppSelector((state) => state.nfi.mintNFI.mintSucceeded);
+    const mintErrErr = useAppSelector((state) => state.nfi.mintNFI.mintErr);
+    const accBalanceBalance = useAppSelector((state) => state.nfi.mintNFI.accBalance);
+    const accBalanceErrErr = useAppSelector((state) => state.nfi.mintNFI.accBalanceErr);
 
     const [name, setName] = useState<string | "">("");
     const [profession, setProfession] = useState<string | "">("");
@@ -158,13 +151,13 @@ export const Register=()=> {
     };
 
     useEffect(() => {
-        if (accountsArr.length !== 0) {
+        if (accountArrArr.length !== 0) {
             estimateGasHandler();
         }
-    }, [accountsArr, name, email, profession, slogan, website, organization, uniqueYou]);
+    }, [accountArrArr, name, email, profession, slogan, website, organization, uniqueYou]);
 
     const submitMintHandler = () => {
-        const mintPayload: MintNFISagaTypes = {
+        const mintPayload: MintingNFIStruct = {
             name: `${name}|||${ColorRGBToString(colorTextName)}`,
             email: `${email}|||${ColorRGBToString(colorTextEmail)}`,
             profession: `${profession}|||${ColorRGBToString(colorTextProfession)}`,
@@ -181,7 +174,7 @@ export const Register=()=> {
     };
 
     const estimateGasHandler = () => {
-        const mintPayload: MintNFISagaTypes = {
+        const mintPayload: MintingNFIStruct = {
             name: `${name}|||${ColorRGBToString(colorTextName)}`,
             email: `${email}|||${ColorRGBToString(colorTextEmail)}`,
             profession: `${profession}|||${ColorRGBToString(colorTextProfession)}`,
@@ -197,41 +190,41 @@ export const Register=()=> {
 
 
     useEffect(() => {
-        console.log('accountsArr', accountsArr.length)
-        if (accountsArr.length === 0) {
-            dispatch(requestUserWalletAction());
+        console.log('accountsArr', accountArrArr.length)
+        if (accountArrArr.length === 0) {
+            dispatch(accountArrAction());
             dispatch(gasAccBalanceAction());
         }
-    }, [accountsArr]);
+    }, [accountArrArr]);
 
     const [modalDisplayTitle, modalDisplayText] = useMemo(() => {
-        if (accountsArr.length === 0) {
+        if (accountArrArr.length === 0) {
             setIsModalOpen(true);
             return (['Connect Wallet Account for Access', "Please go to MetaMask and connect your wallet accountDB."])
         }
         
-        if (addressHasIdentityBool && mintSucceeded === 'idle') {
+        if (addressHasIdentityBoolBool && mintSucceededSucceeded === 'idle') {
             setIsModalOpen(true);
             return (['You have already Minted',
                     <span>Connected wallet account is already registered, each wallet account can have only one identity. <br/><br/> In the future, you will be able to mint an NFI for each contract that you own.</span>]
             )
         }
         
-        if (mintSucceeded === 'failed') {
+        if (mintSucceededSucceeded === 'failed') {
             setIsModalOpen(true);
             return (['Minting failed',
                     <span> Noooo, what happened! Please email Ramona with the details @ ramonajenny.n@gmail.com.</span>]
             )
         }
         
-        if (mintSucceeded === 'succeeded') {
+        if (mintSucceededSucceeded === 'succeeded') {
             setIsModalOpen(true);
             return ([" Minted Successful!", 'You did it! You are now a registered PaperMaster, please navigate to your Identity page and update your portfolio.'])
         }
         
-        if (accBalanceErr.length > 0) {
+        if (accBalanceErrErr.length > 0) {
             setIsModalOpen(true);
-            return (["Account Balance Error", accBalanceErr])
+            return (["Account Balance Error", accBalanceErrErr])
         }
         
         // if (statusBool === true) {
@@ -241,7 +234,7 @@ export const Register=()=> {
 
         setIsModalOpen(false)
         return ([null, null])
-    }, [accountsArr, tokenIDtoIdentityStruct, getOneReceiptFromDB, addressHasIdentityBool, mintSucceeded])
+    }, [accountArrArr, getStructBCBC, singleNFIReceiptDBDB, addressHasIdentityBoolBool, mintSucceededSucceeded])
 
     return (
         <Box
@@ -962,7 +955,7 @@ export const Register=()=> {
                                        uniqueYou={uniqueYou} uniqueYouColor={ColorRGBToString(colorTextUniqueYou)}
                                        avatarBG={ColorRGBToString(bgRGB)}
                                        originDate={originDate}
-                                       accountNumber={accountsArr[0]}
+                                       accountNumber={accountArrArr[0]}
                             />
 
                             <Stack>
@@ -1012,7 +1005,7 @@ export const Register=()=> {
                                                         {modalDisplayText}
                                                         <br/>
                                                         <Text color={'gray.100'}>
-                                                            {mintErrorReason}
+                                                            {mintErrErr}
                                                         </Text>
 
                                                     </Text>
@@ -1040,7 +1033,7 @@ export const Register=()=> {
                                             //loadingText='Waiting to get cost estimates for gas'
                                             color={"pmpurple.13"}
                                         >
-                                            <Text as='u'>Estimated Gas: {gasPrice}</Text>
+                                            <Text as='u'>Estimated Gas: {gasPricePrice}</Text>
                                             {/*{estimateGasHandler}*/}
                                         </Box>
                                         : null}
@@ -1066,7 +1059,7 @@ export const Register=()=> {
                             {modalDisplayText}
                             <br/>
                             <Text color={'gray.100'}>
-                                {mintErrorReason}
+                                {mintErrErr}
                             </Text>
 
                         </Text>

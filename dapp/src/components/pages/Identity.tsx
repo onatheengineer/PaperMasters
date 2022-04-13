@@ -16,10 +16,15 @@ import ModalForIdentNoUseParams from '../identity/ModalForIdentNoUseParams';
 import {AccountLedger} from '../identity/AccountLedger'
 import {apiHarmonyOneAction} from "../../features/accountBC/ledger/LedgerSlice";
 import {ParamsURLInterface} from "../../features/accountDB/AccountDBSlice.types";
-import {paramsChainId, paramsWallet, singleAccountDictionaryDBAction} from "../../features/accountDB/AccountDBSlice";
+import {
+    paramsChainId,
+    paramsWallet,
+    singleAccountDictionaryDBAction,
+    singleNFIReceiptDBAction
+} from "../../features/accountDB/AccountDBSlice";
 
 
-export const Identity=()=> {
+export const Identity:FC=()=> {
 //TODO as soon as they connect - redirect them to their identity page - this is important for the hasIdentityBool slice to work
     const {chainId, walletAcc} = useParams();
     const dispatch = useAppDispatch();
@@ -29,34 +34,36 @@ export const Identity=()=> {
             dispatch(paramsWallet(walletAcc));
             dispatch(apiHarmonyOneAction(walletAcc));
             dispatch(singleAccountDictionaryDBAction({ chainIdURL: chainId, paramsWalletURL: walletAcc } as ParamsURLInterface))}
+            dispatch(singleNFIReceiptDBAction({ chainIdURL: chainId, paramsWalletURL: walletAcc } as ParamsURLInterface))
     }, [walletAcc, chainId]);
 
-    const addressHasTokenBoolBool = useAppSelector((state) => state.accountBC.addressHasTokenBool);
+    const addressHasIdentityBoolBool = useAppSelector((state) => state.accountBC.addressHasIdentityBool);
     const singleStructBC = useAppSelector((state) => state.accountBC.getStructBC);
     const singleAccountDictionaryDBDB = useAppSelector((state) => state.accountDB.singleAccountDictionaryDB);
+    const singleNFIReceiptDBDB = useAppSelector((state) => state.accountDB.singleNFIReceiptDB);
 
     const logicDescriptionMemo = useMemo(() => {
-        console.log(singleAccountDictionaryDBDB, walletAcc, addressHasTokenBoolBool, singleStructBC)
-        if (addressHasTokenBoolBool && singleStructBC !== undefined && singleAccountDictionaryDBDB.ownerDescription !== undefined) {
+        console.log(singleAccountDictionaryDBDB, walletAcc, addressHasIdentityBoolBool, singleStructBC)
+        if (addressHasIdentityBoolBool && singleStructBC !== undefined && singleAccountDictionaryDBDB.ownerDescription !== undefined) {
             if (singleAccountDictionaryDBDB.ownerDescription.length > 0) {
                 return (
                     singleAccountDictionaryDBDB['ownerDescription']
                 )
             }
         }
-        if (addressHasTokenBoolBool && singleStructBC !== undefined) {
-            if (Object.prototype.hasOwnProperty.call(singleStructBC,'identityStruct') && singleStructBC['identityStruct'].length > 0 && requestReceiptUsingParams['identityStruct'][7].length > 0) {
-                if (singleStructBC.identityStruct[7].split("|||")[0].length > 0) {
-                    return (
-                        singleStructBC.identityStruct[7].split("|||")[0]
-                    )
-                }
-            }
-        }
+        // if (addressHasTokenBoolBool && singleStructBC !== undefined) {
+        //     if (Object.prototype.hasOwnProperty.call(singleStructBC,'identityStruct') && singleStructBC['identityStruct'].length > 0 && requestReceiptUsingParams['identityStruct'][7].length > 0) {
+        //         if (singleStructBC.[7].split("|||")[0].length > 0) {
+        //             return (
+        //                 singleStructBC.identityStruct[7].split("|||")[0]
+        //             )
+        //         }
+        //     }
+        // }
         return (
             " Mathematics may not teach us how to add love or subtract hate, but it gives us every reason to hope that every problem has a solution."
         );
-    }, [singleAccountDictionaryDBDB, walletAcc, addressHasTokenBoolBool, singleStructBC])
+    }, [singleAccountDictionaryDBDB, walletAcc, addressHasIdentityBoolBool, singleStructBC])
 
 
     return (
@@ -129,7 +136,7 @@ export const Identity=()=> {
                                      py={'28px'}
                                      overflow={'none'} whiteSpace={'break-spaces'}
                                 >
-                                    {walletAcc.length !== 0 && addressHasTokenBoolBool !== false && singleStructBC !== null && singleStructBC.walletAccount.length !== 0 ?
+                                    {walletAcc.length !== 0 && addressHasIdentityBoolBool !== false && singleStructBC !== null && singleStructBC.walletAccount.length !== 0 ?
                                         <AvatarNFI accountNumber={singleStructBC.walletAccount}
                                                    name={singleStructBC.name.split("|||")[0]}
                                                    nameColor={singleStructBC.name.split("|||")[1]}
@@ -146,7 +153,11 @@ export const Identity=()=> {
                                                    uniqueYou={singleStructBC.uniqueYou.split("|||")[0]}
                                                    uniqueYouColor={singleStructBC.uniqueYou.split("|||")[1]}
                                                    avatarBG={singleStructBC.bgRGB}
-                                                   originDate={parseInt(singleStructBC.originDate)}
+                                                   originDate={(typeof singleStructBC.originDate === 'number' ?
+                                                       (singleStructBC.originDate)
+                                                           :
+                                                       parseInt(singleStructBC.originDate)
+                                                   )}
                                         />
                                         :
                                         <Button

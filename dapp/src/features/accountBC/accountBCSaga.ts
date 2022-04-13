@@ -72,6 +72,10 @@ function* singleStructBCSaga({payload}: PayloadAction<ParamsURLInterface>): Saga
                 const NFIContract = new web3.eth.Contract(MintABI.abi as any, MintABI.networks[chainIdURL].address);
                 const getStructBCBC = yield call(NFIContract.methods.addressToIdentityStruct(paramsWalletURL).call)
                 yield put(getStructBC(getStructBCBC));
+                //TODO what comes out here - can I do a lenth or is it null
+                if(getStructBCBC.length > 0){
+                    yield put(addressHasIdentityBool(true));
+                }
             }
         }
     } catch (e) {

@@ -9,7 +9,7 @@ export interface AccountArrState {
     accountArr: string[];
     accountArrStatus: 'idle' | 'loading' | 'success' | 'failed';
     putAccountArrInDBStatus:'idle' | 'succeeded new entry in DB' | 'failed entry already in DB';
-    addressHasTokenBool: boolean;
+    addressHasIdentityBool: boolean;
     addressToTokenID: number;
     getStructBC: BCStruct | null,
     getAllStructBC: BCStruct[] | null,
@@ -22,7 +22,7 @@ const initialState: AccountArrState = {
     accountArr: [],
     accountArrStatus: 'idle',
     putAccountArrInDBStatus: "idle",
-    addressHasTokenBool: false,
+    addressHasIdentityBool: false,
     addressToTokenID: 0,
     getStructBC: null,
     getAllStructBC: null,
@@ -49,7 +49,7 @@ const AccountBCSlice = createSlice ({
             state.accountArrStatus = action.payload;
         },
         addressHasIdentityBool(state, action: PayloadAction<boolean>) {
-            state.addressHasTokenBool = action.payload
+            state.addressHasIdentityBool = action.payload
         },
         addressToTokenID(state, action: PayloadAction<number>) {
             state.addressToTokenID = action.payload

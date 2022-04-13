@@ -69,11 +69,11 @@ export const Mailto:FC<mailToInterface> = ({ email, subject, body, ...props })=>
     );
 }
 
-export const Header = ()=> {
+export const Header:FC = ()=> {
     const paramsWalletWallet = useAppSelector((state) => state.accountDB.paramsWallet);
     const chainIdProviderProvider = useAppSelector((state)=>state.accountBC.chainIdProvider);
-    const addressHasTokenBoolBool = useAppSelector((state) => state.accountBC.addressHasTokenBool);
-    const NFIReceiptDBDB = useAppSelector((state) => state.accountDB.NFIReceiptDB);
+    const addressHasIdentityBoolBool = useAppSelector((state) => state.accountBC.addressHasIdentityBool);
+    const singleNFIReceiptDBDB = useAppSelector((state) => state.accountDB.singleNFIReceiptDB);
     const getStructBCBC = useAppSelector((state) => state.accountBC.getStructBC);
     const singleAccountDictionaryDBDB = useAppSelector((state) => state.accountDB.singleAccountDictionaryDB);
 
@@ -101,22 +101,22 @@ export const Header = ()=> {
     const [resize, setResize] = useState('horizontal')
 
     const logicTransactionHashMemo = useMemo(() => {
-        console.log(paramsWalletWallet, addressHasTokenBoolBool, getStructBCBC)
-        if (paramsWalletWallet.length > 0 && addressHasTokenBoolBool && getStructBCBC !== undefined) {
-            if(NFIReceiptDBDB.transactionHash !== undefined){
-                if(NFIReceiptDBDB.transactionHash.length){
+        console.log(paramsWalletWallet, addressHasIdentityBoolBool, getStructBCBC)
+        if (paramsWalletWallet.length > 0 && addressHasIdentityBoolBool && getStructBCBC !== undefined) {
+            if(singleNFIReceiptDBDB.transactionHash !== undefined){
+                if(singleNFIReceiptDBDB.transactionHash.length){
                     return (
                         <Text fontSize={'16px'} color={'pmpurple.10'} letterSpacing={'1px'}
                               textShadow={'#F7FAFC 0px 0px 10px'}>
-                            <Link href={`https://explorer.pops.one/tx/${NFIReceiptDBDB.transactionHash}` }>
-                            {NFIReceiptDBDB.transactionHash}
+                            <Link href={`https://explorer.pops.one/tx/${singleNFIReceiptDBDB.transactionHash}` }>
+                            {singleNFIReceiptDBDB.transactionHash}
                             </Link>
                         </Text>
                     )
                 }
             }
         }
-        if (addressHasTokenBoolBool){
+        if (addressHasIdentityBoolBool){
             return (
                 <Text fontSize={'16px'} color={'pmpurple.13'} letterSpacing={'1px'}
                           textShadow={'#F7FAFC 0px 0px 10px'}>
@@ -130,32 +130,32 @@ export const Header = ()=> {
                     Non-Registered Wallet Account
                 </Text>
             )
-    }, [paramsWalletWallet, addressHasTokenBoolBool, getStructBCBC])
+    }, [paramsWalletWallet, addressHasIdentityBoolBool, getStructBCBC])
 
     const logicNameMemo = useMemo(() => {
-        console.log(singleAccountDictionaryDBDB, paramsWalletWallet, addressHasTokenBoolBool, getStructBCBC)
-        if(addressHasTokenBoolBool && getStructBCBC !== undefined && singleAccountDictionaryDBDB.ownerName !== undefined ) {
+        console.log(singleAccountDictionaryDBDB, paramsWalletWallet, addressHasIdentityBoolBool, getStructBCBC)
+        if(addressHasIdentityBoolBool && getStructBCBC !== undefined && singleAccountDictionaryDBDB.ownerName !== undefined ) {
             if(singleAccountDictionaryDBDB.ownerName.length > 0 ) {
                 return (
                     singleAccountDictionaryDBDB['ownerName']
                 )
             }
         }
-        if(addressHasTokenBoolBool && getStructBCBC !== undefined ){
-            if(getStructBCBC.hasOwnProperty('identityStruct') && getStructBCBC['identityStruct'].length > 0
-                && getStructBCBC['identityStruct'][1].length > 0 ) {
-                if(getStructBCBC.identityStruct[1].split("|||")[0].length > 0 ){
-                    return (
-                        getStructBCBC.identityStruct[1].split("|||")[0]
-                    )}
-            }
+        if(addressHasIdentityBoolBool && getStructBCBC !== undefined ){
+            // if(getStructBCBC.hasOwnProperty('identityStruct') && getStructBCBC['identityStruct'].length > 0
+            //     && getStructBCBC['identityStruct'][1].length > 0 ) {
+            //     if(getStructBCBC.identityStruct[1].split("|||")[0].length > 0 ){
+            //         return (
+            //             getStructBCBC.identityStruct[1].split("|||")[0]
+            //         )}
+            // }
         }
         return (
             paramsWalletWallet
         );
-    }, [singleAccountDictionaryDBDB, paramsWalletWallet, addressHasTokenBoolBool, getStructBCBC])
+    }, [singleAccountDictionaryDBDB, paramsWalletWallet, addressHasIdentityBoolBool, getStructBCBC])
     const logicEmailMemo = useMemo(() => {
-        if(addressHasTokenBoolBool && getStructBCBC !== undefined && singleAccountDictionaryDBDB.ownerEmail !== undefined ){
+        if(addressHasIdentityBoolBool && getStructBCBC !== undefined && singleAccountDictionaryDBDB.ownerEmail !== undefined ){
                 return(
                     <Mailto
                         email={singleAccountDictionaryDBDB['ownerEmail']}
@@ -165,25 +165,25 @@ export const Header = ()=> {
                     </Mailto>
                 )
             }
-        if(addressHasTokenBoolBool && getStructBCBC !== undefined ){
-            if(getStructBCBC[3] !== null && getStructBCBC[3].length > 0)
-            if(Object.prototype.hasOwnProperty.call(getStructBCBC, getStructBCBC[3])
-                && getStructBCBC['identityStruct'][3].length > 0 ) {
-                return (
-                    <Mailto
-                        email={getStructBCBC[3].split("|||")[0]}
-                        //email={getStructBCBC.identityStruct[3].split("|||")[0]}
-                        subject="Hello PaperMaster"
-                        body="Nice to meet you PaperMaster!">
-                        <MdOutlineEmail fontSize={'20px'} color={'#5c415c'}/>
-                    </Mailto>
-                )
-            }
+        if(addressHasIdentityBoolBool && getStructBCBC !== undefined ){
+            // if(getStructBCBC[3] !== null && getStructBCBC[3].length > 0)
+            // if(Object.prototype.hasOwnProperty.call(getStructBCBC, getStructBCBC[3])
+            //     && getStructBCBC['identityStruct'][3].length > 0 ) {
+            //     return (
+            //         <Mailto
+            //             email={getStructBCBC[3].split("|||")[0]}
+            //             //email={getStructBCBC.identityStruct[3].split("|||")[0]}
+            //             subject="Hello PaperMaster"
+            //             body="Nice to meet you PaperMaster!">
+            //             <MdOutlineEmail fontSize={'20px'} color={'#5c415c'}/>
+            //         </Mailto>
+            //     )
+            // }
         }
         return (
             <MdOutlineEmail fontSize={'20px'} color={'#5c415c'}/>
         );
-    }, [paramsWalletWallet, addressHasTokenBoolBool, getStructBCBC])
+    }, [paramsWalletWallet, addressHasIdentityBoolBool, getStructBCBC])
 
     return (
         <Flex

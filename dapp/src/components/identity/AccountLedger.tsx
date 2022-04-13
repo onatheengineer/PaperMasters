@@ -1,24 +1,14 @@
 import {Box, Flex, Heading, HStack, Tab, TabList, TabPanel, TabPanels, Tabs, Text, Stack, Spacer} from "@chakra-ui/react";
 import * as React from "react";
 import {FC, useEffect, useMemo} from "react";
-import {paramsWalletAccAction} from "../../features/IdentityPageUseParamsSlice";
 import {useAppDispatch} from "../../app/hooks";
 import {useParams} from "react-router-dom";
 
-interface Interface {
 
-}
+export const AccountLedger:FC=()=> {
 
-export const AccountLedger:FC<Interface>=()=> {
-    const {walletAcc} = useParams();
-    const dispatch = useAppDispatch();
 //const timeStampFormatted = moment(txHash.timeStamp).format('MMM DD YYYY, hh:mm:ss a');
 
-    useEffect(() => {
-        if (walletAcc !== undefined && walletAcc !== "" && walletAcc !== 'undefined') {
-            dispatch(paramsWalletAccAction(walletAcc));
-        }
-    }, [walletAcc]);
 
     // const ethereumLedger = useMemo(() => {
     //

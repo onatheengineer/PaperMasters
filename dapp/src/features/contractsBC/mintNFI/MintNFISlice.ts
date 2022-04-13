@@ -11,12 +11,12 @@ export type MintState = {
 
 const initialStateMint: MintNFI = {
     //before minting
+    accBalance: 0,
+    accBalanceErr: "",
     mintSucceeded: "idle",
-    gasPrice: 0,
     mintErr: "",
     mintStatusBC: false,
-    accBalanceErr: "",
-    accBalance: 0,
+    gasPrice: 0
 }
 
 const initialState: MintState = {

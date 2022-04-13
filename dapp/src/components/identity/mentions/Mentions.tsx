@@ -61,21 +61,16 @@ function reducer(state:any, action:any) {
     }
 }
 
-
-interface Interface {
-
-}
-
-export const Mentions: FC<Interface>=()=> {
+export const Mentions:FC=()=> {
 
     const [resize, setResize] = useState('horizontal')
     const {isOpen, onOpen, onClose} = useDisclosure()
     const firstField = useRef<HTMLTextAreaElement>(null)
-    const filledAccountsArr = useAppSelector((state) => state.register.accounts);
+    const accountArrArr = useAppSelector((state) => state.accountBC.accountArr);
+    const paramsWalletWallet = useAppSelector((state) => state.accountDB.paramsWallet);
     const allMentionsArr = useAppSelector((state) => state.mentions.allMentions);
 
-    const {walletAcc} = useParams();
-    console.log('this is walletAccparamsfromMentions:', walletAcc)
+    console.log('this is walletAccparamsfromMentions:', paramsWalletWallet)
 
     const dateFormated = moment().format('MMM DD YYYY, hh:mm:ss a');
 
@@ -84,19 +79,19 @@ export const Mentions: FC<Interface>=()=> {
     const [state, mentionsDictionary] = useReducer(reducer, {}, initialState);
 
     useEffect(() => {
-        if (walletAcc !== undefined && walletAcc !== 'undefined' && walletAcc !== "") {
-            dispatch(allMentionsAction(walletAcc));
+        if (paramsWalletWallet !== undefined && paramsWalletWallet !== 'undefined' && paramsWalletWallet !== "") {
+            dispatch(allMentionsAction(paramsWalletWallet));
             mentionsDictionary({
                 type: 'paramsWallet',
-                payload: walletAcc
+                payload: paramsWalletWallet
             });
         }
-    }, [walletAcc]);
+    }, [paramsWalletWallet]);
 
     const submitMentionsHandler = () => {
         const mentionsSubmitStateDictionary: mentionsStateDictionaryInterface = {
-            walletAcc: walletAcc as string,
-            fromWallet: filledAccountsArr[0],
+            walletAcc: paramsWalletWallet as string,
+            fromWallet: accountArrArr[0],
             messageBody: state.messageBody,
             radioType: state.radioType,
             fakeDelete: false,
@@ -201,7 +196,7 @@ export const Mentions: FC<Interface>=()=> {
                         <DrawerBody>
                             <DisplayMentions mentionsFullDisplayWindowBool={true}/>
                             <Stack spacing='24px'>
-                                {filledAccountsArr.length !== 0 ?
+                                {accountArrArr.length !== 0 ?
                                     <Box
                                         flex={'max-content'}
                                         mt={'18px'}
@@ -312,7 +307,7 @@ export const Mentions: FC<Interface>=()=> {
                                 onClick={onClose}>
                                 Cancel
                             </Button>
-                            {filledAccountsArr.length !== 0 ?
+                            {accountArrArr.length !== 0 ?
                                 <Button
                                     color='pmpurple.12'
                                     border={'1px solid'}

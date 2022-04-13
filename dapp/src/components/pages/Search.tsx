@@ -26,6 +26,8 @@ import {SiSololearn} from "react-icons/si";
 import IdentityEntryModal from "../../utils/IdentityEntryModal";
 import AvatarNFI from "../AvatarNFI";
 import Sparkle from "react-sparkle";
+import {allAccountDictionaryDBAction, allNFIReceiptDBAction} from "../../features/accountDB/AccountDBSlice";
+import {BCStruct} from "../../features/accountBC/AccountBCSlice.types";
 
 
 interface DataRow {
@@ -47,19 +49,22 @@ interface interfaceFilterComponent{
     activateButton: boolean,
 }
 
-const FilterComponent: FC<interfaceFilterComponent> = ( { filterText, onClick, onFilter, text , placeHolder, idType, activateButton}) => (
-
+const FilterComponent: FC<interfaceFilterComponent> = ( { filterText, onClick, onFilter, text ,
+                                                        placeHolder, idType, activateButton}) => (
     <Box>
         <HStack>
 
             <InputGroup>
-            <Input focusBorderColor='pmpurple.8' color={'pmpurple.13'} border={'1px solid'} borderColor={'pmpurple.3'} id={idType} type="text" placeholder={placeHolder} aria-label="Search Input" value={filterText} onChange={onFilter} />
+            <Input focusBorderColor='pmpurple.8' color={'pmpurple.13'} border={'1px solid'} borderColor={'pmpurple.3'}
+                   id={idType} type="text" placeholder={placeHolder} aria-label="Search Input" value={filterText}
+                   onChange={onFilter} />
                 <Tooltip hasArrow label='Please type at minimum 32 characters to add a wallet account'
                          placement={'bottom-end'} border={'1px solid #694b69'}
                          borderRadius={'3px'} bg='pmpurple.5' color='pmpurple.13' m={'-10px'}>
                 <InputRightAddon
                     p='0' borderColor={"pmpurple.4"} bg={'pmpurple.2'}
-                    children={<Button bg={'pmpurple.5'} color={"pmpurple.13"} disabled={activateButton} onClick={onClick} >{text}</Button>} />
+                    children={<Button bg={'pmpurple.5'} color={"pmpurple.13"} disabled={activateButton}
+                                      onClick={onClick} >{text}</Button>} />
                 </Tooltip>
                 </InputGroup>
 
@@ -71,7 +76,6 @@ const FilterComponent: FC<interfaceFilterComponent> = ( { filterText, onClick, o
 
 const ExpandedComponent: FC<ExpanderComponentProps<DataRow>> = ({ data }) => {
     console.log(data)
-    // @ts-ignore
     const identityStruct: any[] = data['identityStruct'] as any[]
     if(identityStruct.length === 0){
         return (null);
@@ -98,18 +102,16 @@ const ExpandedComponent: FC<ExpanderComponentProps<DataRow>> = ({ data }) => {
         originDate={parseInt(identityStruct[9])}
     />
         )
-
 };
 
-export const Search: FC=()=> {
-    const requestConnectedUserAccountsArr = useAppSelector((state) => state.register.accounts);
-    const addressHasIdentityBool = useAppSelector((state) => state.minted.addressHasIdentity);
-    const tokenIDToIdentity = useAppSelector((state) => state.minted.tokenIDtoIdentityStruct);
-    const getAllWalletFromDB = useAppSelector((state) => state.register.getAllWalletFromDB);
-    const getOneWalletFromDB = useAppSelector((state) => state.register.getOneWalletFromDB);
-    const getAllReceiptFromDB = useAppSelector((state) => state.register.getAllReceiptFromDB);
-    const getOneReceiptFromDB = useAppSelector((state) => state.register.getOneReceiptFromDB);
-    const getDBAccountDictionary = useAppSelector((state) => state.account.getDBAccountDictionary);
+export const Search:FC=()=> {
+    const accountArrArr = useAppSelector((state) => state.accountBC.accountArr);
+    const addressHasIdentityBoolBool = useAppSelector((state) => state.accountBC.addressHasIdentityBool);
+    const getStructBCBC = useAppSelector((state) => state.accountBC.getStructBC);
+    const paramsWalletWallet = useAppSelector((state) => state.accountDB.paramsWallet);
+    const singleNFIReceiptDBDB = useAppSelector((state) => state.accountDB.singleNFIReceiptDB);
+    const allNFIReceiptDBDB = useAppSelector((state) => state.accountDB.allNFIReceiptDB);
+    const allAccountDictionaryDBDB = useAppSelector((state) => state.accountDB.allAccountDictionaryDB);
 
     const [filterText, setFilterText] = useState<string>('');
     const [searchWalletAccount, setWalletAccount] = useState<string>('');
@@ -117,37 +119,25 @@ export const Search: FC=()=> {
     const [isIdentityModalOpen, setIdentityModalOpen] = useState<boolean>(false);
     const dispatch = useAppDispatch();
 
-
-    console.log('this is the getallwalletfromdb', getAllWalletFromDB);
-    console.log('this is the getAllReceiptFromDB', getAllReceiptFromDB)
-
-    // useEffect( getSpecificWallet=()=> {
-    //     //walletString = getAllWalletFromDB[0];
-    //     getAllWalletFromDB.walletAccount = useParams;
-    // }[]);
-
-
-    //console.log('this is the getallwalletfromdb name:' getAllWalletFromDB.name)
-
     useEffect(() => {
-        dispatch(getAllWalletFromDBAction());
-        dispatch(getAllReceiptFromDBAction());
-    }, [requestConnectedUserAccountsArr, getDBAccountDictionary]);
+        dispatch(allAccountDictionaryDBAction());
+        dispatch(allNFIReceiptDBAction());
+    }, [accountArrArr, allAccountDictionaryDBDB]);
 
     const rowsTable = useMemo(() => {
         const receiptDictionary: any = {};
-        console.log('get all receipts from db', getAllReceiptFromDB)
-        getAllReceiptFromDB.map((el:any) => {
+        console.log('get all receipts from db', allNFIReceiptDBDB)
+        allNFIReceiptDBDB.map((el:any) => {
             receiptDictionary[el.walletAccount] = el;
         })
         console.log('this is the receiptDictionary:', receiptDictionary);
         const datarow: DataRow[] = [];
-        getAllWalletFromDB.map((element:any) => {
+        jkdsvgfhsdjkfhgdfjkhg.map((element:any) => {
             let name = "";
             let profession = "";
             let originDateFormatted = "";
-            let identityStruct:any[] = [];
-            if (receiptDictionary.hasOwnProperty(element.walletAccount)) {
+            let identityStruct:BCStruct[] = [];
+            if (Object.prototype.hasOwnProperty.call(receiptDictionary, element.walletAccount)) {
                 console.log('this is the receiptdictionary walletaccount', receiptDictionary[element.walletAccount])
                 if (receiptDictionary[element.walletAccount].hasOwnProperty('identityStruct')) {
                     if (receiptDictionary[element.walletAccount]['identityStruct'].length >= 10) {
@@ -156,12 +146,12 @@ export const Search: FC=()=> {
                         profession = receiptDictionary[element.walletAccount]['identityStruct'][3].split('|||')[0]
                         const originDate = receiptDictionary[element.walletAccount]['identityStruct'][9]
                         const originDateObject = new Date(originDate);
-                        originDateFormatted = `${originDateObject.toLocaleString('en-us', {month: 'long'})} ${originDateObject.getDate()}, ${originDateObject.getFullYear()}`
+                        originDateFormatted = `${originDateObject.toLocaleString('en-us',
+                            {month: 'long'})} ${originDateObject.getDate()}, ${originDateObject.getFullYear()}`
                         console.log("this is the origin date from Search", originDate)
                     }
                 }
             }
-
             const singleWalletDictionary = {
                 identityStruct: identityStruct,
                 walletAccount: element.walletAccount,
@@ -174,7 +164,7 @@ export const Search: FC=()=> {
             datarow.push(singleWalletDictionary);
         })
         return datarow;
-    }, [getAllWalletFromDB, getAllReceiptFromDB]);
+    }, [getAllWalletFromDB, allNFIReceiptDBDB]);
     console.log("this is my rowstable", rowsTable);
 
     const columns: TableColumn<DataRow>[] = [
@@ -183,7 +173,8 @@ export const Search: FC=()=> {
             name: 'Wallet Account',
             //cell: (row, index, column, id)=>{ <button onClick={handleButtonClick}>Action</button>},
             selector: row => row.walletAccount,
-            cell: (row, index, column, id) => <Button as={ReachLink} to={`/identity/${row.walletAccount}`}
+            cell: (row, index, column, id) =>
+                <Button as={ReachLink} to={`/identity/${row.walletAccount}`}
                                                       bg={'#f2eef2'} color={'pmpurple.13'} fontSize={'12px'}>
                 <Text ml={'6px'}> {row.walletAccount} </Text>
             </Button>,
@@ -200,7 +191,8 @@ export const Search: FC=()=> {
         {
             name: 'Name',
             selector: row => row.name,
-            cell: (row, index, column, id) => <Button as={ReachLink} to={`/identity/${row.walletAccount}`}
+            cell: (row, index, column, id) =>
+                <Button as={ReachLink} to={`/identity/${row.walletAccount}`}
                                                       color={'pmpurple.13'} fontSize={'12px'}>
                 <Text ml={'6px'}> {row.name} </Text>
             </Button>,
@@ -259,10 +251,7 @@ export const Search: FC=()=> {
                 <Text ml={'6px'}> Report </Text>
             </Button>,
         },
-
     ];
-
-
     const filteredItems = rowsTable.filter(item => {
             if (filterText.length === 0 && searchWalletAccount.length === 0) {
                 return item;
@@ -282,13 +271,13 @@ export const Search: FC=()=> {
                 }
             }
             if (searchWalletAccount.length !== 0) {
-                if (item.walletAccount && item.walletAccount.toLowerCase().includes(searchWalletAccount.toLowerCase()) && item.name && item.name.toLowerCase().includes(filterText.toLowerCase())) {
+                if (item.walletAccount && item.walletAccount.toLowerCase().includes(searchWalletAccount.toLowerCase())
+                    && item.name && item.name.toLowerCase().includes(filterText.toLowerCase())) {
                     return item;
                 }
             }
         }
     );
-
     const subHeaderComponentMemo = useMemo(() => {
         const handleClear = () => {
             if (filterText) {
@@ -299,7 +288,6 @@ export const Search: FC=()=> {
         const addWalletAccountHandler = () => {
             setIdentityModalOpen(true)
         };
-
         return (
             <Box>
                 <HStack>
@@ -325,9 +313,7 @@ export const Search: FC=()=> {
         );
     }, [filterText, searchWalletAccount, resetPaginationToggle, filteredItems]);
 
-
     return (
-
         <Flex
             justifyContent="center"
             flex='auto'

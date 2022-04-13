@@ -48,7 +48,7 @@ export const IconLinkComponent: FC<iconLinkInterface> = ({children, hrefLink}) =
     )
 }
 
-export const SocialMedia=()=> {
+export const SocialMedia:FC=()=> {
      return (
         <Box
             //border={'1px solid'}
@@ -65,13 +65,13 @@ export const SocialMedia=()=> {
             >
 
                 <Stack direction='row' spacing={2}>
-                    {SocialMediaInterface.Discord === "" ?
-                        <IconLinkComponent
-                            hrefLink={'https://papermasters.io'}>
-                            <Icon as={FaDiscord}/>
-                        </IconLinkComponent>
-                        : null
-                    }
+                    {/*{SocialMediaInterface.Discord === "" ?*/}
+                    {/*    <IconLinkComponent*/}
+                    {/*        hrefLink={'https://papermasters.io'}>*/}
+                    {/*        <Icon as={FaDiscord}/>*/}
+                    {/*    </IconLinkComponent>*/}
+                    {/*    : null*/}
+                    {/*}*/}
                     <IconLinkComponent
                         hrefLink={'https://papermasters.io'}>
                         <Icon as={FaTwitter}/>

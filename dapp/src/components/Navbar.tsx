@@ -33,14 +33,15 @@ import {
 } from '@chakra-ui/icons';
 import {MdManageAccounts, MdOutlineReport, MdOutlineWarningAmber, MdOutlineNaturePeople} from "react-icons/md";
 import {useAppDispatch, useAppSelector} from "../app/hooks";
-import {Link as ReachLink, To, useParams} from "react-router-dom";
+import {Link as ReachLink, To} from "react-router-dom";
 import PMLogoFull from '../assets/icons/PMLogoFull';
+import {accountArrAction} from "../features/accountBC/AccountBCSlice";
 
 export default function WithSubnavigation() {
     const {isOpen, onToggle} = useDisclosure();
-    const tokenIDtoIdentityStruct = useAppSelector((state) => state.minted.tokenIDtoIdentityStruct);
-    const {walletAccount} = useParams();
-    const requestAccountsArr = useAppSelector((state) => state.register.accounts);
+    const getStructBCBC = useAppSelector((state) => state.accountBC.getStructBC);
+    const paramsWalletWallet = useAppSelector((state)=>state.accountDB.paramsWallet)
+    const accountArrArr = useAppSelector((state) => state.accountBC.accountArr);
     const dispatch = useAppDispatch();
 
     return (
@@ -91,7 +92,7 @@ export default function WithSubnavigation() {
                     spacing={6}>
                     {/*this box in necessary for sparkle to work correctly*/}
                     <Box>
-                        {requestAccountsArr.length === 0 ?
+                        {accountArrArr.length === 0 ?
                             <Tooltip hasArrow label='Metamask is waiting for you to make a move'
                                      placement={'bottom-end'} border={'1px solid #694b69'}
                                      borderRadius={'3px'} bg='pmpurple.5' color='pmpurple.13' m={'-10px'}>
@@ -110,7 +111,7 @@ export default function WithSubnavigation() {
                                         }}
                                         onClick={() => {
                                             console.log('i am clicked')
-                                            dispatch(requestUserWalletAction());
+                                            dispatch(accountArrAction());
                                         }}
                                     >
                                         <HStack>

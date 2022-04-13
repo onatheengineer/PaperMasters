@@ -6,15 +6,10 @@ import {
 } from "@chakra-ui/react";
 import {useAppSelector} from "../../app/hooks";
 
-interface Interface {
-
-}
-
-
-export const ValidationsReports:FC<Interface>=()=> {
+export const ValidationsReports:FC=()=> {
     const {walletAccount} = useParams();
 
-    const filledAccountsArr = useAppSelector((state) => state.register.accounts);
+    const accountArrArr = useAppSelector((state) => state.accountBC.accountArr);
 
     return(
             <Heading>

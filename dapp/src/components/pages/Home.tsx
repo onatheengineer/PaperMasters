@@ -1,11 +1,11 @@
 import {
     Stack, Box, Flex, Button, Text, VStack, useBreakpointValue } from '@chakra-ui/react';
-import React from "react";
+import React, {FC} from "react";
 import {} from '@chakra-ui/react';
 import BackgroundLogo from "../../assets/legoLavendarheadercroped.png";
 import SecondFooter from '../Footers/SecondFooterHome'
 
-export default function Home() {
+export const Home:FC=()=> {
     return (
         <Flex
         h={'100%'}
@@ -53,4 +53,6 @@ export default function Home() {
 
         </Flex>
     )
-}
+};
+
+export default Home;

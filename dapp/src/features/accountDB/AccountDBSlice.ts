@@ -47,7 +47,7 @@ const initialState: AccountPageInterface = {
     singleAccountDictionaryDB: initialStateAccountDB,
     allAccountDictionaryDB: [],
     singleNFIReceiptDB: initialStateNFIReceipt,
-    allNFIReceiptDB: initialStateNFIReceipt[],
+    allNFIReceiptDB: [],
     accountDBStatus: "idle",
     userSameAccountBool: false,
 };
@@ -96,9 +96,9 @@ export const { accountArrDB, paramsWallet, accountDBStatus, singleAccountDiction
 export const accountArrDBAction= createAction<string>("USEPARAMS_SAGA");
 export const singleAccountDictionaryDBAction = createAction<ParamsURLInterface>("ACCOUNT_DB_SAGA");
 export const postSingleAccountDictionaryDBAction = createAction<AccountDBInterface>("POST_ACCOUNT_DB_SAGA");
-export const allAccountDictionaryDBAction = createAction<ParamsURLInterface[]>("ALL_ACCOUNT_DB_SAGA");
-export const singleNFIReceiptDBAction = createAction<NFIReceiptInterface>("SINGLE_RECEIPT_DB_SAGA");
-export const allNFIReceiptDBAction = createAction<NFIReceiptInterface[]>("ALL_RECEIPT_DB_SAGA");
+export const allAccountDictionaryDBAction = createAction("ALL_ACCOUNT_DB_SAGA");
+export const singleNFIReceiptDBAction = createAction<ParamsURLInterface>("SINGLE_RECEIPT_DB_SAGA");
+export const allNFIReceiptDBAction = createAction("ALL_RECEIPT_DB_SAGA");
 
 export default AccountDBSlice.reducer;
 

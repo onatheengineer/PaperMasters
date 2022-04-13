@@ -15,16 +15,13 @@ import {
     Text, MenuButton, MenuItem, HStack,
 } from "@chakra-ui/react";
 import {Link as ReachLink} from "react-router-dom";
-import {requestUserWalletAction} from "../../features/accountBC/AccountBCSlice";
 import {SiSololearn} from "react-icons/si";
 import Sparkle from "react-sparkle";
 import {useAppDispatch} from "../../app/hooks";
+import {accountArrAction} from "../../features/accountBC/AccountBCSlice";
 
-interface Interface {
 
-}
-
-export const ModalForIdentNoUseParams:FC<Interface>=()=> {
+export const ModalForIdentNoUseParams:FC=()=> {
     const navigate = useNavigate();
     const {isOpen, onOpen, onClose} = useDisclosure()
     const finalRef = useRef(null)
@@ -66,7 +63,7 @@ export const ModalForIdentNoUseParams:FC<Interface>=()=> {
                         borderColor={'pmpurple.6'}
                         onClick={() => {
                             console.log('i am clicked')
-                            dispatch(requestUserWalletAction());
+                            dispatch(accountArrAction());
                         }}
                         _hover={{color: 'pmpurple.9'}}
                         // _active={{

@@ -6,7 +6,7 @@ import Footer from "./components/Footers/Footer";
 import "focus-visible/dist/focus-visible";
 import {Box, Flex, VStack} from '@chakra-ui/react';
 import Sidebar, {NavItem} from './components/Sidebar'
-import {accountArr, getAccountArrAction} from "./features/accountBC/AccountBCSlice";
+import {accountArr, accountArrAction} from "./features/accountBC/AccountBCSlice";
 import detectEthereumProvider from '@metamask/detect-provider';
 import { useGlobalToast } from './features/toast/hooks/useGlobalToast';
 
@@ -16,7 +16,7 @@ function App() {
 
     useEffect(() => {
         console.log("is this dispatch metamask useEffect running?")
-        dispatch(getAccountArrAction());
+        dispatch(accountArrAction());
         const provider: any = detectEthereumProvider();
         console.log("this is provider:", provider);
         provider.then((actualProvider: any) => {
@@ -24,7 +24,7 @@ function App() {
             actualProvider.on('accountsChanged', (accounts: any) => {
                 console.log('accountDB changed!')
                 dispatch(accountArr([]));
-                dispatch(getAccountArrAction());
+                dispatch(accountArrAction());
                 window.location.reload();
             });
             actualProvider.on('chainChanged', (chainId: any) => {

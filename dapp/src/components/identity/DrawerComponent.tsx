@@ -38,10 +38,9 @@ import {BsFillPersonLinesFill} from "react-icons/bs";
 import {SketchPicker} from "react-color";
 import {SocialButton} from "../Footers/Footer";
 import {openseaIcon} from '../../assets/icons/openseaIcon';
-import {putDBAccountDictionary, putDBAccountDictionaryAction} from '../../features/accountDB/AccountDBSlice';
-import {accountDictionaryInterface} from "../../features/accountBC/AccountBCSlice";
 import {ChevronDownIcon} from "@chakra-ui/icons";
-import {paramsWalletAccAction} from "../../features/IdentityPageUseParamsSlice";
+import {postSingleAccountDictionaryDBAction} from "../../features/accountDB/AccountDBSlice";
+import {AccountDBInterface} from "../../features/accountDB/AccountDBSlice.types";
 
 
 function initialState(paramsRequestAccountDictionary:any) {
@@ -49,7 +48,7 @@ function initialState(paramsRequestAccountDictionary:any) {
         ownerName: "",
         ownerEmail: "",
         ownerDescription: "",
-        aliasProfileLinks: ""
+        socialMediaLinks: ""
     };
 }
 
@@ -61,8 +60,8 @@ function reducer(state:any, action:any) {
             return {...state, ownerEmail: action.payload};
         case 'description':
             return {...state, ownerDescription: action.payload};
-        case 'aliasProfileLinks':
-            return {...state, aliasProfileLinks: action.payload};
+        case 'socialMediaLinks':
+            return {...state, socialMediaLinks: action.payload};
         default:
             throw new Error();
     }
@@ -77,36 +76,32 @@ function Mailto({ email, subject, body, ...props }: any) {
     );
 }
 
-interface Interface {
+export const DrawerComponent:FC=()=> {
 
-}
+    const accountArrArr = useAppSelector((state) => state.accountBC.accountArr);
+    const chainIdProviderProvider = useAppSelector((state) => state.accountBC.chainIdProvider);
+    const addressHasIdentityBoolBool = useAppSelector((state) => state.accountBC.addressHasIdentityBool);
+    const getStructBCBC = useAppSelector((state) => state.accountBC.getStructBC);
+    const paramsWalletWallet = useAppSelector((state) => state.accountDB.paramsWallet);
+    const singleNFIReceiptDBDB = useAppSelector((state) => state.accountDB.singleNFIReceiptDB);
+    const singleAccountDictionaryDBDB = useAppSelector((state) => state.accountDB.singleAccountDictionaryDB);
 
-export const DrawerComponent:FC<Interface>=()=> {
-
-    const userRequestWalletArr = useAppSelector((state) => state.register.accounts);
-    const paramsWalletAcc = useAppSelector((state) => state.identUseParams.paramsWalletAcc);
-    const paramsAddressHasIdentityBoolBC = useAppSelector((state) => state.identUseParams.addressHasIdentityBC);
-    const requestReceiptUsingParams = useAppSelector((state) => state.identUseParams.requestReceiptUsingParams);
-    const requestStructUsingParamsFromBC = useAppSelector((state) => state.identUseParams.requestStructUsingParamsFromBC);
-    const paramsRequestAccountDictionary = useAppSelector((state) => state.identUseParams.requestAccountDictionary);
-
-    console.log('requestReceiptUsingParams:', requestReceiptUsingParams);
-
-    const [state, dispatchAccountProfileDictionary] = useReducer(reducer, paramsRequestAccountDictionary, initialState);
+    const [state, dispatchAccountProfileDictionary] = useReducer(reducer, singleAccountDictionaryDBDB, initialState);
     console.log('this is the state in my useReducer:', state);
     const dispatch = useAppDispatch();
 
     const submitHandler = () => {
-        const accountProfileDictionary: accountDictionaryInterface = {
-            walletAccount: paramsWalletAcc as string,
+        const accountProfileDictionary: AccountDBInterface = {
+            chainId: chainIdProviderProvider as string,
+            walletAccount: paramsWalletWallet as string,
             ownerName: state.ownerName,
             ownerEmail: state.ownerEmail,
             ownerDescription: state.ownerDescription,
-            aliasProfileLinks: state.aliasProfileLinks,
+            socialMediaLinks: state.socialMediaLinks,
             emailValidationNotification: false,
             emailReportNotification: false
         }
-        dispatch(putDBAccountDictionaryAction(accountProfileDictionary));
+        dispatch(postSingleAccountDictionaryDBAction(accountProfileDictionary));
         onClose();
     }
 
@@ -119,7 +114,8 @@ export const DrawerComponent:FC<Interface>=()=> {
     }
     return (
         <>
-        {userRequestWalletArr.length !== 0 && userRequestWalletArr[0].toLowerCase() === paramsWalletAcc?.toLowerCase() && paramsAddressHasIdentityBoolBC ?
+        {accountArrArr.length !== 0 && accountArrArr[0].toLowerCase() === paramsWalletWallet?.toLowerCase()
+        && addressHasIdentityBoolBool ?
                 <Box
                     right={"2px"}
                     top={"2px"}
@@ -209,11 +205,11 @@ export const DrawerComponent:FC<Interface>=()=> {
                                                 borderColor={'pmpurple.8'}
                                                 bg={'pmpurple.2'}
                                                 color='pmpurple.15'
-                                                value={state.aliasProfileLinks}
-                                                id='alias'
+                                                value={state.socialMediaLinks}
+                                                id='socialMedia'
                                                 onChange={(e) => {
                                                     dispatchAccountProfileDictionary({
-                                                        type: 'aliasProfileLinks',
+                                                        type: 'socialMediaLinks',
                                                         payload: e.currentTarget.value
                                                     })
                                                 }}
@@ -396,7 +392,7 @@ export const DrawerComponent:FC<Interface>=()=> {
                                                 placeholder={'Add social media link'}
                                                 onChange={(e) => {
                                                     dispatchAccountProfileDictionary({
-                                                        type: 'aliasProfileLinks',
+                                                        type: 'socialMediaLinks',
                                                         payload: e.currentTarget.value
                                                     })
                                                 }}
