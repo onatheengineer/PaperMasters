@@ -211,7 +211,7 @@ export default function LargeWithLogoCentered() {
             </Box>
         </Box>
     )
-};
+}
 
 
 

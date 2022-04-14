@@ -21,9 +21,9 @@ const createToastSlice = (initialState: ToastState) =>
         },
     });
 
-export const startToast = createAction<ToastOptions>("startToast");
+export const showFriendlyToast =
+    createAction<ToastOptions>("showPersonalToast");
 
 const toastSlice = createToastSlice({ toastOptions: null });
 export const { showToast, resetToast } = toastSlice.actions;
-
 export default toastSlice.reducer;

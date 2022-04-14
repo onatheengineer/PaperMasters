@@ -5,53 +5,51 @@ import { call, put, takeEvery, takeLatest, select} from 'redux-saga/effects';
 import {
     accountArrError,
     accountArrDBAction,
-    accountDBStatus,
     userSameAccountBool,
     singleAccountDictionaryDB,
     singleAccountDictionaryDBAction,
     allAccountDictionaryDBAction,
     postSingleAccountDictionaryDBAction,
     singleNFIReceiptDBAction,
-    allNFIReceiptDBAction, allNFIReceiptDB, singleNFIReceiptDB, allAccountDictionaryDB
+    allNFIReceiptDBAction, allNFIReceiptDB, singleNFIReceiptDB, allAccountDictionaryDB,
+    accountDBselectors
 } from "./AccountDBSlice";
 import {
     accountArr,
-    accountsArrStatus,
     chainIdProvider,
     chainIdSupportedBool,
+    accountBCselectors
 } from "../accountBC/AccountBCSlice";
 import {AccountDBInterface, NFIReceiptInterface, ParamsURLInterface} from "./AccountDBSlice.types";
+import {RootState} from "../../app/store";
 
 const baseURL = 'https://ociuozqx85.execute-api.us-east-1.amazonaws.com';
 
 function* accountArrDBSaga({payload}: PayloadAction<string>): SagaIterator {
     try {
-        const requestAccountArrStatus = yield select(accountsArrStatus);
-        const chainIdProviderId = yield select(chainIdProvider);
-        if (requestAccountArrStatus === 'success' && payload.length > 0) {
-            const chainIdSupportedBoolBool = yield select(chainIdSupportedBool);
-            if (chainIdSupportedBoolBool) {
-                const postAccountArr_chainId = yield call(axios.post, `${baseURL}/account`,
-                    {walletAccount: payload[0], chainId: chainIdProviderId});
-                console.log("AxiospostAccountArr_chainId:", postAccountArr_chainId);
-                //TODO: this needs to work , I don't know if postAccountArr returns 400 or 200
-                if (postAccountArr_chainId.status === 400) {
-                    yield put(accountDBStatus('succeeded new entry in DB'))
-                } else {
-                    yield put(accountDBStatus('failed entry already in DB'))
+        //this payload in AccountArr inside accountBC
+        //console.log('am i making it into accountArrDBSaga?')
+        const chainIdProviderIdSelector = yield select(accountBCselectors.chainIdProviderSelector);
+        const getAccountArrAxios = yield call(axios.get, `${baseURL}/account/${chainIdProviderIdSelector}/${payload}`);
+                if (!Object.prototype.hasOwnProperty.call(getAccountArrAxios.data, 'Item')) {
+                    const chainIdSupportedBoolSelector = yield select(accountBCselectors.chainIdSupportedBoolSelector);
+                    if (chainIdSupportedBoolSelector) {
+                    const postAccountArr_chainId = yield call(axios.post, `${baseURL}/account`,
+                        {walletAccount: payload, chainId: chainIdProviderIdSelector});
+                    console.log("AxiospostAccountArr_chainId:", postAccountArr_chainId);
                 }
             }
-        }
-    } catch (e) {
-        console.error('this is the putAccountArrInDBSaga ERROR catch: ', e);
-        yield put(accountArrError(e));
+    } catch (e: any) {
+        yield put(accountArrError(e.message));
+        const accountArrErrorSelector = yield select(accountDBselectors.accountArrErrorSelector)
+        console.error("accountArrErrorSelector:", accountArrErrorSelector)
     }
 }
 
 function* postSingleAccountDictionaryDBSaga({payload}: PayloadAction<AccountDBInterface>): SagaIterator {
     try{
-        const axiosPUT = yield call(axios.post, `${baseURL}/account`, payload)
-        console.log(axiosPUT)
+        const accountDicaxiosPUT = yield call(axios.post, `${baseURL}/account`, payload)
+        console.log("accountDicaxiosPUT", accountDicaxiosPUT)
     }catch (e) {
         console.error("putSingleAccountDictionaryDBSaga", e);
     }
@@ -64,7 +62,7 @@ function* singleAccountDictionaryDBSaga({payload}: PayloadAction<ParamsURLInterf
         yield put(singleAccountDictionaryDB(accountDictionary.data.Item));
         console.log ('this is the type of accountDictionary:', accountDictionary);
         yield put(userSameAccountBool(false));
-        const accountArrArr = yield select(accountArr)
+        const accountArrArr = yield select(accountBCselectors.accountArrSelector)
         if(accountArrArr.length > 0){
             if(accountDictionary.data.Item.walletAccount === accountArrArr[0]){
                 yield put(userSameAccountBool(true));
@@ -77,9 +75,9 @@ function* singleAccountDictionaryDBSaga({payload}: PayloadAction<ParamsURLInterf
 
 function* allAccountDictionaryDBSaga(): SagaIterator {
     try{
-        const getAccountDBDB = yield call(axios.get, `${baseURL}/account`);
-        console.log ('this is the type of getBDWallet:', getAccountDBDB);
-        yield put(allAccountDictionaryDB(getAccountDBDB.data.Items));
+        const allAccountDictionary = yield call(axios.get, `${baseURL}/account`);
+        console.log ('this is the type of allAccountDictionaryDBSaga:', allAccountDictionary);
+        yield put(allAccountDictionaryDB(allAccountDictionary.data.Items));
     } catch (e) {
         console.error(`this is the allAccountDictionaryDBSaga ERROR catch: ${e}`);
     }
@@ -113,7 +111,7 @@ export function* watchAccountDBSaga(): SagaIterator {
     yield takeLatest(accountArrDBAction.type, accountArrDBSaga);
     yield takeLatest(singleAccountDictionaryDBAction.type, singleAccountDictionaryDBSaga);
     yield takeLatest(postSingleAccountDictionaryDBAction.type, postSingleAccountDictionaryDBSaga);
-    yield takeEvery(allAccountDictionaryDBAction.type, allAccountDictionaryDBSaga);
+    yield takeLatest(allAccountDictionaryDBAction.type, allAccountDictionaryDBSaga);
     yield takeLatest(singleNFIReceiptDBAction.type, singleNFIReceiptDBSaga);
     yield takeLatest(allNFIReceiptDBAction.type, allNFIReceiptDBSaga);
 }

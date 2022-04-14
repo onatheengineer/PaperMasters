@@ -96,6 +96,8 @@ export const Sidebar: FC<InterfaceSidebar>= ({icon, profileName} ) => {
     const [headerTitle, setHeaderTitle] = useState<string>('');
     const [headerText, setHeaderText] = useState<string>('');
 
+    const addressToTokenBoolBool = useAppSelector((state) => state.accountBC.addressToTokenBool);
+
     useEffect(() => {
         console.log(location);
 
@@ -298,7 +300,7 @@ export const Sidebar: FC<InterfaceSidebar>= ({icon, profileName} ) => {
 
                 {/*:  <Route path={'/identity/:walletAcc'} element={<Identity/>}/>*/}
                 {/*}*/}
-                {/*{addressHasIdentity ?*/}
+                {/*{addressToTokenBoolBool ?*/}
                 {/*    <Route path={'/register'} element={<Navigate replace to="/search" />}/>*/}
                 {/*    :*/}
                 {/*    <Route path={'/register'} element={<Register/>}/>*/}

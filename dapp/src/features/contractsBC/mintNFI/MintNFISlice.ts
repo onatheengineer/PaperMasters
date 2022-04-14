@@ -2,6 +2,7 @@ import { createSlice, PayloadAction, createAction } from "@reduxjs/toolkit";
 import {
     MintingNFIStruct, MintNFI
 } from './mintNFISlice.types'
+import {RootState} from "../../../app/store";
 
 export type MintState = {
     mintingNFIStruct : MintingNFIStruct | null;
@@ -61,5 +62,16 @@ export const mintNFIAction = createAction<MintingNFIStruct>("MINT_NFI_SAGA");
 export const gasForMintNFIAction = createAction<MintingNFIStruct>("GAS_FOR_MINT_NFI_SAGA");
 export const gasAccBalanceAction = createAction("GAS_ACC_BALANCE");
 export const tokenURIAction = createAction("TOKEN_URL");
+
+
+export const selectors = {
+    mintSucceededSelector: (state: RootState): 'idle' | 'loading' | 'succeeded' | 'failed' | 'alreadyMinted' | undefined => state.nfi.mintNFI.mintSucceeded,
+    gasForMintingSelector: (state: RootState): number => state.nfi.mintNFI.gasPrice,
+    mintingErrSelector: (state: RootState): string => state.nfi.mintNFI.mintErr,
+    mintStatusBCSelector: (state: RootState): boolean => state.nfi.mintNFI.mintStatusBC,
+    accBalanceErrSelector: (state: RootState): string => state.nfi.mintNFI.accBalanceErr,
+    accBalanceSelector: (state: RootState): number => state.nfi.mintNFI.accBalance,
+    axiosPOSTReceiptStatusSelector: (state: RootState): number => state.nfi.axiosPOSTReceiptStatus,
+}
 
 export default MintNFISlice.reducer;

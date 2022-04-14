@@ -6,7 +6,7 @@ import * as React from "react";
 interface FeatureProps {
     heading: string;
     text: string;
-};
+}
 
 const Feature =({heading, text}: FeatureProps) => {
     return (
@@ -59,4 +59,4 @@ export default function secondFooterHome() {
             </Grid>
         </Box>
     );
-};
+}

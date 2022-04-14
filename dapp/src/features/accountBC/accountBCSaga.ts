@@ -2,13 +2,14 @@ import {call, put, takeEvery, select, takeLatest, all} from 'redux-saga/effects'
 import {PayloadAction} from "@reduxjs/toolkit";
 import Web3 from "web3";
 import {
-    chainIdProvider, chainIdStatus, chainIdSupportedBool, accountArr, accountsArrStatus, addressHasIdentityBool, getStructBC,
+    chainIdProvider, chainIdStatus, chainIdSupportedBool, accountArr,
+    accountArrStatus, addressHasIdentityBool, getStructBC,
     allStructBCAction, getAllStructBC, addressToTokenID, addressToTokenAction,
-    singleStructBCAction, accountArrAction,
+    singleStructBCAction, accountArrAction, accountBCselectors, addressToTokenBool,
 } from "./AccountBCSlice";
 import {accountArrDBAction} from '../accountDB/AccountDBSlice';
 import axios from "axios";
-import chainIdJSON from "./chainId.json";
+import chainIdJSON from "../JSON/chainId.json";
 import {SagaIterator} from "redux-saga";
 import MintABI from "../../abiFiles/PaperMastersNFI.json";
 import {ParamsURLInterface} from "../accountDB/AccountDBSlice.types";
@@ -16,21 +17,22 @@ import {ParamsURLInterface} from "../accountDB/AccountDBSlice.types";
 const web3 = new Web3('https://api.s0.b.hmny.io');
 const baseURL = 'https://ociuozqx85.execute-api.us-east-1.amazonaws.com';
 
-function* accountBCSaga(): SagaIterator {
+function* accountArrSaga(): SagaIterator {
     try {
-        yield put(accountsArrStatus("loading"));
+        yield put(accountArrStatus("loading"));
         yield put(chainIdStatus("loading"));
         const web3 = new Web3(Web3.givenProvider);
         const accArr: string[] = yield call(web3.eth.requestAccounts as any);
-        //TODO run api tp make sure this is NOT a test accountDB. If test accountDB EXIT saga with Toast error stating to accounts
+        //TODO run api to make sure this is NOT a test accountDB. If test accountDB EXIT saga with Toast error stating to accounts
         if (accArr.length > 0) {
-            yield put(accountsArrStatus('success'));
+            yield put(accountArrStatus('success'));
             const accArrLowerCase = accArr.map(element => {
                 return element.toLowerCase();
             });
             yield put(accountArr(accArrLowerCase));
             const chainIdProviderProvider = yield call(web3.eth.getChainId);
-            if (chainIdProviderProvider.length > 0) {
+            console.log("Looking to see if this chaininprovider works!::::", chainIdProviderProvider);
+            if (chainIdProviderProvider > 0) {
                 yield put(chainIdProvider(`${chainIdProviderProvider}`));
                 yield put(addressToTokenAction(accArrLowerCase[0]))
                 yield put(chainIdStatus("success"));
@@ -44,20 +46,21 @@ function* accountBCSaga(): SagaIterator {
                 }
                 //TODO before calling this action I need to check axios to see if this accountBC is already in the DB
                 const hasAccountArrAlready = yield call(axios.get, `${baseURL}/account/${chainIdProviderProvider}/${accArrLowerCase[0]}`);
+                console.log("hasAccountArrAlready!", hasAccountArrAlready);
                 if (!Object.prototype.hasOwnProperty.call(hasAccountArrAlready.data, 'Item')) {
+
                     //TODO need to make sure that this actually works
-                    //yield call(accountArrDBAction,accArrLowerCase[0]);
                     yield put(accountArrDBAction(accArrLowerCase[0]));
                 }
             } else {
                 yield put(chainIdStatus('failed'))
             }
         } else {
-            yield put(accountsArrStatus("failed"));
+            yield put(accountArrStatus("failed"));
         }
     } catch (e: any) {
-        console.error('web3 or requestAccountArr catchError:', e);
-        yield put(accountsArrStatus("failed"));
+        console.error('web3 or requestAccountArr catchError:', e.message);
+        yield put(accountArrStatus("failed"));
         yield put(chainIdProvider(''));
     }
 }
@@ -85,54 +88,60 @@ function* singleStructBCSaga({payload}: PayloadAction<ParamsURLInterface>): Saga
     }
 }
 
-// function* allStructBCSaga(): SagaIterator {
-//     try{
-//         const rpcEndPoint = yield all(Object.keys(chainIdJSON).map( (chainIdKey) => {
-//             if (Object.prototype.hasOwnProperty.call(MintABI.networks, `${chainIdKey}`)) {
-//                 if(chainIdJSON[chainIdKey].rpc !== null){
-//                     const web3 = new Web3(chainIdJSON[chainIdKey].rpc);
-//                     const NFIContract = new web3.eth.Contract(MintABI.abi as any, MintABI.networks[chainIdKey].address);
-//                    return call(NFIContract.methods.allIdentityStructs().call);
-//                 }}
-//         //return (void);
-//         }))
-//         yield put(getAllStructBC(rpcEndPoint));
-//     } catch (e) {
-//         console.error("allStructBCSagaError:", e)
-//     }
-// }
+function* allStructBCSaga(): SagaIterator {
+    try {
+        const allStructBCEndPoint = yield all(Object.keys(chainIdJSON).filter((chainIdKey) => {
+                return Object.prototype.hasOwnProperty.call(MintABI.networks, `${chainIdKey}`)
+            }).filter((chainIdTrue) => {
+                return chainIdJSON[chainIdTrue].rpc !== null;
+            }).map((chainIdNew) => {
+                const web3 = new Web3(chainIdJSON[chainIdNew].rpc);
+                const NFIContract = new web3.eth.Contract(MintABI.abi as any, MintABI.networks[chainIdNew].address);
+                return call(NFIContract.methods.allIdentityStructs().call);
+            })
+        )
+        //TODO the corrected formatt is [[]] coming off the blockchain - BSStruct
+        yield put(getAllStructBC(allStructBCEndPoint));
+        const getAllStructBCBC = yield select(accountBCselectors.getAllStructBCSelector)
+        console.log("getAllStructBC:", getAllStructBCBC)
+        console.log("allStructBCEndPoint:", allStructBCEndPoint)
+    } catch (e) {
+        console.error("allStructBCSagaError:", e)
+    }
+}
 
-// function* addressToTokenSaga({payload}: PayloadAction<string>): SagaIterator {
-//     //payload should be the useParams
-//     try {
-//         yield put(addressHasIdentityBool(false))
-//         if (payload.length > 0) {
-//             const chainIdProviderProvider = yield select(chainIdProvider)
-//             if (Object.prototype.hasOwnProperty.call(MintABI.networks, `${chainIdProviderProvider}`)) {
-//                 const NFIContract = new web3.eth.Contract(MintABI.abi as any, MintABI.networks[chainIdProviderProvider].address);
-//                 const addressToTokenIDID = yield call(NFIContract.methods.addressToTokenID(payload).call);
-//                 console.log("addresstotokenId:", addressToTokenIDID)
-//                 const addressToTokenIDIDNUMBER = parseInt(addressToTokenIDID)
-//                 //TODO if addresstoTikenID is a string then the below if statement needs changed
-//                 if (addressToTokenIDIDNUMBER >= 1) {
-//                     yield put(addressHasIdentityBool(true));
-//                     yield put(addressToTokenID(addressToTokenIDIDNUMBER));
-//                 }
-//                 if (addressToTokenIDID === 0) {
-//                     yield put(addressHasIdentityBool(false))
-//                 }
-//             }
-//         } else {
-//             addressHasIdentityBool(false)
-//         }
-//     } catch (addressHasIdentityBoolFailed: any) {
-//         console.error(addressHasIdentityBoolFailed.message);
-//     }
-// }
+function* addressToTokenSaga(): SagaIterator {
+    //TODO yield selector bring in accountAcc - also make an addressHasIdentity for the CONNECTED user to stop register
+    try {
+        const accountArrSelector = yield select(accountBCselectors.accountArrSelector)
+        yield put(addressHasIdentityBool(false))
+        if (accountArrSelector.length > 0) {
+            const chainIdProviderProvider = yield select(accountBCselectors.chainIdProviderSelector)
+            if (Object.prototype.hasOwnProperty.call(MintABI.networks, `${chainIdProviderProvider}`)) {
+                const NFIContract = new web3.eth.Contract(MintABI.abi as any, MintABI.networks[chainIdProviderProvider].address);
+                const addressToTokenIDID = yield call(NFIContract.methods.addressToTokenID(accountArrSelector).call);
+                console.log("addresstotokenId:", addressToTokenIDID)
+                const addressToTokenIDIDNUMBER = parseInt(addressToTokenIDID)
+                //TODO if addresstoTikenID is a string then the below if statement needs changed
+                if (addressToTokenIDIDNUMBER >= 1) {
+                    yield put(addressToTokenBool(true));
+                    yield put(addressToTokenID(addressToTokenIDIDNUMBER));
+                }
+                if (addressToTokenIDID === 0) {
+                    yield put(addressToTokenBool(false))
+                }
+            }
+        } else {
+            addressToTokenBool(false)
+        }
+    } catch (addressToTokenBoolFailed: any) {
+        console.error(addressToTokenBoolFailed.message);
+    }
+}
 
 export function* watchAccountBCSaga(): SagaIterator {
-    yield takeEvery(accountArrAction.type, accountBCSaga);
-    //yield takeLatest(addressToTokenAction.type, addressToTokenSaga);
+    yield takeEvery(accountArrAction.type, accountArrSaga);
+    yield takeLatest(addressToTokenAction.type, addressToTokenSaga);
     yield takeLatest(singleStructBCAction.type, singleStructBCSaga);
-    //yield takeLatest(allStructBCAction.type, allStructBCSaga);
+    yield takeLatest(allStructBCAction.type, allStructBCSaga);
 }

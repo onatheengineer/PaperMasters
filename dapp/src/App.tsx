@@ -6,28 +6,28 @@ import Footer from "./components/Footers/Footer";
 import "focus-visible/dist/focus-visible";
 import {Box, Flex, VStack} from '@chakra-ui/react';
 import Sidebar, {NavItem} from './components/Sidebar'
-import {accountArr, accountArrAction} from "./features/accountBC/AccountBCSlice";
+import {accountArr, accountArrAction, accountBCselectors} from "./features/accountBC/AccountBCSlice";
 import detectEthereumProvider from '@metamask/detect-provider';
-import { useGlobalToast } from './features/toast/hooks/useGlobalToast';
+import {select} from "redux-saga/effects";
+
 
 function App() {
-    useGlobalToast();
     const dispatch = useAppDispatch();
 
     useEffect(() => {
         console.log("is this dispatch metamask useEffect running?")
         dispatch(accountArrAction());
-        const provider: any = detectEthereumProvider();
-        console.log("this is provider:", provider);
-        provider.then((actualProvider: any) => {
-            console.log('what is this actual provider?', actualProvider);
-            actualProvider.on('accountsChanged', (accounts: any) => {
+        const providerPromise = detectEthereumProvider();
+        console.log("this is provider:", providerPromise);
+        providerPromise.then((provider: any) => {
+            console.log('what is this actual provider?', provider);
+            provider.on('accountsChanged', (accounts: any) => {
                 console.log('accountDB changed!')
                 dispatch(accountArr([]));
                 dispatch(accountArrAction());
                 window.location.reload();
             });
-            actualProvider.on('chainChanged', (chainId: any) => {
+            provider.on('chainChanged', (chainId: any) => {
                 window.location.reload();
             })
         });

@@ -5,8 +5,8 @@ import accountDBSlice from "../features/accountDB/AccountDBSlice";
 import accountBCSlice from "../features/accountBC/AccountBCSlice";
 import mentionsSlice from "../features/accountDB/mentions/MentionsSlice";
 import contractFunctionsSlice from '../features/contractsBC/mintNFI/MintNFIFunctionsSlice'
-import toastSlice from "../features/toast/redux/toastSlice";
 import nfiSlice from '../features/contractsBC/mintNFI/MintNFISlice';
+import toastSlice from "../features/toast/ToastSlice";
 
 const sagaMiddleware = createSaga();
 

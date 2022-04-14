@@ -186,7 +186,7 @@ contract PaperMastersNFI is ERC721, Ownable {
 
         _safeMint(msg.sender, newTokenID);
 
-        emit NFIMinted(newTokenID, block.timestamp, msg.value, _identity);
+        emit NFIMinted(msg.sender, newTokenID, block.timestamp, msg.value, _identity);
     }
     event NFIMinted(address indexed _from, uint256 tokenId, uint256 timeStamp, uint256 contractFee, identity identityStruct);
 

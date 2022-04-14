@@ -25,10 +25,9 @@ import {MdOutlineLibraryAddCheck} from "react-icons/md";
 import {SiSololearn} from "react-icons/si";
 import IdentityEntryModal from "../../utils/IdentityEntryModal";
 import AvatarNFI from "../AvatarNFI";
-import Sparkle from "react-sparkle";
 import {allAccountDictionaryDBAction, allNFIReceiptDBAction} from "../../features/accountDB/AccountDBSlice";
 import {BCStruct} from "../../features/accountBC/AccountBCSlice.types";
-
+import {allStructBCAction} from "../../features/accountBC/AccountBCSlice";
 
 interface DataRow {
     name: string;
@@ -75,7 +74,7 @@ const FilterComponent: FC<interfaceFilterComponent> = ( { filterText, onClick, o
 // data provides access to your row data
 
 const ExpandedComponent: FC<ExpanderComponentProps<DataRow>> = ({ data }) => {
-    console.log(data)
+    console.log("this is Search - Data", data)
     const identityStruct: any[] = data['identityStruct'] as any[]
     if(identityStruct.length === 0){
         return (null);
@@ -105,9 +104,10 @@ const ExpandedComponent: FC<ExpanderComponentProps<DataRow>> = ({ data }) => {
 };
 
 export const Search:FC=()=> {
-    const accountArrArr = useAppSelector((state) => state.accountBC.accountArr);
+     const accountArrArr = useAppSelector((state) => state.accountBC.accountArr);
     const addressHasIdentityBoolBool = useAppSelector((state) => state.accountBC.addressHasIdentityBool);
     const getStructBCBC = useAppSelector((state) => state.accountBC.getStructBC);
+    const getAllStructBCBC = useAppSelector((state) => state.accountBC.getAllStructBC);
     const paramsWalletWallet = useAppSelector((state) => state.accountDB.paramsWallet);
     const singleNFIReceiptDBDB = useAppSelector((state) => state.accountDB.singleNFIReceiptDB);
     const allNFIReceiptDBDB = useAppSelector((state) => state.accountDB.allNFIReceiptDB);
@@ -122,49 +122,52 @@ export const Search:FC=()=> {
     useEffect(() => {
         dispatch(allAccountDictionaryDBAction());
         dispatch(allNFIReceiptDBAction());
-    }, [accountArrArr, allAccountDictionaryDBDB]);
+        dispatch(allStructBCAction());
+    }, []);
 
     const rowsTable = useMemo(() => {
         const receiptDictionary: any = {};
-        console.log('get all receipts from db', allNFIReceiptDBDB)
-        allNFIReceiptDBDB.map((el:any) => {
-            receiptDictionary[el.walletAccount] = el;
-        })
-        console.log('this is the receiptDictionary:', receiptDictionary);
-        const datarow: DataRow[] = [];
-        jkdsvgfhsdjkfhgdfjkhg.map((element:any) => {
-            let name = "";
-            let profession = "";
-            let originDateFormatted = "";
-            let identityStruct:BCStruct[] = [];
-            if (Object.prototype.hasOwnProperty.call(receiptDictionary, element.walletAccount)) {
-                console.log('this is the receiptdictionary walletaccount', receiptDictionary[element.walletAccount])
-                if (receiptDictionary[element.walletAccount].hasOwnProperty('identityStruct')) {
-                    if (receiptDictionary[element.walletAccount]['identityStruct'].length >= 10) {
-                        identityStruct = receiptDictionary[element.walletAccount]['identityStruct']
-                        name = receiptDictionary[element.walletAccount]['identityStruct'][1].split('|||')[0]
-                        profession = receiptDictionary[element.walletAccount]['identityStruct'][3].split('|||')[0]
-                        const originDate = receiptDictionary[element.walletAccount]['identityStruct'][9]
-                        const originDateObject = new Date(originDate);
-                        originDateFormatted = `${originDateObject.toLocaleString('en-us',
-                            {month: 'long'})} ${originDateObject.getDate()}, ${originDateObject.getFullYear()}`
-                        console.log("this is the origin date from Search", originDate)
+        if(getAllStructBCBC !== null){
+            getAllStructBCBC.map((el:any) => {
+                receiptDictionary[el.walletAccount] = el;
+            })
+            console.log('this is the receiptDictionary:', receiptDictionary);
+            const datarow: DataRow[] = [];
+            receiptDictionary.map((element:any) => {
+                let name = "";
+                let profession = "";
+                let originDateFormatted = "";
+                let identityStruct:BCStruct[] = [];
+                if (Object.prototype.hasOwnProperty.call(receiptDictionary, element.walletAccount)) {
+                    console.log('this is the receiptdictionary walletaccount', receiptDictionary[element.walletAccount])
+                    if (Object.hasOwnProperty.call(receiptDictionary[element.walletAccount],'identityStruct')) {
+                        if (receiptDictionary[element.walletAccount]['identityStruct'].length >= 10) {
+                            identityStruct = receiptDictionary[element.walletAccount]['identityStruct']
+                            name = receiptDictionary[element.walletAccount]['identityStruct'][1].split('|||')[0]
+                            profession = receiptDictionary[element.walletAccount]['identityStruct'][3].split('|||')[0]
+                            const originDate = receiptDictionary[element.walletAccount]['identityStruct'][9]
+                            const originDateObject = new Date(originDate);
+                            originDateFormatted = `${originDateObject.toLocaleString('en-us',
+                                {month: 'long'})} ${originDateObject.getDate()}, ${originDateObject.getFullYear()}`
+                            console.log("this is the origin date from Search", originDate)
+                        }
                     }
                 }
-            }
-            const singleWalletDictionary = {
-                identityStruct: identityStruct,
-                walletAccount: element.walletAccount,
-                name: (name ? name : "non-registered"),
-                profession: profession,
-                validations: 1,
-                originDate: originDateFormatted,
-                reported: 0,
-            }
-            datarow.push(singleWalletDictionary);
-        })
-        return datarow;
-    }, [getAllWalletFromDB, allNFIReceiptDBDB]);
+                const singleWalletDictionary = {
+                    identityStruct: identityStruct,
+                    walletAccount: element.walletAccount,
+                    name: (name ? name : "non-registered"),
+                    profession: profession,
+                    validations: 1,
+                    originDate: originDateFormatted,
+                    reported: 0,
+                }
+                datarow.push(singleWalletDictionary);
+            })
+            return datarow;
+        }
+        return[];
+    }, []);
     console.log("this is my rowstable", rowsTable);
 
     const columns: TableColumn<DataRow>[] = [
@@ -296,8 +299,6 @@ export const Search:FC=()=> {
                                      activateButton={false}
                                      filterText={filterText} text={"reset"} placeHolder={"Search NFI"}
                                      idType={"Search"}/>
-
-
                         <FilterComponent onFilter={(e: any) => setWalletAccount(e.target.value)}
                                          onClick={addWalletAccountHandler} activateButton={(filteredItems.length !== 0)}
                                          filterText={searchWalletAccount} text={"Add Wallet Account"}
@@ -346,7 +347,7 @@ export const Search:FC=()=> {
                 />
             </Box>
         </Flex>
-    )
+     )
 };
 
 export default Search;

@@ -169,7 +169,7 @@ export default function WithSubnavigation() {
 const DesktopNav = () => {
     const linkColor = 'pmpurple.13';
     const linkHoverColor = 'pmpurple.8';
-    const popoverContentBgColor = 'pmpurple.4';
+    const popoverContentBgColor = 'pmpurple.2';
 
     return (
         <Stack direction={'row'} spacing={8}
@@ -202,7 +202,6 @@ const DesktopNav = () => {
                                                 {navItem.label}
                                             </Text>
                                         </HStack>
-
                                     </Link>
                                     :
                                     <Link
@@ -228,14 +227,11 @@ const DesktopNav = () => {
                                 }
 
                             </HStack>
-
                         </PopoverTrigger>
-
-
                         {navItem.children && (
                             <PopoverContent
                                 border={'1px solid'}
-                                borderColor={'pmpurple.10'}
+                                borderColor={'pmpurple.8'}
                                 boxShadow={'xl'}
                                 bg={popoverContentBgColor}
                                 p={4}
@@ -264,7 +260,7 @@ const DesktopSubNav = ({ label, subLabel, navLink, navIcon }: NavItem) => {
             display={'block'}
             p={2}
             rounded={'md'}
-            _hover={{ bg: useColorModeValue('pmpurple.5', 'gray.900'),
+            _hover={{ bg: useColorModeValue('pmpurple.3', 'gray.900'),
                 textDecoration: 'none'
             }}>
             <Stack direction={'row'} align={'center'}>

@@ -1,7 +1,8 @@
 import { useToast, UseToastOptions } from "@chakra-ui/react";
-import React, {useEffect} from "react";
-import { useAppDispatch, useAppSelector } from "../../../app/hooks";
-import { resetToast } from "../redux/toastSlice";
+import React from "react";
+
+import { useAppDispatch, useAppSelector } from "../../../app/hooks"
+import { resetToast } from "../ToastSlice"
 
 export const toastConfig: UseToastOptions = {
     isClosable: true,
@@ -14,13 +15,12 @@ export function useGlobalToast(): null {
     const toast = useToast(toastConfig);
     const toastOptions = useAppSelector((state) => state.toast.toastOptions);
 
-    useEffect(() => {
+    React.useEffect(() => {
         if (toastOptions !== null) {
             const { title, status } = toastOptions;
             toast({ title, status });
             dispatch(resetToast());
         }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [toastOptions]);
     return null;
 }

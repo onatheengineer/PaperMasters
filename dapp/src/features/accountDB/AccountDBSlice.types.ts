@@ -44,7 +44,6 @@ export interface AccountPageInterface {
     allAccountDictionaryDB: AccountDBInterface[];
     singleNFIReceiptDB: NFIReceiptInterface;
     allNFIReceiptDB: NFIReceiptInterface[];
-    accountDBStatus: 'idle' | 'succeeded new entry in DB' | 'failed entry already in DB';
     userSameAccountBool: boolean;
 }
 

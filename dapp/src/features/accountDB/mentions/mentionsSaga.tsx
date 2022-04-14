@@ -4,7 +4,6 @@ import {
     singleMentionAction, allMentionsAction, errorMessage, allMentions, mentionsStateDictionaryInterface
 } from "./MentionsSlice";
 import {PayloadAction} from "@reduxjs/toolkit";
-import {ToastOptions} from "../../toast/redux/toastSlice.types";
 import {SagaIterator} from "redux-saga";
 
 const baseURL = 'https://ociuozqx85.execute-api.us-east-1.amazonaws.com';
@@ -12,7 +11,7 @@ const baseURL = 'https://ociuozqx85.execute-api.us-east-1.amazonaws.com';
 function* singleMentionSaga({payload}: PayloadAction<mentionsStateDictionaryInterface>): SagaIterator {
     yield put(errorMessage(""))
     try {
-        if(payload.hasOwnProperty('messageBody')){
+        if(Object.prototype.hasOwnProperty.call(payload, 'messageBody')){
             console.log('singleMentionBodyHasProperty', payload)
             if(payload.messageBody.length > 0){
                 const putActualMention = yield call(axios.put,`${baseURL}/mentions`, payload)

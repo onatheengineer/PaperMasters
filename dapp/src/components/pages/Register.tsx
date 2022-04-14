@@ -62,6 +62,7 @@ export const Register:FC=()=> {
     const mintErrErr = useAppSelector((state) => state.nfi.mintNFI.mintErr);
     const accBalanceBalance = useAppSelector((state) => state.nfi.mintNFI.accBalance);
     const accBalanceErrErr = useAppSelector((state) => state.nfi.mintNFI.accBalanceErr);
+    const addressToTokenBoolBool = useAppSelector((state) => state.accountBC.addressToTokenBool);
 
     const [name, setName] = useState<string | "">("");
     const [profession, setProfession] = useState<string | "">("");
@@ -979,10 +980,10 @@ export const Register:FC=()=> {
                                                 transform: 'translateY(-2px)',
                                                 boxShadow: 'md',
                                             }}
-                                            onClick={submitMintHandler}
+                                             onClick={submitMintHandler}
                                             isLoading={submitButtonClicked}
                                             px={'12px'}
-                                            loadingText='Submitting to the Blockchain for minting, this can take up to 2.5 minutes'
+                                            loadingText='Minting'
                                             color={"pmpurple.13"}
                                             variant='outline'
                                         >
@@ -1004,7 +1005,7 @@ export const Register:FC=()=> {
                                                     <Text mb="1rem" color={'pmpurple.15'}>
                                                         {modalDisplayText}
                                                         <br/>
-                                                        <Text color={'gray.100'}>
+                                                        <Text color={'pmpurple.8'}>
                                                             {mintErrErr}
                                                         </Text>
 

@@ -4,29 +4,35 @@ import {
     mintNFIAction, mintSucceeded, gasForMintNFIAction, gasForMinting, mintStatusBC,
     mintingErr, gasAccBalanceAction, accBalance, accBalanceErr, tokenURIAction, axiosPOSTReceiptStatus,
 } from "./MintNFISlice";
-import {addressHasIdentityBool, chainIdStatus, chainIdProvider, accountArr} from "../../accountBC/AccountBCSlice";
+import {
+    addressHasIdentityBool,
+    chainIdStatus,
+    chainIdProvider,
+    accountArr,
+    accountBCselectors
+} from "../../accountBC/AccountBCSlice";
 import MintABI from '../../../abiFiles/PaperMastersNFI.json'
 import {PayloadAction} from "@reduxjs/toolkit";
 import {SagaIterator} from "redux-saga";
 import {MintingNFIStruct} from "./mintNFISlice.types";
 import Web3 from "web3";
 import {NFIReceiptInterface} from "../../accountDB/AccountDBSlice.types";
-
-const web3 = new Web3('https://api.s0.b.hmny.io');
 const baseURL = 'https://ociuozqx85.execute-api.us-east-1.amazonaws.com';
+
+const web3 = new Web3(Web3.givenProvider);
 const NFIContract = new web3.eth.Contract(MintABI.abi as any, MintABI.networks['1666700000'].address);
 
 function* mintNFISaga({payload}: PayloadAction<MintingNFIStruct>): SagaIterator {
     try {
-        const requestAccountArr: string[] = yield select(accountArr);
-        const addressHasIdentityBoolBool = yield select(addressHasIdentityBool);
+        const requestAccountArr: string[] = yield select(accountBCselectors.accountArrSelector);
+        const addressHasIdentityBoolBool = yield select(accountBCselectors.addressHasIdentityBoolSelector);
         if (addressHasIdentityBoolBool) {
             yield put(mintSucceeded('alreadyMinted'));
             yield put(mintingErr('Sorry, only one NFI per accountDB'));
             return;
         }
-        const chainIdStatusStatus = yield select(chainIdStatus);
-        const chainIdProviderProvider = yield select(chainIdProvider);
+        const chainIdStatusStatus = yield select(accountBCselectors.chainIdStatusSelector);
+        const chainIdProviderProvider = yield select(accountBCselectors.chainIdProviderSelector);
         if (chainIdStatusStatus === 'yesProvider') {
             if (Object.prototype.hasOwnProperty.call(MintABI.networks, `${chainIdProviderProvider}`)) {
                 if (payload.name === null) {
@@ -50,7 +56,7 @@ function* mintNFISaga({payload}: PayloadAction<MintingNFIStruct>): SagaIterator 
                     payload.bgRGB === null ? "" : payload.bgRGB,
                     payload.originDate === null ? "" : payload.originDate,
                 )
-                console.table(prepareResult);
+                console.table("prepareResult:",prepareResult);
                 //TODO: get fee variable from contract and replace the 'value'
                 const mintResult: any = yield call(prepareResult.send, {
                     from: requestAccountArr[0],
@@ -58,11 +64,11 @@ function* mintNFISaga({payload}: PayloadAction<MintingNFIStruct>): SagaIterator 
                 });
                 const receiptToDB: NFIReceiptInterface = {
                     receipt: mintResult,
-                    walletAccount: yield select(accountArr),
-                    chainId: yield select(chainIdProvider),
+                    walletAccount: requestAccountArr[0],
+                    chainId: chainIdProviderProvider,
                     transactionHash: yield mintResult.transactionHash
                 }
-                const axiosPOSTReceipt = yield call(axios.put, `${baseURL}/receipt`, receiptToDB)
+                const axiosPOSTReceipt = yield call(axios.post, `${baseURL}/receipt`, receiptToDB)
                 const status = yield mintResult.status;
                 console.log('this is the status from BC:', status);
                 yield put(mintStatusBC(status))
@@ -116,7 +122,7 @@ function* mintNFISaga({payload}: PayloadAction<MintingNFIStruct>): SagaIterator 
 }
 
 function* getGasForMintSaga({payload}: PayloadAction<MintingNFIStruct>): SagaIterator {
-    const requestAccountArr: string[] = yield select(accountArr);
+    const requestAccountArr: string[] = yield select(accountBCselectors.accountArrSelector);
     const prepareResult = yield call(
         NFIContract.methods.mintNFI,
         payload.name,
@@ -146,7 +152,7 @@ function* getGasForMintSaga({payload}: PayloadAction<MintingNFIStruct>): SagaIte
 
 function* gasAccBalanceSaga(): SagaIterator {
     try {
-        const requestAccountArr: string[] = yield select(accountArr);
+        const requestAccountArr: string[] = yield select(accountBCselectors.accountArrSelector);
         if(requestAccountArr.length > 0) {
             const getAccBalance = yield web3.eth.getBalance(requestAccountArr[0]) as any;
             console.log('getAccBalance',getAccBalance)
@@ -161,7 +167,7 @@ function* gasAccBalanceSaga(): SagaIterator {
 }
 
 function* tokenURISaga({payload}: PayloadAction<string>): SagaIterator {
-    const requestAccountArr: string[] = yield select(accountArr);
+    const requestAccountArr: string[] = yield select(accountBCselectors.accountArrSelector);
 }
 
 export function* watchMintNFISaga(): SagaIterator {
