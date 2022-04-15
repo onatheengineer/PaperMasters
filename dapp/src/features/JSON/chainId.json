@@ -1,22 +1,56 @@
 {
-  "1":
-  {
-    "type": "production",
-    "rpc": null
+  "1":{
+    "rpc":[
+      "https://api.mycryptoapi.com/eth",
+      "https://rpc.flashbots.net/",
+      "https://eth-mainnet.gateway.pokt.network/v1/5f3453978e354ab992c4da79",
+      "https://cloudflare-eth.com/",
+      "https://mainnet-nethermind.blockscout.com/",
+      "https://nodes.mewapi.io/rpc/eth",
+      "https://main-rpc.linkpool.io/",
+      "https://mainnet.eth.cloud.ava.do/",
+      "https://ethereumnodelight.app.runonflux.io",
+      "https://rpc.ankr.com/eth",
+      "https://eth-rpc.gateway.pokt.network",
+      "https://main-light.eth.linkpool.io"
+    ]
   },
+
   "61":
   {
-    "type": "production",
-    "rpc": null
+    "rpc":[
+      "https://blockscout.com/etc/mainnet/api/eth-rpc",
+      "https://www.ethercluster.com/etc"
+    ]
   },
   "1666600000":
   {
-    "type": "production",
-    "rpc": null
+    "rpc":[
+      "https://harmony-0-rpc.gateway.pokt.network",
+      "https://api.harmony.one",
+      "https://a.api.s0.t.hmny.io",
+      "https://api.s0.t.hmny.io",
+      "https://rpc.heavenswail.one/",
+      "https://api.fuzz.fi/",
+      "https://rpc.hermesdefi.io/"
+    ]
   },
-  "1666700000":
-  {
-    "type": "test",
-    "rpc": "https://api.s0.b.hmny.io"
+  "1666600001":{
+    "rpc":[
+      "https://s1.api.harmony.one"
+    ]
+  },
+  "1666600002":{
+    "rpc":[
+      "https://s2.api.harmony.one"
+    ]
+  },
+  "1666700000": {
+    "rpc": [
+      "https://api.harmony.one",
+      "https://s1.api.harmony.one",
+      "https//s2.api.harmony.one",
+      "https//s3.api.harmony.one"
+    ]
   }
 }

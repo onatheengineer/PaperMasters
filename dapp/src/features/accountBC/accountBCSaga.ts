@@ -1,3 +1,6 @@
+//100000000000000000
+//0xdE08194D71a1B1BeA066F83898C9c08C8E76DaEF
+
 import {call, put, takeEvery, select, takeLatest, all} from 'redux-saga/effects';
 import {PayloadAction} from "@reduxjs/toolkit";
 import Web3 from "web3";
@@ -89,6 +92,7 @@ function* singleStructBCSaga({payload}: PayloadAction<ParamsURLInterface>): Saga
 }
 
 function* allStructBCSaga(): SagaIterator {
+    //https://github.com/DefiLlama/chainlist
     try {
         const allStructBCEndPoint = yield all(Object.keys(chainIdJSON).filter((chainIdKey) => {
                 return Object.prototype.hasOwnProperty.call(MintABI.networks, `${chainIdKey}`)
@@ -97,6 +101,8 @@ function* allStructBCSaga(): SagaIterator {
             }).map((chainIdNew) => {
                 const web3 = new Web3(chainIdJSON[chainIdNew].rpc);
                 const NFIContract = new web3.eth.Contract(MintABI.abi as any, MintABI.networks[chainIdNew].address);
+                console.log("NFIContract:",NFIContract);
+
                 return call(NFIContract.methods.allIdentityStructs().call);
             })
         )

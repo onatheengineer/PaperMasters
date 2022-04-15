@@ -157,6 +157,9 @@ function* gasAccBalanceSaga(): SagaIterator {
             const getAccBalance = yield web3.eth.getBalance(requestAccountArr[0]) as any;
             console.log('getAccBalance',getAccBalance)
             yield put(accBalance(getAccBalance));
+            // Often you will need to format the output for the user
+            // which prefer to see values in ether (instead of wei)
+            //ethers.utils.formatEther(getAccBalance)
         } else{
             console.log('Account Error')
         }

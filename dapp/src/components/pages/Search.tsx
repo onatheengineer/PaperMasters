@@ -59,7 +59,7 @@ const FilterComponent: FC<interfaceFilterComponent> = ( { filterText, onClick, o
                    onChange={onFilter} />
                 <Tooltip hasArrow label='Please type at minimum 32 characters to add a wallet account'
                          placement={'bottom-end'} border={'1px solid #694b69'}
-                         borderRadius={'3px'} bg='pmpurple.5' color='pmpurple.13' m={'-10px'}>
+                         borderRadius={'3px'} bg='pmpurple.5' color='pmpurple.13' m={'-6px'}>
                 <InputRightAddon
                     p='0' borderColor={"pmpurple.4"} bg={'pmpurple.2'}
                     children={<Button bg={'pmpurple.5'} color={"pmpurple.13"} disabled={activateButton}
@@ -129,7 +129,8 @@ export const Search:FC=()=> {
         const receiptDictionary: any = {};
         if(getAllStructBCBC !== null){
             getAllStructBCBC.map((el:any) => {
-                receiptDictionary[el.walletAccount] = el;
+                //TODO wallet_chain_Pkey now
+                receiptDictionary[el.allAccountDictionaryDB.wallet_chain_Pkey] = el;
             })
             console.log('this is the receiptDictionary:', receiptDictionary);
             const datarow: DataRow[] = [];
@@ -294,7 +295,6 @@ export const Search:FC=()=> {
         return (
             <Box>
                 <HStack>
-
                     <FilterComponent onFilter={(e: any) => setFilterText(e.target.value)} onClick={handleClear}
                                      activateButton={false}
                                      filterText={filterText} text={"reset"} placeHolder={"Search NFI"}
@@ -303,7 +303,6 @@ export const Search:FC=()=> {
                                          onClick={addWalletAccountHandler} activateButton={(filteredItems.length !== 0)}
                                          filterText={searchWalletAccount} text={"Add Wallet Account"}
                                          placeHolder={"Search Wallet Account"} idType={"WalletAccount"}/>
-
                     <IdentityEntryModal title={'Create a profile for a Non-Registered'} text={'Enter Wallet Account'}
                                         placeHolder={'wallet accountDB'}
                                         buttonText={'Create'} isOpen={isIdentityModalOpen} onClose={() => {

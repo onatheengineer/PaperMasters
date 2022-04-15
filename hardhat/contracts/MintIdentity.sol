@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: GPL-3.0
 pragma solidity >=0.8.0 <0.9.0;
+import "hardhat/console.sol";
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/token/ERC721/extensions/IERC721Metadata.sol";
@@ -68,7 +69,9 @@ contract PaperMastersNFI is ERC721, Ownable {
     }
 
     function allIdentityStructs() public view returns(identity[] memory){
+
         return _dictionaryNFIs;
+        console.log("Trying to look at all the contracts", _dictionaryNFIs);
     }
 
     function setBaseURI(string memory changeBaseURI) public onlyOwner{
