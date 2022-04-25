@@ -28,15 +28,7 @@ import AvatarNFI from "../AvatarNFI";
 import {allAccountDictionaryDBAction, allNFIReceiptDBAction} from "../../features/accountDB/AccountDBSlice";
 import {BCStruct} from "../../features/accountBC/AccountBCSlice.types";
 import {allStructBCAction} from "../../features/accountBC/AccountBCSlice";
-
-interface DataRow {
-    name: string;
-    walletAccount: string;
-    validations: number;
-    originDate: string;
-    profession: string;
-    reported: number;
-}
+import {NFIReceiptInterface} from "../../features/accountDB/AccountDBSlice.types";
 
 interface interfaceFilterComponent{
     filterText: string,
@@ -52,7 +44,6 @@ const FilterComponent: FC<interfaceFilterComponent> = ( { filterText, onClick, o
                                                         placeHolder, idType, activateButton}) => (
     <Box>
         <HStack>
-
             <InputGroup>
             <Input focusBorderColor='pmpurple.8' color={'pmpurple.13'} border={'1px solid'} borderColor={'pmpurple.3'}
                    id={idType} type="text" placeholder={placeHolder} aria-label="Search Input" value={filterText}
@@ -66,51 +57,66 @@ const FilterComponent: FC<interfaceFilterComponent> = ( { filterText, onClick, o
                                       onClick={onClick} >{text}</Button>} />
                 </Tooltip>
                 </InputGroup>
-
         </HStack>
     </Box>
 )
 
 // data provides access to your row data
+// interface DataRow {
+//     //TODO: chainId should display the actual blockchain name and not just the number
+//     chainId: string;
+//     walletAccount?: string;
+//     name?: string;
+//     validations: number;
+//     originDate: string;
+//     profession?: string;
+//     reported: number;
+//     identityStruct<BCStruct>;
+// }
 
-const ExpandedComponent: FC<ExpanderComponentProps<DataRow>> = ({ data }) => {
+const ExpandedComponent: FC<ExpanderComponentProps<BCStruct[]>> = ({ data }) => {
     console.log("this is Search - Data", data)
-    const identityStruct: any[] = data['identityStruct'] as any[]
-    if(identityStruct.length === 0){
-        return (null);
+    const addressHasIdentityBoolBool = useAppSelector((state) => state.accountBC.addressHasIdentityBool);
+    if (!addressHasIdentityBoolBool) {
+        return null;
     }
-        return(
-
-    <AvatarNFI
-        accountNumber={identityStruct[0]}
-        name={identityStruct[1].split("|||")[0]}
-        nameColor={identityStruct[1].split("|||")[1]}
-        email={identityStruct[2].split("|||")[0]}
-        emailColor={identityStruct[2].split("|||")[1]}
-        profession={identityStruct[3].split("|||")[0]}
-        professionColor={identityStruct[3].split("|||")[1]}
-        organization={identityStruct[4].split("|||")[0]}
-        organizationColor={identityStruct[4].split("|||")[1]}
-        slogan={identityStruct[5].split("|||")[0]}
-        sloganColor={identityStruct[5].split("|||")[1]}
-        website={identityStruct[6].split("|||")[0]}
-        websiteColor={identityStruct[6].split("|||")[1]}
-        uniqueYou={identityStruct[7].split("|||")[0]}
-        uniqueYouColor={identityStruct[7].split("|||")[1]}
-        avatarBG={identityStruct[8]}
-        originDate={parseInt(identityStruct[9])}
-    />
+    const getAllStructBCBC = useAppSelector((state) => state.accountBC.getAllStructBC);
+    const dispatch = useAppDispatch();
+    dispatch(allStructBCAction);
+    const identityStruct = data['getAllStructBCBC']
+    if (getAllStructBCBC[0].length === 0) {
+        return null;
+    }
+    return (
+        identityStruct.map(
+            <AvatarNFI
+                walletAccount={identityStruct[0]}
+                name={identityStruct[1].split("|||")[0]}
+                nameColor={identityStruct[1].split("|||")[1]}
+                email={identityStruct[2].split("|||")[0]}
+                emailColor={identityStruct[2].split("|||")[1]}
+                profession={identityStruct[3].split("|||")[0]}
+                professionColor={identityStruct[3].split("|||")[1]}
+                organization={identityStruct[4].split("|||")[0]}
+                organizationColor={identityStruct[4].split("|||")[1]}
+                slogan={identityStruct[5].split("|||")[0]}
+                sloganColor={identityStruct[5].split("|||")[1]}
+                website={identityStruct[6].split("|||")[0]}
+                websiteColor={identityStruct[6].split("|||")[1]}
+                uniqueYou={identityStruct[7].split("|||")[0]}
+                uniqueYouColor={identityStruct[7].split("|||")[1]}
+                avatarBG={identityStruct[8]}
+                originDate={parseInt(identityStruct[9])}
+            />
         )
+    )
 };
 
 export const Search:FC=()=> {
-     const accountArrArr = useAppSelector((state) => state.accountBC.accountArr);
+    const accountArrArr = useAppSelector((state) => state.accountBC.accountArr);
     const addressHasIdentityBoolBool = useAppSelector((state) => state.accountBC.addressHasIdentityBool);
-    const getStructBCBC = useAppSelector((state) => state.accountBC.getStructBC);
     const getAllStructBCBC = useAppSelector((state) => state.accountBC.getAllStructBC);
     const paramsWalletWallet = useAppSelector((state) => state.accountDB.paramsWallet);
-    const singleNFIReceiptDBDB = useAppSelector((state) => state.accountDB.singleNFIReceiptDB);
-    const allNFIReceiptDBDB = useAppSelector((state) => state.accountDB.allNFIReceiptDB);
     const allAccountDictionaryDBDB = useAppSelector((state) => state.accountDB.allAccountDictionaryDB);
 
     const [filterText, setFilterText] = useState<string>('');
@@ -126,14 +132,13 @@ export const Search:FC=()=> {
     }, []);
 
     const rowsTable = useMemo(() => {
-        const receiptDictionary: any = {};
+        const receiptDictionary: NFIReceiptInterface["receipt"] = {};
         if(getAllStructBCBC !== null){
-            getAllStructBCBC.map((el:any) => {
-                //TODO wallet_chain_Pkey now
-                receiptDictionary[el.allAccountDictionaryDB.wallet_chain_Pkey] = el;
+            getAllStructBCBC.map((el:BCStruct) => {
+                receiptDictionary[el.allAccountDictionaryDBDB.wallet_chain_Pkey] = el;
             })
             console.log('this is the receiptDictionary:', receiptDictionary);
-            const datarow: DataRow[] = [];
+            const datarow: BCStruct[] = [];
             receiptDictionary.map((element:any) => {
                 let name = "";
                 let profession = "";
@@ -159,7 +164,7 @@ export const Search:FC=()=> {
                     walletAccount: element.walletAccount,
                     name: (name ? name : "non-registered"),
                     profession: profession,
-                    validations: 1,
+                    validations: 0,
                     originDate: originDateFormatted,
                     reported: 0,
                 }
@@ -171,7 +176,7 @@ export const Search:FC=()=> {
     }, []);
     console.log("this is my rowstable", rowsTable);
 
-    const columns: TableColumn<DataRow>[] = [
+    const columns: TableColumn<BCStruct>[] = [
         {
             //allowRowEvents: true,
             name: 'Wallet Account',

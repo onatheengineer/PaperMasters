@@ -9,7 +9,6 @@ export interface MintingNFIStruct {
     website: string,
     uniqueYou: string,
     bgRGB: string,
-    originDate: number
 }
 
 export interface MintNFI {

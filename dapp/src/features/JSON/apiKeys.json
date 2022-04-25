@@ -34,3 +34,32 @@ applicationSecretKey: 'efdef876fc22bbd3068e3ba4066f3bd5'
 //ankr: YOUR_ANKR_API_KEY
 // https://rpc.ankr.com/eth
 //https://rpc.ankr.com/avalanche
+
+
+//
+// export interface IChainData {
+//     name: string;
+//     chainId: number;
+//     shortName: string;
+//     chain: string;
+//     network: string;
+//     networkId: number;
+//     nativeCurrency: {
+//         name: string;
+//         symbol: string;
+//         decimals: number;
+//     };
+//     rpc: string[];
+//     faucets: string[];
+//     infoURL: string;
+// }
+//evm-chains - npm package
+//https://github.com/pedrouid/evm-chains
+// function getAllChains(): IChainData[];
+// function getChain(chainId: number): IChainData;
+// function getChainByChainId(chainId: number): IChainData;
+// function getChainByKeyValue(key: string, value: any): IChainData;
+// function getChainByNetworkId(networkId: number): number;
+// function convertNetworkIdToChainId(networkId: number): number;
+// function convertChainIdToNetworkId(chainId: number): number;
+

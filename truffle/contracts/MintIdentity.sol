@@ -11,7 +11,6 @@ contract PaperMastersNFI is ERC721, Ownable {
     struct identity
     {
         address walletAccount;
-        uint256 chainId;
         string name;
         string email;
         string profession;
@@ -38,7 +37,7 @@ contract PaperMastersNFI is ERC721, Ownable {
     constructor() ERC721("papermasters.io", "NFI") {
         _setBaseURI = "www.papermasters.io/identity";
         identityFee = 100000000000000000;
-        _dictionaryNFIs.push(identity(address(this),block.chainid,'','','','','','','','',block.timestamp));
+        _dictionaryNFIs.push(identity(address(this),'','','','','','','','',block.timestamp));
     }
 
     function addressToTokenID(address walletAddress) public view returns(uint256) {
@@ -171,7 +170,6 @@ contract PaperMastersNFI is ERC721, Ownable {
 
         identity memory _identity = identity({
         walletAccount: msg.sender,
-        chainId: block.chainid,
         name: _name,
         email: _email,
         profession: _profession,

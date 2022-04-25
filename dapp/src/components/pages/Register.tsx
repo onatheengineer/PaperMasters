@@ -167,7 +167,6 @@ export const Register:FC=()=> {
             website: `${website}|||${ColorRGBToString(colorTextWebsite)}`,
             uniqueYou: `${uniqueYou}|||${ColorRGBToString(colorTextUniqueYou)}`,
             bgRGB: `${ColorRGBToString(bgRGB)}`,
-            originDate: originDate,
         }
         console.table(mintPayload);
         setSubmitButtonClicked(true)
@@ -184,7 +183,6 @@ export const Register:FC=()=> {
             website: `${website}|||${ColorRGBToString(colorTextWebsite)}`,
             uniqueYou: `${uniqueYou}|||${ColorRGBToString(colorTextUniqueYou)}`,
             bgRGB: `${ColorRGBToString(bgRGB)}`,
-            originDate: originDate,
         }
         dispatch(gasForMintNFIAction(mintPayload));
     };
@@ -956,7 +954,7 @@ export const Register:FC=()=> {
                                        uniqueYou={uniqueYou} uniqueYouColor={ColorRGBToString(colorTextUniqueYou)}
                                        avatarBG={ColorRGBToString(bgRGB)}
                                        originDate={originDate}
-                                       accountNumber={accountArrArr[0]}
+                                       walletAccount={accountArrArr[0]}
                             />
 
                             <Stack>
@@ -1008,7 +1006,6 @@ export const Register:FC=()=> {
                                                         <Text color={'pmpurple.8'}>
                                                             {mintErrErr}
                                                         </Text>
-
                                                     </Text>
                                                 </ModalBody>
                                                 <ModalFooter>
@@ -1035,7 +1032,7 @@ export const Register:FC=()=> {
                                             color={"pmpurple.13"}
                                         >
                                             <Text as='u'>Estimated Gas: {gasPricePrice}</Text>
-                                            {/*{estimateGasHandler}*/}
+                                            {estimateGasHandler}
                                         </Box>
                                         : null}
                                 </Center>

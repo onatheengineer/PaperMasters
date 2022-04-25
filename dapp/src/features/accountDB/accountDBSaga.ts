@@ -12,16 +12,23 @@ import {
     postSingleAccountDictionaryDBAction,
     singleNFIReceiptDBAction,
     allNFIReceiptDBAction, allNFIReceiptDB, singleNFIReceiptDB, allAccountDictionaryDB,
+    identityBCDB,
     accountDBselectors
 } from "./AccountDBSlice";
 import {
     accountArr,
     chainIdProvider,
     chainIdSupportedBool,
-    accountBCselectors
+    accountBCselectors, allStructBCAction, getAllStructBC, interfaceBCStruct
 } from "../accountBC/AccountBCSlice";
-import {AccountDBInterface, NFIReceiptInterface, ParamsURLInterface} from "./AccountDBSlice.types";
+import {
+    AccountDBInterface,
+    IdentityBCDBInterface,
+    NFIReceiptInterface,
+    ParamsURLInterface
+} from "./AccountDBSlice.types";
 import {RootState} from "../../app/store";
+import {BCStruct} from "../accountBC/AccountBCSlice.types";
 
 const baseURL = 'https://ociuozqx85.execute-api.us-east-1.amazonaws.com';
 
@@ -83,6 +90,37 @@ function* allAccountDictionaryDBSaga(): SagaIterator {
     }
 }
 
+function* IdentityBCDBSaga(): SagaIterator {
+    try{
+        const getAllStructBCBCSelector:interfaceBCStruct = yield select(accountBCselectors.getAllStructBCSelector);
+        const allAccountDictionaryDBDBSelector:AccountDBInterface[] = yield select(accountDBselectors.allAccountDictionaryDBSelector);
+        const addressHasIdentityBoolBoolSelector:AccountDBInterface[] = yield select(accountBCselectors.addressHasIdentityBoolSelector);
+        const identityBCDBArr:IdentityBCDBInterface[] = [];
+
+        allAccountDictionaryDBDBSelector.map( (el)=>{
+            const dataRowDictionary: IdentityBCDBInterface = {
+                chainId: el.chainId,
+                walletAccount: el.walletAccount,
+                chainIdName: "",
+                tokenId: undefined,
+                name: el.ownerName ? el.ownerName : el.walletAccount,
+                profession: "",
+                validations: 0,
+                reported: 0,
+                createdDate: el.createdDate,
+                originDate: ""
+            }
+            //TODO fill in NFIStruct data
+            identityBCDBArr.push(dataRowDictionary);
+        })
+
+        yield put(identityBCDB(identityBCDBArr))
+
+    } catch (e) {
+        console.error(` ERROR catch: ${e}`);
+    }
+}
+
 function* singleNFIReceiptDBSaga({ payload }: PayloadAction<ParamsURLInterface>): SagaIterator {
     try{
         //TODO fix lambda and api endpoints
@@ -114,6 +152,8 @@ export function* watchAccountDBSaga(): SagaIterator {
     yield takeLatest(allAccountDictionaryDBAction.type, allAccountDictionaryDBSaga);
     yield takeLatest(singleNFIReceiptDBAction.type, singleNFIReceiptDBSaga);
     yield takeLatest(allNFIReceiptDBAction.type, allNFIReceiptDBSaga);
+    yield takeLatest(getAllStructBC.type, IdentityBCDBSaga);
+    yield takeLatest(allAccountDictionaryDB.type, IdentityBCDBSaga);
 }
 
 

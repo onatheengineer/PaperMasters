@@ -1,7 +1,11 @@
-import { createSlice, PayloadAction, createAction } from "@reduxjs/toolkit";
+import {createSlice, PayloadAction, createAction, createEntityAdapter, EntityState} from "@reduxjs/toolkit";
 import {BCStruct} from "./AccountBCSlice.types"
 import {ParamsURLInterface} from "../accountDB/AccountDBSlice.types";
 import { RootState } from "../../app/store";
+
+export interface interfaceBCStruct {
+    [chainId: string]: BCStruct[]
+}
 
 export interface AccountArrState {
     chainIdProvider: string;
@@ -14,7 +18,7 @@ export interface AccountArrState {
     addressToTokenID: number;
     addressToTokenBool: boolean,
     getStructBC: BCStruct | null,
-    getAllStructBC: BCStruct[] | null,
+    getAllStructBC: interfaceBCStruct,
 }
 
 const initialState: AccountArrState = {
@@ -28,8 +32,7 @@ const initialState: AccountArrState = {
     addressToTokenID: 0,
     addressToTokenBool: false,
     getStructBC: null,
-    getAllStructBC: null,
-
+    getAllStructBC: {},
 }
 
 const AccountBCSlice = createSlice ({
@@ -63,8 +66,8 @@ const AccountBCSlice = createSlice ({
         getStructBC(state, action: PayloadAction<BCStruct | null>) {
             state.getStructBC = action.payload
         },
-        getAllStructBC(state, action: PayloadAction<BCStruct[]>) {
-            state.getAllStructBC = action.payload
+        getAllStructBC(state, action: PayloadAction<interfaceBCStruct>) {
+            state.getAllStructBC = {...state.getAllStructBC, ...action.payload}
         },
     }
 });
@@ -77,6 +80,7 @@ export const addressToTokenAction = createAction<string>("ADDRESS_TO_TOKEN_SAGA"
 //TODO: update which action I am passing through
 export const singleStructBCAction = createAction<ParamsURLInterface>("STRUCT_BC_SAGA");
 export const allStructBCAction = createAction("ALL_STRUCT_BC_SAGA");
+export const chainIdStructBCAction = createAction<string>("CHAINID_BC_SAGA");
 
 export const accountBCselectors = {
     chainIdProviderSelector: (state: RootState): string => state.accountBC.chainIdProvider,
@@ -88,8 +92,7 @@ export const accountBCselectors = {
     addressToTokenIDSelector: (state: RootState): number => state.accountBC.addressToTokenID,
     addressToTokenBoolSelector: (state: RootState): boolean => state.accountBC.addressToTokenBool,
     getStructBCSelector: (state: RootState): BCStruct | null => state.accountBC.getStructBC,
-    getAllStructBCSelector: (state: RootState): BCStruct[] | null => state.accountBC.getAllStructBC
+    getAllStructBCSelector: (state: RootState): interfaceBCStruct | null => state.accountBC.getAllStructBC
 };
-
 
 export default AccountBCSlice.reducer;

@@ -54,7 +54,6 @@ function* mintNFISaga({payload}: PayloadAction<MintingNFIStruct>): SagaIterator 
                     payload.website === null ? "" : payload.website,
                     payload.uniqueYou === null ? "" : payload.uniqueYou,
                     payload.bgRGB === null ? "" : payload.bgRGB,
-                    payload.originDate === null ? "" : payload.originDate,
                 )
                 console.table("prepareResult:",prepareResult);
                 //TODO: get fee variable from contract and replace the 'value'
@@ -133,7 +132,6 @@ function* getGasForMintSaga({payload}: PayloadAction<MintingNFIStruct>): SagaIte
         payload.website === null ? "" : payload.website,
         payload.uniqueYou === null ? "" : payload.uniqueYou,
         payload.bgRGB === null ? "" : payload.bgRGB,
-        payload.originDate === null ? "" : payload.originDate,
     )
     try {
         const gasMintResult: any = yield call(prepareResult.estimateGas, {
@@ -159,7 +157,7 @@ function* gasAccBalanceSaga(): SagaIterator {
             yield put(accBalance(getAccBalance));
             // Often you will need to format the output for the user
             // which prefer to see values in ether (instead of wei)
-            //ethers.utils.formatEther(getAccBalance)
+            // ethers.utils.formatEther(getAccBalance)
         } else{
             console.log('Account Error')
         }

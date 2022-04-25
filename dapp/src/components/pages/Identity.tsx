@@ -137,7 +137,7 @@ export const Identity:FC=()=> {
                                      overflow={'none'} whiteSpace={'break-spaces'}
                                 >
                                     {walletAcc.length !== 0 && addressHasIdentityBoolBool !== false && singleStructBC !== null && singleStructBC.walletAccount.length !== 0 ?
-                                        <AvatarNFI accountNumber={singleStructBC.walletAccount}
+                                        <AvatarNFI walletAccount={singleStructBC.walletAccount}
                                                    name={singleStructBC.name.split("|||")[0]}
                                                    nameColor={singleStructBC.name.split("|||")[1]}
                                                    email={singleStructBC.email.split("|||")[0]}

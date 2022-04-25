@@ -17,7 +17,7 @@ import legoLavendarheadercroped from "../assets/legoLavendarheadercroped.png";
 import {PMsvgIcon} from "../assets/icons/PMSvgIcon";
 
 interface AvatarNFIInterface{
-    accountNumber: string,
+    walletAccount: string,
     name: string,
     nameColor: string,
     email: string,
@@ -36,7 +36,7 @@ interface AvatarNFIInterface{
     originDate: number,
 }
 
-export const AvatarNFI:FC<AvatarNFIInterface>=( {accountNumber,
+export const AvatarNFI:FC<AvatarNFIInterface>=( {walletAccount,
                                                 name,
                                                 nameColor,
                                                 email,
@@ -208,7 +208,7 @@ export const AvatarNFI:FC<AvatarNFIInterface>=( {accountNumber,
                                 >
                                     <Text p={'6px'} fontSize={'9pt'} color={'white'}
                                           whiteSpace={'break-spaces'}>
-                                        {accountNumber}
+                                        {walletAccount}
                                     </Text>
                                 </Box>
                             </Stack>

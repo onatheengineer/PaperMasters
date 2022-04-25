@@ -9,5 +9,5 @@ export interface BCStruct{
     website: string;
     uniqueYou: string;
     bgRGB: string;
-    originDate: string | number;
+    originDate: string;
 }

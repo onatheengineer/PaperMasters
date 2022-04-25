@@ -5,10 +5,23 @@ import {call, put, takeEvery, select, takeLatest, all} from 'redux-saga/effects'
 import {PayloadAction} from "@reduxjs/toolkit";
 import Web3 from "web3";
 import {
-    chainIdProvider, chainIdStatus, chainIdSupportedBool, accountArr,
-    accountArrStatus, addressHasIdentityBool, getStructBC,
-    allStructBCAction, getAllStructBC, addressToTokenID, addressToTokenAction,
-    singleStructBCAction, accountArrAction, accountBCselectors, addressToTokenBool,
+    chainIdProvider,
+    chainIdStatus,
+    chainIdSupportedBool,
+    accountArr,
+    accountArrStatus,
+    addressHasIdentityBool,
+    getStructBC,
+    allStructBCAction,
+    getAllStructBC,
+    addressToTokenID,
+    addressToTokenAction,
+    singleStructBCAction,
+    accountArrAction,
+    accountBCselectors,
+    addressToTokenBool,
+    chainIdStructBCAction,
+    interfaceBCStruct,
 } from "./AccountBCSlice";
 import {accountArrDBAction} from '../accountDB/AccountDBSlice';
 import axios from "axios";
@@ -16,8 +29,8 @@ import chainIdJSON from "../JSON/chainId.json";
 import {SagaIterator} from "redux-saga";
 import MintABI from "../../abiFiles/PaperMastersNFI.json";
 import {ParamsURLInterface} from "../accountDB/AccountDBSlice.types";
+import {BCStruct} from "./AccountBCSlice.types";
 
-const web3 = new Web3('https://api.s0.b.hmny.io');
 const baseURL = 'https://ociuozqx85.execute-api.us-east-1.amazonaws.com';
 
 function* accountArrSaga(): SagaIterator {
@@ -91,25 +104,33 @@ function* singleStructBCSaga({payload}: PayloadAction<ParamsURLInterface>): Saga
     }
 }
 
+function* chainIdStructBCSaga({payload}: PayloadAction<string>): SagaIterator {
+    console.log('am I getting into chainIdStructSaga?', payload)
+    console.log('rpc[0]', chainIdJSON[payload].rpc[0])
+    try {
+        const web3 = new Web3(chainIdJSON[payload].rpc[0]);
+        const NFIContract = new web3.eth.Contract(MintABI.abi as any, MintABI.networks[payload].address);
+        console.log("NFIContract:", NFIContract);
+        const identStructBC = yield call(NFIContract.methods.allIdentityStructs().call);
+        //TODO the corrected formatt is [[]] coming off the blockchain - BSStruct
+        yield put(getAllStructBC({[payload]: identStructBC}));
+        const getAllStructBCBC = yield select(accountBCselectors.getAllStructBCSelector)
+        console.log("getAllStructBC:", getAllStructBCBC)
+    }catch (e){
+        console.error("chainIdStructBCSagaError:", e)
+    }
+}
+
 function* allStructBCSaga(): SagaIterator {
-    //https://github.com/DefiLlama/chainlist
     try {
         const allStructBCEndPoint = yield all(Object.keys(chainIdJSON).filter((chainIdKey) => {
                 return Object.prototype.hasOwnProperty.call(MintABI.networks, `${chainIdKey}`)
             }).filter((chainIdTrue) => {
                 return chainIdJSON[chainIdTrue].rpc !== null;
-            }).map((chainIdNew) => {
-                const web3 = new Web3(chainIdJSON[chainIdNew].rpc);
-                const NFIContract = new web3.eth.Contract(MintABI.abi as any, MintABI.networks[chainIdNew].address);
-                console.log("NFIContract:",NFIContract);
-
-                return call(NFIContract.methods.allIdentityStructs().call);
+            }).map((chainId) => {
+                return put(chainIdStructBCAction(chainId));
             })
         )
-        //TODO the corrected formatt is [[]] coming off the blockchain - BSStruct
-        yield put(getAllStructBC(allStructBCEndPoint));
-        const getAllStructBCBC = yield select(accountBCselectors.getAllStructBCSelector)
-        console.log("getAllStructBC:", getAllStructBCBC)
         console.log("allStructBCEndPoint:", allStructBCEndPoint)
     } catch (e) {
         console.error("allStructBCSagaError:", e)
@@ -120,12 +141,16 @@ function* addressToTokenSaga(): SagaIterator {
     //TODO yield selector bring in accountAcc - also make an addressHasIdentity for the CONNECTED user to stop register
     try {
         const accountArrSelector = yield select(accountBCselectors.accountArrSelector)
+        console.log("accountArrSelector:", accountArrSelector)
         yield put(addressHasIdentityBool(false))
         if (accountArrSelector.length > 0) {
             const chainIdProviderProvider = yield select(accountBCselectors.chainIdProviderSelector)
+            const web3 = new Web3(chainIdJSON[chainIdProviderProvider].rpc[0]);
+            console.log("chainIdProviderProvider:", chainIdProviderProvider)
             if (Object.prototype.hasOwnProperty.call(MintABI.networks, `${chainIdProviderProvider}`)) {
+                console.log("MintABI.networks[chainIdProviderProvider].address", MintABI.networks[chainIdProviderProvider].address)
                 const NFIContract = new web3.eth.Contract(MintABI.abi as any, MintABI.networks[chainIdProviderProvider].address);
-                const addressToTokenIDID = yield call(NFIContract.methods.addressToTokenID(accountArrSelector).call);
+                const addressToTokenIDID = yield call(NFIContract.methods.addressToTokenID(accountArrSelector[0]).call);
                 console.log("addresstotokenId:", addressToTokenIDID)
                 const addressToTokenIDIDNUMBER = parseInt(addressToTokenIDID)
                 //TODO if addresstoTikenID is a string then the below if statement needs changed
@@ -150,4 +175,5 @@ export function* watchAccountBCSaga(): SagaIterator {
     yield takeLatest(addressToTokenAction.type, addressToTokenSaga);
     yield takeLatest(singleStructBCAction.type, singleStructBCSaga);
     yield takeLatest(allStructBCAction.type, allStructBCSaga);
+    yield takeEvery(chainIdStructBCAction.type, chainIdStructBCSaga);
 }

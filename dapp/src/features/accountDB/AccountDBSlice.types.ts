@@ -1,3 +1,5 @@
+import {BCStruct} from "../accountBC/AccountBCSlice.types";
+
 export interface SocialMediaInterface{
     Discord: string,
     Twitter: string,
@@ -18,13 +20,15 @@ export interface AccountDBInterface {
     wallet_chain_Pkey?: string,
     chainId: string,
     walletAccount: string,
-    linkToFinishedAvatar?: string,
-    ownerName: string,
-    ownerEmail: string,
-    ownerDescription: string,
-    socialMediaLinks: SocialMediaInterface,
-    emailValidationNotification: boolean,
-    emailReportNotification: boolean,
+    validations?: number,
+    reported?: number,
+    createdDate: number,
+    ownerName?: string,
+    ownerEmail?: string,
+    ownerDescription?: string,
+    socialMediaLinks?: SocialMediaInterface,
+    emailValidationNotification?: boolean,
+    emailReportNotification?: boolean,
 }
 
 export interface NFIReceiptInterface {
@@ -45,11 +49,25 @@ export interface AccountPageInterface {
     singleNFIReceiptDB: NFIReceiptInterface;
     allNFIReceiptDB: NFIReceiptInterface[];
     userSameAccountBool: boolean;
+    identityBCDB: IdentityBCDBInterface[];
 }
 
 export interface ParamsURLInterface {
     chainIdURL: string;
     paramsWalletURL: string;
+}
+
+export interface IdentityBCDBInterface {
+    chainId: string,
+    tokenId: number | undefined,
+    chainIdName: string,
+    walletAccount: string,
+    name: string,
+    profession: string,
+    validations: number,
+    originDate: string | number,
+    createdDate: number,
+    reported: number
 }
 
 

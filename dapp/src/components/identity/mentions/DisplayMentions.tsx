@@ -1,4 +1,4 @@
-import {Box, Divider, HStack, Spacer, Tooltip, VStack, Flex} from "@chakra-ui/react";
+ import {Box, Divider, HStack, Spacer, Tooltip, VStack, Flex} from "@chakra-ui/react";
 import moment from "moment";
 import {BsCircleFill} from "react-icons/bs";
 import * as React from "react";
@@ -12,12 +12,13 @@ interface Interface {
 export const DisplayMentions: FC<Interface>=({mentionsFullDisplayWindowBool})=> {
 
     const allMentionsArr = useAppSelector((state) => state.mentions.allMentions);
+
     const sortedMentionArr = useMemo(() => {
-        const sortedMentionsArr = [...allMentionsArr];
-        sortedMentionsArr.sort((a, b) => {
+        const sortMentionsArr = [...allMentionsArr];
+        sortMentionsArr.sort((a, b) => {
             return (b.timeStamp - a.timeStamp)
         });
-        return (sortedMentionsArr)
+        return (sortMentionsArr)
     }, [allMentionsArr])
 
     return (

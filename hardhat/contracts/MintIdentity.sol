@@ -69,7 +69,6 @@ contract PaperMastersNFI is ERC721, Ownable {
     }
 
     function allIdentityStructs() public view returns(identity[] memory){
-
         return _dictionaryNFIs;
         console.log("Trying to look at all the contracts", _dictionaryNFIs);
     }

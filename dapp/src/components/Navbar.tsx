@@ -147,7 +147,6 @@ export default function WithSubnavigation() {
                                 //             bg: 'pmpurple.3',
                                 // }}
                             >
-
                                 <HStack>
                                     {/*<SiSololearn fontSize={'16px'}/>*/}
                                     <Text>
@@ -373,9 +372,7 @@ const MobileNavItem = ({ label, children, navLink, navIcon }: NavItem) => {
                         {/*)}*/}
                     </Flex>
                 }
-
             </HStack>
-
             <Collapse in={isOpen} animateOpacity style={{marginTop: '0!important'}}>
                 <Stack
                     mt={2}
