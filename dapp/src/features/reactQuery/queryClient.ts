@@ -1,5 +1,4 @@
 import {createStandaloneToast} from "@chakra-ui/react";
-import {accountsApi, useGetAccountByChainIdWalletAccQuery} from '../features/accountDB/accountsApi'
 const toast = createStandaloneToast();
 
 function queryErrorHandler(error:unknown):void {

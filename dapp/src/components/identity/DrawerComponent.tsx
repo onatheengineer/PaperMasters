@@ -94,6 +94,7 @@ export const DrawerComponent:FC=()=> {
         const accountProfileDictionary: AccountDBInterface = {
             chainId: chainIdProviderProvider as string,
             walletAccount: paramsWalletWallet as string,
+            createDate: singleAccountDictionaryDBDB.createDate,
             ownerName: state.ownerName,
             ownerEmail: state.ownerEmail,
             ownerDescription: state.ownerDescription,

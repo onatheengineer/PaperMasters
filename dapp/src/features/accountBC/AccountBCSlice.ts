@@ -3,6 +3,12 @@ import {BCStruct} from "./AccountBCSlice.types"
 import {ParamsURLInterface} from "../accountDB/AccountDBSlice.types";
 import { RootState } from "../../app/store";
 
+export interface interfaceBCStructStruct {
+    [chainId: string]: {
+        [walletAccount: string]: BCStruct
+    }
+}
+
 export interface interfaceBCStruct {
     [chainId: string]: BCStruct[]
 }

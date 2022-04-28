@@ -1,17 +1,17 @@
 import { createSlice, PayloadAction, createAction } from "@reduxjs/toolkit";
 import {
     AccountDBInterface,
-    AccountPageInterface, IdentityBCDBInterface,
+    AccountPageInterface,
     NFIReceiptInterface,
     ParamsURLInterface
 } from "./AccountDBSlice.types";
 import {RootState} from "../../app/store";
 
-const initialStateAccountDB: AccountDBInterface = {
+const initialStateAccountDB: AccountDBInterface  = {
     wallet_chain_Pkey: "",
     chainId: "",
     walletAccount: "",
-        linkToFinishedAvatar: "",
+    createDate: null,
         ownerName: '',
         ownerEmail: '',
         ownerDescription: '',
@@ -36,6 +36,7 @@ const initialStateAccountDB: AccountDBInterface = {
 const initialStateNFIReceipt: NFIReceiptInterface = {
     walletAccount: "",
     chainId: "",
+    tokenId: "",
     receipt: { },
     transactionHash: "",
 }
@@ -50,7 +51,6 @@ const initialState: AccountPageInterface = {
     singleNFIReceiptDB: initialStateNFIReceipt,
     allNFIReceiptDB: [],
     userSameAccountBool: false,
-    identityBCDB: [],
 };
 
 const AccountDBSlice = createSlice ({
@@ -84,16 +84,13 @@ const AccountDBSlice = createSlice ({
         userSameAccountBool(state, action: PayloadAction<boolean>) {
             state.userSameAccountBool = action.payload
         },
-        identityBCDB(state, action: PayloadAction<IdentityBCDBInterface[]>) {
-            state.identityBCDB = action.payload
-        }
     }
 });
 
 export const { accountArrDB, paramsWallet, singleAccountDictionaryDB, allAccountDictionaryDB, accountArrError,
-    singleNFIReceiptDB, allNFIReceiptDB, userSameAccountBool, paramsChainId, identityBCDB } = AccountDBSlice.actions;
+    singleNFIReceiptDB, allNFIReceiptDB, userSameAccountBool, paramsChainId } = AccountDBSlice.actions;
 
-export const accountArrDBAction= createAction<string>("USEPARAMS_SAGA");
+export const accountArrDBAction= createAction<ParamsURLInterface>("USEPARAMS_SAGA");
 export const singleAccountDictionaryDBAction = createAction<ParamsURLInterface>("ACCOUNT_DB_SAGA");
 export const postSingleAccountDictionaryDBAction = createAction<AccountDBInterface>("POST_ACCOUNT_DB_SAGA");
 export const allAccountDictionaryDBAction = createAction("ALL_ACCOUNT_DB_SAGA");
@@ -110,7 +107,6 @@ export const accountDBselectors = {
     singleNFIReceiptDBSelector: (state: RootState): NFIReceiptInterface => state.accountDB.singleNFIReceiptDB,
     allNFIReceiptDBSelector: (state: RootState): NFIReceiptInterface[] => state.accountDB.allNFIReceiptDB,
     userSameAccountBoolSelector: (state: RootState): boolean => state.accountDB.userSameAccountBool,
-    identityBCDBSelector: (state: RootState): IdentityBCDBInterface[] => state.accountDB.identityBCDB,
 }
 
 export default AccountDBSlice.reducer;

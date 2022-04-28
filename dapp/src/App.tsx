@@ -9,7 +9,7 @@ import Sidebar, {NavItem} from './components/Sidebar'
 import {accountArr, accountArrAction, accountBCselectors} from "./features/accountBC/AccountBCSlice";
 import detectEthereumProvider from '@metamask/detect-provider';
 import {select} from "redux-saga/effects";
-//import {ReactQueryDevTools} from 'react-query/devtools';
+import {ReactQueryDevtools} from 'react-query/devtools';
 
 
 

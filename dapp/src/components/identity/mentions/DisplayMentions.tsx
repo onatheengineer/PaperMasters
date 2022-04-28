@@ -1,4 +1,8 @@
- import {Box, Divider, HStack, Spacer, Tooltip, VStack, Flex} from "@chakra-ui/react";
+ import {Box, Divider, HStack, Spacer, Tooltip, VStack, Flex,   Accordion,
+     AccordionItem,
+     AccordionButton,
+     AccordionPanel,
+     AccordionIcon,} from "@chakra-ui/react";
 import moment from "moment";
 import {BsCircleFill} from "react-icons/bs";
 import * as React from "react";
@@ -44,7 +48,44 @@ export const DisplayMentions: FC<Interface>=({mentionsFullDisplayWindowBool})=> 
                             //w={'100%'}
                             // fontSize={'15px'}
                         >
+                            <Accordion allowToggle>
+                                <AccordionItem>
+                                    <h2>
+                                        <AccordionButton>
+                                            <Box flex='1' textAlign='left'>
+                                                Section 1 title
+                                            </Box>
+                                            <AccordionIcon />
+                                        </AccordionButton>
+                                    </h2>
+                                    <AccordionPanel pb={4}>
+                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+                                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+                                        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+                                        commodo consequat.
+                                    </AccordionPanel>
+                                </AccordionItem>
+
+                                <AccordionItem>
+                                    <h2>
+                                        <AccordionButton>
+                                            <Box flex='1' textAlign='left'>
+                                                Section 2 title
+                                            </Box>
+                                            <AccordionIcon />
+                                        </AccordionButton>
+                                    </h2>
+                                    <AccordionPanel pb={4}>
+                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+                                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+                                        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+                                        commodo consequat.
+                                    </AccordionPanel>
+                                </AccordionItem>
+                            </Accordion>
+
                             <HStack>
+
                                 <Box
                                     //border={'2px solid red'}
                                     color={'pmpurple.15'}
@@ -83,7 +124,6 @@ export const DisplayMentions: FC<Interface>=({mentionsFullDisplayWindowBool})=> 
                                 >
                                     {mention.radioType === 1 ?
                                         <HStack>
-
                                             <BsCircleFill color={'green'} size={'8px'}/>
                                             <BsCircleFill color={'grey'} size={'8px'}/>
                                             <BsCircleFill color={'grey'} size={'8px'}/>

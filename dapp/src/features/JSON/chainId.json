@@ -16,14 +16,6 @@
       "https://mainnet.infura.io/v3/c97ad56e08674161a95ba16c6f855b6a"
     ]
   },
-
-  "61":
-  {
-    "rpc":[
-      "https://blockscout.com/etc/mainnet/api/eth-rpc",
-      "https://www.ethercluster.com/etc"
-    ]
-  },
   "1666600000":
   {
     "rpc":[

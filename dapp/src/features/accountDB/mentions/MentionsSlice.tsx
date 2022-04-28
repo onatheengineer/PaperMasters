@@ -11,7 +11,7 @@ export interface mentionsStateDictionaryInterface {
     replyToMentionId: string;
 }
 
-interface mentionsInterface {
+export interface mentionsInterface {
     errorMessage: string;
     singleMention:  mentionsStateDictionaryInterface;
     allMentions: mentionsStateDictionaryInterface[]

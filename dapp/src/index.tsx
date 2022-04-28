@@ -11,21 +11,28 @@ import {
 } from "react-router-dom";
 import {ChakraProvider} from '@chakra-ui/react';
 import theme from "./components/theme";
+import { QueryClient, QueryClientProvider} from "react-query";
+import {ReactQueryDevtools} from 'react-query/devtools';
 
 console.log(theme)
+
+const queryClient = new QueryClient();
 
 ReactDOM.render(
   <React.StrictMode>
       <BrowserRouter>
+
       <ChakraProvider theme={theme}>
           <Provider store={store}>
         <MetamaskStateProvider>
-
+            <QueryClientProvider client={queryClient} contextSharing={true}>
       <App />
-
+                <ReactQueryDevtools />
+            </QueryClientProvider>
     </MetamaskStateProvider>
     </Provider>
 </ChakraProvider>
+
 </BrowserRouter>
   </React.StrictMode>,
 

@@ -10,6 +10,7 @@ contract PaperMastersNFI is ERC721, Ownable {
     uint256 private identityFee;
     struct identity
     {
+        uint256 chainId;
         address walletAccount;
         string name;
         string email;
@@ -37,7 +38,7 @@ contract PaperMastersNFI is ERC721, Ownable {
     constructor() ERC721("papermasters.io", "NFI") {
         _setBaseURI = "www.papermasters.io/identity";
         identityFee = 100000000000000000;
-        _dictionaryNFIs.push(identity(address(this),'','','','','','','','',block.timestamp));
+        _dictionaryNFIs.push(identity(block.chainid, address(this),'','','','','','','','',block.timestamp));
     }
 
     function addressToTokenID(address walletAddress) public view returns(uint256) {
@@ -59,11 +60,7 @@ contract PaperMastersNFI is ERC721, Ownable {
     }
 
     function getChainID() external view returns (uint256) {
-        uint256 chainId;
-        assembly {
-            chainId := chainid()
-        }
-        return chainId;
+        return block.chainid;
     }
 
     function allIdentityStructs() public view returns(identity[] memory){
@@ -169,6 +166,7 @@ contract PaperMastersNFI is ERC721, Ownable {
         require(msg.value >= identityFee, "Not enough ETH sent; check price!");
 
         identity memory _identity = identity({
+        chainId: block.chainid,
         walletAccount: msg.sender,
         name: _name,
         email: _email,
@@ -189,9 +187,9 @@ contract PaperMastersNFI is ERC721, Ownable {
 
         _safeMint(msg.sender, newTokenID);
 
-        emit NFIMinted(msg.sender, newTokenID, block.timestamp, msg.value, _identity);
+        emit NFIMinted(block.chainid, msg.sender, newTokenID, block.timestamp, msg.value, _identity);
     }
-    event NFIMinted(address indexed _from, uint256 tokenId, uint256 timeStamp, uint256 contractFee, identity identityStruct);
+    event NFIMinted( uint256 chainId, address indexed _from, uint256 tokenId, uint256 timeStamp, uint256 contractFee, identity identityStruct);
 
     function setApprovalForAll(address operator, bool approved) public virtual override onlyOwner{}
     function isApprovedForAll(address owner, address operator) public view virtual override onlyOwner returns (bool) {}

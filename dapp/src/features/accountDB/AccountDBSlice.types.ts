@@ -22,7 +22,7 @@ export interface AccountDBInterface {
     walletAccount: string,
     validations?: number,
     reported?: number,
-    createdDate: number,
+    createDate: number | null,
     ownerName?: string,
     ownerEmail?: string,
     ownerDescription?: string,
@@ -35,6 +35,7 @@ export interface NFIReceiptInterface {
     wallet_chain_Pkey?: string;
     walletAccount: string;
     chainId: string;
+    tokenId: string;
     transactionHash: string;
     receipt: object;
 }
@@ -49,26 +50,10 @@ export interface AccountPageInterface {
     singleNFIReceiptDB: NFIReceiptInterface;
     allNFIReceiptDB: NFIReceiptInterface[];
     userSameAccountBool: boolean;
-    identityBCDB: IdentityBCDBInterface[];
 }
 
 export interface ParamsURLInterface {
     chainIdURL: string;
     paramsWalletURL: string;
 }
-
-export interface IdentityBCDBInterface {
-    chainId: string,
-    tokenId: number | undefined,
-    chainIdName: string,
-    walletAccount: string,
-    name: string,
-    profession: string,
-    validations: number,
-    originDate: string | number,
-    createdDate: number,
-    reported: number
-}
-
-
 

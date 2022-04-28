@@ -14,11 +14,8 @@ import {
 
 import {useAppDispatch, useAppSelector} from "../../../app/hooks";
 
-interface Interface {
 
-}
-
-export const ReplyMentions: FC<Interface>=()=> {
+export const ReplyMentions: FC=()=> {
     const firstField = useRef<HTMLTextAreaElement>(null)
     const dateFormated = moment().format('MMM DD YYYY, hh:mm:ss a');
     const {isOpen, onOpen, onClose} = useDisclosure()

@@ -1,5 +1,6 @@
 //this is coming from the BC
 export interface BCStruct{
+    chainId: string;
     walletAccount: string;
     name: string;
     email: string;

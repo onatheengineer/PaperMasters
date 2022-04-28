@@ -85,6 +85,7 @@ export const Header:FC = ()=> {
         const accountProfileDictionary: AccountDBInterface = {
             chainId: chainIdProviderProvider as string,
             walletAccount: paramsWalletWallet as string,
+            createDate: null,
             ownerName: state.ownerName,
             ownerEmail: state.ownerEmail,
             ownerDescription: state.ownerDescription,
@@ -335,10 +336,10 @@ export const Header:FC = ()=> {
                         </Stack>
                         <Stack spacing={0} align={'center'}>
                             <Text fontWeight={600}>23k</Text>
-                            <Tooltip hasArrow label='Total Mentions about PaperMaster' bg='pmpurple.4'
+                            <Tooltip hasArrow label='Total MentionsNew about PaperMaster' bg='pmpurple.4'
                                      color='pmpurple.13'>
                                 <Text fontSize={'sm'} color={'pmpurple.11'}>
-                                    Mentions
+                                    MentionsNew
                                 </Text>
                             </Tooltip>
                         </Stack>

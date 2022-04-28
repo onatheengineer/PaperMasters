@@ -12,7 +12,6 @@ import {
     postSingleAccountDictionaryDBAction,
     singleNFIReceiptDBAction,
     allNFIReceiptDBAction, allNFIReceiptDB, singleNFIReceiptDB, allAccountDictionaryDB,
-    identityBCDB,
     accountDBselectors
 } from "./AccountDBSlice";
 import {
@@ -23,7 +22,6 @@ import {
 } from "../accountBC/AccountBCSlice";
 import {
     AccountDBInterface,
-    IdentityBCDBInterface,
     NFIReceiptInterface,
     ParamsURLInterface
 } from "./AccountDBSlice.types";
@@ -32,17 +30,18 @@ import {BCStruct} from "../accountBC/AccountBCSlice.types";
 
 const baseURL = 'https://ociuozqx85.execute-api.us-east-1.amazonaws.com';
 
-function* accountArrDBSaga({payload}: PayloadAction<string>): SagaIterator {
+function* accountArrDBSaga({payload}: PayloadAction<ParamsURLInterface>): SagaIterator {
+    const { chainIdURL, paramsWalletURL } = payload;
     try {
         //this payload in AccountArr inside accountBC
         //console.log('am i making it into accountArrDBSaga?')
-        const chainIdProviderIdSelector = yield select(accountBCselectors.chainIdProviderSelector);
-        const getAccountArrAxios = yield call(axios.get, `${baseURL}/account/${chainIdProviderIdSelector}/${payload}`);
+       // const chainIdProviderIdSelector = yield select(accountBCselectors.chainIdProviderSelector);
+        const getAccountArrAxios = yield call(axios.get, `${baseURL}/account/${chainIdURL}/${paramsWalletURL}`);
                 if (!Object.prototype.hasOwnProperty.call(getAccountArrAxios.data, 'Item')) {
                     const chainIdSupportedBoolSelector = yield select(accountBCselectors.chainIdSupportedBoolSelector);
                     if (chainIdSupportedBoolSelector) {
                     const postAccountArr_chainId = yield call(axios.post, `${baseURL}/account`,
-                        {walletAccount: payload, chainId: chainIdProviderIdSelector});
+                        {walletAccount: paramsWalletURL, chainId: chainIdURL});
                     console.log("AxiospostAccountArr_chainId:", postAccountArr_chainId);
                 }
             }
@@ -55,7 +54,7 @@ function* accountArrDBSaga({payload}: PayloadAction<string>): SagaIterator {
 
 function* postSingleAccountDictionaryDBSaga({payload}: PayloadAction<AccountDBInterface>): SagaIterator {
     try{
-        const accountDicaxiosPUT = yield call(axios.post, `${baseURL}/account`, payload)
+        const accountDicaxiosPUT = yield call(axios.put, `${baseURL}/account`, payload)
         console.log("accountDicaxiosPUT", accountDicaxiosPUT)
     }catch (e) {
         console.error("putSingleAccountDictionaryDBSaga", e);
@@ -90,37 +89,6 @@ function* allAccountDictionaryDBSaga(): SagaIterator {
     }
 }
 
-function* IdentityBCDBSaga(): SagaIterator {
-    try{
-        const getAllStructBCBCSelector:interfaceBCStruct = yield select(accountBCselectors.getAllStructBCSelector);
-        const allAccountDictionaryDBDBSelector:AccountDBInterface[] = yield select(accountDBselectors.allAccountDictionaryDBSelector);
-        const addressHasIdentityBoolBoolSelector:AccountDBInterface[] = yield select(accountBCselectors.addressHasIdentityBoolSelector);
-        const identityBCDBArr:IdentityBCDBInterface[] = [];
-
-        allAccountDictionaryDBDBSelector.map( (el)=>{
-            const dataRowDictionary: IdentityBCDBInterface = {
-                chainId: el.chainId,
-                walletAccount: el.walletAccount,
-                chainIdName: "",
-                tokenId: undefined,
-                name: el.ownerName ? el.ownerName : el.walletAccount,
-                profession: "",
-                validations: 0,
-                reported: 0,
-                createdDate: el.createdDate,
-                originDate: ""
-            }
-            //TODO fill in NFIStruct data
-            identityBCDBArr.push(dataRowDictionary);
-        })
-
-        yield put(identityBCDB(identityBCDBArr))
-
-    } catch (e) {
-        console.error(` ERROR catch: ${e}`);
-    }
-}
-
 function* singleNFIReceiptDBSaga({ payload }: PayloadAction<ParamsURLInterface>): SagaIterator {
     try{
         //TODO fix lambda and api endpoints
@@ -152,8 +120,6 @@ export function* watchAccountDBSaga(): SagaIterator {
     yield takeLatest(allAccountDictionaryDBAction.type, allAccountDictionaryDBSaga);
     yield takeLatest(singleNFIReceiptDBAction.type, singleNFIReceiptDBSaga);
     yield takeLatest(allNFIReceiptDBAction.type, allNFIReceiptDBSaga);
-    yield takeLatest(getAllStructBC.type, IdentityBCDBSaga);
-    yield takeLatest(allAccountDictionaryDB.type, IdentityBCDBSaga);
 }
 
 

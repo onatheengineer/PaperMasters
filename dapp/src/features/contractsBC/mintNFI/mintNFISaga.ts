@@ -65,6 +65,7 @@ function* mintNFISaga({payload}: PayloadAction<MintingNFIStruct>): SagaIterator 
                     receipt: mintResult,
                     walletAccount: requestAccountArr[0],
                     chainId: chainIdProviderProvider,
+                    tokenId: yield mintResult.tokenId,
                     transactionHash: yield mintResult.transactionHash
                 }
                 const axiosPOSTReceipt = yield call(axios.post, `${baseURL}/receipt`, receiptToDB)

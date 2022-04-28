@@ -8,13 +8,14 @@ import mentionsSlice from "../features/accountDB/mentions/MentionsSlice";
 import contractFunctionsSlice from '../features/contractsBC/mintNFI/MintNFIFunctionsSlice'
 import nfiSlice from '../features/contractsBC/mintNFI/MintNFISlice';
 import toastSlice from "../features/toast/ToastSlice";
-import {accountsApi} from "../features/accountDB/accountsApi";
+import {accountDBApi, nfiBCApi} from "../features/reactQuery/RTKQuery";
 
 const sagaMiddleware = createSaga();
 
 export const store = configureStore({
   reducer: {
-    [accountsApi.reducerPath]: accountsApi.reducer,
+    [accountDBApi.reducerPath]: accountDBApi.reducer,
+    [nfiBCApi.reducerPath]: nfiBCApi.reducer,
     accountBC: accountBCSlice,
     accountDB: accountDBSlice,
     nfi: nfiSlice,
@@ -23,7 +24,7 @@ export const store = configureStore({
     toast: toastSlice,
   },
   middleware: (getDefaultMiddleware) =>
-      getDefaultMiddleware().concat(sagaMiddleware).concat(accountsApi.middleware),
+      getDefaultMiddleware().concat(sagaMiddleware).concat(accountDBApi.middleware).concat(nfiBCApi.middleware),
 });
 
 sagaMiddleware.run(rootSaga);
