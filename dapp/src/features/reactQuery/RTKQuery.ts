@@ -7,6 +7,11 @@ import {BCStruct} from "../accountBC/AccountBCSlice.types";
 import chainIdNetworks from "../JSON/chainId.networks.json";
 import Web3 from "web3";
 import {mentionsInterface, mentionsStateDictionaryInterface} from "../accountDB/mentions/MentionsSlice";
+import {PayloadAction} from "@reduxjs/toolkit";
+import {SagaIterator} from "redux-saga";
+import {call, put} from "redux-saga/effects";
+import {addressHasIdentityBool, addressToTokenBool, addressToTokenID} from "../accountBC/AccountBCSlice";
+import chainIdJSON from "../JSON/chainId.json";
 
 export interface accountsApiInterface{
     Count: number,
@@ -45,6 +50,11 @@ export const nfiBCApi = createApi({
         getIdentityBC: builder.query<BCStruct[], void>({
             queryFn: fetchIdentities,
         }),
+        getSingleIdentityBC: builder.query<Promise<fetchAddressToTokenInterface>, ParamsURLInterface>({
+            queryFn: (arg, queryApi, extraOptions, baseQuery)=> {
+                return {data:fetchAddressToToken(arg) }
+            },
+        }),
     }),
 })
 
@@ -65,7 +75,40 @@ export async function fetchIdentities() {
     console.log('results', results)
     return {data:results.flat()};
 }
+ export interface fetchAddressToTokenInterface{
+     addressHasIdentityBool: boolean,
+     tokenId: number,
+     nfiIdentity: BCStruct | null
+ }
+
+export async function fetchAddressToToken({chainIdURL, paramsWalletURL}: ParamsURLInterface):Promise<fetchAddressToTokenInterface>{
+    //TODO yield selector bring in accountAcc - also make an addressHasIdentity for the CONNECTED user to stop register
+       const fetchDictionary={
+           addressHasIdentityBool: false,
+           tokenId: 0,
+           nfiIdentity: null
+    }
+        if (paramsWalletURL.length > 0) {
+            const web3 = new Web3(chainIdJSON[chainIdURL].rpc[0]);
+            console.log("chainIdProviderProvider:", chainIdURL)
+            if (Object.prototype.hasOwnProperty.call(MintABI.networks, `${chainIdURL}`)) {
+                console.log("MintABI.networks[chainIdProviderProvider].address", MintABI.networks[chainIdURL].address)
+                const NFIContract = new web3.eth.Contract(MintABI.abi as any, MintABI.networks[chainIdURL].address);
+                const addressToTokenIDID = await NFIContract.methods.addressToTokenID(paramsWalletURL[0]).call();
+                console.log("addresstotokenId:", addressToTokenIDID)
+                const addressToTokenIDIDNUMBER = parseInt(addressToTokenIDID)
+                //TODO if addresstoTikenID is a string then the below if statement needs changed
+                if (addressToTokenIDIDNUMBER >= 1) {
+                    fetchDictionary.addressHasIdentityBool = true;
+                    fetchDictionary.tokenId = addressToTokenIDIDNUMBER;
+                    const getStructBC = await NFIContract.methods.addressToIdentityStruct(paramsWalletURL).call()
+                    fetchDictionary.nfiIdentity = getStructBC;
+                }
+            }
+        }
+        return fetchDictionary;
+}
 
 export const { useGetSingleAccountQuery, useGetAllAccountQuery} = accountDBApi
-export const { useGetIdentityBCQuery } = nfiBCApi
+export const { useGetIdentityBCQuery, useGetSingleIdentityBCQuery } = nfiBCApi
 export const { useGetMentionsQuery } = mentionsApi

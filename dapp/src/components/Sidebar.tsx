@@ -99,7 +99,7 @@ export const Sidebar: FC<InterfaceSidebar>= ({icon, profileName} ) => {
     const addressToTokenBoolBool = useAppSelector((state) => state.accountBC.addressToTokenBool);
 
     useEffect(() => {
-        console.log(location);
+        // console.log(location);
 
         const SidebarIdentity = [
             <NavItem navItemSize={navSize} icon={AiOutlineFileSearch} title="Search NFIs" path={'/search'}/>,
@@ -220,7 +220,8 @@ export const Sidebar: FC<InterfaceSidebar>= ({icon, profileName} ) => {
     return (
 
         <Flex
-            //border ={'1px solid blue'}
+            border ={'1px solid orange'}
+            flex={{base: 1, md: 'auto'}}
         >
             {/*{navItemsRender == null ? null :*/}
             {/*    <Box*/}

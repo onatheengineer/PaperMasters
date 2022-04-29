@@ -16,6 +16,22 @@
       "https://mainnet.infura.io/v3/c97ad56e08674161a95ba16c6f855b6a"
     ]
   },
+  "3":{
+    "rpc":[
+      "https://ropsten.infura.io/v3/${c97ad56e08674161a95ba16c6f855b6a}"
+    ]
+  },
+  "4":{
+    "rpc":[
+      "https://rinkeby.infura.io/v3/${c97ad56e08674161a95ba16c6f855b6a}"
+    ]
+  },
+  "5":{
+    "rpc":[
+      "https://goerli.infura.io/v3/${c97ad56e08674161a95ba16c6f855b6a}",
+      "https://rpc.goerli.mudit.blog/"
+    ]
+  },
   "1666600000":
   {
     "rpc":[

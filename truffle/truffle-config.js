@@ -36,6 +36,18 @@ module.exports = {
    */
 
   networks: {
+      ropsten: {
+          provider: function() {
+              return new HDWalletProvider(mnemonic, "https://ropsten.infura.io/v3/c97ad56e08674161a95ba16c6f855b6a");
+          },
+          network_id: '3',
+      },
+      test: {
+          provider: function() {
+              return new HDWalletProvider(mnemonic, "http://127.0.0.1:8545/");
+          },
+          network_id: '*',
+      },
       testnet: {
           provider: () => {
               return new HDWalletProvider({

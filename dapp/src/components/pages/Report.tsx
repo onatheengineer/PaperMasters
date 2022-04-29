@@ -32,11 +32,8 @@ import { ReactNode, ReactText } from 'react';
 import Logo from '../../assets/Logo';
 import Sidebar from "../Sidebar";
 
-interface Interface {
 
-}
-
-export const Report: FC<Interface>=(props: HTMLChakraProps<'form'>)=> {
+export const Report: FC=(props: HTMLChakraProps<'form'>)=> {
 
 
     return (

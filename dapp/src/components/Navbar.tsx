@@ -25,7 +25,6 @@ import {GiBookshelf, GiNewShoot, GiHeatHaze, GiDiscussion, GiBookCover, GiFlower
 import {IoMdCheckmarkCircleOutline} from "react-icons/io";
 import {RiPlantFill} from "react-icons/ri";
 import {FiTrendingUp} from "react-icons/fi";
-
 import {BiBookmarkHeart, BiHomeHeart} from "react-icons/bi";
 import {
     HamburgerIcon,

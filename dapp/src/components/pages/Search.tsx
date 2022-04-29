@@ -31,7 +31,12 @@ import IdentityEntryModal from "../../utils/IdentityEntryModal";
 import AvatarNFI from "../AvatarNFI";
 import {allAccountDictionaryDBAction, allNFIReceiptDBAction} from "../../features/accountDB/AccountDBSlice";
 import {BCStruct} from "../../features/accountBC/AccountBCSlice.types";
-import {accountBCselectors, allStructBCAction, getAllStructBC} from "../../features/accountBC/AccountBCSlice";
+import {
+    accountBCselectors,
+    addressToTokenAction,
+    allStructBCAction,
+    getAllStructBC
+} from "../../features/accountBC/AccountBCSlice";
 import {useQuery} from "react-query";
 import {useTable, Column, TableOptions, useSortBy} from "react-table";
 import {useGetAllAccountQuery, useGetIdentityBCQuery} from "../../features/reactQuery/RTKQuery";
@@ -39,6 +44,7 @@ import {AccountDBInterface} from "../../features/accountDB/AccountDBSlice.types"
 import {TriangleDownIcon, TriangleUpIcon} from "@chakra-ui/icons";
 import {HiOutlineDocumentReport} from "react-icons/hi";
 import {MdOutlineLibraryAddCheck} from "react-icons/md";
+import chainIdNetworkJSON from '../../features/JSON/chainId.networks.json'
 
 
 interface interfaceFilterComponent{
@@ -126,7 +132,6 @@ const ExpandedComponent: FC<ExpanderComponentProps<BCStruct[]>> = ({ data }) => 
 export const Search:FC =()=> {
 
     const accountArrArr = useAppSelector((state) => state.accountBC.accountArr);
-    const addressHasIdentityBoolBool = useAppSelector((state) => state.accountBC.addressHasIdentityBool);
     const getAllStructBCBC = useAppSelector((state) => state.accountBC.getAllStructBC);
     const paramsWalletWallet = useAppSelector((state) => state.accountDB.paramsWallet);
     const allAccountDictionaryDBDB = useAppSelector((state) => state.accountDB.allAccountDictionaryDB);
@@ -213,17 +218,30 @@ export const Search:FC =()=> {
     };
     const data = useMemo((): Cols[] => {
         console.log(accountQuery)
-        if (!accountQuery.data) return []
-        //TODO not sure I can pull from 'data' on a web3 call
-        if (!nfiQuery.data) return []
+        console.log("nfiQuery", nfiQuery)
+        if (!accountQuery.isSuccess) return []
         return (accountQuery.data.Items.map((el) => {
             console.log("el", el)
             let name = "non-registered account";
-            if(el.ownerName && el.ownerName.length > 0){
-                name = el.ownerName as string;
+            if(nfiQuery.isSuccess){
+                const nfiArr = nfiQuery.data!.filter((elel) => {
+                    return (elel.chainId === el.chainId && elel.walletAccount === el.walletAccount)
+                });
+                console.log("nfiArr", nfiArr)
+                if (nfiArr.length > 0) {
+                    const nameName = nfiArr[0].name.split("|||")[0];
+                    name = nameName;
+                    if (el.ownerName && el.ownerName.length > 0) {
+                        name = el.ownerName as string;
+                    }
+                }
             }
+            const chainName = chainIdNetworkJSON.filter((chainN) => {
+                return (chainN.chainId.toString() === el.chainId)
+            })
+            const chainNameName = (chainName.length > 0 ? chainName[0].chain : el.chainId)
             return ({
-                chain: el.chainId,
+                chain: chainNameName,
                 creation: el.createDate!,
                 wallet: el.walletAccount,
                 name: name,
@@ -394,7 +412,8 @@ export const Search:FC =()=> {
     return (
         <Flex
             justifyContent="center"
-            flex='auto'
+            //flex={{base: 1, md: 'auto'}}
+            flex={'auto'}
             w={'100%'}
             p={'16px'}
             border={'1px solid blue'}
@@ -403,6 +422,7 @@ export const Search:FC =()=> {
                 border={'1px solid'}
                 borderColor={'pmpurple.13'}
                 bg={'pmpurple.4'}
+                flex={'auto'}
             >
                 <Table {...getTableProps()}>
                     <Thead>

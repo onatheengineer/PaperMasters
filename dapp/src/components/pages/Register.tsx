@@ -77,6 +77,11 @@ export const Register:FC=()=> {
         rgb: {r: 242, g: 238, b: 242, a: 1},
         hsl: {h: 300, s: 0.13333333333333283, l: 0.9411764705882353, a: 1}
     }
+    const defaultColorBGWhite = {
+        hex: '#FFFFFF',
+        rgb: {r: 255, g: 255, b: 255, a: 1},
+        hsl: {h: 0, s: 0, l: 1, a: 1}
+    }
     const defaultColorText = {hex: '#694b69', rgb: {r: 105, g: 75, b: 105, a: 1}, hsl: {h: 300, s: 0.17, l: 0.35, a: 1}}
 
     const [colorTextName, setColorTextName] = useState<ColorResult>(defaultColorText);
@@ -86,7 +91,7 @@ export const Register:FC=()=> {
     const [colorTextOrganization, setColorTextOrganization] = useState<ColorResult>(defaultColorText);
     const [colorTextWebsite, setColorTextWebsite] = useState<ColorResult>(defaultColorText);
     const [colorTextUniqueYou, setColorTextUniqueYou] = useState<ColorResult>(defaultColorText);
-    const [bgRGB, setbgRGB] = useState<ColorResult>(defaultColorBG);
+    const [bgRGB, setbgRGB] = useState<ColorResult>(defaultColorBGWhite);
 
     const [whichColorField, setWhichColorField] = useState<string>('');
 

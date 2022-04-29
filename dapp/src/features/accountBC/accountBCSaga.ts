@@ -56,7 +56,7 @@ function* accountArrSaga(): SagaIterator {
         if (accArr.length > 0 && getBalance > 0) {
             yield put(accountArrStatus('success'));
             const accArrLowerCase = accArr.map(element => {
-                return element.toLowerCase();
+                return element;
             });
             const chainIdProviderProvider = yield call(web3.eth.getChainId);
             //const chainIdProviderProvider = yield call(web3.eth.net.getId);
@@ -155,20 +155,21 @@ function* singleStructBCSaga({payload}: PayloadAction<ParamsURLInterface>): Saga
 //     }
 // }
 
-function* addressToTokenSaga(): SagaIterator {
+function* addressToTokenSaga({payload}: PayloadAction<ParamsURLInterface>):  SagaIterator {
+    const { chainIdURL, paramsWalletURL } = payload;
     //TODO yield selector bring in accountAcc - also make an addressHasIdentity for the CONNECTED user to stop register
     try {
-        const accountArrSelector = yield select(accountBCselectors.accountArrSelector)
-        console.log("accountArrSelector:", accountArrSelector)
+        //const accountArrSelector = yield select(accountBCselectors.accountArrSelector)
+        //console.log("accountArrSelector:", accountArrSelector)
         yield put(addressHasIdentityBool(false))
-        if (accountArrSelector.length > 0) {
-            const chainIdProviderProvider = yield select(accountBCselectors.chainIdProviderSelector)
-            const web3 = new Web3(chainIdJSON[chainIdProviderProvider].rpc[0]);
-            console.log("chainIdProviderProvider:", chainIdProviderProvider)
-            if (Object.prototype.hasOwnProperty.call(MintABI.networks, `${chainIdProviderProvider}`)) {
-                console.log("MintABI.networks[chainIdProviderProvider].address", MintABI.networks[chainIdProviderProvider].address)
-                const NFIContract = new web3.eth.Contract(MintABI.abi as any, MintABI.networks[chainIdProviderProvider].address);
-                const addressToTokenIDID = yield call(NFIContract.methods.addressToTokenID(accountArrSelector[0]).call);
+        if (paramsWalletURL.length > 0) {
+            //const chainIdProviderProvider = yield select(accountBCselectors.chainIdProviderSelector)
+            const web3 = new Web3(chainIdJSON[chainIdURL].rpc[0]);
+            console.log("chainIdProviderProvider:", chainIdURL)
+            if (Object.prototype.hasOwnProperty.call(MintABI.networks, `${chainIdURL}`)) {
+                console.log("MintABI.networks[chainIdProviderProvider].address", MintABI.networks[chainIdURL].address)
+                const NFIContract = new web3.eth.Contract(MintABI.abi as any, MintABI.networks[chainIdURL].address);
+                const addressToTokenIDID = yield call(NFIContract.methods.addressToTokenID(paramsWalletURL[0]).call);
                 console.log("addresstotokenId:", addressToTokenIDID)
                 const addressToTokenIDIDNUMBER = parseInt(addressToTokenIDID)
                 //TODO if addresstoTikenID is a string then the below if statement needs changed
