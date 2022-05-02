@@ -53,13 +53,5 @@ applicationSecretKey: 'efdef876fc22bbd3068e3ba4066f3bd5'
 //     faucets: string[];
 //     infoURL: string;
 // }
-//evm-chains - npm package
-//https://github.com/pedrouid/evm-chains
-// function getAllChains(): IChainData[];
-// function getChain(chainId: number): IChainData;
-// function getChainByChainId(chainId: number): IChainData;
-// function getChainByKeyValue(key: string, value: any): IChainData;
-// function getChainByNetworkId(networkId: number): number;
-// function convertNetworkIdToChainId(networkId: number): number;
-// function convertChainIdToNetworkId(chainId: number): number;
+
 

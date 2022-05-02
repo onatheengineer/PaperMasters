@@ -1,51 +1,25 @@
 import * as React from 'react';
-import {useState, useEffect, useCallback, useMemo, MouseEventHandler, ChangeEventHandler} from "react";
+import {useState, useEffect, useMemo, MouseEventHandler, ChangeEventHandler} from "react";
 import type {FC} from 'react';
 import {
-    Box,
-    Flex,
-    MenuButton,
-    Input,
-    Button,
-    HStack,
-    InputGroup,
-    InputRightAddon,
-    Text,
-    FormControl, Tooltip, UnorderedList, ListItem, Heading,
-    Table,
-    Thead,
-    Tbody,
-    Tfoot,
-    Tr,
-    Th,
-    Td,
-    TableCaption,
-    TableContainer,
-    chakra,
-    Link,
+    Box, Flex, Input, Button, HStack, InputGroup, InputRightAddon, Text,
+    Tooltip, Heading, Table, Thead, Tbody, Tr, Th, Td,
+    Link, Center, VStack, Popover, PopoverBody, PopoverHeader, PopoverContent, PopoverArrow, PopoverTrigger,
 } from '@chakra-ui/react';
-import {Link as ReachLink, To} from "react-router-dom";
+import {Link as ReachLink} from "react-router-dom";
 import {useAppDispatch, useAppSelector} from "../../app/hooks";
-import DataTable, {ExpanderComponentProps, TableColumn} from 'react-data-table-component';
+import  {ExpanderComponentProps} from 'react-data-table-component';
 import IdentityEntryModal from "../../utils/IdentityEntryModal";
 import AvatarNFI from "../AvatarNFI";
 import {allAccountDictionaryDBAction, allNFIReceiptDBAction} from "../../features/accountDB/AccountDBSlice";
 import {BCStruct} from "../../features/accountBC/AccountBCSlice.types";
-import {
-    accountBCselectors,
-    addressToTokenAction,
-    allStructBCAction,
-    getAllStructBC
-} from "../../features/accountBC/AccountBCSlice";
-import {useQuery} from "react-query";
-import {useTable, Column, TableOptions, useSortBy} from "react-table";
+import {allStructBCAction} from "../../features/accountBC/AccountBCSlice";
+import {useTable, Column, useSortBy} from "react-table";
 import {useGetAllAccountQuery, useGetIdentityBCQuery} from "../../features/reactQuery/RTKQuery";
-import {AccountDBInterface} from "../../features/accountDB/AccountDBSlice.types";
-import {TriangleDownIcon, TriangleUpIcon} from "@chakra-ui/icons";
 import {HiOutlineDocumentReport} from "react-icons/hi";
 import {MdOutlineLibraryAddCheck} from "react-icons/md";
 import chainIdNetworkJSON from '../../features/JSON/chainId.networks.json'
-
+import {PMsvgIcon} from "../../assets/icons/PMSvgIcon";
 
 interface interfaceFilterComponent{
     filterText: string,
@@ -91,7 +65,7 @@ const FilterComponent: FC<interfaceFilterComponent> = ( { filterText, onClick, o
 //     identityStruct<BCStruct>;
 // }
 
-const ExpandedComponent: FC<ExpanderComponentProps<BCStruct[]>> = ({ data }) => {
+const ExpandedAvatarComponent: FC<ExpanderComponentProps<BCStruct[]>> = ({ data }) => {
     console.log("this is Search - Data", data)
     const addressHasIdentityBoolBool = useAppSelector((state) => state.accountBC.addressHasIdentityBool);
     if (!addressHasIdentityBoolBool) {
@@ -131,11 +105,6 @@ const ExpandedComponent: FC<ExpanderComponentProps<BCStruct[]>> = ({ data }) => 
 
 export const Search:FC =()=> {
 
-    const accountArrArr = useAppSelector((state) => state.accountBC.accountArr);
-    const getAllStructBCBC = useAppSelector((state) => state.accountBC.getAllStructBC);
-    const paramsWalletWallet = useAppSelector((state) => state.accountDB.paramsWallet);
-    const allAccountDictionaryDBDB = useAppSelector((state) => state.accountDB.allAccountDictionaryDB);
-
     const [filterText, setFilterText] = useState<string>('');
     const [searchWalletAccount, setWalletAccount] = useState<string>('');
     const [resetPaginationToggle, setResetPaginationToggle] = useState<boolean>(false);
@@ -160,7 +129,7 @@ export const Search:FC =()=> {
     //     () => ExpandedComponent(identity.walletAccount)
     // );
 
-        // const rowsTable = useMemo(() => {
+    // const rowsTable = useMemo(() => {
 //     const receiptDictionary: NFIReceiptInterface["receipt"] = {};
 //     if(getAllStructBCBC !== null){
 //         getAllStructBCBC.map((el:BCStruct) => {
@@ -205,7 +174,8 @@ export const Search:FC =()=> {
 // }, []);
 
     type Cols = {
-        chain: string,
+        shortName: string,
+        chainId: string,
         creation: number | null,
         wallet: string,
         name: string | undefined,
@@ -223,7 +193,9 @@ export const Search:FC =()=> {
         return (accountQuery.data.Items.map((el) => {
             console.log("el", el)
             let name = "non-registered account";
-            if(nfiQuery.isSuccess){
+            let originDate = "";
+            let profession = "";
+            if (nfiQuery.isSuccess) {
                 const nfiArr = nfiQuery.data!.filter((elel) => {
                     return (elel.chainId === el.chainId && elel.walletAccount === el.walletAccount)
                 });
@@ -231,22 +203,25 @@ export const Search:FC =()=> {
                 if (nfiArr.length > 0) {
                     const nameName = nfiArr[0].name.split("|||")[0];
                     name = nameName;
+                    originDate = nfiArr[0].originDate;
+                    profession = nfiArr[0].profession.split("|||")[0];
                     if (el.ownerName && el.ownerName.length > 0) {
                         name = el.ownerName as string;
                     }
                 }
             }
-            const chainName = chainIdNetworkJSON.filter((chainN) => {
+            const chainArr = chainIdNetworkJSON.filter((chainN) => {
                 return (chainN.chainId.toString() === el.chainId)
             })
-            const chainNameName = (chainName.length > 0 ? chainName[0].chain : el.chainId)
+            const chainName = (chainArr.length > 0 ? chainArr[0].shortName : el.chainId)
             return ({
-                chain: chainNameName,
+                shortName: chainName,
+                chainId: el.chainId,
                 creation: el.createDate!,
                 wallet: el.walletAccount,
                 name: name,
-                origin: "",
-                profession: '',
+                origin: originDate,
+                profession: profession,
                 validations: el.validations,
                 validate: '',
                 reported: el.reported,
@@ -258,28 +233,114 @@ export const Search:FC =()=> {
     const columns: Column<Cols>[] = useMemo(() => [
         {
             Header: <Text style={{whiteSpace: 'nowrap'}}> Chain </Text>,
-            accessor: 'chain',
-            Cell: ( el ) =>  <Text fontSize={'12px'} > {el.row.original.chain} </Text>
+            accessor: 'shortName',
+            Cell: (el) => <Text fontSize={'12px'}> {el.row.original.shortName.toUpperCase()} </Text>
         },
         {
-            Header: <Text style={{whiteSpace: 'nowrap'}}> Creation Date </Text>,
+            Header: <Text style={{whiteSpace: 'nowrap'}}> Origin Date </Text>,
             accessor: 'creation',
-            Cell: ({ value }) =>
-            {
-                const originDateObject = new Date(value!);
-                const originDateFormatted = `${originDateObject.toLocaleString('en-us', {month: 'long'})} ${originDateObject.getDate()}, ${originDateObject.getFullYear()}`
-                return   <Text fontSize={'12px'} style={{whiteSpace: 'nowrap'}} > {originDateFormatted} </Text> ;
+            Cell: (el) => {
+                // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+                const creationDateObject = new Date(el.row.original.creation!);
+                const creationDateFormatted = `${creationDateObject.toLocaleString('en-us', {month: 'long'})} ${creationDateObject.getDate()}, ${creationDateObject.getFullYear()}`;
+                const originD = el.row.original.origin;
+                console.log("originD", originD)
+                if (originD === null || originD === undefined || originD === "") {
+
+                    return (
+                        <Center>
+                            <Text fontSize={'12px'} style={{whiteSpace: 'nowrap'}}> {creationDateFormatted} </Text>
+                        </Center>
+                    )
+                } else {
+                    const originDateObject = new Date(parseInt(originD!) * 1000);
+                    const originDateFormatted = `${originDateObject.toLocaleString('en-us', {month: 'long'})} ${originDateObject.getDate()}, ${originDateObject.getFullYear()}`
+                    return (
+                        <>
+                            <Center>
+                                <VStack>
+                                    <Tooltip
+                                        //hasArrow
+                                        label={originDateFormatted}
+                                        placement={'bottom-end'} border={'1px solid #694b69'}
+                                        borderRadius={'3px'} bg='pmpurple.5' color='pmpurple.13' m={'-6px'}
+                                        aria-label='A tooltip'
+                                        bgColor={'white'}
+                                        fontSize={'12px'}
+                                    >
+                                        {/*<Text fontSize={'14px'} style={{whiteSpace: 'nowrap'}} fontWeight={'semibold'} color={'pmpurple.27'}> PaperMaster </Text>*/}
+                                        <span>
+                                           <PMsvgIcon
+                                               width="28"
+                                               height="28"
+                                               viewBox="0 0 28 28"
+                                           />
+                                        </span>
+                                    </Tooltip>
+                                    <Text fontSize={'12px'}
+                                          style={{whiteSpace: 'nowrap'}}> {creationDateFormatted}</Text>
+                                </VStack>
+                            </Center>
+                        </>
+                    )
+                }
             }
         },
         {
             Header: <Text style={{whiteSpace: 'nowrap'}}> Wallet Account </Text>,
             accessor: 'wallet',
             Cell: (el) => {
-                return(
-                    <Button as={ReachLink} to={`/identity/${el.row.original.chain}/${el.row.original.wallet}`}
-                            bg={'#f2eef2'} color={'pmpurple.13'}>
-                        <Text isTruncated={true} fontSize={'12px'} > {el.row.original.wallet} </Text>
-                    </Button>
+                return (
+                    <>
+                        <Text fontSize={'12px'} style={{whiteSpace: 'nowrap'}}> {el.row.original.name}</Text>
+                        <Popover
+                            trigger={'hover'}
+                        >
+                            <PopoverTrigger>
+                                <Button as={ReachLink} to={`/identity/${el.row.original.chainId}/${el.row.original.wallet}`}
+                                        bg={'#f2eef2'}
+                                        color={'pmpurple.13'}
+                                        width={'128px'}
+                                        height={'24px'}
+                                        overflow={ "hidden !important"}
+                                        textAlign={'left'}
+                                        borderRadius={'5px'}
+                                        textOverflow={"ellipsis"}
+                                >
+                                    <Text
+                                        whiteSpace="nowrap"
+                                        overflow={ "hidden !important"}
+                                        textOverflow={"ellipsis"}
+                                        fontSize={'12px'}
+                                        width={'118px'}
+                                    >
+                                        {el.row.original.wallet}
+                                    </Text>
+                                </Button>
+
+                            </PopoverTrigger>
+                            <PopoverContent
+                                whiteSpace="nowrap"
+                                width={'400px'}
+                                border={'1px solid #694b69'}
+                                borderRadius={'3px'}
+                                color='pmpurple.13'
+                                pl={'1px'}
+                                overflow={ "hidden !important"}
+                                textAlign={'center'}
+                            >
+                            <PopoverBody
+                                whiteSpace="nowrap"
+                                width={'140px'}
+                                textAlign={'center'}
+                            >
+                                {el.row.original.wallet}
+                            </PopoverBody>
+                            </PopoverContent>
+
+                        </Popover>
+
+                    </>
                 )
             },
             // sortable: true,
@@ -291,43 +352,41 @@ export const Search:FC =()=> {
             //     fontWeight: 'bold'
             // },
         },
-        {
-            Header: <Text style={{whiteSpace: 'nowrap'}}> Name </Text>,
-            accessor: 'name',
-            Cell: (el) => {
-                return(
-                    <Link as={ReachLink} to={`/identity/${el.row.original.chain}/${el.row.original.wallet}`}
-                            bg={'#f2eef2'} color={'pmpurple.13'}>
-                        <Text fontSize={'12px'} style={{whiteSpace: 'nowrap'}}> {el.row.original.name} </Text>
-                    </Link>
-                )
-            },
-         sortable: true,
-         reorder: true,
-         center: true,
-        },
-        {
-            Header: <Text style={{whiteSpace: 'nowrap'}}> Origin Date </Text>,
-            accessor: 'origin',
-        },
+        // {
+        //     Header: <Text style={{whiteSpace: 'nowrap'}}> Origin Date </Text>,
+        //     accessor: 'origin',
+        //     Cell: ({ value }) =>
+        //     {
+        //         console.log("Epoch VAlue:",value)
+        //         if(!value){
+        //             return ""
+        //         }
+        //         const originDateObject = new Date(parseInt(value)*1000);
+        //         console.log("Epoch parseInt(value):",parseInt(value))
+        //         console.log("Epoch originDateObject:",originDateObject)
+        //         const originDateFormatted = `${originDateObject.toLocaleString('en-us', {month: 'long'})} ${originDateObject.getDate()}, ${originDateObject.getFullYear()}`
+        //         return   <Text fontSize={'12px'} style={{whiteSpace: 'nowrap'}} > {originDateFormatted} </Text> ;
+        //     }
+        // },
         {
             Header: <Text style={{whiteSpace: 'nowrap'}}> Profession </Text>,
             accessor: 'profession',
+            Cell: ({value}) => <Text fontSize={'12px'} style={{whiteSpace: 'nowrap'}}> {value} </Text>
         },
         {
             Header: <Text style={{whiteSpace: 'nowrap'}}> Validations </Text>,
             accessor: 'validations',
         },
         {
-            Header:     <Text style={{whiteSpace: 'nowrap'}}> Validate </Text>,
+            Header: <Text style={{whiteSpace: 'nowrap'}}> Validate </Text>,
             accessor: 'validate',
             Cell: <Button as={ReachLink} to={'/validate'} color={'pmpurple.13'} bg={'#f2eef2'} fontSize={'12px'}>
-                             <MdOutlineLibraryAddCheck fontSize={'16px'}/>
-                             <Text fontSize={'12px'} ml={'6px'}> Validate </Text>
-                         </Button>,
+                <MdOutlineLibraryAddCheck fontSize={'16px'}/>
+                <Text fontSize={'12px'} ml={'6px'}> Validate </Text>
+            </Button>,
             sortable: true,
-         reorder: true,
-         button: true,
+            reorder: true,
+            button: true,
             center: true,
         },
         {
@@ -338,9 +397,9 @@ export const Search:FC =()=> {
             Header: <Text style={{whiteSpace: 'nowrap'}}> Report </Text>,
             accessor: 'report',
             Cell: <Button as={ReachLink} to={'/report'} color={'pmpurple.13'} bg={'#f2eef2'} fontSize={'12px'}>
-                             <HiOutlineDocumentReport fontSize={'16px'}/>
-                             <Text fontSize={'12px'} ml={'6px'}> Report </Text>
-                         </Button>,
+                <HiOutlineDocumentReport fontSize={'16px'}/>
+                <Text fontSize={'12px'} ml={'6px'}> Report </Text>
+            </Button>,
         }
     ], [])
 
@@ -402,8 +461,8 @@ export const Search:FC =()=> {
         );
     }, [filterText, searchWalletAccount, resetPaginationToggle, filteredItems]);
 
-    const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
-        useTable({ columns, data }, useSortBy);
+    const {getTableProps, getTableBodyProps, headerGroups, rows, prepareRow} =
+        useTable({columns, data}, useSortBy);
 
     if (!accountQuery.data) return <div/>
     if (accountQuery.isLoading) return (<Heading>isLoading...</Heading>);

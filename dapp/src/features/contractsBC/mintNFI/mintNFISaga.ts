@@ -20,7 +20,7 @@ import {NFIReceiptInterface} from "../../accountDB/AccountDBSlice.types";
 const baseURL = 'https://ociuozqx85.execute-api.us-east-1.amazonaws.com';
 
 const web3 = new Web3(Web3.givenProvider);
-const NFIContract = new web3.eth.Contract(MintABI.abi as any, MintABI.networks['1666700000'].address);
+const NFIContract = new web3.eth.Contract(MintABI.abi as any, MintABI.networks['3'].address);
 
 function* mintNFISaga({payload}: PayloadAction<MintingNFIStruct>): SagaIterator {
     try {

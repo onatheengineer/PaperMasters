@@ -36,9 +36,17 @@ module.exports = {
    */
 
   networks: {
+      // ropsten: {
+      //     provider: () => new HDWalletProvider(mnemonic, `https://ropsten.infura.io/v3/${c97ad56e08674161a95ba16c6f855b6a}`),
+      //     network_id: 3,       // Ropsten's id
+      //     gas: 5500000,        // Ropsten has a lower block limit than mainnet
+      //     confirmations: 2,    // # of confs to wait between deployments. (default: 0)
+      //     timeoutBlocks: 200,  // # of blocks before a deployment times out  (minimum/default: 50)
+      //     skipDryRun: true     // Skip dry run before migrations? (default: false for public nets )
+      // },
       ropsten: {
           provider: function() {
-              return new HDWalletProvider(mnemonic, "https://ropsten.infura.io/v3/c97ad56e08674161a95ba16c6f855b6a");
+              return new HDWalletProvider('b3dd75968bba439d80769d163ce14fc9', "https://ropsten.infura.io/v3/c97ad56e08674161a95ba16c6f855b6a");
           },
           network_id: '3',
       },
@@ -52,7 +60,7 @@ module.exports = {
           provider: () => {
               return new HDWalletProvider({
                   mnemonic,
-                  providerOrUrl: 'https://api.s0.b.hmny.io', // https://api.s0.t.hmny.io for mainnet
+                  providerOrUrl: 'https://api.s0.b.hmny.io', // https://api.s0.t.hmny.io for mai  nnet
                   derivationPath: `m/44'/1023'/0'/0/`
               });
           },

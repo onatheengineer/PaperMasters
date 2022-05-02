@@ -54,7 +54,7 @@
     "chain": "ETH",
     "network": "testnet",
     "rpc": [
-      "https://ropsten.infura.io/v3/${c97ad56e08674161a95ba16c6f855b6a}"
+      "https://ropsten.infura.io/v3/c97ad56e08674161a95ba16c6f855b6a"
     ],
     "faucets": [
       "http://fauceth.komputing.org?chain=3&address=${ADDRESS}",
