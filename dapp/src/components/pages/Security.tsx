@@ -1,7 +1,7 @@
 import * as React from 'react';
 import type {FC} from 'react';
 import { Box, Flex} from '@chakra-ui/react';
-import Sidebar from "../Sidebar";
+import RoutesRoutes from "../../app/RoutesRoutes";
 import {Route, Routes} from "react-router-dom";
 
 

@@ -6,38 +6,72 @@ import MintABI from "../../abiFiles/PaperMastersNFI.json";
 import {BCStruct} from "../accountBC/AccountBCSlice.types";
 import chainIdNetworks from "../JSON/chainId.networks.json";
 import Web3 from "web3";
-import {mentionsInterface, mentionsStateDictionaryInterface} from "../accountDB/mentions/MentionsSlice";
-import {PayloadAction} from "@reduxjs/toolkit";
-import {SagaIterator} from "redux-saga";
-import {call, put} from "redux-saga/effects";
-import {addressHasIdentityBool, addressToTokenBool, addressToTokenID} from "../accountBC/AccountBCSlice";
 import chainIdJSON from "../JSON/chainId.json";
 
 export interface accountsApiInterface{
     Count: number,
     Items:AccountDBInterface[]
 }
+
+export interface postMentionInterface {
+    chainId: string,
+    walletAccount: string;
+    fromChainId: string;
+    fromWallet: string;
+    replyToMentionId: string;
+    fakeDelete: boolean;
+    messageBody: string;
+    radioType: -1 | 1 | 0;
+}
+
+export interface getMentionInterface {
+    mentionId: string,
+    chainId_walletAccount_Pkey: string,
+    chainId: string,
+    walletAccount: string;
+    fromChainId: string;
+    fromWallet: string;
+    replyToMentionId: string;
+    fakeDelete: boolean;
+    messageBody: string;
+    radioType: -1 | 1 | 0;
+    timeStamp: number;
+}
+
+export interface getMentionsApiInterface{
+    Count: number,
+    Items:getMentionInterface[]
+}
 export const accountDBApi= createApi({
     reducerPath: 'accountDBApi',
     baseQuery: fetchBaseQuery({ baseUrl: 'https://ociuozqx85.execute-api.us-east-1.amazonaws.com' }),
-    tagTypes: ['accountApi'],
+    tagTypes: ['singleAccountApi', 'allAccountApi', 'getMentionApi'],
     endpoints: (builder) => ({
         getSingleAccount: builder.query<AccountDBInterface, ParamsURLInterface>({
             query: ({chainIdURL, paramsWalletURL}:ParamsURLInterface) => `account/${chainIdURL}/${paramsWalletURL}`,
+            providesTags: ['singleAccountApi'],
         }),
         getAllAccount: builder.query<accountsApiInterface, void>({
             query: () => `account`,
+            providesTags: ['allAccountApi']
         }),
-    }),
-})
-
-export const mentionsApi= createApi({
-    reducerPath: 'mentionsApi',
-    baseQuery: fetchBaseQuery({ baseUrl: 'https://ociuozqx85.execute-api.us-east-1.amazonaws.com' }),
-    tagTypes: ['mentionsApi'],
-    endpoints: (builder) => ({
-        getMentions: builder.query<mentionsStateDictionaryInterface, void>({
-            query: () => `mentions`
+        getMention: builder.query<getMentionsApiInterface, ParamsURLInterface>({
+            query: ({chainIdURL, paramsWalletURL}:ParamsURLInterface) => `mentions/${chainIdURL}/${paramsWalletURL}`,
+            providesTags: ['getMentionApi'],
+            transformResponse: (response:getMentionsApiInterface, meta, arg) => {
+                response.Items.sort((a,b)=>{
+                    return b.timeStamp - a.timeStamp
+                })
+                return response
+            }
+        }),
+        postMention: builder.mutation<string, postMentionInterface>({
+            query: (mentionBody:postMentionInterface) => ({
+                url: 'mentions',
+                method: 'POST',
+                body: mentionBody
+            }),
+            invalidatesTags: ['getMentionApi'],
         }),
     }),
 })
@@ -92,7 +126,7 @@ export async function fetchAddressToToken({chainIdURL, paramsWalletURL}: ParamsU
             const web3 = new Web3(chainIdJSON[chainIdURL].rpc[0]);
             console.log("chainIdProviderProvider:", chainIdURL)
             if (Object.prototype.hasOwnProperty.call(MintABI.networks, `${chainIdURL}`)) {
-                console.log("MintABI.networks[chainIdProviderProvider].address", MintABI.networks[chainIdURL].address)
+                console.log("MintABI.networks[chainIdProviderProvider].address:", MintABI.networks[chainIdURL].address)
                 const NFIContract = new web3.eth.Contract(MintABI.abi as any, MintABI.networks[chainIdURL].address);
                 const addressToTokenIDID = await NFIContract.methods.addressToTokenID(paramsWalletURL[0]).call();
                 console.log("addresstotokenId:", addressToTokenIDID)
@@ -109,6 +143,5 @@ export async function fetchAddressToToken({chainIdURL, paramsWalletURL}: ParamsU
         return fetchDictionary;
 }
 
-export const { useGetSingleAccountQuery, useGetAllAccountQuery} = accountDBApi
+export const { useGetSingleAccountQuery, useGetAllAccountQuery, useGetMentionQuery, usePostMentionMutation} = accountDBApi
 export const { useGetIdentityBCQuery, useGetSingleIdentityBCQuery } = nfiBCApi
-export const { useGetMentionsQuery } = mentionsApi

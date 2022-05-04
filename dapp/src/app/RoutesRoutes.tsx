@@ -1,4 +1,4 @@
-import React, { ReactNode, ReactText, useState, useEffect } from 'react';
+import React, {ReactNode, ReactText, useState, useEffect, ReactElement} from 'react';
 import {Route, Routes, useLocation, useParams, useNavigate, Navigate, BrowserRouter} from 'react-router-dom';
 import { AiOutlineFileSearch } from "react-icons/ai";
 import { GiFlowerPot } from "react-icons/gi";
@@ -20,22 +20,22 @@ import {
 import {FiTrendingUp, FiMenu} from 'react-icons/fi';
 import { IconType } from 'react-icons';
 import type {FC} from 'react';
-import Register from "./pages/Register";
-import Search from './pages/Search'
+import Register from "../components/pages/Register";
+import Search from '../components/pages/Search'
 import {Link as ReachLink, To} from "react-router-dom";
 import {MdOutlineFeedback, MdOutlineReport, MdOutlineWarningAmber} from "react-icons/md";
 import {GiBookCover, GiBookmark, GiDiscussion, GiSuspicious} from "react-icons/gi";
-import Home from "./pages/Home";
-import Identity from "./pages/Identity";
-import CloudHWM from "./pages/CloudHWM";
-import YourPeople from "./pages/YourPeople";
-import Validate from "./pages/Validate";
-import Analytics from "./pages/Analytics";
-import Learn from "./pages/Learn";
-import News from "./pages/News";
-import Security from "./pages/Security";
-import {useAppSelector} from "../app/hooks";
-import Report from "./pages/Report";
+import Home from "../components/pages/Home";
+import Identity from "../components/pages/Identity";
+import CloudHWM from "../components/pages/CloudHWM";
+import YourPeople from "../components/pages/yourPeople/YourPeople";
+import Validate from "../components/pages/Validate";
+import Analytics from "../components/pages/Analytics";
+import Learn from "../components/pages/Learn";
+import News from "../components/pages/News";
+import Security from "../components/pages/Security";
+import {useAppSelector} from "./hooks";
+import Report from "../components/pages/Report";
 import {accountArr} from "../features/accountBC/AccountBCSlice";
 
 
@@ -88,7 +88,7 @@ export const NavItem: FC<InterfaceNavItem> = ({ icon, title, active,
     )
 }
 
-export const Sidebar: FC<InterfaceSidebar>= ({icon, profileName} ) => {
+export const RoutesRoutes: FC<InterfaceSidebar>= ({icon, profileName} ): ReactElement => {
 
     const location = useLocation();
     const [navSize, changeNavSize] = useState<'small' | 'large'>("small");
@@ -321,7 +321,7 @@ export const Sidebar: FC<InterfaceSidebar>= ({icon, profileName} ) => {
     )
 };
 
-export default Sidebar;
+export default RoutesRoutes;
 
 
 

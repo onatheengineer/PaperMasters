@@ -30,7 +30,7 @@ import { FaFacebook, FaGithub, FaGoogle } from 'react-icons/fa';
 import {useAppSelector} from "../../app/hooks";
 import { ReactNode, ReactText } from 'react';
 import Logo from '../../assets/Logo';
-import Sidebar from "../Sidebar";
+import RoutesRoutes from "../../app/RoutesRoutes";
 
 
 export const Report: FC=(props: HTMLChakraProps<'form'>)=> {

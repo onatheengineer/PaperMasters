@@ -22,13 +22,13 @@ import {
   useDisclosure
 } from "@chakra-ui/react";
 import {useEffect, useMemo, useReducer, useRef, useState} from "react";
-import {useAppDispatch, useAppSelector} from "../../app/hooks";
+import {useAppDispatch, useAppSelector} from "../../../app/hooks";
 import {FaCube} from "react-icons/fa";
 import {MdOutlineEmail} from "react-icons/md";
 import DrawerComponent from "./DrawerComponent";
 import {SocialMedia} from "./SocialMedia";
-import {AccountDBInterface, ParamsURLInterface} from "../../features/accountDB/AccountDBSlice.types";
-import {postSingleAccountDictionaryDBAction} from "../../features/accountDB/AccountDBSlice";
+import {AccountDBInterface, ParamsURLInterface} from "../../../features/accountDB/AccountDBSlice.types";
+import {postSingleAccountDictionaryDBAction} from "../../../features/accountDB/AccountDBSlice";
 
 function initialState(paramsRequestAccountDictionary:any) {
         return {

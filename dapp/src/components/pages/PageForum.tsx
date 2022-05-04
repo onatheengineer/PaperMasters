@@ -7,7 +7,7 @@ import {
     Menu, MenuButton, MenuDivider,
     MenuItem, MenuList, StackDivider, Text, useColorModeValue, Stack, Collapse, useDisclosure,
 } from '@chakra-ui/react';
-import Sidebar from "../Sidebar";
+import RoutesRoutes from "../../app/RoutesRoutes";
 import {Link as ReachLink} from "react-router-dom";
 
 

@@ -2,9 +2,8 @@ import * as React from 'react';
 import {useState, useEffect, useMemo, MouseEventHandler, ChangeEventHandler} from "react";
 import type {FC} from 'react';
 import {
-    Box, Flex, Input, Button, HStack, InputGroup, InputRightAddon, Text,
-    Tooltip, Heading, Table, Thead, Tbody, Tr, Th, Td,
-    Link, Center, VStack, Popover, PopoverBody, PopoverHeader, PopoverContent, PopoverArrow, PopoverTrigger,
+    Box, Flex, Input, Button, HStack, InputGroup, InputRightAddon, Text, Tooltip, Heading, Table,
+    Thead, Tbody, Tr, Th, Td, Center, VStack, Popover, PopoverBody, PopoverContent, PopoverTrigger,
 } from '@chakra-ui/react';
 import {Link as ReachLink} from "react-router-dom";
 import {useAppDispatch, useAppSelector} from "../../app/hooks";
@@ -525,30 +524,7 @@ export const Search:FC =()=> {
                     </Tbody>
                 </Table>
             </Box>
-            {/*{JSON.stringify(accountQuery.data.Items)}*/}
-            {/*<UnorderedList>*/}
-            {/*    {accountQuery.data.Items.map((accountQueryRow)=>(*/}
-            {/*            <ListItem*/}
-            {/*                key={accountQueryRow.walletAccount}*/}
-            {/*                className={"nfiIdentity-account"}*/}
-            {/*                // onClick={()=>{setSelectedWallet(accountQueryRow)}}*/}
-            {/*            >*/}
-            {/*                {accountQueryRow.walletAccount}*/}
-            {/*            </ListItem>*/}
-            {/*        ))}*/}
-            {/*</UnorderedList>*/}
-            {/*{JSON.stringify(data)}*/}
-            {/*<UnorderedList>*/}
-            {/*    {data.map((nfiIdentity)=>(*/}
-            {/*        <ListItem*/}
-            {/*            key={nfiIdentity.walletAccount}*/}
-            {/*            className={"nfiIdentity-account"}*/}
-            {/*            onClick={()=>{setSelectedWallet(nfiIdentity)}}*/}
-            {/*        >*/}
-            {/*            {nfiIdentity.walletAccount}*/}
-            {/*        </ListItem>*/}
-            {/*    ))}*/}
-            {/*</UnorderedList>*/}
+
             {/*<Box     >*/}
             {/*<DataTable*/}
             {/*    title="Non-Fungible-Identities"*/}

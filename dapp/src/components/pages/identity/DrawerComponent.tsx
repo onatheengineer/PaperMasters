@@ -20,7 +20,7 @@ import {
     Textarea, DrawerFooter, useDisclosure,
 } from "@chakra-ui/react";
 import {useEffect, useMemo, useReducer, useRef, useState} from "react";
-import {useAppDispatch, useAppSelector} from "../../app/hooks";
+import {useAppDispatch, useAppSelector} from "../../../app/hooks";
 import {
     FaCube,
     FaFacebook,
@@ -36,11 +36,11 @@ import {
 import {MdOutlineColorLens, MdOutlineQrCode, MdOutlinePeopleOutline, MdOutlineEmail} from "react-icons/md";
 import {BsFillPersonLinesFill} from "react-icons/bs";
 import {SketchPicker} from "react-color";
-import {SocialButton} from "../Footers/Footer";
-import {openseaIcon} from '../../assets/icons/openseaIcon';
+import {SocialButton} from "../../Footers/Footer";
+import {openseaIcon} from '../../../assets/icons/openseaIcon';
 import {ChevronDownIcon} from "@chakra-ui/icons";
-import {postSingleAccountDictionaryDBAction} from "../../features/accountDB/AccountDBSlice";
-import {AccountDBInterface} from "../../features/accountDB/AccountDBSlice.types";
+import {postSingleAccountDictionaryDBAction} from "../../../features/accountDB/AccountDBSlice";
+import {AccountDBInterface} from "../../../features/accountDB/AccountDBSlice.types";
 
 
 function initialState(paramsRequestAccountDictionary:any) {

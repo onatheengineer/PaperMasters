@@ -4,7 +4,7 @@ import {Link as ReachLink, useParams} from "react-router-dom";
 import {
     Text, TabPanel, TabPanels, TabList, Tabs, Tab, Select, Heading,
 } from "@chakra-ui/react";
-import {useAppSelector} from "../../app/hooks";
+import {useAppSelector} from "../../../app/hooks";
 
 export const ValidationsReports:FC=()=> {
     const {walletAccount} = useParams();

@@ -5,35 +5,35 @@ import Navbar from "./components/Navbar";
 import Footer from "./components/Footers/Footer";
 import "focus-visible/dist/focus-visible";
 import {Box, Flex, VStack} from '@chakra-ui/react';
-import Sidebar, {NavItem} from './components/Sidebar'
+import RoutesRoutes, {NavItem} from './app/RoutesRoutes'
 import {accountArr, accountArrAction, accountBCselectors} from "./features/accountBC/AccountBCSlice";
 import detectEthereumProvider from '@metamask/detect-provider';
 import {select} from "redux-saga/effects";
 import {ReactQueryDevtools} from 'react-query/devtools';
-
+import {Loading} from "./features/reactQuery/Loading";
 
 
 function App() {
-    const dispatch = useAppDispatch();
-
-    useEffect(() => {
-        console.log("is this dispatch metamask useEffect running?")
-        dispatch(accountArrAction());
-        const providerPromise = detectEthereumProvider();
-        console.log("this is provider:", providerPromise);
-        providerPromise.then((provider: any) => {
-            console.log('what is this actual provider?', provider);
-            provider.on('accountsChanged', (accounts: any) => {
-                console.log('accountDB changed!')
-                dispatch(accountArr([]));
-                dispatch(accountArrAction());
-                window.location.reload();
-            });
-            provider.on('chainChanged', (chainId: any) => {
-                window.location.reload();
-            })
-        });
-    }, [])
+    // const dispatch = useAppDispatch();
+    //
+    // useEffect(() => {
+    //     console.log("is this dispatch metamask useEffect running?")
+    //     dispatch(accountArrAction());
+    //     const providerPromise = detectEthereumProvider();
+    //     console.log("this is provider:", providerPromise);
+    //     providerPromise.then((provider: any) => {
+    //         console.log('what is this actual provider?', provider);
+    //         provider.on('accountsChanged', (accounts: any) => {
+    //             console.log('accountDB changed!')
+    //             dispatch(accountArr([]));
+    //             dispatch(accountArrAction());
+    //             window.location.reload();
+    //         });
+    //         provider.on('chainChanged', (chainId: any) => {
+    //             window.location.reload();
+    //         })
+    //     });
+    // }, [])
 
     return (
         <Box
@@ -47,6 +47,7 @@ function App() {
                 flexDirection={'column'}
                 //border={'2px solid red'}
             >
+                <Loading/>
                 <Box>
                     <Navbar/>
                 </Box>
@@ -55,7 +56,7 @@ function App() {
                     //border={'2px solid yellow'}
                     display={'flex'}
                 >
-                    <Sidebar/>
+                    <RoutesRoutes/>
                 </Box>
             </Flex>
             <Footer/>

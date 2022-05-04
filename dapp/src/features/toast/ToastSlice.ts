@@ -1,7 +1,10 @@
 /* eslint-disable no-param-reassign */
 import { createAction, createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-import { ToastOptions } from "./toastSlice.types";
+export interface ToastOptions {
+    title: string;
+    status: "error" | "info" | "warning" | "success" | undefined;
+}
 
 export type ToastState = {
     toastOptions: ToastOptions | null;

@@ -7,7 +7,7 @@ import {
     Menu, MenuButton, MenuDivider,
     MenuItem, MenuList, StackDivider, Text, useColorModeValue, Stack, Collapse, useDisclosure,
 } from '@chakra-ui/react';
-import Sidebar from "../Sidebar";
+import RoutesRoutes from "../../app/RoutesRoutes";
 import {Link as ReachLink} from "react-router-dom";
 import {setRef} from "@mui/material";
 import PageForum from "./PageForum";
@@ -34,7 +34,7 @@ export const Learn:FC=()=> {
             w={"100%"}
         >
             {/*<Flex >*/}
-            {/*    <Sidebar/>*/}
+            {/*    <RoutesRoutes/>*/}
             {/*</Flex>*/}
             <Box flex={'auto'}>
                 <PageForum forumPageHeader={'FAQ'} title={'What is an NFI'} body={'An NFI is a Non-Fungible Token that....'} />

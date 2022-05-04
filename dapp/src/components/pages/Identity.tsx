@@ -2,18 +2,18 @@ import * as React from 'react';
 import type {FC} from 'react';
 import {Link as ReachLink, useNavigate, useParams} from "react-router-dom";
 import {
-    Box, Button, Flex, Stack, Text, HStack,  Divider,
+    Box, Button, Flex, Stack, Text, HStack, Divider, Heading, Spacer, useDisclosure,
 } from "@chakra-ui/react";
 import { RiShareForwardLine} from 'react-icons/ri';
 import {useAppSelector, useAppDispatch} from "../../app/hooks";
 import AvatarNFI from "../AvatarNFI";
 import bgImage from '../../assets/legoLavendarheadercroped.png'
 import {FormEvent, useEffect, useMemo, useReducer, useState} from "react";
-import Header, {Mailto} from "../identity/Header";
-import Projects from "../identity/Projects";
-import ValidationsReports from "../identity/ValidationsReports";
-import ModalForIdentNoUseParams from '../identity/ModalForIdentNoUseParams';
-import {AccountLedger} from '../identity/AccountLedger'
+import Header, {Mailto} from "./identity/Header";
+import Projects from "./identity/Projects";
+import ValidationsReports from "./identity/ValidationsReports";
+import ModalForIdentNoUseParams from './identity/ModalForIdentNoUseParams';
+import {AccountLedger} from './identity/AccountLedger'
 import {apiHarmonyOneAction} from "../../features/accountBC/ledger/LedgerSlice";
 import {ParamsURLInterface} from "../../features/accountDB/AccountDBSlice.types";
 import {
@@ -22,7 +22,10 @@ import {
     singleAccountDictionaryDBAction,
     singleNFIReceiptDBAction
 } from "../../features/accountDB/AccountDBSlice";
-
+import {FaPlus} from "react-icons/fa";
+import MentionsDrawer from "./identity/mentions/MentionsDrawer";
+import {AiOutlineComment} from "react-icons/ai";
+import Mentions from "./identity/mentions/Mentions";
 
 export const Identity:FC=()=> {
 //TODO as soon as they connect - redirect them to their identity page - this is important for the hasIdentityBool slice to work
@@ -33,10 +36,15 @@ export const Identity:FC=()=> {
             dispatch(paramsChainId(chainId));
             dispatch(paramsWallet(walletAcc));
             dispatch(apiHarmonyOneAction(walletAcc));
-            dispatch(singleAccountDictionaryDBAction({ chainIdURL: chainId, paramsWalletURL: walletAcc } as ParamsURLInterface))}
-            dispatch(singleNFIReceiptDBAction({ chainIdURL: chainId, paramsWalletURL: walletAcc } as ParamsURLInterface))
+            dispatch(singleAccountDictionaryDBAction({
+                chainIdURL: chainId,
+                paramsWalletURL: walletAcc
+            } as ParamsURLInterface))
+        }
+        dispatch(singleNFIReceiptDBAction({chainIdURL: chainId, paramsWalletURL: walletAcc} as ParamsURLInterface))
     }, [walletAcc, chainId]);
 
+    const chainIdProviderProvider = useAppSelector((state) => state.accountBC.chainIdProvider);
     const addressHasIdentityBoolBool = useAppSelector((state) => state.accountBC.addressHasIdentityBool);
     const singleStructBC = useAppSelector((state) => state.accountBC.getStructBC);
     const singleAccountDictionaryDBDB = useAppSelector((state) => state.accountDB.singleAccountDictionaryDB);
@@ -65,7 +73,8 @@ export const Identity:FC=()=> {
         );
     }, [singleAccountDictionaryDBDB, walletAcc, addressHasIdentityBoolBool, singleStructBC])
 
-
+    const {isOpen, onOpen, onClose} = useDisclosure()
+    if (!chainId) return null;
     return (
         <Box
             //border={'4px solid red'}
@@ -154,9 +163,9 @@ export const Identity:FC=()=> {
                                                    uniqueYouColor={singleStructBC.uniqueYou.split("|||")[1]}
                                                    avatarBG={singleStructBC.bgRGB}
                                                    originDate={(typeof singleStructBC.originDate === 'number' ?
-                                                       (singleStructBC.originDate)
+                                                           (singleStructBC.originDate)
                                                            :
-                                                       parseInt(singleStructBC.originDate)
+                                                           parseInt(singleStructBC.originDate)
                                                    )}
                                         />
                                         :
@@ -202,14 +211,15 @@ export const Identity:FC=()=> {
                                         //w={'30vW'}
                                         //border={'4px solid blue'}
                                     >
-                                        {/*{provider === */}
-                                        {/*<Text mb={'5px'} fontSize="17px" color={'pmpurple.13'} align={'center'}>*/}
-                                        {/*    Ethereum Ledger*/}
-                                        {/*</Text>*/}
-
-                                        <Text mb={'5px'} fontSize="16px" color={'pmpurple.13'} align={'center'}>
-                                            Harmony Ledger
-                                        </Text>
+                                        {chainIdProviderProvider === '1666600000' ?
+                                            <Text mb={'5px'} fontSize="16px" color={'pmpurple.13'} align={'center'}>
+                                                Harmony Ledger
+                                            </Text>
+                                            :
+                                            <Text mb={'5px'} fontSize="17px" color={'pmpurple.13'} align={'center'}>
+                                                Ethereum Ledger
+                                            </Text>
+                                        }
                                         <Divider
                                             border={'1px solid'}
                                             borderColor={'pmpurple.8'}
@@ -219,7 +229,144 @@ export const Identity:FC=()=> {
                                 </Box>
                             </HStack>
                         </Box>
-                        <Projects/>
+                        <Stack
+                            //maxH={'455px'}
+                            border={'1px solid blue'}
+                            direction={{base: 'column', md: 'row'}}
+                        >
+
+                            <Flex
+                                flexDirection={'column'}
+                                w={'50%'}
+                                p="16px"
+                                //my="24px"
+                                //mx={{xl: '32px'}}
+                                borderRadius='15px'
+                                bg='white'
+                                px="24px"
+                                border={'1px solid red'}
+                                maxH={'455px'}
+                            >
+                                <Box
+                                    display='flex'
+                                    border={'1px solid green'}
+                                    // borderBottom={'1px solid'}
+                                    // borderColor={'pmpurple.6'}
+                                >
+                                    <HStack
+                                        w={'100%'}
+                                    >
+                                        <Heading mb="18px">
+                                            <Flex direction="column">
+                                                <Text mb={'5px'} fontSize="18px" color={'pmpurple.13'} fontWeight="bold"
+                                                      align={'left'}>
+                                                    Projects
+                                                </Text>
+                                                <Text fontSize="15px" color={'pmpurple.13'} fontWeight="400"
+                                                      align={'left'}>
+                                                    PaperMasters protect the Blockchain
+                                                </Text>
+                                            </Flex>
+                                        </Heading>
+                                        <Spacer/>
+                                        <Button
+                                            //style={{border: '1px solid #b59eb5'}}
+                                            px="6px"
+                                            py={'4px'}
+                                            //bg="transparent"
+                                            color={'pmpurple.13'}
+                                            border="1px solid"
+                                            borderColor={'pmpurple.2'}
+                                            //borderRadius="15px"
+                                            //minHeight={{sm: "200px", md: "100%"}}
+                                            rightIcon={<FaPlus fontSize="10px"/>}
+                                        >
+                                            <Text fontSize="sm" fontWeight="bold">
+                                                Add Project
+                                            </Text>
+                                        </Button>
+                                    </HStack>
+                                </Box>
+                                <Divider
+                                    border={'1px solid'}
+                                    borderColor={'pmpurple.8'}/>
+                                <Projects/>
+                            </Flex>
+                            <Flex
+                                flexDirection={'column'}
+                                w={'50%'}
+                                p="16px"
+                                //my="24px"
+                                //mx={{xl: '32px'}}
+                                borderRadius='15px'
+                                bg='white'
+                                px="24px"
+                                border={'1px solid red'}
+                                maxH={'455px'}
+                            >
+                                <Box
+                                    display='flex'
+                                    border={'1px solid green'}
+                                    // borderBottom={'1px solid'}
+                                    // borderColor={'pmpurple.6'}
+                                >
+                                    <HStack
+                                        w={'100%'}
+                                    >
+                                        <Heading mb="18px">
+                                            <Flex direction="column">
+                                                <Text mb={'5px'} fontSize="18px" color={'pmpurple.13'} fontWeight="bold"
+                                                      align={'left'}>
+                                                    Mentions
+                                                </Text>
+                                                <Text fontSize="15px" color={'pmpurple.13'} fontWeight="400"
+                                                      align={'left'}>
+                                                    Give a Mention
+                                                </Text>
+                                            </Flex>
+                                        </Heading>
+                                        <Spacer/>
+                                        <Button
+                                            //style={{border: '1px solid #b59eb5'}}
+                                            px="6px"
+                                            py={'4px'}
+                                            //bg="transparent"
+                                            color={'pmpurple.13'}
+                                            border="1px solid"
+                                            borderColor={'pmpurple.2'}
+                                            //borderRadius="15px"
+                                            //minHeight={{sm: "200px", md: "100%"}}
+                                            onClick={() => {
+                                                onOpen()
+                                            }}
+                                            rightIcon={<AiOutlineComment fontSize="18px"/>}
+                                        >
+                                            <Text fontSize="sm" fontWeight="bold">
+                                                Mentions
+                                            </Text>
+                                        </Button>
+                                        <MentionsDrawer
+                                            chainIdURL={chainId}
+                                            paramsWalletURL={walletAcc}
+                                            mentionsFullDisplayWindowBool={false}
+                                            onOpenOpen={onOpen}
+                                            isOpenOpen={isOpen}
+                                            onCloseClose={onClose}
+                                        />
+                                    </HStack>
+                                </Box>
+                                <Divider
+                                    border={'1px solid'}
+                                    borderColor={'pmpurple.8'}/>
+                                <Mentions
+                                    chainIdURL={chainId}
+                                    paramsWalletURL={walletAcc}
+                                    mentionsFullDisplayWindowBool={false}
+                                />
+                            </Flex>
+
+                        </Stack>
+
                     </Stack>
                 </Stack>
                 :

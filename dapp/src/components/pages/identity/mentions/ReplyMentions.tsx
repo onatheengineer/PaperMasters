@@ -12,7 +12,7 @@ import {
     DrawerContent,
 } from "@chakra-ui/react";
 
-import {useAppDispatch, useAppSelector} from "../../../app/hooks";
+import {useAppDispatch, useAppSelector} from "../../../../app/hooks";
 
 
 export const ReplyMentions: FC=()=> {

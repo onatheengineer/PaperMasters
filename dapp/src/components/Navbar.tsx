@@ -38,10 +38,8 @@ import {accountArrAction} from "../features/accountBC/AccountBCSlice";
 
 export default function WithSubnavigation() {
     const {isOpen, onToggle} = useDisclosure();
-    const getStructBCBC = useAppSelector((state) => state.accountBC.getStructBC);
-    const paramsWalletWallet = useAppSelector((state)=>state.accountDB.paramsWallet)
-    const accountArrArr = useAppSelector((state) => state.accountBC.accountArr);
     const dispatch = useAppDispatch();
+    const accountArrArr = useAppSelector((state) => state.accountBC.accountArr);
 
     return (
         <Box>
@@ -168,6 +166,8 @@ const DesktopNav = () => {
     const linkColor = 'pmpurple.13';
     const linkHoverColor = 'pmpurple.8';
     const popoverContentBgColor = 'pmpurple.2';
+    const chainIdProviderProvider = useAppSelector((state) => state.accountBC.chainIdProvider);
+    const accountArrArr = useAppSelector((state) => state.accountBC.accountArr);
 
     return (
         <Stack direction={'row'} spacing={8}
@@ -409,14 +409,10 @@ interface NavItem {
     children?: Array<NavItem>;
     navIcon?: JSX.Element;
     navLink?: To,
+
 }
 
 const NAV_ITEMS: Array<NavItem> = [
-    // {
-    //     label: '',
-    //     navIcon: <PMLogoFull fill={'#5c415c'} width={'170px'}/>,
-    //     navLink: '/',
-    // },
     {
         label: 'Non-Fungible Identity',
         navIcon: <MdManageAccounts fontSize={'18px'}/>,
@@ -425,23 +421,23 @@ const NAV_ITEMS: Array<NavItem> = [
                 label: 'Identity',
                 subLabel: 'Your Authentic Identity',
                 navIcon: <MdManageAccounts fontSize={'18px'}/>,
-                navLink: '/identity/${requestAccountsArr[0]}',
+                navLink: '/identity',
             },
             {
                 label: 'Register',
-                subLabel: 'Register your wallet accountDB',
+                subLabel: 'Register your wallet',
                 navIcon: <BiBookmarkHeart fontSize={'18px'}/>,
                 navLink: '/register',
             },
             {
                 label: 'Validate (coming soon)',
-                subLabel: 'Authenticate a wallet accountDB',
+                subLabel: 'Authenticate a wallet',
                 navIcon: <IoMdCheckmarkCircleOutline fontSize={'18px'}/>,
                 navLink: '/validate',
             },
             {
                 label: 'Report (coming soon)',
-                subLabel: 'Report a wallet accountDB for wrongful activity',
+                subLabel: 'Report a wallet for wrongful activity',
                 navIcon: <MdOutlineReport fontSize={'18px'}/>,
                 navLink: 'report',
             },
@@ -487,7 +483,7 @@ const NAV_ITEMS: Array<NavItem> = [
         children: [
             {
                 label: 'About Us',
-                subLabel: 'Were not going anywhere',
+                subLabel: 'We are here for the community',
                 navIcon: <GiFlowerHat fontSize={'18px'}/>,
                 navLink: '/yourpeople',
             },

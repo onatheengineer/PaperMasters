@@ -1,7 +1,7 @@
 import {Box, Flex, Heading, HStack, Tab, TabList, TabPanel, TabPanels, Tabs, Text, Stack, Spacer} from "@chakra-ui/react";
 import * as React from "react";
 import {FC, useEffect, useMemo} from "react";
-import {useAppDispatch} from "../../app/hooks";
+import {useAppDispatch} from "../../../app/hooks";
 import {useParams} from "react-router-dom";
 
 

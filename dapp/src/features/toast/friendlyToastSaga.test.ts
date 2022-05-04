@@ -1,10 +1,15 @@
 import { expectSaga } from "redux-saga-test-plan";
-
-import { ToastOptions } from "./toastSlice.types"
 import { makeFriendlyToast } from "./friendlyToastSaga"
 import { showToast } from "./ToastSlice"
+import {UseToastOptions} from "@chakra-ui/react";
 
-const friendlyToastPayload: ToastOptions = {
+export const toastConfig: UseToastOptions = {
+    isClosable: true,
+    variant: "subtle",
+    position: "bottom",
+};
+
+const friendlyToastPayload: UseToastOptions = {
     title: "you're great",
     status: "info",
 };

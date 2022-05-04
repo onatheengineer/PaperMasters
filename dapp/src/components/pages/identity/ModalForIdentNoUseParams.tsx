@@ -17,8 +17,8 @@ import {
 import {Link as ReachLink} from "react-router-dom";
 import {SiSololearn} from "react-icons/si";
 import Sparkle from "react-sparkle";
-import {useAppDispatch} from "../../app/hooks";
-import {accountArrAction} from "../../features/accountBC/AccountBCSlice";
+import {useAppDispatch} from "../../../app/hooks";
+import {accountArrAction} from "../../../features/accountBC/AccountBCSlice";
 
 
 export const ModalForIdentNoUseParams:FC=()=> {

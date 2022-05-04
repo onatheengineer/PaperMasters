@@ -105,7 +105,7 @@ function* singleStructBCSaga({payload}: PayloadAction<ParamsURLInterface>): Saga
                 const getStructBCBC = yield call(NFIContract.methods.addressToIdentityStruct(paramsWalletURL).call)
                 yield put(getStructBC(getStructBCBC));
                 //TODO what comes out here - can I do a lenth or is it null
-                if(getStructBCBC.length > 0){
+                if(getStructBCBC[0].length > 0){
                     yield put(addressHasIdentityBool(true));
                 }
             }

@@ -9,13 +9,12 @@ import {
      IconButton, useBreakpointValue,
 } from "@chakra-ui/react";
 import {useMemo, useState} from "react";
-import {useAppDispatch, useAppSelector} from "../../app/hooks";
+import {useAppDispatch, useAppSelector} from "../../../app/hooks";
 import {FaFacebook, FaInstagram, FaPlus, FaTwitter} from "react-icons/fa";
 import {AiOutlineComment} from "react-icons/ai";
-import ImageArchitect1 from "../../assets/img/ImageArchitect1.png";
+import ImageArchitect1 from "../../../assets/img/ImageArchitect1.png";
 import {Carousel } from 'react-responsive-carousel';
-import Mentions from "./mentions/Mentions";
-import DisplayMentions from "./mentions/DisplayMentions";
+import MentionsDrawer from "./mentions/MentionsDrawer";
 // Here we have used react-icons package for the icons
 import { BiLeftArrowAlt, BiRightArrowAlt } from 'react-icons/bi';
 //import Slider from 'react-slick';
@@ -70,65 +69,7 @@ export const Projects=()=> {
         ]
 
     return (
-        <Stack
-        //maxH={'455px'}
-        border={'1px solid blue'}
-        direction={{base: 'column', md: 'row'}}
-        >
-            <Flex
-                flexDirection={'column'}
-                w={'50%'}
-                p="16px"
-                //my="24px"
-                //mx={{xl: '32px'}}
-                borderRadius='15px'
-                bg='white'
-                px="24px"
-                border={'1px solid red'}
-                maxH={'455px'}
-            >
-                <Box
-                    display = 'flex'
-                    border={'1px solid green'}
-                    // borderBottom={'1px solid'}
-                    // borderColor={'pmpurple.6'}
-                >
-                    <HStack
-                    w={'100%'}
-                    >
-                        <Heading mb="18px">
-                            <Flex direction="column">
-                                <Text mb={'5px'} fontSize="18px" color={'pmpurple.13'} fontWeight="bold" align={'left'}>
-                                    Projects
-                                </Text>
-                                <Text fontSize="15px" color={'pmpurple.13'} fontWeight="400" align={'left'}>
-                                    PaperMasters protect the Blockchain
-                                </Text>
-                            </Flex>
-                        </Heading>
-                        <Spacer/>
-                        <Button
-                            //style={{border: '1px solid #b59eb5'}}
-                            px="6px"
-                            py={'4px'}
-                            //bg="transparent"
-                            color={'pmpurple.13'}
-                            border="1px solid"
-                            borderColor={'pmpurple.2'}
-                            //borderRadius="15px"
-                            //minHeight={{sm: "200px", md: "100%"}}
-                            rightIcon={<FaPlus fontSize="10px"/>}
-                        >
-                            <Text fontSize="sm" fontWeight="bold">
-                                Add Project
-                            </Text>
-                        </Button>
-                    </HStack>
-                </Box>
-                <Divider
-                    border={'1px solid'}
-                    borderColor={'pmpurple.8'}
-                />
+
 
                 <Flex
                     h={'100%'}
@@ -261,25 +202,8 @@ export const Projects=()=> {
                             </Flex>
                             {/*</Carousel>*/}
                         </Flex>
-
                     </Grid>
                 </Flex>
-            </Flex>
-            <Box
-                w={'50%'}
-                p="16px"
-                //my="24px"
-                //mx={{xl: '32px'}}
-                borderRadius='15px'
-                bg='white'
-                px="24px"
-                //border={'1px solid red'}
-                h={'100%'}
-                >
-                <Mentions/>
-            </Box>
-
-        </Stack>
     )
 };
 

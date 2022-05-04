@@ -100,12 +100,17 @@ export default function LargeWithLogoCentered() {
                     md: 'repeat(4, 1fr)',
                     lg: 'repeat(5, 1fr)'
                 }}
-                gap={{base: '8', sm: '12', md: '16'}}>
-                {/*<SimpleGrid columns={{base: 1, sm: 2, md: 5}} spacing={8}>*/}
+                gap={{base: '8', sm: '12', md: '16'}}
+            >
                 <Stack display={{base: 'none', lg: 'block'}}>
-                    <PMsvgIcon/>
+                    <Link as={ReachLink} to="/">
+                        <PMsvgIcon
+                            width="60"
+                            height="60"
+                            viewBox="0 0 60 60"
+                        />
+                    </Link>
                 </Stack>
-
                 <Stack alignItems={'flex-start'}>
                     <ListHeader>Services</ListHeader>
                     <Link as={ReachLink} to="/">Non-Fungible Identities</Link>

@@ -4,7 +4,7 @@ import {
     Avatar, AvatarGroup, Box, Button, Flex, Grid, GridItem, Icon, Image, Link, MenuItem,
     Stack, Switch, Text, useColorModeValue, HStack,
 } from "@chakra-ui/react";
-import {useAppSelector} from "../../app/hooks";
+import {useAppSelector} from "../../../app/hooks";
 import {
     FaDiscord,
     FaFacebook, FaGithub,
@@ -16,9 +16,9 @@ import {
     FaTwitter,
     FaYoutube
 } from "react-icons/fa";
-import {openseaIcon} from "../../assets/icons/openseaIcon";
+import {openseaIcon} from "../../../assets/icons/openseaIcon";
 import {MdOutlinePeopleOutline} from "react-icons/md";
-import {SocialMediaInterface} from "../../features/accountDB/AccountDBSlice.types";
+import {SocialMediaInterface} from "../../../features/accountDB/AccountDBSlice.types";
 
 interface iconLinkInterface{
     children: any,
