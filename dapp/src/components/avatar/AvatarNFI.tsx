@@ -13,8 +13,8 @@ import {
     Stack,
     Text, VStack
 } from "@chakra-ui/react";
-import legoLavendarheadercroped from "../assets/legoLavendarheadercroped.png";
-import {PMsvgIcon} from "../assets/icons/PMSvgIcon";
+import legoLavendarheadercroped from "../../assets/legoLavendarheadercroped.png";
+import {PMsvgIcon} from "../../assets/icons/PMSvgIcon";
 
 interface AvatarNFIInterface{
     walletAccount: string,

@@ -9,7 +9,7 @@ import {Link as ReachLink} from "react-router-dom";
 import {useAppDispatch, useAppSelector} from "../../app/hooks";
 import  {ExpanderComponentProps} from 'react-data-table-component';
 import IdentityEntryModal from "../../utils/IdentityEntryModal";
-import AvatarNFI from "../AvatarNFI";
+import AvatarNFI from "../avatar/AvatarNFI";
 import {allAccountDictionaryDBAction, allNFIReceiptDBAction} from "../../features/accountDB/AccountDBSlice";
 import {BCStruct} from "../../features/accountBC/AccountBCSlice.types";
 import {allStructBCAction} from "../../features/accountBC/AccountBCSlice";

@@ -3,6 +3,14 @@ pragma solidity >=0.8.0 <0.9.0;
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/token/ERC721/extensions/IERC721Metadata.sol";
+import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
+import "@openzeppelin/contracts/token/ERC20/extensions/draft-ERC20Permit.sol";
+import "@openzeppelin/contracts/token/ERC20/extensions/ERC20Votes.sol";
+import "./governance/Governor.sol";
+import "./governance/compatibility/GovernorCompatibilityBravo.sol";
+import "./governance/extensions/GovernorVotes.sol";
+import "./governance/extensions/GovernorVotesQuorumFraction.sol";
+import "./governance/extensions/GovernorTimelockControl.sol";
 import "hardhat/console.sol";
 
 contract PaperMastersNFI is ERC721, Ownable {
@@ -198,4 +206,151 @@ contract PaperMastersNFI is ERC721, Ownable {
     function safeTransferFrom(address from, address to, uint256 tokenId) public virtual override  onlyOwner {}
     function safeTransferFrom(address from, address to, uint256 tokenId, bytes memory _data) public virtual override onlyOwner {}
     function _safeTransfer(address from, address to, uint256 tokenId, bytes memory _data) internal virtual override onlyOwner {}
+}
+
+
+contract Validate is ERC20, ERC20Permit, ERC20Votes {
+    constructor() ERC20("Validate", "VAL") ERC20Permit("Validate") {}
+
+    // The functions below are overrides required by Solidity.
+
+    function _afterTokenTransfer(address from, address to, uint256 amount)
+    internal
+    override(ERC20, ERC20Votes)
+    {
+        super._afterTokenTransfer(from, to, amount);
+    }
+
+    function _mint(address to, uint256 amount)
+    internal
+    override(ERC20, ERC20Votes)
+    {
+        super._mint(to, amount);
+    }
+
+    function _burn(address account, uint256 amount)
+    internal
+    override(ERC20, ERC20Votes)
+    {
+        super._burn(account, amount);
+    }
+}
+
+contract Report is ERC20, ERC20Permit, ERC20Votes {
+    constructor() ERC20("Report", "RPT") ERC20Permit("Report") {}
+
+    // The functions below are overrides required by Solidity.
+
+    function _afterTokenTransfer(address from, address to, uint256 amount)
+    internal
+    override(ERC20, ERC20Votes)
+    {
+        super._afterTokenTransfer(from, to, amount);
+    }
+
+    function _mint(address to, uint256 amount)
+    internal
+    override(ERC20, ERC20Votes)
+    {
+        super._mint(to, amount);
+    }
+
+    function _burn(address account, uint256 amount)
+    internal
+    override(ERC20, ERC20Votes)
+    {
+        super._burn(account, amount);
+    }
+}
+
+contract MyGovernor is Governor, GovernorCompatibilityBravo, GovernorVotes, GovernorVotesQuorumFraction, GovernorTimelockControl {
+    constructor(IVotes _token, TimelockController _timelock)
+    Governor("MyGovernor")
+    GovernorVotes(_token)
+    GovernorVotesQuorumFraction(4)
+    GovernorTimelockControl(_timelock)
+    {}
+
+    function votingDelay() public pure override returns (uint256) {
+        return 6575; // 1 day
+    }
+
+    function votingPeriod() public pure override returns (uint256) {
+        return 46027; // 1 week
+    }
+
+    function proposalThreshold() public pure override returns (uint256) {
+        return 0;
+    }
+
+    // The functions below are overrides required by Solidity.
+
+    function quorum(uint256 blockNumber)
+    public
+    view
+    override(IGovernor, GovernorVotesQuorumFraction)
+    returns (uint256)
+    {
+        return super.quorum(blockNumber);
+    }
+
+    function getVotes(address account, uint256 blockNumber)
+    public
+    view
+    override(IGovernor, GovernorVotes)
+    returns (uint256)
+    {
+        return super.getVotes(account, blockNumber);
+    }
+
+    function state(uint256 proposalId)
+    public
+    view
+    override(Governor, IGovernor, GovernorTimelockControl)
+    returns (ProposalState)
+    {
+        return super.state(proposalId);
+    }
+
+    function propose(address[] memory targets, uint256[] memory values, bytes[] memory calldatas, string memory description)
+    public
+    override(Governor, GovernorCompatibilityBravo, IGovernor)
+    returns (uint256)
+    {
+        return super.propose(targets, values, calldatas, description);
+    }
+
+    function _execute(uint256 proposalId, address[] memory targets, uint256[] memory values, bytes[] memory calldatas, bytes32 descriptionHash)
+    internal
+    override(Governor, GovernorTimelockControl)
+    {
+        super._execute(proposalId, targets, values, calldatas, descriptionHash);
+    }
+
+    function _cancel(address[] memory targets, uint256[] memory values, bytes[] memory calldatas, bytes32 descriptionHash)
+    internal
+    override(Governor, GovernorTimelockControl)
+    returns (uint256)
+    {
+        return super._cancel(targets, values, calldatas, descriptionHash);
+    }
+
+    function _executor()
+    internal
+    view
+    override(Governor, GovernorTimelockControl)
+    returns (address)
+    {
+        return super._executor();
+    }
+
+    function supportsInterface(bytes4 interfaceId)
+    public
+    view
+    override(Governor, IERC165, GovernorTimelockControl)
+    returns (bool)
+    {
+        return super.supportsInterface(interfaceId);
+    }
+
 }

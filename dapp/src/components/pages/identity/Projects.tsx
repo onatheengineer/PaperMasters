@@ -22,7 +22,6 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import {select} from "redux-saga/effects";
 
-
 export const Projects=()=> {
 
 

@@ -19,7 +19,7 @@ import {
     Button,
     Text,
     PopoverContent,
-    PopoverBody, Link
+    PopoverBody, Link, Collapse
 } from '@chakra-ui/react';
 import {
     accountsApiInterface,
@@ -44,6 +44,8 @@ export const SingleMention:FC<singleMentionInterface> =({mention})=> {
         chainIdURL: mention.fromChainId!,
         paramsWalletURL: mention.fromWallet!
     });
+    const [show, setShow] = React.useState(false)
+    const handleToggle = () => setShow(!show)
     const timeStampFormatted = moment(mention.timeStamp).format('MMM DD YYYY, hh:mm:ss a');
     const timeStampShortFormatted = moment(mention.timeStamp).format('MMM DD YYYY');
     return (
@@ -70,6 +72,7 @@ export const SingleMention:FC<singleMentionInterface> =({mention})=> {
                                     borderRadius={'5px'}
                             >
                                 <Text
+                                    as={'u'}
                                     whiteSpace="nowrap"
                                     fontSize={'16px'}
                                 >
@@ -103,6 +106,7 @@ export const SingleMention:FC<singleMentionInterface> =({mention})=> {
                               borderRadius={'5px'}
                         >
                             <Text
+                                as={'u'}
                                 whiteSpace="nowrap"
                                 fontSize={'16px'}
                             >
@@ -140,7 +144,21 @@ export const SingleMention:FC<singleMentionInterface> =({mention})=> {
                     //     {mention.messageBody}
                     // }}
                 >
+                    <Collapse
+                        startingHeight={20}
+                        in={show}
+                    >
                     {mention.messageBody}
+                    </Collapse>
+                    <Button
+                        border={'1px solid'}
+                        borderColor={'pmpurple.2'}
+                        size='xs'
+                        onClick={handleToggle}
+                        my='.5rem'
+                    >
+                        Show {show ? 'Less' : 'More'}
+                    </Button>
                 </Box>
                 <Spacer/>
                 <Box

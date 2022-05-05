@@ -5,6 +5,7 @@ import {
     Text, TabPanel, TabPanels, TabList, Tabs, Tab, Select, Heading,
 } from "@chakra-ui/react";
 import {useAppSelector} from "../../../app/hooks";
+import ValidateAvatar from "../../avatar/ValidateAvatar";
 
 export const ValidationsReports:FC=()=> {
     const {walletAccount} = useParams();
@@ -24,6 +25,7 @@ export const ValidationsReports:FC=()=> {
                             <Text textAlign={'left'} fontSize="sm" color={'pmpurple.8'} fontWeight="600" mb="12px">
                                 GIFTED BY ACCOUNT:
                             </Text>
+                            {/*<ValidateAvatar giver={} giverColor={} receiver={} receiverColor={} comment={} commentColor={} originDate={} />*/}
                             {/*<Flex align="center" mb="20px">*/}
                             {/*    <Switch colorScheme="purple" me="10px"/>*/}
                             {/*    <Text*/}

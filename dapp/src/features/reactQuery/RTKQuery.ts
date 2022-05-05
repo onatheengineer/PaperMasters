@@ -193,5 +193,16 @@ export async function fetchAddressToToken({chainIdURL, paramsWalletURL}: ParamsU
     return { error: { status: 404, data: " NfI does not exist" } }
 }
 
+export interface validateInterface{
+    giver: string,
+    giverColor: string,
+    receiver: string,
+    receiverColor: string,
+    comment: string
+    commentColor: string
+    originDate: string
+}
+
+
 export const { useGetSingleAccountQuery, useGetAllAccountQuery, useGetMentionQuery, usePostMentionMutation} = accountDBApi
 export const { useGetIdentityBCQuery, useGetSingleIdentityBCQuery } = nfiBCApi

@@ -39,7 +39,7 @@ import {
     gasForMintNFIAction,
     gasAccBalanceAction
 } from "../../features/contractsBC/mintNFI/MintNFISlice";
-import AvatarNFI from "../AvatarNFI";
+import AvatarNFI from "../avatar/AvatarNFI";
 import {accountArrAction} from "../../features/accountBC/AccountBCSlice";
 import {BCStruct} from "../../features/accountBC/AccountBCSlice.types";
 import {MintingNFIStruct} from "../../features/contractsBC/mintNFI/mintNFISlice.types";
@@ -192,7 +192,6 @@ export const Register:FC=()=> {
         dispatch(gasForMintNFIAction(mintPayload));
     };
 
-
     useEffect(() => {
         console.log('accountsArr', accountArrArr.length)
         if (accountArrArr.length === 0) {
@@ -206,31 +205,26 @@ export const Register:FC=()=> {
             setIsModalOpen(true);
             return (['Connect Wallet Account for Access', "Please go to MetaMask and connect your wallet accountDB."])
         }
-        
         if (addressHasIdentityBoolBool && mintSucceededSucceeded === 'idle') {
             setIsModalOpen(true);
             return (['You have already Minted',
                     <span>Connected wallet account is already registered, each wallet account can have only one identity. <br/><br/> In the future, you will be able to mint an NFI for each contract that you own.</span>]
             )
         }
-        
         if (mintSucceededSucceeded === 'failed') {
             setIsModalOpen(true);
             return (['Minting failed',
                     <span> Noooo, what happened! Please email Ramona with the details @ ramonajenny.n@gmail.com.</span>]
             )
         }
-        
         if (mintSucceededSucceeded === 'succeeded') {
             setIsModalOpen(true);
             return ([" Minted Successful!", 'You did it! You are now a registered PaperMaster, please navigate to your Identity page and update your portfolio.'])
         }
-        
         if (accBalanceErrErr.length > 0) {
             setIsModalOpen(true);
             return (["Account Balance Error", accBalanceErrErr])
         }
-        
         // if (statusBool === true) {
         //     setIsModalOpen(true);
         //     return ([" Minted Successful!", 'You did it! You are now a registered PaperMaster, please navigate to your Identity page and update your portfolio.'])

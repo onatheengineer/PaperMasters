@@ -6,7 +6,7 @@ import {
 } from "@chakra-ui/react";
 import { RiShareForwardLine} from 'react-icons/ri';
 import {useAppSelector, useAppDispatch} from "../../app/hooks";
-import AvatarNFI from "../AvatarNFI";
+import AvatarNFI from "../avatar/AvatarNFI";
 import bgImage from '../../assets/legoLavendarheadercroped.png'
 import {FormEvent, useEffect, useMemo, useReducer, useState} from "react";
 import Header, {Mailto} from "./identity/Header";
