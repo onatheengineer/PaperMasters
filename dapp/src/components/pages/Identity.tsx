@@ -26,6 +26,7 @@ import {FaPlus} from "react-icons/fa";
 import MentionsDrawer from "./identity/mentions/MentionsDrawer";
 import {AiOutlineComment} from "react-icons/ai";
 import Mentions from "./identity/mentions/Mentions";
+import {useGetMentionQuery, useGetSingleIdentityBCQuery} from "../../features/reactQuery/RTKQuery";
 
 export const Identity:FC=()=> {
 //TODO as soon as they connect - redirect them to their identity page - this is important for the hasIdentityBool slice to work
@@ -48,7 +49,12 @@ export const Identity:FC=()=> {
     const addressHasIdentityBoolBool = useAppSelector((state) => state.accountBC.addressHasIdentityBool);
     const singleStructBC = useAppSelector((state) => state.accountBC.getStructBC);
     const singleAccountDictionaryDBDB = useAppSelector((state) => state.accountDB.singleAccountDictionaryDB);
-    const singleNFIReceiptDBDB = useAppSelector((state) => state.accountDB.singleNFIReceiptDB);
+    //const singleNFIReceiptDBDB = useAppSelector((state) => state.accountDB.singleNFIReceiptDB);
+    const useGetSingleIdentityBCQueryQuery = useGetSingleIdentityBCQuery({
+        chainIdURL: chainId!,
+        paramsWalletURL: walletAcc!
+    });
+    console.log('dataIdentity:', useGetSingleIdentityBCQueryQuery)
 
     const logicDescriptionMemo = useMemo(() => {
         console.log(singleAccountDictionaryDBDB, walletAcc, addressHasIdentityBoolBool, singleStructBC)
@@ -69,7 +75,7 @@ export const Identity:FC=()=> {
         //     }
         // }
         return (
-            " Mathematics may not teach us how to add love or subtract hate, but it gives us every reason to hope that every problem has a solution."
+            " Mathematics may not teach us how to add love or subtract hate, but it gives us every reason to hope that every problem has a solution.  -Anonymous"
         );
     }, [singleAccountDictionaryDBDB, walletAcc, addressHasIdentityBoolBool, singleStructBC])
 
@@ -145,28 +151,25 @@ export const Identity:FC=()=> {
                                      py={'28px'}
                                      overflow={'none'} whiteSpace={'break-spaces'}
                                 >
-                                    {walletAcc.length !== 0 && addressHasIdentityBoolBool !== false && singleStructBC !== null && singleStructBC.walletAccount.length !== 0 ?
-                                        <AvatarNFI walletAccount={singleStructBC.walletAccount}
-                                                   name={singleStructBC.name.split("|||")[0]}
-                                                   nameColor={singleStructBC.name.split("|||")[1]}
-                                                   email={singleStructBC.email.split("|||")[0]}
-                                                   emailColor={singleStructBC.email.split("|||")[1]}
-                                                   profession={singleStructBC.profession.split("|||")[0]}
-                                                   professionColor={singleStructBC.profession.split("|||")[1]}
-                                                   organization={singleStructBC.organization.split("|||")[0]}
-                                                   organizationColor={singleStructBC.organization.split("|||")[1]}
-                                                   slogan={singleStructBC.slogan.split("|||")[0]}
-                                                   sloganColor={singleStructBC.slogan.split("|||")[1]}
-                                                   website={singleStructBC.website.split("|||")[0]}
-                                                   websiteColor={singleStructBC.website.split("|||")[1]}
-                                                   uniqueYou={singleStructBC.uniqueYou.split("|||")[0]}
-                                                   uniqueYouColor={singleStructBC.uniqueYou.split("|||")[1]}
-                                                   avatarBG={singleStructBC.bgRGB}
-                                                   originDate={(typeof singleStructBC.originDate === 'number' ?
-                                                           (singleStructBC.originDate)
-                                                           :
-                                                           parseInt(singleStructBC.originDate)
-                                                   )}
+                                    {useGetSingleIdentityBCQueryQuery.isSuccess ?
+                                        <AvatarNFI
+                                            walletAccount={useGetSingleIdentityBCQueryQuery.data!.nfiIdentity!.walletAccount}
+                                            name={useGetSingleIdentityBCQueryQuery.data!.nfiIdentity!.name.split("|||")[0]}
+                                            nameColor={useGetSingleIdentityBCQueryQuery.data!.nfiIdentity!.name.split("|||")[1]}
+                                            email={useGetSingleIdentityBCQueryQuery.data!.nfiIdentity!.email.split("|||")[0]}
+                                            emailColor={useGetSingleIdentityBCQueryQuery.data!.nfiIdentity!.email.split("|||")[1]}
+                                            profession={useGetSingleIdentityBCQueryQuery.data!.nfiIdentity!.profession.split("|||")[0]}
+                                            professionColor={useGetSingleIdentityBCQueryQuery.data!.nfiIdentity!.profession.split("|||")[1]}
+                                            organization={useGetSingleIdentityBCQueryQuery.data!.nfiIdentity!.organization.split("|||")[0]}
+                                            organizationColor={useGetSingleIdentityBCQueryQuery.data!.nfiIdentity!.organization.split("|||")[1]}
+                                            slogan={useGetSingleIdentityBCQueryQuery.data!.nfiIdentity!.slogan.split("|||")[0]}
+                                            sloganColor={useGetSingleIdentityBCQueryQuery.data!.nfiIdentity!.slogan.split("|||")[1]}
+                                            website={useGetSingleIdentityBCQueryQuery.data!.nfiIdentity!.website.split("|||")[0]}
+                                            websiteColor={useGetSingleIdentityBCQueryQuery.data!.nfiIdentity!.website.split("|||")[1]}
+                                            uniqueYou={useGetSingleIdentityBCQueryQuery.data!.nfiIdentity!.uniqueYou.split("|||")[0]}
+                                            uniqueYouColor={useGetSingleIdentityBCQueryQuery.data!.nfiIdentity!.uniqueYou.split("|||")[1]}
+                                            avatarBG={useGetSingleIdentityBCQueryQuery.data!.nfiIdentity!.bgRGB}
+                                            originDate={useGetSingleIdentityBCQueryQuery.data!.nfiIdentity!.originDate.toNumber() * 1000}
                                         />
                                         :
                                         <Button
@@ -231,10 +234,9 @@ export const Identity:FC=()=> {
                         </Box>
                         <Stack
                             //maxH={'455px'}
-                            border={'1px solid blue'}
+                            //border={'1px solid blue'}
                             direction={{base: 'column', md: 'row'}}
                         >
-
                             <Flex
                                 flexDirection={'column'}
                                 w={'50%'}
@@ -244,12 +246,12 @@ export const Identity:FC=()=> {
                                 borderRadius='15px'
                                 bg='white'
                                 px="24px"
-                                border={'1px solid red'}
+                                //border={'1px solid red'}
                                 maxH={'455px'}
                             >
                                 <Box
                                     display='flex'
-                                    border={'1px solid green'}
+                                    //border={'1px solid green'}
                                     // borderBottom={'1px solid'}
                                     // borderColor={'pmpurple.6'}
                                 >
@@ -301,17 +303,18 @@ export const Identity:FC=()=> {
                                 borderRadius='15px'
                                 bg='white'
                                 px="24px"
-                                border={'1px solid red'}
+                                //border={'1px solid red'}
                                 maxH={'455px'}
                             >
                                 <Box
                                     display='flex'
-                                    border={'1px solid green'}
+                                    //border={'1px solid green'}
                                     // borderBottom={'1px solid'}
                                     // borderColor={'pmpurple.6'}
                                 >
                                     <HStack
                                         w={'100%'}
+                                        //border={'4px solid red'}
                                     >
                                         <Heading mb="18px">
                                             <Flex direction="column">
@@ -327,7 +330,7 @@ export const Identity:FC=()=> {
                                         </Heading>
                                         <Spacer/>
                                         <Button
-                                            //style={{border: '1px solid #b59eb5'}}
+                                            //border={'4px solid blue'}
                                             px="6px"
                                             py={'4px'}
                                             //bg="transparent"
@@ -361,12 +364,9 @@ export const Identity:FC=()=> {
                                 <Mentions
                                     chainIdURL={chainId}
                                     paramsWalletURL={walletAcc}
-                                    mentionsFullDisplayWindowBool={false}
                                 />
                             </Flex>
-
                         </Stack>
-
                     </Stack>
                 </Stack>
                 :

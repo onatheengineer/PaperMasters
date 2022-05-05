@@ -14,7 +14,10 @@ import {allAccountDictionaryDBAction, allNFIReceiptDBAction} from "../../feature
 import {BCStruct} from "../../features/accountBC/AccountBCSlice.types";
 import {allStructBCAction} from "../../features/accountBC/AccountBCSlice";
 import {useTable, Column, useSortBy} from "react-table";
-import {useGetAllAccountQuery, useGetIdentityBCQuery} from "../../features/reactQuery/RTKQuery";
+import {
+    useGetAllAccountQuery,
+    useGetIdentityBCQuery,
+} from "../../features/reactQuery/RTKQuery";
 import {HiOutlineDocumentReport} from "react-icons/hi";
 import {MdOutlineLibraryAddCheck} from "react-icons/md";
 import chainIdNetworkJSON from '../../features/JSON/chainId.networks.json'
@@ -122,6 +125,7 @@ export const Search:FC =()=> {
     const [selectedWallet, setSelectedWallet] = useState<BCStruct[]>([]);
     const accountQuery = useGetAllAccountQuery();
     const nfiQuery = useGetIdentityBCQuery();
+
     // export function nfiBC({ identity }):BCStruct[] {
     // const { data, isLoading, isError, error } = useGetIdentityBCQuery(
     //     ["identityStruct", identity.walletAccount],
@@ -196,13 +200,13 @@ export const Search:FC =()=> {
             let profession = "";
             if (nfiQuery.isSuccess) {
                 const nfiArr = nfiQuery.data!.filter((elel) => {
-                    return (elel.chainId === el.chainId && elel.walletAccount === el.walletAccount)
+                    return (elel.chainId.toString() === el.chainId && elel.walletAccount === el.walletAccount)
                 });
                 console.log("nfiArr", nfiArr)
                 if (nfiArr.length > 0) {
                     const nameName = nfiArr[0].name.split("|||")[0];
                     name = nameName;
-                    originDate = nfiArr[0].originDate;
+                    originDate = nfiArr[0].originDate.toString();
                     profession = nfiArr[0].profession.split("|||")[0];
                     if (el.ownerName && el.ownerName.length > 0) {
                         name = el.ownerName as string;
@@ -227,7 +231,7 @@ export const Search:FC =()=> {
                 report: '',
             })
         }))
-    }, [accountQuery])
+    }, [accountQuery, nfiQuery])
 
     const columns: Column<Cols>[] = useMemo(() => [
         {
@@ -245,7 +249,6 @@ export const Search:FC =()=> {
                 const originD = el.row.original.origin;
                 console.log("originD", originD)
                 if (originD === null || originD === undefined || originD === "") {
-
                     return (
                         <Center>
                             <Text fontSize={'12px'} style={{whiteSpace: 'nowrap'}}> {creationDateFormatted} </Text>
@@ -322,7 +325,7 @@ export const Search:FC =()=> {
                                 whiteSpace="nowrap"
                                 width={'400px'}
                                 border={'1px solid #694b69'}
-                                borderRadius={'3px'}
+                                //borderRadius={'3px'}
                                 color='pmpurple.13'
                                 pl={'1px'}
                                 overflow={ "hidden !important"}

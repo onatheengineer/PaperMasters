@@ -2,19 +2,8 @@ import * as React from 'react';
 import type {FC} from 'react';
 import {
     Stack, Box, Flex, Button, Text, VStack, useBreakpointValue } from '@chakra-ui/react';
-import {Route, Routes} from "react-router-dom";
-import WithAction from "../Navbar";
-import BackgroundLogo from '../../assets/legoLavendarheadercroped.png';
-import SecondFooterHome from '../Footers/SecondFooterHome';
 
-
-
-
-interface Interface {
-
-}
-
-export const CloudHWM: FC<Interface>=()=> {
+export const CloudHWM: FC=()=> {
 
         return (
             <Flex

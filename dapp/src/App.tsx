@@ -14,26 +14,26 @@ import {Loading} from "./features/reactQuery/Loading";
 
 
 function App() {
-    // const dispatch = useAppDispatch();
-    //
-    // useEffect(() => {
-    //     console.log("is this dispatch metamask useEffect running?")
-    //     dispatch(accountArrAction());
-    //     const providerPromise = detectEthereumProvider();
-    //     console.log("this is provider:", providerPromise);
-    //     providerPromise.then((provider: any) => {
-    //         console.log('what is this actual provider?', provider);
-    //         provider.on('accountsChanged', (accounts: any) => {
-    //             console.log('accountDB changed!')
-    //             dispatch(accountArr([]));
-    //             dispatch(accountArrAction());
-    //             window.location.reload();
-    //         });
-    //         provider.on('chainChanged', (chainId: any) => {
-    //             window.location.reload();
-    //         })
-    //     });
-    // }, [])
+    const dispatch = useAppDispatch();
+
+    useEffect(() => {
+        console.log("is this dispatch metamask useEffect running?")
+        dispatch(accountArrAction());
+        const providerPromise = detectEthereumProvider();
+        console.log("this is provider:", providerPromise);
+        providerPromise.then((provider: any) => {
+            console.log('what is this actual provider?', provider);
+            provider.on('accountsChanged', (accounts: any) => {
+                console.log('accountDB changed!')
+                dispatch(accountArr([]));
+                dispatch(accountArrAction());
+                window.location.reload();
+            });
+            provider.on('chainChanged', (chainId: any) => {
+                window.location.reload();
+            })
+        });
+    }, [])
 
     return (
         <Box
