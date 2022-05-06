@@ -1,7 +1,5 @@
 import * as React from 'react';
-import {useState, useEffect, MouseEventHandler, useMemo} from "react";
-import Web3 from "web3";
-//import {getFilledAccountsArr}
+import {useState, useEffect, useMemo} from "react";
 import type {FC} from 'react';
 import {
     FormControl, FormLabel, Input, Stack, Box, Button, Heading, Text, Flex,
@@ -10,13 +8,11 @@ import {
     Divider,
     InputGroup,
     InputRightAddon,
-    InputRightElement,
     PopoverContent,
     PopoverBody,
     PopoverTrigger,
     Popover,
     Portal,
-    MenuItem,
     InputLeftElement,
     Modal,
     ModalOverlay,
@@ -24,29 +20,17 @@ import {
     ModalHeader,
     ModalFooter,
     ModalBody,
-    ModalCloseButton,
-    Container, VStack, SimpleGrid, GridItem, Select,
-    useBreakpointValue,
+    ModalCloseButton, VStack, SimpleGrid, GridItem,
 } from '@chakra-ui/react';
-import {FaFacebook, FaGithub, FaGoogle, FaScroll} from 'react-icons/fa';
 import { MdOutlineColorLens} from 'react-icons/md';
 import {useAppDispatch, useAppSelector} from "../../app/hooks";
-import PMLogo from '../../assets/PMGIMPResized.png';
-import Logo from '../../assets/Logo';
 import {ColorChangeHandler, ColorResult, SketchPicker, GithubPicker, RGBColor} from 'react-color';
 import {
-    mintNFIAction,
-    gasForMintNFIAction,
-    gasAccBalanceAction
+    gasAccBalanceAction, gasForMintNFIAction
 } from "../../features/contractsBC/mintNFI/MintNFISlice";
-import AvatarNFI from "../avatar/AvatarNFI";
 import {accountArrAction} from "../../features/accountBC/AccountBCSlice";
-import {BCStruct} from "../../features/accountBC/AccountBCSlice.types";
-import {MintingNFIStruct} from "../../features/contractsBC/mintNFI/mintNFISlice.types";
-import validate from "./Validate";
 import {validateInterface} from "../../features/reactQuery/RTKQuery";
 import ValidateAvatar from "../avatar/ValidateAvatar";
-
 
 export const Validate:FC=()=> {
     const dispatch = useAppDispatch();
@@ -72,7 +56,6 @@ export const Validate:FC=()=> {
     const [colorTextComment, setColorTextComment] = useState<ColorResult>(defaultColorText);
     const [whichColorField, setWhichColorField] = useState<string>('');
     const [submitButtonClicked, setSubmitButtonClicked] = useState<boolean>(false);
-    const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
     const giverHandler = (e: React.FormEvent<HTMLInputElement>) => { setGiver(e.currentTarget.value); };
     const receiverHandler = (e: React.FormEvent<HTMLInputElement>) => { setReceiver(e.currentTarget.value); };
     const commentHandler = (e: React.FormEvent<HTMLInputElement>) => { setComment(e.currentTarget.value); };
@@ -100,17 +83,19 @@ export const Validate:FC=()=> {
             giver: `${giver}|||${ColorRGBToString(colorTextGiver)}`,
             receiver: `${receiver}|||${ColorRGBToString(colorTextReceiver)}`,
             comment: `${comment}|||${ColorRGBToString(colorTextComment)}`,
+            originDate: originDate
         }
         console.table(validatePayload);
         setSubmitButtonClicked(true)
     };
     const estimateGasHandler = () => {
-        const validatePayload: validateInterface = {
+        const estimateGasPayload: validateInterface = {
             giver: `${giver}|||${ColorRGBToString(colorTextGiver)}`,
             receiver: `${receiver}|||${ColorRGBToString(colorTextReceiver)}`,
             comment: `${comment}|||${ColorRGBToString(colorTextComment)}`,
+            originDate: originDate
         }
-        //dispatch(gasForMintNFIAction(validatePayload));
+        //dispatch(gasForMintNFIAction(estimateGasPayload));
     };
     useEffect(() => {
         console.log('accountsArr', accountArrArr.length)
@@ -132,7 +117,8 @@ export const Validate:FC=()=> {
         if (addressHasIdentityBoolBool && mintSucceededSucceeded === 'idle') {
             setIsModalOpen(true);
             return (['You have already Minted',
-                    <span>Connected wallet account is already registered, each wallet account can have only one identity. <br/><br/> In the future, you will be able to mint an NFI for each contract that you own.</span>]
+                    <span>Connected wallet account is already registered, each wallet account can have only one identity.
+                        <br/><br/> In the future, you will be able to mint an NFI for each contract that you own.</span>]
             )
         }
         if (mintSucceededSucceeded === 'failed') {
@@ -152,11 +138,11 @@ export const Validate:FC=()=> {
         // if (statusBool === true) {
         //     setIsModalOpen(true);
         //     return ([" Minted Successful!", 'You did it! You are now a registered PaperMaster, please navigate to your Identity page and update your portfolio.'])
-        // };
+        // }
 
         setIsModalOpen(false)
         return ([null, null])
-    }, [accountArrArr, getStructBCBC, singleNFIReceiptDBDB, addressHasIdentityBoolBool, mintSucceededSucceeded])
+    }, [accountArrArr])
 
     return(
         <Box
@@ -182,7 +168,6 @@ export const Validate:FC=()=> {
                     border={'4px solid'}
                     borderColor={'pmpurple.12'}
                 >
-
                     <VStack
                         alignItems={'center'}
                         //border={'2px solid green'}
@@ -201,13 +186,13 @@ export const Validate:FC=()=> {
                         <SimpleGrid columns={1} columnGap={1} rowGap={8} w={'full'}>
                             <GridItem colSpan={1}>
                                 <FormControl isRequired>
-                                    <FormLabel htmlFor='name' color={'pmpurple.13'} mb={'2px'}>Name</FormLabel>
+                                    <FormLabel htmlFor='giver' color={'pmpurple.13'} mb={'2px'}>Giver</FormLabel>
                                     <InputGroup size='md'>
                                         <Input focusBorderColor='pmpurple.9'
                                                borderColor={"pmpurple.4"}
-                                               id='name'
+                                               id='giver'
                                                pl={'62px'}
-                                               placeholder='name, company'
+                                               placeholder='giver account'
                                                isDisabled={submitButtonClicked}
                                                onChange={giverHandler}
                                                color={'pmpurple.15'}
@@ -216,7 +201,7 @@ export const Validate:FC=()=> {
                                                          children={<Button size='xs' color={"pmpurple.10"}
                                                                            onClick={() => {
                                                                                setColorTextGiver(defaultColorText)
-                                                                           }}> Reset</Button>}/>
+                                                                           }}> Reset Color</Button>}/>
                                         <InputLeftElement
                                             width='3.5rem'
                                         >
@@ -237,14 +222,12 @@ export const Validate:FC=()=> {
                                                             boxShadow: 'lg',
                                                         }}
                                                         onClick={() => {
-                                                            setWhichColorField('name')
+                                                            setWhichColorField('giver')
                                                         }}
                                                     >
                                                         <MdOutlineColorLens fontSize={'20px'}/>
-
                                                     </Button>
                                                 </PopoverTrigger>
-
                                                 <Portal>
                                                     <PopoverContent
                                                         bg='transparent'
@@ -255,7 +238,6 @@ export const Validate:FC=()=> {
                                                         h={'50px'}
                                                     >
                                                         <PopoverBody>
-
                                                             <Box position={'absolute'} zIndex={'2'}>
                                                                 <SketchPicker
                                                                     color={colorTextGiver.rgb}
@@ -269,7 +251,6 @@ export const Validate:FC=()=> {
                                                     </PopoverContent>
                                                 </Portal>
                                             </Popover>
-
                                         </InputLeftElement>
                                     </InputGroup>
                                     <FormErrorMessage>Field is required.</FormErrorMessage>
@@ -277,11 +258,11 @@ export const Validate:FC=()=> {
                             </GridItem>
                             <GridItem colSpan={1}>
                                 <FormControl isRequired>
-                                    <FormLabel htmlFor='email' color={'pmpurple.13'} mb={'2px'}>Email</FormLabel>
+                                    <FormLabel htmlFor='receiver' color={'pmpurple.13'} mb={'2px'}>Receiver</FormLabel>
                                     <InputGroup size='md'>
-                                        <Input focusBorderColor='pmpurple.9' borderColor={"pmpurple.4"} id='email'
+                                        <Input focusBorderColor='pmpurple.9' borderColor={"pmpurple.4"} id='receiver'
                                                pl={'62px'}
-                                               placeholder='email'
+                                               placeholder='receiver account'
                                                isDisabled={submitButtonClicked}
                                                onChange={receiverHandler}
                                                color={'pmpurple.15'}
@@ -290,7 +271,7 @@ export const Validate:FC=()=> {
                                                          children={<Button size='xs' color={"pmpurple.10"}
                                                                            onClick={() => {
                                                                                setColorTextReceiver(defaultColorText)
-                                                                           }}> Reset</Button>}/>
+                                                                           }}>Reset Color</Button>}/>
                                         <InputLeftElement
                                             width='3.5rem'
                                         >
@@ -311,13 +292,12 @@ export const Validate:FC=()=> {
                                                             boxShadow: 'lg',
                                                         }}
                                                         onClick={() => {
-                                                            setWhichColorField('email')
+                                                            setWhichColorField('receiver')
                                                         }}
                                                     >
                                                         <MdOutlineColorLens fontSize={'20px'}/>
                                                     </Button>
                                                 </PopoverTrigger>
-
                                                 <Portal>
                                                     <PopoverContent
                                                         bg='transparent'
@@ -328,9 +308,7 @@ export const Validate:FC=()=> {
                                                         h={'50px'}
                                                     >
                                                         <PopoverBody>
-
                                                             <Box position={'absolute'} zIndex={'2'}>
-
                                                                 <SketchPicker
                                                                     color={colorTextReceiver.rgb}
                                                                     onChange={colorChangeHandler}
@@ -345,16 +323,15 @@ export const Validate:FC=()=> {
                                             </Popover>
                                         </InputLeftElement>
                                     </InputGroup>
-
                                 </FormControl>
                             </GridItem>
                             <GridItem colSpan={1}>
                                 <FormControl>
                                     <FormLabel color={'pmpurple.13'} mb={'2px'}
-                                               htmlFor='profession'>Profession</FormLabel>
+                                               htmlFor='comment'>Comment</FormLabel>
                                     <InputGroup size='md'>
-                                        <Input focusBorderColor='pmpurple.9' id='profession' pl={'62px'}
-                                               placeholder='profession'
+                                        <Input focusBorderColor='pmpurple.9' id='comment' pl={'62px'}
+                                               placeholder='comment'
                                                isDisabled={submitButtonClicked}
                                                onChange={commentHandler}
                                                color={'pmpurple.15'}
@@ -363,7 +340,7 @@ export const Validate:FC=()=> {
                                                          children={<Button size='xs' color={"pmpurple.10"}
                                                                            onClick={() => {
                                                                                setColorTextComment(defaultColorText)
-                                                                           }}> Reset</Button>}/>
+                                                                           }}> Reset Color</Button>}/>
                                         <InputLeftElement
                                             width='3.5rem'
                                         >
@@ -384,13 +361,12 @@ export const Validate:FC=()=> {
                                                             boxShadow: 'lg',
                                                         }}
                                                         onClick={() => {
-                                                            setWhichColorField('profession')
+                                                            setWhichColorField('comment')
                                                         }}
                                                     >
                                                         <MdOutlineColorLens fontSize={'20px'}/>
                                                     </Button>
                                                 </PopoverTrigger>
-
                                                 <Portal>
                                                     <PopoverContent
                                                         bg='transparent'
@@ -401,9 +377,7 @@ export const Validate:FC=()=> {
                                                         h={'50px'}
                                                     >
                                                         <PopoverBody>
-
                                                             <Box position={'absolute'} zIndex={'2'}>
-
                                                                 <SketchPicker
                                                                     color={colorTextComment.rgb}
                                                                     onChange={colorChangeHandler}
@@ -424,7 +398,6 @@ export const Validate:FC=()=> {
                         </SimpleGrid>
                     </VStack>
                 </VStack>
-
                 <VStack
                     w={'full'}
                     py={8}
@@ -450,13 +423,14 @@ export const Validate:FC=()=> {
                             p={{base: 0, xl: 20}}
                         >
                             <ValidateAvatar
-                                   giver={giver} giverColor={ColorRGBToString(colorTextGiver)}
-                                   receiver={receiver} receiverColor={ColorRGBToString(colorTextReceiver)}
+                                   giver={giver}
+                                   giverColor={ColorRGBToString(colorTextGiver)}
+                                   receiver={receiver}
+                                   receiverColor={ColorRGBToString(colorTextReceiver)}
                                    comment={comment}
                                    commentColor={ColorRGBToString(colorTextComment)}
                                    originDate={originDate}
                             />
-
                             <Stack>
                                 <Box
                                     pt={'160px'}

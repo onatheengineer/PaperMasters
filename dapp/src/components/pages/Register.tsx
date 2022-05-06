@@ -1,7 +1,5 @@
 import * as React from 'react';
-import {useState, useEffect, MouseEventHandler, useMemo} from "react";
-import Web3 from "web3";
-//import {getFilledAccountsArr}
+import {useState, useEffect, useMemo} from "react";
 import type {FC} from 'react';
 import {
     FormControl, FormLabel, Input, Stack, Box, Button, Heading, Text, Flex,
@@ -16,7 +14,6 @@ import {
     PopoverTrigger,
     Popover,
     Portal,
-    MenuItem,
     InputLeftElement,
     Modal,
     ModalOverlay,
@@ -24,16 +21,11 @@ import {
     ModalHeader,
     ModalFooter,
     ModalBody,
-    ModalCloseButton,
-    Container, VStack, SimpleGrid, GridItem, Select,
-    useBreakpointValue,
+    ModalCloseButton, VStack, SimpleGrid, GridItem,
 } from '@chakra-ui/react';
-import {FaFacebook, FaGithub, FaGoogle, FaScroll} from 'react-icons/fa';
 import { MdOutlineColorLens} from 'react-icons/md';
 import {useAppDispatch, useAppSelector} from "../../app/hooks";
-import PMLogo from '../../assets/PMGIMPResized.png';
-import Logo from '../../assets/Logo';
-import {ColorChangeHandler, ColorResult, SketchPicker, GithubPicker, RGBColor} from 'react-color';
+import {ColorChangeHandler, ColorResult, SketchPicker} from 'react-color';
 import {
     mintNFIAction,
     gasForMintNFIAction,
@@ -41,7 +33,6 @@ import {
 } from "../../features/contractsBC/mintNFI/MintNFISlice";
 import AvatarNFI from "../avatar/AvatarNFI";
 import {accountArrAction} from "../../features/accountBC/AccountBCSlice";
-import {BCStruct} from "../../features/accountBC/AccountBCSlice.types";
 import {MintingNFIStruct} from "../../features/contractsBC/mintNFI/mintNFISlice.types";
 
 const ColorRGBToString=(colorResultRGB: ColorResult)=>{
@@ -51,19 +42,14 @@ const ColorRGBToString=(colorResultRGB: ColorResult)=>{
 
 export const Register:FC=()=> {
     const dispatch = useAppDispatch();
-    const paramsWalletWallet = useAppSelector((state) => state.accountDB.paramsWallet);
     const singleNFIReceiptDBDB = useAppSelector((state) => state.accountDB.singleNFIReceiptDB);
     const addressHasIdentityBoolBool = useAppSelector((state) => state.accountBC.addressHasIdentityBool);
     const getStructBCBC = useAppSelector((state) => state.accountBC.getStructBC);
     const accountArrArr = useAppSelector((state) => state.accountBC.accountArr);
-    const mintStatusBCBC = useAppSelector((state) => state.nfi.mintNFI.mintStatusBC);
     const gasPricePrice = useAppSelector((state) => state.nfi.mintNFI.gasPrice);
     const mintSucceededSucceeded = useAppSelector((state) => state.nfi.mintNFI.mintSucceeded);
     const mintErrErr = useAppSelector((state) => state.nfi.mintNFI.mintErr);
-    const accBalanceBalance = useAppSelector((state) => state.nfi.mintNFI.accBalance);
     const accBalanceErrErr = useAppSelector((state) => state.nfi.mintNFI.accBalanceErr);
-    const addressToTokenBoolBool = useAppSelector((state) => state.accountBC.addressToTokenBool);
-
     const [name, setName] = useState<string | "">("");
     const [profession, setProfession] = useState<string | "">("");
     const [email, setEmail] = useState<string | "">("");
@@ -298,12 +284,12 @@ export const Register:FC=()=> {
                                         >
 
                                             <Text px={'20px'} color={"pmpurple.10"}> Set NFI Background Color </Text>
-                                            <MdOutlineColorLens fontSize={'20px'} color={"#9c7e9c"}/>
+                                            {/*<MdOutlineColorLens fontSize={'20px'} color={"#9c7e9c"}/>*/}
                                             <InputRightElement m='3px' textAlign={'center'}
                                                                children={<Button bg='pmpurple.9' size='xs'
                                                                                  onClick={() => {
                                                                                      setbgRGB(defaultColorBG)
-                                                                                 }}> Reset</Button>}/>
+                                                                                 }}> Reset Color</Button>}/>
                                         </Button>
                                     </PopoverTrigger>
                                     <Portal>
@@ -348,7 +334,7 @@ export const Register:FC=()=> {
                                                          children={<Button size='xs' color={"pmpurple.10"}
                                                                            onClick={() => {
                                                                                setColorTextName(defaultColorText)
-                                                                           }}> Reset</Button>}/>
+                                                                           }}> Reset Color</Button>}/>
                                         <InputLeftElement
                                             width='3.5rem'
                                         >
@@ -423,7 +409,7 @@ export const Register:FC=()=> {
                                                          children={<Button size='xs' color={"pmpurple.10"}
                                                                            onClick={() => {
                                                                                setColorTextEmail(defaultColorText)
-                                                                           }}> Reset</Button>}/>
+                                                                           }}> Reset Color</Button>}/>
                                         <InputLeftElement
                                             width='3.5rem'
                                         >
@@ -496,7 +482,7 @@ export const Register:FC=()=> {
                                                          children={<Button size='xs' color={"pmpurple.10"}
                                                                            onClick={() => {
                                                                                setColorTextProfession(defaultColorText)
-                                                                           }}> Reset</Button>}/>
+                                                                           }}> Reset Color</Button>}/>
                                         <InputLeftElement
                                             width='3.5rem'
                                         >
@@ -568,7 +554,7 @@ export const Register:FC=()=> {
                                                          children={<Button size='xs' color={"pmpurple.10"}
                                                                            onClick={() => {
                                                                                setColorTextSlogan(defaultColorText)
-                                                                           }}> Reset</Button>}/>
+                                                                           }}> Reset Color</Button>}/>
                                         <InputLeftElement
                                             width='3.5rem'
                                         >
@@ -640,7 +626,7 @@ export const Register:FC=()=> {
                                                          children={<Button size='xs' color={"pmpurple.10"}
                                                                            onClick={() => {
                                                                                setColorTextOrganization(defaultColorText)
-                                                                           }}> Reset</Button>}/>
+                                                                           }}> Reset Color</Button>}/>
                                         <InputLeftElement
                                             width='3.5rem'
                                         >
@@ -711,7 +697,7 @@ export const Register:FC=()=> {
                                                          children={<Button size='xs' color={"pmpurple.10"}
                                                                            onClick={() => {
                                                                                setColorTextWebsite(defaultColorText)
-                                                                           }}> Reset</Button>}/>
+                                                                           }}> Reset Color</Button>}/>
                                         <InputLeftElement
                                             width='3.5rem'
                                         >
@@ -782,7 +768,7 @@ export const Register:FC=()=> {
                                                          children={<Button size='xs' color={"pmpurple.10"}
                                                                            onClick={() => {
                                                                                setColorTextUniqueYou(defaultColorText)
-                                                                           }}> Reset</Button>}/>
+                                                                           }}> Reset Color</Button>}/>
                                         <InputLeftElement
                                             width='3.5rem'
                                         >
@@ -941,7 +927,6 @@ export const Register:FC=()=> {
                         <Box
                             p={{base: 0, xl: 20}}
                         >
-
                             <AvatarNFI name={name} nameColor={ColorRGBToString(colorTextName)}
                                        email={email} emailColor={ColorRGBToString(colorTextEmail)}
                                        profession={profession}
@@ -955,7 +940,6 @@ export const Register:FC=()=> {
                                        originDate={originDate}
                                        walletAccount={accountArrArr[0]}
                             />
-
                             <Stack>
                                 <Box
                                     pt={'160px'}

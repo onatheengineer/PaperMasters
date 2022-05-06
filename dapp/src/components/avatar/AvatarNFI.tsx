@@ -79,7 +79,6 @@ export const AvatarNFI:FC<AvatarNFIInterface>=( {walletAccount,
                         wordBreak={'break-word'}
                         rounded={'10px'}
                     >
-
                         <Image
                             position={'absolute'}
                             top={'0px'}
@@ -102,9 +101,7 @@ export const AvatarNFI:FC<AvatarNFIInterface>=( {walletAccount,
                                 //backgroundPosition="center"
                                 //src={legoLavendarheadercroped}
                                 //objectFit={'cover'}
-                            >
-                                {/*<PMsvgIcon/>*/}
-                            </Image>
+                            />
                             <Avatar
                                 mt={'22px'}
                                 icon={<PMsvgIcon/>}
@@ -168,12 +165,12 @@ export const AvatarNFI:FC<AvatarNFIInterface>=( {walletAccount,
                                         {profession}
                                     </Text>
                                     <Text noOfLines={1}
-                                          color={organizationColor}>
-                                        {organization}
-                                    </Text>
-                                    <Text noOfLines={1}
                                           color={sloganColor}>
                                         {slogan}
+                                    </Text>
+                                    <Text noOfLines={1}
+                                          color={organizationColor}>
+                                        {organization}
                                     </Text>
                                     <Text noOfLines={1}
                                           color={websiteColor}>

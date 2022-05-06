@@ -195,12 +195,12 @@ export async function fetchAddressToToken({chainIdURL, paramsWalletURL}: ParamsU
 
 export interface validateInterface{
     giver: string,
-    giverColor: string,
+    giverColor?: string,
     receiver: string,
-    receiverColor: string,
-    comment: string
-    commentColor: string
-    originDate: string
+    receiverColor?: string,
+    comment: string,
+    commentColor?: string,
+    originDate: number
 }
 
 
