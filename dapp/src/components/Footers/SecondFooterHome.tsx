@@ -1,7 +1,8 @@
 import {
-    Box, chakra, Grid, GridItem, Container,
+    Box, chakra, Grid, GridItem, Container, Heading, Text, Link
 } from '@chakra-ui/react';
 import * as React from "react";
+import {Link as ReachLink, To} from "react-router-dom";
 
 interface FeatureProps {
     heading: string;
@@ -40,22 +41,58 @@ export default function secondFooterHome() {
                     lg: 'repeat(4, 1fr)',
                 }}
                 gap={{base: '8', sm: '12', md: '16'}}>
-                <Feature
-                    heading={'What is a Non-Fungible-Identity (NFI)?'}
-                    text={'Short text describing one of you components/service'}
-                />
-                <Feature
-                    heading={'Benefits of becoming a PaperMaster?'}
-                    text={'Short text describing one of you components/service'}
-                />
-                <Feature
-                    heading={'What is NFI Protection and Validation?'}
-                    text={'Short text describing one of you components/service'}
-                />
-                <Feature
-                    heading={'How to search the NFI Catalog'}
-                    text={'Short text describing one of you components/service'}
-                />
+                <GridItem>
+                    <Heading fontSize="xl" fontWeight="600" fontStyle={'bold'}>
+                        <Link
+                            as={ReachLink}
+                            to="/learn"
+                        >
+                        What is a Non-Fungible-Identity (NFI)?
+                        </Link>
+                                <Text fontSize="lg" fontWeight="400" >
+                            NFIs are transparent identites...
+                        </Text>
+                    </Heading>
+                </GridItem>
+                <GridItem>
+                    <Heading fontSize="xl" fontWeight="600" fontStyle={'bold'}>
+                        <Link
+                            as={ReachLink}
+                            to="/learn"
+                        >
+                            Benefits of becoming a PaperMaster?
+                        </Link>
+                        <Text fontSize="lg" fontWeight="400" >
+                            NFIs are transparent identites...
+                        </Text>
+                    </Heading>
+                </GridItem>
+                <GridItem>
+                    <Heading fontSize="xl" fontWeight="600" fontStyle={'bold'}>
+                        <Link
+                            as={ReachLink}
+                            to="/learn"
+                        >
+                            What is NFI Protection and Validation?
+                        </Link>
+                        <Text fontSize="lg" fontWeight="400" >
+                            NFIs are transparent identites...
+                        </Text>
+                    </Heading>
+                </GridItem>
+                <GridItem>
+                    <Heading fontSize="xl" fontWeight="600" fontStyle={'bold'}>
+                        <Link
+                            as={ReachLink}
+                            to="/learn"
+                        >
+                            How to search the NFI Catalog
+                        </Link>
+                        <Text fontSize="lg" fontWeight="400" >
+                            NFIs are transparent identites...
+                        </Text>
+                    </Heading>
+                </GridItem>
             </Grid>
         </Box>
     );

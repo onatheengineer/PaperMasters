@@ -7,12 +7,7 @@ import {Route, Routes} from "react-router-dom";
 import PageForum from "./PageForum";
 
 
-
-interface Interface {
-
-}
-
-export const News:FC<Interface>=()=>{
+export const News:FC=()=>{
 
     // const NewsForumPage = [
     //     <PageForum title={'PaperMaster News'} body={'dfgfdhdftgyertg'}/>,
@@ -20,19 +15,15 @@ export const News:FC<Interface>=()=>{
     //     <PageForum title={'Updated Features'} body={'dfgfdhdftgyertg'}/>,
     //     <PageForum title={'Future Features'} body={'bdfkljgiuertywrebfbfshjteruerter'}/>,
     // ]
-
         return (
-
             <Flex>
-
                 {/*<Flex >*/}
                 {/*    <RoutesRoutes/>*/}
                 {/*</Flex>*/}
                 <Box flex='auto'  style={{border: '8px solid white'}}>
-                    <PageForum title={"New Features"} body={"sdfhdkjfghierugerjk"} forumPageHeader={'News'}/>
+                    <PageForum title={"News"} body={"New Features"}/>
                 </Box>
             </Flex>
-
         )
     };
 

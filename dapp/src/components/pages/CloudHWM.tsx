@@ -1,14 +1,18 @@
 import * as React from 'react';
 import type {FC} from 'react';
 import {
-    Stack, Box, Flex, Button, Text, VStack, useBreakpointValue } from '@chakra-ui/react';
+    Stack, Box, Flex, Button, Text, VStack, useBreakpointValue, Container, Grid, GridItem, Heading, Link, Center
+} from '@chakra-ui/react';
+import {Link as ReachLink} from "react-router-dom";
 
 export const CloudHWM: FC=()=> {
-
-        return (
+    return (
+        <Flex
+            flexDirection={'column'}
+        >
             <Flex
                 w={'100vw'}
-                h={'60vh'}
+                flexGrow={1}
                 //backgroundImage={BackgroundLogo}
                 backgroundSize={'cover'}
                 backgroundPosition={'center center'}
@@ -45,6 +49,86 @@ export const CloudHWM: FC=()=> {
                     </Stack>
                 </VStack>
             </Flex>
+            <Flex
+            flexShrink={1}
+            >
+                <Box as={Container}
+                     display={'flex'}
+                     //flexGrow={1}
+                     maxW="full"
+                     py={16}
+                     justifyContent={'space-evenly'}
+                     alignItems={'flex-start'}
+                     alignContent={'space-evenly'}
+                     bg={'pmpurple.3'}
+                     color={'pmpurple.12'}
+                    //border={'1px solid'}
+                    //borderColor={'pmpurple.8'}
+                >
+                    <Grid
+                        templateColumns={{
+                            base: 'repeat(1, 1fr)',
+                            sm: 'repeat(2, 1fr)',
+                            md: 'repeat(2, 1fr)',
+                            lg: 'repeat(3, 1fr)',
+                        }}
+                        gap={{base: '6', sm: '12', md: '16'}}>
+                        <GridItem>
+                            <Heading fontSize="xl" fontWeight="600" fontStyle={'bold'}>
+                                <Link
+                                    as={ReachLink}
+                                    to="/learn"
+                                >
+                                    What is CloudHWM?
+                                </Link>
+                                <Text fontSize="lg" fontWeight="400">
+                                    CloudHWM is...
+                                </Text>
+                            </Heading>
+                        </GridItem>
+                        <GridItem>
+                            <Heading fontSize="xl" fontWeight="600" fontStyle={'bold'}>
+                                <Link
+                                    as={ReachLink}
+                                    to="/learn"
+                                >
+                                    Benefits of CloudHWM service?
+                                </Link>
+                                <Text fontSize="lg" fontWeight="400">
+                                    Hardware heat protection...
+                                </Text>
+                            </Heading>
+                        </GridItem>
+                        <GridItem>
+                            <Heading fontSize="xl" fontWeight="600" fontStyle={'bold'}>
+                                <Link
+                                    as={ReachLink}
+                                    to="/learn"
+                                >
+                                    What is CLoudHWM Protection?
+                                </Link>
+                                <Text fontSize="lg" fontWeight="400">
+                                    Protection to Miners hardware...
+                                </Text>
+                            </Heading>
+                        </GridItem>
+                        {/*<GridItem>*/}
+                        {/*    <Heading fontSize="xl" fontWeight="600" fontStyle={'bold'}>*/}
+                        {/*        <Link*/}
+                        {/*            as={ReachLink}*/}
+                        {/*            to="/learn"*/}
+                        {/*        >*/}
+                        {/*            How to search the NFI Catalog*/}
+                        {/*        </Link>*/}
+                        {/*        <Text fontSize="lg" fontWeight="400" >*/}
+                        {/*            NFIs are transparent identites...*/}
+                        {/*        </Text>*/}
+                        {/*    </Heading>*/}
+                        {/*</GridItem>*/}
+                    </Grid>
+                </Box>
+            </Flex>
+        </Flex>
     )
 };
 

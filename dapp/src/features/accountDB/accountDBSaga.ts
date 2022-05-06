@@ -90,6 +90,7 @@ function* allAccountDictionaryDBSaga(): SagaIterator {
 }
 
 function* singleNFIReceiptDBSaga({ payload }: PayloadAction<ParamsURLInterface>): SagaIterator {
+    const { chainIdURL, paramsWalletURL } = payload;
     try{
         //TODO fix lambda and api endpoints
         const { chainIdURL, paramsWalletURL } = payload;

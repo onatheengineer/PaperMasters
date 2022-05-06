@@ -109,7 +109,7 @@ export const Header:FC = ()=> {
                     return (
                         <Text fontSize={'16px'} color={'pmpurple.10'} letterSpacing={'1px'}
                               textShadow={'#F7FAFC 0px 0px 10px'}>
-                            <Link href={`https://explorer.pops.one/tx/${singleNFIReceiptDBDB.transactionHash}` }>
+                            <Link href={`https://etherscan.io/tx/${singleNFIReceiptDBDB.transactionHash}` }>
                             {singleNFIReceiptDBDB.transactionHash}
                             </Link>
                         </Text>
@@ -131,7 +131,7 @@ export const Header:FC = ()=> {
                     Non-Registered Wallet Account
                 </Text>
             )
-    }, [paramsWalletWallet, addressHasIdentityBoolBool, getStructBCBC])
+    }, [paramsWalletWallet, addressHasIdentityBoolBool, getStructBCBC, singleNFIReceiptDBDB])
 
     const logicNameMemo = useMemo(() => {
         console.log(singleAccountDictionaryDBDB, paramsWalletWallet, addressHasIdentityBoolBool, getStructBCBC)
@@ -325,30 +325,30 @@ export const Header:FC = ()=> {
                         </Button>
 
                     <HStack spacing={'34px'}>
-                        <Stack spacing={'0px'} align={'center'}>
-                            <Text fontWeight={600}>57</Text>
-                            <Tooltip hasArrow label='Total received Validations from other Blockchain accounts'
-                                     bg='pmpurple.4' color='pmpurple.13'>
-                                <Text fontSize={'sm'} color={'pmpurple.11'}>
-                                    Validations
-                                </Text>
-                            </Tooltip>
-                        </Stack>
+                        {/*<Stack spacing={'0px'} align={'center'}>*/}
+                        {/*    <Text fontWeight={600}>57</Text>*/}
+                        {/*    <Tooltip hasArrow label='Total received Validations from other Blockchain accounts'*/}
+                        {/*             bg='pmpurple.4' color='pmpurple.13'>*/}
+                        {/*        <Text fontSize={'sm'} color={'pmpurple.11'}>*/}
+                        {/*            Validations*/}
+                        {/*        </Text>*/}
+                        {/*    </Tooltip>*/}
+                        {/*</Stack>*/}
+                        {/*<Stack spacing={0} align={'center'}>*/}
+                        {/*    <Text fontWeight={600}>23k</Text>*/}
+                        {/*    <Tooltip hasArrow label='Total MentionsNew about PaperMaster' bg='pmpurple.4'*/}
+                        {/*             color='pmpurple.13'>*/}
+                        {/*        <Text fontSize={'sm'} color={'pmpurple.11'}>*/}
+                        {/*            MentionsNew*/}
+                        {/*        </Text>*/}
+                        {/*    </Tooltip>*/}
+                        {/*</Stack>*/}
                         <Stack spacing={0} align={'center'}>
-                            <Text fontWeight={600}>23k</Text>
-                            <Tooltip hasArrow label='Total MentionsNew about PaperMaster' bg='pmpurple.4'
-                                     color='pmpurple.13'>
-                                <Text fontSize={'sm'} color={'pmpurple.11'}>
-                                    MentionsNew
-                                </Text>
-                            </Tooltip>
-                        </Stack>
-                        <Stack spacing={0} align={'center'}>
-                            <Text fontWeight={600}>23k</Text>
+                            <Text fontWeight={600}>(SWAN NFT goes there) 23k</Text>
                             <Tooltip hasArrow label='Total reports made about PaperMaster' bg='pmpurple.4'
                                      color='pmpurple.13'>
                                 <Text fontSize={'sm'} color={'pmpurple.11'}>
-                                    Reported
+                                    Validations
                                 </Text>
                             </Tooltip>
                         </Stack>
@@ -358,7 +358,7 @@ export const Header:FC = ()=> {
                                      label='Number of Validations PaperMaster has given to other Blockchain accounts'
                                      bg='pmpurple.4' color='pmpurple.13'>
                                 <Text fontSize={'sm'} color={'pmpurple.11'}>
-                                    Validations Given
+                                    Gifted Validations
                                 </Text>
                             </Tooltip>
                         </Stack>

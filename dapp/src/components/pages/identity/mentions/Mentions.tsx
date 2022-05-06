@@ -133,37 +133,29 @@ export const SingleMention:FC<singleMentionInterface> =({mention})=> {
             <HStack
                 alignItems={'start'}
             >
-                <Box
-                    isTruncated={true}
-                    color={'pmpurple.12'}
-                    overflow={'none'}
-                    whiteSpace={'pre-wrap'}
-                    textAlign={'justify'}
-                    noOfLines={1}
-                    // onClick={()=>{
-                    //     {mention.messageBody}
-                    // }}
-                >
-                    <Collapse
-                        startingHeight={20}
-                        in={show}
-                    >
-                    {mention.messageBody}
-                    </Collapse>
-                    <Button
-                        border={'1px solid'}
-                        borderColor={'pmpurple.2'}
-                        size='xs'
-                        onClick={handleToggle}
-                        my='.5rem'
-                    >
-                        Show {show ? 'Less' : 'More'}
-                    </Button>
-                </Box>
+                    {mention.messageBody.length > 0 ?
+                        <Box>
+                            <Collapse
+                                startingHeight={26}
+                                //endingHeight={'auto'}
+                                in={show}
+                                //unmountOnExit={false}
+                                //animateOpacity={true}
+                            >
+                                <Link
+                                    onClick={handleToggle}
+                                >
+                                    {mention.messageBody}
+                                </Link>
+                            </Collapse>
+                        </Box>
+                        : null
+                    }
                 <Spacer/>
                 <Box
                 pt={2}
                 pl={14}
+                pb={1}
                 >
                     {mention.radioType === 1 ?
                         <HStack>

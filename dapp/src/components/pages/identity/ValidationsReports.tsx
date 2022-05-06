@@ -17,8 +17,8 @@ export const ValidationsReports:FC=()=> {
                 <Tabs isFitted variant='enclosed'>
                     <TabList color={'pmpurple.13'}>
 
-                        <Tab>Validations</Tab>
-                        <Tab>Reports</Tab>
+                        <Tab>Validations(add total number of validations here)</Tab>
+                        <Tab>Reports (add total number of reports here)</Tab>
                     </TabList>
                     <TabPanels>
                         <TabPanel>

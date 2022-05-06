@@ -11,6 +11,7 @@ import RoutesRoutes from "../../app/RoutesRoutes";
 import {Link as ReachLink} from "react-router-dom";
 import {setRef} from "@mui/material";
 import PageForum from "./PageForum";
+import React from "react";
 
 
 
@@ -36,9 +37,31 @@ export const Learn:FC=()=> {
             {/*<Flex >*/}
             {/*    <RoutesRoutes/>*/}
             {/*</Flex>*/}
-            <Box flex={'auto'}>
-                <PageForum forumPageHeader={'FAQ'} title={'What is an NFI'} body={'An NFI is a Non-Fungible Token that....'} />
-                <PageForum forumPageHeader={'What can I do with my NFI'} title={'WWhat can you not do with it'} body={'-You can....'} />
+            <Box
+                flex={'auto'}
+                border={'2px solid'}
+                borderColor={'pmpurple.10'}
+                bgColor={'pmpurple.1'}
+                borderRadius={'10px'}
+                m={30}
+            >
+                <Box
+                flexGrow={1}
+                m={8}
+                >
+                    <Heading
+                        textAlign={'center'}
+                        fontSize={'40px'}
+                        fontWeight={'600'}
+                        fontStyle={'bold'}
+                    >
+                        Learning Center
+                    </Heading>
+                </Box>
+                <PageForum title={'What is a Non-Fungible-Identity (NFI)?'} body={'NFIs are transparent identites...'} />
+                <PageForum title={'Benefits of becoming a PaperMaster?'} body={'You can....'} />
+                <PageForum title={'What is NFI Protection and Validation?'} body={'You can....'} />
+                <PageForum title={'How to search the NFI Catalog'} body={'You can....'} />
             </Box>
         </Flex>
     )

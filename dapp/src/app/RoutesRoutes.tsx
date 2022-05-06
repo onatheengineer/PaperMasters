@@ -1,30 +1,25 @@
-import React, {ReactNode, ReactText, useState, useEffect, ReactElement} from 'react';
-import {Route, Routes, useLocation, useParams, useNavigate, Navigate, BrowserRouter} from 'react-router-dom';
+import React, { useState, useEffect, ReactElement} from 'react';
+import {Route, Routes, useLocation} from 'react-router-dom';
 import { AiOutlineFileSearch } from "react-icons/ai";
 import { GiFlowerPot } from "react-icons/gi";
 import { BiHomeHeart, BiBookmarkHeart } from 'react-icons/bi';
-import { IoMdCheckmarkCircleOutline, IoMdAttach } from 'react-icons/io';
+import { IoMdCheckmarkCircleOutline } from 'react-icons/io';
 import {
-    IconButton,
-    Box,
     Flex,
     Icon,
     Link,
     Text,
-    Heading,
     Menu,
     MenuButton,
-    Divider,
-    Avatar,
 } from '@chakra-ui/react';
-import {FiTrendingUp, FiMenu} from 'react-icons/fi';
+import {FiTrendingUp} from 'react-icons/fi';
 import { IconType } from 'react-icons';
 import type {FC} from 'react';
 import Register from "../components/pages/Register";
 import Search from '../components/pages/Search'
 import {Link as ReachLink, To} from "react-router-dom";
-import {MdOutlineFeedback, MdOutlineReport, MdOutlineWarningAmber} from "react-icons/md";
-import {GiBookCover, GiBookmark, GiDiscussion, GiSuspicious} from "react-icons/gi";
+import { MdOutlineReport, MdOutlineWarningAmber} from "react-icons/md";
+import {GiBookCover} from "react-icons/gi";
 import Home from "../components/pages/Home";
 import Identity from "../components/pages/Identity";
 import CloudHWM from "../components/pages/CloudHWM";
@@ -36,8 +31,6 @@ import News from "../components/pages/News";
 import Security from "../components/pages/Security";
 import {useAppSelector} from "./hooks";
 import Report from "../components/pages/Report";
-import {accountArr} from "../features/accountBC/AccountBCSlice";
-
 
 interface InterfaceNavItem {
     title?: string;
@@ -52,10 +45,8 @@ interface InterfaceSidebar{
     profileName?: string;
 }
 
-
 export const NavItem: FC<InterfaceNavItem> = ({ icon, title, active,
                                                   navItemSize, path} ) => {
-
 
     return (
             <Flex
@@ -80,7 +71,6 @@ export const NavItem: FC<InterfaceNavItem> = ({ icon, title, active,
                                 <Icon as={icon} fontSize="xl" color={"#694b69"}/>
                                 <Text ml={5} display={navItemSize == "small" ? "none" : "flex"}>{title}</Text>
                             </Flex>
-
                         </MenuButton>
                     </Link>
                 </Menu>
@@ -95,8 +85,6 @@ export const RoutesRoutes: FC<InterfaceSidebar>= ({icon, profileName} ): ReactEl
     const [navItemsRender, setNavItemRender] = useState<JSX.Element[] | null>([]);
     const [headerTitle, setHeaderTitle] = useState<string>('');
     const [headerText, setHeaderText] = useState<string>('');
-
-    const addressToTokenBoolBool = useAppSelector((state) => state.accountBC.addressToTokenBool);
 
     useEffect(() => {
         // console.log(location);
@@ -218,7 +206,6 @@ export const RoutesRoutes: FC<InterfaceSidebar>= ({icon, profileName} ): ReactEl
     }, [location, navSize]);
 
     return (
-
         <Flex
             border ={'1px solid orange'}
             flex={{base: 1, md: 'auto'}}
@@ -292,13 +279,11 @@ export const RoutesRoutes: FC<InterfaceSidebar>= ({icon, profileName} ): ReactEl
             {/*        </Flex>*/}
             {/*    </Box>*/}
             {/*}*/}
-
             <Routes>
                 <Route path="/" element={<Home/>}/>
                 <Route path={'/identity/:chainId/:walletAcc'} element={<Identity/>}/>
                 {/*{walletAcc === undefined || walletAcc === 'undefined' || walletAcc.length === 0 ?*/}
                 {/*    <Route path={'/identity/:walletAcc'} element={<Navigate replace to= "/identity/0x7C097941487f53bBdd39fddea7Bed9AEf3312ED5" />}/>*/}
-
                 {/*:  <Route path={'/identity/:walletAcc'} element={<Identity/>}/>*/}
                 {/*}*/}
                 {/*{addressToTokenBoolBool ?*/}
