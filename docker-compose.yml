@@ -4,7 +4,7 @@ services:
     container_name: website
     restart: always
     build:
-      context: ./client
+      context: ./dapp
       dockerfile: Dockerfile
     command: npm run serve
     ports:

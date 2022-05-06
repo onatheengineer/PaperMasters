@@ -56,9 +56,15 @@ export const Validate:FC=()=> {
     const [colorTextComment, setColorTextComment] = useState<ColorResult>(defaultColorText);
     const [whichColorField, setWhichColorField] = useState<string>('');
     const [submitButtonClicked, setSubmitButtonClicked] = useState<boolean>(false);
-    const giverHandler = (e: React.FormEvent<HTMLInputElement>) => { setGiver(e.currentTarget.value); };
-    const receiverHandler = (e: React.FormEvent<HTMLInputElement>) => { setReceiver(e.currentTarget.value); };
-    const commentHandler = (e: React.FormEvent<HTMLInputElement>) => { setComment(e.currentTarget.value); };
+    const giverHandler = (e: React.FormEvent<HTMLInputElement>) => {
+        setGiver(e.currentTarget.value);
+    };
+    const receiverHandler = (e: React.FormEvent<HTMLInputElement>) => {
+        setReceiver(e.currentTarget.value);
+    };
+    const commentHandler = (e: React.FormEvent<HTMLInputElement>) => {
+        setComment(e.currentTarget.value);
+    };
     const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
     const colorChangeHandler: ColorChangeHandler = (colorSelect: ColorResult) => {
         switch (whichColorField) {
@@ -74,7 +80,7 @@ export const Validate:FC=()=> {
         }
         console.table(colorSelect);
     };
-    const ColorRGBToString=(colorResultRGB: ColorResult)=>{
+    const ColorRGBToString = (colorResultRGB: ColorResult) => {
         const colorStringRGB = `rgba(${colorResultRGB.rgb.r}, ${colorResultRGB.rgb.g}, ${colorResultRGB.rgb.b}, ${colorResultRGB.rgb.a})`
         return colorStringRGB;
     }
@@ -144,7 +150,7 @@ export const Validate:FC=()=> {
         return ([null, null])
     }, [accountArrArr])
 
-    return(
+    return (
         <Box
             h={'100%'}
             p={[0, 1, 20]}
@@ -173,7 +179,7 @@ export const Validate:FC=()=> {
                         //border={'2px solid green'}
                     >
                         <Heading color={'pmpurple.13'} size="xl">
-                            Mint PaperMaster NFI
+                            Mint PaperMaster Validation
                         </Heading>
                         <Text color={'pmpurple.13'} align="center" fontWeight="medium">
                             PaperMaster Identities are permanent Blockchain PaperMaster
@@ -423,13 +429,13 @@ export const Validate:FC=()=> {
                             p={{base: 0, xl: 20}}
                         >
                             <ValidateAvatar
-                                   giver={giver}
-                                   giverColor={ColorRGBToString(colorTextGiver)}
-                                   receiver={receiver}
-                                   receiverColor={ColorRGBToString(colorTextReceiver)}
-                                   comment={comment}
-                                   commentColor={ColorRGBToString(colorTextComment)}
-                                   originDate={originDate}
+                                giver={giver}
+                                giverColor={ColorRGBToString(colorTextGiver)}
+                                receiver={receiver}
+                                receiverColor={ColorRGBToString(colorTextReceiver)}
+                                comment={comment}
+                                commentColor={ColorRGBToString(colorTextComment)}
+                                originDate={originDate}
                             />
                             <Stack>
                                 <Box
@@ -546,6 +552,6 @@ export const Validate:FC=()=> {
             </Modal>
         </Box>
     )
-}
+};
 
 export default Validate;

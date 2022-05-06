@@ -165,7 +165,7 @@ export default function WithSubnavigation() {
 const DesktopNav = () => {
     const linkColor = 'pmpurple.13';
     const linkHoverColor = 'pmpurple.8';
-    const popoverContentBgColor = 'pmpurple.2';
+    const popoverContentBgColor = 'pmpurple.1';
     const chainIdProviderProvider = useAppSelector((state) => state.accountBC.chainIdProvider);
     const accountArrArr = useAppSelector((state) => state.accountBC.accountArr);
 

@@ -4,11 +4,7 @@ import type {FC} from 'react'
 import {Button, FormControl, FormLabel, Grid, GridItem, Input, Stack} from '@chakra-ui/react';
 
 
-interface Interface {
-
-}
-
-export const Analytics:FC<Interface>=()=>{
+export const Analytics:FC=()=>{
 
     return(
 

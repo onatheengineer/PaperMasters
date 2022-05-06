@@ -68,8 +68,11 @@ contract PaperMastersNFI is ERC721, Ownable {
         return _dictionaryNFIs[tokenId];
     }
 
-    function getChainID() external view returns (uint256) {
+    function chainID() external view returns (uint256) {
         return block.chainid;
+    }
+    function getChainID() external view returns (uint256) {
+        return getChainId();
     }
 
     function allIdentityStructs() public view returns(identity[] memory){
@@ -325,13 +328,11 @@ contract PaperMastersNFI is ERC721, Ownable {
         require(!sender.voted, "Already voted.");
         sender.voted = true;
         sender.vote = proposal;
-
         // If `proposal` is out of the range of the array,
         // this will throw automatically and revert all
         // changes.
         proposals[proposal].voteCount += sender.weight;
     }
-
     /// @dev Computes the winning proposal taking all
     /// previous votes into account.
     function winningProposal() public view

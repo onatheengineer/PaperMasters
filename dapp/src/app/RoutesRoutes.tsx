@@ -207,7 +207,7 @@ export const RoutesRoutes: FC<InterfaceSidebar>= ({icon, profileName} ): ReactEl
 
     return (
         <Flex
-            border ={'1px solid orange'}
+            //border ={'1px solid orange'}
             flex={{base: 1, md: 'auto'}}
         >
             {/*{navItemsRender == null ? null :*/}

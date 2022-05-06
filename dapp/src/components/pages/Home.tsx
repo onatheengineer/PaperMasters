@@ -8,14 +8,14 @@ import SecondFooter from '../Footers/SecondFooterHome'
 export const Home:FC=()=> {
     return (
         <Flex
-        h={'100%'}
-        border={'1px solid green'}
-        flexDirection={'column'}
+            h={'100%'}
+            //border={'1px solid green'}
+            flexDirection={'column'}
         >
             <Flex
                 w={'100vW'}
                 alignItems={'stretch'}
-                flexGrow = {1}
+                flexGrow={1}
                 //h={'80vh'}
                 backgroundImage={BackgroundLogo}
                 backgroundSize={'cover'}
@@ -39,18 +39,14 @@ export const Home:FC=()=> {
                             fontWeight={300}
                             lineHeight={1.2}
                             fontSize={useBreakpointValue({base: '4xl', md: '3xl'})}>
-                            Providing protection and legitimacy for People, Companies and Contracts by bringing Non-Fungable-Identities (NFIs) to the Blockchain
+                            Providing protection and legitimacy for People, Companies and Contracts by bringing
+                            Non-Fungable-Identities (NFIs) to the Blockchain
                         </Text>
                     </Stack>
                 </VStack>
 
             </Flex>
-            <Flex
-            flexShrink={1}
-            >
-                <SecondFooter/>
-            </Flex>
-
+            <SecondFooter/>
         </Flex>
     )
 };

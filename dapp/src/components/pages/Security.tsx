@@ -5,13 +5,7 @@ import RoutesRoutes from "../../app/RoutesRoutes";
 import {Route, Routes} from "react-router-dom";
 
 
-
-
-interface Interface {
-
-}
-
-export const CommunityForum: FC<Interface>=()=> {
+export const CommunityForum: FC=()=> {
     // const SecurityForumPage = [
     //     <PageForum title={'Security and Protection'} body={'Security and Protectionis Everything, it provides trust'}/>,
     //     <PageForum title={'Blockchain Protection'} body={'dfgfdhdftgyertg'}/>,

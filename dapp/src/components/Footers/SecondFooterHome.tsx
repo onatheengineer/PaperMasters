@@ -23,9 +23,9 @@ const Feature =({heading, text}: FeatureProps) => {
 export default function secondFooterHome() {
     return (
         <Box as={Container}
-             flexGrow={1}
+            flexShrink={1}
              maxW="full"
-             py={10}
+             py={14}
              justifyContent={'space-evenly'}
              alignItems={'flex-start'}
              alignContent={'space-evenly'}

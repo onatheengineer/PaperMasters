@@ -91,6 +91,8 @@ export default function LargeWithLogoCentered() {
              alignContent={'space-evenly'}
              bg={'pmpurple.2'}
              color={'pmpurple.12'}
+             borderTop={'1px solid'}
+             borderTopColor={'pmpurple.4'}
         >
             <Grid
                 py={4}
