@@ -142,11 +142,13 @@ export const SingleMention:FC<singleMentionInterface> =({mention})=> {
                                 //unmountOnExit={false}
                                 //animateOpacity={true}
                             >
-                                <Link
-                                    onClick={handleToggle}
-                                >
-                                    {mention.messageBody}
-                                </Link>
+                                        <Link
+                                            onClick={handleToggle}
+                                            //isTruncated={true}
+                                            //textOverflow={'ellipsis'}
+                                        >
+                                        {mention.messageBody}
+                                        </Link>
                             </Collapse>
                         </Box>
                         : null

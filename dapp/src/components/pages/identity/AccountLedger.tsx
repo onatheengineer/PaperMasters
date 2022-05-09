@@ -1,11 +1,26 @@
-import {Box, Flex, Heading, HStack, Tab, TabList, TabPanel, TabPanels, Tabs, Text, Stack, Spacer} from "@chakra-ui/react";
+import {
+    Box,
+    Flex,
+    Heading,
+    HStack,
+    Tab,
+    TabList,
+    TabPanel,
+    TabPanels,
+    Tabs,
+    Text,
+    Stack,
+    Spacer,
+    Tooltip
+} from "@chakra-ui/react";
 import * as React from "react";
 import {FC, useEffect, useMemo} from "react";
 import {useAppDispatch} from "../../../app/hooks";
 import {useParams} from "react-router-dom";
 import {useGetQueryMainnetQuery} from "../../../features/reactQuery/RTKQuery";
 import {ParamsURLInterface} from "../../../features/accountDB/AccountDBSlice.types";
-
+import moment from "moment";
+import {ethers} from "ethers";
 
 export const AccountLedger:FC<ParamsURLInterface>=({chainIdURL, paramsWalletURL})=> {
     const getLedger = useGetQueryMainnetQuery({
@@ -13,58 +28,131 @@ export const AccountLedger:FC<ParamsURLInterface>=({chainIdURL, paramsWalletURL}
         paramsWalletURL: paramsWalletURL!
     });
     console.log("getLedger", getLedger)
-//const timeStampFormatted = moment(txHash.timeStamp).format('MMM DD YYYY, hh:mm:ss a');
 
-
-    // const ethereumLedger = useMemo(() => {
-    //
-    //     if () {
-    //{txHash}
-    //
-    //             return (
-    //
-    //             )
-    //         }
-    // }, [])
 
     return (
         <Flex align="center" mb="20px"
               border={'1px solid pink'}
               flexGrow={1}
+              overflow={'auto'}
         >
-            <Stack>
-                {getLedger.isSuccess && getLedger.data.map((el:any) => {
-                    return (
-                        <Stack>
-                            <HStack>
-                                <Text
-                                    //noOfLines={1}
-                                    fontSize="md"
-                                    color="gray.500"
-                                    fontWeight="400"
-                                >
-                                    {el.from}
-                                </Text>
-                                <Spacer/>
-                                <Text
-                                    //noOfLines={1}
-                                    fontSize="md"
-                                    color="gray.500"
-                                    fontWeight="400"
-                                >
-                                    {el.hash}
-                                    {/*{el.from}*/}
-                                    {/*{el.to}*/}
-                                    {/*{el.timestamp}*/}
-                                    {/*{el.value}*/}
+            <Box
+                w={'100%'}
+            >
+                <Stack
+                    w={'100%'}
+                >
+                    {getLedger.isSuccess && getLedger.data.map((el: any) => {
+                        const timeStampFormatted = moment(el.timestamp*1000).format('MMM DD YYYY, hh:mm:ss a');
+                        const timeStampShort = moment(el.timestamp*1000).format('MMM DD YYYY');
+                        const valueFormatted =
+                             parseFloat(ethers.utils.formatEther(el.value)) + parseFloat(ethers.utils.formatEther(el.gasPrice))
+                        console.log("valueFormatted",valueFormatted)
+                        return (
+                            <Box
+                                flex={'max-content'}
+                                w={'100%'}
+                                //border={'1px solid red'}
+                                borderBottom={'1px solid'}
+                                borderColor={'pmpurple.4'}
+                                px={2}
+                            >
+                                <Stack>
+                                    <HStack>
+                                            <HStack>
+                                                <Text
+                                                pr={'2px'}
+                                                color={'pmpurple.13'}
+                                                >
+                                                    Transaction Hash:
+                                                </Text>
+                                                <Text
+                                                    isTruncated={true}
+                                                    width={'300px'}
+                                                    color={'pmpurple.13'}
+                                                >
+                                                    {el.hash}
+                                                </Text>
+                                            </HStack>
+                                        <Spacer/>
+                                        <Tooltip
+                                            label={timeStampFormatted}
+                                            aria-label='A tooltip'
+                                            bg={'pmpurple.8'}
+                                        >
+                                        <Text
+                                            //noOfLines={1}
+                                            fontSize="14px"
+                                            color={'pmpurple.13'}
+                                            fontWeight="400"
+                                        >
+                                            {timeStampShort}
+                                        </Text>
+                                        </Tooltip>
+                                        <Box
+                                            //border={'1px solid orange'}
+                                            bg={'pmpurple.2'}
+                                            borderRadius={'2px'}
+                                        >
+                                            <Text
+                                                isTruncated={true}
+                                                width={'100px'}
+                                                color={'pmpurple.13'}
+                                                title={valueFormatted.toString()}
+                                            >
+                                                {valueFormatted}
+                                            </Text>
+                                        </Box>
+                                    </HStack>
+                                    <HStack>
 
-                                </Text>
-                            </HStack>
-                        </Stack>
-                    )
-                })
-                }
-            </Stack>
+                                    <HStack>
+                                        <Text
+                                            pr={'2px'}
+                                            color={'pmpurple.13'}
+                                        >
+                                            From:
+                                        </Text>
+                                        <Text
+                                            isTruncated={true}
+                                            width={'300px'}
+                                            color={'pmpurple.13'}
+                                        >
+                                            {el.from}
+                                        </Text>
+                                    </HStack>
+                                    <Spacer/>
+                                    <HStack>
+                                        <Text
+                                            pr={'2px'}
+                                            color={'pmpurple.13'}
+                                        >
+                                            To:
+                                        </Text>
+                                        <Text
+                                            isTruncated={true}
+                                            width={'300px'}
+                                            color={'pmpurple.13'}
+                                        >
+                                            {el.to !== null ?
+                                                el.to
+                                                :  <Text
+                                                    color={'pmpurple.27'}
+                                                >
+
+                                                Contact Creation
+                                                </Text>
+                                            }
+                                        </Text>
+                                    </HStack>
+                                    </HStack>
+                                </Stack>
+                            </Box>
+                        )
+                    })
+                    }
+                </Stack>
+            </Box>
         </Flex>
     )
 };
