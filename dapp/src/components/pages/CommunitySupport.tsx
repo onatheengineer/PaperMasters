@@ -16,10 +16,10 @@ import React from "react";
 
 
 
-export const Learn:FC=()=> {
+export const CommunitySupport:FC=()=> {
 
     // const LearnForumPage [
-    //     <PageForum title={'Learn about NFIs'} body={'dfgfdhdftgyertg'}/>,
+    //     <PageForum title={'CommunitySupport about NFIs'} body={'dfgfdhdftgyertg'}/>,
     //     <PageForum title={'What is a Non-Fungiable-Identity (NFI)'} body={'dfgfdhdftgyertg'}/>,
     //     <PageForum title={'What is the difference between a NFT and PaperMasters NFI'} body={'dfgfdhdftgyertg'}/>,
     //     <PageForum title={'What are the benefits of having a PaperMasters NFI?'} body={'dfgfdhdftgyertg'}/>,
@@ -67,5 +67,5 @@ export const Learn:FC=()=> {
     )
 };
 
-export default Learn;
+export default CommunitySupport;
 

@@ -8,7 +8,7 @@ import mentionsSlice from "../features/accountDB/mentions/MentionsSlice";
 import contractFunctionsSlice from '../features/contractsBC/mintNFI/MintNFIFunctionsSlice'
 import nfiSlice from '../features/contractsBC/mintNFI/MintNFISlice';
 import toastSlice from "../features/toast/ToastSlice";
-import {accountDBApi, nfiBCApi} from "../features/reactQuery/RTKQuery";
+import {accountDBApi, nfiBCApi, queryBCApi} from "../features/reactQuery/RTKQuery";
 
 const sagaMiddleware = createSaga();
 
@@ -16,6 +16,7 @@ export const store = configureStore({
   reducer: {
     [accountDBApi.reducerPath]: accountDBApi.reducer,
     [nfiBCApi.reducerPath]: nfiBCApi.reducer,
+    [queryBCApi.reducerPath]: queryBCApi.reducer,
     accountBC: accountBCSlice,
     accountDB: accountDBSlice,
     nfi: nfiSlice,
@@ -24,11 +25,10 @@ export const store = configureStore({
     toast: toastSlice,
   },
   middleware: (getDefaultMiddleware) =>
-      getDefaultMiddleware().concat(sagaMiddleware).concat(accountDBApi.middleware).concat(nfiBCApi.middleware),
+      getDefaultMiddleware().concat(sagaMiddleware).concat(accountDBApi.middleware).concat(nfiBCApi.middleware).concat(queryBCApi.middleware),
 });
 
 sagaMiddleware.run(rootSaga);
-
 export type AppDispatch = typeof store.dispatch;
 export type RootState = ReturnType<typeof store.getState>;
 setupListeners(store.dispatch);

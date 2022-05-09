@@ -113,38 +113,34 @@ export default function LargeWithLogoCentered() {
                         />
                     </Link>
                 </Stack>
-                <Stack alignItems={'flex-start'}>
+                <Stack>
                     <ListHeader>Services</ListHeader>
-                    <Link as={ReachLink} to="/">Non-Fungible Identities</Link>
-                    <Link as={ReachLink} to="/">Search</Link>
-                    <Link as={ReachLink} to="/">Validation</Link>
-                    <Link as={ReachLink} to="/">Report</Link>
-                    <Link as={ReachLink} to="/">CloudHWM</Link>
+                    <Link as={ReachLink} to="/register">Register</Link>
+                    <Link as={ReachLink} to="/search">Search</Link>
+                    <Link as={ReachLink} to="/validate">Validate</Link>
+                    <Link as={ReachLink} to="/report">Report</Link>
                 </Stack>
-                <Stack alignItems={'flex-start'}>
+                <Stack>
                     <ListHeader>Community Support</ListHeader>
-                    <Link as={ReachLink} to="/">Learning Center</Link>
-                    <Link as={ReachLink} to="/">Authentic PM Identities</Link>
-                    <Link as={ReachLink} to="/">Community Guidelines</Link>
+                    <Link as={ReachLink} to="/analytics">Analytics</Link>
+                    <Link as={ReachLink} to="/cloudhwm">CloudHWM</Link>
+                    {/*<Link as={ReachLink} to="/learn">Learning Center</Link>*/}
                     <Link as={ReachLink} to="/">New & Updated Features</Link>
-                    <Link as={ReachLink} to="/">Future Stories</Link>
+                    {/*<Link as={ReachLink} to="/">Future Stories</Link>*/}
                 </Stack>
-                <Stack alignItems={'flex-start'}>
+                <Stack>
                     <ListHeader>Security</ListHeader>
-                    <Link as={ReachLink} to="/">Blockchain Protection</Link>
-                    <Link as={ReachLink} to="/">Blockchain Legitimacy</Link>
-                    <Link as={ReachLink} to="/">Privacy Policy</Link>
-                    <Link as={ReachLink} to="/">Terms of Service</Link>
+                    <Link as={ReachLink} to="/">Blockchain Protection & Legitimacy</Link>
+                    <Link as={ReachLink} to="/">Community Guidelines</Link>
+                    <Link as={ReachLink} to="/">Privacy Policy & Cookies</Link>
                 </Stack>
-                <Stack alignItems={'flex-start'}>
+                <Stack>
                     <ListHeader>Your People</ListHeader>
-                    <Link as={ReachLink} to="/Analytics">Analytics</Link>
-                    <Link as={ReachLink} to="/AboutUs">About Us</Link>
-                    <Link as={ReachLink} to="/SupportProject">Support the Project</Link>
+                    <Link as={ReachLink} to="/identity/3/0xbEc6F6B37CFF8355a046afD2a2EcfEA05c1215F5">About Me</Link>
+                    {/*<Link as={ReachLink} to="/">Support the Project</Link>*/}
                     <Link as={ReachLink} to="/Logokit">Logo Kit</Link>
                 </Stack>
             </Grid>
-            {/*</SimpleGrid>*/}
 
             <Box
                 p={4}
@@ -152,10 +148,7 @@ export default function LargeWithLogoCentered() {
                 borderTop={'1px solid'}
                 borderColor={'pmpurple.4'}
             >
-
-                <Stack direction={{base: 'column', md: 'row'}}
-
-                >
+                <Stack direction={{base: 'column', md: 'row'}} >
                     <Text
                         //border={'1px solid blue'}
                         //width={{ base: 'flex', md: 'none'}}
@@ -165,55 +158,47 @@ export default function LargeWithLogoCentered() {
                         >
                                 <Icon as={BsHeartFill} fontSize={'13px'}/>
                             </span>
-
                         by The PaperMasters ~ working to bring protection and legitimacy to the
                         Blockchain.
                     </Text>
-
                     <Spacer/>
                     <Grid
                         templateColumns={{
                             base: 'repeat(9, 1fr)',
                             sm: 'repeat(9, 1fr)',
                             md: 'repeat(3, 1fr)',
-                            lg: 'repeat(9, 1fr)',
+                            lg: 'repeat(4, 1fr)',
                         }}
                         gap={{base: '2', lg: '8'}}
                         justifyContent={{base: 'center', md: 'none'}}
                     >
-
                         <SocialButton label={'Twitter'} href={'https://twitter.com/ramonajenny_n'}>
                             <FaTwitter/>
                         </SocialButton>
-                        <SocialButton label={'YouTube'}
-                                      href={'https://www.youtube.com/channel/UC-w92fylwBTYGK--jse0jeQ'}>
-                            <FaYoutube/>
-                        </SocialButton>
-                        <SocialButton label={'Instagram'}
-                                      href={'https://www.instagram.com/ramonaandrew_niederhausern/'}>
-                            <FaInstagram/>
-                        </SocialButton>
+                        {/*<SocialButton label={'YouTube'}*/}
+                        {/*              href={'https://www.youtube.com/channel/UC-w92fylwBTYGK--jse0jeQ'}>*/}
+                        {/*    <FaYoutube/>*/}
+                        {/*</SocialButton>*/}
+                        {/*<SocialButton label={'Instagram'}*/}
+                        {/*              href={'https://www.instagram.com/ramonaandrew_niederhausern/'}>*/}
+                        {/*    <FaInstagram/>*/}
+                        {/*</SocialButton>*/}
                         <SocialButton label={'Linkedin'} href={'https://www.linkedin.com/in/ramonajenny/'}>
                             <FaLinkedin/>
                         </SocialButton>
-                        <SocialButton label={'Linkedin'} href={'https://www.linkedin.com/in/andrew-nieder/'}>
-                            <FaLinkedin/>
-                        </SocialButton>
+                        {/*<SocialButton label={'Linkedin'} href={'https://www.linkedin.com/in/andrew-nieder/'}>*/}
+                        {/*    <FaLinkedin/>*/}
+                        {/*</SocialButton>*/}
                         <SocialButton label={'GitHub'} href={'https://github.com/ramonajenny'}>
                             <FaGithub/>
                         </SocialButton>
-                        <SocialButton label={'GitHub'} href={'https://github.com/Arzemn'}>
-                            <FaGithub/>
-                        </SocialButton>
+                        {/*<SocialButton label={'GitHub'} href={'https://github.com/Arzemn'}>*/}
+                        {/*    <FaGithub/>*/}
+                        {/*</SocialButton>*/}
                         <SocialButton label={'GitHub'} href={'https://discord.com/channels/ramonajenny#1512'}>
                             <FaDiscord/>
                         </SocialButton>
-                        <SocialButton label={'GitHub'} href={'https://discord.com/channels/ramonajenny#1512'}>
-                            <FaReddit/>
-                        </SocialButton>
-
                     </Grid>
-
                 </Stack>
             </Box>
         </Box>

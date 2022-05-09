@@ -382,15 +382,16 @@ export const Search:FC =()=> {
         {
             Header: <Text style={{whiteSpace: 'nowrap'}}> Validate </Text>,
             accessor: 'validate',
-            Cell: <Button as={ReachLink} to={'/validate'} color={'pmpurple.13'} bg={'#f2eef2'} fontSize={'12px'}>
+            Cell: (el) => {
+                return (
+                    <>
+                <Button as={ReachLink} to={`/validate/${el.row.original.chainId}/${el.row.original.wallet}`} color={'pmpurple.13'} bg={'#f2eef2'} fontSize={'12px'}>
                 <MdOutlineLibraryAddCheck fontSize={'16px'}/>
                 <Text fontSize={'12px'} ml={'6px'}> Validate </Text>
-            </Button>,
-            sortable: true,
-            reorder: true,
-            button: true,
-            center: true,
-        },
+            </Button>
+                        </>
+            )
+            },},
         {
             Header: <Text style={{whiteSpace: 'nowrap'}}> Reported </Text>,
             accessor: 'reported',
@@ -398,11 +399,16 @@ export const Search:FC =()=> {
         {
             Header: <Text style={{whiteSpace: 'nowrap'}}> Report </Text>,
             accessor: 'report',
-            Cell: <Button as={ReachLink} to={'/report'} color={'pmpurple.13'} bg={'#f2eef2'} fontSize={'12px'}>
-                <HiOutlineDocumentReport fontSize={'16px'}/>
-                <Text fontSize={'12px'} ml={'6px'}> Report </Text>
-            </Button>,
-        }
+            Cell: (el) => {
+                return (
+                    <>
+                        <Button as={ReachLink} to={`/report/${el.row.original.chainId}/${el.row.original.wallet}`} color={'pmpurple.13'} bg={'#f2eef2'} fontSize={'12px'}>
+                            <HiOutlineDocumentReport fontSize={'16px'}/>
+                            <Text fontSize={'12px'} ml={'6px'}> Report </Text>
+                        </Button>
+                    </>
+                )
+            },},
     ], [])
 
     const filteredItems = data.filter(item => {

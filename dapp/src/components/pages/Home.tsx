@@ -44,7 +44,6 @@ export const Home:FC=()=> {
                         </Text>
                     </Stack>
                 </VStack>
-
             </Flex>
             <SecondFooter/>
         </Flex>

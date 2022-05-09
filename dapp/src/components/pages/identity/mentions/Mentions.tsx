@@ -232,7 +232,7 @@ export const Mentions:FC<interfaceMentions> =({chainIdURL, paramsWalletURL})=> {
             p="0px"
             mt={'5px'}
             //border={'1px solid orange'}
-            border={'2px solid'}
+            //border={'2px solid'}
             borderColor={'pmpurple.6'}
             overflow={'auto'}
         >

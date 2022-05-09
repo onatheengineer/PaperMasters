@@ -40,7 +40,7 @@ import {SocialButton} from "../../Footers/Footer";
 import {openseaIcon} from '../../../assets/icons/openseaIcon';
 import {ChevronDownIcon} from "@chakra-ui/icons";
 import {postSingleAccountDictionaryDBAction} from "../../../features/accountDB/AccountDBSlice";
-import {AccountDBInterface} from "../../../features/accountDB/AccountDBSlice.types";
+import {AccountDBInterface, ParamsURLInterface} from "../../../features/accountDB/AccountDBSlice.types";
 
 
 function initialState(paramsRequestAccountDictionary:any) {
@@ -76,13 +76,11 @@ function Mailto({ email, subject, body, ...props }: any) {
     );
 }
 
-export const DrawerComponent:FC=()=> {
+export const DrawerComponent:FC<ParamsURLInterface>=({chainIdURL, paramsWalletURL})=> {
 
     const accountArrArr = useAppSelector((state) => state.accountBC.accountArr);
-    const chainIdProviderProvider = useAppSelector((state) => state.accountBC.chainIdProvider);
     const addressHasIdentityBoolBool = useAppSelector((state) => state.accountBC.addressHasIdentityBool);
     const getStructBCBC = useAppSelector((state) => state.accountBC.getStructBC);
-    const paramsWalletWallet = useAppSelector((state) => state.accountDB.paramsWallet);
     const singleNFIReceiptDBDB = useAppSelector((state) => state.accountDB.singleNFIReceiptDB);
     const singleAccountDictionaryDBDB = useAppSelector((state) => state.accountDB.singleAccountDictionaryDB);
 
@@ -92,8 +90,8 @@ export const DrawerComponent:FC=()=> {
 
     const submitHandler = () => {
         const accountProfileDictionary: AccountDBInterface = {
-            chainId: chainIdProviderProvider as string,
-            walletAccount: paramsWalletWallet as string,
+            chainId: chainIdURL as string,
+            walletAccount: paramsWalletURL as string,
             createDate: singleAccountDictionaryDBDB.createDate,
             ownerName: state.ownerName,
             ownerEmail: state.ownerEmail,
@@ -114,9 +112,9 @@ export const DrawerComponent:FC=()=> {
         return (null);
     }
     return (
+        //TODO - should I permit a name change
         <>
-        {accountArrArr.length !== 0 && accountArrArr[0].toLowerCase() === paramsWalletWallet?.toLowerCase()
-        && addressHasIdentityBoolBool ?
+        {accountArrArr.length !== 0 && accountArrArr[0] === paramsWalletURL && addressHasIdentityBoolBool ?
                 <Box
                     right={"2px"}
                     top={"2px"}

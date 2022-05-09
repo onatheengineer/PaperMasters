@@ -35,51 +35,48 @@ const baseURL = 'https://ociuozqx85.execute-api.us-east-1.amazonaws.com';
 
 function* accountArrSaga(): SagaIterator {
     try {
-        //const provider = new ethers.providers.JsonRpcProvider('https://eth-mainnet.alchemyapi.io/v2/mEUzvPVY6xECwMieu01t9D3fuYyOYGCl');
-        //console.log("accountArrBCprovider:", provider)
-       // const signer = yield call(provider.getSigner)
-       // const signerConnect = yield call(signer.connect(provider))
-        //const ethersJSChainId:Promise< number > = yield call(signerConnect.getChainId())
-        //const ethersJSChainIDId:Promise< number > = signerConnect.getChainId()
-        //console.log("ethersJSChainId:", ethersJSChainIDId)
-        //console.log("ethersJSChainId:", ethersJSChainId)
+        const provider = new ethers.providers!.Web3Provider(window.ethereum);
+        console.log("accountArrBCprovider:", provider)
+        const accArr:string[] = yield call(window.ethereum.request, {method: 'eth_requestAccounts'});
+        console.log("accArr",accArr)
+        const accArrChecksum:string[] = [ethers.utils.getAddress(accArr[0])]
+        console.log("accArrChecksum",accArrChecksum)
+        //TODO note to self - this comes out of the BC as lowercase - it will NOT match MetaMask - think about ASCII - technically .toLowerCase() is a different string
+        const chainId:string = yield call(window.ethereum.request, {method: 'eth_chainId'});
+        console.log(chainId)
+        const chainIdDecimal:number = parseInt(chainId, 16)
+        console.log("chainIdDecimal",chainIdDecimal)
+        const getBalance = yield call(window.ethereum.request, {method: 'eth_getBalance', params: [accArrChecksum[0], 'latest']});
+        console.log('getBalance', getBalance)
+        const getBalanceDecimal = ethers.utils.formatEther(getBalance);
+        console.log('getBalanceHex', getBalanceDecimal)
         yield put(accountArrStatus("loading"));
         yield put(chainIdStatus("loading"));
-        const web3 = new Web3(Web3.givenProvider);
-        const accArr: string[] = yield call(web3.eth.requestAccounts as any);
-        const getBalance: number = yield call(web3.eth.getBalance as any, accArr[0])
-        console.log('getBalance', getBalance)
-        //const hash = web3.utils.sha3('msgHash')
-        //const signed = yield call(web3.eth.sign, hash, accArr[0])
-        console.log("accArr:", accArr)
+        console.log("accArr:", accArrChecksum)
         //TODO run api to make sure this is NOT a test accountDB. If test accountDB EXIT saga with Toast error stating to accounts
-        if (accArr.length > 0 && getBalance > 0) {
+        if (accArrChecksum.length > 0 && getBalance > 0) {
+            //TODO show modal: 'It is free to connect to this site and get a base identity but you do have to first fund your wallet account before an identity page will generate for you'
             yield put(accountArrStatus('success'));
-            const accArrLowerCase = accArr.map(element => {
-                return element;
-            });
-            const chainIdProviderProvider = yield call(web3.eth.getChainId);
-            //const chainIdProviderProvider = yield call(web3.eth.net.getId);
-            console.log("Looking if chaininprovider works!::::", chainIdProviderProvider);
-            if (chainIdProviderProvider) {
-                if (chainIdNetworks.filter((el)=> el.chainId === chainIdProviderProvider)) {
-                    yield put(accountArr(accArrLowerCase));
-                    yield put(chainIdProvider(`${chainIdProviderProvider}`));
-                    yield put(addressToTokenAction(accArrLowerCase[0]))
+             if (chainIdDecimal) {
+                if (chainIdNetworks.filter((el)=> el.chainId === chainIdDecimal)) {
+                    yield put(accountArr(accArrChecksum));
+                    yield put(chainIdProvider(`${chainIdDecimal}`));
+                    yield put(addressToTokenAction(accArrChecksum[0]))
                     yield put(chainIdStatus("success"));
                     yield put(chainIdSupportedBool(true)) //these are the chainId's that will get an
                     // identityPage, should be all real accounts that are not TEST accounts
                     yield put(chainIdStatus('yesProvider'))
                 } else {
+                    //TODO show modal that they are connecting with an unsupported chain
                     yield put(chainIdSupportedBool(false))
                     yield put(chainIdStatus('notProvider'))
                 }
                 //TODO before calling this action I need to check axios to see if this accountBC is already in the DB
-                const hasAccountArrAlready = yield call(axios.get, `${baseURL}/account/${chainIdProviderProvider}/${accArrLowerCase[0]}`);
+                const hasAccountArrAlready = yield call(axios.get, `${baseURL}/account/${chainIdDecimal}/${accArrChecksum[0]}`);
                 console.log("hasAccountArrAlready!", hasAccountArrAlready);
                 if (!Object.prototype.hasOwnProperty.call(hasAccountArrAlready.data, 'Item')) {
                     //TODO need to make sure that this actually works
-                    yield put(accountArrDBAction({chainIdURL: chainIdProviderProvider, paramsWalletURL: accArrLowerCase[0]}));
+                    yield put(accountArrDBAction({chainIdURL: `${chainIdDecimal}`, paramsWalletURL: accArrChecksum[0]}));
                 }
             } else {
                 yield put(chainIdStatus('failed'))
@@ -95,9 +92,9 @@ function* accountArrSaga(): SagaIterator {
 }
 
 function* singleStructBCSaga({payload}: PayloadAction<ParamsURLInterface>): SagaIterator {
+    const { chainIdURL, paramsWalletURL } = payload;
     try {
         yield put(getStructBC(null));
-        const { chainIdURL, paramsWalletURL } = payload;
         if (Object.prototype.hasOwnProperty.call(MintABI.networks, `${chainIdURL}`)) {
             if(chainIdJSON[chainIdURL].rpc !== null){
                 const web3 = new Web3(chainIdJSON[chainIdURL].rpc);

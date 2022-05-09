@@ -23,9 +23,9 @@ const Feature =({heading, text}: FeatureProps) => {
 export default function secondFooterHome() {
     return (
         <Box as={Container}
-            flexShrink={1}
-             maxW="full"
              py={14}
+             flexShrink={1}
+             maxW="full"
              justifyContent={'space-evenly'}
              alignItems={'flex-start'}
              alignContent={'space-evenly'}
@@ -50,7 +50,7 @@ export default function secondFooterHome() {
                         What is a Non-Fungible-Identity (NFI)?
                         </Link>
                                 <Text fontSize="lg" fontWeight="400" >
-                            NFIs are transparent identites...
+                            Authentic PM Identities are .....NFIs are transparent identites...
                         </Text>
                     </Heading>
                 </GridItem>

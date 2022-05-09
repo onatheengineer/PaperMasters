@@ -1,5 +1,5 @@
 import React, { useState, useEffect, ReactElement} from 'react';
-import {Route, Routes, useLocation} from 'react-router-dom';
+import {Route, Routes, useLocation, Navigate} from 'react-router-dom';
 import { AiOutlineFileSearch } from "react-icons/ai";
 import { GiFlowerPot } from "react-icons/gi";
 import { BiHomeHeart, BiBookmarkHeart } from 'react-icons/bi';
@@ -26,11 +26,12 @@ import CloudHWM from "../components/pages/CloudHWM";
 import YourPeople from "../components/pages/yourPeople/YourPeople";
 import Validate from "../components/pages/Validate";
 import Analytics from "../components/pages/Analytics";
-import Learn from "../components/pages/Learn";
+import CommunitySupport from "../components/pages/CommunitySupport";
 import News from "../components/pages/News";
 import Security from "../components/pages/Security";
 import {useAppSelector} from "./hooks";
 import Report from "../components/pages/Report";
+import ModalForIdentNoUseParams from "../components/pages/identity/ModalForIdentNoUseParams";
 
 interface InterfaceNavItem {
     title?: string;
@@ -80,6 +81,10 @@ export const NavItem: FC<InterfaceNavItem> = ({ icon, title, active,
 
 export const RoutesRoutes: FC<InterfaceSidebar>= ({icon, profileName} ): ReactElement => {
 
+    const chainIdProviderProvider = useAppSelector((state) => state.accountBC.chainIdProvider);
+    const accountArrArr = useAppSelector((state) => state.accountBC.accountArr);
+    const addressHasIdentityBoolBool = useAppSelector((state) => state.accountBC.addressHasIdentityBool);
+
     const location = useLocation();
     const [navSize, changeNavSize] = useState<'small' | 'large'>("small");
     const [navItemsRender, setNavItemRender] = useState<JSX.Element[] | null>([]);
@@ -95,7 +100,7 @@ export const RoutesRoutes: FC<InterfaceSidebar>= ({icon, profileName} ): ReactEl
             <NavItem navItemSize={navSize} icon={IoMdCheckmarkCircleOutline} title="Validate NFI" path={'/validate'}/>,
             <NavItem navItemSize={navSize} icon={MdOutlineReport} title="Report NFI" path={'/report'}/>,
             <NavItem navItemSize={navSize} icon={MdOutlineWarningAmber} title="Report suss" path={'/learn'}/>,
-            <NavItem navItemSize={navSize} icon={GiBookCover} title="Learn" path={'/learn'}/>,
+            <NavItem navItemSize={navSize} icon={GiBookCover} title="CommunitySupport" path={'/learn'}/>,
             <NavItem navItemSize={navSize} icon={FiTrendingUp} title="Analytics" path={'/analytics'}/>,
         ]
 
@@ -105,7 +110,7 @@ export const RoutesRoutes: FC<InterfaceSidebar>= ({icon, profileName} ): ReactEl
             <NavItem navItemSize={navSize} icon={IoMdCheckmarkCircleOutline} title="Validate NFI" path={'/validate'}/>,
             <NavItem navItemSize={navSize} icon={MdOutlineReport} title="Report NFI" path={'/report'}/>,
             <NavItem navItemSize={navSize} icon={MdOutlineWarningAmber} title="Report suss" path={'/learn'}/>,
-            <NavItem navItemSize={navSize} icon={GiBookCover} title="Learn" path={'/learn'}/>,
+            <NavItem navItemSize={navSize} icon={GiBookCover} title="CommunitySupport" path={'/learn'}/>,
             <NavItem navItemSize={navSize} icon={FiTrendingUp} title="Analytics" path={'/analytics'}/>,
 
         ]
@@ -142,7 +147,7 @@ export const RoutesRoutes: FC<InterfaceSidebar>= ({icon, profileName} ): ReactEl
         ]
 
         const SidebarLearn = [
-            <NavItem navItemSize={navSize} icon={GiBookCover} title="Learn" path={'/learn'}/>,
+            <NavItem navItemSize={navSize} icon={GiBookCover} title="CommunitySupport" path={'/learn'}/>,
             <NavItem navItemSize={navSize} icon={FiTrendingUp} title="Analytics" path={'/analytics'}/>,
         ]
 
@@ -274,17 +279,17 @@ export const RoutesRoutes: FC<InterfaceSidebar>= ({icon, profileName} ): ReactEl
             {/*                    </Text>*/}
             {/*                </Flex>*/}
             {/*            </Flex>*/}
-
-
             {/*        </Flex>*/}
             {/*    </Box>*/}
             {/*}*/}
             <Routes>
                 <Route path="/" element={<Home/>}/>
+                <Route path={'/identity'} element={ <ModalForIdentNoUseParams/>}/>
                 <Route path={'/identity/:chainId/:walletAcc'} element={<Identity/>}/>
-                {/*{walletAcc === undefined || walletAcc === 'undefined' || walletAcc.length === 0 ?*/}
-                {/*    <Route path={'/identity/:walletAcc'} element={<Navigate replace to= "/identity/0x7C097941487f53bBdd39fddea7Bed9AEf3312ED5" />}/>*/}
-                {/*:  <Route path={'/identity/:walletAcc'} element={<Identity/>}/>*/}
+                {/*{ chainIdProviderProvider === undefined || chainIdProviderProvider === 'undefined' ||*/}
+                {/*chainIdProviderProvider.length === 0 || accountArrArr === undefined || accountArrArr.length === 0 ?*/}
+                {/*    <Route path={`/identity/:${chainIdProviderProvider}/:${accountArrArr}`} element={<Navigate replace to= "/identity/3/0xbEc6F6B37CFF8355a046afD2a2EcfEA05c1215F5" />}/>*/}
+                {/*:  <Route path={`/identity/:${chainIdProviderProvider}/:${accountArrArr}`} element={<Identity/>}/>*/}
                 {/*}*/}
                 {/*{addressToTokenBoolBool ?*/}
                 {/*    <Route path={'/register'} element={<Navigate replace to="/search" />}/>*/}
@@ -292,13 +297,13 @@ export const RoutesRoutes: FC<InterfaceSidebar>= ({icon, profileName} ): ReactEl
                 {/*    <Route path={'/register'} element={<Register/>}/>*/}
                 {/*}*/}
                 <Route path={'/register'} element={<Register/>}/>
-                <Route path={'/validate'} element={<Validate/>}/>
-                <Route path={'/report'} element={<Report/>}/>
+                <Route path={'/validate/:chainId/:walletAcc'} element={<Validate/>}/>
+                <Route path={'/report/:chainId/:walletAcc'} element={<Report/>}/>
                 <Route path={'/analytics'} element={<Analytics/>}/>
                 <Route path={'/search'} element={<Search/>}/>
-                <Route path={'/learn'} element={<Learn/>}/>
-                <Route path={'/news'} element={<News/>}/>
-                <Route path={'/security'} element={<Security/>}/>
+                <Route path={'/communitysupport'} element={<CommunitySupport/>}/>
+                {/*<Route path={'/news'} element={<News/>}/>*/}
+                {/*<Route path={'/security'} element={<Security/>}/>*/}
                 <Route path={'/CloudHWM'} element={<CloudHWM/>}/>
                 <Route path={'/yourpeople'} element={<YourPeople/>}/>
             </Routes>

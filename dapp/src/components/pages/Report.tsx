@@ -51,7 +51,6 @@ const ColorRGBToString=(colorResultRGB: ColorResult)=>{
 
 export const Report:FC=()=> {
     const dispatch = useAppDispatch();
-    const paramsWalletWallet = useAppSelector((state) => state.accountDB.paramsWallet);
     const singleNFIReceiptDBDB = useAppSelector((state) => state.accountDB.singleNFIReceiptDB);
     const addressHasIdentityBoolBool = useAppSelector((state) => state.accountBC.addressHasIdentityBool);
     const getStructBCBC = useAppSelector((state) => state.accountBC.getStructBC);
@@ -204,7 +203,7 @@ export const Report:FC=()=> {
     const [modalDisplayTitle, modalDisplayText] = useMemo(() => {
         if (accountArrArr.length === 0) {
             setIsModalOpen(true);
-            return (['Connect Wallet Account for Access', "Please go to MetaMask and connect your wallet accountDB."])
+            return (['Connect Wallet Account for Access', "Please go to MetaMask and connect your wallet."])
         }
 
         if (addressHasIdentityBoolBool && mintSucceededSucceeded === 'idle') {

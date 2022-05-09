@@ -27,6 +27,8 @@ import MentionsDrawer from "./identity/mentions/MentionsDrawer";
 import {AiOutlineComment} from "react-icons/ai";
 import Mentions from "./identity/mentions/Mentions";
 import {useGetMentionQuery, useGetSingleIdentityBCQuery} from "../../features/reactQuery/RTKQuery";
+import chainIdNetworks from "../../features/JSON/chainId.networks.json";
+import {addressHasIdentityBool, singleStructBCAction} from "../../features/accountBC/AccountBCSlice";
 
 export const Identity:FC=()=> {
 //TODO as soon as they connect - redirect them to their identity page - this is important for the hasIdentityBool slice to work
@@ -35,6 +37,10 @@ export const Identity:FC=()=> {
     useEffect(() => {
         if (walletAcc !== undefined && walletAcc !== "" && walletAcc !== 'undefined') {
             dispatch(paramsChainId(chainId));
+            dispatch(singleStructBCAction({
+                chainIdURL: chainId,
+                paramsWalletURL: walletAcc
+            } as ParamsURLInterface));
             dispatch(paramsWallet(walletAcc));
             dispatch(apiHarmonyOneAction(walletAcc));
             dispatch(singleAccountDictionaryDBAction({
@@ -78,9 +84,19 @@ export const Identity:FC=()=> {
             " Mathematics may not teach us how to add love or subtract hate, but it gives us every reason to hope that every problem has a solution.  -Anonymous"
         );
     }, [singleAccountDictionaryDBDB, walletAcc, addressHasIdentityBoolBool, singleStructBC])
-
+    const chainName = useMemo(()=>{
+        if(chainId !== undefined){
+            const chainIdSupportedArr = chainIdNetworks.filter((el) => {
+                return el.chainId === parseInt(chainId)
+            });
+            if(chainIdSupportedArr.length >0){
+                return(chainIdSupportedArr[0].name)
+            }
+        }
+        return ""
+    },[chainId])
     const {isOpen, onOpen, onClose} = useDisclosure()
-    if (!chainId) return null;
+    if (!chainId) return  <ModalForIdentNoUseParams/>;
     return (
         <Box
             //border={'4px solid red'}
@@ -111,7 +127,7 @@ export const Identity:FC=()=> {
                         objectFit={'cover'}
                         //border={'4px solid blue'}
                     />
-                    <Header/>
+                    <Header chainIdURL={chainId} paramsWalletURL={walletAcc}/>
                     <Stack p={'10px'}
                         //border={'4px solid blue'}
                     >
@@ -212,22 +228,16 @@ export const Identity:FC=()=> {
                                         whiteSpace={"pre-line"}
                                         h={'100%'}
                                         //w={'30vW'}
-                                        //border={'4px solid blue'}
+                                        //border={'1px solid blue'}
                                     >
-                                        {chainIdProviderProvider === '1666600000' ?
-                                            <Text mb={'5px'} fontSize="16px" color={'pmpurple.13'} align={'center'}>
-                                                Harmony Ledger
-                                            </Text>
-                                            :
                                             <Text mb={'5px'} fontSize="17px" color={'pmpurple.13'} align={'center'}>
-                                                Ethereum Ledger
+                                                {chainName} Ledger
                                             </Text>
-                                        }
                                         <Divider
                                             border={'1px solid'}
                                             borderColor={'pmpurple.8'}
                                         />
-                                        <AccountLedger/>
+                                        <AccountLedger chainIdURL={chainId} paramsWalletURL={walletAcc}/>
                                     </Box>
                                 </Box>
                             </HStack>

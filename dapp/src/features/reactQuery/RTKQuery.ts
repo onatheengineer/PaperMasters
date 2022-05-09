@@ -114,6 +114,43 @@ export const nfiBCApi = createApi({
     }),
 })
 
+export const queryBCApi = createApi({
+    reducerPath: 'queryBCApi',
+    baseQuery: fakeBaseQuery(),
+    tagTypes: ['etherScanApi', 'ropstenApi'],
+    endpoints: (builder) => ({
+        getQueryMainnet: builder.query<any, ParamsURLInterface>({
+            queryFn: fetchEthereumTranastionsMainNet,
+            providesTags: ['etherScanApi']
+        }),
+        getQueryRopsten: builder.query<any, ParamsURLInterface>({
+            queryFn: fetchEthereumTranastionsRopsten,
+            providesTags: ['ropstenApi']
+        }),
+    }),
+})
+
+export async function fetchEthereumTranastionsMainNet({chainIdURL, paramsWalletURL}: ParamsURLInterface){
+    const chainIdSupportedArr = chainIdNetworks.filter((el) => {
+        return el.chainId === parseInt(chainIdURL)
+    });
+    const providerEtherscanMainnet = new ethers.providers.EtherscanProvider(  chainIdSupportedArr[0].name.toLowerCase() , 'RYVBB5ZI138MHIX2JJVWBT6MVTGXJT133Q' )
+    console.log("providerEtherscanMainnet",providerEtherscanMainnet )
+    const mainnetHistory = await providerEtherscanMainnet.getHistory(paramsWalletURL)
+    console.log("mainnetHistory:", mainnetHistory)
+    return {data: mainnetHistory};
+}
+export async function fetchEthereumTranastionsRopsten({chainIdURL, paramsWalletURL}: ParamsURLInterface){
+    const chainIdSupportedArr = chainIdNetworks.filter((el) => {
+        return el.chainId === parseInt(chainIdURL)
+    });
+    const providerEtherscanRopsten = new ethers.providers.EtherscanProvider( "ropsten" , 'mEUzvPVY6xECwMieu01t9D3fuYyOYGCl' )
+    console.log("providerEtherscanRopsten",providerEtherscanRopsten )
+    const ropstenHistory = await providerEtherscanRopsten.getHistory(paramsWalletURL)
+    console.log("ropstenHistory:", ropstenHistory)
+    return {data: ropstenHistory};
+}
+
 export async function fetchIdentities() {
     const results = await Promise.all(Object.keys(MintABI.networks).map(async (chainId): Promise<BCStruct[]> => {
             const chainIdSupportedArr = chainIdNetworks.filter((el) => {
@@ -203,6 +240,6 @@ export interface validateInterface{
     originDate: number
 }
 
-
 export const { useGetSingleAccountQuery, useGetAllAccountQuery, useGetMentionQuery, usePostMentionMutation} = accountDBApi
 export const { useGetIdentityBCQuery, useGetSingleIdentityBCQuery } = nfiBCApi
+export const { useGetQueryMainnetQuery, useGetQueryRopstenQuery } = queryBCApi

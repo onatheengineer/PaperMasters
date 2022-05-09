@@ -13,17 +13,17 @@ export const ValidationsReports:FC=()=> {
     const accountArrArr = useAppSelector((state) => state.accountBC.accountArr);
 
     return(
+        //TODO total number of validations add total number of reports here
             <Heading>
                 <Tabs isFitted variant='enclosed'>
                     <TabList color={'pmpurple.13'}>
-
-                        <Tab>Validations(add total number of validations here)</Tab>
-                        <Tab>Reports (add total number of reports here)</Tab>
+                        <Tab>Validations</Tab>
+                        <Tab>Reports</Tab>
                     </TabList>
                     <TabPanels>
                         <TabPanel>
                             <Text textAlign={'left'} fontSize="sm" color={'pmpurple.8'} fontWeight="600" mb="12px">
-                                GIFTED BY ACCOUNT:
+                                GIFTED BY ACCOUNT: coming soon...
                             </Text>
                             {/*<ValidateAvatar giver={} giverColor={} receiver={} receiverColor={} comment={} commentColor={} originDate={} />*/}
                             {/*<Flex align="center" mb="20px">*/}
@@ -42,7 +42,7 @@ export const ValidationsReports:FC=()=> {
                         </TabPanel>
                         <TabPanel>
                             <Text textAlign={'left'} fontSize="sm" color={'pmpurple.8'} fontWeight="600" mb="12px">
-                                REPORTED BY ACCOUNT:
+                                REPORTED BY ACCOUNT: coming soon...
                             </Text>
                             {/*<Flex align="center" mb="20px">*/}
                             {/*    <Switch colorScheme="purple" me="10px"/>*/}

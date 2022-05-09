@@ -3,10 +3,16 @@ import * as React from "react";
 import {FC, useEffect, useMemo} from "react";
 import {useAppDispatch} from "../../../app/hooks";
 import {useParams} from "react-router-dom";
+import {useGetQueryMainnetQuery} from "../../../features/reactQuery/RTKQuery";
+import {ParamsURLInterface} from "../../../features/accountDB/AccountDBSlice.types";
 
 
-export const AccountLedger:FC=()=> {
-
+export const AccountLedger:FC<ParamsURLInterface>=({chainIdURL, paramsWalletURL})=> {
+    const getLedger = useGetQueryMainnetQuery({
+        chainIdURL: chainIdURL!,
+        paramsWalletURL: paramsWalletURL!
+    });
+    console.log("getLedger", getLedger)
 //const timeStampFormatted = moment(txHash.timeStamp).format('MMM DD YYYY, hh:mm:ss a');
 
 
@@ -22,97 +28,42 @@ export const AccountLedger:FC=()=> {
     // }, [])
 
     return (
-        <Flex align="center" mb="20px">
+        <Flex align="center" mb="20px"
+              border={'1px solid pink'}
+              flexGrow={1}
+        >
             <Stack>
-                <HStack>
-                    {/*    <Text*/}
-                    {/*        noOfLines={1}*/}
-                    {/*        fontSize="md"*/}
-                    {/*        color="gray.500"*/}
-                    {/*        fontWeight="400"*/}
-                    {/*    >*/}
-                    {/*    this could also show the actual name if the accountDB assuming they've registered their accountDB or contract address*/}
-                    {/*        From: {fromAcc}*/}
-                    {/*    </Text>*/}
-                    {/*    <Spacer/>*/}
-                    {/*    <Text*/}
-                    {/*        noOfLines={1}*/}
-                    {/*        fontSize="md"*/}
-                    {/*        color="gray.500"*/}
-                    {/*        fontWeight="400"*/}
-                    {/*    >*/}
-                    {/*       {timeStampFormatted}*/}
-                    {/*    </Text>*/}
+                {getLedger.isSuccess && getLedger.data.map((el:any) => {
+                    return (
+                        <Stack>
+                            <HStack>
+                                <Text
+                                    //noOfLines={1}
+                                    fontSize="md"
+                                    color="gray.500"
+                                    fontWeight="400"
+                                >
+                                    {el.from}
+                                </Text>
+                                <Spacer/>
+                                <Text
+                                    //noOfLines={1}
+                                    fontSize="md"
+                                    color="gray.500"
+                                    fontWeight="400"
+                                >
+                                    {el.hash}
+                                    {/*{el.from}*/}
+                                    {/*{el.to}*/}
+                                    {/*{el.timestamp}*/}
+                                    {/*{el.value}*/}
 
-                    {/*</HStack>*/}
-                    <Stack>
-                        {/*<HStack>*/}
-                        {/*    <Text*/}
-                        {/*        noOfLines={1}*/}
-                        {/*        fontSize="md"*/}
-                        {/*        color="gray.500"*/}
-                        {/*        fontWeight="400"*/}
-                        {/*    >*/}
-                        {/*    this could also show the actual name if the accountDB assuming they've registered their accountDB or contract address OR get the name of the contract from the contract*/}
-                        {/*        To: {toAcc}*/}
-                        {/*    </Text>*/}
-                        {/*    <Spacer/>*/}
-                        {/*    <Text*/}
-                        {/*        noOfLines={1}*/}
-                        {/*        fontSize="md"*/}
-                        {/*        color="gray.500"*/}
-                        {/*        fontWeight="400"*/}
-                        {/*    >*/}
-                        {/*        txHash: {txHash}*/}
-                        {/*    </Text>*/}
-
-                        {/*</HStack>*/}
-                    </Stack>
-                    <Stack>
-                        {/*<HStack>*/}
-                        {/*    <Text*/}
-                        {/*        noOfLines={1}*/}
-                        {/*        fontSize="md"*/}
-                        {/*        color="gray.500"*/}
-                        {/*        fontWeight="400"*/}
-                        {/*    >*/}
-                        {/*    //show red or green depending on in or out*/}
-                        {/*         {cost}*/}
-                        {/*    </Text>*/}
-                        {/*    <Spacer/>*/}
-                        {/*    <Text*/}
-                        {/*        noOfLines={1}*/}
-                        {/*        fontSize="md"*/}
-                        {/*        color="gray.500"*/}
-                        {/*        fontWeight="400"*/}
-                        {/*    >*/}
-                        {/*        Something here: { something here}*/}
-                        {/*    </Text>*/}
-                        {/*</HStack>*/}
-                    </Stack>
-                    <Stack>
-                        {/*<HStack>*/}
-                        {/*    <Text*/}
-                        {/*        noOfLines={1}*/}
-                        {/*        fontSize="md"*/}
-                        {/*        color="gray.500"*/}
-                        {/*        fontWeight="400"*/}
-                        {/*    >*/}
-                        {/*    //show red or green depending on in or out*/}
-                        {/*         {addressName}*/}
-                        {/*    </Text>*/}
-                        {/*    <Spacer/>*/}
-                        {/*    <Text*/}
-                        {/*        noOfLines={1}*/}
-                        {/*        fontSize="md"*/}
-                        {/*        color="gray.500"*/}
-                        {/*        fontWeight="400"*/}
-                        {/*    >*/}
-                        {/*        tx count: {txCount}*/}
-                        {/*    </Text>*/}
-                        {/*</HStack>*/}
-                    </Stack>
-                </HStack>
+                                </Text>
+                            </HStack>
+                        </Stack>
+                    )
+                })
+                }
             </Stack>
         </Flex>
     )

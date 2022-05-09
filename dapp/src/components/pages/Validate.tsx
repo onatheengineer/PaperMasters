@@ -118,7 +118,7 @@ export const Validate:FC=()=> {
     const [modalDisplayTitle, modalDisplayText] = useMemo(() => {
         if (accountArrArr.length === 0) {
             setIsModalOpen(true);
-            return (['Connect Wallet Account for Access', "Please go to MetaMask and connect your wallet accountDB."])
+            return (['Connect Wallet Account for Access', "Please go to MetaMask and connect your wallet."])
         }
         if (addressHasIdentityBoolBool && mintSucceededSucceeded === 'idle') {
             setIsModalOpen(true);

@@ -42,8 +42,8 @@ export const Projects=()=> {
 
     // These are the breakpoints which changes the position of the
     // buttons as the screen size changes
-    const top = useBreakpointValue({ base: '90%', md: '50%' });
-    const side = useBreakpointValue({ base: '30%', md: '40px' });
+    const top = useBreakpointValue({base: '90%', md: '50%'});
+    const side = useBreakpointValue({base: '30%', md: '40px'});
     const project = [
         {
             title: 'Contract actual BC name',
@@ -65,144 +65,146 @@ export const Projects=()=> {
         //     image:
         //         'image of the NFT coming from the owner of the contract',
         // }
-        ]
+    ]
 
     return (
-
-
+        <Flex
+            h={'100%'}
+            w={'100%'}
+            px="5px"
+            mt={'5px'}
+            border={'1px solid orange'}
+            //display={'inline-block'}
+            display={'flex'}
+        >
+            <Grid
+                templateColumns={{sm: "1fr", md: "1fr 1fr", xl: "repeat(5, 1fr)"}}
+                templateRows={{sm: "1fr 1fr 1fr auto", md: "1fr 1fr", xl: "1fr"}}
+                gap="24px"
+            >
                 <Flex
                     h={'100%'}
-                    w={'100%'}
-                    px="5px"
-                     mt={'5px'}
-                     border={'1px solid orange'}
+                    border={'1px solid blue'}
+                    //borderColor={'pmpurple.8'}
+                    mx={{xl: "15px"}}
+                    my='5px'
+                    borderRadius='15px' bg='white' p="16px" direction="column"
+                    justifyContent={'space-evenly'}
+                    //display={'inline-block'}
+                    flexGrow={1}
                 >
-                    <Grid
-                        templateColumns={{sm: "1fr", md: "1fr 1fr", xl: "repeat(5, 1fr)"}}
-                        templateRows={{sm: "1fr 1fr 1fr auto", md: "1fr 1fr", xl: "1fr"}}
-                        gap="24px"
-                    >
-                        <Flex
-                            h={'100%'}
-                            border={'1px solid'}
-                            borderColor={'pmpurple.8'}
-                            mx={{xl: "15px"}}
-                            m='5px'
-                            borderRadius='15px' bg='white' p="16px" direction="column"
-                              justifyContent={'space-evenly'}
+                    {/*<Box*/}
+                    {/*    position={'relative'}*/}
+                    {/*    height={'600px'}*/}
+                    {/*    width={'full'}*/}
+                    {/*    overflow={'hidden'}>*/}
+
+                    {/*    <IconButton*/}
+                    {/*        aria-label="left-arrow"*/}
+                    {/*        variant="ghost"*/}
+                    {/*        position="absolute"*/}
+                    {/*        left={side}*/}
+                    {/*        top={top}*/}
+                    {/*        transform={'translate(0%, -50%)'}*/}
+                    {/*        zIndex={2}*/}
+                    {/*        onClick={() => slider?.slickPrev()}>*/}
+                    {/*        <BiLeftArrowAlt size="40px" />*/}
+                    {/*    </IconButton>*/}
+                    {/*    /!* Right Icon *!/*/}
+                    {/*    <IconButton*/}
+                    {/*        aria-label="right-arrow"*/}
+                    {/*        variant="ghost"*/}
+                    {/*        position="absolute"*/}
+                    {/*        right={side}*/}
+                    {/*        top={top}*/}
+                    {/*        transform={'translate(0%, -50%)'}*/}
+                    {/*        zIndex={2}*/}
+                    {/*        onClick={() => slider?.slickNext()}>*/}
+                    {/*        <BiRightArrowAlt size="40px" />*/}
+                    {/*    </IconButton>*/}
+                    {/* Slider */}
+                    {/*    <Slider {...settings} ref={(slider:any) => setSlider(slider)}>*/}
+                    {/*        {project.map((project, index) => (*/}
+                    {/*            <Box*/}
+                    {/*                key={index}*/}
+                    {/*                height={'6xl'}*/}
+                    {/*                position="relative"*/}
+                    {/*                backgroundPosition="center"*/}
+                    {/*                backgroundRepeat="no-repeat"*/}
+                    {/*                backgroundSize="cover"*/}
+                    {/*                backgroundImage={`url(${project.image})`}>*/}
+                    {/*                /!* This is the block you need to change, to customize the caption *!/*/}
+                    {/*                <Container size="container.lg" height="600px" position="relative">*/}
+                    {/*                    <Stack*/}
+                    {/*                        spacing={6}*/}
+                    {/*                        w={'full'}*/}
+                    {/*                        maxW={'lg'}*/}
+                    {/*                        position="absolute"*/}
+                    {/*                        top="50%"*/}
+                    {/*                        transform="translate(0, -50%)">*/}
+                    {/*                        <Heading fontSize={{ base: '3xl', md: '4xl', lg: '5xl' }}>*/}
+                    {/*                            {project.title}*/}
+                    {/*                        </Heading>*/}
+                    {/*                        <Text fontSize={{ base: 'md', lg: 'lg' }} color="GrayText">*/}
+                    {/*                            {project.text}*/}
+                    {/*                        </Text>*/}
+                    {/*                    </Stack>*/}
+                    {/*                </Container>*/}
+                    {/*            </Box>*/}
+                    {/*        ))}*/}
+                    {/*    </Slider>*/}
+                    {/*</Box>*/}
+
+                    <Box mb="20px" position="relative" borderRadius="15px">
+                        <Image src={ImageArchitect1} borderRadius="15px"/>
+                        <Box
+                            w="100%"
+                            h="100%"
+                            position="absolute"
+                            top="0"
+                            borderRadius="15px"
+                            bg="linear-gradient(360deg, rgba(49, 56, 96, 0.16) 0%, rgba(21, 25, 40, 0.88) 100%)"
+                        ></Box>
+                    </Box>
+                    <Flex direction="column">
+                        <Text fontSize="md" color="gray.500" fontWeight="600" mb="10px">
+                            Project #1 Smart Contract BC Names
+                        </Text>
+                        <Text
+                            fontSize="xl"
+                            color={'pmpurple.13'}
+                            fontWeight="bold"
+                            mb="10px"
                         >
-                            {/*<Box*/}
-                            {/*    position={'relative'}*/}
-                            {/*    height={'600px'}*/}
-                            {/*    width={'full'}*/}
-                            {/*    overflow={'hidden'}>*/}
-
-                            {/*    <IconButton*/}
-                            {/*        aria-label="left-arrow"*/}
-                            {/*        variant="ghost"*/}
-                            {/*        position="absolute"*/}
-                            {/*        left={side}*/}
-                            {/*        top={top}*/}
-                            {/*        transform={'translate(0%, -50%)'}*/}
-                            {/*        zIndex={2}*/}
-                            {/*        onClick={() => slider?.slickPrev()}>*/}
-                            {/*        <BiLeftArrowAlt size="40px" />*/}
-                            {/*    </IconButton>*/}
-                            {/*    /!* Right Icon *!/*/}
-                            {/*    <IconButton*/}
-                            {/*        aria-label="right-arrow"*/}
-                            {/*        variant="ghost"*/}
-                            {/*        position="absolute"*/}
-                            {/*        right={side}*/}
-                            {/*        top={top}*/}
-                            {/*        transform={'translate(0%, -50%)'}*/}
-                            {/*        zIndex={2}*/}
-                            {/*        onClick={() => slider?.slickNext()}>*/}
-                            {/*        <BiRightArrowAlt size="40px" />*/}
-                            {/*    </IconButton>*/}
-                                {/* Slider */}
-                            {/*    <Slider {...settings} ref={(slider:any) => setSlider(slider)}>*/}
-                            {/*        {project.map((project, index) => (*/}
-                            {/*            <Box*/}
-                            {/*                key={index}*/}
-                            {/*                height={'6xl'}*/}
-                            {/*                position="relative"*/}
-                            {/*                backgroundPosition="center"*/}
-                            {/*                backgroundRepeat="no-repeat"*/}
-                            {/*                backgroundSize="cover"*/}
-                            {/*                backgroundImage={`url(${project.image})`}>*/}
-                            {/*                /!* This is the block you need to change, to customize the caption *!/*/}
-                            {/*                <Container size="container.lg" height="600px" position="relative">*/}
-                            {/*                    <Stack*/}
-                            {/*                        spacing={6}*/}
-                            {/*                        w={'full'}*/}
-                            {/*                        maxW={'lg'}*/}
-                            {/*                        position="absolute"*/}
-                            {/*                        top="50%"*/}
-                            {/*                        transform="translate(0, -50%)">*/}
-                            {/*                        <Heading fontSize={{ base: '3xl', md: '4xl', lg: '5xl' }}>*/}
-                            {/*                            {project.title}*/}
-                            {/*                        </Heading>*/}
-                            {/*                        <Text fontSize={{ base: 'md', lg: 'lg' }} color="GrayText">*/}
-                            {/*                            {project.text}*/}
-                            {/*                        </Text>*/}
-                            {/*                    </Stack>*/}
-                            {/*                </Container>*/}
-                            {/*            </Box>*/}
-                            {/*        ))}*/}
-                            {/*    </Slider>*/}
-                            {/*</Box>*/}
-
-                            <Box mb="20px" position="relative" borderRadius="15px">
-                                <Image src={ImageArchitect1} borderRadius="15px"/>
-                                <Box
-                                    w="100%"
-                                    h="100%"
-                                    position="absolute"
-                                    top="0"
-                                    borderRadius="15px"
-                                    bg="linear-gradient(360deg, rgba(49, 56, 96, 0.16) 0%, rgba(21, 25, 40, 0.88) 100%)"
-                                ></Box>
-                            </Box>
-                            <Flex direction="column">
-                                <Text fontSize="md" color="gray.500" fontWeight="600" mb="10px">
-                                    Project #1 Smart Contract BC Names
-                                </Text>
-                                <Text
-                                    fontSize="xl"
-                                    color={'pmpurple.13'}
-                                    fontWeight="bold"
-                                    mb="10px"
-                                >
-                                    My future project...
-                                </Text>
-                                <Text fontSize="md" color={'pmpurple.13'} fontWeight="400" mb="20px">
-                                    As I look through my bucket list, I find my next endeavor...
-                                </Text>
-                                <Flex justifyContent="space-between">
-                                    <Button
-                                        variant="outline"
-                                        color={'pmpurple.13'}
-                                        minW="110px"
-                                        h="36px"
-                                        fontSize="xs"
-                                        px="1.5rem"
-                                        //onClick={()=>{dispatch(' saga')}}
-                                    >
-                                        VIEW PROJECT
-                                    </Button>
-                                    <AvatarGroup size="xs">
-                                        <Avatar name="Nautica Nieder" src={'PMlogo.png'}/>
-                                        <Avatar name="Ammon Nieder" src={'legoLavendar.png'}/>
-                                        <Avatar name="Atlas Nieder" src={'legoLavendar.png'}/>
-                                        <Avatar name="Elijah Early" src={'PMlogo.png'}/>
-                                    </AvatarGroup>
-                                </Flex>
-                            </Flex>
-                            {/*</Carousel>*/}
+                            My future project...
+                        </Text>
+                        <Text fontSize="md" color={'pmpurple.13'} fontWeight="400" mb="20px">
+                            As I look through my bucket list, I find my next endeavor...
+                        </Text>
+                        <Flex justifyContent="space-between">
+                            <Button
+                                variant="outline"
+                                color={'pmpurple.13'}
+                                minW="110px"
+                                h="36px"
+                                fontSize="xs"
+                                px="1.5rem"
+                                //onClick={()=>{dispatch(' saga')}}
+                            >
+                                VIEW PROJECT
+                            </Button>
+                            <AvatarGroup size="xs">
+                                <Avatar name="Nautica Nieder" src={'PMlogo.png'}/>
+                                <Avatar name="Ammon Nieder" src={'legoLavendar.png'}/>
+                                <Avatar name="Atlas Nieder" src={'legoLavendar.png'}/>
+                                <Avatar name="Elijah Early" src={'PMlogo.png'}/>
+                            </AvatarGroup>
                         </Flex>
-                    </Grid>
+                    </Flex>
+                    {/*</Carousel>*/}
                 </Flex>
+            </Grid>
+        </Flex>
     )
 };
 

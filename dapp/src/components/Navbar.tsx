@@ -57,7 +57,7 @@ export default function WithSubnavigation() {
                     flex={{base: 1, md: 'auto'}}
                     ml={{base: -2}}
                     //border={'1px solid blue'}
-                    display={{base: 'flex', md: 'flex', lg: 'flex', xl: 'none'}}>
+                    display={{base: 'flex', md: 'flex', lg: 'none', xl: 'none'}}>
                     <IconButton
                         onClick={onToggle}
                         icon={
@@ -78,7 +78,7 @@ export default function WithSubnavigation() {
                         <PMLogoFull fill={'#5c415c'} width={'155px'}/>
                     </Link>
 
-                    <Flex display={{base: 'none', xl: 'flex'}} ml={10}>
+                    <Flex display={{base: 'none', lg: 'flex'}} ml={10}>
                         <DesktopNav/>
                     </Flex>
                 </Flex>
@@ -166,8 +166,6 @@ const DesktopNav = () => {
     const linkColor = 'pmpurple.13';
     const linkHoverColor = 'pmpurple.8';
     const popoverContentBgColor = 'pmpurple.1';
-    const chainIdProviderProvider = useAppSelector((state) => state.accountBC.chainIdProvider);
-    const accountArrArr = useAppSelector((state) => state.accountBC.accountArr);
 
     return (
         <Stack direction={'row'} spacing={8}
@@ -250,10 +248,14 @@ const DesktopNav = () => {
 };
 
 const DesktopSubNav = ({ label, subLabel, navLink, navIcon }: NavItem) => {
+   console.log('navLink:', navLink)
+    const chainIdProviderProvider = useAppSelector((state) => state.accountBC.chainIdProvider);
+    const accountArrArr = useAppSelector((state) => state.accountBC.accountArr);
+    const navLinkModified = navLink === '/identity' ?  `/identity/${chainIdProviderProvider}/${accountArrArr}` : navLink
     return (
         <Link
             as={ReachLink}
-            to={navLink as To}
+            to={navLinkModified as To}
             role={'group'}
             display={'block'}
             p={2}
@@ -265,7 +267,6 @@ const DesktopSubNav = ({ label, subLabel, navLink, navIcon }: NavItem) => {
                 <Box>
                     <HStack>
                         {navIcon}
-
                         <Text
                             transition={'all .3s ease'}
                             // _groupHover={{ color: 'pmpurple.13' }}
@@ -286,7 +287,7 @@ const MobileNav = () => {
         <Stack
             bg={useColorModeValue('pmpurple.3', 'pmpurple.3')}
             p={4}
-            display={{xl: 'none'}}>
+            display={{lg: 'none'}}>
             {NAV_ITEMS.map((navItem) => {
                 //console.log(navItem)
                     return (
@@ -300,6 +301,9 @@ const MobileNav = () => {
 
 const MobileNavItem = ({ label, children, navLink, navIcon }: NavItem) => {
     const {isOpen, onToggle} = useDisclosure();
+    const chainIdProviderProvider = useAppSelector((state) => state.accountBC.chainIdProvider);
+    const accountArrArr = useAppSelector((state) => state.accountBC.accountArr);
+    const navLinkModified = navLink === '/identity' ?  `/identity/${chainIdProviderProvider}/${accountArrArr}` : navLink
     return (
         <Stack spacing={4} onClick={children && onToggle}>
             <HStack
@@ -381,22 +385,25 @@ const MobileNavItem = ({ label, children, navLink, navIcon }: NavItem) => {
                     borderColor={useColorModeValue('pmpurple.8', 'pmpurple.8')}
                     align={'start'}>
                     {children &&
-                        children.map((child) => (
-                            <Link
-                                as={ReachLink}
-                                to={child.navLink as To}
-                                // to={child.navLink}
-                                key={child.label}
-                                py={2}
-                            >
-                                <HStack>
-                                    {child.navIcon}
-                                    <Text>
-                                        {child.label}
-                                    </Text>
-                                </HStack>
-                            </Link>
-                        ))}
+                        children.map((child) => {
+                            const navLinkModified = child.navLink === '/identity' ?  `/identity/${chainIdProviderProvider}/${accountArrArr}` : child.navLink
+                           return(
+                               <Link
+                                   as={ReachLink}
+                                   to={navLinkModified as To}
+                                   // to={child.navLink}
+                                   key={child.label}
+                                   py={2}
+                               >
+                                   <HStack>
+                                       {child.navIcon}
+                                       <Text>
+                                           {child.label}
+                                       </Text>
+                                   </HStack>
+                               </Link>
+                           )
+                            })}
                 </Stack>
             </Collapse>
         </Stack>
@@ -429,18 +436,18 @@ const NAV_ITEMS: Array<NavItem> = [
                 navIcon: <BiBookmarkHeart fontSize={'18px'}/>,
                 navLink: '/register',
             },
-            {
-                label: 'Validate (coming soon)',
-                subLabel: 'Authenticate a wallet',
-                navIcon: <IoMdCheckmarkCircleOutline fontSize={'18px'}/>,
-                navLink: '/validate',
-            },
-            {
-                label: 'Report (coming soon)',
-                subLabel: 'Report a wallet for wrongful activity',
-                navIcon: <MdOutlineReport fontSize={'18px'}/>,
-                navLink: 'report',
-            },
+            // {
+            //     label: 'Validate (coming soon)',
+            //     subLabel: 'Authenticate a wallet',
+            //     navIcon: <IoMdCheckmarkCircleOutline fontSize={'18px'}/>,
+            //     navLink: '/validate',
+            // },
+            // {
+            //     label: 'Report (coming soon)',
+            //     subLabel: 'Report a wallet for wrongful activity',
+            //     navIcon: <MdOutlineReport fontSize={'18px'}/>,
+            //     navLink: 'report',
+            // },
         ],
     },
     {
@@ -448,21 +455,33 @@ const NAV_ITEMS: Array<NavItem> = [
         navIcon: <MdOutlineNaturePeople fontSize={'18px'} fontWeight={'bolder'}/>,
         navLink: '/search',
     },
+    // {
+    //     label: 'Analytics',
+    //     navIcon: <FiTrendingUp fontSize={'18px'}/>,
+    //     // subLabel: 'Project Statistics',
+    //     navLink: '/analytics'
+    // },
     {
-        label: 'Learning Center',
+        label: 'Community Support',
         navIcon: <ImBooks fontSize={'18px'}/>,
         children: [
             {
                 label: 'FAQ',
                 subLabel: 'Frequently Asked Questions',
                 navIcon: <GiDiscussion fontSize={'18px'}/>,
-                navLink: '/learn',
+                navLink: '/communitySupport',
+            },
+            {
+                label: 'Analytics',
+                navIcon: <FiTrendingUp fontSize={'18px'}/>,
+                subLabel: 'Project Statistics',
+                navLink: '/analytics'
             },
             {
                 label: 'New & Updated Features',
                 subLabel: 'Stories to come',
                 navIcon: <GiFlowerPot fontSize={'18px'}/>,
-                navLink: '/learn',
+                navLink: '/communitySupport',
             },
             // {
             //     label: 'Report Suspicious Activity',
@@ -482,10 +501,10 @@ const NAV_ITEMS: Array<NavItem> = [
         navIcon: <FaScroll fontSize={'18px'}/>,
         children: [
             {
-                label: 'About Us',
-                subLabel: 'We are here for the community',
+                label: 'About Me',
+                subLabel: 'I am here for the community',
                 navIcon: <GiFlowerHat fontSize={'18px'}/>,
-                navLink: '/yourpeople',
+                navLink: `/identity/3/0xbEc6F6B37CFF8355a046afD2a2EcfEA05c1215F5`,
             },
             {
                 label: 'Support',
@@ -495,10 +514,10 @@ const NAV_ITEMS: Array<NavItem> = [
 
             },
             {
-                label: 'Analytics',
-                navIcon: <FiTrendingUp fontSize={'18px'}/>,
-                subLabel: 'Project Statistics',
-                navLink: '/analytics'
+                label: 'New & Updated Features',
+                subLabel: 'Stories to come',
+                navIcon: <GiFlowerPot fontSize={'18px'}/>,
+                navLink: '/yourpeople',
             },
         ],
     },
