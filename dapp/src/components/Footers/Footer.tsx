@@ -125,19 +125,19 @@ export default function LargeWithLogoCentered() {
                     <Link as={ReachLink} to="/analytics">Analytics</Link>
                     <Link as={ReachLink} to="/cloudhwm">CloudHWM</Link>
                     {/*<Link as={ReachLink} to="/learn">Learning Center</Link>*/}
-                    <Link as={ReachLink} to="/">New & Updated Features</Link>
+                    <Link as={ReachLink} to="/yourpeople">New & Updated Features</Link>
                     {/*<Link as={ReachLink} to="/">Future Stories</Link>*/}
                 </Stack>
                 <Stack>
                     <ListHeader>Security</ListHeader>
-                    <Link as={ReachLink} to="/">Blockchain Protection & Legitimacy</Link>
-                    <Link as={ReachLink} to="/">Community Guidelines</Link>
-                    <Link as={ReachLink} to="/">Privacy Policy & Cookies</Link>
+                    <Link as={ReachLink} to="/communitysupport">Blockchain Protection & Legitimacy</Link>
+                    <Link as={ReachLink} to="/communitysupport">Community Guidelines</Link>
+                    <Link as={ReachLink} to="/communitysupport">Privacy Policy & Cookies</Link>
                 </Stack>
                 <Stack>
                     <ListHeader>Your People</ListHeader>
                     <Link as={ReachLink} to="/identity/3/0xbEc6F6B37CFF8355a046afD2a2EcfEA05c1215F5">About Me</Link>
-                    {/*<Link as={ReachLink} to="/">Support the Project</Link>*/}
+                    <Link as={ReachLink} to="/yourpeople">Support the Project</Link>
                     <Link as={ReachLink} to="/Logokit">Logo Kit</Link>
                 </Stack>
             </Grid>

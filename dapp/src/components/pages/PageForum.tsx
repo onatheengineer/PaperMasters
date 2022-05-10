@@ -92,7 +92,7 @@ export const PageForum=forwardRef<HTMLDivElement | null, InterfaceFORUM>(({ titl
                                 rounded='md'
                                 shadow='md'
                             >
-                                <Text fontSize="md" color={'pmpurple.13'} fontWeight="bold">
+                                <Text fontSize="md" color={'pmpurple.13'} fontWeight="semibold">
                                     {body}
                                 </Text>
                             </Box>

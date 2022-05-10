@@ -128,14 +128,15 @@ export const YourPeople:FC<InterfaceYourPeople>=()=> {
                     px={20}
                     color={'pmpurple.13'}
                 >
-                    New and Updated Features...
+                    New, Updated and Future Features
                 </Heading>
                 <Text
                     px={20}
                     pb={5}
                     color={'pmpurple.13'}
                 >
-                    Stories to come...
+                    In the future I hope to make a QR Code or linked Icon of your identity page so
+                    that you can use it to attached to your name outside of the PaperMasters site.
                 </Text>
                 <Heading
                     textAlign={'left'}
@@ -145,13 +146,26 @@ export const YourPeople:FC<InterfaceYourPeople>=()=> {
                     px={20}
                     color={'pmpurple.13'}
                 >
-                    Stories to come...
+                    Support the Project
                 </Heading>
                 <Text
                     px={20}
                     color={'pmpurple.13'}
                 >
-                    Stories to come...
+                    You are the reason I took on this project to protect the Blockchain.
+                                   I care about you, you inspire me to keep delivering this product.
+                                      Without you, the PaperMasters doesn't exist.
+                                     If you would like to support the effort, here’s some specific ways to help.
+                                     Spread the word about the papermasters.io.
+                    Send a link to a friend.
+                    Add our link and/or logo to to your website or your social media sites.
+                    Our logo is located at the bottom of this page in the footer.
+                    Adding a text link to your PaperMasters Identity page site from your social site is a
+                    vote of confidence. It’s also a great way to share PaperMasters resources with your people.
+                                      Give a Validation or Report and support your fellow PaperMasters.
+                                     I enjoy your comments and love building relationships with the community.
+                                    I learn from your comments new ways to improve the site. Send me some feedback: ramonajenny.n@gmail.com.
+
                 </Text>
             </Box>
         </Flex>

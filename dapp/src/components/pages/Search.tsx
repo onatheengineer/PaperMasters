@@ -13,7 +13,7 @@ import AvatarNFI from "../avatar/AvatarNFI";
 import {allAccountDictionaryDBAction, allNFIReceiptDBAction} from "../../features/accountDB/AccountDBSlice";
 import {BCStruct} from "../../features/accountBC/AccountBCSlice.types";
 import {allStructBCAction} from "../../features/accountBC/AccountBCSlice";
-import {useTable, Column, useSortBy} from "react-table";
+import {useTable, Column, useSortBy, usePagination} from "react-table";
 import {
     useGetAllAccountQuery,
     useGetIdentityBCQuery,
@@ -38,15 +38,21 @@ const FilterComponent: FC<interfaceFilterComponent> = ( { filterText, onClick, o
     <Box>
         <HStack>
             <InputGroup>
-            <Input focusBorderColor='pmpurple.8' color={'pmpurple.13'} border={'1px solid'} borderColor={'pmpurple.3'}
+            <Input focusBorderColor='pmpurple.8' color={'pmpurple.13'} border={'1px solid'} borderColor={'pmpurple.6'}
                    id={idType} type="text" placeholder={placeHolder} aria-label="Search Input" value={filterText}
-                   onChange={onFilter} />
+                   onChange={onFilter}
+                   borderRadius={'0px'}
+            />
                 <Tooltip hasArrow label='Please type at minimum 32 characters to add a wallet account'
                          placement={'bottom-end'} border={'1px solid #694b69'}
-                         borderRadius={'3px'} bg='pmpurple.5' color='pmpurple.13' m={'-6px'}>
+                         borderRadius={'3px'}
+                         bg='pmpurple.5' color='pmpurple.13' m={'-6px'}>
                 <InputRightAddon
-                    p='0' borderColor={"pmpurple.4"} bg={'pmpurple.2'}
-                    children={<Button bg={'pmpurple.5'} color={"pmpurple.13"} disabled={activateButton}
+                    p='0' borderColor={"pmpurple.6"} bg={'pmpurple.2'}
+                    children={<Button bg={'pmpurple.6'}
+                                      borderRadius={'0px'}
+                                      color={"pmpurple.13"}
+                                      disabled={activateButton}
                                       onClick={onClick} >{text}</Button>} />
                 </Tooltip>
                 </InputGroup>
@@ -107,8 +113,8 @@ const ExpandedAvatarComponent: FC<ExpanderComponentProps<BCStruct[]>> = ({ data 
 
 export const Search:FC =()=> {
 
-    const [filterText, setFilterText] = useState<string>('');
-    const [searchWalletAccount, setWalletAccount] = useState<string>('');
+    const [filterWallets, setFilterWallets] = useState<string>('');
+    //const [searchWalletAccount, setWalletAccount] = useState<string>('');
     const [resetPaginationToggle, setResetPaginationToggle] = useState<boolean>(false);
     const [isIdentityModalOpen, setIdentityModalOpen] = useState<boolean>(false);
     const dispatch = useAppDispatch();
@@ -123,7 +129,7 @@ export const Search:FC =()=> {
     //TODO add timestamp in my account DB
     const [currentPage, setCurrentPage] = useState(0);
     const [selectedWallet, setSelectedWallet] = useState<BCStruct[]>([]);
-    const accountQuery = useGetAllAccountQuery();
+    const accountQuery = useGetAllAccountQuery ();
     const nfiQuery = useGetIdentityBCQuery();
 
     // export function nfiBC({ identity }):BCStruct[] {
@@ -270,7 +276,6 @@ export const Search:FC =()=> {
                                         bgColor={'white'}
                                         fontSize={'12px'}
                                     >
-                                        {/*<Text fontSize={'14px'} style={{whiteSpace: 'nowrap'}} fontWeight={'semibold'} color={'pmpurple.27'}> PaperMaster </Text>*/}
                                         <span>
                                            <PMsvgIcon
                                                width="28"
@@ -299,19 +304,20 @@ export const Search:FC =()=> {
                             trigger={'hover'}
                         >
                             <PopoverTrigger>
-                                <Button as={ReachLink} to={`/identity/${el.row.original.chainId}/${el.row.original.wallet}`}
+                                <Button as={ReachLink}
+                                        to={`/identity/${el.row.original.chainId}/${el.row.original.wallet}`}
                                         bg={'#f2eef2'}
                                         color={'pmpurple.13'}
                                         width={'128px'}
                                         height={'24px'}
-                                        overflow={ "hidden !important"}
+                                        overflow={"hidden !important"}
                                         textAlign={'left'}
                                         borderRadius={'5px'}
                                         textOverflow={"ellipsis"}
                                 >
                                     <Text
                                         whiteSpace="nowrap"
-                                        overflow={ "hidden !important"}
+                                        overflow={"hidden !important"}
                                         textOverflow={"ellipsis"}
                                         fontSize={'12px'}
                                         width={'118px'}
@@ -319,7 +325,6 @@ export const Search:FC =()=> {
                                         {el.row.original.wallet}
                                     </Text>
                                 </Button>
-
                             </PopoverTrigger>
                             <PopoverContent
                                 whiteSpace="nowrap"
@@ -328,48 +333,22 @@ export const Search:FC =()=> {
                                 //borderRadius={'3px'}
                                 color='pmpurple.13'
                                 pl={'1px'}
-                                overflow={ "hidden !important"}
+                                overflow={"hidden !important"}
                                 textAlign={'center'}
                             >
-                            <PopoverBody
-                                whiteSpace="nowrap"
-                                width={'140px'}
-                                textAlign={'center'}
-                            >
-                                {el.row.original.wallet}
-                            </PopoverBody>
+                                <PopoverBody
+                                    whiteSpace="nowrap"
+                                    width={'140px'}
+                                    textAlign={'center'}
+                                >
+                                    {el.row.original.wallet}
+                                </PopoverBody>
                             </PopoverContent>
-
                         </Popover>
-
                     </>
                 )
-            },
-            // sortable: true,
-            // reorder: true,
-            // center: true,
-            // grow: 3.2,
-            // style: {
-            //     backgroundColor: '#f2eef2',
-            //     fontWeight: 'bold'
-            // },
+            }
         },
-        // {
-        //     Header: <Text style={{whiteSpace: 'nowrap'}}> Origin Date </Text>,
-        //     accessor: 'origin',
-        //     Cell: ({ value }) =>
-        //     {
-        //         console.log("Epoch VAlue:",value)
-        //         if(!value){
-        //             return ""
-        //         }
-        //         const originDateObject = new Date(parseInt(value)*1000);
-        //         console.log("Epoch parseInt(value):",parseInt(value))
-        //         console.log("Epoch originDateObject:",originDateObject)
-        //         const originDateFormatted = `${originDateObject.toLocaleString('en-us', {month: 'long'})} ${originDateObject.getDate()}, ${originDateObject.getFullYear()}`
-        //         return   <Text fontSize={'12px'} style={{whiteSpace: 'nowrap'}} > {originDateFormatted} </Text> ;
-        //     }
-        // },
         {
             Header: <Text style={{whiteSpace: 'nowrap'}}> Profession </Text>,
             accessor: 'profession',
@@ -412,26 +391,26 @@ export const Search:FC =()=> {
     ], [])
 
     const filteredItems = data.filter(item => {
-            if (filterText.length === 0 && searchWalletAccount.length === 0) {
+            if (filterWallets.length === 0 && setFilterWallets.length === 0) {
                 return item;
             }
-            if (filterText.length !== 0) {
-                if (item.name && item.name.toLowerCase().includes(filterText.toLowerCase())) {
+            if (filterWallets.length !== 0) {
+                if (item.name && item.name.toLowerCase().includes(filterWallets.toLowerCase())) {
                     return item;
                 }
-                if (item.profession && item.profession.toLowerCase().includes(filterText.toLowerCase())) {
+                if (item.profession && item.profession.toLowerCase().includes(filterWallets.toLowerCase())) {
                     return item;
                 }
-                if (item.origin && item.origin.toLowerCase().includes(filterText.toLowerCase())) {
+                if (item.origin && item.origin.toLowerCase().includes(filterWallets.toLowerCase())) {
                     return item;
                 }
-                if (item.wallet && item.wallet.toLowerCase().includes(filterText.toLowerCase())) {
+                if (item.wallet && item.wallet.toLowerCase().includes(filterWallets.toLowerCase())) {
                     return item;
                 }
             }
-            if (searchWalletAccount.length !== 0) {
-                if (item.wallet && item.wallet.toLowerCase().includes(searchWalletAccount.toLowerCase())
-                    && item.name && item.name.toLowerCase().includes(filterText.toLowerCase())) {
+            if (setFilterWallets.length !== 0) {
+                if (item.wallet && item.wallet.toLowerCase().includes(filterWallets.toLowerCase())
+                    && item.name && item.name.toLowerCase().includes(filterWallets.toLowerCase())) {
                     return item;
                 }
             }
@@ -440,9 +419,9 @@ export const Search:FC =()=> {
 
     const subHeaderComponentMemo = useMemo(() => {
         const handleClear = () => {
-            if (filterText) {
+            if (filterWallets) {
                 setResetPaginationToggle(!resetPaginationToggle);
-                setFilterText('');
+                setFilterWallets('');
             }
         };
         const addWalletAccountHandler = () => {
@@ -451,26 +430,34 @@ export const Search:FC =()=> {
         return (
             <Box>
                 <HStack>
-                    <FilterComponent onFilter={(e: any) => setFilterText(e.target.value)} onClick={handleClear}
-                                     activateButton={false}
-                                     filterText={filterText} text={"reset"} placeHolder={"Search NFI"}
+                    <FilterComponent onFilter={(e: any) => setFilterWallets(e.target.value)} onClick={handleClear}
+                                     activateButton={(filteredItems.length !== 0)}
+                                     filterText={filterWallets} text={"reset"} placeHolder={"Search NFI"}
                                      idType={"Search"}/>
-                    <FilterComponent onFilter={(e: any) => setWalletAccount(e.target.value)}
-                                     onClick={addWalletAccountHandler} activateButton={(filteredItems.length !== 0)}
-                                     filterText={searchWalletAccount} text={"Add Wallet Account"}
-                                     placeHolder={"Search Wallet Account"} idType={"WalletAccount"}/>
+                    <Button
+                    bg={'pmpruple.6'}
+                    border={'1px solid'}
+                    //borderColor={'pmpurple.6'}
+                    onClick={addWalletAccountHandler}
+                    >
+                        <Text textColor={'pmpurple.13'}>Add Wallet Account</Text>
+                    </Button>
+                    {/*<FilterComponent onFilter={(e: any) => setFilterWallets(e.target.value)}*/}
+                    {/*                 onClick={addWalletAccountHandler} activateButton={false}*/}
+                    {/*                 filterText={setFilterWallets} text={"Add Wallet Account"}*/}
+                    {/*                 placeHolder={"Search Wallet Account"} idType={"WalletAccount"}/>*/}
                     <IdentityEntryModal title={'Create a profile for a Non-Registered'} text={'Enter Wallet Account'}
-                                        placeHolder={'wallet accountDB'}
+                                        placeHolder={'wallet account'}
                                         buttonText={'Create'} isOpen={isIdentityModalOpen} onClose={() => {
                         setIdentityModalOpen(false)
                     }}/>
                 </HStack>
             </Box>
         );
-    }, [filterText, searchWalletAccount, resetPaginationToggle, filteredItems]);
+    }, [filterWallets, setFilterWallets, resetPaginationToggle, filteredItems]);
 
     const {getTableProps, getTableBodyProps, headerGroups, rows, prepareRow} =
-        useTable({columns, data}, useSortBy);
+        useTable({columns, data}, useSortBy, usePagination);
 
     if (!accountQuery.data) return <div/>
     if (accountQuery.isLoading) return (<Heading>isLoading...</Heading>);
@@ -488,9 +475,22 @@ export const Search:FC =()=> {
             <Box
                 border={'1px solid'}
                 borderColor={'pmpurple.13'}
-                bg={'pmpurple.4'}
+                bg={'pmpurple.3'}
                 flex={'auto'}
             >
+                <Heading
+                pt={4}
+                mb={6}
+                >
+                    Wallet Account Search Table
+                </Heading>
+                <Box
+                    justifyItems={'end'}
+                    //justifyContent={'right'}
+                    py={4}
+                >
+                          {subHeaderComponentMemo}
+                </Box>
                 <Table {...getTableProps()}>
                     <Thead>
                         {headerGroups.map((headerGroup) => (

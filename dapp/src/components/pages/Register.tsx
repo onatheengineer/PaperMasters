@@ -942,7 +942,7 @@ export const Register:FC=()=> {
                             />
                             <Stack>
                                 <Box
-                                    pt={'160px'}
+                                    pt={'120px'}
                                 >
                                     <Divider color='pmpurple.8'/>
                                 </Box>
@@ -950,7 +950,7 @@ export const Register:FC=()=> {
                                 <Center>
 
                                     {/*&& accBalanceErr !== ""*/}
-                                    {name !== "" ?
+                                    {name !== "" && email !== "" ?
                                         <Button
                                             border={'1px solid'}
                                             borderColor={'pmpurple.13'}
@@ -1005,9 +1005,9 @@ export const Register:FC=()=> {
                                 <Center>
                                     {name !== "" ?
                                         <Box
-                                            border={'1px solid'}
-                                            borderColor={'pmpurple.13'}
-                                            bg={'pmpurple.3'}
+                                            //border={'1px solid'}
+                                            //borderColor={'pmpurple.13'}
+                                            //bg={'pmpurple.3'}
                                             mt={"20px"}
                                             mb={"2px"}
                                             px={'6px'}
