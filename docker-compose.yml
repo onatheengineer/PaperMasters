@@ -1,7 +1,7 @@
 services:
-  website:
+  pmsite:
     image: "node:14.18.2"
-    container_name: website
+    container_name: pmsite
     restart: always
     build:
       context: ./dapp
