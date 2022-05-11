@@ -89,7 +89,8 @@
     "test": "react-app-rewired test",
     "eject": "react-app-rewired eject",
     "lint": "eslint . --ext .ts",
-    "lintfix": "eslint . --ext .ts --fix"
+      "lintfix": "eslint . --ext .ts --fix",
+      "serve":"serve -s build"
   },
   "eslintConfig": {
     "extends": "react-app"

@@ -5,9 +5,9 @@ WORKDIR /usr/scr/app
 COPY package.json /usr/scr/app/package.json
 COPY package-lock.json /usr/scr/app/package-lock.json
 
-RUN npm install --silent
+RUN npm install
 
-COPY . /user/scr/app
+COPY . /usr/scr/app
 
 RUN npm run build
 
