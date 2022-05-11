@@ -1,11 +1,34 @@
 import * as React from 'react';
-import {useState, useEffect, useMemo, MouseEventHandler, ChangeEventHandler} from "react";
+import {useState, useEffect, useMemo, MouseEventHandler, ChangeEventHandler, useRef, FormEvent} from "react";
 import type {FC} from 'react';
 import {
-    Box, Flex, Input, Button, HStack, InputGroup, InputRightAddon, Text, Tooltip, Heading, Table,
-    Thead, Tbody, Tr, Th, Td, Center, VStack, Popover, PopoverBody, PopoverContent, PopoverTrigger,
+    Box,
+    Flex,
+    Input,
+    Button,
+    HStack,
+    InputGroup,
+    InputRightAddon,
+    Text,
+    Tooltip,
+    Heading,
+    Table,
+    Thead,
+    Tbody,
+    Tr,
+    Th,
+    Td,
+    Center,
+    VStack,
+    Popover,
+    PopoverBody,
+    PopoverContent,
+    PopoverTrigger,
+    Modal,
+    ModalOverlay,
+    ModalContent, ModalHeader, ModalCloseButton, ModalBody, FormControl, FormLabel, ModalFooter,
 } from '@chakra-ui/react';
-import {Link as ReachLink} from "react-router-dom";
+import {Link as ReachLink, useNavigate} from "react-router-dom";
 import {useAppDispatch, useAppSelector} from "../../app/hooks";
 import  {ExpanderComponentProps} from 'react-data-table-component';
 import IdentityEntryModal from "../../utils/IdentityEntryModal";
@@ -427,6 +450,21 @@ export const Search:FC =()=> {
         const addWalletAccountHandler = () => {
             setIdentityModalOpen(true)
         };
+        const initialRef = useRef<HTMLInputElement>(null)
+        const initialRefChain = useRef<HTMLInputElement>(null)
+        const navigate = useNavigate();
+        const [typedText, setTypedText] = useState<string>("");
+        const [typedTextChainId, setTypedTextChainId] = useState<string>("");
+        const inputTextHandler = (e: FormEvent<HTMLInputElement>) => {
+            setTypedText(e.currentTarget.value);
+        };
+        const inputTextChainIdHandler = (e: FormEvent<HTMLInputElement>) => {
+            setTypedTextChainId(e.currentTarget.value);
+        };
+        const navToProfilePageHandler = ()=>{
+            navigate(`/identity/${initialRefChain.current?.value}/${initialRef.current?.value}`);
+            console.log(initialRef.current?.value);
+        }
         return (
             <Box>
                 <HStack>
@@ -442,15 +480,52 @@ export const Search:FC =()=> {
                     >
                         <Text textColor={'pmpurple.13'}>Add Wallet Account</Text>
                     </Button>
-                    {/*<FilterComponent onFilter={(e: any) => setFilterWallets(e.target.value)}*/}
-                    {/*                 onClick={addWalletAccountHandler} activateButton={false}*/}
-                    {/*                 filterText={setFilterWallets} text={"Add Wallet Account"}*/}
-                    {/*                 placeHolder={"Search Wallet Account"} idType={"WalletAccount"}/>*/}
-                    <IdentityEntryModal title={'Create a profile for a Non-Registered'} text={'Enter Wallet Account'}
-                                        placeHolder={'wallet account'}
-                                        buttonText={'Create'} isOpen={isIdentityModalOpen} onClose={() => {
-                        setIdentityModalOpen(false)
-                    }}/>
+                    <Box>
+                        <Modal
+                            initialFocusRef={initialRef}
+                            isOpen={isIdentityModalOpen}
+                            onClose={() => {
+                                setIdentityModalOpen(false) }}
+                        >
+                            <ModalOverlay />
+                            <ModalContent>
+                                <ModalHeader>'Create a profile for a Non-Registered'</ModalHeader>
+                                <ModalCloseButton />
+                                <ModalBody pb={4}>
+                                    <FormControl mt={4}>
+                                        <FormLabel>Chain Id</FormLabel>
+                                        <Input
+                                            onChange={inputTextChainIdHandler}
+                                            focusBorderColor='pmpurple.6'
+                                            border={'1px solid'} borderColor={'pmpurple.8'}
+                                            ref={initialRefChain} placeholder='chain Id'
+                                        />
+                                    </FormControl>
+                                    <FormControl mt={4}>
+                                        <FormLabel>'Enter Wallet Account'</FormLabel>
+                                        <Input
+                                            onChange={inputTextHandler}
+                                            focusBorderColor='pmpurple.6'
+                                            border={'1px solid'} borderColor={'pmpurple.8'}
+                                            ref={initialRef} placeholder='Must be greater than 26 characters'
+                                        />
+                                    </FormControl>
+                                </ModalBody>
+                                <ModalFooter>
+                                    <Button bg={'pmpurple.8'} disabled={(typedText.length <= 26 || typedTextChainId.length < 1)} border={'1px solid'}
+                                            borderColor={'pmpurple.13'}  color={'pmpurple.1'} mr={3}
+                                            onClick={navToProfilePageHandler}
+                                    >
+                                        Create
+                                    </Button>
+                                    <Button bg={'pmpurple.2'} border={'1px solid'} borderColor={'pmpurple.4'}
+                                            color={'pmpurple.13'} mr={3} onClick={() => {
+                                        setIdentityModalOpen(false) }}>Cancel</Button>
+                                </ModalFooter>
+                            </ModalContent>
+                        </Modal>
+                    </Box>
+
                 </HStack>
             </Box>
         );

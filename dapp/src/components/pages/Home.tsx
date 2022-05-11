@@ -26,7 +26,12 @@ export const Home:FC=()=> {
                     justify={'center'}
                     px={useBreakpointValue({base: 4, md: 8})}
                     bgGradient={'linear(to-r, blackAlpha.600, transparent)'}>
-                    <Stack maxW={'2xl'} align={'flex-start'} spacing={6}>
+                    <Stack maxW={'2xl'}
+                           //align={'flex-start'}
+                           spacing={6}
+                        //border={'1px solid blue'}
+                           justifyContent={'left'}
+                    >
                         <Text
                             color={'white'}
                             fontWeight={600}

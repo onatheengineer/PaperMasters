@@ -284,7 +284,7 @@ export const RoutesRoutes: FC<InterfaceSidebar>= ({icon, profileName} ): ReactEl
             {/*}*/}
             <Routes>
                 <Route path="/" element={<Home/>}/>
-                <Route path={'/identity'} element={ <ModalForIdentNoUseParams/>}/>
+                <Route path={'/identity'} element={<Identity/>}/>
                 <Route path={'/identity/:chainId/:walletAcc'} element={<Identity/>}/>
                 {/*{ chainIdProviderProvider === undefined || chainIdProviderProvider === 'undefined' ||*/}
                 {/*chainIdProviderProvider.length === 0 || accountArrArr === undefined || accountArrArr.length === 0 ?*/}

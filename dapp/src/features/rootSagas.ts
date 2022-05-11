@@ -4,10 +4,9 @@ import {watchNFIFunctionsSaga} from './contractsBC/mintNFI/mintNFIFunctionsSaga'
 import {watchAccountBCSaga} from './accountBC/accountBCSaga'
 import {watchAccountDBSaga} from './accountDB/accountDBSaga'
 import {watchMentionsSaga} from "./accountDB/mentions/mentionsSaga";
-import {watchLedgerSaga} from "./accountBC/ledger/LedgerSaga";
 
 
 export default function* rootSaga() {
     yield all([ call(watchNFIFunctionsSaga), call(watchMintNFISaga), call(watchAccountDBSaga),
-       call(watchMentionsSaga), call(watchLedgerSaga), call(watchAccountBCSaga)]);
+       call(watchMentionsSaga), call(watchAccountBCSaga)]);
 }

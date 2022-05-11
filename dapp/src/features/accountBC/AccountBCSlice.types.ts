@@ -12,3 +12,8 @@ export interface BCStruct{
     bgRGB: string;
     originDate: string;
 }
+
+export interface WalletConnectMetaMaskInterface{
+    chainId: string;
+    walletAccount: string[];
+}

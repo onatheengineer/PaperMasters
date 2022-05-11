@@ -1,13 +1,7 @@
 import {createSlice, PayloadAction, createAction, createEntityAdapter, EntityState} from "@reduxjs/toolkit";
-import {BCStruct} from "./AccountBCSlice.types"
+import {BCStruct, WalletConnectMetaMaskInterface} from "./AccountBCSlice.types"
 import {ParamsURLInterface} from "../accountDB/AccountDBSlice.types";
 import { RootState } from "../../app/store";
-
-export interface interfaceBCStructStruct {
-    [chainId: string]: {
-        [walletAccount: string]: BCStruct
-    }
-}
 
 export interface interfaceBCStruct {
     [chainId: string]: BCStruct[]
@@ -81,7 +75,8 @@ const AccountBCSlice = createSlice ({
 export const { chainIdProvider, chainIdSupportedBool, chainIdStatus, accountArr, accountArrStatus,
     addressHasIdentityBool, addressToTokenBool, getAllStructBC, getStructBC, addressToTokenID} = AccountBCSlice.actions;
 
-export const accountArrAction = createAction("GET_ACCOUNT_ARR_ACTION_SAGA");
+export const accountArrAction = createAction<WalletConnectMetaMaskInterface>("GET_ACCOUNT_ARR_ACTION_SAGA");
+export const accountArrMetaMaskAction = createAction("GET_ACCOUNT_ARR_METAMASK_ACTION_SAGA");
 export const addressToTokenAction = createAction<string>("ADDRESS_TO_TOKEN_SAGA");
 //TODO: update which action I am passing through
 export const singleStructBCAction = createAction<ParamsURLInterface>("STRUCT_BC_SAGA");

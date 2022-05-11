@@ -41,6 +41,7 @@ import {openseaIcon} from '../../../assets/icons/openseaIcon';
 import {ChevronDownIcon} from "@chakra-ui/icons";
 import {postSingleAccountDictionaryDBAction} from "../../../features/accountDB/AccountDBSlice";
 import {AccountDBInterface, ParamsURLInterface} from "../../../features/accountDB/AccountDBSlice.types";
+import {usePostAccountDictionaryMutation, usePostMentionMutation} from "../../../features/reactQuery/RTKQuery";
 
 
 function initialState(paramsRequestAccountDictionary:any) {
@@ -84,9 +85,14 @@ export const DrawerComponent:FC<ParamsURLInterface>=({chainIdURL, paramsWalletUR
     const singleNFIReceiptDBDB = useAppSelector((state) => state.accountDB.singleNFIReceiptDB);
     const singleAccountDictionaryDBDB = useAppSelector((state) => state.accountDB.singleAccountDictionaryDB);
 
+    const [postAccount, data] = usePostAccountDictionaryMutation();
     const [state, dispatchAccountProfileDictionary] = useReducer(reducer, singleAccountDictionaryDBDB, initialState);
     console.log('this is the state in my useReducer:', state);
     const dispatch = useAppDispatch();
+
+    useEffect(()=>{
+        console.log(data)
+    },[data])
 
     const submitHandler = () => {
         const accountProfileDictionary: AccountDBInterface = {
@@ -100,7 +106,9 @@ export const DrawerComponent:FC<ParamsURLInterface>=({chainIdURL, paramsWalletUR
             emailValidationNotification: false,
             emailReportNotification: false
         }
-        dispatch(postSingleAccountDictionaryDBAction(accountProfileDictionary));
+        //dispatch(postSingleAccountDictionaryDBAction(accountProfileDictionary));
+        postAccount(accountProfileDictionary);
+        console.log(accountProfileDictionary)
         onClose();
     }
 
@@ -112,9 +120,6 @@ export const DrawerComponent:FC<ParamsURLInterface>=({chainIdURL, paramsWalletUR
         return (null);
     }
     return (
-        //TODO - should I permit a name change
-        <>
-        {accountArrArr.length !== 0 && accountArrArr[0] === paramsWalletURL && addressHasIdentityBoolBool ?
                 <Box
                     right={"2px"}
                     top={"2px"}
@@ -446,9 +451,6 @@ export const DrawerComponent:FC<ParamsURLInterface>=({chainIdURL, paramsWalletUR
                         </DrawerContent>
                     </Drawer>
                 </Box>
-                : null
-        }
-        </>
         )
 };
 

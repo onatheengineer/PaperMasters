@@ -27,24 +27,48 @@ import {
 } from "./AccountDBSlice.types";
 import {RootState} from "../../app/store";
 import {BCStruct} from "../accountBC/AccountBCSlice.types";
+import chainIdNetworks from "../JSON/chainId.networks.json";
+import {ethers} from "ethers";
+import {resolveAny} from "dns";
 
 const baseURL = 'https://ociuozqx85.execute-api.us-east-1.amazonaws.com';
 
 function* accountArrDBSaga({payload}: PayloadAction<ParamsURLInterface>): SagaIterator {
     const { chainIdURL, paramsWalletURL } = payload;
+    console.log("payloadDB:", payload)
     try {
-        //this payload in AccountArr inside accountBC
-        //console.log('am i making it into accountArrDBSaga?')
-       // const chainIdProviderIdSelector = yield select(accountBCselectors.chainIdProviderSelector);
-        const getAccountArrAxios = yield call(axios.get, `${baseURL}/account/${chainIdURL}/${paramsWalletURL}`);
+        if(payload.paramsWalletURL.length > 0) {
+            const chainIdSupportedArr = chainIdNetworks.filter((el) => {
+                return el.chainId === parseInt(chainIdURL)
+            });
+            console.log("chainIdSupportedArr",chainIdSupportedArr[0])
+            const provider = ethers.getDefaultProvider(chainIdSupportedArr[0].name.toLowerCase(),
+                {
+                    etherscan: 'RYVBB5ZI138MHIX2JJVWBT6MVTGXJT133Q',
+                    infura: 'c97ad56e08674161a95ba16c6f855b6a',
+                    alchemy: 'mEUzvPVY6xECwMieu01t9D3fuYyOYGCl',
+                    pocket: '329ee9f55d37f7ef7a54f84a4df341d096004450263af1d40cc4650e47e26609'
+                });
+            console.log("provider", provider)
+            const getBalance = yield Promise.resolve(provider.getBalance(payload.paramsWalletURL)) as any
+            console.log('getBalance', getBalance)
+            console.log('getBalanceSTRING', getBalance.toString())
+            const getBalanceDecimal = ethers.utils.formatEther(getBalance);
+            console.log('getBalanceDecimal', getBalanceDecimal)
+            if (!getBalance.isZero()) {
+                const getAccountArrAxios = yield call(axios.get, `${baseURL}/account/${chainIdURL}/${paramsWalletURL}`);
                 if (!Object.prototype.hasOwnProperty.call(getAccountArrAxios.data, 'Item')) {
-                    const chainIdSupportedBoolSelector = yield select(accountBCselectors.chainIdSupportedBoolSelector);
-                    if (chainIdSupportedBoolSelector) {
-                    const postAccountArr_chainId = yield call(axios.post, `${baseURL}/account`,
-                        {walletAccount: paramsWalletURL, chainId: chainIdURL});
-                    console.log("AxiospostAccountArr_chainId:", postAccountArr_chainId);
+                    const chainIdSupportedArr = chainIdNetworks.filter((el) => {
+                        return el.chainId === parseInt(chainIdURL)
+                    });
+                    if (chainIdSupportedArr.length > 0) {
+                        const postAccountArr_chainId = yield call(axios.post, `${baseURL}/account`,
+                            {walletAccount: paramsWalletURL, chainId: chainIdURL});
+                        console.log("AxiospostAccountArr_chainId:", postAccountArr_chainId);
+                    }
                 }
             }
+        }
     } catch (e: any) {
         yield put(accountArrError(e.message));
         const accountArrErrorSelector = yield select(accountDBselectors.accountArrErrorSelector)
@@ -54,8 +78,8 @@ function* accountArrDBSaga({payload}: PayloadAction<ParamsURLInterface>): SagaIt
 
 function* postSingleAccountDictionaryDBSaga({payload}: PayloadAction<AccountDBInterface>): SagaIterator {
     try{
-        const accountDicaxiosPUT = yield call(axios.put, `${baseURL}/account`, payload)
-        console.log("accountDicaxiosPUT", accountDicaxiosPUT)
+        const accountDicaxiosPOST = yield call(axios.post, `${baseURL}/account`, payload)
+        console.log("accountDicaxiosPUT", accountDicaxiosPOST)
     }catch (e) {
         console.error("putSingleAccountDictionaryDBSaga", e);
     }

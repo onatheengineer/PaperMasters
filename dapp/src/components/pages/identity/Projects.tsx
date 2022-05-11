@@ -73,7 +73,7 @@ export const Projects=()=> {
             w={'100%'}
             px="5px"
             mt={'5px'}
-            border={'1px solid orange'}
+            //border={'1px solid orange'}
             //display={'inline-block'}
             display={'flex'}
         >
@@ -84,8 +84,8 @@ export const Projects=()=> {
             >
                 <Flex
                     h={'100%'}
-                    border={'1px solid blue'}
-                    //borderColor={'pmpurple.8'}
+                    border={'1px solid'}
+                    borderColor={'pmpurple.8'}
                     mx={{xl: "15px"}}
                     my='5px'
                     borderRadius='15px' bg='white' p="16px" direction="column"

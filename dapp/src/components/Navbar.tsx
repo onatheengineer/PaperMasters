@@ -1,4 +1,6 @@
 import React, {FC, ReactNode, useEffect} from 'react';
+import WalletConnect from "@walletconnect/client";
+import QRCodeModal from "@walletconnect/qrcode-modal";
 import Sparkle from 'react-sparkle';
 import {
     Box,
@@ -34,7 +36,7 @@ import {MdManageAccounts, MdOutlineReport, MdOutlineWarningAmber, MdOutlineNatur
 import {useAppDispatch, useAppSelector} from "../app/hooks";
 import {Link as ReachLink, To} from "react-router-dom";
 import PMLogoFull from '../assets/icons/PMLogoFull';
-import {accountArrAction} from "../features/accountBC/AccountBCSlice";
+import {accountArrAction, accountArrMetaMaskAction} from "../features/accountBC/AccountBCSlice";
 
 export default function WithSubnavigation() {
     const {isOpen, onToggle} = useDisclosure();
@@ -108,7 +110,7 @@ export default function WithSubnavigation() {
                                         }}
                                         onClick={() => {
                                             console.log('i am clicked')
-                                            dispatch(accountArrAction());
+                                            dispatch(accountArrMetaMaskAction());
                                         }}
                                     >
                                         <HStack>

@@ -31,13 +31,17 @@ export const AccountLedger:FC<ParamsURLInterface>=({chainIdURL, paramsWalletURL}
 
 
     return (
-        <Flex align="center" mb="20px"
-              border={'1px solid pink'}
+        <Flex align="center"
+              //border={'1px solid pink'}
+              h={'90%'}
+              w={'100%'}
               flexGrow={1}
-              overflow={'auto'}
+              overflow={'none'}
         >
             <Box
                 w={'100%'}
+                h={'100%'}
+                overflow={'auto'}
             >
                 <Stack
                     w={'100%'}
@@ -63,6 +67,8 @@ export const AccountLedger:FC<ParamsURLInterface>=({chainIdURL, paramsWalletURL}
                                                 <Text
                                                 pr={'2px'}
                                                 color={'pmpurple.13'}
+                                                fontSize={'14px'}
+                                                whiteSpace={'nowrap'}
                                                 >
                                                     Transaction Hash:
                                                 </Text>
@@ -70,6 +76,8 @@ export const AccountLedger:FC<ParamsURLInterface>=({chainIdURL, paramsWalletURL}
                                                     isTruncated={true}
                                                     width={'300px'}
                                                     color={'pmpurple.13'}
+                                                    fontSize={'14px'}
+                                                    whiteSpace={'nowrap'}
                                                 >
                                                     {el.hash}
                                                 </Text>
@@ -82,9 +90,10 @@ export const AccountLedger:FC<ParamsURLInterface>=({chainIdURL, paramsWalletURL}
                                         >
                                         <Text
                                             //noOfLines={1}
-                                            fontSize="14px"
+                                            fontSize={'14px'}
                                             color={'pmpurple.13'}
                                             fontWeight="400"
+                                            whiteSpace={'nowrap'}
                                         >
                                             {timeStampShort}
                                         </Text>
@@ -98,6 +107,8 @@ export const AccountLedger:FC<ParamsURLInterface>=({chainIdURL, paramsWalletURL}
                                                 isTruncated={true}
                                                 width={'100px'}
                                                 color={'pmpurple.13'}
+                                                fontSize={'14px'}
+                                                whiteSpace={'nowrap'}
                                                 title={valueFormatted.toString()}
                                             >
                                                 {valueFormatted}
@@ -105,11 +116,12 @@ export const AccountLedger:FC<ParamsURLInterface>=({chainIdURL, paramsWalletURL}
                                         </Box>
                                     </HStack>
                                     <HStack>
-
                                     <HStack>
                                         <Text
                                             pr={'2px'}
                                             color={'pmpurple.13'}
+                                            fontSize={'14px'}
+                                            whiteSpace={'nowrap'}
                                         >
                                             From:
                                         </Text>
@@ -117,6 +129,8 @@ export const AccountLedger:FC<ParamsURLInterface>=({chainIdURL, paramsWalletURL}
                                             isTruncated={true}
                                             width={'300px'}
                                             color={'pmpurple.13'}
+                                            fontSize={'14px'}
+                                            whiteSpace={'nowrap'}
                                         >
                                             {el.from}
                                         </Text>
@@ -126,6 +140,8 @@ export const AccountLedger:FC<ParamsURLInterface>=({chainIdURL, paramsWalletURL}
                                         <Text
                                             pr={'2px'}
                                             color={'pmpurple.13'}
+                                            fontSize={'14px'}
+                                            whiteSpace={'nowrap'}
                                         >
                                             To:
                                         </Text>
@@ -133,14 +149,15 @@ export const AccountLedger:FC<ParamsURLInterface>=({chainIdURL, paramsWalletURL}
                                             isTruncated={true}
                                             width={'300px'}
                                             color={'pmpurple.13'}
+                                            fontSize={'14px'}
+                                            whiteSpace={'nowrap'}
                                         >
                                             {el.to !== null ?
                                                 el.to
                                                 :  <Text
                                                     color={'pmpurple.27'}
                                                 >
-
-                                                Contact Creation
+                                                Contract Creation
                                                 </Text>
                                             }
                                         </Text>

@@ -18,7 +18,7 @@ import {Link as ReachLink} from "react-router-dom";
 import {SiSololearn} from "react-icons/si";
 import Sparkle from "react-sparkle";
 import {useAppDispatch} from "../../../app/hooks";
-import {accountArrAction} from "../../../features/accountBC/AccountBCSlice";
+import {accountArrAction, accountArrMetaMaskAction} from "../../../features/accountBC/AccountBCSlice";
 
 
 export const ModalForIdentNoUseParams:FC=()=> {
@@ -63,7 +63,7 @@ export const ModalForIdentNoUseParams:FC=()=> {
                             borderColor={'pmpurple.6'}
                             onClick={() => {
                                 console.log('i am clicked')
-                                dispatch(accountArrAction());
+                                dispatch(accountArrMetaMaskAction());
                             }}
                             _hover={{color: 'pmpurple.9'}}
                             // _active={{

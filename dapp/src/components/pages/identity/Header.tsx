@@ -34,6 +34,11 @@ import swan3 from '../../../assets/swan3.jpg'
 import Validate from "../Validate";
 import Report from "../Report";
 import {IoMdCheckmarkCircleOutline} from "react-icons/io";
+import {
+    useGetIdentityBCQuery,
+    useGetSingleAccountQuery,
+    useGetSingleIdentityBCQuery
+} from "../../../features/reactQuery/RTKQuery";
 
 function initialState(paramsRequestAccountDictionary:any) {
         return {
@@ -75,14 +80,19 @@ export const Mailto:FC<mailToInterface> = ({ email, subject, body, ...props })=>
 }
 
 export const Header:FC<ParamsURLInterface> = ({chainIdURL, paramsWalletURL})=> {
-    const addressHasIdentityBoolBool = useAppSelector((state) => state.accountBC.addressHasIdentityBool);
     const singleNFIReceiptDBDB = useAppSelector((state) => state.accountDB.singleNFIReceiptDB);
-    const getStructBCBC = useAppSelector((state) => state.accountBC.getStructBC);
-    const singleAccountDictionaryDBDB = useAppSelector((state) => state.accountDB.singleAccountDictionaryDB);
-
-    const [state, dispatchAccountProfileDictionary] = useReducer(reducer, singleAccountDictionaryDBDB, initialState);
-    console.log('this is the state in my useReducer:', state);
+    const accountArrArr = useAppSelector((state) => state.accountBC.accountArr);
+    const chainIdProviderProvider = useAppSelector((state) => state.accountBC.chainIdProvider);
     const dispatch = useAppDispatch();
+    const useGetSingleIdentityBCQueryQuery = useGetSingleIdentityBCQuery({
+        chainIdURL: chainIdURL!,
+        paramsWalletURL: paramsWalletURL!
+    });
+    const useGetSingleAccountQueryQuery = useGetSingleAccountQuery({
+        chainIdURL: chainIdURL!,
+        paramsWalletURL: paramsWalletURL!
+    });
+    const [state, dispatchAccountProfileDictionary] = useReducer(reducer, useGetSingleAccountQueryQuery.data, initialState);
 
     const submitHandler = () => {
         const accountProfileDictionary: AccountDBInterface = {
@@ -105,22 +115,7 @@ export const Header:FC<ParamsURLInterface> = ({chainIdURL, paramsWalletURL})=> {
     const [resize, setResize] = useState('horizontal')
 
     const logicTransactionHashMemo = useMemo(() => {
-        console.log(paramsWalletURL, addressHasIdentityBoolBool, getStructBCBC)
-        if (paramsWalletURL.length > 0 && addressHasIdentityBoolBool && getStructBCBC !== undefined) {
-            if (singleNFIReceiptDBDB.transactionHash !== undefined) {
-                if (singleNFIReceiptDBDB.transactionHash.length) {
-                    return (
-                        <Text fontSize={'16px'} color={'pmpurple.10'} letterSpacing={'1px'}
-                              textShadow={'#F7FAFC 0px 0px 10px'}>
-                            <Link href={`https://etherscan.io/tx/${singleNFIReceiptDBDB.transactionHash}`}>
-                                {singleNFIReceiptDBDB.transactionHash}
-                            </Link>
-                        </Text>
-                    )
-                }
-            }
-        }
-        if (addressHasIdentityBoolBool) {
+        if (useGetSingleIdentityBCQueryQuery.isSuccess) {
             return (
                 <Text fontSize={'16px'} color={'pmpurple.13'} letterSpacing={'1px'}
                       textShadow={'#F7FAFC 0px 0px 10px'}>
@@ -134,60 +129,45 @@ export const Header:FC<ParamsURLInterface> = ({chainIdURL, paramsWalletURL})=> {
                 Non-Registered Wallet Account
             </Text>
         )
-    }, [paramsWalletURL, addressHasIdentityBoolBool, getStructBCBC, singleNFIReceiptDBDB])
+    }, [paramsWalletURL, useGetSingleIdentityBCQueryQuery])
 
     const logicNameMemo = useMemo(() => {
-        console.log(singleAccountDictionaryDBDB, paramsWalletURL, addressHasIdentityBoolBool, getStructBCBC)
-        if (addressHasIdentityBoolBool && getStructBCBC !== undefined && singleAccountDictionaryDBDB.ownerName !== undefined) {
-            if (singleAccountDictionaryDBDB.ownerName.length > 0) {
-                return (
-                    singleAccountDictionaryDBDB['ownerName']
-                )
-            }
+        if(useGetSingleAccountQueryQuery.data != undefined && useGetSingleAccountQueryQuery.data.Item.ownerName!.length > 0 ){
+            return useGetSingleAccountQueryQuery.data.Item.ownerName
         }
-        if (addressHasIdentityBoolBool && getStructBCBC !== undefined) {
-            // if(getStructBCBC.hasOwnProperty('identityStruct') && getStructBCBC['identityStruct'].length > 0
-            //     && getStructBCBC['identityStruct'][1].length > 0 ) {
-            //     if(getStructBCBC.identityStruct[1].split("|||")[0].length > 0 ){
-            //         return (
-            //             getStructBCBC.identityStruct[1].split("|||")[0]
-            //         )}
-            // }
+        if(useGetSingleIdentityBCQueryQuery.isSuccess){
+            return useGetSingleIdentityBCQueryQuery.data.nfiIdentity!.name.split("|||")[0]
         }
         return (
             paramsWalletURL
         );
-    }, [singleAccountDictionaryDBDB, paramsWalletURL, addressHasIdentityBoolBool, getStructBCBC])
+    }, [useGetSingleAccountQueryQuery, paramsWalletURL, useGetSingleIdentityBCQueryQuery])
+
     const logicEmailMemo = useMemo(() => {
-        if (addressHasIdentityBoolBool && getStructBCBC !== undefined && singleAccountDictionaryDBDB.ownerEmail !== undefined) {
+        if(useGetSingleAccountQueryQuery.data != undefined && useGetSingleAccountQueryQuery.data.Item.ownerEmail!.length > 0 ){
             return (
                 <Mailto
-                    email={singleAccountDictionaryDBDB['ownerEmail']}
+            email={useGetSingleAccountQueryQuery.data.Item.ownerEmail!}
+            subject="Hello PaperMaster"
+            body="Nice to meet you PaperMaster!">
+                <MdOutlineEmail fontSize={'20px'} color={'#5c415c'}/>
+        </Mailto>
+            )
+        }
+        if(useGetSingleIdentityBCQueryQuery.isSuccess){
+            return (
+                <Mailto
+                    email={useGetSingleIdentityBCQueryQuery.data.nfiIdentity!.email.split("|||")[0]}
                     subject="Hello PaperMaster"
                     body="Nice to meet you PaperMaster!">
                     <MdOutlineEmail fontSize={'20px'} color={'#5c415c'}/>
                 </Mailto>
-            )
-        }
-        if (addressHasIdentityBoolBool && getStructBCBC !== undefined) {
-            // if(getStructBCBC[3] !== null && getStructBCBC[3].length > 0)
-            // if(Object.prototype.hasOwnProperty.call(getStructBCBC, getStructBCBC[3])
-            //     && getStructBCBC['identityStruct'][3].length > 0 ) {
-            //     return (
-            //         <Mailto
-            //             email={getStructBCBC[3].split("|||")[0]}
-            //             //email={getStructBCBC.identityStruct[3].split("|||")[0]}
-            //             subject="Hello PaperMaster"
-            //             body="Nice to meet you PaperMaster!">
-            //             <MdOutlineEmail fontSize={'20px'} color={'#5c415c'}/>
-            //         </Mailto>
-            //     )
-            // }
-        }
-        return (
-            <MdOutlineEmail fontSize={'20px'} color={'#5c415c'}/>
-        );
-    }, [paramsWalletURL, addressHasIdentityBoolBool, getStructBCBC])
+            )}
+    return (
+        <MdOutlineEmail fontSize={'20px'} color={'#5c415c'}/>
+    );
+    }, [useGetSingleAccountQueryQuery, paramsWalletURL, useGetSingleIdentityBCQueryQuery])
+
 
     return (
         <Flex
@@ -211,7 +191,13 @@ export const Header:FC<ParamsURLInterface> = ({chainIdURL, paramsWalletURL})=> {
                 lg: "translateY(75%)",
             }}
         >
-            <DrawerComponent chainIdURL={chainIdURL} paramsWalletURL={paramsWalletURL}/>
+            {accountArrArr.length !== 0 && accountArrArr[0] === paramsWalletURL && chainIdProviderProvider === chainIdURL && useGetSingleIdentityBCQueryQuery.isSuccess  ?
+
+                <DrawerComponent chainIdURL={chainIdURL} paramsWalletURL={paramsWalletURL}/>
+
+                : null
+            }
+
             <Flex
                 mb={{sm: "10px", md: "0px"}}
                 direction={{sm: "column", md: "row"}}

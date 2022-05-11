@@ -1,6 +1,6 @@
 import * as React from 'react';
 import type {FC} from 'react';
-import {Link as ReachLink, useNavigate, useParams} from "react-router-dom";
+import {Link as ReachLink, useNavigate, useParams, Navigate} from "react-router-dom";
 import {
     Box, Button, Flex, Stack, Text, HStack, Divider, Heading, Spacer, useDisclosure,
 } from "@chakra-ui/react";
@@ -14,9 +14,9 @@ import Projects from "./identity/Projects";
 import ValidationsReports from "./identity/ValidationsReports";
 import ModalForIdentNoUseParams from './identity/ModalForIdentNoUseParams';
 import {AccountLedger} from './identity/AccountLedger'
-import {apiHarmonyOneAction} from "../../features/accountBC/ledger/LedgerSlice";
 import {ParamsURLInterface} from "../../features/accountDB/AccountDBSlice.types";
 import {
+    accountArrDBAction,
     paramsChainId,
     paramsWallet,
     singleAccountDictionaryDBAction,
@@ -26,23 +26,31 @@ import {FaPlus} from "react-icons/fa";
 import MentionsDrawer from "./identity/mentions/MentionsDrawer";
 import {AiOutlineComment} from "react-icons/ai";
 import Mentions from "./identity/mentions/Mentions";
-import {useGetMentionQuery, useGetSingleIdentityBCQuery} from "../../features/reactQuery/RTKQuery";
+import {
+    useGetMentionQuery,
+    useGetSingleAccountQuery,
+    useGetSingleIdentityBCQuery
+} from "../../features/reactQuery/RTKQuery";
 import chainIdNetworks from "../../features/JSON/chainId.networks.json";
 import {addressHasIdentityBool, singleStructBCAction} from "../../features/accountBC/AccountBCSlice";
 
 export const Identity:FC=()=> {
 //TODO as soon as they connect - redirect them to their identity page - this is important for the hasIdentityBool slice to work
     const {chainId, walletAcc} = useParams();
+    console.log(chainId)
     const dispatch = useAppDispatch();
     useEffect(() => {
-        if (walletAcc !== undefined && walletAcc !== "" && walletAcc !== 'undefined') {
+        if (walletAcc !== undefined && walletAcc !== "" && walletAcc !== 'undefined' && chainId !== undefined && chainId !== "" && chainId !== 'undefined') {
             dispatch(paramsChainId(chainId));
+            dispatch(paramsWallet(walletAcc));
+            dispatch(accountArrDBAction({
+                chainIdURL: chainId,
+                paramsWalletURL: walletAcc
+            } as ParamsURLInterface))
             dispatch(singleStructBCAction({
                 chainIdURL: chainId,
                 paramsWalletURL: walletAcc
             } as ParamsURLInterface));
-            dispatch(paramsWallet(walletAcc));
-            dispatch(apiHarmonyOneAction(walletAcc));
             dispatch(singleAccountDictionaryDBAction({
                 chainIdURL: chainId,
                 paramsWalletURL: walletAcc
@@ -52,10 +60,18 @@ export const Identity:FC=()=> {
     }, [walletAcc, chainId]);
 
     const chainIdProviderProvider = useAppSelector((state) => state.accountBC.chainIdProvider);
-    const addressHasIdentityBoolBool = useAppSelector((state) => state.accountBC.addressHasIdentityBool);
-    const singleStructBC = useAppSelector((state) => state.accountBC.getStructBC);
-    const singleAccountDictionaryDBDB = useAppSelector((state) => state.accountDB.singleAccountDictionaryDB);
+    const accountArrArr = useAppSelector((state) => state.accountBC.accountArr);
+    console.log('accountArr', accountArrArr)
+    //const addressHasIdentityBoolBool = useAppSelector((state) => state.accountBC.addressHasIdentityBool);
+    //const singleStructBC = useAppSelector((state) => state.accountBC.getStructBC);
+    //const singleAccountDictionaryDBDB = useAppSelector((state) => state.accountDB.singleAccountDictionaryDB);
     //const singleNFIReceiptDBDB = useAppSelector((state) => state.accountDB.singleNFIReceiptDB);
+
+    const useGetSingleAccountQueryQuery = useGetSingleAccountQuery({
+        chainIdURL: chainId!,
+        paramsWalletURL: walletAcc!
+    });
+    console.log('useGetSingleAccountQueryQuery',useGetSingleAccountQueryQuery)
     const useGetSingleIdentityBCQueryQuery = useGetSingleIdentityBCQuery({
         chainIdURL: chainId!,
         paramsWalletURL: walletAcc!
@@ -63,40 +79,38 @@ export const Identity:FC=()=> {
     console.log('dataIdentity:', useGetSingleIdentityBCQueryQuery)
 
     const logicDescriptionMemo = useMemo(() => {
-        console.log(singleAccountDictionaryDBDB, walletAcc, addressHasIdentityBoolBool, singleStructBC)
-        if (addressHasIdentityBoolBool && singleStructBC !== undefined && singleAccountDictionaryDBDB.ownerDescription !== undefined) {
-            if (singleAccountDictionaryDBDB.ownerDescription.length > 0) {
+        console.log(useGetSingleAccountQueryQuery.data, walletAcc)
+        if(useGetSingleAccountQueryQuery.isSuccess){
+            if (useGetSingleAccountQueryQuery.data!.Item.ownerDescription !== undefined && useGetSingleAccountQueryQuery.data!.Item.ownerDescription.length > 0) {
                 return (
-                    singleAccountDictionaryDBDB['ownerDescription']
+                    useGetSingleAccountQueryQuery.data!.Item.ownerDescription
                 )
             }
         }
-        // if (addressHasTokenBoolBool && singleStructBC !== undefined) {
-        //     if (Object.prototype.hasOwnProperty.call(singleStructBC,'identityStruct') && singleStructBC['identityStruct'].length > 0 && requestReceiptUsingParams['identityStruct'][7].length > 0) {
-        //         if (singleStructBC.[7].split("|||")[0].length > 0) {
-        //             return (
-        //                 singleStructBC.identityStruct[7].split("|||")[0]
-        //             )
-        //         }
-        //     }
-        // }
+
         return (
             " Mathematics may not teach us how to add love or subtract hate, but it gives us every reason to hope that every problem has a solution.  -Anonymous"
         );
-    }, [singleAccountDictionaryDBDB, walletAcc, addressHasIdentityBoolBool, singleStructBC])
-    const chainName = useMemo(()=>{
-        if(chainId !== undefined){
+    }, [useGetSingleAccountQueryQuery, walletAcc])
+
+    const chainName = useMemo(() => {
+        if (chainId !== undefined) {
             const chainIdSupportedArr = chainIdNetworks.filter((el) => {
                 return el.chainId === parseInt(chainId)
             });
-            if(chainIdSupportedArr.length >0){
-                return(chainIdSupportedArr[0].name)
+            if (chainIdSupportedArr.length > 0) {
+                return (chainIdSupportedArr[0].name)
             }
         }
         return ""
-    },[chainId])
+    }, [chainId])
     const {isOpen, onOpen, onClose} = useDisclosure()
-    if (!chainId) return  <ModalForIdentNoUseParams/>;
+    if (!chainId) {
+        if (accountArrArr.length > 0) {
+            return <Navigate to={`/identity/${chainIdProviderProvider}/${accountArrArr[0]}`}/>
+        }
+        return (<ModalForIdentNoUseParams/>)
+    }
     return (
         <Box
             //border={'4px solid red'}
@@ -150,18 +164,20 @@ export const Identity:FC=()=> {
                                 </Flex>
                             </Box>
                         </Box>
-                        <Box>
+                        <Box
+                            //border={'1px solid red'}
+                            h={'462px'}
+                        >
                             <HStack spacing={'10px'}
                                     align='stretch'
                                     justify={'space-evenly'}
-                                    minH={"400px"}
+                                    //minH={"400px"}
                             >
                                 <Box w='38%' borderRadius='15px' bg='white' p="16px" overflow={'none'}
                                      whiteSpace={"pre-line"}
                                 >
                                     <ValidationsReports/>
                                 </Box>
-
                                 <Box w='380px' borderRadius='15px' bg='white'
                                      px="16px"
                                      py={'28px'}
@@ -219,20 +235,22 @@ export const Identity:FC=()=> {
                                         </Button>
                                     }
                                 </Box>
-                                <Box w='38%' borderRadius='15px' bg='white' p="12px" pb={'16px'}
-                                     overflow={'none'}
-                                     whiteSpace={"pre-line"}
+                                <Box
+                                    maxH={'460px'}
+                                    w='38%' borderRadius='15px' bg='white' p="12px" pb={'16px'}
+                                    overflow={'none'}
+                                    whiteSpace={"pre-line"}
                                 >
                                     <Box
-                                        overflow={'hidden'}
+                                        overflow={'none'}
                                         whiteSpace={"pre-line"}
                                         h={'100%'}
                                         //w={'30vW'}
                                         //border={'1px solid blue'}
                                     >
-                                            <Text mb={'5px'} fontSize="17px" color={'pmpurple.13'} align={'center'}>
-                                                {chainName} Ledger
-                                            </Text>
+                                        <Text mb={'5px'} fontSize="17px" color={'pmpurple.13'} align={'center'}>
+                                            {chainName} Ledger
+                                        </Text>
                                         <Divider
                                             border={'1px solid'}
                                             borderColor={'pmpurple.8'}
@@ -243,7 +261,7 @@ export const Identity:FC=()=> {
                             </HStack>
                         </Box>
                         <Stack
-                            //maxH={'455px'}
+                            maxH={'485px'}
                             //border={'1px solid blue'}
                             direction={{base: 'column', md: 'row'}}
                         >
@@ -257,7 +275,7 @@ export const Identity:FC=()=> {
                                 bg='white'
                                 px="24px"
                                 //border={'1px solid red'}
-                                maxH={'455px'}
+
                             >
                                 <Box
                                     display='flex'
@@ -314,7 +332,6 @@ export const Identity:FC=()=> {
                                 bg='white'
                                 px="24px"
                                 //border={'1px solid red'}
-                                maxH={'455px'}
                             >
                                 <Box
                                     display='flex'
