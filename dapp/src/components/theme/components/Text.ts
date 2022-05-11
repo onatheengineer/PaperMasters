@@ -1,4 +1,4 @@
-export const Heading = {
+export const Text = {
     // 1. We can update the base styles
     baseStyle: {
         fontWeight: 'bold', // Normally, it is "semibold"

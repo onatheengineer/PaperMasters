@@ -81,7 +81,7 @@ export const Identity:FC=()=> {
     const logicDescriptionMemo = useMemo(() => {
         console.log(useGetSingleAccountQueryQuery.data, walletAcc)
         if(useGetSingleAccountQueryQuery.isSuccess){
-            if (useGetSingleAccountQueryQuery.data!.Item.ownerDescription !== undefined && useGetSingleAccountQueryQuery.data!.Item.ownerDescription.length > 0) {
+            if (useGetSingleAccountQueryQuery.data.Item.ownerDescription !== undefined && useGetSingleAccountQueryQuery.data!.Item.ownerDescription.length > 0) {
                 return (
                     useGetSingleAccountQueryQuery.data!.Item.ownerDescription
                 )

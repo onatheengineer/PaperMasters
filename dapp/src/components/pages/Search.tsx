@@ -66,18 +66,19 @@ const FilterComponent: FC<interfaceFilterComponent> = ( { filterText, onClick, o
                    onChange={onFilter}
                    borderRadius={'0px'}
             />
-                <Tooltip hasArrow label='Please type at minimum 32 characters to add a wallet account'
-                         placement={'bottom-end'} border={'1px solid #694b69'}
-                         borderRadius={'3px'}
-                         bg='pmpurple.5' color='pmpurple.13' m={'-6px'}>
+
                 <InputRightAddon
-                    p='0' borderColor={"pmpurple.6"} bg={'pmpurple.2'}
-                    children={<Button bg={'pmpurple.6'}
-                                      borderRadius={'0px'}
-                                      color={"pmpurple.13"}
-                                      disabled={activateButton}
-                                      onClick={onClick} >{text}</Button>} />
-                </Tooltip>
+                    p='0'
+                    borderColor={"pmpurple.6"}
+                    bg={'pmpurple.2'}
+                    children={
+                        <Button bg={'pmpurple.6'}
+                                          borderRadius={'0px'}
+                                          color={"pmpurple.13"}
+                                          onClick={onClick} >
+                            {text}
+                        </Button>}
+                    />
                 </InputGroup>
         </HStack>
     </Box>
@@ -218,6 +219,9 @@ export const Search:FC =()=> {
         reported: number | undefined,
         report: string
     };
+
+
+
     const data = useMemo((): Cols[] => {
         console.log(accountQuery)
         console.log("nfiQuery", nfiQuery)
@@ -228,7 +232,7 @@ export const Search:FC =()=> {
             let originDate = "";
             let profession = "";
             if (nfiQuery.isSuccess) {
-                const nfiArr = nfiQuery.data!.filter((elel) => {
+                const nfiArr = nfiQuery.data.filter((elel) => {
                     return (elel.chainId.toString() === el.chainId && elel.walletAccount === el.walletAccount)
                 });
                 console.log("nfiArr", nfiArr)
@@ -470,7 +474,7 @@ export const Search:FC =()=> {
                 <HStack>
                     <FilterComponent onFilter={(e: any) => setFilterWallets(e.target.value)} onClick={handleClear}
                                      activateButton={(filteredItems.length !== 0)}
-                                     filterText={filterWallets} text={"reset"} placeHolder={"Search NFI"}
+                                     filterText={filterWallets} text={"reset"} placeHolder={"Search Wallet Account"}
                                      idType={"Search"}/>
                     <Button
                     bg={'pmpruple.6'}
@@ -545,11 +549,12 @@ export const Search:FC =()=> {
             flex={'auto'}
             w={'100%'}
             p={'16px'}
-            border={'1px solid blue'}
+            //border={'1px solid blue'}
         >
             <Box
-                border={'1px solid'}
-                borderColor={'pmpurple.13'}
+                border={'4px solid'}
+                borderColor={'pmpurple.12'}
+                borderRadius={'10px'}
                 bg={'pmpurple.3'}
                 flex={'auto'}
             >

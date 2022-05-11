@@ -41,7 +41,6 @@ export const ModalForIdentNoUseParams:FC=()=> {
             {/*    tabIndex={-1}*/}
             {/*    aria-label='Focus moved to this box'>*/}
             {/*</Box>*/}
-
             <Modal finalFocusRef={finalRef} isOpen={true} onClose={onClose} blockScrollOnMount={true}>
                 <ModalOverlay/>
                 <ModalContent>

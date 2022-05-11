@@ -1,6 +1,9 @@
 export const Button = {
 
     baseStyle: {
+        color: 'pmpurple.27',
+        bgcolor: 'pmpurple.27',
+        borderColor: 'pmpurple.5',
         //bg: 'red',
         lineHeight: "1.2",
         borderRadius: "md",

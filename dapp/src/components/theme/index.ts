@@ -7,6 +7,7 @@ import {Box} from "./components/Box";
 import {colors} from './colors';
 import {Card} from './components/Card';
 import {Heading} from './components/Heading';
+import {Text} from './components/Text';
 import {SocialMediaLinks} from "./components/SocialMediaLinks";
 import {Link} from "./components/Link";
 import {Divider} from "./components/Divider";
@@ -24,6 +25,7 @@ const theme = extendTheme({
         SocialMediaLinks,
         Link,
         Divider,
+        Text,
     }
 });
 export default theme;
