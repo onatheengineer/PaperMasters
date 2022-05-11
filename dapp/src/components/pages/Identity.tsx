@@ -80,11 +80,17 @@ export const Identity:FC=()=> {
 
     const logicDescriptionMemo = useMemo(() => {
         console.log(useGetSingleAccountQueryQuery.data, walletAcc)
-        if(useGetSingleAccountQueryQuery.isSuccess){
-            if (useGetSingleAccountQueryQuery.data!.Item.ownerDescription !== undefined && useGetSingleAccountQueryQuery.data!.Item.ownerDescription.length > 0) {
-                return (
-                    useGetSingleAccountQueryQuery.data!.Item.ownerDescription
-                )
+        if (useGetSingleAccountQueryQuery.isSuccess) {
+            if (useGetSingleAccountQueryQuery.data !== undefined) {
+                if (useGetSingleAccountQueryQuery.data.Item !== undefined) {
+                    if (useGetSingleAccountQueryQuery.data!.Item.ownerDescription !== undefined) {
+                        if (useGetSingleAccountQueryQuery.data!.Item.ownerDescription.length > 0) {
+                            return (
+                                useGetSingleAccountQueryQuery.data!.Item.ownerDescription
+                            )
+                        }
+                    }
+                }
             }
         }
 
@@ -107,6 +113,7 @@ export const Identity:FC=()=> {
     const {isOpen, onOpen, onClose} = useDisclosure()
     if (!chainId) {
         if (accountArrArr.length > 0) {
+            console.log("Navigate to Array", accountArrArr)
             return <Navigate to={`/identity/${chainIdProviderProvider}/${accountArrArr[0]}`}/>
         }
         return (<ModalForIdentNoUseParams/>)

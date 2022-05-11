@@ -132,8 +132,14 @@ export const Header:FC<ParamsURLInterface> = ({chainIdURL, paramsWalletURL})=> {
     }, [paramsWalletURL, useGetSingleIdentityBCQueryQuery])
 
     const logicNameMemo = useMemo(() => {
-        if(useGetSingleAccountQueryQuery.data != undefined && useGetSingleAccountQueryQuery.data.Item.ownerName!.length > 0 ){
-            return useGetSingleAccountQueryQuery.data.Item.ownerName
+        if(useGetSingleAccountQueryQuery.data != undefined) {
+            if (useGetSingleAccountQueryQuery.data.Item != undefined) {
+                if (useGetSingleAccountQueryQuery.data.Item.ownerName != undefined) {
+                    if (useGetSingleAccountQueryQuery.data.Item.ownerName!.length > 0) {
+                        return useGetSingleAccountQueryQuery.data.Item.ownerName
+                    }
+                }
+            }
         }
         if(useGetSingleIdentityBCQueryQuery.isSuccess){
             return useGetSingleIdentityBCQueryQuery.data.nfiIdentity!.name.split("|||")[0]
@@ -144,15 +150,22 @@ export const Header:FC<ParamsURLInterface> = ({chainIdURL, paramsWalletURL})=> {
     }, [useGetSingleAccountQueryQuery, paramsWalletURL, useGetSingleIdentityBCQueryQuery])
 
     const logicEmailMemo = useMemo(() => {
-        if(useGetSingleAccountQueryQuery.data != undefined && useGetSingleAccountQueryQuery.data.Item.ownerEmail!.length > 0 ){
-            return (
-                <Mailto
-            email={useGetSingleAccountQueryQuery.data.Item.ownerEmail!}
-            subject="Hello PaperMaster"
-            body="Nice to meet you PaperMaster!">
-                <MdOutlineEmail fontSize={'20px'} color={'#5c415c'}/>
-        </Mailto>
-            )
+        if(useGetSingleAccountQueryQuery.data != undefined ) {
+            if (useGetSingleAccountQueryQuery.data.Item != undefined) {
+                if (useGetSingleAccountQueryQuery.data.Item.ownerEmail != undefined) {
+                    if (useGetSingleAccountQueryQuery.data.Item.ownerEmail!.length > 0) {
+
+                        return (
+                            <Mailto
+                                email={useGetSingleAccountQueryQuery.data.Item.ownerEmail!}
+                                subject="Hello PaperMaster"
+                                body="Nice to meet you PaperMaster!">
+                                <MdOutlineEmail fontSize={'20px'} color={'#5c415c'}/>
+                            </Mailto>
+                        )
+                    }
+                }
+            }
         }
         if(useGetSingleIdentityBCQueryQuery.isSuccess){
             return (
