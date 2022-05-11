@@ -74,7 +74,7 @@ export default function secondFooterHome() {
                             Providing fellow Blockchainers with a reputable reputation found on your PaperMasters
                             identity page
                             including a live account ledger, any past contracts you helped create and mentions by
-                            your fellow Blockchains showing that you are the honest trustworthy person the rest of
+                            your fellow Blockchains provides the way you need to authenticate that you are the honest trustworthy person the rest of
                             us know you are.
                         </Text>
                     </Stack>
