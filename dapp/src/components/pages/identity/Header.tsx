@@ -184,7 +184,7 @@ export const Header:FC<ParamsURLInterface> = ({chainIdURL, paramsWalletURL})=> {
 
     return (
         <Flex
-            direction={{sm: "column", md: "row"}}
+            direction={{base:"column", sm: "column", md: "row"}}
             //w={{ sm: "90%", xl: "95%" }}
             align='center'
             left={'10px'}
@@ -199,8 +199,9 @@ export const Header:FC<ParamsURLInterface> = ({chainIdURL, paramsWalletURL})=> {
             pr={'38px'}
             borderRadius="20px"
             transform={{
-                sm: "translateY(45%)",
-                md: "translateY(90%)",
+                base: "translateY(5%)",
+                sm: "translateY(5%)",
+                md: "translateY(45%)",
                 lg: "translateY(75%)",
             }}
         >
@@ -213,7 +214,7 @@ export const Header:FC<ParamsURLInterface> = ({chainIdURL, paramsWalletURL})=> {
 
             <Flex
                 mb={{sm: "10px", md: "0px"}}
-                direction={{sm: "column", md: "row"}}
+                direction={{base:"column", sm: "column", md: "row"}}
                 w={{sm: "100%"}}
                 textAlign={{sm: "center", md: "start"}}
                 align="center"
@@ -300,7 +301,7 @@ export const Header:FC<ParamsURLInterface> = ({chainIdURL, paramsWalletURL})=> {
             </Flex>
             <Flex
                 align="center"
-                direction={{sm: "column", md: "row"}}
+                direction={{base: "column", sm: "column", md: "row"}}
                 w={{sm: "100%"}}
                 //textAlign={'right'}
                 bg={'transparent'}

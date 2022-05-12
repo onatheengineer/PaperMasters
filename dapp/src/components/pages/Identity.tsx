@@ -15,6 +15,7 @@ import ValidationsReports from "./identity/ValidationsReports";
 import ModalForIdentNoUseParams from './identity/ModalForIdentNoUseParams';
 import {AccountLedger} from './identity/AccountLedger'
 import {ParamsURLInterface} from "../../features/accountDB/AccountDBSlice.types";
+import { useMediaQuery } from '@chakra-ui/react'
 import {
     accountArrDBAction,
     paramsChainId,
@@ -33,7 +34,6 @@ import {
 } from "../../features/reactQuery/RTKQuery";
 import chainIdNetworks from "../../features/JSON/chainId.networks.json";
 import {addressHasIdentityBool, singleStructBCAction} from "../../features/accountBC/AccountBCSlice";
-
 export const Identity:FC=()=> {
 //TODO as soon as they connect - redirect them to their identity page - this is important for the hasIdentityBool slice to work
     const {chainId, walletAcc} = useParams();
@@ -140,7 +140,7 @@ export const Identity:FC=()=> {
                         position="relative"
                         display="flex"
                         justifyContent="center"
-                        mb={'60px'}
+                        mb={{base:'160px',md:"30px", lg:"60px"}}
                         top={'0px'}
                         right={'0px'}
                         left={'0px'}
@@ -150,6 +150,7 @@ export const Identity:FC=()=> {
                     />
                     <Header chainIdURL={chainId} paramsWalletURL={walletAcc}/>
                     <Stack p={'10px'}
+
                         //border={'4px solid blue'}
                     >
                         <Box borderRadius='15px' bg='white' p="12px" px="24px" overflow={'none'}>
@@ -173,21 +174,26 @@ export const Identity:FC=()=> {
                         </Box>
                         <Box
                             //border={'1px solid red'}
-                            h={'462px'}
+
                         >
-                            <HStack spacing={'10px'}
+                            <Stack spacing={'10px'}
+                                   direction={{base:"column", sm: "column", md:"column", lg:"row"}}
                                     align='stretch'
                                     justify={'space-evenly'}
                                     //minH={"400px"}
                             >
-                                <Box w='38%' borderRadius='15px' bg='white' p="16px" overflow={'none'}
+                                <Box w={{base:"100%",lg:'38%'}}
+                                     h={'462px'}
+                                     borderRadius='15px' bg='white' p="16px" overflow={'none'}
                                      whiteSpace={"pre-line"}
+                                    display={{base:"none",lg:"block"}}
                                 >
                                     <ValidationsReports/>
                                 </Box>
-                                <Box w='380px' borderRadius='15px' bg='white'
+                                <Box w={{base:"100%",lg:'380px'}}  borderRadius='15px' bg='white'
                                      px="16px"
                                      py={'28px'}
+                                     h={'462px'}
                                      overflow={'none'} whiteSpace={'break-spaces'}
                                 >
                                     {useGetSingleIdentityBCQueryQuery.isSuccess ?
@@ -243,8 +249,8 @@ export const Identity:FC=()=> {
                                     }
                                 </Box>
                                 <Box
-                                    maxH={'460px'}
-                                    w='38%' borderRadius='15px' bg='white' p="12px" pb={'16px'}
+                                    h={'462px'}
+                                    w={{base:"100%",lg:'38%'}} borderRadius='15px' bg='white' p="12px" pb={'16px'}
                                     overflow={'none'}
                                     whiteSpace={"pre-line"}
                                 >
@@ -252,6 +258,7 @@ export const Identity:FC=()=> {
                                         overflow={'none'}
                                         whiteSpace={"pre-line"}
                                         h={'100%'}
+
                                         //w={'30vW'}
                                         //border={'1px solid blue'}
                                     >
@@ -265,22 +272,22 @@ export const Identity:FC=()=> {
                                         <AccountLedger chainIdURL={chainId} paramsWalletURL={walletAcc}/>
                                     </Box>
                                 </Box>
-                            </HStack>
+                            </Stack>
                         </Box>
                         <Stack
-                            maxH={'485px'}
+                            direction={{base: "column", sm: "column", md:"column", lg:"row"}}
                             //border={'1px solid blue'}
-                            direction={{base: 'column', md: 'row'}}
                         >
                             <Flex
                                 flexDirection={'column'}
-                                w={'50%'}
+                                w={{base:"100%",lg:'50%'}}
                                 p="16px"
                                 //my="24px"
                                 //mx={{xl: '32px'}}
                                 borderRadius='15px'
                                 bg='white'
                                 px="24px"
+                                h={"462px"}
                                 //border={'1px solid red'}
 
                             >
@@ -331,13 +338,14 @@ export const Identity:FC=()=> {
                             </Flex>
                             <Flex
                                 flexDirection={'column'}
-                                w={'50%'}
+                                w={{base:"100%",lg:'50%'}}
                                 p="16px"
                                 //my="24px"
                                 //mx={{xl: '32px'}}
                                 borderRadius='15px'
                                 bg='white'
                                 px="24px"
+                                h={"462px"}
                                 //border={'1px solid red'}
                             >
                                 <Box
