@@ -275,33 +275,33 @@ export const Search:FC =()=> {
             Header: <Text style={{whiteSpace: 'nowrap'}}> Origin Date </Text>,
             accessor: 'creation',
             Cell: (el) => {
-                // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-                const creationDateObject = new Date(el.row.original.creation!);
-                const creationDateFormatted = `${creationDateObject.toLocaleString('en-us', {month: 'long'})} ${creationDateObject.getDate()}, ${creationDateObject.getFullYear()}`;
-                const originD = el.row.original.origin;
-                console.log("originD", originD)
-                if (originD === null || originD === undefined || originD === "") {
-                    return (
-                        <Center>
-                            <Text fontSize={'12px'} style={{whiteSpace: 'nowrap'}}> {creationDateFormatted} </Text>
-                        </Center>
-                    )
-                } else {
-                    const originDateObject = new Date(parseInt(originD!) * 1000);
-                    const originDateFormatted = `${originDateObject.toLocaleString('en-us', {month: 'long'})} ${originDateObject.getDate()}, ${originDateObject.getFullYear()}`
-                    return (
-                        <>
+                if(el.row.original.creation !== null){
+                    const creationDateObject = new Date(el.row.original.creation);
+                    const creationDateFormatted = `${creationDateObject.toLocaleString('en-us', {month: 'long'})} ${creationDateObject.getDate()}, ${creationDateObject.getFullYear()}`;
+                    const originD = el.row.original.origin;
+                    console.log("originD", originD)
+                    if (originD === null || originD === undefined || originD === "") {
+                        return (
                             <Center>
-                                <VStack>
-                                    <Tooltip
-                                        //hasArrow
-                                        label={originDateFormatted}
-                                        placement={'bottom-end'} border={'1px solid #694b69'}
-                                        borderRadius={'3px'} bg='pmpurple.5' color='pmpurple.13' m={'-6px'}
-                                        aria-label='A tooltip'
-                                        bgColor={'white'}
-                                        fontSize={'12px'}
-                                    >
+                                <Text fontSize={'12px'} style={{whiteSpace: 'nowrap'}}> {creationDateFormatted} </Text>
+                            </Center>
+                        )
+                    } else {
+                        const originDateObject = new Date(parseInt(originD!) * 1000);
+                        const originDateFormatted = `${originDateObject.toLocaleString('en-us', {month: 'long'})} ${originDateObject.getDate()}, ${originDateObject.getFullYear()}`
+                        return (
+                            <>
+                                <Center>
+                                    <VStack>
+                                        <Tooltip
+                                            //hasArrow
+                                            label={originDateFormatted}
+                                            placement={'bottom-end'} border={'1px solid #694b69'}
+                                            borderRadius={'3px'} bg='pmpurple.5' color='pmpurple.13' m={'-6px'}
+                                            aria-label='A tooltip'
+                                            bgColor={'white'}
+                                            fontSize={'12px'}
+                                        >
                                         <span>
                                            <PMsvgIcon
                                                width="28"
@@ -309,15 +309,17 @@ export const Search:FC =()=> {
                                                viewBox="0 0 28 28"
                                            />
                                         </span>
-                                    </Tooltip>
-                                    <Text fontSize={'12px'}
-                                          style={{whiteSpace: 'nowrap'}}> {creationDateFormatted}</Text>
-                                </VStack>
-                            </Center>
-                        </>
-                    )
+                                        </Tooltip>
+                                        <Text fontSize={'12px'}
+                                              style={{whiteSpace: 'nowrap'}}> {creationDateFormatted}</Text>
+                                    </VStack>
+                                </Center>
+                            </>
+                        )
+                    }
                 }
-            }
+                }
+
         },
         {
             Header: <Text style={{whiteSpace: 'nowrap'}}> Wallet Account </Text>,
