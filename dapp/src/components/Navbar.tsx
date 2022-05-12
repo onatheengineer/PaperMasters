@@ -59,7 +59,7 @@ export default function WithSubnavigation() {
                     flex={{base: 1, md: 'auto'}}
                     ml={{base: -2}}
                     //border={'1px solid blue'}
-                    display={{base: 'flex', md: 'flex', lg: 'none', xl: 'none'}}>
+                    display={{base: 'flex', md: 'flex', lg: 'flex', xl: 'none'}}>
                     <IconButton
                         onClick={onToggle}
                         icon={
@@ -80,7 +80,7 @@ export default function WithSubnavigation() {
                         <PMLogoFull fill={'#5c415c'} width={'155px'}/>
                     </Link>
 
-                    <Flex display={{base: 'none', lg: 'flex'}} ml={10}>
+                    <Flex display={{base: 'none', xl: 'flex'}} ml={10}>
                         <DesktopNav/>
                     </Flex>
                 </Flex>

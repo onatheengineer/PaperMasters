@@ -226,7 +226,8 @@ export const Register:FC=()=> {
 
     if(mintSucceededSucceeded === 'succeeded'){
         return ( <Navigate to={`/identity/${chainIdProviderProvider}/${accountArrArr}`} /> )}
-
+    if(useGetSingleIdentityBCQueryQuery.isSuccess){
+        return ( <Navigate to={`/identity/${chainIdProviderProvider}/${accountArrArr}`} /> )}
     return (
         <Box
             h={'100%'}
