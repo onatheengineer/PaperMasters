@@ -81,7 +81,7 @@ export const AccountLedger:FC<ParamsURLInterface>=({chainIdURL, paramsWalletURL}
                                             color={'pmpurple.13'}
                                             whiteSpace={'nowrap'}
                                         >
-                                            <Tag bgColor={"pmpurple.10"} color={"white"}  fontSize={"9pt"}>
+                                            <Tag bgColor={"pmpurple.7"} color={"white"}  fontSize={"9pt"}>
                                                 Tx
                                             </Tag>  {el.hash}
                                         </Text>
@@ -99,7 +99,7 @@ export const AccountLedger:FC<ParamsURLInterface>=({chainIdURL, paramsWalletURL}
                                             fontWeight="400"
                                             whiteSpace={'nowrap'}
                                         >
-                                            <Tag fontSize={"9pt"}  bgColor={"pmpurple.13"} color={"white"}>{timeStampShort}</Tag> <Tag fontSize={"9pt"} bgColor={"pmpurple.10"} color={"white"}>Amount</Tag> {valueFormatted}
+                                            <Tag fontSize={"9pt"}  bgColor={"pmpurple.13"} color={"white"}>{timeStampShort}</Tag> <Tag fontSize={"9pt"} bgColor={"pmpurple.7"} color={"white"}>Amount</Tag> {valueFormatted}
                                         </Text>
                                         </Tooltip>
                                         <Box
@@ -119,7 +119,7 @@ export const AccountLedger:FC<ParamsURLInterface>=({chainIdURL, paramsWalletURL}
                                             whiteSpace={'nowrap'}
                                             fontWeight="400"
                                         >
-                                          <Tag  fontSize={"9pt"} bgColor={"pmpurple.10"} color={"white"}>From</Tag>  {el.from}
+                                          <Tag  fontSize={"9pt"} bgColor={"pmpurple.7"} color={"white"}>From</Tag>  {el.from}
                                         </Text>
 
 
@@ -128,7 +128,7 @@ export const AccountLedger:FC<ParamsURLInterface>=({chainIdURL, paramsWalletURL}
                                             color={'pmpurple.13'}
                                             whiteSpace={'nowrap'}
                                             fontWeight="400"
-                                        > <Tag  fontSize={"9pt"} bgColor={"pmpurple.10"} color={"white"}>To</Tag> {el.to !== null ?
+                                        > <Tag  fontSize={"9pt"} bgColor={"pmpurple.7"} color={"white"}>To</Tag> {el.to !== null ?
                                                 el.to
                                                 :  <Box
                                                 display={"inline"}
