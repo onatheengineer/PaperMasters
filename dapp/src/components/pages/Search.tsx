@@ -66,7 +66,6 @@ const FilterComponent: FC<interfaceFilterComponent> = ( { filterText, onClick, o
                    onChange={onFilter}
                    borderRadius={'0px'}
             />
-
                 <InputRightAddon
                     p='0'
                     borderColor={"pmpurple.6"}
@@ -472,9 +471,12 @@ export const Search:FC =()=> {
         return (
             <Box>
                 <HStack>
-                    <FilterComponent onFilter={(e: any) => setFilterWallets(e.target.value)} onClick={handleClear}
+                    <FilterComponent onFilter={(e: any) => setFilterWallets(e.target.value)}
+                                     onClick={handleClear}
                                      activateButton={(filteredItems.length !== 0)}
-                                     filterText={filterWallets} text={"reset"} placeHolder={"Search Wallet Account"}
+                                     filterText={filterWallets}
+                                     text={"reset"}
+                                     placeHolder={"Search Wallet Account"}
                                      idType={"Search"}/>
                     <Button
                     bg={'pmpruple.6'}

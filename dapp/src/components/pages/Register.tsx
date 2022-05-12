@@ -1,6 +1,7 @@
 import * as React from 'react';
 import {useState, useEffect, useMemo} from "react";
 import type {FC} from 'react';
+import {Navigate} from 'react-router-dom'
 import {
     FormControl, FormLabel, Input, Stack, Box, Button, Heading, Text, Flex,
     Center,
@@ -34,6 +35,8 @@ import {
 import AvatarNFI from "../avatar/AvatarNFI";
 import {accountArrAction} from "../../features/accountBC/AccountBCSlice";
 import {MintingNFIStruct} from "../../features/contractsBC/mintNFI/mintNFISlice.types";
+import {useGetSingleIdentityBCQuery} from "../../features/reactQuery/RTKQuery";
+import {Link as ReachLink} from "react-router-dom";
 
 const ColorRGBToString=(colorResultRGB: ColorResult)=>{
     const colorStringRGB = `rgba(${colorResultRGB.rgb.r}, ${colorResultRGB.rgb.g}, ${colorResultRGB.rgb.b}, ${colorResultRGB.rgb.a})`
@@ -43,8 +46,7 @@ const ColorRGBToString=(colorResultRGB: ColorResult)=>{
 export const Register:FC=()=> {
     const dispatch = useAppDispatch();
     const singleNFIReceiptDBDB = useAppSelector((state) => state.accountDB.singleNFIReceiptDB);
-    const addressHasIdentityBoolBool = useAppSelector((state) => state.accountBC.addressHasIdentityBool);
-    const getStructBCBC = useAppSelector((state) => state.accountBC.getStructBC);
+    const chainIdProviderProvider = useAppSelector((state) => state.accountBC.chainIdProvider);
     const accountArrArr = useAppSelector((state) => state.accountBC.accountArr);
     const gasPricePrice = useAppSelector((state) => state.nfi.mintNFI.gasPrice);
     const mintSucceededSucceeded = useAppSelector((state) => state.nfi.mintNFI.mintSucceeded);
@@ -57,7 +59,10 @@ export const Register:FC=()=> {
     const [organization, setOrganization] = useState<string | "">("");
     const [website, setWebsite] = useState<string | "">("");
     const [uniqueYou, setUniqueYou] = useState<string | "">("");
-
+    const useGetSingleIdentityBCQueryQuery = useGetSingleIdentityBCQuery({
+        chainIdURL: chainIdProviderProvider!,
+        paramsWalletURL: accountArrArr[0]!
+    });
     const defaultColorBG = {
         hex: '#f2eef2',
         rgb: {r: 242, g: 238, b: 242, a: 1},
@@ -190,7 +195,7 @@ export const Register:FC=()=> {
             setIsModalOpen(true);
             return (['Connect Wallet Account for Access', "Please use MetaMask or WalletConnect to connect your wallet."])
         }
-        if (addressHasIdentityBoolBool && mintSucceededSucceeded === 'idle') {
+        if (useGetSingleIdentityBCQueryQuery.isSuccess) {
             setIsModalOpen(true);
             return (['You have already Minted',
                     <span>Connected wallet account is already registered, each wallet account can have only one identity. <br/><br/> In the future, you will be able to mint an NFI for each contract that you own.</span>]
@@ -217,7 +222,10 @@ export const Register:FC=()=> {
 
         setIsModalOpen(false)
         return ([null, null])
-    }, [accountArrArr, getStructBCBC, singleNFIReceiptDBDB, addressHasIdentityBoolBool, mintSucceededSucceeded])
+    }, [accountArrArr, singleNFIReceiptDBDB, useGetSingleIdentityBCQueryQuery, mintSucceededSucceeded])
+
+    if(mintSucceededSucceeded === 'succeeded'){
+        return ( <Navigate to={`/identity/${chainIdProviderProvider}/${accountArrArr}`} /> )}
 
     return (
         <Box
@@ -948,8 +956,7 @@ export const Register:FC=()=> {
 
                                 <Center>
 
-                                    {/*&& accBalanceErr !== ""*/}
-                                    {name !== "" && email !== "" ?
+                                    {name !== "" && email !== "" && ( mintSucceededSucceeded !== 'alreadyMinted' ) ?
                                         <Button
                                             border={'1px solid'}
                                             borderColor={'pmpurple.13'}
@@ -961,7 +968,7 @@ export const Register:FC=()=> {
                                                 boxShadow: 'md',
                                             }}
                                              onClick={submitMintHandler}
-                                            isLoading={submitButtonClicked}
+                                            isLoading={submitButtonClicked }
                                             px={'12px'}
                                             loadingText='Minting'
                                             color={"pmpurple.13"}
