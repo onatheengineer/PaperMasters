@@ -289,7 +289,7 @@ const MobileNav = () => {
         <Stack
             bg={useColorModeValue('pmpurple.3', 'pmpurple.3')}
             p={4}
-            display={{lg: 'none'}}>
+            display={{xl: 'none'}}>
             {NAV_ITEMS.map((navItem) => {
                 //console.log(navItem)
                     return (
