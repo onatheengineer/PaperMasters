@@ -191,7 +191,6 @@ export const AvatarNFI:FC<AvatarNFIInterface>=( {walletAccount,
                                       color={'pmpurple.13'}>
                                     Origin Date {originDateFormatted}
                                 </Text>
-
                                 <Box
                                     position={'absolute'}
                                     bottom={'0px'}
@@ -204,7 +203,9 @@ export const AvatarNFI:FC<AvatarNFIInterface>=( {walletAccount,
                                     bg={'pmpurple.10'}
                                 >
                                     <Text p={'6px'} fontSize={'9pt'} color={'white'}
-                                          whiteSpace={'break-spaces'}>
+                                          whiteSpace={'break-spaces'}
+                                          noOfLines={1}
+                                    >
                                         {walletAccount}
                                     </Text>
                                 </Box>

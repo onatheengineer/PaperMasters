@@ -52,7 +52,6 @@ const MintNFISlice = createSlice ({
             state.axiosPOSTReceiptStatus = action.payload
         },
     },
-
 });
 
 export const {mintSucceeded, gasForMinting, mintingErr, mintStatusBC, accBalanceErr, accBalance, axiosPOSTReceiptStatus} = MintNFISlice.actions;
