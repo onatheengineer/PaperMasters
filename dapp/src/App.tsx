@@ -19,9 +19,11 @@ import {ReactQueryDevtools} from 'react-query/devtools';
 import {Loading} from "./features/reactQuery/Loading";
 import WalletConnect from "@walletconnect/client";
 import QRCodeModal from "@walletconnect/qrcode-modal";
+import {useGlobalToast} from "./features/toast/hooks/useGlobalToast";
 
 function App() {
     const dispatch = useAppDispatch();
+    const toast = useGlobalToast();
     useEffect(() => {
         if(window.ethereum){
             dispatch(accountArrMetaMaskAction());
@@ -68,8 +70,8 @@ function App() {
 // Subscribe to connection events
             connector.on("connect", (error, payload) => {
                 if (error) {
-                    throw error;
                     console.error(error)
+                    throw error;
                 }
                 // Get provided accounts and chainId
                 const { accounts, chainId } = payload.params[0];
@@ -82,8 +84,8 @@ function App() {
 
             connector.on("session_update", (error, payload) => {
                 if (error) {
-                    throw error;
                     console.error(error)
+                    throw error;
                 }
 
                 // Get updated accounts and chainId
@@ -95,8 +97,8 @@ function App() {
 
             connector.on("disconnect", (error, payload) => {
                 if (error) {
-                    throw error;
                     console.error(error)
+                    throw error;
                 }
 
                 // Delete connector

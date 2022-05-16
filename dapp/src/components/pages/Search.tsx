@@ -2,30 +2,12 @@ import * as React from 'react';
 import {useState, useEffect, useMemo, MouseEventHandler, ChangeEventHandler, useRef, FormEvent} from "react";
 import type {FC} from 'react';
 import {
-    Box,
-    Flex,
-    Input,
-    Button,
-    HStack,
-    InputGroup,
-    InputRightAddon,
-    Text,
-    Tooltip,
-    Heading,
-    Table,
-    Thead,
-    Tbody,
-    Tr,
-    Th,
-    Td,
-    Center,
-    VStack,
-    Popover,
-    PopoverBody,
-    PopoverContent,
-    PopoverTrigger,
-    Modal,
-    ModalOverlay,
+    Box, Flex, Input, Button, HStack,
+    InputGroup, InputRightAddon, Text,
+    Tooltip, Heading, Table, Thead,
+    Tbody, Tr, Th, Td, Center, VStack,
+    Popover, PopoverBody, PopoverContent, PopoverTrigger,
+    Modal, ModalOverlay,
     ModalContent, ModalHeader, ModalCloseButton, ModalBody, FormControl, FormLabel, ModalFooter,
 } from '@chakra-ui/react';
 import {Link as ReachLink, useNavigate} from "react-router-dom";
@@ -85,7 +67,6 @@ const FilterComponent: FC<interfaceFilterComponent> = ( { filterText, onClick, o
 
 // data provides access to your row data
 // interface DataRow {
-//     //TODO: chainId should display the actual blockchain name and not just the number
 //     chainId: string;
 //     walletAccount?: string;
 //     name?: string;
@@ -96,51 +77,56 @@ const FilterComponent: FC<interfaceFilterComponent> = ( { filterText, onClick, o
 //     identityStruct<BCStruct>;
 // }
 
-const ExpandedAvatarComponent: FC<ExpanderComponentProps<BCStruct[]>> = ({ data }) => {
-    console.log("this is Search - Data", data)
-    const addressHasIdentityBoolBool = useAppSelector((state) => state.accountBC.addressHasIdentityBool);
-    if (!addressHasIdentityBoolBool) {
-        return null;
-    }
-    const getAllStructBCBC = useAppSelector((state) => state.accountBC.getAllStructBC);
-    const dispatch = useAppDispatch();
-    dispatch(allStructBCAction);
-    const identityStruct = data['getAllStructBCBC']
-    if (getAllStructBCBC[0].length === 0) {
-        return null;
-    }
-    return (
-        identityStruct.map(
-            <AvatarNFI
-                walletAccount={identityStruct[0]}
-                name={identityStruct[1].split("|||")[0]}
-                nameColor={identityStruct[1].split("|||")[1]}
-                email={identityStruct[2].split("|||")[0]}
-                emailColor={identityStruct[2].split("|||")[1]}
-                profession={identityStruct[3].split("|||")[0]}
-                professionColor={identityStruct[3].split("|||")[1]}
-                organization={identityStruct[4].split("|||")[0]}
-                organizationColor={identityStruct[4].split("|||")[1]}
-                slogan={identityStruct[5].split("|||")[0]}
-                sloganColor={identityStruct[5].split("|||")[1]}
-                website={identityStruct[6].split("|||")[0]}
-                websiteColor={identityStruct[6].split("|||")[1]}
-                uniqueYou={identityStruct[7].split("|||")[0]}
-                uniqueYouColor={identityStruct[7].split("|||")[1]}
-                avatarBG={identityStruct[8]}
-                originDate={parseInt(identityStruct[9])}
-            />
-        )
-    )
-};
+// const ExpandedAvatarComponent: FC<ExpanderComponentProps<BCStruct[]>> = ({ data }) => {
+//     console.log("this is Search - Data", data)
+//     const addressHasIdentityBoolBool = useAppSelector((state) => state.accountBC.addressHasIdentityBool);
+//     if (!addressHasIdentityBoolBool) {
+//         return null;
+//     }
+//     const getAllStructBCBC = useAppSelector((state) => state.accountBC.getAllStructBC);
+//     const dispatch = useAppDispatch();
+//     dispatch(allStructBCAction);
+//     const identityStruct = data['getAllStructBCBC']
+//     if (getAllStructBCBC[0].length === 0) {
+//         return null;
+//     }
+//     return (
+//         identityStruct.map(
+//             <AvatarNFI
+//                 walletAccount={identityStruct[0]}
+//                 name={identityStruct[1].split("|||")[0]}
+//                 nameColor={identityStruct[1].split("|||")[1]}
+//                 email={identityStruct[2].split("|||")[0]}
+//                 emailColor={identityStruct[2].split("|||")[1]}
+//                 profession={identityStruct[3].split("|||")[0]}
+//                 professionColor={identityStruct[3].split("|||")[1]}
+//                 organization={identityStruct[4].split("|||")[0]}
+//                 organizationColor={identityStruct[4].split("|||")[1]}
+//                 slogan={identityStruct[5].split("|||")[0]}
+//                 sloganColor={identityStruct[5].split("|||")[1]}
+//                 website={identityStruct[6].split("|||")[0]}
+//                 websiteColor={identityStruct[6].split("|||")[1]}
+//                 uniqueYou={identityStruct[7].split("|||")[0]}
+//                 uniqueYouColor={identityStruct[7].split("|||")[1]}
+//                 avatarBG={identityStruct[8]}
+//                 originDate={parseInt(identityStruct[9])}
+//             />
+//         )
+//     )
+// };
 
 export const Search:FC =()=> {
-
+    const dispatch = useAppDispatch();
+    const navigate = useNavigate();
     const [filterWallets, setFilterWallets] = useState<string>('');
     //const [searchWalletAccount, setWalletAccount] = useState<string>('');
     const [resetPaginationToggle, setResetPaginationToggle] = useState<boolean>(false);
     const [isIdentityModalOpen, setIdentityModalOpen] = useState<boolean>(false);
-    const dispatch = useAppDispatch();
+    const initialRef = useRef<HTMLInputElement>(null)
+    const initialRefChain = useRef<HTMLInputElement>(null)
+    const [typedText, setTypedText] = useState<string>("");
+    const [typedTextChainId, setTypedTextChainId] = useState<string>("");
+
 
     useEffect(() => {
         dispatch(allAccountDictionaryDBAction());
@@ -148,8 +134,6 @@ export const Search:FC =()=> {
         dispatch(allStructBCAction());
     }, []);
 
-    //TODO write a funtion to convert chainId into network name
-    //TODO add timestamp in my account DB
     const [currentPage, setCurrentPage] = useState(0);
     const [selectedWallet, setSelectedWallet] = useState<BCStruct[]>([]);
     const accountQuery = useGetAllAccountQuery ();
@@ -218,8 +202,6 @@ export const Search:FC =()=> {
         reported: number | undefined,
         report: string
     };
-
-
 
     const data = useMemo((): Cols[] => {
         console.log(accountQuery)
@@ -444,7 +426,6 @@ export const Search:FC =()=> {
             }
         }
     );
-
     const subHeaderComponentMemo = useMemo(() => {
         const handleClear = () => {
             if (filterWallets) {
@@ -455,11 +436,6 @@ export const Search:FC =()=> {
         const addWalletAccountHandler = () => {
             setIdentityModalOpen(true)
         };
-        const initialRef = useRef<HTMLInputElement>(null)
-        const initialRefChain = useRef<HTMLInputElement>(null)
-        const navigate = useNavigate();
-        const [typedText, setTypedText] = useState<string>("");
-        const [typedTextChainId, setTypedTextChainId] = useState<string>("");
         const inputTextHandler = (e: FormEvent<HTMLInputElement>) => {
             setTypedText(e.currentTarget.value);
         };
@@ -468,8 +444,7 @@ export const Search:FC =()=> {
         };
         const navToProfilePageHandler = ()=>{
             navigate(`/identity/${initialRefChain.current?.value}/${initialRef.current?.value}`);
-            console.log(initialRef.current?.value);
-        }
+        };
         return (
             <Box>
                 <HStack>
@@ -537,7 +512,7 @@ export const Search:FC =()=> {
                 </HStack>
             </Box>
         );
-    }, [filterWallets, setFilterWallets, resetPaginationToggle, filteredItems]);
+    }, [filterWallets, resetPaginationToggle, filteredItems]);
 
     const {getTableProps, getTableBodyProps, headerGroups, rows, prepareRow} =
         useTable({columns, data}, useSortBy, usePagination);
@@ -559,7 +534,7 @@ export const Search:FC =()=> {
                 border={'4px solid'}
                 borderColor={'pmpurple.12'}
                 borderRadius={'10px'}
-                bg={'pmpurple.3'}
+                bg={'pmpurple.1'}
                 flex={'auto'}
             >
                 <Heading

@@ -26,7 +26,6 @@ contract PaperMastersNFI is ERC721, Ownable {
     identity[] _dictionaryNFIs;
     mapping(address => uint256) totalIdentities;
     mapping(address => uint256) _supportPMDonations;
-
     struct swanNFT {
         address giver;
         address receiver;
