@@ -2,8 +2,8 @@
 FROM node:14.18.2
 RUN mkdir -p /usr/scr/app
 
-COPY package.json /usr/scr/app/package.json
-COPY package-lock.json /usr/scr/app/package-lock.json
+COPY package.json /usr/scr/app
+COPY package-lock.json /usr/scr/app
 
 WORKDIR /usr/scr/app
 RUN npm install --silent
