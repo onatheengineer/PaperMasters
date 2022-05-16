@@ -80,6 +80,7 @@ export const AccountLedger:FC<ParamsURLInterface>=({chainIdURL, paramsWalletURL}
                                             isTruncated={true}
                                             color={'pmpurple.13'}
                                             whiteSpace={'nowrap'}
+                                            w={{base:"250px",sm:"notset"}}
                                         >
                                             <Tag bgColor={"pmpurple.7"} color={"white"}  fontSize={"9pt"}>
                                                 Tx

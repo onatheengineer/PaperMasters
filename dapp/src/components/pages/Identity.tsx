@@ -126,10 +126,12 @@ export const Identity:FC=()=> {
             display='flex'
             flexDirection='column'
             //align='center'
+            w={"100%"}
         >
             {walletAcc !== undefined && walletAcc !== 'undefined' && walletAcc !== "" && walletAcc.length !== 0 ?
                 <Stack
                     //border={'4px solid yellow'}
+                    w={"100%"}
                 >
                     <Box
                         bgImage={bgImage}
@@ -150,10 +152,10 @@ export const Identity:FC=()=> {
                     />
                     <Header chainIdURL={chainId} paramsWalletURL={walletAcc}/>
                     <Stack p={'10px'}
-
+                        w={"100%"}
                         //border={'4px solid blue'}
                     >
-                        <Box borderRadius='15px' bg='white' p="12px" px="24px" overflow={'none'}>
+                        <Box borderRadius='15px' bg='white' p="12px" px="24px" overflow={'none'} w={"100%"}>
                             {/*<Heading p="12px 5px" mb="0px">*/}
                             {/*    <Text fontSize="16px" color='pmpurple.13' fontWeight="bold" align={'left'}>*/}
                             {/*        Description*/}

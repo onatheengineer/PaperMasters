@@ -68,9 +68,9 @@ export const Projects=()=> {
     ]
 
     return (
-        <Flex
-            h={'100%'}
-            w={'100%'}
+        <Box
+            //h={'100%'}
+            w={"300px"}
             px="5px"
             mt={'5px'}
             //border={'1px solid orange'}
@@ -78,8 +78,8 @@ export const Projects=()=> {
             display={'flex'}
         >
             <Grid
-                templateColumns={{sm: "1fr", md: "1fr 1fr", xl: "repeat(5, 1fr)"}}
-                templateRows={{sm: "1fr 1fr 1fr auto", md: "1fr 1fr", xl: "1fr"}}
+                templateColumns={{base: "1fr 1fr"}}
+                templateRows={{base: "1fr 1fr"}}
                 gap="24px"
             >
                 <Flex
@@ -93,67 +93,7 @@ export const Projects=()=> {
                     //display={'inline-block'}
                     flexGrow={1}
                 >
-                    {/*<Box*/}
-                    {/*    position={'relative'}*/}
-                    {/*    height={'600px'}*/}
-                    {/*    width={'full'}*/}
-                    {/*    overflow={'hidden'}>*/}
 
-                    {/*    <IconButton*/}
-                    {/*        aria-label="left-arrow"*/}
-                    {/*        variant="ghost"*/}
-                    {/*        position="absolute"*/}
-                    {/*        left={side}*/}
-                    {/*        top={top}*/}
-                    {/*        transform={'translate(0%, -50%)'}*/}
-                    {/*        zIndex={2}*/}
-                    {/*        onClick={() => slider?.slickPrev()}>*/}
-                    {/*        <BiLeftArrowAlt size="40px" />*/}
-                    {/*    </IconButton>*/}
-                    {/*    /!* Right Icon *!/*/}
-                    {/*    <IconButton*/}
-                    {/*        aria-label="right-arrow"*/}
-                    {/*        variant="ghost"*/}
-                    {/*        position="absolute"*/}
-                    {/*        right={side}*/}
-                    {/*        top={top}*/}
-                    {/*        transform={'translate(0%, -50%)'}*/}
-                    {/*        zIndex={2}*/}
-                    {/*        onClick={() => slider?.slickNext()}>*/}
-                    {/*        <BiRightArrowAlt size="40px" />*/}
-                    {/*    </IconButton>*/}
-                    {/* Slider */}
-                    {/*    <Slider {...settings} ref={(slider:any) => setSlider(slider)}>*/}
-                    {/*        {project.map((project, index) => (*/}
-                    {/*            <Box*/}
-                    {/*                key={index}*/}
-                    {/*                height={'6xl'}*/}
-                    {/*                position="relative"*/}
-                    {/*                backgroundPosition="center"*/}
-                    {/*                backgroundRepeat="no-repeat"*/}
-                    {/*                backgroundSize="cover"*/}
-                    {/*                backgroundImage={`url(${project.image})`}>*/}
-                    {/*                /!* This is the block you need to change, to customize the caption *!/*/}
-                    {/*                <Container size="container.lg" height="600px" position="relative">*/}
-                    {/*                    <Stack*/}
-                    {/*                        spacing={6}*/}
-                    {/*                        w={'full'}*/}
-                    {/*                        maxW={'lg'}*/}
-                    {/*                        position="absolute"*/}
-                    {/*                        top="50%"*/}
-                    {/*                        transform="translate(0, -50%)">*/}
-                    {/*                        <Heading fontSize={{ base: '3xl', md: '4xl', lg: '5xl' }}>*/}
-                    {/*                            {project.title}*/}
-                    {/*                        </Heading>*/}
-                    {/*                        <Text fontSize={{ base: 'md', lg: 'lg' }} color="GrayText">*/}
-                    {/*                            {project.text}*/}
-                    {/*                        </Text>*/}
-                    {/*                    </Stack>*/}
-                    {/*                </Container>*/}
-                    {/*            </Box>*/}
-                    {/*        ))}*/}
-                    {/*    </Slider>*/}
-                    {/*</Box>*/}
 
                     <Box mb="20px" position="relative" borderRadius="15px">
                         <Image src={ImageArchitect1} borderRadius="15px"/>
@@ -179,7 +119,7 @@ export const Projects=()=> {
                             My future project...
                         </Text>
                         <Text fontSize="md" color={'pmpurple.13'} fontWeight="400" mb="20px">
-                            As I look through my bucket list, I find my next endeavor...
+                            As I look through my bucket list...
                         </Text>
                         <Flex justifyContent="space-between">
                             <Button
@@ -204,7 +144,7 @@ export const Projects=()=> {
                     {/*</Carousel>*/}
                 </Flex>
             </Grid>
-        </Flex>
+        </Box>
     )
 };
 

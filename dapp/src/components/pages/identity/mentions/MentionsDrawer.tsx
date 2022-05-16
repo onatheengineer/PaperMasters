@@ -92,7 +92,7 @@ export const MentionsDrawer:FC<interfaceMentionsDrawer>=({chainIdURL, paramsWall
                 </DrawerHeader>
                 <DrawerBody>
                     <Box
-                    border={'1px solid pink'}
+                    //border={'1px solid pink'}
                     h={'100%'}
                     >
                         <Flex
