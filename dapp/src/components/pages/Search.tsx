@@ -8,7 +8,7 @@ import {
     Tbody, Tr, Th, Td, Center, VStack,
     Popover, PopoverBody, PopoverContent, PopoverTrigger,
     Modal, ModalOverlay,
-    ModalContent, ModalHeader, ModalCloseButton, ModalBody, FormControl, FormLabel, ModalFooter,
+    ModalContent, ModalHeader, ModalCloseButton, ModalBody, FormControl, FormLabel, ModalFooter, toast,
 } from '@chakra-ui/react';
 import {Link as ReachLink, useNavigate} from "react-router-dom";
 import {useAppDispatch, useAppSelector} from "../../app/hooks";
@@ -17,7 +17,7 @@ import IdentityEntryModal from "../../utils/IdentityEntryModal";
 import AvatarNFI from "../avatar/AvatarNFI";
 import {allAccountDictionaryDBAction, allNFIReceiptDBAction} from "../../features/accountDB/AccountDBSlice";
 import {BCStruct} from "../../features/accountBC/AccountBCSlice.types";
-import {allStructBCAction} from "../../features/accountBC/AccountBCSlice";
+import {accountArr, allStructBCAction} from "../../features/accountBC/AccountBCSlice";
 import {useTable, Column, useSortBy, usePagination} from "react-table";
 import {
     useGetAllAccountQuery,
@@ -27,6 +27,7 @@ import {HiOutlineDocumentReport} from "react-icons/hi";
 import {MdOutlineLibraryAddCheck} from "react-icons/md";
 import chainIdNetworkJSON from '../../features/JSON/chainId.networks.json'
 import {PMsvgIcon} from "../../assets/icons/PMSvgIcon";
+import {showToast} from "../../features/toast/ToastSlice";
 
 interface interfaceFilterComponent{
     filterText: string,
@@ -301,7 +302,6 @@ export const Search:FC =()=> {
                     }
                 }
                 }
-
         },
         {
             Header: <Text style={{whiteSpace: 'nowrap'}}> Wallet Account </Text>,
@@ -442,12 +442,20 @@ export const Search:FC =()=> {
         const inputTextChainIdHandler = (e: FormEvent<HTMLInputElement>) => {
             setTypedTextChainId(e.currentTarget.value);
         };
-        const navToProfilePageHandler = ()=>{
-            navigate(`/identity/${initialRefChain.current?.value}/${initialRef.current?.value}`);
+        const navToProfilePageHandler = ()=> {
+            if (accountArr.length === 0) {
+                dispatch(showToast({
+                    title: 'You need to connect your own account before you can add ' +
+                        'someone elses wallet account', status: 'error'
+                }))
+            } else {
+                navigate(`/identity/${initialRefChain.current?.value}/${initialRef.current?.value}`);
+            }
         };
         return (
             <Box>
-                <HStack>
+                <HStack
+                justifyContent={'end'}>
                     <FilterComponent onFilter={(e: any) => setFilterWallets(e.target.value)}
                                      onClick={handleClear}
                                      activateButton={(filteredItems.length !== 0)}
@@ -456,13 +464,16 @@ export const Search:FC =()=> {
                                      placeHolder={"Search Wallet Account"}
                                      idType={"Search"}/>
                     <Button
-                    bg={'pmpruple.6'}
+                    bg={'pmpruple.4'}
                     border={'1px solid'}
-                    //borderColor={'pmpurple.6'}
+                    borderColor={'pmpurple.6'}
                     onClick={addWalletAccountHandler}
                     >
-                        <Text textColor={'pmpurple.13'}>Add Wallet Account</Text>
+                        <Text textColor={'pmpurple.27'}
+                              bg={'pmpruple.4'}
+                        >Add Wallet Account</Text>
                     </Button>
+                </HStack>
                     <Box>
                         <Modal
                             initialFocusRef={initialRef}
@@ -472,11 +483,11 @@ export const Search:FC =()=> {
                         >
                             <ModalOverlay />
                             <ModalContent>
-                                <ModalHeader>'Create a profile for a Non-Registered'</ModalHeader>
+                                <ModalHeader textColor={'pmpurple.13'}>Create a profile for a Non-Registered</ModalHeader>
                                 <ModalCloseButton />
                                 <ModalBody pb={4}>
                                     <FormControl mt={4}>
-                                        <FormLabel>Chain Id</FormLabel>
+                                        <FormLabel textColor={'pmpurple.13'}>Chain Id</FormLabel>
                                         <Input
                                             onChange={inputTextChainIdHandler}
                                             focusBorderColor='pmpurple.6'
@@ -485,7 +496,7 @@ export const Search:FC =()=> {
                                         />
                                     </FormControl>
                                     <FormControl mt={4}>
-                                        <FormLabel>'Enter Wallet Account'</FormLabel>
+                                        <FormLabel textColor={'pmpurple.13'}>Enter Wallet Account</FormLabel>
                                         <Input
                                             onChange={inputTextHandler}
                                             focusBorderColor='pmpurple.6'
@@ -508,8 +519,6 @@ export const Search:FC =()=> {
                             </ModalContent>
                         </Modal>
                     </Box>
-
-                </HStack>
             </Box>
         );
     }, [filterWallets, resetPaginationToggle, filteredItems]);
@@ -531,18 +540,26 @@ export const Search:FC =()=> {
             //border={'1px solid blue'}
         >
             <Box
-                border={'4px solid'}
-                borderColor={'pmpurple.12'}
+                border={'3px solid'}
+                borderColor={'pmpurple.13'}
                 borderRadius={'10px'}
                 bg={'pmpurple.1'}
                 flex={'auto'}
             >
-                <Heading
-                pt={4}
-                mb={6}
+                <Box
+                m={2}
                 >
-                    Wallet Account Search Table
-                </Heading>
+                        <Center>
+                            <Text
+                            fontSize={20}
+                            color={'pmpurple.13'}
+                            fontWeight={'bold'}
+                            >
+                                Wallet Account Search Table
+                            </Text>
+                        </Center>
+                </Box>
+
                 <Box
                     justifyItems={'end'}
                     //justifyContent={'right'}
