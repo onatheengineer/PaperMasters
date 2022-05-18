@@ -109,7 +109,7 @@ function App() {
         <Box
             border={'2px solid'}
             borderColor={"pmpurple.8"}
-            bg={'pmpurple.6'}
+            bg={'pmpurple.4'}
             overflow={'hidden'}
         >
             <Flex

@@ -71,10 +71,10 @@ export const Validate:FC=()=> {
     const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
     const colorChangeHandler: ColorChangeHandler = (colorSelect: ColorResult) => {
         switch (whichColorField) {
-            case "Giver":
+            case "giver":
                 setColorTextGiver(colorSelect);
                 break;
-            case "Receiver":
+            case "receiver":
                 setColorTextReceiver(colorSelect);
                 break;
             case 'comment':

@@ -224,10 +224,12 @@ export const Register:FC=()=> {
         return ([null, null])
     }, [accountArrArr, singleNFIReceiptDBDB, useGetSingleIdentityBCQueryQuery, mintSucceededSucceeded])
 
-    if(mintSucceededSucceeded === 'succeeded'){
-        return ( <Navigate to={`/identity/${chainIdProviderProvider}/${accountArrArr}`} /> )}
-    if(useGetSingleIdentityBCQueryQuery.isSuccess){
-        return ( <Navigate to={`/identity/${chainIdProviderProvider}/${accountArrArr}`} /> )}
+    if (mintSucceededSucceeded === 'succeeded') {
+        return (<Navigate to={`/identity/${chainIdProviderProvider}/${accountArrArr}`}/>)
+    }
+    if (useGetSingleIdentityBCQueryQuery.isSuccess) {
+        return (<Navigate to={`/identity/${chainIdProviderProvider}/${accountArrArr}`}/>)
+    }
     return (
         <Box
             h={'100%'}
@@ -236,7 +238,7 @@ export const Register:FC=()=> {
         >
             <Flex
                 h={{base: 'auto', md: '100%'}}
-                direction={{base: "column", xl: 'row'}}
+                direction={{base: "column", md: 'row'}}
                 //border={'2px solid blue'}
                 justifyContent={'space-evenly'}
                 alignItems={'flex-center'}
@@ -252,7 +254,6 @@ export const Register:FC=()=> {
                     border={'4px solid'}
                     borderColor={'pmpurple.12'}
                 >
-
                     <VStack
                         alignItems={'center'}
                         //border={'2px solid green'}
@@ -910,7 +911,6 @@ export const Register:FC=()=> {
                         </SimpleGrid>
                     </VStack>
                 </VStack>
-
                 <VStack
                     w={'full'}
                     py={8}
@@ -957,7 +957,7 @@ export const Register:FC=()=> {
 
                                 <Center>
 
-                                    {name !== "" && email !== "" && ( mintSucceededSucceeded !== 'alreadyMinted' ) ?
+                                    {name !== "" && email !== "" && (mintSucceededSucceeded !== 'alreadyMinted') ?
                                         <Button
                                             border={'1px solid'}
                                             borderColor={'pmpurple.13'}
@@ -968,8 +968,8 @@ export const Register:FC=()=> {
                                                 transform: 'translateY(-2px)',
                                                 boxShadow: 'md',
                                             }}
-                                             onClick={submitMintHandler}
-                                            isLoading={submitButtonClicked }
+                                            onClick={submitMintHandler}
+                                            isLoading={submitButtonClicked}
                                             px={'12px'}
                                             loadingText='Minting'
                                             color={"pmpurple.13"}

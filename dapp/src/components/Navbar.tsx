@@ -46,7 +46,7 @@ export default function WithSubnavigation() {
     return (
         <Box>
             <Flex
-                bg={useColorModeValue('pmpurple.2', 'gray.800')}
+                bg={useColorModeValue('pmpurple.1', 'gray.800')}
                 color={useColorModeValue('pmpurple.13', 'white')}
                 minH={'60px'}
                 py={{base: 2}}
@@ -104,10 +104,10 @@ export default function WithSubnavigation() {
                                         fontSize={'sm'}
                                         fontWeight={400}
                                         color={'pmpurple.13'}
-                                        bg={'pmpurple.2'}
+                                        //bg={'pmpurple.2'}
                                         //href={'#'}
                                         _hover={{
-                                            bg: 'pmpurple.3',
+                                            bg: 'pmpurple.2',
                                         }}
                                         onClick={() => {
                                             console.log('i am clicked')
