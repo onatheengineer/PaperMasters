@@ -27,7 +27,6 @@ import YourPeople from "../components/pages/yourPeople/YourPeople";
 import Validate from "../components/pages/Validate";
 import Analytics from "../components/pages/Analytics";
 import CommunitySupport from "../components/pages/CommunitySupport";
-import News from "../components/pages/News";
 import Security from "../components/pages/Security";
 import {useAppSelector} from "./hooks";
 import Report from "../components/pages/Report";

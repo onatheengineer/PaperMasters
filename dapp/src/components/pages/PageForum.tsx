@@ -1,4 +1,4 @@
-import React, {useEffect, useState, useRef, MutableRefObject, forwardRef} from "react";
+import React, {useEffect, useState, useRef, MutableRefObject, forwardRef, ReactElement} from "react";
 import type {FC} from 'react'
 import {
     Box, Heading, useMergeRefs,
@@ -14,10 +14,12 @@ import {Link as ReachLink} from "react-router-dom";
 
 interface InterfaceFORUM {
 title: string;
-body: string;
+subtitle: string;
+body: ReactElement | string;
+
 }
 
-export const PageForum=forwardRef<HTMLDivElement | null, InterfaceFORUM>(({ title, body }, ref)=> {
+export const PageForum=forwardRef<HTMLDivElement | null, InterfaceFORUM>(({ title, subtitle, body }, ref)=> {
 
     const [isOpen, setIsOpen] = useState<boolean>(false);
 
@@ -92,7 +94,10 @@ export const PageForum=forwardRef<HTMLDivElement | null, InterfaceFORUM>(({ titl
                                 rounded='md'
                                 shadow='md'
                             >
-                                <Text fontSize="md" color={'pmpurple.13'} fontWeight="semibold">
+                                <Text fontSize="sm" color={'pmpurple.13'} fontWeight="bold">
+                                    {subtitle}
+                                </Text>
+                                <Text fontSize="sm" color={'pmpurple.13'} fontWeight="semi-bold">
                                     {body}
                                 </Text>
                             </Box>

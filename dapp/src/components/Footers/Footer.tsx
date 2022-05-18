@@ -164,7 +164,7 @@ export default function LargeWithLogoCentered() {
                     //borderColor={'pmpurple.4'}
                     bg={'pmpurple.1'}
                 >
-                    <Stack direction={{base: 'column', md: 'row'}}>
+                    <Stack direction={{base: 'row', md: 'row'}}>
                         <Text
                             pt={1}
                             fontSize={'14px'}
@@ -182,9 +182,9 @@ export default function LargeWithLogoCentered() {
                         <Spacer/>
                         <Grid
                             templateColumns={{
-                                base: 'repeat(9, 1fr)',
-                                sm: 'repeat(9, 1fr)',
-                                md: 'repeat(3, 1fr)',
+                                base: 'repeat(2, 1fr)',
+                                sm: 'repeat(2, 1fr)',
+                                md: 'repeat(4, 1fr)',
                                 lg: 'repeat(4, 1fr)',
                             }}
                             gap={{base: '2', lg: '8'}}

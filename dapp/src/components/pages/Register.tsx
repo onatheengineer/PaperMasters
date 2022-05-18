@@ -326,7 +326,6 @@ export const Register:FC=()=> {
                                 </Popover>
                             </GridItem>
                             <GridItem colSpan={1}>
-
                                 <FormControl isRequired>
                                     <FormLabel htmlFor='name' color={'pmpurple.13'} mb={'2px'}>Name</FormLabel>
                                     <InputGroup size='md'>

@@ -46,17 +46,20 @@ export default function WithSubnavigation() {
     return (
         <Box>
             <Flex
-                bg={useColorModeValue('pmpurple.1', 'gray.800')}
-                color={useColorModeValue('pmpurple.13', 'white')}
+                bg={'pmpurple.1'}
+                color={'pmpurple.13'}
                 minH={'60px'}
-                py={{base: 2}}
+                py={{base: 1}}
                 px={{base: 4}}
                 borderBottom={1}
                 borderStyle={'solid'}
-                borderColor={useColorModeValue('pmpurple.8', 'gray.900')}
-                align={'center'}>
+                borderColor={'pmpurple.8'}
+                align={'center'}
+                //justify={{base: 'start', md:'left', lg: 'flex-start'}}
+            >
                 <Flex
-                    flex={{base: 1, md: 'auto'}}
+                    //border={'1px solid red'}
+                    flex={{base: 1, md: 1}}
                     ml={{base: -2}}
                     //border={'1px solid blue'}
                     //this is the hamburgermenu
@@ -70,13 +73,17 @@ export default function WithSubnavigation() {
                         aria-label={'Toggle Navigation'}
                     />
                 </Flex>
-                <Flex flex={{base: 1}} justify={{base: 'center', md: 'start'}}>
+                <Flex
+                    flex={{base: 1}}
+                    justify={{base: 'center', lg: 'flex-start'}}
+                    //border={'1px solid blue'}
+                >
                     <Link
                         as={ReachLink}
                         to={'/'}
-                        textAlign={useBreakpointValue({base: 'center', md: 'left'})}
+                        //textAlign={{base: 'center', md: 'left'}}
                         fontFamily={'heading'}
-                        color={useColorModeValue('pmpurple.13', 'white')}
+                        color='pmpurple.13'
                     >
                         <PMLogoFull fill={'#5c415c'} width={'140px'}/>
                     </Link>
@@ -86,10 +93,12 @@ export default function WithSubnavigation() {
                     </Flex>
                 </Flex>
                 <Stack
-                    flex={{base: 1, md: 0}}
+                    flex={{base: 1, lg: 'none'}}
                     justify={'flex-end'}
                     direction={'row'}
-                    spacing={6}>
+                    spacing={6}
+                    //border={'1px solid green'}
+                >
                     {/*this box in necessary for sparkle to work correctly*/}
                     <Box>
                         {accountArrArr.length === 0 ?
@@ -138,16 +147,15 @@ export default function WithSubnavigation() {
                             :
                             <Box
                                 display={{base: 'inline-flex', md: 'inline-flex'}}
-                                fontSize={'md'}
-                                fontWeight={600}
+                                fontSize={'sm'}
+                                fontWeight={400}
                                 color={'pmpurple.8'}
-                                bg={'pmpurple.2'}
                                 //href={'#'}
                                 //         _hover={{
                                 //             bg: 'pmpurple.3',
                                 // }}
                             >
-                                <HStack>
+                                <HStack >
                                     {/*<SiSololearn fontSize={'16px'}/>*/}
                                     <Text>
                                         Connected
@@ -197,7 +205,12 @@ const DesktopNav = () => {
                                             //border={'1px solid blue'}
                                         >
                                             {navItem.navIcon}
-                                            <Text>
+                                            <Text
+                                                _hover={{
+                                                    textDecoration: 'none',
+                                                    color: linkHoverColor,
+                                                }}
+                                            >
                                                 {navItem.label}
                                             </Text>
                                         </HStack>
@@ -218,7 +231,12 @@ const DesktopNav = () => {
                                             //border={'1px solid blue'}
                                         >
                                             {navItem.navIcon}
-                                            <Text>
+                                            <Text
+                                                _hover={{
+                                                    textDecoration: 'none',
+                                                    color: linkHoverColor,
+                                                }}
+                                            >
                                                 {navItem.label}
                                             </Text>
                                         </HStack>
@@ -263,7 +281,7 @@ const DesktopSubNav = ({ label, subLabel, navLink, navIcon }: NavItem) => {
             display={'block'}
             p={2}
             rounded={'md'}
-            _hover={{ bg: useColorModeValue('pmpurple.3', 'gray.900'),
+            _hover={{ bg: 'pmpurple.3',
                 textDecoration: 'none'
             }}>
             <Stack direction={'row'} align={'center'}>
@@ -271,6 +289,7 @@ const DesktopSubNav = ({ label, subLabel, navLink, navIcon }: NavItem) => {
                     <HStack>
                         {navIcon}
                         <Text
+                            fontSize={'sm'}
                             transition={'all .3s ease'}
                             // _groupHover={{ color: 'pmpurple.13' }}
                             fontWeight={500}>
@@ -278,7 +297,7 @@ const DesktopSubNav = ({ label, subLabel, navLink, navIcon }: NavItem) => {
                         </Text>
 
                     </HStack>
-                    <Text fontSize={'sm'}>{subLabel}</Text>
+                    <Text fontSize={'x-small'}>{subLabel}</Text>
                 </Box>
             </Stack>
         </Link>
