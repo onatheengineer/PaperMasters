@@ -51,6 +51,7 @@ const FilterComponent: FC<interfaceFilterComponent> = ( { filterText, onClick, o
                    borderColor={'pmpurple.6'}
                    id={idType}
                    type="text"
+                   fontSize={14}
                    placeholder={placeHolder}
                    aria-label="Search Input"
                    value={filterText}
@@ -67,6 +68,7 @@ const FilterComponent: FC<interfaceFilterComponent> = ( { filterText, onClick, o
                             borderLeftRadius={0}
                             color={"pmpurple.13"}
                             onClick={onClick}
+                            fontSize={14}
                         >
                             {text}
                         </Button>}
@@ -488,7 +490,7 @@ export const Search:FC =()=> {
                         borderColor={'pmpurple.5'}
                         onClick={addWalletAccountHandler}
                     >
-                        <Text textColor={'pmpurple.13'}
+                        <Text fontSize={12} textColor={'pmpurple.13'}
                         >Add Wallet Account</Text>
                     </Button>
                 </HStack>
