@@ -51,8 +51,8 @@ export const CommunitySupport:FC=()=> {
                 >
                     <Heading
                         textAlign={'center'}
-                        fontSize={'40px'}
-                        fontWeight={'600'}
+                        fontSize={'30px'}
+                        fontWeight={'500'}
                         fontStyle={'bold'}
                     >
                         Community Support

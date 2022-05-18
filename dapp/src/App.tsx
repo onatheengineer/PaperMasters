@@ -59,7 +59,6 @@ function App() {
             }
             if (connector.connected) {
                 console.log('getting in here connector.connected??')
-
                 const connectedAccountArr = connector.accounts
                 const connectedChainId = connector.chainId
                 console.log("connectedAcoounts", connectedAccountArr)
@@ -87,7 +86,6 @@ function App() {
                     console.error(error)
                     throw error;
                 }
-
                 // Get updated accounts and chainId
                 const { accounts, chainId } = payload.params[0];
                 const connectedAccountArr = connector.accounts

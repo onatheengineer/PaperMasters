@@ -767,7 +767,7 @@ export const Register:FC=()=> {
                                         Uniqueness</FormLabel>
                                     <InputGroup size='md'>
                                         <Input focusBorderColor='pmpurple.9' id='uniqueYou' pl={'62px'}
-                                               placeholder='unique you, date of birth, anything goes here'
+                                               placeholder='unique you, anything goes here'
                                                isDisabled={submitButtonClicked} onChange={uniqueYouHandler}
                                                color={'pmpurple.15'}
                                                mb={'18px'}
@@ -838,7 +838,7 @@ export const Register:FC=()=> {
                             {/*            Country</FormLabel>*/}
                             {/*        <InputGroup size='md'>*/}
                             {/*            <Select focusBorderColor='pmpurple.9' id='uniqueYou' pl={'62px'}*/}
-                            {/*                   placeholder='unique you, date of birth, anything goes here'*/}
+                            {/*                   placeholder='unique you, anything goes here'*/}
                             {/*                   isDisabled={submitButtonClicked} onChange={uniqueYouHandler}*/}
                             {/*                   color={'pmpurple.15'}*/}
                             {/*                   mb={'18px'}*/}

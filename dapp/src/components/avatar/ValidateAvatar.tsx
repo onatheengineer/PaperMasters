@@ -25,7 +25,7 @@ export const ValidateAvatar:FC<validateInterface>=( { giver, giverColor, receive
 
     return (
         <Container centerContent>
-            <AspectRatio w='320px' ratio={4 / 5}>
+            <AspectRatio w='320px' ratio={2 / 1}>
                 <Box
                     h={"100%"}
                     w={'full'}
@@ -46,35 +46,20 @@ export const ValidateAvatar:FC<validateInterface>=( { giver, giverColor, receive
                         rounded={'10px'}
                     >
 
-                        {/*<Image*/}
-                        {/*    position={'absolute'}*/}
-                        {/*    top={'0px'}*/}
-                        {/*    right={'0px'}*/}
-                        {/*    left={'0px'}*/}
-                        {/*    h={'60px'}*/}
-                        {/*    backgroundPosition="center"*/}
-                        {/*    src={swan3}*/}
-                        {/*    objectFit={'cover'}*/}
-                        {/*/>*/}
-
-                        <Flex justify={'center'}>
-                            {/*<Image*/}
-                            {/*    position={'absolute'}*/}
-                            {/*    mt={'22px'}*/}
-                            {/*    top={'0px'}*/}
-                            {/*    right={'0px'}*/}
-                            {/*    left={'0px'}*/}
-                            {/*    //h={'60px'}*/}
-                            {/*    backgroundPosition="center"*/}
-                            {/*    src={swan3}*/}
-                            {/*    //objectFit={'cover'}*/}
-                            {/*>*/}
-                            {/*    /!*<PMsvgIcon/>*!/*/}
-                            {/*</Image>*/}
+                        <Image
+                            position={'absolute'}
+                            top={'0px'}
+                            right={'0px'}
+                            left={'0px'}
+                            h={'60px'}
+                            backgroundPosition="center"
+                            //src={swan3}
+                            objectFit={'cover'}
+                        />
                             <Avatar
                                 mt={'22px'}
                                 icon={<PMsvgIcon/>}
-                                boxSize='3.05em'
+                                boxSize='2.0em'
                                 variant={"square"}
                                 showBorder={false}
                                 bg={"transparent"}
@@ -95,7 +80,7 @@ export const ValidateAvatar:FC<validateInterface>=( { giver, giverColor, receive
                                 {/*    </Text>*/}
                                 {/*</AvatarBadge>*/}
                             </Avatar>
-                        </Flex>
+
                         {/*<Text pt={'0px'} fontSize={'21px'} fontWeight={500}*/}
                         {/*      fontFamily={'body'} align={'center'}*/}
                         {/*      color={'pmpurple.14'}>*/}
@@ -124,14 +109,17 @@ export const ValidateAvatar:FC<validateInterface>=( { giver, giverColor, receive
                                     alignItems={"center"}
                                 >
                                     <Text noOfLines={1}
+                                          whiteSpace={"nowrap"}
                                           color={giverColor}>
                                         {giver}
                                     </Text>
                                     <Text noOfLines={1}
+                                          whiteSpace={"nowrap"}
                                           color={receiverColor}>
                                         {receiver}
                                     </Text>
                                     <Text noOfLines={1}
+                                          whiteSpace={"nowrap"}
                                           color={commentColor}>
                                         {comment}
                                     </Text>

@@ -30,7 +30,7 @@ export default function secondFooterHome() {
                  py={10}
                  px={7}
                  maxW="full"
-                 bg={'pmpurple.3'} color={'pmpurple.12'}
+                 bg={'pmpurple.1'} color={'pmpurple.12'}
                  //border={'1px solid blue'}
                 // borderColor={'pmpurple.8'}
             >
@@ -45,7 +45,7 @@ export default function secondFooterHome() {
                     gap={{base: '8', sm: '12', md: '16'}}>
                     <Stack>
                             <Text
-                                fontSize="2xl" fontWeight="650" fontStyle={'bold'}
+                                fontSize="xl" fontWeight="700" fontStyle={'bold'}
                             >
                                 <Link
                                     as={ReachLink}
@@ -54,14 +54,14 @@ export default function secondFooterHome() {
                                     What is a Non-Fungible-Identity (NFI)?
                                 </Link>
                             </Text>
-                        <Text fontSize="lg" fontWeight="400" >
+                        <Text fontSize="md" fontWeight="400" >
                             NFIs are transparent wallet addresses providing a tracking by fellow Blockchainers of
                             the interactions that wallet address has had in the community.
                         </Text>
                     </Stack>
                     <Stack>
                         <Text
-                            fontSize="2xl" fontWeight="650" fontStyle={'bold'}
+                            fontSize="xl" fontWeight="700" fontStyle={'bold'}
                         >
                             <Link
                                 as={ReachLink}
@@ -70,7 +70,7 @@ export default function secondFooterHome() {
                                 Benefits of becoming a PaperMaster?
                             </Link>
                         </Text>
-                        <Text fontSize="lg" fontWeight="400" >
+                        <Text fontSize="md" fontWeight="400" >
                             Providing fellow Blockchainers with a reputable reputation found on your PaperMasters
                             identity page
                             including a live account ledger, any past contracts you helped create and mentions by
@@ -80,7 +80,7 @@ export default function secondFooterHome() {
                     </Stack>
                     <Stack>
                         <Text
-                            fontSize="2xl" fontWeight="650" fontStyle={'bold'}
+                            fontSize="xl" fontWeight="700" fontStyle={'bold'}
                         >
                             <Link
                                 as={ReachLink}
@@ -90,7 +90,7 @@ export default function secondFooterHome() {
                             </Link>
                         </Text>
 
-                        <Text fontSize="lg" fontWeight="400" >
+                        <Text fontSize="md" fontWeight="400" >
                             Let us all keep the Blockchain beautiful, validating and reporting
                             a wallet address helps your fellow Blockchainers known that a wallet address is safe, or
                             not safe, to conduct business with. These Validations and Reports

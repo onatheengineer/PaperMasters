@@ -59,7 +59,8 @@ export default function WithSubnavigation() {
                     flex={{base: 1, md: 'auto'}}
                     ml={{base: -2}}
                     //border={'1px solid blue'}
-                    display={{base: 'flex', md: 'flex', lg: 'flex', xl: 'none'}}>
+                    //this is the hamburgermenu
+                    display={{base: 'flex', md: 'flex', lg: 'none', xl: 'none'}}>
                     <IconButton
                         onClick={onToggle}
                         icon={
@@ -77,10 +78,10 @@ export default function WithSubnavigation() {
                         fontFamily={'heading'}
                         color={useColorModeValue('pmpurple.13', 'white')}
                     >
-                        <PMLogoFull fill={'#5c415c'} width={'155px'}/>
+                        <PMLogoFull fill={'#5c415c'} width={'140px'}/>
                     </Link>
 
-                    <Flex display={{base: 'none', xl: 'flex'}} ml={10}>
+                    <Flex display={{base: 'none', lg: 'flex'}} ml={4}>
                         <DesktopNav/>
                     </Flex>
                 </Flex>
@@ -100,8 +101,8 @@ export default function WithSubnavigation() {
                                 >
                                     <Button
                                         display={{base: 'inline-flex', md: 'inline-flex'}}
-                                        fontSize={'md'}
-                                        fontWeight={600}
+                                        fontSize={'sm'}
+                                        fontWeight={400}
                                         color={'pmpurple.13'}
                                         bg={'pmpurple.2'}
                                         //href={'#'}
@@ -170,7 +171,7 @@ const DesktopNav = () => {
     const popoverContentBgColor = 'pmpurple.1';
 
     return (
-        <Stack direction={'row'} spacing={8}
+        <Stack direction={'row'} spacing={5}
         alignItems={'center'}
         >
             {NAV_ITEMS.map((navItem) => (
@@ -185,8 +186,8 @@ const DesktopNav = () => {
                                         as={Link}
                                         display={'inline'}
                                         p={2}
-                                        fontSize={'md'}
-                                        fontWeight={500}
+                                        fontSize={'sm'}
+                                        fontWeight={400}
                                         color={linkColor}
                                         _hover={{
                                             textDecoration: 'none',
@@ -206,8 +207,8 @@ const DesktopNav = () => {
                                         as={ReachLink}
                                         to={navItem.navLink}
                                         p={2}
-                                        fontSize={'md'}
-                                        fontWeight={500}
+                                        fontSize={'sm'}
+                                        fontWeight={400}
                                         color={linkColor}
                                         _hover={{
                                             textDecoration: 'none',
@@ -307,13 +308,12 @@ const MobileNavItem = ({ label, children, navLink, navIcon }: NavItem) => {
     const accountArrArr = useAppSelector((state) => state.accountBC.accountArr);
     const navLinkModified = navLink === '/identity' ?  `/identity/${chainIdProviderProvider}/${accountArrArr}` : navLink
     return (
-        <Stack spacing={4} onClick={children && onToggle}>
+        <Stack spacing={0} onClick={children && onToggle}>
             <HStack
-                //spacing={5}
+                spacing={0}
             >
                 {!navLink ?
             <Flex
-                py={2}
                 as={Link}
                 justify={'space-between'}
                 align={'center'}
@@ -321,7 +321,7 @@ const MobileNavItem = ({ label, children, navLink, navIcon }: NavItem) => {
                     textDecoration: 'none',
                 }}>
                 <Text
-                    fontWeight={600}
+                    fontWeight={400}
                     color={'pmpurple.13'}
                 >
                         <HStack>
@@ -343,7 +343,6 @@ const MobileNavItem = ({ label, children, navLink, navIcon }: NavItem) => {
             </Flex>
                     :
                     <Flex
-                        py={2}
                         as={ReachLink}
                         to={navLink}
                         justify={'space-between'}
@@ -352,7 +351,7 @@ const MobileNavItem = ({ label, children, navLink, navIcon }: NavItem) => {
                             textDecoration: 'none',
                         }}>
                         <Text
-                            fontWeight={600}
+                            fontWeight={400}
                             color={'pmpurple.13'}>
                             {/*<Link*/}
                             {/*as={ReachLink}*/}
@@ -418,24 +417,23 @@ interface NavItem {
     children?: Array<NavItem>;
     navIcon?: JSX.Element;
     navLink?: To,
-
 }
 
 const NAV_ITEMS: Array<NavItem> = [
     {
         label: 'Non-Fungible Identity',
-        navIcon: <MdManageAccounts fontSize={'18px'}/>,
+        navIcon: <MdManageAccounts fontSize={'14px'}/>,
         children: [
             {
                 label: 'Identity',
                 subLabel: 'Your Authentic Identity',
-                navIcon: <MdManageAccounts fontSize={'18px'}/>,
+                navIcon: <MdManageAccounts fontSize={'14px'}/>,
                 navLink: '/identity',
             },
             {
                 label: 'Register',
                 subLabel: 'Register your wallet',
-                navIcon: <BiBookmarkHeart fontSize={'18px'}/>,
+                navIcon: <BiBookmarkHeart fontSize={'14px'}/>,
                 navLink: '/register',
             },
             // {
@@ -454,7 +452,7 @@ const NAV_ITEMS: Array<NavItem> = [
     },
     {
         label: 'Search',
-        navIcon: <MdOutlineNaturePeople fontSize={'18px'} fontWeight={'bolder'}/>,
+        navIcon: <MdOutlineNaturePeople fontSize={'14px'} fontWeight={'bolder'}/>,
         navLink: '/search',
     },
     // {
@@ -464,26 +462,25 @@ const NAV_ITEMS: Array<NavItem> = [
     //     navLink: '/analytics'
     // },
     {
-        label: 'Community Support',
-        navIcon: <ImBooks fontSize={'18px'}/>,
+        label: 'CloudHWM',
+        navIcon: <GiHeatHaze fontSize={'14px'}/>,
+        navLink: '/cloudhwm',
+    },
+    {
+        label: 'Community',
+        navIcon: <SiSololearn fontSize={'14px'}/>,
         children: [
             {
                 label: 'FAQ',
                 subLabel: 'Frequently Asked Questions',
-                navIcon: <GiDiscussion fontSize={'18px'}/>,
+                navIcon: <GiDiscussion fontSize={'14px'}/>,
                 navLink: '/communitySupport',
             },
             {
                 label: 'Analytics',
-                navIcon: <FiTrendingUp fontSize={'18px'}/>,
+                navIcon: <FiTrendingUp fontSize={'14px'}/>,
                 subLabel: 'Project Statistics',
                 navLink: '/analytics'
-            },
-            {
-                label: 'New & Updated Features',
-                subLabel: 'Stories to come',
-                navIcon: <GiFlowerPot fontSize={'18px'}/>,
-                navLink: '/communitySupport',
             },
             // {
             //     label: 'Report Suspicious Activity',
@@ -494,31 +491,26 @@ const NAV_ITEMS: Array<NavItem> = [
         ],
     },
     {
-        label: 'CloudHWM',
-        navIcon: <GiHeatHaze fontSize={'18px'}/>,
-        navLink: '/cloudhwm',
-    },
-    {
         label: 'Your People',
-        navIcon: <FaScroll fontSize={'18px'}/>,
+        navIcon: <FaScroll fontSize={'14px'}/>,
         children: [
             {
                 label: 'About Me',
                 subLabel: 'I am here for the community',
-                navIcon: <GiFlowerHat fontSize={'18px'}/>,
+                navIcon: <GiFlowerHat fontSize={'14px'}/>,
                 navLink: `/identity/3/0xbEc6F6B37CFF8355a046afD2a2EcfEA05c1215F5`,
             },
             {
                 label: 'Support',
                 subLabel: 'Support the project',
-                navIcon: <RiPlantFill fontSize={'18px'}/>,
+                navIcon: <RiPlantFill fontSize={'14px'}/>,
                 navLink: '/yourpeople',
 
             },
             {
                 label: 'New & Updated Features',
                 subLabel: 'Stories to come',
-                navIcon: <GiFlowerPot fontSize={'18px'}/>,
+                navIcon: <GiFlowerPot fontSize={'14px'}/>,
                 navLink: '/yourpeople',
             },
         ],

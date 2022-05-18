@@ -5,7 +5,7 @@ import {
     Box, Flex, Input, Button, HStack,
     InputGroup, InputRightAddon, Text,
     Tooltip, Heading, Table, Thead,
-    Tbody, Tr, Th, Td, Center, VStack,
+    Tbody, Tr, Th, Td, Center, VStack, Stack,
     Popover, PopoverBody, PopoverContent, PopoverTrigger,
     Modal, ModalOverlay,
     ModalContent, ModalHeader, ModalCloseButton, ModalBody, FormControl, FormLabel, ModalFooter, toast,
@@ -28,6 +28,7 @@ import {MdOutlineLibraryAddCheck} from "react-icons/md";
 import chainIdNetworkJSON from '../../features/JSON/chainId.networks.json'
 import {PMsvgIcon} from "../../assets/icons/PMSvgIcon";
 import {showToast} from "../../features/toast/ToastSlice";
+import {TriangleDownIcon, TriangleUpIcon} from "@chakra-ui/icons";
 
 interface interfaceFilterComponent{
     filterText: string,
@@ -44,20 +45,29 @@ const FilterComponent: FC<interfaceFilterComponent> = ( { filterText, onClick, o
     <Box>
         <HStack>
             <InputGroup>
-            <Input focusBorderColor='pmpurple.8' color={'pmpurple.13'} border={'1px solid'} borderColor={'pmpurple.6'}
-                   id={idType} type="text" placeholder={placeHolder} aria-label="Search Input" value={filterText}
+            <Input focusBorderColor='pmpurple.8'
+                   color={'pmpurple.13'}
+                   border={'1px solid'}
+                   borderColor={'pmpurple.6'}
+                   id={idType}
+                   type="text"
+                   placeholder={placeHolder}
+                   aria-label="Search Input"
+                   value={filterText}
                    onChange={onFilter}
-                   borderRadius={'0px'}
+                   borderRadius={'5px'}
             />
                 <InputRightAddon
-                    p='0'
-                    borderColor={"pmpurple.6"}
+                    p={0}
                     bg={'pmpurple.2'}
                     children={
-                        <Button bg={'pmpurple.6'}
-                                          borderRadius={'0px'}
-                                          color={"pmpurple.13"}
-                                          onClick={onClick} >
+                        <Button
+                            bg={'pmpurple.6'}
+                            borderRightRadius={'5px'}
+                            borderLeftRadius={0}
+                            color={"pmpurple.13"}
+                            onClick={onClick}
+                        >
                             {text}
                         </Button>}
                     />
@@ -137,7 +147,7 @@ export const Search:FC =()=> {
 
     const [currentPage, setCurrentPage] = useState(0);
     const [selectedWallet, setSelectedWallet] = useState<BCStruct[]>([]);
-    const accountQuery = useGetAllAccountQuery ();
+    const accountQuery = useGetAllAccountQuery();
     const nfiQuery = useGetIdentityBCQuery();
 
     // export function nfiBC({ identity }):BCStruct[] {
@@ -250,15 +260,15 @@ export const Search:FC =()=> {
 
     const columns: Column<Cols>[] = useMemo(() => [
         {
-            Header: <Text style={{whiteSpace: 'nowrap'}}> Chain </Text>,
+            Header: <Center> <Text style={{whiteSpace: 'nowrap'}}> Chain </Text> </Center>,
             accessor: 'shortName',
             Cell: (el) => <Text fontSize={'12px'}> {el.row.original.shortName.toUpperCase()} </Text>
         },
         {
-            Header: <Text style={{whiteSpace: 'nowrap'}}> Origin Date </Text>,
+            Header: <Center><Text style={{whiteSpace: 'nowrap'}}> Origin Date </Text></Center>,
             accessor: 'creation',
             Cell: (el) => {
-                if(el.row.original.creation !== null){
+                if (el.row.original.creation !== null) {
                     const creationDateObject = new Date(el.row.original.creation);
                     const creationDateFormatted = `${creationDateObject.toLocaleString('en-us', {month: 'long'})} ${creationDateObject.getDate()}, ${creationDateObject.getFullYear()}`;
                     const originD = el.row.original.origin;
@@ -301,15 +311,16 @@ export const Search:FC =()=> {
                         )
                     }
                 }
-                }
+            }
         },
         {
-            Header: <Text style={{whiteSpace: 'nowrap'}}> Wallet Account </Text>,
+            Header: <Center> <Text style={{whiteSpace: 'nowrap'}}> Wallet Account </Text></Center>,
             accessor: 'wallet',
             Cell: (el) => {
                 return (
                     <>
-                        <Text fontSize={'12px'} style={{whiteSpace: 'nowrap'}}> {el.row.original.name}</Text>
+                        <Center><Text fontSize={'12px'}
+                                      style={{whiteSpace: 'nowrap'}}> {el.row.original.name}</Text></Center>
                         <Popover
                             trigger={'hover'}
                         >
@@ -325,15 +336,17 @@ export const Search:FC =()=> {
                                         borderRadius={'5px'}
                                         textOverflow={"ellipsis"}
                                 >
-                                    <Text
-                                        whiteSpace="nowrap"
-                                        overflow={"hidden !important"}
-                                        textOverflow={"ellipsis"}
-                                        fontSize={'12px'}
-                                        width={'118px'}
-                                    >
-                                        {el.row.original.wallet}
-                                    </Text>
+                                    <Center>
+                                        <Text
+                                            whiteSpace="nowrap"
+                                            overflow={"hidden !important"}
+                                            textOverflow={"ellipsis"}
+                                            fontSize={'12px'}
+                                            width={'118px'}
+                                        >
+                                            {el.row.original.wallet}
+                                        </Text>
+                                    </Center>
                                 </Button>
                             </PopoverTrigger>
                             <PopoverContent
@@ -360,44 +373,48 @@ export const Search:FC =()=> {
             }
         },
         {
-            Header: <Text style={{whiteSpace: 'nowrap'}}> Profession </Text>,
+            Header: <Center><Text style={{whiteSpace: 'nowrap'}}> Profession </Text></Center>,
             accessor: 'profession',
-            Cell: ({value}) => <Text fontSize={'12px'} style={{whiteSpace: 'nowrap'}}> {value} </Text>
+            Cell: ({value}) => <Center><Text fontSize={'12px'} style={{whiteSpace: 'nowrap'}}> {value} </Text></Center>
         },
         {
-            Header: <Text style={{whiteSpace: 'nowrap'}}> Validations </Text>,
+            Header: <Center><Text style={{whiteSpace: 'nowrap'}}> Validations </Text></Center>,
             accessor: 'validations',
         },
         {
-            Header: <Text style={{whiteSpace: 'nowrap'}}> Validate </Text>,
+            Header: <Center><Text style={{whiteSpace: 'nowrap'}}> Validate </Text></Center>,
             accessor: 'validate',
             Cell: (el) => {
                 return (
-                    <>
-                <Button as={ReachLink} to={`/validate/${el.row.original.chainId}/${el.row.original.wallet}`} color={'pmpurple.13'} bg={'#f2eef2'} fontSize={'12px'}>
-                <MdOutlineLibraryAddCheck fontSize={'16px'}/>
-                <Text fontSize={'12px'} ml={'6px'}> Validate </Text>
-            </Button>
-                        </>
-            )
-            },},
+                    <Center>
+                        <Button as={ReachLink} to={`/validate/${el.row.original.chainId}/${el.row.original.wallet}`}
+                                color={'pmpurple.13'} bg={'#f2eef2'} fontSize={'12px'}>
+                            <MdOutlineLibraryAddCheck fontSize={'16px'}/>
+                            <Text fontSize={'12px'} ml={'6px'}> Validate </Text>
+                        </Button>
+                    </Center>
+                )
+            },
+        },
         {
-            Header: <Text style={{whiteSpace: 'nowrap'}}> Reported </Text>,
+            Header: <Center><Text style={{whiteSpace: 'nowrap'}}> Reported </Text></Center>,
             accessor: 'reported',
         },
         {
-            Header: <Text style={{whiteSpace: 'nowrap'}}> Report </Text>,
+            Header: <Center><Text style={{whiteSpace: 'nowrap'}}> Report </Text></Center>,
             accessor: 'report',
             Cell: (el) => {
                 return (
-                    <>
-                        <Button as={ReachLink} to={`/report/${el.row.original.chainId}/${el.row.original.wallet}`} color={'pmpurple.13'} bg={'#f2eef2'} fontSize={'12px'}>
+                    <Center>
+                        <Button as={ReachLink} to={`/report/${el.row.original.chainId}/${el.row.original.wallet}`}
+                                color={'pmpurple.13'} bg={'#f2eef2'} fontSize={'12px'}>
                             <HiOutlineDocumentReport fontSize={'16px'}/>
                             <Text fontSize={'12px'} ml={'6px'}> Report </Text>
                         </Button>
-                    </>
+                    </Center>
                 )
-            },},
+            },
+        },
     ], [])
 
     const filteredItems = data.filter(item => {
@@ -442,7 +459,7 @@ export const Search:FC =()=> {
         const inputTextChainIdHandler = (e: FormEvent<HTMLInputElement>) => {
             setTypedTextChainId(e.currentTarget.value);
         };
-        const navToProfilePageHandler = ()=> {
+        const navToProfilePageHandler = () => {
             if (accountArr.length === 0) {
                 dispatch(showToast({
                     title: 'You need to connect your own account before you can add ' +
@@ -455,7 +472,9 @@ export const Search:FC =()=> {
         return (
             <Box>
                 <HStack
-                justifyContent={'end'}>
+                    justifyContent={'end'}
+                    mr={2}
+                >
                     <FilterComponent onFilter={(e: any) => setFilterWallets(e.target.value)}
                                      onClick={handleClear}
                                      activateButton={(filteredItems.length !== 0)}
@@ -464,61 +483,64 @@ export const Search:FC =()=> {
                                      placeHolder={"Search Wallet Account"}
                                      idType={"Search"}/>
                     <Button
-                    bg={'pmpruple.4'}
-                    border={'1px solid'}
-                    borderColor={'pmpurple.6'}
-                    onClick={addWalletAccountHandler}
+                        bg={'pmpruple.2'}
+                        border={'1px solid'}
+                        borderColor={'pmpurple.5'}
+                        onClick={addWalletAccountHandler}
                     >
-                        <Text textColor={'pmpurple.27'}
-                              bg={'pmpruple.4'}
+                        <Text textColor={'pmpurple.13'}
                         >Add Wallet Account</Text>
                     </Button>
                 </HStack>
-                    <Box>
-                        <Modal
-                            initialFocusRef={initialRef}
-                            isOpen={isIdentityModalOpen}
-                            onClose={() => {
-                                setIdentityModalOpen(false) }}
-                        >
-                            <ModalOverlay />
-                            <ModalContent>
-                                <ModalHeader textColor={'pmpurple.13'}>Create a profile for a Non-Registered</ModalHeader>
-                                <ModalCloseButton />
-                                <ModalBody pb={4}>
-                                    <FormControl mt={4}>
-                                        <FormLabel textColor={'pmpurple.13'}>Chain Id</FormLabel>
-                                        <Input
-                                            onChange={inputTextChainIdHandler}
-                                            focusBorderColor='pmpurple.6'
-                                            border={'1px solid'} borderColor={'pmpurple.8'}
-                                            ref={initialRefChain} placeholder='chain Id'
-                                        />
-                                    </FormControl>
-                                    <FormControl mt={4}>
-                                        <FormLabel textColor={'pmpurple.13'}>Enter Wallet Account</FormLabel>
-                                        <Input
-                                            onChange={inputTextHandler}
-                                            focusBorderColor='pmpurple.6'
-                                            border={'1px solid'} borderColor={'pmpurple.8'}
-                                            ref={initialRef} placeholder='Must be greater than 26 characters'
-                                        />
-                                    </FormControl>
-                                </ModalBody>
-                                <ModalFooter>
-                                    <Button bg={'pmpurple.8'} disabled={(typedText.length <= 26 || typedTextChainId.length < 1)} border={'1px solid'}
-                                            borderColor={'pmpurple.13'}  color={'pmpurple.1'} mr={3}
-                                            onClick={navToProfilePageHandler}
-                                    >
-                                        Create
-                                    </Button>
-                                    <Button bg={'pmpurple.2'} border={'1px solid'} borderColor={'pmpurple.4'}
-                                            color={'pmpurple.13'} mr={3} onClick={() => {
-                                        setIdentityModalOpen(false) }}>Cancel</Button>
-                                </ModalFooter>
-                            </ModalContent>
-                        </Modal>
-                    </Box>
+                <Box>
+                    <Modal
+                        initialFocusRef={initialRef}
+                        isOpen={isIdentityModalOpen}
+                        onClose={() => {
+                            setIdentityModalOpen(false)
+                        }}
+                    >
+                        <ModalOverlay/>
+                        <ModalContent>
+                            <ModalHeader textColor={'pmpurple.13'}>Create a profile for a Non-Registered</ModalHeader>
+                            <ModalCloseButton/>
+                            <ModalBody pb={4}>
+                                <FormControl mt={4}>
+                                    <FormLabel textColor={'pmpurple.13'}>Chain Id</FormLabel>
+                                    <Input
+                                        onChange={inputTextChainIdHandler}
+                                        focusBorderColor='pmpurple.6'
+                                        border={'1px solid'} borderColor={'pmpurple.8'}
+                                        ref={initialRefChain} placeholder='chain Id'
+                                    />
+                                </FormControl>
+                                <FormControl mt={4}>
+                                    <FormLabel textColor={'pmpurple.13'}>Enter Wallet Account</FormLabel>
+                                    <Input
+                                        onChange={inputTextHandler}
+                                        focusBorderColor='pmpurple.6'
+                                        border={'1px solid'} borderColor={'pmpurple.8'}
+                                        ref={initialRef} placeholder='Must be greater than 26 characters'
+                                    />
+                                </FormControl>
+                            </ModalBody>
+                            <ModalFooter>
+                                <Button bg={'pmpurple.8'}
+                                        disabled={(typedText.length <= 26 || typedTextChainId.length < 1)}
+                                        border={'1px solid'}
+                                        borderColor={'pmpurple.13'} color={'pmpurple.1'} mr={3}
+                                        onClick={navToProfilePageHandler}
+                                >
+                                    Create
+                                </Button>
+                                <Button bg={'pmpurple.2'} border={'1px solid'} borderColor={'pmpurple.4'}
+                                        color={'pmpurple.13'} mr={3} onClick={() => {
+                                    setIdentityModalOpen(false)
+                                }}>Cancel</Button>
+                            </ModalFooter>
+                        </ModalContent>
+                    </Modal>
+                </Box>
             </Box>
         );
     }, [filterWallets, resetPaginationToggle, filteredItems]);
@@ -533,108 +555,120 @@ export const Search:FC =()=> {
     return (
         <Flex
             justifyContent="center"
-            //flex={{base: 1, md: 'auto'}}
-            flex={'auto'}
+            flex={{base: 1, md: 'auto'}}
+            //flex={'auto'}
             w={'100%'}
-            p={'16px'}
-            //border={'1px solid blue'}
+            //border={'1px solid red'}
+            m={5}
+            bg={'pmpurple.1'}
+            border={'3px solid'}
+            borderColor={'pmpurple.13'}
+            borderRadius={'6px'}
         >
-            <Box
-                border={'3px solid'}
-                borderColor={'pmpurple.13'}
-                borderRadius={'10px'}
-                bg={'pmpurple.1'}
-                flex={'auto'}
+            <Stack
+                spacing={0}
+                w={'100%'}
+                //border={'1px solid red'}
             >
                 <Box
-                m={2}
+                p={2}
                 >
-                        <Center>
-                            <Text
+                    <Center>
+                        <Text
                             fontSize={20}
                             color={'pmpurple.13'}
                             fontWeight={'bold'}
-                            >
-                                Wallet Account Search Table
-                            </Text>
-                        </Center>
+                        >
+                            Wallet Account Search Table
+                        </Text>
+                    </Center>
                 </Box>
 
                 <Box
                     justifyItems={'end'}
-                    //justifyContent={'right'}
+                    justifyContent={'right'}
                     py={4}
                 >
-                          {subHeaderComponentMemo}
+                    {subHeaderComponentMemo}
                 </Box>
-                <Table {...getTableProps()}>
-                    <Thead>
-                        {headerGroups.map((headerGroup) => (
-                            <Tr {...headerGroup.getHeaderGroupProps()}>
-                                {headerGroup.headers.map((column) => (
-                                    <Th
-                                        {...column.getHeaderProps()}
-                                        // isNumeric={column.isNumeric}
-                                    >
-                                        {column.render('Header')}
-                                        {/*<chakra.span pl='4'>*/}
-                                        {/*    {column.isSorted ? (*/}
-                                        {/*        column.isSortedDesc ? (*/}
-                                        {/*            <TriangleDownIcon aria-label='sorted descending' />*/}
-                                        {/*        ) : (*/}
-                                        {/*            <TriangleUpIcon aria-label='sorted ascending' />*/}
-                                        {/*        )*/}
-                                        {/*    ) : null}*/}
-                                        {/*</chakra.span>*/}
-                                    </Th>
-                                ))}
-                            </Tr>
-                        ))}
-                    </Thead>
-                    <Tbody {...getTableBodyProps()}>
-                        {rows.map((row) => {
-                            prepareRow(row)
-                            return (
-                                <Tr {...row.getRowProps()}>
-                                    {row.cells.map((cell) => (
-                                        <Td {...cell.getCellProps()}
-                                            // isNumeric={cell.column.isNumeric}
-                                        >
-                                            {cell.render('Cell')}
-                                        </Td>
-                                    ))}
-                                </Tr>
-                            )
-                        })}
-                    </Tbody>
-                </Table>
-            </Box>
 
-            {/*<Box     >*/}
-            {/*<DataTable*/}
-            {/*    title="Non-Fungible-Identities"*/}
-            {/*    columns={columns}*/}
-            {/*    data={filteredItems}*/}
-            {/*    expandableRows*/}
-            {/*    expandableRowsComponent={ExpandedComponent}*/}
-            {/*    defaultSortFieldId={5}*/}
-            {/*    fixedHeader={true}*/}
-            {/*    fixedHeaderScrollHeight={'60vh'}*/}
-            {/*    pagination={true}*/}
-            {/*    paginationResetDefaultPage={resetPaginationToggle} // optionally, a hook to reset pagination to page 1*/}
-            {/*    subHeader={true}*/}
-            {/*    subHeaderComponent={subHeaderComponentMemo}*/}
-            {/*    persistTableHead*/}
-            {/*    paginationPerPage={12}*/}
-            {/*    striped={true}*/}
-            {/*    highlightOnHover={true}*/}
-            {/*    //selectableRows*/}
-            {/*/>*/}
-            {/*</Box>*/}
+                <Box
+                    //border={'1px solid red'}
+                    h={'100%'}
+                >
+                    <Table {...getTableProps()}                    >
+                            <Thead
+                            position={'sticky'}
+                            >
+                                {headerGroups.map((headerGroup) => (
+                                    <Tr {...headerGroup.getHeaderGroupProps()}>
+                                        {headerGroup.headers.map((column) => (
+                                            <Th
+                                                {...column.getHeaderProps()}
+                                                // isNumeric={column.isNumeric}
+                                            >
+                                                {column.render('Header')}
+                                                {/*<span pl='4'>*/}
+                                                {/*    {column.isSorted ? (*/}
+                                                {/*        column.isSortedDesc ? (*/}
+                                                {/*            <TriangleDownIcon aria-label='sorted descending' />*/}
+                                                {/*        ) : (*/}
+                                                {/*            <TriangleUpIcon aria-label='sorted ascending' />*/}
+                                                {/*        )*/}
+                                                {/*    ) : null}*/}
+                                                {/*</span>*/}
+                                            </Th>
+                                        ))}
+                                    </Tr>
+                                ))}
+                            </Thead>
+                            <Tbody {...getTableBodyProps()}
+                            overflowY={'auto'}
+                                   overflowX={'hidden'}
+                            >
+                                {rows.map((row) => {
+                                    prepareRow(row)
+                                    return (
+                                        <Tr {...row.getRowProps()}>
+                                            {row.cells.map((cell) => (
+                                                <Td {...cell.getCellProps()}
+                                                    // isNumeric={cell.column.isNumeric}
+                                                >
+                                                    {cell.render('Cell')}
+                                                </Td>
+                                            ))}
+                                        </Tr>
+                                    )
+                                })}
+                            </Tbody>
+                    </Table>
+                </Box>
+            </Stack>
         </Flex>
     )
 };
 
 export default Search;
+
+{/*<Box     >*/}
+{/*<DataTable*/}
+{/*    title="Non-Fungible-Identities"*/}
+{/*    columns={columns}*/}
+{/*    data={filteredItems}*/}
+{/*    expandableRows*/}
+{/*    expandableRowsComponent={ExpandedComponent}*/}
+{/*    defaultSortFieldId={5}*/}
+{/*    fixedHeader={true}*/}
+{/*    fixedHeaderScrollHeight={'60vh'}*/}
+{/*    pagination={true}*/}
+{/*    paginationResetDefaultPage={resetPaginationToggle} // optionally, a hook to reset pagination to page 1*/}
+{/*    subHeader={true}*/}
+{/*    subHeaderComponent={subHeaderComponentMemo}*/}
+{/*    persistTableHead*/}
+{/*    paginationPerPage={12}*/}
+{/*    striped={true}*/}
+{/*    highlightOnHover={true}*/}
+{/*    //selectableRows*/}
+{/*/>*/}
 
 

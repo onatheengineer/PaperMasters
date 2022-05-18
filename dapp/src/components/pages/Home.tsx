@@ -16,7 +16,7 @@ export const Home:FC=()=> {
                 w={'100vW'}
                 alignItems={'stretch'}
                 flexGrow={1}
-                //h={'80vh'}
+                h={{base:'40vh', md:'none'}}
                 backgroundImage={BackgroundLogo}
                 backgroundSize={'cover'}
                 backgroundPosition={'center center'}
@@ -28,7 +28,7 @@ export const Home:FC=()=> {
                     bgGradient={'linear(to-r, blackAlpha.600, transparent)'}>
                     <Stack maxW={'2xl'}
                            //align={'flex-start'}
-                           spacing={6}
+                           spacing={4}
                         //border={'1px solid blue'}
                            justifyContent={'left'}
                     >
@@ -36,14 +36,14 @@ export const Home:FC=()=> {
                             color={'white'}
                             fontWeight={600}
                             lineHeight={1.2}
-                            fontSize={useBreakpointValue({base: '3xl', md: '6xl'})}>
+                            fontSize={{base: '3xl', md: '4xl'}}>
                             The PaperMasters
                         </Text>
                         <Text
                             color={'white'}
                             fontWeight={300}
                             lineHeight={1.2}
-                            fontSize={useBreakpointValue({base: '4xl', md: '3xl'})}>
+                            fontSize={{base: 'xl', md: '2xl'}}>
                             Providing protection and legitimacy for People, Companies and Contracts by bringing
                             Non-Fungable-Identities (NFIs) to the Blockchain
                         </Text>

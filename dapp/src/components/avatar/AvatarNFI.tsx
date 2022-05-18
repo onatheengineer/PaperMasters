@@ -157,26 +157,33 @@ export const AvatarNFI:FC<AvatarNFIInterface>=( {walletAccount,
                                     alignItems={"center"}
                                 >
                                     <Text noOfLines={1}
+                                          whiteSpace={"nowrap"}
                                           color={emailColor}>
                                         {email}
                                     </Text>
                                     <Text noOfLines={1}
-                                          color={professionColor}>
+                                          whiteSpace={"nowrap"}
+                                          color={professionColor}
+                                    >
                                         {profession}
                                     </Text>
                                     <Text noOfLines={1}
+                                          whiteSpace={"nowrap"}
                                           color={sloganColor}>
                                         {slogan}
                                     </Text>
                                     <Text noOfLines={1}
+                                          whiteSpace={"nowrap"}
                                           color={organizationColor}>
                                         {organization}
                                     </Text>
                                     <Text noOfLines={1}
+                                          whiteSpace={"nowrap"}
                                           color={websiteColor}>
                                         {website}
                                     </Text>
                                     <Text noOfLines={3}
+                                          whiteSpace={"nowrap"}
                                           color={uniqueYouColor}>
                                         {uniqueYou}
                                     </Text>

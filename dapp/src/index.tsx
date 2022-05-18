@@ -12,7 +12,6 @@ import {
 import {ChakraProvider} from '@chakra-ui/react';
 import theme from "./components/theme";
 import { QueryClient, QueryClientProvider} from "react-query";
-import {ReactQueryDevtools} from 'react-query/devtools';
 
 
 console.log(theme)
@@ -27,9 +26,6 @@ ReactDOM.render(
         <MetamaskStateProvider>
             <QueryClientProvider client={queryClient} contextSharing={true}>
       <App />
-
-
-                <ReactQueryDevtools />
             </QueryClientProvider>
     </MetamaskStateProvider>
     </Provider>

@@ -83,6 +83,10 @@ const ListHeader = ({ children }: { children: ReactNode }) => {
 
 export default function LargeWithLogoCentered() {
     return (
+        <Flex>
+            <Stack
+            spacing={0}
+            >
         <Box as={Container}
              flexGrow={1}
              maxW="full"
@@ -94,61 +98,66 @@ export default function LargeWithLogoCentered() {
              borderTop={'1px solid'}
              borderTopColor={'pmpurple.4'}
         >
-            <Grid
-                py={4}
-                templateColumns={{
-                    base: 'repeat(2, 1fr)',
-                    sm: 'repeat(2, 1fr)',
-                    md: 'repeat(4, 1fr)',
-                    lg: 'repeat(5, 1fr)'
-                }}
-                gap={{base: '8', sm: '12', md: '16'}}
-            >
-                <Stack display={{base: 'none', lg: 'block'}}>
-                    <Link as={ReachLink} to="/">
-                        <PMsvgIcon
-                            width="60"
-                            height="60"
-                            viewBox="0 0 60 60"
-                        />
-                    </Link>
-                </Stack>
-                <Stack>
-                    <ListHeader>Services</ListHeader>
-                    <Link as={ReachLink} to="/register">Register</Link>
-                    <Link as={ReachLink} to="/search">Search</Link>
-                    <Link as={ReachLink} to="/validate">Validate</Link>
-                    <Link as={ReachLink} to="/report">Report</Link>
-                </Stack>
-                <Stack>
-                    <ListHeader>Community Support</ListHeader>
-                    <Link as={ReachLink} to="/analytics">Analytics</Link>
-                    <Link as={ReachLink} to="/cloudhwm">CloudHWM</Link>
-                    {/*<Link as={ReachLink} to="/learn">Learning Center</Link>*/}
-                    <Link as={ReachLink} to="/yourpeople">New & Updated Features</Link>
-                    {/*<Link as={ReachLink} to="/">Future Stories</Link>*/}
-                </Stack>
-                <Stack>
-                    <ListHeader>Security</ListHeader>
-                    <Link as={ReachLink} to="/communitysupport">Blockchain Protection & Legitimacy</Link>
-                    <Link as={ReachLink} to="/communitysupport">Community Guidelines</Link>
-                    <Link as={ReachLink} to="/communitysupport">Privacy Policy & Cookies</Link>
-                </Stack>
-                <Stack>
-                    <ListHeader>Your People</ListHeader>
-                    <Link as={ReachLink} to="/identity/3/0xbEc6F6B37CFF8355a046afD2a2EcfEA05c1215F5">About Me</Link>
-                    <Link as={ReachLink} to="/yourpeople">Support the Project</Link>
-                    <Link as={ReachLink} to="/Logokit">Logo Kit</Link>
-                </Stack>
-            </Grid>
+            <Box>
+                <Grid
+                    py={4}
+                    templateColumns={{
+                        base: 'repeat(2, 1fr)',
+                        sm: 'repeat(2, 1fr)',
+                        md: 'repeat(4, 1fr)',
+                        lg: 'repeat(5, 1fr)'
+                    }}
+                    gap={{base: '8', sm: '12', md: '16'}}
+                >
+                    <Stack display={{base: 'none', lg: 'block'}}>
+                        <Link as={ReachLink} to="/">
+                            <PMsvgIcon
+                                width="60"
+                                height="60"
+                                viewBox="0 0 60 60"
+                            />
+                        </Link>
+                    </Stack>
+                    <Stack>
+                        <ListHeader>Services</ListHeader>
+                        <Link as={ReachLink} to="/register">Register</Link>
+                        <Link as={ReachLink} to="/search">Search</Link>
+                        <Link as={ReachLink} to="/validate">Validate</Link>
+                        <Link as={ReachLink} to="/report">Report</Link>
+                    </Stack>
+                    <Stack>
+                        <ListHeader>Community</ListHeader>
+                        {/*<Link as={ReachLink} to="/learn">Learning Center</Link>*/}
+                        <Link as={ReachLink} to="/cloudhwm">CloudHWM</Link>
+                        {/*<Link as={ReachLink} to="/">Future Stories</Link>*/}
+                        <Link as={ReachLink} to="/analytics">Analytics</Link>
+                        <Link as={ReachLink} to="/communitySupport">FAQ</Link>
+                    </Stack>
+                    <Stack>
+                        <ListHeader>Security</ListHeader>
+                        <Link as={ReachLink} to="/communitysupport">Blockchain Protection & Legitimacy</Link>
+                        <Link as={ReachLink} to="/communitysupport">Community Guidelines</Link>
+                        <Link as={ReachLink} to="/communitysupport">Privacy Policy & Cookies</Link>
+                    </Stack>
+                    <Stack>
+                        <ListHeader>Your People</ListHeader>
+                        <Link as={ReachLink} to="/identity/3/0xbEc6F6B37CFF8355a046afD2a2EcfEA05c1215F5">About Me</Link>
+                        <Link as={ReachLink} to="/yourpeople">Support the Project</Link>
+                        <Link as={ReachLink} to="/yourpeople">New & Updated Features</Link>
+                        <Link as={ReachLink} to="/Logokit">Logo Kit</Link>
+                    </Stack>
+                </Grid>
+            </Box>
 
+        </Box>
             <Box
                 p={4}
                 //border={'1px solid blue'}
                 borderTop={'1px solid'}
                 borderColor={'pmpurple.4'}
+                bg={'pmpurple.1'}
             >
-                <Stack direction={{base: 'column', md: 'row'}} >
+                <Stack direction={{base: 'column', md: 'row'}}>
                     <Text
                         //border={'1px solid blue'}
                         //width={{ base: 'flex', md: 'none'}}
@@ -201,7 +210,9 @@ export default function LargeWithLogoCentered() {
                     </Grid>
                 </Stack>
             </Box>
-        </Box>
+            </Stack>
+        </Flex>
+
     )
 }
 
