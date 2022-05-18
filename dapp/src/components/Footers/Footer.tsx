@@ -75,7 +75,7 @@ const Logo = (props: any) => {
 
 const ListHeader = ({ children }: { children: ReactNode }) => {
     return (
-        <Text fontWeight={'500'} fontSize={'lg'} mb={2}>
+        <Text fontWeight={'500'} fontSize={'md'} mb={2}>
             {children}
         </Text>
     );
@@ -83,136 +83,144 @@ const ListHeader = ({ children }: { children: ReactNode }) => {
 
 export default function LargeWithLogoCentered() {
     return (
-        <Flex>
-            <Stack
-            spacing={0}
-            >
-        <Box as={Container}
-             flexGrow={1}
-             maxW="full"
-             justifyContent={'space-evenly'}
-             alignItems={'flex-start'}
-             alignContent={'space-evenly'}
-             bg={'pmpurple.2'}
-             color={'pmpurple.12'}
-             borderTop={'1px solid'}
-             borderTopColor={'pmpurple.4'}
+        <Flex
+            //border={'1px solid blue'}
+            flexGrow={1}
+            maxW="full"
+            justifyContent={'space-evenly'}
+            alignItems={'flex-start'}
+            alignContent={'space-evenly'}
+            bg={'pmpurple.2'}
+            color={'pmpurple.12'}
         >
-            <Box>
-                <Grid
-                    py={4}
-                    templateColumns={{
-                        base: 'repeat(2, 1fr)',
-                        sm: 'repeat(2, 1fr)',
-                        md: 'repeat(4, 1fr)',
-                        lg: 'repeat(5, 1fr)'
-                    }}
-                    gap={{base: '8', sm: '12', md: '16'}}
-                >
-                    <Stack display={{base: 'none', lg: 'block'}}>
-                        <Link as={ReachLink} to="/">
-                            <PMsvgIcon
-                                width="60"
-                                height="60"
-                                viewBox="0 0 60 60"
-                            />
-                        </Link>
-                    </Stack>
-                    <Stack>
-                        <ListHeader>Services</ListHeader>
-                        <Link as={ReachLink} to="/register">Register</Link>
-                        <Link as={ReachLink} to="/search">Search</Link>
-                        <Link as={ReachLink} to="/validate">Validate</Link>
-                        <Link as={ReachLink} to="/report">Report</Link>
-                    </Stack>
-                    <Stack>
-                        <ListHeader>Community</ListHeader>
-                        {/*<Link as={ReachLink} to="/learn">Learning Center</Link>*/}
-                        <Link as={ReachLink} to="/cloudhwm">CloudHWM</Link>
-                        {/*<Link as={ReachLink} to="/">Future Stories</Link>*/}
-                        <Link as={ReachLink} to="/analytics">Analytics</Link>
-                        <Link as={ReachLink} to="/communitySupport">FAQ</Link>
-                    </Stack>
-                    <Stack>
-                        <ListHeader>Security</ListHeader>
-                        <Link as={ReachLink} to="/communitysupport">Blockchain Protection & Legitimacy</Link>
-                        <Link as={ReachLink} to="/communitysupport">Community Guidelines</Link>
-                        <Link as={ReachLink} to="/communitysupport">Privacy Policy & Cookies</Link>
-                    </Stack>
-                    <Stack>
-                        <ListHeader>Your People</ListHeader>
-                        <Link as={ReachLink} to="/identity/3/0xbEc6F6B37CFF8355a046afD2a2EcfEA05c1215F5">About Me</Link>
-                        <Link as={ReachLink} to="/yourpeople">Support the Project</Link>
-                        <Link as={ReachLink} to="/yourpeople">New & Updated Features</Link>
-                        <Link as={ReachLink} to="/Logokit">Logo Kit</Link>
-                    </Stack>
-                </Grid>
-            </Box>
-
-        </Box>
-            <Box
-                p={4}
-                //border={'1px solid blue'}
-                borderTop={'1px solid'}
-                borderColor={'pmpurple.4'}
-                bg={'pmpurple.1'}
+            <Stack
+                spacing={0}
+                //border={'1px solid green'}
+                w={'100%'}
             >
-                <Stack direction={{base: 'column', md: 'row'}}>
-                    <Text
-                        //border={'1px solid blue'}
-                        //width={{ base: 'flex', md: 'none'}}
-                        color='pmpurple.13'>© 2022 Made with
-                        <span
-                            style={{padding: '8px'}}
-                        >
-                                <Icon as={BsHeartFill} fontSize={'13px'}/>
-                            </span>
-                        by The PaperMasters ~ working to bring protection and legitimacy to the
-                        Blockchain.
-                    </Text>
-                    <Spacer/>
+                <Box
+                p={2}
+                >
                     <Grid
                         templateColumns={{
-                            base: 'repeat(9, 1fr)',
-                            sm: 'repeat(9, 1fr)',
-                            md: 'repeat(3, 1fr)',
-                            lg: 'repeat(4, 1fr)',
+                            base: 'repeat(2, 1fr)',
+                            sm: 'repeat(2, 1fr)',
+                            md: 'repeat(4, 1fr)',
+                            lg: 'repeat(5, 1fr)'
                         }}
-                        gap={{base: '2', lg: '8'}}
-                        justifyContent={{base: 'center', md: 'none'}}
+                        gap={{base: '8', sm: '12', md: '16'}}
                     >
-                        <SocialButton label={'Twitter'} href={'https://twitter.com/ramonajenny_n'}>
-                            <FaTwitter/>
-                        </SocialButton>
-                        {/*<SocialButton label={'YouTube'}*/}
-                        {/*              href={'https://www.youtube.com/channel/UC-w92fylwBTYGK--jse0jeQ'}>*/}
-                        {/*    <FaYoutube/>*/}
-                        {/*</SocialButton>*/}
-                        {/*<SocialButton label={'Instagram'}*/}
-                        {/*              href={'https://www.instagram.com/ramonaandrew_niederhausern/'}>*/}
-                        {/*    <FaInstagram/>*/}
-                        {/*</SocialButton>*/}
-                        <SocialButton label={'Linkedin'} href={'https://www.linkedin.com/in/ramonajenny/'}>
-                            <FaLinkedin/>
-                        </SocialButton>
-                        {/*<SocialButton label={'Linkedin'} href={'https://www.linkedin.com/in/andrew-nieder/'}>*/}
-                        {/*    <FaLinkedin/>*/}
-                        {/*</SocialButton>*/}
-                        <SocialButton label={'GitHub'} href={'https://github.com/ramonajenny'}>
-                            <FaGithub/>
-                        </SocialButton>
-                        {/*<SocialButton label={'GitHub'} href={'https://github.com/Arzemn'}>*/}
-                        {/*    <FaGithub/>*/}
-                        {/*</SocialButton>*/}
-                        <SocialButton label={'GitHub'} href={'https://discord.com/channels/ramonajenny#1512'}>
-                            <FaDiscord/>
-                        </SocialButton>
+                        <Stack
+                            display={{base: 'none', lg: 'block'}}
+                        >
+                            <Link as={ReachLink} to="/"
+                            >
+                                <PMsvgIcon
+                                    width="60"
+                                    height="60"
+                                    viewBox="0 0 60 60"
+                                />
+                            </Link>
+                        </Stack>
+                        <Stack>
+                            <ListHeader>Services</ListHeader>
+                            <Link as={ReachLink} to="/register" fontSize={'14px'}>Register</Link>
+                            <Link as={ReachLink} to="/search" fontSize={'14px'}>Search</Link>
+                            <Link as={ReachLink} to="/validate" fontSize={'14px'}>Validate</Link>
+                            <Link as={ReachLink} to="/report" fontSize={'14px'}>Report</Link>
+                        </Stack>
+                        <Stack>
+                            <ListHeader>Community</ListHeader>
+                            {/*<Link as={ReachLink} to="/learn">Learning Center</Link>*/}
+                            <Link as={ReachLink} to="/cloudhwm" fontSize={'14px'}>CloudHWM</Link>
+                            {/*<Link as={ReachLink} to="/">Future Stories</Link>*/}
+                            <Link as={ReachLink} to="/analytics" fontSize={'14px'}>Analytics</Link>
+                            <Link as={ReachLink} to="/communitySupport" fontSize={'14px'}>FAQ</Link>
+                        </Stack>
+                        <Stack>
+                            <ListHeader>Security</ListHeader>
+                            <Link as={ReachLink} to="/communitysupport" fontSize={'14px'}>Blockchain Protection &
+                                Legitimacy</Link>
+                            <Link as={ReachLink} to="/communitysupport" fontSize={'14px'}>Community
+                                Guidelines</Link>
+                            <Link as={ReachLink} to="/communitysupport" fontSize={'14px'}>Privacy Policy &
+                                Cookies</Link>
+                        </Stack>
+                        <Stack>
+                            <ListHeader>Your People</ListHeader>
+                            <Link as={ReachLink} to="/identity/3/0xbEc6F6B37CFF8355a046afD2a2EcfEA05c1215F5"
+                                  fontSize={'14px'}>About Me</Link>
+                            <Link as={ReachLink} to="/yourpeople" fontSize={'14px'}>Support the Project</Link>
+                            <Link as={ReachLink} to="/yourpeople" fontSize={'14px'}>New & Updated Features</Link>
+                            <Link as={ReachLink} to="/Logokit" fontSize={'14px'}>Logo Kit</Link>
+                        </Stack>
                     </Grid>
-                </Stack>
-            </Box>
-            </Stack>
-        </Flex>
+                </Box>
 
+                <Box
+                    p={2}
+                    //border={'1px solid red'}
+                    //borderTop={'1px solid'}
+                    //borderColor={'pmpurple.4'}
+                    bg={'pmpurple.1'}
+                >
+                    <Stack direction={{base: 'column', md: 'row'}}>
+                        <Text
+                            pt={1}
+                            fontSize={'14px'}
+                            //border={'1px solid blue'}
+                            //width={{ base: 'flex', md: 'none'}}
+                            color='pmpurple.13'>© 2022 Made with
+                            <span
+                                style={{padding: '8px'}}
+                            >
+                                <Icon as={BsHeartFill} fontSize={'12px'}/>
+                            </span>
+                            by The PaperMasters ~ working to bring protection and legitimacy to the
+                            Blockchain.
+                        </Text>
+                        <Spacer/>
+                        <Grid
+                            templateColumns={{
+                                base: 'repeat(9, 1fr)',
+                                sm: 'repeat(9, 1fr)',
+                                md: 'repeat(3, 1fr)',
+                                lg: 'repeat(4, 1fr)',
+                            }}
+                            gap={{base: '2', lg: '8'}}
+                            justifyContent={{base: 'center', md: 'none'}}
+                        >
+                            <SocialButton label={'Twitter'} href={'https://twitter.com/ramonajenny_n'}>
+                                <FaTwitter/>
+                            </SocialButton>
+                            {/*<SocialButton label={'YouTube'}*/}
+                            {/*              href={'https://www.youtube.com/channel/UC-w92fylwBTYGK--jse0jeQ'}>*/}
+                            {/*    <FaYoutube/>*/}
+                            {/*</SocialButton>*/}
+                            {/*<SocialButton label={'Instagram'}*/}
+                            {/*              href={'https://www.instagram.com/ramonaandrew_niederhausern/'}>*/}
+                            {/*    <FaInstagram/>*/}
+                            {/*</SocialButton>*/}
+                            <SocialButton label={'Linkedin'} href={'https://www.linkedin.com/in/ramonajenny/'}>
+                                <FaLinkedin/>
+                            </SocialButton>
+                            {/*<SocialButton label={'Linkedin'} href={'https://www.linkedin.com/in/andrew-nieder/'}>*/}
+                            {/*    <FaLinkedin/>*/}
+                            {/*</SocialButton>*/}
+                            <SocialButton label={'GitHub'} href={'https://github.com/ramonajenny'}>
+                                <FaGithub/>
+                            </SocialButton>
+                            {/*<SocialButton label={'GitHub'} href={'https://github.com/Arzemn'}>*/}
+                            {/*    <FaGithub/>*/}
+                            {/*</SocialButton>*/}
+                            <SocialButton label={'GitHub'} href={'https://discord.com/channels/ramonajenny#1512'}>
+                                <FaDiscord/>
+                            </SocialButton>
+                        </Grid>
+                    </Stack>
+                </Box>
+        </Stack>
+        </Flex>
     )
 }
 
