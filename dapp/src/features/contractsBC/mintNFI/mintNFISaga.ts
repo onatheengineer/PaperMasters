@@ -4,13 +4,7 @@ import {
     mintNFIAction, mintSucceeded, gasForMintNFIAction, gasForMinting, mintStatusBC,
     mintingErr, gasAccBalanceAction, accBalance, accBalanceErr, tokenURIAction, axiosPOSTReceiptStatus,
 } from "./MintNFISlice";
-import {
-    addressHasIdentityBool,
-    chainIdStatus,
-    chainIdProvider,
-    accountArr,
-    accountBCselectors
-} from "../../accountBC/AccountBCSlice";
+import { accountBCselectors} from "../../accountBC/AccountBCSlice";
 import MintABI from '../../../abiFiles/PaperMastersNFI.json'
 import {PayloadAction} from "@reduxjs/toolkit";
 import {SagaIterator} from "redux-saga";
