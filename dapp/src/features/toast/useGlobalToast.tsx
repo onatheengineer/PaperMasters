@@ -4,8 +4,8 @@ import {
     useToast,
     UseToastOptions,} from "@chakra-ui/react";
 import React, {useEffect} from "react";
-import { useAppDispatch, useAppSelector } from "../../../app/hooks"
-import { resetToast } from "../ToastSlice"
+import { useAppDispatch, useAppSelector } from "../../app/hooks"
+import { resetToast } from "./ToastSlice"
 
 interface UseCustomToastInterface {
     (options?: UseToastOptions | undefined): string | number | undefined;

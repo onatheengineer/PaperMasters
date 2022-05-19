@@ -219,7 +219,6 @@ export const Register:FC=()=> {
         //     setIsModalOpen(true);
         //     return ([" Minted Successful!", 'You did it! You are now a registered PaperMaster, please navigate to your Identity page and update your portfolio.'])
         // };
-
         setIsModalOpen(false)
         return ([null, null])
     }, [accountArrArr, singleNFIReceiptDBDB, useGetSingleIdentityBCQueryQuery, mintSucceededSucceeded])
@@ -291,7 +290,6 @@ export const Register:FC=()=> {
                                                 setWhichColorField('colorBG')
                                             }}
                                         >
-
                                             <Text px={'20px'} color={"pmpurple.10"}> Set NFI Background Color </Text>
                                             {/*<MdOutlineColorLens fontSize={'20px'} color={"#9c7e9c"}/>*/}
                                             <InputRightElement m='3px' textAlign={'center'}
@@ -1021,7 +1019,6 @@ export const Register:FC=()=> {
                                             color={"pmpurple.13"}
                                         >
                                             <Text as='u'>Estimated Gas: {gasPricePrice}</Text>
-                                            {estimateGasHandler}
                                         </Box>
                                         : null}
                                 </Center>

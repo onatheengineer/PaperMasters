@@ -80,7 +80,6 @@ export const AccountLedger:FC<ParamsURLInterface>=({chainIdURL, paramsWalletURL}
                                     </Tooltip>
                                     <Text
                                         textAlign={'left'}
-                                        isTruncated={true}
                                         color={'pmpurple.13'}
                                         whiteSpace={'nowrap'}
                                         w={{base: "250px", sm: "notset"}}
@@ -101,7 +100,6 @@ export const AccountLedger:FC<ParamsURLInterface>=({chainIdURL, paramsWalletURL}
                                     >
                                     </Box>
                                     <Text
-                                        isTruncated={true}
                                         color={'pmpurple.13'}
                                         whiteSpace={'nowrap'}
                                         fontWeight="400"
@@ -110,7 +108,6 @@ export const AccountLedger:FC<ParamsURLInterface>=({chainIdURL, paramsWalletURL}
                                              color={"white"}>From</Tag> {el.from}
                                     </Text>
                                     <Text
-                                        isTruncated={true}
                                         color={'pmpurple.13'}
                                         whiteSpace={'nowrap'}
                                         fontWeight="400"

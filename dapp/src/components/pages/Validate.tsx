@@ -24,7 +24,7 @@ import {
 } from '@chakra-ui/react';
 import { MdOutlineColorLens} from 'react-icons/md';
 import {useAppDispatch, useAppSelector} from "../../app/hooks";
-import {ColorChangeHandler, ColorResult, SketchPicker, GithubPicker, RGBColor} from 'react-color';
+import {ColorChangeHandler, ColorResult, SketchPicker, GithubPicker, RGBColor} from 'react-color'
 import {
     gasAccBalanceAction, gasForMintNFIAction
 } from "../../features/contractsBC/mintNFI/MintNFISlice";
@@ -515,7 +515,6 @@ export const Validate:FC=()=> {
                                             color={"pmpurple.13"}
                                         >
                                             <Text as='u'>Estimated Gas: {gasPricePrice}</Text>
-                                            {estimateGasHandler}
                                         </Box>
                                         : null}
                                 </Center>

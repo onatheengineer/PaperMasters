@@ -38,7 +38,7 @@ import {Link as ReachLink, To} from "react-router-dom";
 import PMLogoFull from '../assets/icons/PMLogoFull';
 import {accountArrAction, accountArrMetaMaskAction} from "../features/accountBC/AccountBCSlice";
 
-export default function WithSubnavigation() {
+export const Navbar:FC=() =>{
     const {isOpen, onToggle} = useDisclosure();
     const dispatch = useAppDispatch();
     const accountArrArr = useAppSelector((state) => state.accountBC.accountArr);
@@ -109,6 +109,7 @@ export default function WithSubnavigation() {
                                     //border={'1px solid red'}
                                 >
                                     <Button
+                                        role={'connect wallet'}
                                         display={{base: 'inline-flex', md: 'inline-flex'}}
                                         fontSize={'sm'}
                                         fontWeight={400}
@@ -124,7 +125,6 @@ export default function WithSubnavigation() {
                                         }}
                                     >
                                         <HStack>
-
                                             {/*<SiSololearn fontSize={'16px'}/>*/}
                                             <Text>
                                                 Connect Wallet
@@ -170,8 +170,8 @@ export default function WithSubnavigation() {
                 <MobileNav/>
             </Collapse>
         </Box>
-    );
-}
+    )
+};
 
 const DesktopNav = () => {
     const linkColor = 'pmpurple.13';
@@ -535,3 +535,5 @@ const NAV_ITEMS: Array<NavItem> = [
         ],
     },
 ];
+
+export default Navbar;

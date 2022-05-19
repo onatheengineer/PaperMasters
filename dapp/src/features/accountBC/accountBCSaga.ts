@@ -9,14 +9,11 @@ import {
     accountArrStatus,
     addressHasIdentityBool,
     getStructBC,
-    getAllStructBC,
     addressToTokenID,
     addressToTokenAction,
     singleStructBCAction,
     accountArrAction,
-    accountBCselectors,
-    addressToTokenBool,
-    interfaceBCStruct, accountArrMetaMaskAction,
+    addressToTokenBool, accountArrMetaMaskAction,
 } from "./AccountBCSlice";
 import {accountArrDBAction} from '../accountDB/AccountDBSlice';
 import axios from "axios";
@@ -25,16 +22,29 @@ import chainIdNetworks from "../JSON/chainId.networks.json";
 import {SagaIterator} from "redux-saga";
 import MintABI from "../../abiFiles/PaperMastersNFI.json";
 import {ParamsURLInterface} from "../accountDB/AccountDBSlice.types";
-import {BCStruct, WalletConnectMetaMaskInterface} from "./AccountBCSlice.types";
+import { WalletConnectMetaMaskInterface} from "./AccountBCSlice.types";
 import {useSignerChainId} from "eth-hooks";
 import { ethers } from "ethers";
 import WalletConnect from "@walletconnect/client";
 import QRCodeModal from "@walletconnect/qrcode-modal";
-import {showToast} from "../toast/ToastSlice";
+import {showToast, ToastOptions} from "../toast/ToastSlice";
 
 const baseURL = 'https://ociuozqx85.execute-api.us-east-1.amazonaws.com';
 
-function* accountArrSaga({payload}: PayloadAction<WalletConnectMetaMaskInterface>): SagaIterator {
+// export function generateErrorToastOptions(
+//     error: string,
+//     ticketAction: BCAction
+// ): ToastOptions {
+//     const titleIntro = ticketAction
+//         ? `Could not ${ticketAction} tickets`
+//         : "Ticket error";
+//     return {
+//         title: `${titleIntro}: ${error}`,
+//         status: "error",
+//     };
+// }
+
+export function* accountArrSaga({payload}: PayloadAction<WalletConnectMetaMaskInterface>): SagaIterator {
     const {chainId, walletAccount} = payload;
     {
         try {
@@ -104,7 +114,7 @@ function* accountArrSaga({payload}: PayloadAction<WalletConnectMetaMaskInterface
     }
 }
 
-function* accountArrMetaMaskSaga(): SagaIterator {
+export function* accountArrMetaMaskSaga(): SagaIterator {
     try {
         if(!window.ethereum) {
             console.log('not window ether provider')
@@ -154,8 +164,7 @@ function* accountArrMetaMaskSaga(): SagaIterator {
     }
 }
 
-
-function* singleStructBCSaga({payload}: PayloadAction<ParamsURLInterface>): SagaIterator {
+export function* singleStructBCSaga({payload}: PayloadAction<ParamsURLInterface>): SagaIterator {
     const { chainIdURL, paramsWalletURL } = payload;
     try {
         yield put(getStructBC(null));
@@ -216,7 +225,7 @@ function* singleStructBCSaga({payload}: PayloadAction<ParamsURLInterface>): Saga
 //     }
 // }
 
-function* addressToTokenSaga({payload}: PayloadAction<ParamsURLInterface>):  SagaIterator {
+export function* addressToTokenSaga({payload}: PayloadAction<ParamsURLInterface>):  SagaIterator {
     const { chainIdURL, paramsWalletURL } = payload;
     //TODO yield selector bring in accountAcc - also make an addressHasIdentity for the CONNECTED user to stop register
     try {
@@ -228,7 +237,7 @@ function* addressToTokenSaga({payload}: PayloadAction<ParamsURLInterface>):  Sag
             const web3 = new Web3(chainIdJSON[chainIdURL].rpc[0]);
             console.log("chainIdProviderProvider:", chainIdURL)
             if (Object.prototype.hasOwnProperty.call(MintABI.networks, `${chainIdURL}`)) {
-                console.log("MintABI.networks[chainIdProviderProvider].address", MintABI.networks[chainIdURL].address)
+
                 const NFIContract = new web3.eth.Contract(MintABI.abi as any, MintABI.networks[chainIdURL].address);
                 const addressToTokenIDID = yield call(NFIContract.methods.addressToTokenID(paramsWalletURL[0]).call);
                 console.log("addresstotokenId:", addressToTokenIDID)

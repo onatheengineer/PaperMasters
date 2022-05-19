@@ -1,5 +1,13 @@
 /* eslint-disable no-param-reassign */
 import { createAction, createSlice, PayloadAction } from "@reduxjs/toolkit";
+import {RootState} from "../../app/store";
+import {UseToastOptions} from "@chakra-ui/react";
+
+export const toastConfig: UseToastOptions = {
+    isClosable: true,
+    variant: "subtle",
+    position: "bottom",
+};
 
 export interface ToastOptions {
     title: string;
@@ -24,8 +32,7 @@ const createToastSlice = (initialState: ToastState) =>
         },
     });
 
-export const showFriendlyToast =
-    createAction<ToastOptions>("showPersonalToast");
+export const startToast = createAction<ToastOptions>("startToast");
 
 const toastSlice = createToastSlice({ toastOptions: null });
 export const { showToast, resetToast } = toastSlice.actions;

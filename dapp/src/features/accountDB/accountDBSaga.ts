@@ -15,25 +15,19 @@ import {
     accountDBselectors
 } from "./AccountDBSlice";
 import {
-    accountArr,
-    chainIdProvider,
-    chainIdSupportedBool,
-    accountBCselectors, allStructBCAction, getAllStructBC, interfaceBCStruct
+    accountBCselectors
 } from "../accountBC/AccountBCSlice";
 import {
     AccountDBInterface,
     NFIReceiptInterface,
     ParamsURLInterface
 } from "./AccountDBSlice.types";
-import {RootState} from "../../app/store";
-import {BCStruct} from "../accountBC/AccountBCSlice.types";
 import chainIdNetworks from "../JSON/chainId.networks.json";
 import {ethers} from "ethers";
-import {resolveAny} from "dns";
 
 const baseURL = 'https://ociuozqx85.execute-api.us-east-1.amazonaws.com';
 
-function* accountArrDBSaga({payload}: PayloadAction<ParamsURLInterface>): SagaIterator {
+export function* accountArrDBSaga({payload}: PayloadAction<ParamsURLInterface>): SagaIterator {
     const { chainIdURL, paramsWalletURL } = payload;
     console.log("payloadDB:", payload)
     try {
@@ -76,7 +70,7 @@ function* accountArrDBSaga({payload}: PayloadAction<ParamsURLInterface>): SagaIt
     }
 }
 
-function* postSingleAccountDictionaryDBSaga({payload}: PayloadAction<AccountDBInterface>): SagaIterator {
+export function* postSingleAccountDictionaryDBSaga({payload}: PayloadAction<AccountDBInterface>): SagaIterator {
     try{
         const accountDicaxiosPOST = yield call(axios.post, `${baseURL}/account`, payload)
         console.log("accountDicaxiosPUT", accountDicaxiosPOST)
@@ -85,7 +79,7 @@ function* postSingleAccountDictionaryDBSaga({payload}: PayloadAction<AccountDBIn
     }
 }
 
-function* singleAccountDictionaryDBSaga({payload}: PayloadAction<ParamsURLInterface>): SagaIterator {
+export function* singleAccountDictionaryDBSaga({payload}: PayloadAction<ParamsURLInterface>): SagaIterator {
     const { chainIdURL, paramsWalletURL } = payload;
     try{
         const accountDictionary = yield call(axios.get, `${baseURL}/account/${chainIdURL}/${paramsWalletURL}`);
@@ -103,7 +97,7 @@ function* singleAccountDictionaryDBSaga({payload}: PayloadAction<ParamsURLInterf
     }
 }
 
-function* allAccountDictionaryDBSaga(): SagaIterator {
+export function* allAccountDictionaryDBSaga(): SagaIterator {
     try{
         const allAccountDictionary = yield call(axios.get, `${baseURL}/account`);
         console.log ('this is the type of allAccountDictionaryDBSaga:', allAccountDictionary);
@@ -113,7 +107,7 @@ function* allAccountDictionaryDBSaga(): SagaIterator {
     }
 }
 
-function* singleNFIReceiptDBSaga({ payload }: PayloadAction<ParamsURLInterface>): SagaIterator {
+export function* singleNFIReceiptDBSaga({ payload }: PayloadAction<ParamsURLInterface>): SagaIterator {
     const { chainIdURL, paramsWalletURL } = payload;
     try{
         //TODO fix lambda and api endpoints
@@ -128,7 +122,7 @@ function* singleNFIReceiptDBSaga({ payload }: PayloadAction<ParamsURLInterface>)
     }
 }
 
-function* allNFIReceiptDBSaga(): SagaIterator {
+export function* allNFIReceiptDBSaga(): SagaIterator {
     try{
         //TODO fix lambda and api endpoints
         const getAllReceiptDB = yield call(axios.get, `${baseURL}/receipt`);

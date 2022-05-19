@@ -13,13 +13,10 @@ import {useAppDispatch, useAppSelector} from "../../../app/hooks";
 import {FaFacebook, FaInstagram, FaPlus, FaTwitter} from "react-icons/fa";
 import {AiOutlineComment} from "react-icons/ai";
 import ImageArchitect1 from "../../../assets/img/ImageArchitect1.png";
-import {Carousel } from 'react-responsive-carousel';
 import MentionsDrawer from "./mentions/MentionsDrawer";
 // Here we have used react-icons package for the icons
 import { BiLeftArrowAlt, BiRightArrowAlt } from 'react-icons/bi';
-//import Slider from 'react-slick';
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
+
 import {select} from "redux-saga/effects";
 
 export const Projects=()=> {
@@ -141,7 +138,6 @@ export const Projects=()=> {
                             </AvatarGroup>
                         </Flex>
                     </Flex>
-                    {/*</Carousel>*/}
                 </Flex>
             </Grid>
         </Box>

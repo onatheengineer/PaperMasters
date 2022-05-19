@@ -230,7 +230,7 @@ export async function fetchAddressToToken({chainIdURL, paramsWalletURL}: ParamsU
                 alchemy: 'mEUzvPVY6xECwMieu01t9D3fuYyOYGCl',
                 pocket: '329ee9f55d37f7ef7a54f84a4df341d096004450263af1d40cc4650e47e26609'
             });
-            const NFIContract = new ethers.Contract(MintABI.networks[chainIdURL].address, MintABI.abi as any, provider);
+            const NFIContract = new ethers.Contract(MintABI.networks[chainIdURL].address, MintABI.abi, provider);
             console.log('NFIContract:', NFIContract);
             const addressToTokenIDID = await NFIContract.addressToTokenID(paramsWalletURL);
             console.log("addresstotokenId:", addressToTokenIDID)

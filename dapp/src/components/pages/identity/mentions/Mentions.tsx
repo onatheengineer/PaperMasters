@@ -212,7 +212,7 @@ export const Mentions:FC<interfaceMentions> =({chainIdURL, paramsWalletURL})=> {
                 fontSize={'20px'}
                 textAlign={'center'}
             >
-                Something went wrong...{error}
+                Something went wrong...
             </Heading>
         )
     }

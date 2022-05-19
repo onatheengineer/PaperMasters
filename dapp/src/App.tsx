@@ -16,14 +16,13 @@ import {
 import detectEthereumProvider from '@metamask/detect-provider';
 import {select} from "redux-saga/effects";
 import {ReactQueryDevtools} from 'react-query/devtools';
-import {Loading} from "./features/reactQuery/Loading";
 import WalletConnect from "@walletconnect/client";
 import QRCodeModal from "@walletconnect/qrcode-modal";
-import {useGlobalToast} from "./features/toast/hooks/useGlobalToast";
+import {useGlobalToast} from "./features/toast/useGlobalToast";
 
 function App() {
     const dispatch = useAppDispatch();
-    const toast = useGlobalToast();
+    useGlobalToast();
     useEffect(() => {
         if(window.ethereum){
             dispatch(accountArrMetaMaskAction());
@@ -117,7 +116,6 @@ function App() {
                 flexDirection={'column'}
                 //border={'2px solid red'}
             >
-                <Loading/>
                 <Box>
                     <Navbar/>
                 </Box>

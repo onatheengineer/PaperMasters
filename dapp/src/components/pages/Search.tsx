@@ -8,11 +8,12 @@ import {
     Tbody, Tr, Th, Td, Center, VStack, Stack,
     Popover, PopoverBody, PopoverContent, PopoverTrigger,
     Modal, ModalOverlay,
-    ModalContent, ModalHeader, ModalCloseButton, ModalBody, FormControl, FormLabel, ModalFooter, toast,
+    ModalContent, ModalHeader, ModalCloseButton,
+    ModalBody, FormControl, FormLabel, ModalFooter, Toast,
 } from '@chakra-ui/react';
+import { useToast } from '@chakra-ui/react'
 import {Link as ReachLink, useNavigate} from "react-router-dom";
 import {useAppDispatch, useAppSelector} from "../../app/hooks";
-import  {ExpanderComponentProps} from 'react-data-table-component';
 import IdentityEntryModal from "../../utils/IdentityEntryModal";
 import AvatarNFI from "../avatar/AvatarNFI";
 import {allAccountDictionaryDBAction, allNFIReceiptDBAction} from "../../features/accountDB/AccountDBSlice";
@@ -28,7 +29,6 @@ import {MdOutlineLibraryAddCheck} from "react-icons/md";
 import chainIdNetworkJSON from '../../features/JSON/chainId.networks.json'
 import {PMsvgIcon} from "../../assets/icons/PMSvgIcon";
 import {showToast} from "../../features/toast/ToastSlice";
-import {TriangleDownIcon, TriangleUpIcon} from "@chakra-ui/icons";
 
 interface interfaceFilterComponent{
     filterText: string,

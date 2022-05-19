@@ -3,6 +3,27 @@ import {BCStruct, WalletConnectMetaMaskInterface} from "./AccountBCSlice.types"
 import {ParamsURLInterface} from "../accountDB/AccountDBSlice.types";
 import { RootState } from "../../app/store";
 
+export enum accountArrSagaAction {
+    unsupportedChain = "cancelDBConnection",
+    dbEntry = "dbEntry",
+    getAccountBalance = "balance",
+    releaseAccount = "release",
+}
+
+export enum AccountArrSagaStatus {
+    idleChainId = "idle",
+    idleWalletAccount = "idle",
+    inProgressChainId = "in progress",
+    inProgressWalletAccount = "in progress",
+    connectedChainId = "connected",
+    connectedWalletAccount = "connected",
+}
+
+export type AccountState = {
+    action: accountArrSagaAction | null;
+    accountArrArrStatus: AccountArrSagaStatus;
+};
+
 export interface interfaceBCStruct {
     [chainId: string]: BCStruct[]
 }
@@ -73,7 +94,8 @@ const AccountBCSlice = createSlice ({
 });
 
 export const { chainIdProvider, chainIdSupportedBool, chainIdStatus, accountArr, accountArrStatus,
-    addressHasIdentityBool, addressToTokenBool, getAllStructBC, getStructBC, addressToTokenID} = AccountBCSlice.actions;
+    addressHasIdentityBool, addressToTokenBool, getAllStructBC, getStructBC, addressToTokenID}
+    = AccountBCSlice.actions;
 
 export const accountArrAction = createAction<WalletConnectMetaMaskInterface>("GET_ACCOUNT_ARR_ACTION_SAGA");
 export const accountArrMetaMaskAction = createAction("GET_ACCOUNT_ARR_METAMASK_ACTION_SAGA");

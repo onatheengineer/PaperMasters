@@ -9,7 +9,6 @@ import {
 } from '@chakra-ui/react';
 import RoutesRoutes from "../../app/RoutesRoutes";
 import {Link as ReachLink} from "react-router-dom";
-import {setRef} from "@mui/material";
 import PageForum from "./PageForum";
 import React from "react";
 
