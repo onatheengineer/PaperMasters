@@ -1,31 +1,23 @@
 import React, {useEffect} from 'react';
 import './App.css';
-import {useAppDispatch, useAppSelector} from './app/hooks';
-import Navbar from "./components/Navbar";
-import Footer from "./components/Footers/Footer";
+import {useAppDispatch} from './app/hooks';
+import Navbar from "./components/pages/home/Navbar";
+import Footer from "./components/pages/home/Footers/Footer";
 import "focus-visible/dist/focus-visible";
-import {Box, Flex, VStack} from '@chakra-ui/react';
-import RoutesRoutes, {NavItem} from './app/RoutesRoutes'
-import {
-    accountArr,
-    accountArrAction,
-    accountArrMetaMaskAction,
-    accountBCselectors,
-    chainIdProvider
-} from "./features/accountBC/AccountBCSlice";
+import {Box, Flex} from '@chakra-ui/react';
+import RoutesRoutes from './app/RoutesRoutes'
+import {accountArr, accountArrAction, accountArrMetaMaskAction} from "./features/accountBC/AccountBCSlice";
 import detectEthereumProvider from '@metamask/detect-provider';
-import {select} from "redux-saga/effects";
-import {ReactQueryDevtools} from 'react-query/devtools';
 import WalletConnect from "@walletconnect/client";
 import QRCodeModal from "@walletconnect/qrcode-modal";
 import {useGlobalToast} from "./features/toast/useGlobalToast";
-import './App.css'
+
 
 function App() {
     const dispatch = useAppDispatch();
     useGlobalToast();
     useEffect(() => {
-        if(window.ethereum){
+        if (window.ethereum) {
             dispatch(accountArrMetaMaskAction());
             const providerPromise = detectEthereumProvider();
             console.log("this is provider:", providerPromise);
@@ -73,7 +65,7 @@ function App() {
                     throw error;
                 }
                 // Get provided accounts and chainId
-                const { accounts, chainId } = payload.params[0];
+                const {accounts, chainId} = payload.params[0];
                 console.log("accounts:", accounts)
                 console.log("chainId:", chainId)
                 const connectedAccountArr = connector.accounts
@@ -87,7 +79,7 @@ function App() {
                     throw error;
                 }
                 // Get updated accounts and chainId
-                const { accounts, chainId } = payload.params[0];
+                const {accounts, chainId} = payload.params[0];
                 const connectedAccountArr = connector.accounts
                 const connectedChainId = connector.chainId
                 dispatch(accountArrAction({chainId: `${connectedChainId}`, walletAccount: connectedAccountArr}));

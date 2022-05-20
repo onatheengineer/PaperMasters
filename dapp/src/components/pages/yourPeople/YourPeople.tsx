@@ -1,18 +1,6 @@
-import React from 'react';
-import {useState, useEffect} from "react";
 import type {FC} from 'react'
-import {Button, Flex, FormControl, FormLabel, Grid, GridItem, Input, Stack, Text} from '@chakra-ui/react';
-import PageForum from "../PageForum";
-import {
-    Box,
-    Center,
-    Heading,
-    Image,
-    Link,
-
-} from '@chakra-ui/react';
-import { ReactElement, ReactNode } from 'react';
-import type { Image as ImageType } from '../../../features/reactQuery/types';
+import React from 'react';
+import {Box, Flex, Heading, Text} from '@chakra-ui/react';
 // import { baseImageUrl } from '../../axiosInstance/constants';
 // import {imageRamona} from '../../..//assets/greenshirt'
 // import {imageAndrew} from '../../../assets/pinkShirts'
@@ -68,8 +56,9 @@ interface InterfaceYourPeople {
     texttest?: string,
     //card: typeof Card: CardProps
 }
+
 //
-export const YourPeople:FC<InterfaceYourPeople>=()=> {
+export const YourPeople: FC<InterfaceYourPeople> = () => {
 //     // const YourPeopleForumPage = [
 //     //     <PageForum title={'We want you to know who we are'} body={'dfgfdhdftgyertg'}/>,
 //     //     <PageForum title={'About Us'} body={'dfgfdhdftgyertg'}/>,
@@ -153,18 +142,19 @@ export const YourPeople:FC<InterfaceYourPeople>=()=> {
                     color={'pmpurple.13'}
                 >
                     You are the reason I took on this project to protect the Blockchain.
-                                   I care about you, you inspire me to keep delivering this product.
-                                      Without you, the PaperMasters doesn't exist.
-                                     If you would like to support the effort, here’s some specific ways to help.
-                                     Spread the word about the papermasters.io.
+                    I care about you, you inspire me to keep delivering this product.
+                    Without you, the PaperMasters doesn't exist.
+                    If you would like to support the effort, here’s some specific ways to help.
+                    Spread the word about the papermasters.io.
                     Send a link to a friend.
                     Add our link and/or logo to to your website or your social media sites.
                     Our logo is located at the bottom of this page in the footer.
                     Adding a text link to your PaperMasters Identity page site from your social site is a
                     vote of confidence. It’s also a great way to share PaperMasters resources with your people.
-                                      Give a Validation or Report and support your fellow PaperMasters.
-                                     I enjoy your comments and love building relationships with the community.
-                                    I learn from your comments new ways to improve the site. Send me some feedback: ramonajenny.n@gmail.com.
+                    Give a Validation or Report and support your fellow PaperMasters.
+                    I enjoy your comments and love building relationships with the community.
+                    I learn from your comments new ways to improve the site. Send me some feedback:
+                    ramonajenny.n@gmail.com.
 
                 </Text>
             </Box>

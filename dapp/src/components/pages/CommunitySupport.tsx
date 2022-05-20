@@ -1,19 +1,11 @@
 //import React { useEffect, useState, useRef } from "react";
 import type {FC} from 'react'
-import {
-    Box, Heading, useMergeRefs,
-    Button,
-    Flex,
-    Menu, MenuButton, MenuDivider,
-    MenuItem, MenuList, StackDivider, Text, useColorModeValue, Stack, Collapse, useDisclosure,
-} from '@chakra-ui/react';
-import RoutesRoutes from "../../app/RoutesRoutes";
-import {Link as ReachLink} from "react-router-dom";
-import PageForum from "./PageForum";
 import React from "react";
+import {Box, Flex, Heading,} from '@chakra-ui/react';
+import PageForum from "../PageForum";
 
 
-export const CommunitySupport:FC=()=> {
+export const CommunitySupport: FC = () => {
     // const LearnForumPage [
     //     <PageForum title={'CommunitySupport about NFIs'} body={'dfgfdhdftgyertg'}/>,
     //     <PageForum title={'What is a Non-Fungiable-Identity (NFI)'} body={'dfgfdhdftgyertg'}/>,
@@ -40,8 +32,8 @@ export const CommunitySupport:FC=()=> {
                 m={30}
             >
                 <Box
-                flexGrow={1}
-                m={8}
+                    flexGrow={1}
+                    m={8}
                 >
                     <Heading
                         textAlign={'center'}
@@ -55,37 +47,39 @@ export const CommunitySupport:FC=()=> {
                 <PageForum title={'Blockchain Protection and Legitimacy'}
                            subtitle={'Authentic and Transparent'}
                            body={'NFIs are transparent identities, just like the Blockchain keeps a ' +
-                    'public ledger, identities keep your wallet address transparent as well. I hope that the community will see value in becoming a PaperMaster and' +
-                    'show off the integrity of their wallet address.'} />
+                               'public ledger, identities keep your wallet address transparent as well. I hope that the community will see value in becoming a PaperMaster and' +
+                               'show off the integrity of their wallet address.'}/>
                 <PageForum title={'Community Guidelines'}
                            subtitle={'Please be nice'}
                            body={'Please do not Validate or Report anyone that you personally have not done ' +
-                    'business with. If you have information to offer to the community about a shady account, please use the Mentions feature.'} />
+                               'business with. If you have information to offer to the community about a shady account, please use the Mentions feature.'}/>
                 <PageForum title={'Benefits of becoming a PaperMaster?'}
                            subtitle={'Account Integrity'}
                            body={'Providing fellow Blockchainers with a reputable reputation is vital to ' +
-                    'keeping the community safe so no accounts get hurt. Being a PaperMaster helps validate your integrity and support of honest ' +
-                    'business transactions by sending them to your PaperMasters identity page with a live account ledger, any past contracts you ' +
-                    'helped create and mentions by your fellow Blockchains showing that you are the honest trustworthy person you are telling them you are.'} />
+                               'keeping the community safe so no accounts get hurt. Being a PaperMaster helps validate your integrity and support of honest ' +
+                               'business transactions by sending them to your PaperMasters identity page with a live account ledger, any past contracts you ' +
+                               'helped create and mentions by your fellow Blockchains showing that you are the honest trustworthy person you are telling them you are.'}/>
                 <PageForum title={'What is NFI Protection and Validation?'}
                            subtitle={'Protecting our Community'}
                            body={'Let us all keep the Blockchain beautiful, validating and reporting ' +
-                    'a wallet address helps your fellow Blockchainers known that the wallet address is safe, or not safe, to do business with. These Validations and Reports ' +
-                    'are Non-Fungible Tokens permanently attached to the wallet address. '} />
+                               'a wallet address helps your fellow Blockchainers known that the wallet address is safe, or not safe, to do business with. These Validations and Reports ' +
+                               'are Non-Fungible Tokens permanently attached to the wallet address. '}/>
                 <PageForum title={'How to add a wallet account'}
                            subtitle={"View a Blockchainer's Activity"}
                            body={'Go to the search page and type in a Chain Id of the wallet account you wish to add, then add the wallet account number, remember account ' +
-                               'addresses are at least 26 characters'} />
+                               'addresses are at least 26 characters'}/>
                 <PageForum title={'Cookies Policy'}
                            subtitle={'Authentication'}
                            body={<span>I use cookies to verify your account and determine analytics. Security site
                                and product integrity <br/> I may use Cookies to keep your account and data safe and secure.
-                               <br/> <h5 style={{fontWeight:650}}>Advertising</h5>  Nope, not interested, also I will never sell your
-                               information. <br/><h5 style={{fontWeight:650}}> Site features and services </h5>
-                               I may use cookies to enable help me increase functionality of the site to provide a better user experience. <h5 style={{fontWeight:650}}>
+                               <br/> <h5 style={{fontWeight: 650}}>Advertising</h5>  Nope, not interested, also I will never sell your
+                               information. <br/><h5 style={{fontWeight: 650}}> Site features and services </h5>
+                               I may use cookies to enable help me increase functionality of the site to provide a better user experience. <h5
+                                   style={{fontWeight: 650}}>
                                    Performance </h5>
-                               I am use cookies to provide you with the best experience possible.<h5 style={{fontWeight:650}}> Analytics and research </h5>
-                               I use cookies to better understand how people use the site so that it can improve it.</span> } />
+                               I am use cookies to provide you with the best experience possible.<h5
+                                   style={{fontWeight: 650}}> Analytics and research </h5>
+                               I use cookies to better understand how people use the site so that it can improve it.</span>}/>
             </Box>
         </Flex>
     )

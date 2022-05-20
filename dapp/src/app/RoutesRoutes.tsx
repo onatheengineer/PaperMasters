@@ -1,26 +1,17 @@
-import React, { useState, useEffect, ReactElement} from 'react';
-import {Route, Routes, useLocation, Navigate} from 'react-router-dom';
-import { AiOutlineFileSearch } from "react-icons/ai";
-import { GiFlowerPot } from "react-icons/gi";
-import { BiHomeHeart, BiBookmarkHeart } from 'react-icons/bi';
-import { IoMdCheckmarkCircleOutline } from 'react-icons/io';
-import {
-    Flex,
-    Icon,
-    Link,
-    Text,
-    Menu,
-    MenuButton,
-} from '@chakra-ui/react';
-import {FiTrendingUp} from 'react-icons/fi';
-import { IconType } from 'react-icons';
 import type {FC} from 'react';
+import React, {ReactElement, useEffect, useState} from 'react';
+import {Link as ReachLink, Route, Routes, To, useLocation} from 'react-router-dom';
+import {AiOutlineFileSearch} from "react-icons/ai";
+import {GiBookCover, GiFlowerPot} from "react-icons/gi";
+import {BiBookmarkHeart, BiHomeHeart} from 'react-icons/bi';
+import {IoMdCheckmarkCircleOutline} from 'react-icons/io';
+import {Flex, Icon, Link, Menu, MenuButton, Text,} from '@chakra-ui/react';
+import {FiTrendingUp} from 'react-icons/fi';
+import {IconType} from 'react-icons';
 import Register from "../components/pages/Register";
 import Search from '../components/pages/Search'
-import {Link as ReachLink, To} from "react-router-dom";
-import { MdOutlineReport, MdOutlineWarningAmber} from "react-icons/md";
-import {GiBookCover} from "react-icons/gi";
-import Home from "../components/pages/Home";
+import {MdOutlineReport, MdOutlineWarningAmber} from "react-icons/md";
+import Home from "../components/pages/home/Home";
 import Identity from "../components/pages/Identity";
 import CloudHWM from "../components/pages/CloudHWM";
 import YourPeople from "../components/pages/yourPeople/YourPeople";
@@ -30,7 +21,6 @@ import CommunitySupport from "../components/pages/CommunitySupport";
 import Security from "../components/pages/Security";
 import {useAppSelector} from "./hooks";
 import Report from "../components/pages/Report";
-import ModalForIdentNoUseParams from "../components/pages/identity/ModalForIdentNoUseParams";
 
 interface InterfaceNavItem {
     title?: string;
@@ -40,45 +30,47 @@ interface InterfaceNavItem {
     path: To;
 }
 
-interface InterfaceSidebar{
+interface InterfaceSidebar {
     icon?: IconType;
     profileName?: string;
 }
 
-export const NavItem: FC<InterfaceNavItem> = ({ icon, title, active,
-                                                  navItemSize, path} ) => {
+export const NavItem: FC<InterfaceNavItem> = ({
+                                                  icon, title, active,
+                                                  navItemSize, path
+                                              }) => {
 
     return (
-            <Flex
-                mt={'28px'}
-                flexDir="column"
-                w="100%"
-                h={'100%'}
-                alignItems={navItemSize == "small" ? "center" : "flex-start"}
-            >
-                <Menu placement="right">
-                    <Link
-                        as={ReachLink}
-                        to={path}
-                        backgroundColor={active ? "#e6dee6" : "none"}
-                        p={3}
-                        borderRadius={8}
-                        _hover={{textDecor: 'none', backgroundColor: "#c1aec1"}}
-                        w={navItemSize ? "large" : "100%"}
-                    >
-                        <MenuButton w="100%">
-                            <Flex>
-                                <Icon as={icon} fontSize="xl" color={"#694b69"}/>
-                                <Text ml={5} display={navItemSize == "small" ? "none" : "flex"}>{title}</Text>
-                            </Flex>
-                        </MenuButton>
-                    </Link>
-                </Menu>
-            </Flex>
+        <Flex
+            mt={'28px'}
+            flexDir="column"
+            w="100%"
+            h={'100%'}
+            alignItems={navItemSize == "small" ? "center" : "flex-start"}
+        >
+            <Menu placement="right">
+                <Link
+                    as={ReachLink}
+                    to={path}
+                    backgroundColor={active ? "#e6dee6" : "none"}
+                    p={3}
+                    borderRadius={8}
+                    _hover={{textDecor: 'none', backgroundColor: "#c1aec1"}}
+                    w={navItemSize ? "large" : "100%"}
+                >
+                    <MenuButton w="100%">
+                        <Flex>
+                            <Icon as={icon} fontSize="xl" color={"#694b69"}/>
+                            <Text ml={5} display={navItemSize == "small" ? "none" : "flex"}>{title}</Text>
+                        </Flex>
+                    </MenuButton>
+                </Link>
+            </Menu>
+        </Flex>
     )
 }
 
-export const RoutesRoutes: FC<InterfaceSidebar>= ({icon, profileName} ): ReactElement => {
+export const RoutesRoutes: FC<InterfaceSidebar> = ({icon, profileName}): ReactElement => {
 
     const chainIdProviderProvider = useAppSelector((state) => state.accountBC.chainIdProvider);
     const accountArrArr = useAppSelector((state) => state.accountBC.accountArr);

@@ -1,25 +1,15 @@
-import React, {useEffect, useState, useRef, MutableRefObject, forwardRef, ReactElement} from "react";
-import type {FC} from 'react'
-import {
-    Box, Heading, useMergeRefs,
-    Button,
-    Flex,
-    Menu, MenuButton, MenuDivider,
-    MenuItem, MenuList, StackDivider, Text, useColorModeValue, Stack, Collapse, useDisclosure,
-} from '@chakra-ui/react';
-import RoutesRoutes from "../../app/RoutesRoutes";
-import {Link as ReachLink} from "react-router-dom";
-
+import React, {forwardRef, ReactElement, useRef, useState} from "react";
+import {Box, Button, Collapse, Flex, Menu, MenuButton, Stack, StackDivider, Text,} from '@chakra-ui/react';
 
 
 interface InterfaceFORUM {
-title: string;
-subtitle: string;
-body: ReactElement | string;
+    title: string;
+    subtitle: string;
+    body: ReactElement | string;
 
 }
 
-export const PageForum=forwardRef<HTMLDivElement | null, InterfaceFORUM>(({ title, subtitle, body }, ref)=> {
+export const PageForum = forwardRef<HTMLDivElement | null, InterfaceFORUM>(({title, subtitle, body}, ref) => {
 
     const [isOpen, setIsOpen] = useState<boolean>(false);
 
