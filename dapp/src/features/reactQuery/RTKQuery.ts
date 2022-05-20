@@ -1,13 +1,10 @@
-import { createApi, fetchBaseQuery,   buildCreateApi, BaseQueryFn, fakeBaseQuery,
-    coreModule,
-    reactHooksModule } from '@reduxjs/toolkit/query/react'
-import {AccountDBInterface, AccountPageInterface, ParamsURLInterface} from '../accountDB/AccountDBSlice.types'
+import {createApi, fakeBaseQuery, fetchBaseQuery} from '@reduxjs/toolkit/query/react'
+import {AccountDBInterface, ParamsURLInterface} from '../accountDB/AccountDBSlice.types'
 import MintABI from "../../abiFiles/PaperMastersNFI.json";
 import chainIdNetworks from "../JSON/chainId.networks.json";
-import Web3 from "web3";
-import chainIdJSON from "../JSON/chainId.json";
 import {BigNumber, ethers} from "ethers";
-import {call} from "redux-saga/effects";
+
+export type MintABIType= keyof typeof MintABI;
 
 export interface accountsApiInterface{
     Count: number,
@@ -230,7 +227,8 @@ export async function fetchAddressToToken({chainIdURL, paramsWalletURL}: ParamsU
                 alchemy: 'mEUzvPVY6xECwMieu01t9D3fuYyOYGCl',
                 pocket: '329ee9f55d37f7ef7a54f84a4df341d096004450263af1d40cc4650e47e26609'
             });
-            const NFIContract = new ethers.Contract(MintABI.networks[chainIdURL].address, MintABI.abi, provider);
+            const ntw  = MintABI.networks as {[cid: string]: { address:string }};
+            const NFIContract = new ethers.Contract(ntw[chainIdURL].address, MintABI.abi, provider);
             console.log('NFIContract:', NFIContract);
             const addressToTokenIDID = await NFIContract.addressToTokenID(paramsWalletURL);
             console.log("addresstotokenId:", addressToTokenIDID)
