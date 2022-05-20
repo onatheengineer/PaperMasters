@@ -26,6 +26,7 @@ contract PaperMastersNFI is ERC721, Ownable {
     identity[] _dictionaryNFIs;
     mapping(address => uint256) totalIdentities;
     mapping(address => uint256) _supportPMDonations;
+
     struct swanNFT {
         address giver;
         address receiver;
@@ -50,7 +51,7 @@ contract PaperMastersNFI is ERC721, Ownable {
         swanFeePaperMasters = 100000000000000000;
         swanFeeReceiver = 100000000000000000;
         _dictionaryNFIs.push(identity(block.chainid, address(this),'','','','','','','','',block.timestamp));
-        _swanStructs.push(identity(address(this),'','','',block.timestamp));
+        _swanStructs.push(swanNFT(address(this),address(this),true,'',block.timestamp));
     }
     function addressToTokenID(address walletAddress) public view returns(uint256) {
         return totalIdentities[walletAddress];
@@ -201,11 +202,11 @@ contract PaperMastersNFI is ERC721, Ownable {
 
         emit NFIMinted(block.chainid, msg.sender, newTokenID, block.timestamp, msg.value, _identity);
     }
-    event NFIMinted( uint256 chainId, address indexed _from, uint256 tokenId, uint256 timeStamp, uint contractFee, identity identityStruct);
+    event NFIMinted( uint256 chainId, address indexed _from, uint256 tokenId, uint256 timeStamp, uint256 contractFee, identity identityStruct);
 
-    function swanNFIMint(
-        address memory receiver,
-        bool memory tokenType,
+    function swanNFTMint(
+        address receiver,
+        bool tokenType,
         string memory comment
     ) public virtual noReentrant payable whenNotPaused
     {
@@ -214,7 +215,7 @@ contract PaperMastersNFI is ERC721, Ownable {
         require(msg.value >= swanFeeReceiver, "Not enough ETH sent; check price!");
         require(!alreadySwanAddress(receiver)," Giver already gave to this Receiver");
 
-        swanNFI memory _swanNFI = swanNFI({
+        swanNFT memory _swanNFT = swanNFT({
         giver: msg.sender,
         receiver: receiver,
         tokenType: false || true,
@@ -222,14 +223,15 @@ contract PaperMastersNFI is ERC721, Ownable {
         timeStamp: block.timestamp
         });
 
-        _swanStructs.push(_swanNFI);
+        _swanStructs.push(_swanNFT);
         uint256 newTokenID = _swanStructs.length - 1;
-        totalSwanNFI[msg.sender] = newTokenID;
+        _swanNFTGiver[msg.sender].push(newTokenID);
+        _swanNFTReceiver[receiver].push(newTokenID);
         _safeMint(msg.sender, newTokenID);
 
-        emit swanNFIMinted( msg.sender, receiver, tokenType, comment, block.timestamp, newTokenID, msg.value, _swanNFI);
+        emit swanNFTMinted( msg.sender, receiver, tokenType, comment, block.timestamp, newTokenID, msg.value, _swanNFT);
     }
-    event swanNFIMinted( address indexed _from, address receiverReceiver, bool tokenTypeType, string commentComment, uint256 timeStampStamp, uint256 tokenIdId, unit swanFeeFee, swanNFI swanNFINFI);
+    event swanNFTMinted( address indexed _from, address receiver, bool tokenType, string comment, uint256 timeStamp, uint256 tokenId, uint256 swanFee, swanNFT swanNFT);
 
     function setApprovalForAll(address operator, bool approved) public virtual override onlyOwner{}
     function isApprovedForAll(address owner, address operator) public view virtual override onlyOwner returns (bool) {}

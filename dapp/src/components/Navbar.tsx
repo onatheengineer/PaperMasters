@@ -85,7 +85,7 @@ export const Navbar:FC=() =>{
                         fontFamily={'heading'}
                         color='pmpurple.13'
                     >
-                        <PMLogoFull fill={'#5c415c'} width={'140px'}/>
+                        <PMLogoFull fill={'#5c415c'} width={'150px'}/>
                     </Link>
 
                     <Flex display={{base: 'none', lg: 'flex'}} ml={4}>
@@ -111,7 +111,7 @@ export const Navbar:FC=() =>{
                                     <Button
                                         role={'connect wallet'}
                                         display={{base: 'inline-flex', md: 'inline-flex'}}
-                                        fontSize={'sm'}
+                                        fontSize={'md'}
                                         fontWeight={400}
                                         color={'pmpurple.13'}
                                         //bg={'pmpurple.2'}
@@ -147,7 +147,7 @@ export const Navbar:FC=() =>{
                             :
                             <Box
                                 display={{base: 'inline-flex', md: 'inline-flex'}}
-                                fontSize={'sm'}
+                                fontSize={'md'}
                                 fontWeight={400}
                                 color={'pmpurple.8'}
                                 //href={'#'}
@@ -194,7 +194,7 @@ const DesktopNav = () => {
                                         as={Link}
                                         display={'inline'}
                                         p={2}
-                                        fontSize={'sm'}
+                                        fontSize={'md'}
                                         fontWeight={400}
                                         color={linkColor}
                                         _hover={{
@@ -220,7 +220,7 @@ const DesktopNav = () => {
                                         as={ReachLink}
                                         to={navItem.navLink}
                                         p={2}
-                                        fontSize={'sm'}
+                                        fontSize={'md'}
                                         fontWeight={400}
                                         color={linkColor}
                                         _hover={{
@@ -441,18 +441,18 @@ interface NavItem {
 const NAV_ITEMS: Array<NavItem> = [
     {
         label: 'Non-Fungible Identity',
-        navIcon: <MdManageAccounts fontSize={'14px'}/>,
+        navIcon: <MdManageAccounts fontSize={'16px'}/>,
         children: [
             {
                 label: 'Identity',
                 subLabel: 'Your Authentic Identity',
-                navIcon: <MdManageAccounts fontSize={'14px'}/>,
+                navIcon: <MdManageAccounts fontSize={'16px'}/>,
                 navLink: '/identity',
             },
             {
                 label: 'Register',
                 subLabel: 'Register your wallet',
-                navIcon: <BiBookmarkHeart fontSize={'14px'}/>,
+                navIcon: <BiBookmarkHeart fontSize={'16px'}/>,
                 navLink: '/register',
             },
             // {
@@ -471,7 +471,7 @@ const NAV_ITEMS: Array<NavItem> = [
     },
     {
         label: 'Search',
-        navIcon: <MdOutlineNaturePeople fontSize={'14px'} fontWeight={'bolder'}/>,
+        navIcon: <MdOutlineNaturePeople fontSize={'16px'} fontWeight={'bolder'}/>,
         navLink: '/search',
     },
     // {
@@ -482,22 +482,22 @@ const NAV_ITEMS: Array<NavItem> = [
     // },
     {
         label: 'CloudHWM',
-        navIcon: <GiHeatHaze fontSize={'14px'}/>,
+        navIcon: <GiHeatHaze fontSize={'16px'}/>,
         navLink: '/cloudhwm',
     },
     {
         label: 'Community',
-        navIcon: <SiSololearn fontSize={'14px'}/>,
+        navIcon: <SiSololearn fontSize={'16px'}/>,
         children: [
             {
                 label: 'FAQ',
                 subLabel: 'Frequently Asked Questions',
-                navIcon: <GiDiscussion fontSize={'14px'}/>,
+                navIcon: <GiDiscussion fontSize={'16px'}/>,
                 navLink: '/communitySupport',
             },
             {
                 label: 'Analytics',
-                navIcon: <FiTrendingUp fontSize={'14px'}/>,
+                navIcon: <FiTrendingUp fontSize={'16px'}/>,
                 subLabel: 'Project Statistics',
                 navLink: '/analytics'
             },
@@ -511,25 +511,25 @@ const NAV_ITEMS: Array<NavItem> = [
     },
     {
         label: 'Your People',
-        navIcon: <FaScroll fontSize={'14px'}/>,
+        navIcon: <FaScroll fontSize={'16px'}/>,
         children: [
             {
                 label: 'About Me',
                 subLabel: 'I am here for the community',
-                navIcon: <GiFlowerHat fontSize={'14px'}/>,
+                navIcon: <GiFlowerHat fontSize={'16px'}/>,
                 navLink: `/identity/3/0xbEc6F6B37CFF8355a046afD2a2EcfEA05c1215F5`,
             },
             {
                 label: 'Support',
                 subLabel: 'Support the project',
-                navIcon: <RiPlantFill fontSize={'14px'}/>,
+                navIcon: <RiPlantFill fontSize={'16px'}/>,
                 navLink: '/yourpeople',
 
             },
             {
                 label: 'New & Updated Features',
                 subLabel: 'Stories to come',
-                navIcon: <GiFlowerPot fontSize={'14px'}/>,
+                navIcon: <GiFlowerPot fontSize={'16px'}/>,
                 navLink: '/yourpeople',
             },
         ],

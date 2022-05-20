@@ -23,7 +23,7 @@ const Feature =({heading, text}: FeatureProps) => {
 export default function secondFooterHome() {
     return (
         <Flex
-            //border={'1px solid red'}
+           // border={'1px solid red'}
         >
             <Box as={Container}
                 //flexShrink={1}

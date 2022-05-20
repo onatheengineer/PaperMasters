@@ -19,6 +19,7 @@ import {ReactQueryDevtools} from 'react-query/devtools';
 import WalletConnect from "@walletconnect/client";
 import QRCodeModal from "@walletconnect/qrcode-modal";
 import {useGlobalToast} from "./features/toast/useGlobalToast";
+import './App.css'
 
 function App() {
     const dispatch = useAppDispatch();
@@ -105,6 +106,8 @@ function App() {
     }, [])
 
     return (
+        // <div className={"App"}>
+        // </div>
         <Box
             border={'2px solid'}
             borderColor={"pmpurple.8"}

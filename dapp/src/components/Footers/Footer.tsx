@@ -20,8 +20,6 @@ import {BsHeartFill} from "react-icons/bs";
 import {FaDiscord, FaGithub, FaInstagram, FaLinkedin, FaReddit, FaTwitter, FaYoutube} from "react-icons/fa";
 import {PMsvgIcon} from "../../assets/icons/PMSvgIcon";
 
-
-
 export const SocialButton = ({
                                  children,
                                  label,
@@ -99,7 +97,11 @@ export default function LargeWithLogoCentered() {
                 w={'100%'}
             >
                 <Box
-                p={2}
+                p={10}
+                borderTop={'2px solid'}
+                borderTopColor={'pmpurple.4'}
+                borderBottom={'2px solid'}
+                borderBottomColor={'pmpurple.4'}
                 >
                     <Grid
                         templateColumns={{
@@ -158,7 +160,7 @@ export default function LargeWithLogoCentered() {
                 </Box>
 
                 <Box
-                    p={2}
+                    p={6}
                     //border={'1px solid red'}
                     //borderTop={'1px solid'}
                     //borderColor={'pmpurple.4'}
