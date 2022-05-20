@@ -9,7 +9,7 @@ import {
     Popover, PopoverBody, PopoverContent, PopoverTrigger,
     Modal, ModalOverlay,
     ModalContent, ModalHeader, ModalCloseButton,
-    ModalBody, FormControl, FormLabel, ModalFooter, Toast,
+    ModalBody, FormControl, FormLabel, ModalFooter,
 } from '@chakra-ui/react';
 import { useToast } from '@chakra-ui/react'
 import {Link as ReachLink, useNavigate} from "react-router-dom";
@@ -313,6 +313,7 @@ export const Search:FC =()=> {
                         )
                     }
                 }
+                return null
             }
         },
         {
@@ -327,11 +328,12 @@ export const Search:FC =()=> {
                             trigger={'hover'}
                         >
                             <PopoverTrigger>
+                            <Center>
                                 <Button as={ReachLink}
                                         to={`/identity/${el.row.original.chainId}/${el.row.original.wallet}`}
                                         bg={'#f2eef2'}
                                         color={'pmpurple.13'}
-                                        width={'128px'}
+                                        width={'130px'}
                                         height={'24px'}
                                         overflow={"hidden !important"}
                                         textAlign={'left'}
@@ -350,6 +352,7 @@ export const Search:FC =()=> {
                                         </Text>
                                     </Center>
                                 </Button>
+                            </Center>
                             </PopoverTrigger>
                             <PopoverContent
                                 whiteSpace="nowrap"
@@ -475,7 +478,7 @@ export const Search:FC =()=> {
             <Box>
                 <HStack
                     justifyContent={'end'}
-                    mr={2}
+                    mr={6}
                 >
                     <FilterComponent onFilter={(e: any) => setFilterWallets(e.target.value)}
                                      onClick={handleClear}
@@ -573,11 +576,12 @@ export const Search:FC =()=> {
                 //border={'1px solid red'}
             >
                 <Box
-                p={2}
+                p={4}
+                mt={3}
                 >
                     <Center>
                         <Text
-                            fontSize={20}
+                            fontSize={22}
                             color={'pmpurple.13'}
                             fontWeight={'bold'}
                         >

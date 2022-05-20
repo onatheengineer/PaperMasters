@@ -28,13 +28,13 @@ import WalletConnect from "@walletconnect/client";
 import QRCodeModal from "@walletconnect/qrcode-modal";
 import {showToast} from "../toast/ToastSlice";
 import {expectSaga} from "redux-saga-test-plan";
-import {accountArrSaga,accountArrMetaMaskSaga, addressToTokenSaga, singleStructBCSaga } from './accountBCSaga';
+import {accountArrSaga,accountArrMetaMaskSaga } from './accountBCSaga';
 import {fireEvent, render, screen} from '@testing-library/react';
 import Navbar from "../../components/Navbar";
 
-const baseURL = 'https://ociuozqx85.execute-api.us-east-1.amazonaws.com';
-
-//testing nav connect button
+// const baseURL = 'https://ociuozqx85.execute-api.us-east-1.amazonaws.com';
+//
+// //testing nav connect button
 // test('button initially has, connect wallet, text', ()=>{
 //     render(<Navbar/>);
 //     screen.getAllByRole('button', {name: 'connect wallet'});

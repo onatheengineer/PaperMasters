@@ -166,26 +166,29 @@ export async function fetchIdentities() {
             const chainIdSupportedArr = chainIdNetworks.filter((el) => {
                 return el.chainId === parseInt(chainId)
             });
-            console.log("chainIdSupportedArr", chainIdSupportedArr)
-            const rpcSupported = chainIdSupportedArr[0].rpc[0];
-            console.log("rpcsupported", rpcSupported)
-        const network = chainIdSupportedArr[0].name.toLowerCase();
-        const provider = ethers.getDefaultProvider(network, {
-            etherscan: 'RYVBB5ZI138MHIX2JJVWBT6MVTGXJT133Q',
-            infura: 'c97ad56e08674161a95ba16c6f855b6a',
-            alchemy: 'mEUzvPVY6xECwMieu01t9D3fuYyOYGCl',
-            pocket: '329ee9f55d37f7ef7a54f84a4df341d096004450263af1d40cc4650e47e26609'
-        });
-        console.log('provider TESTfetchIdentities:', provider);
-        const NFIContract = new ethers.Contract(MintABI.networks[chainId].address, MintABI.abi as any, provider);
-        console.log('NFIContract:', NFIContract);
+            console.log(results)
+            //console.log("chainIdSupportedArr", chainIdSupportedArr)
+            //const rpcSupported = chainIdSupportedArr[0].rpc[0];
+            //console.log("rpcsupported", rpcSupported)
+            const network = chainIdSupportedArr[0].name.toLowerCase();
+            const provider = ethers.getDefaultProvider(network, {
+                etherscan: 'RYVBB5ZI138MHIX2JJVWBT6MVTGXJT133Q',
+                infura: 'c97ad56e08674161a95ba16c6f855b6a',
+                alchemy: 'mEUzvPVY6xECwMieu01t9D3fuYyOYGCl',
+                pocket: '329ee9f55d37f7ef7a54f84a4df341d096004450263af1d40cc4650e47e26609'
+            });
+            console.log('provider TESTfetchIdentities:', provider);
+            //const chainIDID: any = chainIdSupportedArr
+        // console.log(chainIDID)
+            const NFIContract = new ethers.Contract(MintABI.networks[chainId].address, MintABI.abi as any, provider);
+            console.log('NFIContract:', NFIContract);
             const identStructBC = await NFIContract.allIdentityStructs();
-            console.log("identStructBC:",identStructBC)
+            console.log("identStructBC:", identStructBC)
             return (identStructBC);
         }
     ))
     console.log('results', results)
-    return {data:results.flat()};
+    return {data: results.flat()};
 }
 
 // export async function getBalanceFunction ({chainIdURL, paramsWalletURL}: ParamsURLInterface){
