@@ -178,9 +178,8 @@ export async function fetchIdentities() {
                 pocket: '329ee9f55d37f7ef7a54f84a4df341d096004450263af1d40cc4650e47e26609'
             });
             console.log('provider TESTfetchIdentities:', provider);
-            //const chainIDID: any = chainIdSupportedArr
-        // console.log(chainIDID)
-            const NFIContract = new ethers.Contract(MintABI.networks[chainId].address, MintABI.abi as any, provider);
+            const ntw  = MintABI.networks as {[cid: string]: { address:string }};
+            const NFIContract = new ethers.Contract(ntw[chainId].address, MintABI.abi, provider);
             console.log('NFIContract:', NFIContract);
             const identStructBC = await NFIContract.allIdentityStructs();
             console.log("identStructBC:", identStructBC)
