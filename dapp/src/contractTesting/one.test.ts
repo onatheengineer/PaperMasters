@@ -105,6 +105,7 @@ describe("ContractTesting", () => {
             return await NFIContract.getIdentityFee().then((fee: BigNumber) => {
                 return expect(fee.toHexString( )).toEqual("0x016345785d8a0000");
             });
+
         })));
     });
 });
