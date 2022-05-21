@@ -1,31 +1,58 @@
 {
-  "env": {
-    "browser": true,
-    "es2021": true
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "extensions": [
+          ".js",
+          ".ts"
+        ]
+      }
+    }
   },
   "extends": [
-    "eslint:recommended",
-    "plugin:react/recommended",
+    "airbnb-base",
     "plugin:@typescript-eslint/recommended",
-    "react-app",
-    "react-app/jest",
-    "plugin:testing-library/react",
-    "plugin:jest-dom/recommended"
+    "plugin:prettier/recommended"
   ],
-  "parser": "@typescript-eslint/parser",
-  "parserOptions": {
-    "ecmaFeatures": {
-      "jsx": true
-    },
-    "ecmaVersion": "latest",
-    "sourceType": "module"
-  },
   "plugins": [
-    "react",
     "@typescript-eslint",
-    "testing-library",
-    "jest-dom"
+    "simple-import-sort",
+    "prettier"
   ],
+  "env": {
+    "es6": true
+  },
   "rules": {
+    "max-lines-per-function": [
+      "warn",
+      40
+    ],
+    "import/extensions": [
+      "error",
+      "never"
+    ],
+    "simple-import-sort/imports": "error",
+    "simple-import-sort/exports": "error",
+    "sort-imports": "off",
+    "import/order": "off",
+    "import/prefer-default-export": 0,
+    "import/no-unresolved": 0,
+    "no-shadow": "off",
+    "@typescript-eslint/no-shadow": "error",
+    "prettier/prettier": [
+      "error",
+      {
+        "endOfLine": "auto"
+      }
+    ],
+    "no-param-reassign": [
+      "error",
+      {
+        "props": true,
+        "ignorePropertyModificationsFor": [
+          "state"
+        ]
+      }
+    ]
   }
 }

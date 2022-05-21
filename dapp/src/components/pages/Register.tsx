@@ -1,49 +1,54 @@
-import * as React from 'react';
-import {useState, useEffect, useMemo} from "react";
 import type {FC} from 'react';
+import * as React from 'react';
+import {useEffect, useMemo, useState} from 'react';
 import {Navigate} from 'react-router-dom'
 import {
-    FormControl, FormLabel, Input, Stack, Box, Button, Heading, Text, Flex,
+    Box,
+    Button,
     Center,
-    FormErrorMessage,
     Divider,
+    Flex,
+    FormControl,
+    FormErrorMessage,
+    FormLabel,
+    GridItem,
+    Heading,
+    Input,
     InputGroup,
+    InputLeftElement,
     InputRightAddon,
     InputRightElement,
-    PopoverContent,
-    PopoverBody,
-    PopoverTrigger,
-    Popover,
-    Portal,
-    InputLeftElement,
     Modal,
-    ModalOverlay,
-    ModalContent,
-    ModalHeader,
-    ModalFooter,
     ModalBody,
-    ModalCloseButton, VStack, SimpleGrid, GridItem,
+    ModalCloseButton,
+    ModalContent,
+    ModalFooter,
+    ModalHeader,
+    ModalOverlay,
+    Popover,
+    PopoverBody,
+    PopoverContent,
+    PopoverTrigger,
+    Portal,
+    SimpleGrid,
+    Stack,
+    Text,
+    VStack,
 } from '@chakra-ui/react';
-import { MdOutlineColorLens} from 'react-icons/md';
+import {MdOutlineColorLens} from 'react-icons/md';
 import {useAppDispatch, useAppSelector} from "../../app/hooks";
 import {ColorChangeHandler, ColorResult, SketchPicker} from 'react-color';
-import {
-    mintNFIAction,
-    gasForMintNFIAction,
-    gasAccBalanceAction
-} from "../../features/contractsBC/mintNFI/MintNFISlice";
+import {gasAccBalanceAction, gasForMintNFIAction, mintNFIAction} from "../../features/mintNFI/MintNFISlice";
 import AvatarNFI from "../avatar/AvatarNFI";
-import {accountArrAction} from "../../features/accountBC/AccountBCSlice";
-import {MintingNFIStruct} from "../../features/contractsBC/mintNFI/mintNFISlice.types";
+import {MintingNFIStruct} from "../../features/mintNFI/mintNFISlice.types";
 import {useGetSingleIdentityBCQuery} from "../../features/reactQuery/RTKQuery";
-import {Link as ReachLink} from "react-router-dom";
 
-const ColorRGBToString=(colorResultRGB: ColorResult)=>{
+const ColorRGBToString = (colorResultRGB: ColorResult) => {
     const colorStringRGB = `rgba(${colorResultRGB.rgb.r}, ${colorResultRGB.rgb.g}, ${colorResultRGB.rgb.b}, ${colorResultRGB.rgb.a})`
     return colorStringRGB;
 }
 
-export const Register:FC=()=> {
+export const Register: FC = () => {
     const dispatch = useAppDispatch();
     const singleNFIReceiptDBDB = useAppSelector((state) => state.accountDB.singleNFIReceiptDB);
     const chainIdProviderProvider = useAppSelector((state) => state.accountBC.chainIdProvider);

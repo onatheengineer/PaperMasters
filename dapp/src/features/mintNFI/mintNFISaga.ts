@@ -1,16 +1,26 @@
-import { call, put, takeLatest, select} from 'redux-saga/effects';
+import {call, put, select, takeLatest} from 'redux-saga/effects';
 import axios from "axios";
 import {
-    mintNFIAction, mintSucceeded, gasForMintNFIAction, gasForMinting, mintStatusBC,
-    mintingErr, gasAccBalanceAction, accBalance, accBalanceErr, tokenURIAction, axiosPOSTReceiptStatus,
+    accBalance,
+    accBalanceErr,
+    axiosPOSTReceiptStatus,
+    gasAccBalanceAction,
+    gasForMinting,
+    gasForMintNFIAction,
+    mintingErr,
+    mintNFIAction,
+    mintStatusBC,
+    mintSucceeded,
+    tokenURIAction,
 } from "./MintNFISlice";
-import { accountBCselectors} from "../../accountBC/AccountBCSlice";
-import MintABI from '../../../abiFiles/PaperMastersNFI.json'
+import {accountBCselectors} from "../accountBC/AccountBCSlice";
+import MintABI from '../../abiFiles/PaperMastersNFI.json'
 import {PayloadAction} from "@reduxjs/toolkit";
 import {SagaIterator} from "redux-saga";
 import {MintingNFIStruct} from "./mintNFISlice.types";
 import Web3 from "web3";
-import {NFIReceiptInterface} from "../../accountDB/AccountDBSlice.types";
+import {NFIReceiptInterface} from "../accountDB/AccountDBSlice.types";
+
 const baseURL = 'https://ociuozqx85.execute-api.us-east-1.amazonaws.com';
 
 const web3 = new Web3(Web3.givenProvider);
@@ -49,7 +59,7 @@ function* mintNFISaga({payload}: PayloadAction<MintingNFIStruct>): SagaIterator 
                     payload.uniqueYou === null ? "" : payload.uniqueYou,
                     payload.bgRGB === null ? "" : payload.bgRGB,
                 )
-                console.table("prepareResult:",prepareResult);
+                console.table("prepareResult:", prepareResult);
                 //TODO: get fee variable from contract and replace the 'value'
                 const mintResult: any = yield call(prepareResult.send, {
                     from: requestAccountArr[0],
@@ -146,17 +156,17 @@ function* getGasForMintSaga({payload}: PayloadAction<MintingNFIStruct>): SagaIte
 function* gasAccBalanceSaga(): SagaIterator {
     try {
         const requestAccountArr: string[] = yield select(accountBCselectors.accountArrSelector);
-        if(requestAccountArr.length > 0) {
+        if (requestAccountArr.length > 0) {
             const getAccBalance = yield web3.eth.getBalance(requestAccountArr[0]) as any;
-            console.log('getAccBalance',getAccBalance)
+            console.log('getAccBalance', getAccBalance)
             yield put(accBalance(getAccBalance));
             // Often you will need to format the output for the user
             // which prefer to see values in ether (instead of wei)
             // ethers.utils.formatEther(getAccBalance)
-        } else{
+        } else {
             console.log('Account Error')
         }
-    } catch (accBalanceErrErr:any) {
+    } catch (accBalanceErrErr: any) {
         console.error('accBalanceErrorMessage:', accBalanceErrErr.message)
         yield put(accBalanceErr(accBalanceErrErr));
     }
@@ -167,8 +177,8 @@ function* tokenURISaga({payload}: PayloadAction<string>): SagaIterator {
 }
 
 export function* watchMintNFISaga(): SagaIterator {
-        yield takeLatest(mintNFIAction.type, mintNFISaga);
-        yield takeLatest(gasForMintNFIAction.type, getGasForMintSaga);
-        yield takeLatest(gasAccBalanceAction.type, gasAccBalanceSaga);
-        yield takeLatest(tokenURIAction.type, tokenURISaga);
-    }
+    yield takeLatest(mintNFIAction.type, mintNFISaga);
+    yield takeLatest(gasForMintNFIAction.type, getGasForMintSaga);
+    yield takeLatest(gasAccBalanceAction.type, gasAccBalanceSaga);
+    yield takeLatest(tokenURIAction.type, tokenURISaga);
+}

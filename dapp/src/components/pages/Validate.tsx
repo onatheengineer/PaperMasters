@@ -1,40 +1,47 @@
-import * as React from 'react';
-import {useState, useEffect, useMemo} from "react";
 import type {FC} from 'react';
+import * as React from 'react';
+import {useEffect, useMemo, useState} from 'react';
 import {
-    FormControl, FormLabel, Input, Stack, Box, Button, Heading, Text, Flex,
+    Box,
+    Button,
     Center,
-    FormErrorMessage,
     Divider,
+    Flex,
+    FormControl,
+    FormErrorMessage,
+    FormLabel,
+    GridItem,
+    Heading,
+    Input,
     InputGroup,
-    InputRightAddon,
-    PopoverContent,
-    PopoverBody,
-    PopoverTrigger,
-    Popover,
-    Portal,
     InputLeftElement,
+    InputRightAddon,
     Modal,
-    ModalOverlay,
-    ModalContent,
-    ModalHeader,
-    ModalFooter,
     ModalBody,
-    ModalCloseButton, VStack, SimpleGrid, GridItem,
+    ModalCloseButton,
+    ModalContent,
+    ModalFooter,
+    ModalHeader,
+    ModalOverlay,
+    Popover,
+    PopoverBody,
+    PopoverContent,
+    PopoverTrigger,
+    Portal,
+    SimpleGrid,
+    Stack,
+    Text,
+    VStack,
 } from '@chakra-ui/react';
-import { MdOutlineColorLens} from 'react-icons/md';
+import {MdOutlineColorLens} from 'react-icons/md';
 import {useAppDispatch, useAppSelector} from "../../app/hooks";
-import {ColorChangeHandler, ColorResult, SketchPicker, GithubPicker, RGBColor} from 'react-color'
-import {
-    gasAccBalanceAction, gasForMintNFIAction
-} from "../../features/contractsBC/mintNFI/MintNFISlice";
-import {accountArrAction} from "../../features/accountBC/AccountBCSlice";
+import {ColorChangeHandler, ColorResult, SketchPicker} from 'react-color'
+import {gasAccBalanceAction} from "../../features/mintNFI/MintNFISlice";
 import {validateInterface} from "../../features/reactQuery/RTKQuery";
 import ValidateAvatar from "../avatar/ValidateAvatar";
-import {ParamsURLInterface} from "../../features/accountDB/AccountDBSlice.types";
 import {useParams} from "react-router-dom";
 
-export const Validate:FC=()=> {
+export const Validate: FC = () => {
     const {chainId, walletAcc} = useParams();
     const dispatch = useAppDispatch();
     const paramsWalletWallet = useAppSelector((state) => state.accountDB.paramsWallet);
@@ -200,7 +207,7 @@ export const Validate:FC=()=> {
                                                fontSize={'13px'}
                                                placeholder={`${accountArrArr}`}
                                                isDisabled={true}
-                                              // isDisabled={submitButtonClicked}
+                                            // isDisabled={submitButtonClicked}
                                                onChange={giverHandler}
                                                color={'pmpurple.15'}
                                         />
