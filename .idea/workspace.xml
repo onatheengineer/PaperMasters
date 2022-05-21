@@ -1,0 +1,451 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="069ea68a-d74a-44db-aadb-c107c6bc8fb5" name="Changes" comment="creating css and more">
+      <change afterPath="$PROJECT_DIR$/dapp/.prettierrc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dapp/.eslintrc" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/.eslintrc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dapp/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dapp/src/app/store.ts" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/app/store.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dapp/src/components/pages/Register.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/components/pages/Register.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dapp/src/components/pages/Validate.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/components/pages/Validate.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dapp/src/features/accountBC/accountBCSaga.test.ts" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/features/accountBC/accountBCSaga.test.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dapp/src/features/contractsBC/mintNFI/MintNFIFunctionsSlice.ts" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/features/mintNFI/MintNFIFunctionsSlice.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dapp/src/features/contractsBC/mintNFI/MintNFISlice.ts" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/features/mintNFI/MintNFISlice.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dapp/src/features/contractsBC/mintNFI/mintNFIFunctionsSaga.ts" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/features/mintNFI/mintNFIFunctionsSaga.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dapp/src/features/contractsBC/mintNFI/mintNFISaga.ts" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/features/mintNFI/mintNFISaga.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dapp/src/features/contractsBC/mintNFI/mintNFISlice.types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/features/mintNFI/mintNFISlice.types.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dapp/src/features/reactQuery/RTKQuery.ts" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/features/reactQuery/RTKQuery.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dapp/src/features/rootSagas.ts" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/features/rootSagas.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dapp/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/yarn.lock" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Solidity Contract" />
+      </list>
+    </option>
+  </component>
+  <component name="FormatOnSaveOptions">
+    <option name="myRunOnSave" value="true" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/dapp/src/components/pages/home/Navbar.tsx" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/dapp/src/App.tsx" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/dapp/src/components/pages/Register.tsx" root0="FORCE_HIGHLIGHTING" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="OptimizeOnSaveOptions">
+    <option name="myRunOnSave" value="true" />
+  </component>
+  <component name="PackageJsonUpdateNotifier">
+    <dismissed value="$PROJECT_DIR$/truffle/package.json" />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
+  <component name="ProjectId" id="22hJ6GwrA9klC4rLXA5P3KLGunm" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="code.cleanup.on.save" value="true" />
+    <property name="com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File" value="JSON&#10;TypeScript JSX&#10;Solidity" />
+    <property name="js.linters.configure.manually.selectedeslint" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/dapp/src/features/mintNFI" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.standard" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.selected.package.eslint" value="\\wsl$\Ubuntu\home\ramona\gitrepos\MintIdentityTPM\dapp\node_modules\eslint" />
+    <property name="node.js.selected.package.standard" value="" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="nodejs_interpreter_path" value="wsl://Ubuntu@/usr/bin/node" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="rearrange.code.on.save" value="true" />
+    <property name="settings.editor.selected.configurable" value="settings.javascript.linters.eslint" />
+    <property name="ts.external.directory.path" value="\\wsl$\Ubuntu\home\ramona\gitrepos\MintIdentityTPM\hardhat\node_modules\typescript\lib" />
+    <property name="vue.rearranger.settings.migration" value="true" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="\\wsl$\Ubuntu\home\ramona\gitrepos\MintIdentityTPM\dapp\src\features\mintNFI" />
+      <recent name="\\wsl$\Ubuntu\home\ramona\gitrepos\MintIdentityTPM\dapp\src" />
+      <recent name="\\wsl$\Ubuntu\home\ramona\gitrepos\MintIdentityTPM\dapp\src\components\pages" />
+      <recent name="\\wsl$\Ubuntu\home\ramona\gitrepos\MintIdentityTPM\dapp\src\abiFiles" />
+      <recent name="\\wsl$\Ubuntu\home\ramona\gitrepos\MintIdentityTPM\hardhat\contracts" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="\\wsl$\Ubuntu\home\ramona\gitrepos\MintIdentityTPM\dapp\src\contract" />
+      <recent name="\\wsl$\Ubuntu\home\ramona\gitrepos\MintIdentityTPM\dapp\src\contractTesting" />
+      <recent name="\\wsl$\Ubuntu\home\ramona\gitrepos\MintIdentityTPM\dapp\src\features" />
+      <recent name="\\wsl$\Ubuntu\home\ramona\gitrepos\MintIdentityTPM\dapp" />
+      <recent name="\\wsl$\Ubuntu\home\ramona\gitrepos\MintIdentityTPM\dapp\src\components" />
+    </key>
+  </component>
+  <component name="RunManager" selected="JavaScript Debug.Unnamed">
+    <configuration name="Unnamed" type="JavascriptDebugType" nameIsGenerated="true" uri="http://localhost:3000">
+      <method v="2" />
+    </configuration>
+    <configuration name="deploy" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/truffle/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="deploy" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="JavaScript Debug.Unnamed" />
+      <item itemvalue="npm.deploy" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="npm.deploy" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="069ea68a-d74a-44db-aadb-c107c6bc8fb5" name="Changes" comment="" />
+      <created>1640283709105</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1640283709105</updated>
+      <workItem from="1640283711034" duration="4368000" />
+      <workItem from="1640290500166" duration="3639000" />
+      <workItem from="1640312500047" duration="5089000" />
+      <workItem from="1640470105724" duration="1061000" />
+      <workItem from="1640478395802" duration="74000" />
+      <workItem from="1640478482213" duration="14000" />
+      <workItem from="1640478506820" duration="17000" />
+      <workItem from="1640478534040" duration="23000" />
+      <workItem from="1640478592607" duration="9151000" />
+      <workItem from="1640587544716" duration="44471000" />
+      <workItem from="1640833990090" duration="164000" />
+      <workItem from="1641262411114" duration="19412000" />
+      <workItem from="1641337613309" duration="87618000" />
+      <workItem from="1641598167716" duration="9743000" />
+      <workItem from="1641692006882" duration="65990000" />
+      <workItem from="1641945767884" duration="1636000" />
+      <workItem from="1641947755810" duration="6634000" />
+      <workItem from="1641954839999" duration="84000" />
+      <workItem from="1641955104745" duration="42964000" />
+      <workItem from="1642082248412" duration="44556000" />
+      <workItem from="1642177915455" duration="30231000" />
+      <workItem from="1642226622128" duration="30000" />
+      <workItem from="1642226806815" duration="562000" />
+      <workItem from="1642268357997" duration="20211000" />
+      <workItem from="1642525937561" duration="269970000" />
+      <workItem from="1643234136110" duration="70259000" />
+      <workItem from="1643494358636" duration="67684000" />
+      <workItem from="1643726586443" duration="32539000" />
+      <workItem from="1643822793880" duration="192832000" />
+      <workItem from="1644847472090" duration="132395000" />
+      <workItem from="1645319835351" duration="79427000" />
+      <workItem from="1645678516139" duration="12046000" />
+      <workItem from="1645744416862" duration="22546000" />
+      <workItem from="1646003943279" duration="150603000" />
+      <workItem from="1646629201044" duration="65153000" />
+      <workItem from="1646786612232" duration="218000" />
+      <workItem from="1646794507868" duration="90214000" />
+      <workItem from="1647219202705" duration="152657000" />
+      <workItem from="1647876205432" duration="51143000" />
+      <workItem from="1647970450432" duration="69825000" />
+      <workItem from="1648239552594" duration="4510000" />
+      <workItem from="1648475677721" duration="38545000" />
+      <workItem from="1648572524449" duration="10118000" />
+      <workItem from="1648604052376" duration="25092000" />
+      <workItem from="1648750092672" duration="13227000" />
+      <workItem from="1648859773547" duration="850000" />
+      <workItem from="1648997984656" duration="99210000" />
+      <workItem from="1649249981844" duration="4144000" />
+      <workItem from="1649254182278" duration="24092000" />
+      <workItem from="1649280316993" duration="7435000" />
+      <workItem from="1649287966188" duration="171455000" />
+      <workItem from="1649859865834" duration="33784000" />
+      <workItem from="1649939701321" duration="23505000" />
+      <workItem from="1650141465144" duration="13901000" />
+      <workItem from="1650327707436" duration="3673000" />
+      <workItem from="1650385726667" duration="23017000" />
+      <workItem from="1650474433992" duration="7413000" />
+      <workItem from="1650495188182" duration="2128000" />
+      <workItem from="1650576681092" duration="31864000" />
+      <workItem from="1650992949819" duration="83168000" />
+      <workItem from="1651181599593" duration="30718000" />
+      <workItem from="1651371563000" duration="11430000" />
+      <workItem from="1651408205497" duration="469000" />
+      <workItem from="1651408694738" duration="69000" />
+      <workItem from="1651408864348" duration="540000" />
+      <workItem from="1651409426214" duration="101000" />
+      <workItem from="1651409544846" duration="193000" />
+      <workItem from="1651410139870" duration="23348000" />
+      <workItem from="1651524569193" duration="7571000" />
+      <workItem from="1651542645976" duration="22852000" />
+      <workItem from="1651633009291" duration="151498000" />
+      <workItem from="1652125757794" duration="1354000" />
+      <workItem from="1652128204095" duration="5000" />
+      <workItem from="1652128233487" duration="8000" />
+      <workItem from="1652128386439" duration="241000" />
+      <workItem from="1652132246898" duration="19380000" />
+      <workItem from="1652185763160" duration="44481000" />
+      <workItem from="1652272541479" duration="7955000" />
+      <workItem from="1652289173065" duration="18211000" />
+      <workItem from="1652452970584" duration="1954000" />
+      <workItem from="1652467101026" duration="2000" />
+      <workItem from="1652467250290" duration="3424000" />
+      <workItem from="1652575503961" duration="15549000" />
+      <workItem from="1652980160180" duration="22746000" />
+      <workItem from="1653017306825" duration="627000" />
+      <workItem from="1653017953705" duration="4116000" />
+      <workItem from="1653055644537" duration="27990000" />
+    </task>
+    <task id="LOCAL-00001" summary="testR">
+      <created>1640283820136</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1640283820136</updated>
+    </task>
+    <task id="LOCAL-00002" summary="testR">
+      <created>1640478412041</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1640478412041</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Contract Meta Start">
+      <created>1640716999118</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1640716999118</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Contract Meta Start">
+      <created>1640743563051</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1640743563051</updated>
+    </task>
+    <task id="LOCAL-00005" summary="update name">
+      <created>1640832839737</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1640832839737</updated>
+    </task>
+    <task id="LOCAL-00006" summary="update name">
+      <created>1640833031016</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1640833031016</updated>
+    </task>
+    <task id="LOCAL-00007" summary="update to functions">
+      <created>1640833206740</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1640833206740</updated>
+    </task>
+    <task id="LOCAL-00008" summary="some css garbage">
+      <created>1641422894207</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1641422894207</updated>
+    </task>
+    <task id="LOCAL-00009" summary="some css garbage">
+      <created>1641587352047</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1641587352047</updated>
+    </task>
+    <task id="LOCAL-00010" summary="antd pro">
+      <created>1641697717372</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1641697717372</updated>
+    </task>
+    <task id="LOCAL-00011" summary="adding avatar">
+      <created>1641871304558</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1641871304558</updated>
+    </task>
+    <task id="LOCAL-00012" summary="adding avatar">
+      <created>1641946533700</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1641946533700</updated>
+    </task>
+    <task id="LOCAL-00013" summary="web3 working!">
+      <created>1641960583967</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1641960583967</updated>
+    </task>
+    <task id="LOCAL-00014" summary="creating store">
+      <created>1642559395901</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1642559395901</updated>
+    </task>
+    <task id="LOCAL-00015" summary="creating store">
+      <created>1642560153205</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1642560153205</updated>
+    </task>
+    <task id="LOCAL-00016" summary="creating store">
+      <created>1642561057520</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1642561057520</updated>
+    </task>
+    <task id="LOCAL-00017" summary="creating store">
+      <created>1642562475905</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1642562475905</updated>
+    </task>
+    <task id="LOCAL-00018" summary="creating css and more">
+      <created>1652309803189</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1652309803189</updated>
+    </task>
+    <task id="LOCAL-00019" summary="creating css and more">
+      <created>1652309996580</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1652309996580</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.History.Properties">
+    <option name="COLUMN_ID_ORDER">
+      <list>
+        <option value="Default.Root" />
+        <option value="Default.Author" />
+        <option value="Default.Date" />
+        <option value="Default.Subject" />
+      </list>
+    </option>
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="72dd0437-5c26-4bb9-bc79-5c6f2caf7333">
+          <value>
+            <State>
+              <option name="SHOW_ONLY_AFFECTED_CHANGES" value="true" />
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="HEAD" />
+                      </list>
+                    </value>
+                  </entry>
+                  <entry key="roots">
+                    <value>
+                      <list>
+                        <option value="$PROJECT_DIR$" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="OPEN_GENERIC_TABS">
+      <map>
+        <entry key="72dd0437-5c26-4bb9-bc79-5c6f2caf7333" value="TOOL_WINDOW" />
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <ignored-roots>
+      <path value="$PROJECT_DIR$/cawfreeDapp/my-react-dapp" />
+      <path value="$PROJECT_DIR$/chakra-ui-navbar" />
+      <path value="$PROJECT_DIR$/dapp/my-react-dapp" />
+      <path value="$PROJECT_DIR$/packageDapp/my-react-dapp" />
+      <path value="$PROJECT_DIR$/testComponents/chakra-ui-navbar" />
+    </ignored-roots>
+    <MESSAGE value="testR" />
+    <MESSAGE value="Contract Meta Start" />
+    <MESSAGE value="update name" />
+    <MESSAGE value="update to functions" />
+    <MESSAGE value="some css garbage" />
+    <MESSAGE value="antd pro" />
+    <MESSAGE value="adding avatar" />
+    <MESSAGE value="web3 working!" />
+    <MESSAGE value="going to dapp" />
+    <MESSAGE value="creating pages" />
+    <MESSAGE value="creating store" />
+    <MESSAGE value="creating storesotre" />
+    <MESSAGE value="creating css and more" />
+    <option name="LAST_COMMIT_MESSAGE" value="creating css and more" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
+  </component>
+</project>
