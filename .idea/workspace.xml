@@ -5,20 +5,115 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="069ea68a-d74a-44db-aadb-c107c6bc8fb5" name="Changes" comment="creating css and more">
-      <change afterPath="$PROJECT_DIR$/dapp/.prettierrc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dapp/src/components/pages/home/Navbar.test.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dapp/src/components/pages/valadationsReaports/Report.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dapp/src/components/pages/valadationsReaports/Reports.test.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dapp/.babelrc" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/.babelrc" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dapp/.eslintrc" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/.eslintrc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dapp/.prettierrc" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/.prettierrc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dapp/config-overrides.js" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/config-overrides.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dapp/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dapp/src/app/store.ts" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/app/store.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dapp/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/public/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dapp/scripts/providersHarmonyOneTest.js" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/scripts/providersHarmonyOneTest.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dapp/scripts/providersTest.js" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/scripts/providersTest.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dapp/scripts/query_blockchain.js" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/scripts/query_blockchain.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dapp/src/App.css" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/App.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dapp/src/App.test.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/App.test.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dapp/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/App.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dapp/src/app/RoutesRoutes.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/app/RoutesRoutes.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dapp/src/assets/Logo.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/assets/Logo.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dapp/src/assets/icons/PMLogoFull.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/assets/icons/PMLogoFull.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dapp/src/assets/icons/PMSvgIcon.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/assets/icons/PMSvgIcon.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dapp/src/assets/icons/openseaIcon.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/assets/icons/openseaIcon.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dapp/src/components/PageForum.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/components/PageForum.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dapp/src/components/avatar/AvatarNFI.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/components/avatar/AvatarNFI.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dapp/src/components/avatar/ValidateAvatar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/components/avatar/ValidateAvatar.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dapp/src/components/pages/Analytics.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/components/pages/Analytics.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dapp/src/components/pages/CloudHWM.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/components/pages/CloudHWM.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dapp/src/components/pages/CommunitySupport.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/components/pages/CommunitySupport.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dapp/src/components/pages/Identity.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/components/pages/identity/Identity.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dapp/src/components/pages/Register.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/components/pages/Register.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dapp/src/components/pages/Validate.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/components/pages/Validate.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dapp/src/features/accountBC/accountBCSaga.test.ts" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/features/accountBC/accountBCSaga.test.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dapp/src/features/contractsBC/mintNFI/MintNFIFunctionsSlice.ts" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/features/mintNFI/MintNFIFunctionsSlice.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dapp/src/features/contractsBC/mintNFI/MintNFISlice.ts" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/features/mintNFI/MintNFISlice.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dapp/src/features/contractsBC/mintNFI/mintNFIFunctionsSaga.ts" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/features/mintNFI/mintNFIFunctionsSaga.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dapp/src/features/contractsBC/mintNFI/mintNFISaga.ts" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/features/mintNFI/mintNFISaga.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dapp/src/features/contractsBC/mintNFI/mintNFISlice.types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/features/mintNFI/mintNFISlice.types.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dapp/src/components/pages/Report.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dapp/src/components/pages/Search.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/components/pages/Search.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dapp/src/components/pages/Security.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/components/pages/Security.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dapp/src/components/pages/Validate.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/components/pages/valadationsReaports/Validate.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dapp/src/components/pages/home/Footers/Footer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/components/pages/home/Footers/Footer.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dapp/src/components/pages/home/Footers/SecondFooterHome.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/components/pages/home/Footers/SecondFooterHome.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dapp/src/components/pages/home/Home.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/components/pages/home/Home.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dapp/src/components/pages/home/Navbar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/components/pages/home/Navbar.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dapp/src/components/pages/identity/AccountLedger.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/components/pages/identity/AccountLedger.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dapp/src/components/pages/identity/DrawerComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/components/pages/identity/DrawerComponent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dapp/src/components/pages/identity/Header.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/components/pages/identity/Header.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dapp/src/components/pages/identity/ModalForIdentNoUseParams.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/components/pages/identity/ModalForIdentNoUseParams.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dapp/src/components/pages/identity/Projects.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/components/pages/identity/Projects.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dapp/src/components/pages/identity/SocialMedia.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/components/pages/identity/SocialMedia.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dapp/src/components/pages/identity/ValidationsReports.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/components/pages/valadationsReaports/ValidationsReports.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dapp/src/components/pages/identity/mentions/Mentions.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/components/pages/identity/mentions/Mentions.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dapp/src/components/pages/identity/mentions/MentionsDrawer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/components/pages/identity/mentions/MentionsDrawer.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dapp/src/components/pages/identity/mentions/ReplyMentions.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/components/pages/identity/mentions/ReplyMentions.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dapp/src/components/pages/yourPeople/YourPeople.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/components/pages/yourPeople/YourPeople.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dapp/src/components/theme/colors.ts" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/components/theme/colors.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dapp/src/components/theme/components/Box.ts" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/components/theme/components/Box.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dapp/src/components/theme/components/Button.ts" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/components/theme/components/Button.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dapp/src/components/theme/components/Card.ts" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/components/theme/components/Card.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dapp/src/components/theme/components/Divider.ts" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/components/theme/components/Divider.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dapp/src/components/theme/components/Heading.ts" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/components/theme/components/Heading.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dapp/src/components/theme/components/Link.ts" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/components/theme/components/Link.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dapp/src/components/theme/components/SocialMediaLinks.ts" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/components/theme/components/SocialMediaLinks.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dapp/src/components/theme/components/Table.ts" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/components/theme/components/Table.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dapp/src/components/theme/components/Text.ts" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/components/theme/components/Text.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dapp/src/components/theme/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/components/theme/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dapp/src/components/theme/styles.global.ts" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/components/theme/styles.global.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dapp/src/contract/PaperMastersNFI.sol" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/contract/PaperMastersNFI.sol" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dapp/src/contract/PaperMastersNFI.test.ts" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/contract/PaperMastersNFI.test.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dapp/src/contractTesting/one.test.ts" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/contractTesting/one.test.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dapp/src/features/JSON/chainData.ts" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/features/JSON/chainData.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dapp/src/features/JSON/chainData.types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/features/JSON/chainData.types.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dapp/src/features/JSON/chainId.json" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/features/JSON/chainId.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dapp/src/features/JSON/chainId.networks.json" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/features/JSON/chainId.networks.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dapp/src/features/JSON/chainId.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/features/JSON/chainId.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dapp/src/features/accountBC/AccountBCSlice.ts" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/features/accountBC/AccountBCSlice.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dapp/src/features/accountBC/AccountBCSlice.types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/features/accountBC/AccountBCSlice.types.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dapp/src/features/accountBC/accountBCSaga.ts" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/features/accountBC/accountBCSaga.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dapp/src/features/accountDB/AccountDBSlice.ts" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/features/accountDB/AccountDBSlice.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dapp/src/features/accountDB/AccountDBSlice.types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/features/accountDB/AccountDBSlice.types.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dapp/src/features/accountDB/accountDBSaga.test.ts" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/features/accountDB/accountDBSaga.test.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dapp/src/features/accountDB/accountDBSaga.ts" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/features/accountDB/accountDBSaga.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dapp/src/features/accountDB/mentions/MentionsSlice.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/features/accountDB/mentions/MentionsSlice.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dapp/src/features/accountDB/mentions/mentionsSaga.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/features/accountDB/mentions/mentionsSaga.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dapp/src/features/mintNFI/MintNFIFunctionsSlice.ts" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/features/mintNFI/MintNFIFunctionsSlice.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dapp/src/features/mintNFI/MintNFISlice.ts" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/features/mintNFI/MintNFISlice.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dapp/src/features/mintNFI/mintNFIFunctionsSaga.ts" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/features/mintNFI/mintNFIFunctionsSaga.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dapp/src/features/mintNFI/mintNFISaga.ts" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/features/mintNFI/mintNFISaga.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dapp/src/features/mintNFI/mintNFISlice.types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/features/mintNFI/mintNFISlice.types.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dapp/src/features/reactQuery/RTKQuery.ts" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/features/reactQuery/RTKQuery.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dapp/src/features/reactQuery/types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/features/reactQuery/types.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dapp/src/features/rootSagas.ts" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/features/rootSagas.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dapp/src/features/toast/ToastSlice.ts" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/features/toast/ToastSlice.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dapp/src/features/toast/logErrorToastSaga.test.ts" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/features/toast/logErrorToastSaga.test.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dapp/src/features/toast/logErrorToastSaga.ts" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/features/toast/logErrorToastSaga.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dapp/src/features/toast/useGlobalToast.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/features/toast/useGlobalToast.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dapp/src/global.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/global.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dapp/src/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dapp/src/react-app-env.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/react-app-env.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dapp/src/serviceWorker.ts" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/serviceWorker.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dapp/src/utils/Copyright.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/utils/Copyright.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dapp/src/utils/Icons/IconBox.js" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/utils/Icons/IconBox.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dapp/src/utils/Icons/Icons.js" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/utils/Icons/Icons.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dapp/src/utils/IdentityEntryModal.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/utils/IdentityEntryModal.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dapp/src/utils/Spinner.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/utils/Spinner.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dapp/src/utils/utilities.ts" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/utils/utilities.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dapp/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/tsconfig.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dapp/webstorm-styled-components" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/webstorm-styled-components" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dapp/webstorm-styled-components/.github/ISSUE_TEMPLATE.md" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/webstorm-styled-components/.github/ISSUE_TEMPLATE.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dapp/webstorm-styled-components/LICENSE.md" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/webstorm-styled-components/LICENSE.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dapp/webstorm-styled-components/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/webstorm-styled-components/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dapp/webstorm-styled-components/src/main/resources/META-INF/CHANGELOG.md" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/webstorm-styled-components/src/main/resources/META-INF/CHANGELOG.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dapp/webstorm-styled-components/testData/completion/attrClassNames.js" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/webstorm-styled-components/testData/completion/attrClassNames.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dapp/webstorm-styled-components/testData/completion/attrClassNamesFunc.js" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/webstorm-styled-components/testData/completion/attrClassNamesFunc.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dapp/webstorm-styled-components/testData/completion/attrClassNamesNestedExpression.js" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/webstorm-styled-components/testData/completion/attrClassNamesNestedExpression.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dapp/webstorm-styled-components/testData/completion/styledComponentsStylesheet.css" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/webstorm-styled-components/testData/completion/styledComponentsStylesheet.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dapp/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -89,8 +184,9 @@
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_interpreter_path" value="wsl://Ubuntu@/usr/bin/node" />
     <property name="nodejs_package_manager_path" value="npm" />
+    <property name="prettierjs.PrettierConfiguration.Package" value="\\wsl$\Ubuntu\home\ramona\gitrepos\MintIdentityTPM\dapp\node_modules\prettier" />
     <property name="rearrange.code.on.save" value="true" />
-    <property name="settings.editor.selected.configurable" value="settings.javascript.linters.eslint" />
+    <property name="settings.editor.selected.configurable" value="settings.javascript.prettier" />
     <property name="ts.external.directory.path" value="\\wsl$\Ubuntu\home\ramona\gitrepos\MintIdentityTPM\hardhat\node_modules\typescript\lib" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
@@ -103,11 +199,11 @@
       <recent name="\\wsl$\Ubuntu\home\ramona\gitrepos\MintIdentityTPM\hardhat\contracts" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="\\wsl$\Ubuntu\home\ramona\gitrepos\MintIdentityTPM\dapp\src\components\pages\identity" />
+      <recent name="\\wsl$\Ubuntu\home\ramona\gitrepos\MintIdentityTPM\dapp\src\components\pages\valadationsReaports" />
       <recent name="\\wsl$\Ubuntu\home\ramona\gitrepos\MintIdentityTPM\dapp\src\contract" />
       <recent name="\\wsl$\Ubuntu\home\ramona\gitrepos\MintIdentityTPM\dapp\src\contractTesting" />
       <recent name="\\wsl$\Ubuntu\home\ramona\gitrepos\MintIdentityTPM\dapp\src\features" />
-      <recent name="\\wsl$\Ubuntu\home\ramona\gitrepos\MintIdentityTPM\dapp" />
-      <recent name="\\wsl$\Ubuntu\home\ramona\gitrepos\MintIdentityTPM\dapp\src\components" />
     </key>
   </component>
   <component name="RunManager" selected="JavaScript Debug.Unnamed">
@@ -228,7 +324,9 @@
       <workItem from="1652980160180" duration="22746000" />
       <workItem from="1653017306825" duration="627000" />
       <workItem from="1653017953705" duration="4116000" />
-      <workItem from="1653055644537" duration="27990000" />
+      <workItem from="1653055644537" duration="29279000" />
+      <workItem from="1653236465120" duration="18072000" />
+      <workItem from="1653334240371" duration="57374000" />
     </task>
     <task id="LOCAL-00001" summary="testR">
       <created>1640283820136</created>

@@ -1,6 +1,6 @@
 {
-  "1":{
-    "rpc":[
+  "1": {
+    "rpc": [
       "https://api.mycryptoapi.com/eth",
       "https://rpc.flashbots.net/",
       "https://eth-mainnet.gateway.pokt.network/v1/5f3453978e354ab992c4da79",
@@ -16,25 +16,20 @@
       "https://mainnet.infura.io/v3/c97ad56e08674161a95ba16c6f855b6a"
     ]
   },
-  "3":{
-    "rpc":[
-      "https://ropsten.infura.io/v3/${c97ad56e08674161a95ba16c6f855b6a}"
-    ]
+  "3": {
+    "rpc": ["https://ropsten.infura.io/v3/${c97ad56e08674161a95ba16c6f855b6a}"]
   },
-  "4":{
-    "rpc":[
-      "https://rinkeby.infura.io/v3/${c97ad56e08674161a95ba16c6f855b6a}"
-    ]
+  "4": {
+    "rpc": ["https://rinkeby.infura.io/v3/${c97ad56e08674161a95ba16c6f855b6a}"]
   },
-  "5":{
-    "rpc":[
+  "5": {
+    "rpc": [
       "https://goerli.infura.io/v3/${c97ad56e08674161a95ba16c6f855b6a}",
       "https://rpc.goerli.mudit.blog/"
     ]
   },
-  "1666600000":
-  {
-    "rpc":[
+  "1666600000": {
+    "rpc": [
       "https://api.harmony.one",
       "https://s1.api.harmony.one",
       "https://s2.api.harmony.one",
@@ -47,15 +42,11 @@
       "https://rpc.hermesdefi.io/"
     ]
   },
-  "1666600001":{
-    "rpc":[
-      "https://s1.api.harmony.one"
-    ]
+  "1666600001": {
+    "rpc": ["https://s1.api.harmony.one"]
   },
-  "1666600002":{
-    "rpc":[
-      "https://s2.api.harmony.one"
-    ]
+  "1666600002": {
+    "rpc": ["https://s2.api.harmony.one"]
   },
   "1666700000": {
     "rpc": [

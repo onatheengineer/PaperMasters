@@ -1,5 +1,5 @@
 .App {
-  min-height: 100vH;
+  min-height: 100vh;
   background-color: #daceda;
   position: relative;
   //text-align: center;
@@ -44,5 +44,3 @@
 *:focus {
   box-shadow: none !important;
 }
-
-

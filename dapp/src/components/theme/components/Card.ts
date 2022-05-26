@@ -1,4 +1,3 @@
 export const Card = {
-    borderColor: 'pmpurple.300',
-
-}
+  borderColor: 'pmpurple.300',
+};

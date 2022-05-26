@@ -3,13 +3,13 @@ import { render } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import { store } from './app/store';
 import App from './App';
-import {BrowserRouter} from "react-router-dom";
-import theme from "./components/theme";
-import {ChakraProvider} from "@chakra-ui/react";
+import { BrowserRouter } from 'react-router-dom';
+import theme from './components/theme';
+import { ChakraProvider } from '@chakra-ui/react';
 
 Object.defineProperty(window, 'matchMedia', {
   writable: true,
-  value: jest.fn().mockImplementation(query => ({
+  value: jest.fn().mockImplementation((query) => ({
     matches: false,
     media: query,
     onchange: null,
@@ -31,25 +31,26 @@ window.matchMedia = (query) => ({
   addEventListener: jest.fn(),
   removeEventListener: jest.fn(),
   dispatchEvent: jest.fn(),
-})
+});
 
-global.matchMedia = global.matchMedia || function () {
-  return {
-    addListener: jest.fn(),
-    removeListener: jest.fn(),
+global.matchMedia =
+  global.matchMedia ||
+  function () {
+    return {
+      addListener: jest.fn(),
+      removeListener: jest.fn(),
+    };
   };
-};
 
 test('renders learn react link', () => {
   const { getByText } = render(
-<BrowserRouter>
-    <ChakraProvider theme={theme}>
-    <Provider store={store}>
-        <App />
-    </Provider>
-    </ChakraProvider>
-</BrowserRouter>
-
+    <BrowserRouter>
+      <ChakraProvider theme={theme}>
+        <Provider store={store}>
+          <App />
+        </Provider>
+      </ChakraProvider>
+    </BrowserRouter>,
   );
 
   //expect(getByText(/learn/i)).toBeInTheDocument();

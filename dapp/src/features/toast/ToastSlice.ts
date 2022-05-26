@@ -1,38 +1,38 @@
 /* eslint-disable no-param-reassign */
-import { createAction, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import {RootState} from "../../app/store";
-import {UseToastOptions} from "@chakra-ui/react";
+import { createAction, createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { RootState } from '../../app/store';
+import { UseToastOptions } from '@chakra-ui/react';
 
 export const toastConfig: UseToastOptions = {
-    isClosable: true,
-    variant: "subtle",
-    position: "bottom",
+  isClosable: true,
+  variant: 'subtle',
+  position: 'bottom',
 };
 
 export interface ToastOptions {
-    title: string;
-    status: "error" | "info" | "warning" | "success" | undefined;
+  title: string;
+  status: 'error' | 'info' | 'warning' | 'success' | undefined;
 }
 
 export type ToastState = {
-    toastOptions: ToastOptions | null;
+  toastOptions: ToastOptions | null;
 };
 
 const createToastSlice = (initialState: ToastState) =>
-    createSlice({
-        name: "toast",
-        initialState,
-        reducers: {
-            showToast(state, action: PayloadAction<ToastOptions>) {
-                state.toastOptions = action.payload;
-            },
-            resetToast(state) {
-                state.toastOptions = null;
-            },
-        },
-    });
+  createSlice({
+    name: 'toast',
+    initialState,
+    reducers: {
+      showToast(state, action: PayloadAction<ToastOptions>) {
+        state.toastOptions = action.payload;
+      },
+      resetToast(state) {
+        state.toastOptions = null;
+      },
+    },
+  });
 
-export const startToast = createAction<ToastOptions>("startToast");
+export const startToast = createAction<ToastOptions>('startToast');
 
 const toastSlice = createToastSlice({ toastOptions: null });
 export const { showToast, resetToast } = toastSlice.actions;

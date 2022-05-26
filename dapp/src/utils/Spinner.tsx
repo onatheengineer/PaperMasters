@@ -33,18 +33,18 @@
 // `;
 //
 //const Spinner = WrappedComponent => ({ isLoading, ...otherProps }) => {
-import {FC} from "react";
+import { FC } from 'react';
 
 const Spinner: FC = () => {
-    //return isLoading?
-    return (
-        <div>Spinning</div>
-//     <SpinnerOverlay>
-//         <SpinnerContainer />
-//     </SpinnerOverlay>
-//     ) : (
-//         <WrappedComponent {...otherProps} />
-     )
+  //return isLoading?
+  return (
+    <div>Spinning</div>
+    //     <SpinnerOverlay>
+    //         <SpinnerContainer />
+    //     </SpinnerOverlay>
+    //     ) : (
+    //         <WrappedComponent {...otherProps} />
+  );
 };
 //
 export default Spinner;

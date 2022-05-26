@@ -1,3 +1,3 @@
 export const Divider = {
-    colorScheme: 'pmpurple.13'
-}
+  colorScheme: 'pmpurple.13',
+};

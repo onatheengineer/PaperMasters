@@ -2,11 +2,7 @@
   "compilerOptions": {
     "target": "es6",
     "resolveJsonModule": true,
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
+    "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
@@ -20,16 +16,14 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "preserve",
-    "paths" : {
+    "paths": {
       "crypto": ["./node_modules/crypto-browserify"],
       "stream": ["./node_modules/stream-browserify"],
       "assert": ["./node_modules/assert"],
       "http": ["./node_modules/stream-http"],
       "https": ["./node_modules/https-browserify"],
-      "os": ["./node_modules/os-browserify"],
+      "os": ["./node_modules/os-browserify"]
     }
   },
-  "include": [
-    "src"
-  ]
+  "include": ["src"]
 }

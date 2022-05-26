@@ -14,6 +14,35 @@ import chainIdNetworks from '../JSON/chainId.networks.json';
 
 export type MintABIType = keyof typeof MintABI;
 
+export interface validateInterface {
+  giver: string;
+  giverColor?: string;
+  receiver: string;
+  receiverColor?: string;
+  comment: string;
+  commentColor?: string;
+  originDate: number;
+}
+
+export interface BCStruct {
+  chainId: BigNumber;
+  walletAccount: string;
+  name: string;
+  email: string;
+  profession: string;
+  organization: string;
+  slogan: string;
+  website: string;
+  uniqueYou: string;
+  bgRGB: string;
+  originDate: BigNumber;
+}
+
+export interface fetchAddressToTokenInterface {
+  tokenId: number;
+  nfiIdentity: BCStruct | null;
+}
+
 export interface accountsApiInterface {
   Count: number;
   Items: AccountDBInterface[];
@@ -52,112 +81,6 @@ export interface getMentionsApiInterface {
   Count: number;
   Items: getMentionInterface[];
 }
-
-export const accountDBApi = createApi({
-  reducerPath: 'accountDBApi',
-  baseQuery: fetchBaseQuery({
-    baseUrl: 'https://ociuozqx85.execute-api.us-east-1.amazonaws.com',
-  }),
-  tagTypes: ['singleAccountApi', 'allAccountApi', 'getMentionApi'],
-  endpoints: (builder) => ({
-    getSingleAccount: builder.query<
-      singleAccountsApiInterface,
-      ParamsURLInterface
-    >({
-      query: ({ chainIdURL, paramsWalletURL }: ParamsURLInterface) =>
-        `account/${chainIdURL}/${paramsWalletURL}`,
-      providesTags: ['singleAccountApi'],
-    }),
-    getAllAccount: builder.query<accountsApiInterface, void>({
-      query: () => `account`,
-      providesTags: ['allAccountApi'],
-    }),
-    getMention: builder.query<getMentionsApiInterface, ParamsURLInterface>({
-      query: ({ chainIdURL, paramsWalletURL }: ParamsURLInterface) =>
-        `mentions/${chainIdURL}/${paramsWalletURL}`,
-      providesTags: ['getMentionApi'],
-      transformResponse: (response: getMentionsApiInterface, meta, arg) => {
-        response.Items.sort((a, b) => {
-          return b.timeStamp - a.timeStamp;
-        });
-        return response;
-      },
-    }),
-    postAccountDictionary: builder.mutation<string, AccountDBInterface>({
-      query: (accountDBBody: AccountDBInterface) => ({
-        url: 'account',
-        method: 'PUT',
-        body: accountDBBody,
-      }),
-      invalidatesTags: ['singleAccountApi', 'allAccountApi'],
-    }),
-    postMention: builder.mutation<string, postMentionInterface>({
-      query: (mentionBody: postMentionInterface) => ({
-        url: 'mentions',
-        method: 'POST',
-        body: mentionBody,
-      }),
-      invalidatesTags: ['getMentionApi'],
-    }),
-  }),
-});
-
-export interface fetchAddressToTokenInterface {
-  tokenId: number;
-  nfiIdentity: BCStruct | null;
-}
-
-export interface BCStruct {
-  chainId: BigNumber;
-  walletAccount: string;
-  name: string;
-  email: string;
-  profession: string;
-  organization: string;
-  slogan: string;
-  website: string;
-  uniqueYou: string;
-  bgRGB: string;
-  originDate: BigNumber;
-}
-
-export const nfiBCApi = createApi({
-  reducerPath: 'nfiBCApi',
-  baseQuery: fakeBaseQuery(),
-  tagTypes: ['allNFIApi', 'singleNFIApi'],
-  endpoints: (builder) => ({
-    getIdentityBC: builder.query<BCStruct[], void>({
-      queryFn: fetchIdentities,
-      providesTags: ['allNFIApi'],
-    }),
-    getSingleIdentityBC: builder.query<
-      fetchAddressToTokenInterface,
-      ParamsURLInterface
-    >({
-      queryFn: fetchAddressToToken,
-      providesTags: ['singleNFIApi'],
-      // transformResponse: (response:fetchAddressToTokenInterface) => {
-      //     return response as fetchAddressToTokenInterface
-      // }
-    }),
-  }),
-});
-
-export const queryBCApi = createApi({
-  reducerPath: 'queryBCApi',
-  baseQuery: fakeBaseQuery(),
-  tagTypes: ['etherScanApi', 'ropstenApi'],
-  endpoints: (builder) => ({
-    getQueryMainnet: builder.query<any, ParamsURLInterface>({
-      queryFn: fetchEthereumTranastionsMainNet,
-      providesTags: ['etherScanApi'],
-    }),
-    // getQueryRopsten: builder.query<any, ParamsURLInterface>({
-    //   queryFn: fetchEthereumTranastionsRopsten,
-    //   providesTags: ['ropstenApi'],
-    // }),
-  }),
-});
 
 export async function fetchEthereumTranastionsMainNet({
   chainIdURL,
@@ -274,7 +197,7 @@ export async function fetchAddressToToken({
       Object.prototype.hasOwnProperty.call(MintABI.networks, `${chainIdURL}`)
     ) {
       const chainIdSupportedArr = chainIdNetworks.filter((el) => {
-        return el.chainId === parseInt(chainIdURL);
+        return el.chainId === parseInt(chainIdURL, 10);
       });
       const provider = ethers.getDefaultProvider(
         chainIdSupportedArr[0].name.toLowerCase(),
@@ -297,7 +220,7 @@ export async function fetchAddressToToken({
         paramsWalletURL,
       );
       console.log('addresstotokenId:', addressToTokenIDID);
-      const addressToTokenIDIDNUMBER = parseInt(addressToTokenIDID);
+      const addressToTokenIDIDNUMBER = parseInt(addressToTokenIDID, 10);
       if (addressToTokenIDIDNUMBER >= 1) {
         fetchDictionaryReturn.tokenId = addressToTokenIDIDNUMBER;
         fetchDictionaryReturn.nfiIdentity =
@@ -310,15 +233,100 @@ export async function fetchAddressToToken({
   return { error: { status: 404, data: ' NfI does not exist' } };
 }
 
-export interface validateInterface {
-  giver: string;
-  giverColor?: string;
-  receiver: string;
-  receiverColor?: string;
-  comment: string;
-  commentColor?: string;
-  originDate: number;
-}
+export const accountDBApi = createApi({
+  reducerPath: 'accountDBApi',
+  baseQuery: fetchBaseQuery({
+    baseUrl: 'https://ociuozqx85.execute-api.us-east-1.amazonaws.com',
+  }),
+  tagTypes: ['singleAccountApi', 'allAccountApi', 'getMentionApi'],
+  endpoints: (builder) => ({
+    getSingleAccount: builder.query<
+      singleAccountsApiInterface,
+      ParamsURLInterface
+    >({
+      query: ({ chainIdURL, paramsWalletURL }: ParamsURLInterface) =>
+        `account/${chainIdURL}/${paramsWalletURL}`,
+      providesTags: ['singleAccountApi'],
+    }),
+    getAllAccount: builder.query<accountsApiInterface, void>({
+      query: () => `account`,
+      providesTags: ['allAccountApi'],
+    }),
+    getMention: builder.query<getMentionsApiInterface, ParamsURLInterface>({
+      query: ({ chainIdURL, paramsWalletURL }: ParamsURLInterface) =>
+        `mentions/${chainIdURL}/${paramsWalletURL}`,
+      providesTags: ['getMentionApi'],
+      transformResponse: (response: getMentionsApiInterface, meta, arg) => {
+        response.Items.sort((a, b) => {
+          return b.timeStamp - a.timeStamp;
+        });
+        return response;
+      },
+    }),
+    postAccountDictionary: builder.mutation<void, AccountDBInterface>({
+      query: (accountDBBody: AccountDBInterface) => ({
+        url: 'account',
+        method: 'POST',
+        body: accountDBBody,
+      }),
+      invalidatesTags: ['singleAccountApi', 'allAccountApi'],
+    }),
+    updateAccountDictionary: builder.mutation<void, AccountDBInterface>({
+      query: (accountVariables) => ({
+        url: 'account',
+        method: 'PUT',
+        body: accountVariables,
+      }),
+      invalidatesTags: ['singleAccountApi', 'allAccountApi'],
+    }),
+    postMention: builder.mutation<void, postMentionInterface>({
+      query: (mentionBody: postMentionInterface) => ({
+        url: 'mentions',
+        method: 'POST',
+        body: mentionBody,
+      }),
+      invalidatesTags: ['getMentionApi'],
+    }),
+  }),
+});
+
+export const nfiBCApi = createApi({
+  reducerPath: 'nfiBCApi',
+  baseQuery: fakeBaseQuery(),
+  tagTypes: ['allNFIApi', 'singleNFIApi'],
+  endpoints: (builder) => ({
+    getIdentityBC: builder.query<BCStruct[], void>({
+      queryFn: fetchIdentities,
+      providesTags: ['allNFIApi'],
+    }),
+    getSingleIdentityBC: builder.query<
+      fetchAddressToTokenInterface,
+      ParamsURLInterface
+    >({
+      queryFn: fetchAddressToToken,
+      providesTags: ['singleNFIApi'],
+      // transformResponse: (response:fetchAddressToTokenInterface) => {
+      //     return response as fetchAddressToTokenInterface
+      // }
+    }),
+  }),
+});
+
+export const queryBCApi = createApi({
+  reducerPath: 'queryBCApi',
+  baseQuery: fakeBaseQuery(),
+  tagTypes: ['etherScanApi', 'ropstenApi'],
+  endpoints: (builder) => ({
+    getQueryMainnet: builder.query<any, ParamsURLInterface>({
+      queryFn: fetchEthereumTranastionsMainNet,
+      providesTags: ['etherScanApi'],
+    }),
+    // getQueryRopsten: builder.query<any, ParamsURLInterface>({
+    //   queryFn: fetchEthereumTranastionsRopsten,
+    //   providesTags: ['ropstenApi'],
+    // }),
+  }),
+});
 
 export const {
   useGetSingleAccountQuery,
@@ -326,6 +334,7 @@ export const {
   useGetMentionQuery,
   usePostAccountDictionaryMutation,
   usePostMentionMutation,
+  useUpdateAccountDictionaryMutation,
 } = accountDBApi;
 export const { useGetIdentityBCQuery, useGetSingleIdentityBCQuery } = nfiBCApi;
 export const { useGetQueryMainnetQuery } = queryBCApi;
