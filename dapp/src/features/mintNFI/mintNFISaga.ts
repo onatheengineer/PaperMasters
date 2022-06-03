@@ -4,7 +4,8 @@ import type { SagaIterator } from 'redux-saga';
 import { call, put, select, takeLatest } from 'redux-saga/effects';
 import Web3 from 'web3';
 
-import MintABI from '../../abiFiles/PaperMastersNFI';
+// eslint-disable-next-line import/extensions
+import MintABI from '../../abiFiles/PaperMastersNFI.json';
 import { accountBCselectors } from '../accountBC/AccountBCSlice';
 import { NFIReceiptInterface } from '../accountDB/AccountDBSlice.types';
 import {

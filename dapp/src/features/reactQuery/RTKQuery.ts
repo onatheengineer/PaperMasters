@@ -5,12 +5,14 @@ import {
 } from '@reduxjs/toolkit/query/react';
 import { BigNumber, ethers } from 'ethers';
 
-import MintABI from '../../abiFiles/PaperMastersNFI';
+// eslint-disable-next-line import/extensions
+import MintABI from '../../abiFiles/PaperMastersNFI.json';
 import {
   AccountDBInterface,
   ParamsURLInterface,
 } from '../accountDB/AccountDBSlice.types';
-import chainIdNetworks from '../JSON/chainId.networks';
+// eslint-disable-next-line import/extensions
+import chainIdNetworks from '../JSON/chainId.networks.json';
 
 export type MintABIType = keyof typeof MintABI;
 

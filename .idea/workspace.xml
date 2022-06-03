@@ -5,7 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d9eab20b-ada3-4978-b53e-04738bfff59d" name="Changes" comment="update for eslint errors">
-      <change beforePath="$PROJECT_DIR$/dapp/src/components/pages/identity/mentions/MentionsDrawer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/components/pages/identity/mentions/MentionsDrawer.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dapp/.eslintignore" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/.eslintignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dapp/src/components/pages/Search.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/components/pages/Search.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dapp/src/components/pages/identity/Identity.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/components/pages/identity/Identity.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dapp/src/contract/PaperMastersNFI.test.ts" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/contract/PaperMastersNFI.test.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dapp/src/features/accountBC/accountBCSaga.ts" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/features/accountBC/accountBCSaga.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dapp/src/features/accountDB/accountDBSaga.ts" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/features/accountDB/accountDBSaga.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dapp/src/features/mintNFI/mintNFISaga.ts" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/features/mintNFI/mintNFISaga.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dapp/src/features/reactQuery/RTKQuery.ts" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/features/reactQuery/RTKQuery.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -85,7 +93,7 @@
       <workItem from="1652583977396" duration="1361000" />
       <workItem from="1652658890749" duration="1262000" />
       <workItem from="1652746647377" duration="17231000" />
-      <workItem from="1654129096843" duration="5068000" />
+      <workItem from="1654129096843" duration="6374000" />
     </task>
     <task id="LOCAL-00001" summary="tempt">
       <created>1640717063893</created>
@@ -311,7 +319,14 @@
       <option name="project" value="LOCAL" />
       <updated>1654229973971</updated>
     </task>
-    <option name="localTasksCounter" value="33" />
+    <task id="LOCAL-00033" summary="update for eslint errors">
+      <created>1654230462675</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1654230462675</updated>
+    </task>
+    <option name="localTasksCounter" value="34" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

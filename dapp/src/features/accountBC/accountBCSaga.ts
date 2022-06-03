@@ -7,7 +7,8 @@ import type { SagaIterator } from 'redux-saga';
 import { call, put, takeEvery } from 'redux-saga/effects';
 
 import { accountArrDBAction } from '../accountDB/AccountDBSlice';
-import chainIdNetworks from '../JSON/chainId.networks';
+// eslint-disable-next-line import/extensions
+import chainIdNetworks from '../JSON/chainId.networks.json';
 import { showToast } from '../toast/ToastSlice';
 import {
   accountArr,

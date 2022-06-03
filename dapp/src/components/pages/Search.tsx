@@ -54,7 +54,8 @@ import {
   allAccountDictionaryDBAction,
   allNFIReceiptDBAction,
 } from '../../features/accountDB/AccountDBSlice';
-import chainIdNetworkJSON from '../../features/JSON/chainId.networks';
+// eslint-disable-next-line import/extensions
+import chainIdNetworkJSON from '../../features/JSON/chainId.networks.json';
 import {
   useGetAllAccountQuery,
   useGetIdentityBCQuery,

@@ -5,7 +5,8 @@ import type { SagaIterator } from 'redux-saga';
 import { call, put, select, takeLatest } from 'redux-saga/effects';
 
 import { accountBCselectors } from '../accountBC/AccountBCSlice';
-import chainIdNetworks from '../JSON/chainId.networks';
+// eslint-disable-next-line import/extensions
+import chainIdNetworks from '../JSON/chainId.networks.json';
 import {
   accountArrDBAction,
   accountArrError,
