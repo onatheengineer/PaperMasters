@@ -1,7 +1,6 @@
-import React from 'react';
-import { useState, useEffect } from 'react';
-import type { FC } from 'react';
 import { Box, Flex, Heading } from '@chakra-ui/react';
+import type { FC } from 'react';
+import React from 'react';
 
 export const Analytics: FC = () => {
   return (

@@ -6,7 +6,7 @@ import { SocialButton } from '../home/Footers/Footer';
 
 interface socialMediaInterface {
   placeholder: string;
-  value: string | undefined;
+  valuevalue: string | undefined;
   type: string;
   role: string;
   icon: ReactElement;
@@ -21,21 +21,24 @@ interface socialMediaInterface {
 
 export const SocialMediaComponent: FC<socialMediaInterface> = ({
   placeholder,
-  value,
+  valuevalue,
   type,
   role,
   onChangeSocial,
   icon,
 }) => {
   // const [postAccount, data] = usePostAccountDictionaryMutation();
-  const [socialName, setSocialName] = React.useState<string | undefined>(value);
+  const [socialName, setSocialName] = React.useState<string | undefined>(
+    valuevalue,
+  );
   return (
     <Box
       // border={'1px solid'}
       // borderColor={'pmpurple.13'}
       position={'relative'}
       p={'0px'}
-      m={'0px'}
+      m={2}
+      flexGrow={1}
     >
       <HStack>
         <SocialButton label={type} href={'#'}>

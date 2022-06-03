@@ -1,5 +1,8 @@
 {
   "settings": {
+    "import/ignore": [
+      ".(json|css)$"
+    ],
     "import/resolver": {
       "node": {
         "extensions": [
@@ -25,7 +28,7 @@
   "rules": {
     "max-lines-per-function": [
       "warn",
-      40
+      60
     ],
     "import/extensions": [
       "error",
@@ -43,15 +46,6 @@
       "error",
       {
         "endOfLine": "auto"
-      }
-    ],
-    "no-param-reassign": [
-      "error",
-      {
-        "props": true,
-        "ignorePropertyModificationsFor": [
-          "state"
-        ]
       }
     ]
   }

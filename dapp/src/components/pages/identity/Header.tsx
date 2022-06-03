@@ -1,12 +1,9 @@
 import {
-  Avatar,
   Box,
   Button,
   Flex,
   HStack,
   Icon,
-  Image,
-  Link,
   Stack,
   Text,
   Tooltip,
@@ -16,22 +13,35 @@ import {
 import type { FC } from 'react';
 import * as React from 'react';
 import { useMemo, useReducer, useRef, useState } from 'react';
-import { FaCube } from 'react-icons/fa';
-import { IoMdCheckmarkCircleOutline } from 'react-icons/io';
-import { MdOutlineEmail, MdOutlineReport } from 'react-icons/md';
-import { Link as ReachLink } from 'react-router-dom';
+import {
+  FaCube,
+  FaDiscord,
+  FaFacebook,
+  FaGithub,
+  FaInstagram,
+  FaLinkedinIn,
+  FaReddit,
+  FaTwitch,
+  FaTwitter,
+  FaYoutube,
+} from 'react-icons/fa';
+import { MdOutlineEmail, MdOutlinePeopleOutline } from 'react-icons/md';
+import { TbMoodNeutral, TbThumbDown, TbThumbUp } from 'react-icons/tb';
 
 import { useAppDispatch, useAppSelector } from '../../../app/hooks';
+import { openseaIcon } from '../../../assets/icons/openseaIcon';
 import { postSingleAccountDictionaryDBAction } from '../../../features/accountDB/AccountDBSlice';
 import {
   AccountDBInterface,
   ParamsURLInterface,
 } from '../../../features/accountDB/AccountDBSlice.types';
 import {
+  useGetMentionQuery,
   useGetSingleAccountQuery,
   useGetSingleIdentityBCQuery,
 } from '../../../features/reactQuery/RTKQuery';
 import DrawerComponent from './DrawerComponent';
+import SocialMediaHeader from './SocialMediaHeader';
 
 function initialState(paramsRequestAccountDictionary: any) {
   return {
@@ -96,6 +106,10 @@ export const Header: FC<ParamsURLInterface> = ({
   const useGetSingleAccountQueryQuery = useGetSingleAccountQuery({
     chainIdURL: chainIdURL!,
     paramsWalletURL: paramsWalletURL!,
+  });
+  const useGetMentionQueryQuery = useGetMentionQuery({
+    chainIdURL,
+    paramsWalletURL,
   });
   const [state, setAccountProfileDictionary] = useReducer(
     reducer,
@@ -209,6 +223,29 @@ export const Header: FC<ParamsURLInterface> = ({
     useGetSingleIdentityBCQueryQuery,
   ]);
 
+  const mentionTally: number[] = useMemo(() => {
+    let mentionPositive = 0;
+    let mentionNeutral = 0;
+    let mentionNegative = 0;
+
+    if (useGetMentionQueryQuery.data !== undefined) {
+      useGetMentionQueryQuery.data.Items.map((el) => {
+        if (el.radioType === 1) {
+          mentionPositive += 1;
+        }
+        if (el.radioType === 0) {
+          mentionNegative += 1;
+        }
+        if (el.radioType === -1) {
+          mentionNeutral += 1;
+        }
+        return el;
+      });
+    }
+
+    return [mentionPositive, mentionNeutral, mentionNegative];
+  }, [useGetMentionQueryQuery]);
+
   return (
     <Flex
       direction={{ base: 'column', sm: 'column', md: 'row' }}
@@ -253,14 +290,14 @@ export const Header: FC<ParamsURLInterface> = ({
         m={'0px'}
         p={'0px'}
       >
-        <Avatar
-          me={{ md: '22px' }}
-          src="" // this is the profile image
-          w="90px"
-          h="90px"
-          mb={'6px'}
-          borderRadius="10px"
-        />
+        {/* <Avatar */}
+        {/*  me={{ md: '22px' }} */}
+        {/*  src="" // this is the profile image */}
+        {/*  w="90px" */}
+        {/*  h="90px" */}
+        {/*  mb={'6px'} */}
+        {/*  borderRadius="10px" */}
+        {/* /> */}
         <Stack>
           <Flex
             direction="column"
@@ -272,13 +309,13 @@ export const Header: FC<ParamsURLInterface> = ({
           >
             <Box
               // border={'1px solid blue'}
-              p={'2px'}
-              my={'0px'}
+              // p={'2px'}
+              mb={4}
             >
-              <HStack spacing={4}>
+              <HStack spacing={4} pt={2} mb={0}>
                 <Box
                   // border={'1px solid blue'}
-                  pt={'4px'}
+                  pl={2}
                   my={'0px'}
                 >
                   <Text
@@ -292,35 +329,86 @@ export const Header: FC<ParamsURLInterface> = ({
                 <Box
                   // border={'1px solid blue'}
                   pt={'6px'}
-                  my={'0px'}
+                  my={0}
                 >
                   {logicEmailMemo}
                 </Box>
               </HStack>
             </Box>
-            {/* <SocialMedia /> */}
             <HStack>
-              <Link
-                as={ReachLink}
-                to={`/validate/${chainIdURL}/${paramsWalletURL}`}
-              >
-                <HStack>
-                  <IoMdCheckmarkCircleOutline fontSize={'18px'} />
-                  <Text>Validate</Text>
-                </HStack>
-              </Link>
-
-              <Link
-                as={ReachLink}
-                to={`/report/${chainIdURL}/${paramsWalletURL}`}
-              >
-                <HStack>
-                  <MdOutlineReport fontSize={'18px'} />
-                  <Text>Report</Text>
-                </HStack>
-              </Link>
+              <SocialMediaHeader
+                label={'linkedin'}
+                icon={<FaLinkedinIn />}
+                chainIdURL={chainIdURL}
+                paramsWalletURL={paramsWalletURL}
+              />
+              <SocialMediaHeader
+                label={'twitter'}
+                icon={<FaTwitter />}
+                chainIdURL={chainIdURL}
+                paramsWalletURL={paramsWalletURL}
+              />
+              <SocialMediaHeader
+                label={'github'}
+                icon={<FaGithub />}
+                chainIdURL={chainIdURL}
+                paramsWalletURL={paramsWalletURL}
+              />
+              <SocialMediaHeader
+                label={'reddit'}
+                icon={<FaReddit />}
+                chainIdURL={chainIdURL}
+                paramsWalletURL={paramsWalletURL}
+              />
+              <SocialMediaHeader
+                label={'discord'}
+                icon={<FaDiscord />}
+                chainIdURL={chainIdURL}
+                paramsWalletURL={paramsWalletURL}
+              />
+              <SocialMediaHeader
+                label={'youtube'}
+                icon={<FaYoutube />}
+                chainIdURL={chainIdURL}
+                paramsWalletURL={paramsWalletURL}
+              />
+              <SocialMediaHeader
+                label={'instagram'}
+                icon={<FaInstagram />}
+                chainIdURL={chainIdURL}
+                paramsWalletURL={paramsWalletURL}
+              />
+              <SocialMediaHeader
+                label={'twitch'}
+                icon={<FaTwitch />}
+                chainIdURL={chainIdURL}
+                paramsWalletURL={paramsWalletURL}
+              />
+              <SocialMediaHeader
+                label={'facebook'}
+                icon={<FaFacebook />}
+                chainIdURL={chainIdURL}
+                paramsWalletURL={paramsWalletURL}
+              />
+              <SocialMediaHeader
+                label={'opensea'}
+                icon={<Icon as={openseaIcon} />}
+                chainIdURL={chainIdURL}
+                paramsWalletURL={paramsWalletURL}
+              />
+              <SocialMediaHeader
+                label={'socialButtonGeneric1'}
+                icon={<MdOutlinePeopleOutline />}
+                chainIdURL={chainIdURL}
+                paramsWalletURL={paramsWalletURL}
+              />
+              <SocialMediaHeader
+                label={'socialButtonGeneric2'}
+                icon={<MdOutlinePeopleOutline />}
+                chainIdURL={chainIdURL}
+                paramsWalletURL={paramsWalletURL}
+              />
             </HStack>
-            {/* {logicQRCodeMemo} */}
           </Flex>
         </Stack>
       </Flex>
@@ -369,61 +457,57 @@ export const Header: FC<ParamsURLInterface> = ({
             >
               <Icon as={FaCube} me="6px" />
               <Text fontSize="sm" color="pmpurple.13" fontWeight="bold">
-                {/* TODO: when I click on this button I want it to route me to the registration & validations page */}
                 {logicTransactionHashMemo}
               </Text>
             </Flex>
           </Button>
           <HStack spacing={'34px'}>
-            {/* <Stack spacing={'0px'} align={'center'}> */}
-            {/*    <Text fontWeight={600}>57</Text> */}
-            {/*    <Tooltip hasArrow label='Total received Validations from other Blockchain accounts' */}
-            {/*             bg='pmpurple.4' color='pmpurple.13'> */}
-            {/*        <Text fontSize={'sm'} color={'pmpurple.11'}> */}
-            {/*            Validations */}
-            {/*        </Text> */}
-            {/*    </Tooltip> */}
-            {/* </Stack> */}
-            {/* <Stack spacing={0} align={'center'}> */}
-            {/*    <Text fontWeight={600}>23k</Text> */}
-            {/*    <Tooltip hasArrow label='Total MentionsNew about PaperMaster' bg='pmpurple.4' */}
-            {/*             color='pmpurple.13'> */}
-            {/*        <Text fontSize={'sm'} color={'pmpurple.11'}> */}
-            {/*            MentionsNew */}
-            {/*        </Text> */}
-            {/*    </Tooltip> */}
-            {/* </Stack> */}
-            //TODO swan image goes here
             <Stack spacing={0} align={'center'}>
               <HStack>
-                <Image src="swan3" borderRadius="15px" />
-                <Text fontWeight={600}>23k</Text>
+                <Text>{mentionTally[0]}</Text>
+                <TbThumbUp color={'pmpurple.11'} fontSize={'sm'} />
               </HStack>
               <Tooltip
                 hasArrow
-                label="Total received Validations from other Blockchain accounts"
+                label="Number of Positive Mentions received from fellow Blockchainers"
                 bg="pmpurple.4"
                 color="pmpurple.13"
               >
-                <Text fontSize={'sm'} color={'pmpurple.11'}>
-                  Validations
-                </Text>
+                <Text>Positive Mentions</Text>
               </Tooltip>
             </Stack>
+
             <Stack spacing={0} align={'center'}>
               <HStack>
-                <Image src="swan3" borderRadius="15px" />
-                <Text fontWeight={600}>3k</Text>
+                <Text>{mentionTally[1]}</Text>
+                <TbMoodNeutral color={'pmpurple.11'} fontSize={'sm'} />
               </HStack>
               <Tooltip
                 hasArrow
-                label="Number of Validations PaperMaster has given to other Blockchain accounts"
+                label="Number of Neutral Mentions received from fellow Blockchainers"
                 bg="pmpurple.4"
                 color="pmpurple.13"
               >
-                <Text fontSize={'sm'} color={'pmpurple.11'}>
-                  Gifted Validations
-                </Text>
+                <HStack>
+                  <Text>Neutral Mentions</Text>
+                </HStack>
+              </Tooltip>
+            </Stack>
+
+            <Stack spacing={0} align={'center'}>
+              <HStack>
+                <Text>{mentionTally[2]}</Text>
+                <TbThumbDown color={'pmpurple.11'} fontSize={'sm'} />
+              </HStack>
+              <Tooltip
+                hasArrow
+                label="Number of Negative Mentions received from fellow Blockchainers"
+                bg="pmpurple.4"
+                color="pmpurple.13"
+              >
+                <HStack>
+                  <Text>Negative Mentions</Text>
+                </HStack>
               </Tooltip>
             </Stack>
           </HStack>

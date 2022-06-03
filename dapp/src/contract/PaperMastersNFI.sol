@@ -8,8 +8,6 @@ import "@openzeppelin/contracts/token/ERC721/extensions/IERC721Metadata.sol";
 contract PaperMastersNFI is ERC721, Ownable {
     string private _setBaseURI;
     uint256 private identityFee;
-    uint256 private swanFeePaperMasters;
-    uint256 private swanFeeReceiver;
 
     struct identity
     {
@@ -30,22 +28,6 @@ contract PaperMastersNFI is ERC721, Ownable {
     mapping(address => uint256) totalIdentities;
     mapping(address => uint256) _supportPMDonations;
 
-    struct swanNFT {
-        address giver;
-        address receiver;
-        bool tokenType;
-        string comment;
-        uint256 timeStamp;
-    }
-
-    swanNFT[] _swanStructs;
-    //    mapping(address => uint256[]) _swanNFTGiver;
-    //    mapping(address => uint256[]) _swanNFTReceiver;
-    //    mapping(address => address[]) private _swanNFThasGiver;
-    mapping(address => mapping(address => uint256[])) private _swanNFTGiver;
-    mapping(address => mapping(address => uint256[])) private _swanNFTReceiver;
-
-
     //prevents ren-entry when modifier is added to a function
     bool internal locked;
     modifier noReentrant() {
@@ -59,28 +41,13 @@ contract PaperMastersNFI is ERC721, Ownable {
     //        _;
     //    }
     constructor() ERC721("papermasters.io", "NFI") {
-        _name = name_;
-        _symbol = symbol_;
         _setBaseURI = "www.papermasters.io";
         identityFee = 100000000000000000;
-        swanFeePaperMasters = 100000000000000000;
-        swanFeeReceiver = 100000000000000000;
         _dictionaryNFIs.push(identity(block.chainid, address(this), '', '', '', '', '', '', '', '', block.timestamp));
-        _swanStructs.push(swanNFT(address(this), address(this), true, '', block.timestamp));
-    }
-    function getChainId(address walletAddress) public view returns (uint256) {
-        return getChainId();
     }
 
-    function balanceOf(address owner) public view virtual override returns (uint256) {
-        require(owner != address(0), "ERC721: address zero is not a valid owner");
-        return _balances[owner];
-    }
-
-    function ownerOf(uint256 tokenId) public view virtual override returns (address) {
-        address owner = _owners[tokenId];
-        require(owner != address(0), "ERC721: owner query for nonexistent token");
-        return owner;
+    function getChainId() public view returns (uint256) {
+        return block.chainid;
     }
 
     function addressToTokenID(address walletAddress) public view returns (uint256) {
@@ -105,36 +72,12 @@ contract PaperMastersNFI is ERC721, Ownable {
         return _dictionaryNFIs;
     }
 
-    function allSwanGiver(address giver) public view returns (uint256){
-        return _swanNFTGiver;
-    }
-
-    function allSwanGReceiver(address receiver) public view returns (uint256){
-        return _swanNFTReceiver;
-    }
-
-    function alreadyGiven(address giver) public view returns(bool memory){
-        for(unit i = 0; i<)
-            if(_swanNFTGiver[msg.sender][i] >= 1){
-                return true
-            }
-        return false
-    }
-
     //metadata extension tokenURI, name and symbol
     function tokenURI(uint256 tokenId) public view virtual override returns (string memory) {
         require(_exists(tokenId), "ERC721Metadata: URI query for nonexistent token");
         address owner = ownerOf(tokenId);
         string memory baseURI = _baseURI();
         return bytes(baseURI).length > 0 ? string(abi.encodePacked(baseURI, owner)) : "";
-    }
-
-    function name() external view returns (string memory){
-        return PaperMastersNFI;
-    }
-
-    function symbol() external view returns (string memory){
-        return NFI;
     }
 
     function setBaseURI(string memory changeBaseURI) public onlyOwner {
@@ -153,21 +96,6 @@ contract PaperMastersNFI is ERC721, Ownable {
         identityFee = val;
     }
 
-    function getSwanFeePaperMasters() public view returns (uint256) {
-        return swanFeePaperMasters;
-    }
-
-    function getSwanFeeReceiver() public view returns (uint256) {
-        return swanFeeReceiver;
-    }
-
-    function setSwanFeePaperMasters(uint256 val) external onlyOwner {
-        swanFeePaperMasters = val;
-    }
-
-    function setSwanFeeReceiver(uint256 val) external onlyOwner {
-        swanFeeReceiver = val;
-    }
     // Fallback function must be declared as external.
     fallback() external payable {
         // send / transfer (forwards 2300 gas to this fallback function)
@@ -205,19 +133,6 @@ contract PaperMastersNFI is ERC721, Ownable {
         return _dictionaryNFIs.length;
     }
 
-    function totalSwanSupply() public view returns (uint256, uint256) {
-        uint256 totalValidations == 0;
-        uint256 totalReports == 0;
-        while( swanStructs.tokenType == true){
-            totalValidations += totalValidation;
-        }
-        while( swanStructs.tokenType == false){
-            totalReports += totalReports;
-        }
-        return totalValidations;
-        return totalReports;
-    }
-
     bool public paused = false;
 
     modifier whenNotPaused() {
@@ -253,8 +168,9 @@ contract PaperMastersNFI is ERC721, Ownable {
         string memory _bgRGB
     ) public virtual noReentrant payable whenNotPaused
     {
-        require(!addressHasTokenBool(msg.sender), " Wallet already has an NFI! You get one per wallet account");
         require(msg.value >= identityFee, "Not enough ETH sent; check price!");
+        require(msg.sender.balance >= identityFee, "Account does not have sufficient funds");
+        require(!addressHasTokenBool(msg.sender), " Wallet already has an NFI! You get one per wallet account");
 
         identity memory _identity = identity({
         chainId : block.chainid,
@@ -280,57 +196,15 @@ contract PaperMastersNFI is ERC721, Ownable {
 
     event NFIMinted(uint256 chainId, address indexed _from, uint256 tokenId, uint256 timeStamp, uint256 contractFee, identity identityStruct);
 
-    function swanNFTMint(
-        address memory receiver,
-        bool memory tokenType,
-        string memory comment
-    ) public virtual noReentrant payable whenNotPaused
-    {
-        require(msg.sender != receiver, "Giver cannot also be the Receiver");
-        require(msg.value >= swanFeePaperMasters, "Not enough ETH sent; check price!");
-        require(msg.value >= swanFeeReceiver, "Not enough ETH sent; check price!");
-        require(!alreadySwanAddress(receiver), " Giver already gave to this Receiver");
+    function setApprovalForAll(address operator, bool approved) public virtual override onlyOwner {}
 
-        swanNFT memory _swanNFT = swanNFT({
-        giver : msg.sender,
-        receiver : receiver,
-        tokenType : false || true,
-        comment : comment,
-        timeStamp : block.timestamp
-        });
+    function isApprovedForAll(address owner, address operator) public view virtual override onlyOwner returns (bool) {}
 
-        _swanStructs.push(_swanNFT);
-        uint256 newTokenID = _swanStructs.length - 1;
-        _swanNFTGiver[msg.sender][receiver].push(newTokenID);
-        _swanNFTReceiver[receiver][msg.sender].push(newTokenID);
-        _safeMint(msg.sender, newTokenID);
+    function transferFrom(address from, address to, uint256 tokenId) public virtual override onlyOwner {}
 
-        emit swanNFTMinted(msg.sender, receiver, tokenType, comment, block.timestamp, newTokenID, msg.value, _swanNFT);
-    }
+    function safeTransferFrom(address from, address to, uint256 tokenId) public virtual override onlyOwner {}
 
-    event swanNFTMinted(address indexed _from, address receiver, bool tokenType, string comment, uint256 timeStamp, uint256 tokenId, uint256 swanFee, swanNFT swanNFT);
+    function safeTransferFrom(address from, address to, uint256 tokenId, bytes memory _data) public virtual override onlyOwner {}
 
-    function setApprovalForAll(address operator, bool approved) public virtual override onlyOwner {
-        return "sorry only owner";
-    }
-
-    function isApprovedForAll(address owner, address operator) public view virtual override onlyOwner returns (bool) {
-        return "sorry only owner";
-    }
-
-    function transferFrom(address from, address to, uint256 tokenId) public virtual override onlyOwner {
-        return "sorry only owner";
-    }
-
-    function safeTransferFrom(address from, address to, uint256 tokenId) public virtual override onlyOwner {
-        return "sorry only owner";
-    }
-
-    function safeTransferFrom(address from, address to, uint256 tokenId, bytes memory _data) public virtual override onlyOwner {
-        return "sorry only owner";
-    }
-
-    function _safeTransfer(address from, address to, uint256 tokenId, bytes memory _data) internal virtual override onlyOwner {
-        return "sorry only owner";
-    }
+    function _safeTransfer(address from, address to, uint256 tokenId, bytes memory _data) internal virtual override onlyOwner {}
 }

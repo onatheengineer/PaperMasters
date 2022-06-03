@@ -1,7 +1,7 @@
 import { BigNumber, ethers } from 'ethers';
 
 import MintABI from '../abiFiles/PaperMastersNFI';
-import chainIdNetworks from '../features/JSON/chainId.networks.json';
+import chainIdNetworks from '../features/JSON/chainId.networks';
 
 describe('ContractTesting', () => {
   test('One Supported Blockhain', () => {

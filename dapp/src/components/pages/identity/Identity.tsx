@@ -10,12 +10,13 @@ import {
   Text,
   useDisclosure,
 } from '@chakra-ui/react';
+import { ethers } from 'ethers';
 import type { FC } from 'react';
 import * as React from 'react';
 import { useEffect, useMemo } from 'react';
 import { AiOutlineComment } from 'react-icons/ai';
-import { FaPlus } from 'react-icons/fa';
 import { RiShareForwardLine } from 'react-icons/ri';
+import { SiEthereum } from 'react-icons/si';
 import { Link as ReachLink, Navigate, useParams } from 'react-router-dom';
 
 import { useAppDispatch, useAppSelector } from '../../../app/hooks';
@@ -31,17 +32,16 @@ import {
 import { ParamsURLInterface } from '../../../features/accountDB/AccountDBSlice.types';
 import chainIdNetworks from '../../../features/JSON/chainId.networks.json';
 import {
+  useGetQueryMainnetQuery,
   useGetSingleAccountQuery,
   useGetSingleIdentityBCQuery,
 } from '../../../features/reactQuery/RTKQuery';
 import AvatarNFI from '../../avatar/AvatarNFI';
-import ValidationsReports from '../valadationsReaports/ValidationsReports';
 import { AccountLedger } from './AccountLedger';
 import Header from './Header';
 import Mentions from './mentions/Mentions';
 import MentionsDrawer from './mentions/MentionsDrawer';
 import ModalForIdentNoUseParams from './ModalForIdentNoUseParams';
-import Projects from './Projects';
 
 export const Identity: FC = () => {
   // TODO as soon as they connect - redirect them to their identity page - this is important for the hasIdentityBool slice to work
@@ -106,6 +106,12 @@ export const Identity: FC = () => {
     paramsWalletURL: walletAcc!,
   });
   console.log('dataIdentity:', useGetSingleIdentityBCQueryQuery);
+  const getBalanceQuery = useGetQueryMainnetQuery({
+    chainIdURL: chainId!,
+    paramsWalletURL: walletAcc!,
+  });
+
+  console.log('getBalanceQuery:', getBalanceQuery);
 
   const logicDescriptionMemo = useMemo(() => {
     console.log(useGetSingleAccountQueryQuery.data, walletAcc);
@@ -140,6 +146,20 @@ export const Identity: FC = () => {
     }
     return '';
   }, [chainId]);
+
+  const getBalanceMemo = useMemo(() => {
+    if (getBalanceQuery.data !== undefined) {
+      const getBalanceB = parseFloat(
+        ethers.utils.formatEther(getBalanceQuery.data.balance),
+        // const balanceFormatted =  BigNumber.toHexString(getBalanceB)
+        // return getBalanceB;
+      );
+      console.log('getBalanceB', getBalanceB);
+      return getBalanceB;
+    }
+    return null;
+  }, [getBalanceQuery]);
+
   const { isOpen, onOpen, onClose } = useDisclosure();
   if (!chainId) {
     if (accountArrArr.length > 0) {
@@ -224,6 +244,7 @@ export const Identity: FC = () => {
                 </Flex>
               </Box>
             </Box>
+
             <Box
             // border={'1px solid red'}
             >
@@ -239,18 +260,18 @@ export const Identity: FC = () => {
                 justify={'space-evenly'}
                 // minH={"400px"}
               >
-                <Box
-                  w={{ base: '100%', lg: '38%' }}
-                  h={'462px'}
-                  borderRadius="15px"
-                  bg="white"
-                  p="16px"
-                  overflow={'none'}
-                  whiteSpace={'pre-line'}
-                  display={{ base: 'none', lg: 'block' }}
-                >
-                  <ValidationsReports />
-                </Box>
+                {/* <Box */}
+                {/*  w={{ base: '100%', lg: '38%' }} */}
+                {/*  h={'462px'} */}
+                {/*  borderRadius="15px" */}
+                {/*  bg="white" */}
+                {/*  p="16px" */}
+                {/*  overflow={'none'} */}
+                {/*  whiteSpace={'pre-line'} */}
+                {/*  display={{ base: 'none', lg: 'block' }} */}
+                {/* > */}
+                {/*  <ValidationsReports /> */}
+                {/* </Box> */}
                 <Box
                   w={{ base: '100%', lg: '380px' }}
                   borderRadius="15px"
@@ -388,126 +409,139 @@ export const Identity: FC = () => {
                     </Button>
                   )}
                 </Box>
-                <Box
-                  h={'462px'}
-                  w={{ base: '100%', lg: '38%' }}
+
+                {/* <Stack */}
+                {/*  direction={{ */}
+                {/*    base: 'column', */}
+                {/*    sm: 'column', */}
+                {/*    md: 'column', */}
+                {/*    lg: 'row', */}
+                {/*  }} */}
+                {/*  // border={'1px solid blue'} */}
+                {/* > */}
+                <Flex
+                  flexDirection={'column'}
+                  w={{ base: '100%', lg: '50%' }}
+                  p="16px"
+                  // my="24px"
+                  // mx={{xl: '32px'}}
                   borderRadius="15px"
                   bg="white"
-                  p="12px"
-                  pb={'16px'}
-                  overflow={'none'}
-                  whiteSpace={'pre-line'}
+                  px="24px"
+                  h={'462px'}
+                  // border={'1px solid red'}
+                  flexGrow={1}
+                  mr={0}
                 >
                   <Box
-                    overflow={'none'}
-                    whiteSpace={'pre-line'}
-                    h={'100%'}
-                    // w={'30vW'}
-                    // border={'1px solid blue'}
+                    display="flex"
+                    // border={'1px solid green'}
+                    // borderBottom={'1px solid'}
+                    // borderColor={'pmpurple.6'}
                   >
-                    <Text
-                      mb={'5px'}
-                      fontSize="17px"
-                      color={'pmpurple.13'}
-                      align={'center'}
-                    >
-                      {chainName} Ledger
-                    </Text>
-                    <Divider border={'1px solid'} borderColor={'pmpurple.8'} />
-                    <AccountLedger
-                      chainIdURL={chainId}
-                      paramsWalletURL={walletAcc}
-                    />
+                    <HStack w={'100%'}>
+                      <Heading mb="18px">
+                        <Flex direction="column">
+                          <Text
+                            mb={'5px'}
+                            fontSize="18px"
+                            color={'pmpurple.13'}
+                            fontWeight="bold"
+                            align={'left'}
+                          >
+                            {chainName} Ledger
+                          </Text>
+                          <Text
+                            fontSize="15px"
+                            color={'pmpurple.13'}
+                            fontWeight="400"
+                            align={'left'}
+                          >
+                            PaperMasters protect the Blockchain
+                          </Text>
+                        </Flex>
+                      </Heading>
+                      <Spacer />
+                      <Box
+                        // isDisabled={true}
+                        // style={{border: '1px solid #b59eb5'}}
+                        p={2}
+                        // bg="transparent"
+                        color={'pmpurple.13'}
+                        border="1px solid"
+                        borderColor={'pmpurple.2'}
+                        borderRadius="5px"
+
+                        // minHeight={{sm: "200px", md: "100%"}}
+                        // RightIcon={<SiEthereum fontSize="14px" />}
+                      >
+                        <HStack>
+                          Icon={<SiEthereum fontSize="14px" />}
+                          <Text fontSize="sm" fontWeight="bold">
+                            {getBalanceMemo}
+                          </Text>
+                        </HStack>
+                      </Box>
+                    </HStack>
                   </Box>
-                </Box>
+                  <Divider border={'1px solid'} borderColor={'pmpurple.8'} />
+                  <AccountLedger
+                    chainIdURL={chainId}
+                    paramsWalletURL={walletAcc}
+                  />
+                </Flex>
               </Stack>
             </Box>
-            <Stack
-              direction={{
-                base: 'column',
-                sm: 'column',
-                md: 'column',
-                lg: 'row',
-              }}
-              // border={'1px solid blue'}
-            >
-              <Flex
-                flexDirection={'column'}
-                w={{ base: '100%', lg: '50%' }}
-                p="16px"
-                // my="24px"
-                // mx={{xl: '32px'}}
+
+            <Flex w={'100%'} flexDirection={'row'}>
+              <Box
+                h={'462px'}
+                w={{ base: '100%', lg: '38%' }}
                 borderRadius="15px"
                 bg="white"
-                px="24px"
-                h={'462px'}
-                // border={'1px solid red'}
+                p="12px"
+                pb={'16px'}
+                overflow={'none'}
+                whiteSpace={'pre-line'}
+                // border={'1px solid yellow'}
               >
                 <Box
-                  display="flex"
-                  // border={'1px solid green'}
-                  // borderBottom={'1px solid'}
-                  // borderColor={'pmpurple.6'}
+                  overflow={'none'}
+                  whiteSpace={'pre-line'}
+                  h={'100%'}
+                  // w={'30vW'}
+                  // border={'1px solid blue'}
                 >
-                  <HStack w={'100%'}>
-                    <Heading mb="18px">
-                      <Flex direction="column">
-                        <Text
-                          mb={'5px'}
-                          fontSize="18px"
-                          color={'pmpurple.13'}
-                          fontWeight="bold"
-                          align={'left'}
-                        >
-                          Projects
-                        </Text>
-                        <Text
-                          fontSize="15px"
-                          color={'pmpurple.13'}
-                          fontWeight="400"
-                          align={'left'}
-                        >
-                          PaperMasters protect the Blockchain
-                        </Text>
-                      </Flex>
-                    </Heading>
-                    <Spacer />
-                    <Button
-                      // style={{border: '1px solid #b59eb5'}}
-                      px="6px"
-                      py={'4px'}
-                      // bg="transparent"
-                      color={'pmpurple.13'}
-                      border="1px solid"
-                      borderColor={'pmpurple.2'}
-                      // borderRadius="15px"
-                      // minHeight={{sm: "200px", md: "100%"}}
-                      rightIcon={<FaPlus fontSize="10px" />}
-                    >
-                      <Text fontSize="sm" fontWeight="bold">
-                        Add Project
-                      </Text>
-                    </Button>
-                  </HStack>
+                  <Text
+                    mb={'5px'}
+                    fontSize="17px"
+                    color={'pmpurple.13'}
+                    align={'center'}
+                  >
+                    Site Activity
+                  </Text>
+                  <Divider border={'1px solid'} borderColor={'pmpurple.8'} />
+                  Coming soon...
                 </Box>
-                <Divider border={'1px solid'} borderColor={'pmpurple.8'} />
-                <Projects />
-              </Flex>
+              </Box>
+
               <Flex
                 flexDirection={'column'}
-                w={{ base: '100%', lg: '50%' }}
+                // w={{ base: '100%', lg: '50%' }}
                 p="16px"
                 // my="24px"
                 // mx={{xl: '32px'}}
                 borderRadius="15px"
+                ml={2}
                 bg="white"
                 px="24px"
                 h={'462px'}
                 // border={'1px solid red'}
+                flexGrow={1}
               >
                 <Box
                   display="flex"
-                  // border={'1px solid green'}
+                  // border={'1px solid pink'}
                   // borderBottom={'1px solid'}
                   // borderColor={'pmpurple.6'}
                 >
@@ -569,7 +603,7 @@ export const Identity: FC = () => {
                 <Divider border={'1px solid'} borderColor={'pmpurple.8'} />
                 <Mentions chainIdURL={chainId} paramsWalletURL={walletAcc} />
               </Flex>
-            </Stack>
+            </Flex>
           </Stack>
         </Stack>
       ) : (

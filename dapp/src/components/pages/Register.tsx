@@ -177,21 +177,6 @@ export const Register: FC = () => {
     console.table(colorSelect);
   };
 
-  useEffect(() => {
-    if (accountArrArr.length !== 0) {
-      estimateGasHandler();
-    }
-  }, [
-    accountArrArr,
-    name,
-    email,
-    profession,
-    slogan,
-    website,
-    organization,
-    uniqueYou,
-  ]);
-
   const submitMintHandler = () => {
     const mintPayload: MintingNFIStruct = {
       name: `${name}|||${ColorRGBToString(colorTextName)}`,
@@ -231,7 +216,20 @@ export const Register: FC = () => {
     if (accountArrArr.length === 0) {
       dispatch(gasAccBalanceAction());
     }
-  }, [accountArrArr]);
+    if (accountArrArr.length !== 0) {
+      estimateGasHandler();
+    }
+  }, [
+    accountArrArr,
+    name,
+    email,
+    profession,
+    slogan,
+    website,
+    organization,
+    uniqueYou,
+    accountArrArr,
+  ]);
 
   const [modalDisplayTitle, modalDisplayText] = useMemo(() => {
     if (accountArrArr.length === 0) {

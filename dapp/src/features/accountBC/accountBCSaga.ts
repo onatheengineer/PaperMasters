@@ -1,42 +1,26 @@
-import {
-  call,
-  put,
-  takeEvery,
-  select,
-  takeLatest,
-  all,
-} from 'redux-saga/effects';
 import { PayloadAction } from '@reduxjs/toolkit';
-import Web3 from 'web3';
+import WalletConnect from '@walletconnect/client';
+import QRCodeModal from '@walletconnect/qrcode-modal';
+import axios from 'axios';
+import { ethers } from 'ethers';
+import { SagaIterator } from 'redux-saga';
+import { call, put, takeEvery } from 'redux-saga/effects';
+
+import { accountArrDBAction } from '../accountDB/AccountDBSlice';
+import chainIdNetworks from '../JSON/chainId.networks.json';
+import { showToast } from '../toast/ToastSlice';
 import {
+  accountArr,
+  accountArrAction,
+  accountArrMetaMaskAction,
+  accountArrStatus,
+  addressToTokenAction,
   chainIdProvider,
   chainIdStatus,
   chainIdSupportedBool,
-  accountArr,
-  accountArrStatus,
-  addressHasIdentityBool,
-  getStructBC,
-  addressToTokenID,
-  addressToTokenAction,
-  singleStructBCAction,
-  accountArrAction,
-  addressToTokenBool,
-  accountArrMetaMaskAction,
 } from './AccountBCSlice';
-import { accountArrDBAction } from '../accountDB/AccountDBSlice';
-import axios from 'axios';
-import chainIdNetworks from '../JSON/chainId.networks.json';
-import { SagaIterator } from 'redux-saga';
-//import MintABI from "../../abiFiles/PaperMastersNFI.json";
-import { ParamsURLInterface } from '../accountDB/AccountDBSlice.types';
+// import MintABI from "../../abiFiles/PaperMastersNFI.json";
 import { WalletConnectMetaMaskInterface } from './AccountBCSlice.types';
-import { useSignerChainId } from 'eth-hooks';
-import { ethers } from 'ethers';
-import WalletConnect from '@walletconnect/client';
-import QRCodeModal from '@walletconnect/qrcode-modal';
-import { showToast, ToastOptions } from '../toast/ToastSlice';
-import * as MintABI from '../../abiFiles/PaperMastersNFI.json';
-import { chainIdJSON } from '../JSON/chainId';
 
 const baseURL = 'https://ociuozqx85.execute-api.us-east-1.amazonaws.com';
 
@@ -62,10 +46,10 @@ export function* accountArrSaga({
       yield put(accountArrStatus('loading'));
       yield put(chainIdStatus('loading'));
       console.log('accArr:', payload.walletAccount);
-      //TODO run api to make sure this is NOT a test accountDB. If test accountDB EXIT saga with Toast error stating to accounts
+      // TODO run api to make sure this is NOT a test accountDB. If test accountDB EXIT saga with Toast error stating to accounts
       if (payload.walletAccount.length > 0) {
         const chainIdSupportedArr = chainIdNetworks.filter((el) => {
-          return el.chainId === parseInt(chainId);
+          return el.chainId === parseInt(chainId, 10);
         });
         const provider = ethers.getDefaultProvider(
           chainIdSupportedArr[0].name.toLowerCase(),
@@ -86,7 +70,7 @@ export function* accountArrSaga({
         const getBalanceDecimal = ethers.utils.formatEther(getBalance);
         console.log('getBalanceDecimal', getBalanceDecimal);
         if (!getBalance.isZero()) {
-          //TODO show modal: 'It is free to connect to this site and get a base identity but you do have to first fund your wallet account before an identity page will generate for you'
+          // TODO show modal: 'It is free to connect to this site and get a base identity but you do have to first fund your wallet account before an identity page will generate for you'
           yield put(accountArrStatus('success'));
           if (chainId) {
             if (
@@ -98,15 +82,15 @@ export function* accountArrSaga({
               yield put(chainIdProvider(`${payload.chainId}`));
               yield put(addressToTokenAction(payload.walletAccount[0]));
               yield put(chainIdStatus('success'));
-              yield put(chainIdSupportedBool(true)); //these are the chainId's that will get an
+              yield put(chainIdSupportedBool(true)); // these are the chainId's that will get an
               // identityPage, should be all real accounts that are not TEST accounts
               yield put(chainIdStatus('yesProvider'));
             } else {
-              //TODO show modal that they are connecting with an unsupported chain
+              // TODO show modal that they are connecting with an unsupported chain
               yield put(chainIdSupportedBool(false));
               yield put(chainIdStatus('notProvider'));
             }
-            //TODO before calling this action I need to check axios to see if this accountBC is already in the DB
+            // TODO before calling this action I need to check axios to see if this accountBC is already in the DB
             const hasAxiosGet = yield call(
               axios.get,
               `${baseURL}/account/${payload.chainId}/${payload.walletAccount[0]}`,
@@ -116,7 +100,7 @@ export function* accountArrSaga({
               !Object.prototype.hasOwnProperty.call(hasAxiosGet.data, 'Item')
             ) {
               console.log('hasAxiosGet Does Not Have ACCOUNT', hasAxiosGet);
-              //TODO need to make sure that this actually works
+              // TODO need to make sure that this actually works
               yield put(
                 accountArrDBAction({
                   chainIdURL: `${payload.chainId}`,
@@ -183,18 +167,30 @@ export function* accountArrMetaMaskSaga(): SagaIterator {
         );
       }
     } else {
-      const provider = new ethers.providers!.Web3Provider(window.ethereum);
-      console.log('accountArrBCprovider:', provider);
+      // const provider = await detectEthereumProvider();
+      // const provider = new ethers.providers!.Web3Provider(window.ethereum);
+      // console.log('accountArrBCprovider:', provider);
       const accArr: string[] = yield call(window.ethereum.request, {
         method: 'eth_requestAccounts',
       });
+
+      if (accArr === null) {
+        put(
+          showToast({
+            title:
+              'You need to disable all other wallet connects beside MetaMask, ie. Wallet Connect, GameStop',
+            status: 'error',
+          }),
+        );
+      }
+
       console.log(
         "accArr -- remember, Ethers doesn't follow ASCII !!!",
         accArr,
       );
       const accArrChecksum: string[] = [ethers.utils.getAddress(accArr[0])];
       console.log('accArrChecksum', accArrChecksum);
-      //TODO note to self - this comes out of the BC as lowercase - it will NOT match MetaMask - think about ASCII - technically .toLowerCase() is a different string
+      // TODO note to self - this comes out of the BC as lowercase - it will NOT match MetaMask - think about ASCII - technically .toLowerCase() is a different string
       const chainId: string = yield call(window.ethereum.request, {
         method: 'eth_chainId',
       });
@@ -315,6 +311,6 @@ export function* watchAccountBCSaga(): SagaIterator {
   yield takeEvery(accountArrMetaMaskAction.type, accountArrMetaMaskSaga);
   // yield takeLatest(addressToTokenAction.type, addressToTokenSaga);
   // yield takeLatest(singleStructBCAction.type, singleStructBCSaga);
-  //yield takeLatest(allStructBCAction.type, allStructBCSaga);
-  //yield takeEvery(chainIdStructBCAction.type, chainIdStructBCSaga);
+  // yield takeLatest(allStructBCAction.type, allStructBCSaga);
+  // yield takeEvery(chainIdStructBCAction.type, chainIdStructBCSaga);
 }

@@ -21,11 +21,11 @@ import type { FC } from 'react';
 import * as React from 'react';
 import { useEffect, useReducer, useRef } from 'react';
 import {
+  FaDiscord,
   FaFacebook,
   FaGithub,
   FaInstagram,
   FaLinkedinIn,
-  FaReddit,
   FaRegEdit,
   FaTwitch,
   FaTwitter,
@@ -33,7 +33,7 @@ import {
 } from 'react-icons/fa';
 import { MdOutlinePeopleOutline } from 'react-icons/md';
 
-import { useAppDispatch, useAppSelector } from '../../../app/hooks';
+import { useAppSelector } from '../../../app/hooks';
 import { openseaIcon } from '../../../assets/icons/openseaIcon';
 import {
   AccountDBInterface,
@@ -44,10 +44,9 @@ import {
   usePostAccountDictionaryMutation,
   useUpdateAccountDictionaryMutation,
 } from '../../../features/reactQuery/RTKQuery';
-import { SocialButton } from '../home/Footers/Footer';
 import { SocialMediaComponent } from './SocialMedia';
 
-function initialState(paramsRequestAccountDictionary: any) {
+function initialState() {
   return {
     ownerName: '',
     ownerEmail: '',
@@ -56,7 +55,7 @@ function initialState(paramsRequestAccountDictionary: any) {
     twitter: '',
     github: '',
     discord: '',
-    yourtube: '',
+    youtube: '',
     instagram: '',
     twitch: '',
     facebook: '',
@@ -101,26 +100,18 @@ function reducer(state: any, action: any) {
   }
 }
 
-function Mailto({ email, subject, body, ...props }: any) {
-  return (
-    <a href={`mailto:${email}?subject=${subject || ''}&body=${body || ''}`}>
-      {props.children}
-    </a>
-  );
-}
+// function Mailto({ email, subject, body, ...props }: any) {
+//   return (
+//     <a href={`mailto:${email}?subject=${subject || ''}&body=${body || ''}`}>
+//       {props.children}
+//     </a>
+//   );
+// }
 
 export const DrawerComponent: FC<ParamsURLInterface> = ({
   chainIdURL,
   paramsWalletURL,
 }) => {
-  const accountArrArr = useAppSelector((state) => state.accountBC.accountArr);
-  const addressHasIdentityBoolBool = useAppSelector(
-    (state) => state.accountBC.addressHasIdentityBool,
-  );
-  const getStructBCBC = useAppSelector((state) => state.accountBC.getStructBC);
-  const singleNFIReceiptDBDB = useAppSelector(
-    (state) => state.accountDB.singleNFIReceiptDB,
-  );
   const singleAccountDictionaryDBDB = useAppSelector(
     (state) => state.accountDB.singleAccountDictionaryDB,
   );
@@ -141,7 +132,6 @@ export const DrawerComponent: FC<ParamsURLInterface> = ({
     initialState,
   );
   console.log('this is the state in my useReducer:', state);
-  const dispatch = useAppDispatch();
 
   useEffect(() => {
     console.log(useGetSingleAccountQueryQu.data);
@@ -254,15 +244,13 @@ export const DrawerComponent: FC<ParamsURLInterface> = ({
     type: string;
     payload: string;
   }): void => {
-    {
-      dispatchAccountProfileDictionary({
-        type,
-        payload,
-      });
+    dispatchAccountProfileDictionary({
+      type,
+      payload,
+    });
 
-      console.log(type);
-      console.log(payload);
-    }
+    console.log(type);
+    console.log(payload);
   };
 
   const firstField = useRef<HTMLTextAreaElement>(null);
@@ -289,6 +277,7 @@ export const DrawerComponent: FC<ParamsURLInterface> = ({
       </Tooltip>
       <Drawer
         isOpen={isOpen}
+        size={'md'}
         placement="right"
         initialFocusRef={firstField}
         onClose={onClose}
@@ -302,11 +291,13 @@ export const DrawerComponent: FC<ParamsURLInterface> = ({
           <DrawerBody>
             <Stack spacing="24px">
               <Box>
-                <FormLabel mt={'22px'} color="pmpurple.15" htmlFor="username">
+                <FormLabel mb={0} mt={1} color="pmpurple.15" htmlFor="username">
                   Name
                 </FormLabel>
                 <Input
                   focusBorderColor="pmpurple.9"
+                  placeholder={'name'}
+                  mb={2}
                   border={'1px solid'}
                   borderColor={'pmpurple.8'}
                   bg={'pmpurple.2'}
@@ -320,11 +311,13 @@ export const DrawerComponent: FC<ParamsURLInterface> = ({
                     });
                   }}
                 />
-                <FormLabel mt={'22px'} color="pmpurple.15" htmlFor="username">
+                <FormLabel mb={0} mt={1} color="pmpurple.15" htmlFor="username">
                   Email
                 </FormLabel>
                 <Input
                   focusBorderColor="pmpurple.9"
+                  placeholder={'email'}
+                  mb={3}
                   border={'1px solid'}
                   borderColor={'pmpurple.8'}
                   bg={'pmpurple.2'}
@@ -337,405 +330,177 @@ export const DrawerComponent: FC<ParamsURLInterface> = ({
                       payload: e.currentTarget.value,
                     });
                   }}
-                  // placeholder={getDBAccountDictionary{${ownerName}}}
                 />
-
-                <FormLabel
-                  mt={'22px'}
-                  color="pmpurple.15"
-                  htmlFor="socialMedia"
-                >
-                  Social Media Links
-                </FormLabel>
-                <HStack>
-                  <a
-                    title={'LinkedIn'}
-                    href={
-                      useGetSingleAccountQueryQu.data?.Item.socialMediaLinks
-                        ?.linkedin as string
-                    }
-                    target={'_blank'}
-                  >
-                    <FaLinkedinIn />
-                  </a>
-                  <Input
+                <Box>
+                  {useGetSingleAccountQueryQu.isSuccess}
+                  {useGetSingleAccountQueryQu.data !== undefined}
+                  <HStack>
+                    <SocialMediaComponent
+                      placeholder={'linkedin'}
+                      valuevalue={
+                        useGetSingleAccountQueryQu?.data?.Item.socialMediaLinks
+                          ?.linkedin
+                      }
+                      type={'linkedin'}
+                      role={'sociallinkedin'}
+                      onChangeSocial={changeSocialHandler}
+                      icon={<FaLinkedinIn />}
+                    />
+                  </HStack>
+                  <HStack>
+                    <SocialMediaComponent
+                      placeholder={'twitter'}
+                      valuevalue={
+                        useGetSingleAccountQueryQu?.data?.Item.socialMediaLinks
+                          ?.twitter
+                      }
+                      type={'twitter'}
+                      role={'socialTwitter'}
+                      onChangeSocial={changeSocialHandler}
+                      icon={<FaTwitter />}
+                    />
+                  </HStack>
+                  <HStack>
+                    <SocialMediaComponent
+                      placeholder={'github'}
+                      valuevalue={
+                        useGetSingleAccountQueryQu?.data?.Item.socialMediaLinks
+                          ?.github
+                      }
+                      type={'github'}
+                      role={'socialgithub'}
+                      onChangeSocial={changeSocialHandler}
+                      icon={<FaGithub />}
+                    />
+                  </HStack>
+                  <HStack>
+                    <SocialMediaComponent
+                      placeholder={'discord'}
+                      valuevalue={
+                        useGetSingleAccountQueryQu?.data?.Item.socialMediaLinks
+                          ?.discord
+                      }
+                      type={'discord'}
+                      role={'socialdiscord'}
+                      onChangeSocial={changeSocialHandler}
+                      icon={<FaDiscord />}
+                    />
+                  </HStack>
+                  <HStack>
+                    <SocialMediaComponent
+                      placeholder={'youtube'}
+                      valuevalue={
+                        useGetSingleAccountQueryQu?.data?.Item.socialMediaLinks
+                          ?.youtube
+                      }
+                      type={'youtube'}
+                      role={'socialyoutube'}
+                      onChangeSocial={changeSocialHandler}
+                      icon={<FaYoutube />}
+                    />
+                  </HStack>
+                  <HStack>
+                    <SocialMediaComponent
+                      placeholder={'instagram'}
+                      valuevalue={
+                        useGetSingleAccountQueryQu?.data?.Item.socialMediaLinks
+                          ?.instagram
+                      }
+                      type={'instagram'}
+                      role={'socialinstagram'}
+                      onChangeSocial={changeSocialHandler}
+                      icon={<FaInstagram />}
+                    />
+                  </HStack>
+                  <HStack>
+                    <SocialMediaComponent
+                      placeholder={'twitch'}
+                      valuevalue={
+                        useGetSingleAccountQueryQu?.data?.Item.socialMediaLinks
+                          ?.twitch
+                      }
+                      type={'twitch'}
+                      role={'socialtwitch'}
+                      onChangeSocial={changeSocialHandler}
+                      icon={<FaTwitch />}
+                    />
+                  </HStack>
+                  <HStack>
+                    <SocialMediaComponent
+                      placeholder={'facebook'}
+                      valuevalue={
+                        useGetSingleAccountQueryQu?.data?.Item.socialMediaLinks
+                          ?.facebook
+                      }
+                      type={'facebook'}
+                      role={'socialfacebook'}
+                      onChangeSocial={changeSocialHandler}
+                      icon={<FaFacebook />}
+                    />
+                  </HStack>
+                  <HStack>
+                    <SocialMediaComponent
+                      placeholder={'opensea'}
+                      valuevalue={
+                        useGetSingleAccountQueryQu?.data?.Item.socialMediaLinks
+                          ?.opensea
+                      }
+                      type={'opensea'}
+                      role={'socialopensea'}
+                      onChangeSocial={changeSocialHandler}
+                      icon={<Icon as={openseaIcon} />}
+                    />
+                  </HStack>
+                  <HStack>
+                    <SocialMediaComponent
+                      placeholder={'socialButtonGeneric1'}
+                      valuevalue={
+                        useGetSingleAccountQueryQu?.data?.Item.socialMediaLinks
+                          ?.socialButtonGeneric1
+                      }
+                      type={'socialButtonGeneric1'}
+                      role={'socialsocialButtonGeneric1'}
+                      onChangeSocial={changeSocialHandler}
+                      icon={<MdOutlinePeopleOutline />}
+                    />
+                  </HStack>
+                  <HStack>
+                    <SocialMediaComponent
+                      placeholder={'socialButtonGeneric2'}
+                      valuevalue={
+                        useGetSingleAccountQueryQu?.data?.Item.socialMediaLinks
+                          ?.socialButtonGeneric2
+                      }
+                      type={'socialButtonGeneric2'}
+                      role={'socialsocialButtonGeneric2'}
+                      onChangeSocial={changeSocialHandler}
+                      icon={<MdOutlinePeopleOutline />}
+                    />
+                  </HStack>
+                </Box>
+                <Box>
+                  <FormLabel mb={0} mt={1} color="pmpurple.15" htmlFor="desc">
+                    Description
+                  </FormLabel>
+                  <Textarea
                     focusBorderColor="pmpurple.9"
+                    color="pmpurple.13"
                     border={'1px solid'}
-                    borderColor={'pmpurple.8'}
+                    borderColor={'pmpurple.6'}
                     bg={'pmpurple.2'}
-                    color="pmpurple.15"
-                    value={state.linkedin}
-                    id="socialMedia"
+                    h={'400px'}
+                    id="desc"
+                    ref={firstField}
+                    placeholder="Add description"
+                    value={state.ownerDescription}
                     onChange={(e) => {
                       dispatchAccountProfileDictionary({
-                        type: 'linkedin',
+                        type: 'description',
                         payload: e.currentTarget.value,
                       });
                     }}
                   />
-                </HStack>
-                {/* <Link as={ReachLink} to={} type={'linkedin'}> */}
-                {/*  <FaLinkedin /> */}
-                {/* </Link> */}
-                <HStack>
-                  <Input
-                    focusBorderColor="pmpurple.9"
-                    border={'1px solid'}
-                    borderColor={'pmpurple.8'}
-                    bg={'pmpurple.2'}
-                    color="pmpurple.15"
-                    // value={getDBAccountDictionary{${ownerName}}}
-                    id="account Name"
-                    // placeholder={getDBAccountDictionary{${ownerName}}}
-                  />
-                </HStack>
-                <HStack>
-                  <SocialButton
-                    label={'linkedin'}
-                    href={'https://discord.com/channels/ramonajenny#1512'}
-                  >
-                    <FaTwitter />
-                  </SocialButton>
-                  <Input
-                    focusBorderColor="pmpurple.9"
-                    border={'1px solid'}
-                    borderColor={'pmpurple.8'}
-                    bg={'pmpurple.2'}
-                    color="pmpurple.15"
-                    // value={getDBAccountDictionary{${ownerName}}}
-                    // id='accountDB Name'
-                    // placeholder={getDBAccountDictionary{${ownerName}}}
-                  />
-                </HStack>
-
-                <HStack>
-                  <SocialButton
-                    label={'GitHub'}
-                    href={'https://discord.com/channels/ramonajenny#1512'}
-                  >
-                    <FaYoutube />
-                  </SocialButton>
-                  <Input
-                    focusBorderColor="pmpurple.9"
-                    border={'1px solid'}
-                    borderColor={'pmpurple.8'}
-                    bg={'pmpurple.2'}
-                    color="pmpurple.15"
-                    // value={getDBAccountDictionary{${ownerName}}}
-                    id="account Name"
-                    // placeholder={getDBAccountDictionary{${ownerName}}}
-                  />
-                </HStack>
-                <HStack>
-                  <SocialButton
-                    label={'GitHub'}
-                    href={'https://discord.com/channels/ramonajenny#1512'}
-                  >
-                    <FaInstagram />
-                  </SocialButton>
-                  <Input
-                    focusBorderColor="pmpurple.9"
-                    border={'1px solid'}
-                    borderColor={'pmpurple.8'}
-                    bg={'pmpurple.2'}
-                    color="pmpurple.15"
-                    // value={getDBAccountDictionary{${ownerName}}}
-                    id="account Name"
-                    // placeholder={getDBAccountDictionary{${ownerName}}}
-                  />
-                </HStack>
-                <HStack>
-                  <SocialButton
-                    label={'GitHub'}
-                    href={'https://discord.com/channels/ramonajenny#1512'}
-                  >
-                    <FaTwitch />
-                  </SocialButton>
-                  <Input
-                    focusBorderColor="pmpurple.9"
-                    border={'1px solid'}
-                    borderColor={'pmpurple.8'}
-                    bg={'pmpurple.2'}
-                    color="pmpurple.15"
-                    // value={getDBAccountDictionary{${ownerName}}}
-                    id="account Name"
-                    // placeholder={getDBAccountDictionary{${ownerName}}}
-                  />
-                </HStack>
-                <HStack>
-                  <SocialButton
-                    label={'GitHub'}
-                    href={'https://discord.com/channels/ramonajenny#1512'}
-                  >
-                    <FaFacebook />
-                  </SocialButton>
-                  <Input
-                    focusBorderColor="pmpurple.9"
-                    border={'1px solid'}
-                    borderColor={'pmpurple.8'}
-                    bg={'pmpurple.2'}
-                    color="pmpurple.15"
-                    // value={getDBAccountDictionary{${ownerName}}}
-                    id="account Name"
-                    // placeholder={getDBAccountDictionary{${ownerName}}}
-                  />
-                </HStack>
-                <HStack>
-                  <SocialButton
-                    label={'GitHub'}
-                    href={'https://discord.com/channels/ramonajenny#1512'}
-                  >
-                    <FaReddit />
-                  </SocialButton>
-                  <Input
-                    focusBorderColor="pmpurple.9"
-                    border={'1px solid'}
-                    borderColor={'pmpurple.8'}
-                    bg={'pmpurple.2'}
-                    color="pmpurple.15"
-                    // value={getDBAccountDictionary{${ownerName}}}
-                    id="account Name"
-                    // placeholder={getDBAccountDictionary{${ownerName}}}
-                  />
-                </HStack>
-                <HStack>
-                  <SocialButton
-                    label={'GitHub'}
-                    href={'https://discord.com/channels/ramonajenny#1512'}
-                  >
-                    <FaGithub />
-                  </SocialButton>
-                  <Input
-                    focusBorderColor="pmpurple.9"
-                    border={'1px solid'}
-                    borderColor={'pmpurple.8'}
-                    bg={'pmpurple.2'}
-                    color="pmpurple.15"
-                    // value={getDBAccountDictionary{${ownerName}}}
-                    id="account Name"
-                    // placeholder={getDBAccountDictionary{${ownerName}}}
-                  />
-                </HStack>
-                <HStack>
-                  <SocialButton
-                    label={'GitHub'}
-                    href={'https://discord.com/channels/ramonajenny#1512'}
-                  >
-                    <Icon as={openseaIcon} />
-                  </SocialButton>
-                  <Input
-                    focusBorderColor="pmpurple.9"
-                    border={'1px solid'}
-                    borderColor={'pmpurple.8'}
-                    bg={'pmpurple.2'}
-                    color="pmpurple.15"
-                    // value={getDBAccountDictionary{${ownerName}}}
-                    id="account Name"
-                    // placeholder={getDBAccountDictionary{${ownerName}}}
-                  />
-                </HStack>
-                <HStack>
-                  <SocialButton
-                    label={'GitHub'}
-                    href={'https://discord.com/channels/ramonajenny#1512'}
-                  >
-                    <MdOutlinePeopleOutline />
-                  </SocialButton>
-                  <Input
-                    focusBorderColor="pmpurple.9"
-                    border={'1px solid'}
-                    borderColor={'pmpurple.8'}
-                    bg={'pmpurple.2'}
-                    color="pmpurple.15"
-                    // value={getDBAccountDictionary{${ownerName}}}
-                    id="account Name"
-                    placeholder={'Add social media link'}
-                  />
-                </HStack>
-                <HStack>
-                  <SocialButton
-                    label={'GitHub'}
-                    href={'https://discord.com/channels/ramonajenny#1512'}
-                  >
-                    <MdOutlinePeopleOutline />
-                  </SocialButton>
-                  <Input
-                    focusBorderColor="pmpurple.9"
-                    border={'1px solid'}
-                    borderColor={'pmpurple.8'}
-                    bg={'pmpurple.2'}
-                    color="pmpurple.15"
-                    // value={getDBAccountDictionary{${ownerName}}}
-                    id="social media"
-                    placeholder={'Add social media link'}
-                    onChange={(e) => {
-                      dispatchAccountProfileDictionary({
-                        type: 'socialMediaLinks',
-                        payload: e.currentTarget.value,
-                      });
-                    }}
-                  />
-                </HStack>
-              </Box>
-              <Box>
-                {useGetSingleAccountQueryQu.isSuccess}
-                {useGetSingleAccountQueryQu.data !== undefined}
-                <HStack>
-                  <SocialMediaComponent
-                    placeholder={'linkedin'}
-                    value={
-                      useGetSingleAccountQueryQu?.data?.Item.socialMediaLinks
-                        ?.linkedin
-                    }
-                    type={'linkedin'}
-                    role={'sociallinkedin'}
-                    onChangeSocial={changeSocialHandler}
-                    icon={<FaLinkedinIn />}
-                  />
-                </HStack>
-                <HStack>
-                  <SocialMediaComponent
-                    placeholder={'twitter'}
-                    value={
-                      useGetSingleAccountQueryQu?.data?.Item.socialMediaLinks
-                        ?.twitter
-                    }
-                    type={'twitter'}
-                    role={'socialTwitter'}
-                    onChangeSocial={changeSocialHandler}
-                  />
-                </HStack>
-                <HStack>
-                  <SocialMediaComponent
-                    placeholder={'github'}
-                    value={
-                      useGetSingleAccountQueryQu?.data?.Item.socialMediaLinks
-                        ?.github
-                    }
-                    type={'github'}
-                    role={'socialgithub'}
-                    onChangeSocial={changeSocialHandler}
-                  />
-                </HStack>
-                <HStack>
-                  <SocialMediaComponent
-                    placeholder={'discord'}
-                    value={
-                      useGetSingleAccountQueryQu?.data?.Item.socialMediaLinks
-                        ?.discord
-                    }
-                    type={'discord'}
-                    role={'socialdiscord'}
-                    onChangeSocial={changeSocialHandler}
-                  />
-                </HStack>
-                <HStack>
-                  <SocialMediaComponent
-                    placeholder={'youtube'}
-                    value={
-                      useGetSingleAccountQueryQu?.data?.Item.socialMediaLinks
-                        ?.youtube
-                    }
-                    type={'youtube'}
-                    role={'socialyoutube'}
-                    onChangeSocial={changeSocialHandler}
-                  />
-                </HStack>
-                <HStack>
-                  <SocialMediaComponent
-                    placeholder={'instagram'}
-                    value={
-                      useGetSingleAccountQueryQu?.data?.Item.socialMediaLinks
-                        ?.instagram
-                    }
-                    type={'instagram'}
-                    role={'socialinstagram'}
-                    onChangeSocial={changeSocialHandler}
-                  />
-                </HStack>
-                <HStack>
-                  <SocialMediaComponent
-                    placeholder={'twitch'}
-                    value={
-                      useGetSingleAccountQueryQu?.data?.Item.socialMediaLinks
-                        ?.twitch
-                    }
-                    type={'twitch'}
-                    role={'socialtwitch'}
-                    onChangeSocial={changeSocialHandler}
-                  />
-                </HStack>
-                <HStack>
-                  <SocialMediaComponent
-                    placeholder={'facebook'}
-                    value={
-                      useGetSingleAccountQueryQu?.data?.Item.socialMediaLinks
-                        ?.facebook
-                    }
-                    type={'facebook'}
-                    role={'socialfacebook'}
-                    onChangeSocial={changeSocialHandler}
-                  />
-                </HStack>
-                <HStack>
-                  <SocialMediaComponent
-                    placeholder={'opensea'}
-                    value={
-                      useGetSingleAccountQueryQu?.data?.Item.socialMediaLinks
-                        ?.opensea
-                    }
-                    type={'opensea'}
-                    role={'socialopensea'}
-                    onChangeSocial={changeSocialHandler}
-                  />
-                </HStack>
-                <HStack>
-                  <SocialMediaComponent
-                    placeholder={'socialButtonGeneric1'}
-                    value={
-                      useGetSingleAccountQueryQu?.data?.Item.socialMediaLinks
-                        ?.socialButtonGeneric1
-                    }
-                    type={'socialButtonGeneric1'}
-                    role={'socialsocialButtonGeneric1'}
-                    onChangeSocial={changeSocialHandler}
-                  />
-                </HStack>
-                <HStack>
-                  <SocialMediaComponent
-                    placeholder={'socialButtonGeneric2'}
-                    value={
-                      useGetSingleAccountQueryQu?.data?.Item.socialMediaLinks
-                        ?.socialButtonGeneric2
-                    }
-                    type={'socialButtonGeneric2'}
-                    role={'socialsocialButtonGeneric2'}
-                    onChangeSocial={changeSocialHandler}
-                  />
-                </HStack>
-              </Box>
-              <Box>
-                <FormLabel mt={'0px'} color="pmpurple.15" htmlFor="desc">
-                  Description
-                </FormLabel>
-                <Textarea
-                  focusBorderColor="pmpurple.9"
-                  color="pmpurple.13"
-                  border={'1px solid'}
-                  borderColor={'pmpurple.6'}
-                  bg={'pmpurple.2'}
-                  h={'400px'}
-                  id="desc"
-                  ref={firstField}
-                  placeholder="Add description"
-                  value={state.ownerDescription}
-                  onChange={(e) => {
-                    dispatchAccountProfileDictionary({
-                      type: 'description',
-                      payload: e.currentTarget.value,
-                    });
-                  }}
-                />
+                </Box>
               </Box>
             </Stack>
           </DrawerBody>

@@ -55,7 +55,7 @@ export const NavItem: FC<InterfaceNavItem> = ({
       flexDir="column"
       w="100%"
       h={'100%'}
-      alignItems={navItemSize == 'small' ? 'center' : 'flex-start'}
+      alignItems={navItemSize === 'small' ? 'center' : 'flex-start'}
     >
       <Menu placement="right">
         <Link
@@ -70,7 +70,7 @@ export const NavItem: FC<InterfaceNavItem> = ({
           <MenuButton w="100%">
             <Flex>
               <Icon as={icon} fontSize="xl" color={'#694b69'} />
-              <Text ml={5} display={navItemSize == 'small' ? 'none' : 'flex'}>
+              <Text ml={5} display={navItemSize === 'small' ? 'none' : 'flex'}>
                 {title}
               </Text>
             </Flex>

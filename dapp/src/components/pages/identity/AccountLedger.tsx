@@ -1,4 +1,13 @@
-import { Box, Flex, Stack, Tag, Text, Tooltip } from '@chakra-ui/react';
+import {
+  Box,
+  Flex,
+  HStack,
+  Spacer,
+  Stack,
+  Tag,
+  Text,
+  Tooltip,
+} from '@chakra-ui/react';
 import { ethers } from 'ethers';
 import moment from 'moment';
 import * as React from 'react';
@@ -28,7 +37,7 @@ export const AccountLedger: FC<ParamsURLInterface> = ({
       <Box w={'100%'} h={'100%'} overflow={'auto'}>
         <Stack w={'100%'}>
           {getLedger.isSuccess &&
-            getLedger.data.map((el: any, index: number) => {
+            getLedger.data.history.map((el: any, index: number) => {
               const timeStampFormatted = moment(el.timestamp * 1000).format(
                 'MMM DD YYYY, hh:mm:ss a',
               );
@@ -51,92 +60,100 @@ export const AccountLedger: FC<ParamsURLInterface> = ({
                   fontSize={'10pt'}
                 >
                   <Stack>
-                    <Tooltip
-                      label={timeStampFormatted}
-                      aria-label="A tooltip"
-                      bg={'pmpurple.8'}
-                    >
+                    <HStack>
+                      <Box>
+                        <Tooltip
+                          label={timeStampFormatted}
+                          aria-label="A tooltip"
+                          bg={'pmpurple.8'}
+                        >
+                          <Text
+                            // pl={"20px"}
+                            // noOfLines={1}
+                            color={'pmpurple.13'}
+                            fontWeight="400"
+                            whiteSpace={'nowrap'}
+                          >
+                            <Tag
+                              fontSize={'9pt'}
+                              bgColor={'pmpurple.13'}
+                              color={'white'}
+                            >
+                              {timeStampShort}
+                            </Tag>
+                          </Text>
+                        </Tooltip>
+                      </Box>
+
+                      <Box>
+                        <Text
+                          textAlign={'left'}
+                          color={'pmpurple.13'}
+                          whiteSpace={'nowrap'}
+                          w={{ base: '250px', sm: 'notset' }}
+                        >
+                          <Tag
+                            bgColor={'pmpurple.7'}
+                            color={'white'}
+                            fontSize={'9pt'}
+                          >
+                            Tx
+                          </Tag>{' '}
+                          {el.hash}
+                        </Text>
+                      </Box>
+                      <Spacer />
+                      <Box>
+                        <Text>
+                          <Tag
+                            fontSize={'9pt'}
+                            bgColor={'pmpurple.7'}
+                            color={'white'}
+                          >
+                            Amount
+                          </Tag>{' '}
+                          {valueFormatted}
+                        </Text>
+                      </Box>
+                    </HStack>
+                    <HStack>
                       <Text
-                        // pl={"20px"}
-                        // noOfLines={1}
                         color={'pmpurple.13'}
-                        fontWeight="400"
                         whiteSpace={'nowrap'}
+                        fontWeight="400"
                       >
                         <Tag
                           fontSize={'9pt'}
-                          bgColor={'pmpurple.13'}
+                          bgColor={'pmpurple.7'}
                           color={'white'}
                         >
-                          {timeStampShort}
-                        </Tag>
+                          From
+                        </Tag>{' '}
+                        {el.from}
                       </Text>
-                    </Tooltip>
-                    <Text
-                      textAlign={'left'}
-                      color={'pmpurple.13'}
-                      whiteSpace={'nowrap'}
-                      w={{ base: '250px', sm: 'notset' }}
-                    >
-                      <Tag
-                        bgColor={'pmpurple.7'}
-                        color={'white'}
-                        fontSize={'9pt'}
+                      <Spacer />
+                      <Text
+                        color={'pmpurple.13'}
+                        whiteSpace={'nowrap'}
+                        fontWeight="400"
                       >
-                        Tx
-                      </Tag>{' '}
-                      {el.hash}
-                    </Text>
-                    <Text>
-                      <Tag
-                        fontSize={'9pt'}
-                        bgColor={'pmpurple.7'}
-                        color={'white'}
-                      >
-                        Amount
-                      </Tag>{' '}
-                      {valueFormatted}
-                    </Text>
-                    <Box
-                      // border={'1px solid orange'}
-                      borderRadius={'2px'}
-                      pl={'20px'}
-                    ></Box>
-                    <Text
-                      color={'pmpurple.13'}
-                      whiteSpace={'nowrap'}
-                      fontWeight="400"
-                    >
-                      <Tag
-                        fontSize={'9pt'}
-                        bgColor={'pmpurple.7'}
-                        color={'white'}
-                      >
-                        From
-                      </Tag>{' '}
-                      {el.from}
-                    </Text>
-                    <Text
-                      color={'pmpurple.13'}
-                      whiteSpace={'nowrap'}
-                      fontWeight="400"
-                    >
-                      {' '}
-                      <Tag
-                        fontSize={'9pt'}
-                        bgColor={'pmpurple.7'}
-                        color={'white'}
-                      >
-                        To
-                      </Tag>{' '}
-                      {el.to !== null ? (
-                        el.to
-                      ) : (
-                        <Box display={'inline'} color={'pmpurple.27'}>
-                          Contract Creation
-                        </Box>
-                      )}
-                    </Text>
+                        {' '}
+                        <Tag
+                          fontSize={'9pt'}
+                          bgColor={'pmpurple.7'}
+                          color={'white'}
+                        >
+                          To
+                        </Tag>{' '}
+                        {el.to !== null ? (
+                          el.to
+                        ) : (
+                          <Box display={'inline'} color={'pmpurple.27'}>
+                            Contract Creation
+                          </Box>
+                        )}
+                      </Text>
+                    </HStack>
                   </Stack>
                 </Box>
               );

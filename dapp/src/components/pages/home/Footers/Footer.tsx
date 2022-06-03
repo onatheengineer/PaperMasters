@@ -1,5 +1,3 @@
-import * as React from 'react';
-import { ReactNode } from 'react';
 import {
   Box,
   chakra,
@@ -13,9 +11,12 @@ import {
   useColorModeValue,
   VisuallyHidden,
 } from '@chakra-ui/react';
-import { Link as ReachLink } from 'react-router-dom';
+import * as React from 'react';
+import { ReactNode } from 'react';
 import { BsHeartFill } from 'react-icons/bs';
 import { FaDiscord, FaGithub, FaLinkedin, FaTwitter } from 'react-icons/fa';
+import { Link as ReachLink } from 'react-router-dom';
+
 import { PMsvgIcon } from '../../../../assets/icons/PMSvgIcon';
 
 export const SocialButton = ({
@@ -82,7 +83,7 @@ const ListHeader = ({ children }: { children: ReactNode }) => {
 export default function LargeWithLogoCentered() {
   return (
     <Flex
-      //border={'1px solid blue'}
+      // border={'1px solid blue'}
       flexGrow={1}
       maxW="full"
       justifyContent={'space-evenly'}
@@ -93,7 +94,7 @@ export default function LargeWithLogoCentered() {
     >
       <Stack
         spacing={0}
-        //border={'1px solid green'}
+        // border={'1px solid green'}
         w={'100%'}
       >
         <Box
@@ -134,13 +135,16 @@ export default function LargeWithLogoCentered() {
             </Stack>
             <Stack>
               <ListHeader>Community</ListHeader>
-              {/*<Link as={ReachLink} to="/learn">Learning Center</Link>*/}
+              {/* <Link as={ReachLink} to="/learn">Learning Center</Link> */}
               <Link as={ReachLink} to="/cloudhwm" fontSize={'14px'}>
                 CloudHWM
               </Link>
-              {/*<Link as={ReachLink} to="/">Future Stories</Link>*/}
-              <Link as={ReachLink} to="/analytics" fontSize={'14px'}>
-                Analytics
+              {/* <Link as={ReachLink} to="/">Future Stories</Link> */}
+              {/* <Link as={ReachLink} to="/analytics" fontSize={'14px'}> */}
+              {/*  Analytics */}
+              {/* </Link> */}
+              <Link as={ReachLink} to="/communitysupport" fontSize={'14px'}>
+                Community Guidelines
               </Link>
               <Link as={ReachLink} to="/communitySupport" fontSize={'14px'}>
                 FAQ
@@ -150,9 +154,6 @@ export default function LargeWithLogoCentered() {
               <ListHeader>Security</ListHeader>
               <Link as={ReachLink} to="/communitysupport" fontSize={'14px'}>
                 Blockchain Protection & Legitimacy
-              </Link>
-              <Link as={ReachLink} to="/communitysupport" fontSize={'14px'}>
-                Community Guidelines
               </Link>
               <Link as={ReachLink} to="/communitysupport" fontSize={'14px'}>
                 Privacy Policy & Cookies
@@ -167,32 +168,32 @@ export default function LargeWithLogoCentered() {
               >
                 About Me
               </Link>
-              <Link as={ReachLink} to="/yourpeople" fontSize={'14px'}>
-                Support the Project
-              </Link>
+              {/* <Link as={ReachLink} to="/yourpeople" fontSize={'14px'}> */}
+              {/*  Support the Project */}
+              {/* </Link> */}
               <Link as={ReachLink} to="/yourpeople" fontSize={'14px'}>
                 New & Updated Features
               </Link>
-              <Link as={ReachLink} to="/Logokit" fontSize={'14px'}>
-                Logo Kit
-              </Link>
+              {/* <Link as={ReachLink} to="/Logokit" fontSize={'14px'}> */}
+              {/*  Logo Kit */}
+              {/* </Link> */}
             </Stack>
           </Grid>
         </Box>
 
         <Box
           p={6}
-          //border={'1px solid red'}
-          //borderTop={'1px solid'}
-          //borderColor={'pmpurple.4'}
+          // border={'1px solid red'}
+          // borderTop={'1px solid'}
+          // borderColor={'pmpurple.4'}
           bg={'pmpurple.1'}
         >
           <Stack direction={{ base: 'row', md: 'row' }}>
             <Text
               pt={1}
               fontSize={'14px'}
-              //border={'1px solid blue'}
-              //width={{ base: 'flex', md: 'none'}}
+              // border={'1px solid blue'}
+              // width={{ base: 'flex', md: 'none'}}
               color="pmpurple.13"
             >
               © 2022 Made with
@@ -219,32 +220,32 @@ export default function LargeWithLogoCentered() {
               >
                 <FaTwitter />
               </SocialButton>
-              {/*<SocialButton label={'YouTube'}*/}
-              {/*              href={'https://www.youtube.com/channel/UC-w92fylwBTYGK--jse0jeQ'}>*/}
-              {/*    <FaYoutube/>*/}
-              {/*</SocialButton>*/}
-              {/*<SocialButton label={'Instagram'}*/}
-              {/*              href={'https://www.instagram.com/ramonaandrew_niederhausern/'}>*/}
-              {/*    <FaInstagram/>*/}
-              {/*</SocialButton>*/}
+              {/* <SocialButton label={'YouTube'} */}
+              {/*              href={'https://www.youtube.com/channel/UC-w92fylwBTYGK--jse0jeQ'}> */}
+              {/*    <FaYoutube/> */}
+              {/* </SocialButton> */}
+              {/* <SocialButton label={'Instagram'} */}
+              {/*              href={'https://www.instagram.com/ramonaandrew_niederhausern/'}> */}
+              {/*    <FaInstagram/> */}
+              {/* </SocialButton> */}
               <SocialButton
                 label={'Linkedin'}
                 href={'https://www.linkedin.com/in/ramonajenny/'}
               >
                 <FaLinkedin />
               </SocialButton>
-              {/*<SocialButton label={'Linkedin'} href={'https://www.linkedin.com/in/andrew-nieder/'}>*/}
-              {/*    <FaLinkedin/>*/}
-              {/*</SocialButton>*/}
+              {/* <SocialButton label={'Linkedin'} href={'https://www.linkedin.com/in/andrew-nieder/'}> */}
+              {/*    <FaLinkedin/> */}
+              {/* </SocialButton> */}
               <SocialButton
                 label={'GitHub'}
                 href={'https://github.com/ramonajenny'}
               >
                 <FaGithub />
               </SocialButton>
-              {/*<SocialButton label={'GitHub'} href={'https://github.com/Arzemn'}>*/}
-              {/*    <FaGithub/>*/}
-              {/*</SocialButton>*/}
+              {/* <SocialButton label={'GitHub'} href={'https://github.com/Arzemn'}> */}
+              {/*    <FaGithub/> */}
+              {/* </SocialButton> */}
               <SocialButton
                 label={'GitHub'}
                 href={'https://discord.com/channels/ramonajenny#1512'}
@@ -395,4 +396,4 @@ export default function LargeWithLogoCentered() {
 //                 </VStack>
 //             </Flex>
 //     );
-//};
+// };

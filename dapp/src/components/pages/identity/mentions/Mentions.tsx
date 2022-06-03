@@ -1,40 +1,30 @@
-import React, { useMemo, useState } from 'react';
-import type { FC } from 'react';
 import {
-  Accordion,
-  AccordionButton,
-  AccordionIcon,
-  AccordionItem,
-  AccordionPanel,
   Box,
-  Divider,
-  Flex,
-  HStack,
-  Spacer,
-  Tooltip,
-  Heading,
-  VStack,
-  Popover,
-  PopoverTrigger,
-  Button,
-  Text,
-  PopoverContent,
-  PopoverBody,
-  Link,
   Collapse,
+  Flex,
+  Heading,
+  HStack,
+  Link,
+  Popover,
+  PopoverBody,
+  PopoverContent,
+  PopoverTrigger,
+  Spacer,
+  Text,
+  Tooltip,
+  VStack,
 } from '@chakra-ui/react';
+import moment from 'moment';
+import type { FC } from 'react';
+import React, { useState } from 'react';
+import { BsCircleFill } from 'react-icons/bs';
+import { Link as ReachLink } from 'react-router-dom';
+
 import {
-  accountsApiInterface,
   getMentionInterface,
   useGetMentionQuery,
   useGetSingleIdentityBCQuery,
 } from '../../../../features/reactQuery/RTKQuery';
-import moment from 'moment';
-import { BsCircleFill } from 'react-icons/bs';
-
-import { useAppSelector } from '../../../../app/hooks';
-import * as timers from 'timers';
-import { Link as ReachLink } from 'react-router-dom';
 
 interface singleMentionInterface {
   mention: getMentionInterface;
@@ -56,7 +46,7 @@ export const SingleMention: FC<singleMentionInterface> = ({ mention }) => {
   );
   return (
     <Box
-      //border={'2px solid purple'}
+      // border={'2px solid purple'}
       px="8px"
       m={'0px'}
       w={'100%'}
@@ -71,7 +61,7 @@ export const SingleMention: FC<singleMentionInterface> = ({ mention }) => {
               <Link
                 as={ReachLink}
                 to={`/identity/${mention.fromChainId}/${mention.fromWallet}`}
-                //bg={'#f2eef2'}
+                // bg={'#f2eef2'}
                 color={'pmpurple.13'}
                 textAlign={'left'}
                 borderRadius={'5px'}
@@ -89,7 +79,7 @@ export const SingleMention: FC<singleMentionInterface> = ({ mention }) => {
               whiteSpace="nowrap"
               width={'400px'}
               border={'1px solid #694b69'}
-              //borderRadius={'3px'}
+              // borderRadius={'3px'}
               color="pmpurple.13"
               pl={'1px'}
               textAlign={'center'}
@@ -107,7 +97,7 @@ export const SingleMention: FC<singleMentionInterface> = ({ mention }) => {
           <Link
             as={ReachLink}
             to={`/identity/${mention.fromChainId}/${mention.fromWallet}`}
-            //bg={'#f2eef2'}
+            // bg={'#f2eef2'}
             color={'pmpurple.13'}
             textAlign={'left'}
             borderRadius={'5px'}
@@ -124,7 +114,7 @@ export const SingleMention: FC<singleMentionInterface> = ({ mention }) => {
           bg={'pmpurple.8'}
         >
           <Box
-            //border={'2px solid red'}
+            // border={'2px solid red'}
             color={'pmpurple.8'}
             fontSize={'12px'}
             overflow={'none'}
@@ -138,15 +128,15 @@ export const SingleMention: FC<singleMentionInterface> = ({ mention }) => {
           <Box>
             <Collapse
               startingHeight={26}
-              //endingHeight={'auto'}
+              // endingHeight={'auto'}
               in={show}
-              //unmountOnExit={false}
-              //animateOpacity={true}
+              // unmountOnExit={false}
+              // animateOpacity={true}
             >
               <Link
                 onClick={handleToggle}
-                //isTruncated={true}
-                //textOverflow={'ellipsis'}
+                // isTruncated={true}
+                // textOverflow={'ellipsis'}
               >
                 {mention.messageBody}
               </Link>
@@ -155,19 +145,21 @@ export const SingleMention: FC<singleMentionInterface> = ({ mention }) => {
         ) : null}
         <Spacer />
         <Box pt={2} pl={14} pb={1}>
-          {mention.radioType === 1 ? (
+          {mention.radioType === 1 && (
             <HStack>
               <BsCircleFill color={'green'} size={'8px'} />
               <BsCircleFill color={'grey'} size={'8px'} />
               <BsCircleFill color={'grey'} size={'8px'} />
             </HStack>
-          ) : mention.radioType === 0 ? (
+          )}
+          {mention.radioType === 0 && (
             <HStack>
               <BsCircleFill color={'grey'} size={'8px'} />
               <BsCircleFill color={'red'} size={'8px'} />
               <BsCircleFill color={'grey'} size={'8px'} />
             </HStack>
-          ) : (
+          )}
+          {mention.radioType === -1 && (
             <HStack>
               <BsCircleFill color={'grey'} size={'8px'} />
               <BsCircleFill color={'grey'} size={'8px'} />
@@ -184,6 +176,7 @@ interface interfaceMentions {
   chainIdURL: string;
   paramsWalletURL: string;
 }
+
 export const Mentions: FC<interfaceMentions> = ({
   chainIdURL,
   paramsWalletURL,
@@ -203,6 +196,7 @@ export const Mentions: FC<interfaceMentions> = ({
     );
   }
   if (isError) {
+    console.log('error:', error);
     return (
       <Heading pt={'50px'} fontSize={'20px'} textAlign={'center'}>
         Something went wrong...
@@ -226,8 +220,8 @@ export const Mentions: FC<interfaceMentions> = ({
       w={'100%'}
       p="0px"
       mt={'5px'}
-      //border={'1px solid orange'}
-      //border={'2px solid'}
+      // border={'1px solid orange'}
+      // border={'2px solid'}
       borderColor={'pmpurple.6'}
       overflow={'auto'}
     >
@@ -235,12 +229,13 @@ export const Mentions: FC<interfaceMentions> = ({
         w={'100%'}
         flexGrow={1}
         display={'flex'}
-        //overflow={'auto'}
+        // overflow={'auto'}
         spacing={0}
       >
-        {data!.Items.map((mention: getMentionInterface) => {
-          return <SingleMention mention={mention} />;
-        })}
+        {data !== undefined &&
+          data.Items.map((mention: getMentionInterface) => {
+            return <SingleMention mention={mention} />;
+          })}
       </VStack>
     </Flex>
   );

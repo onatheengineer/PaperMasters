@@ -1,20 +1,19 @@
-import * as React from 'react';
-import type { FC } from 'react';
 import {
-  Stack,
   Box,
-  Flex,
   Button,
-  Text,
-  VStack,
-  useBreakpointValue,
   Container,
+  Flex,
   Grid,
   GridItem,
   Heading,
   Link,
-  Center,
+  Stack,
+  Text,
+  useBreakpointValue,
+  VStack,
 } from '@chakra-ui/react';
+import type { FC } from 'react';
+import * as React from 'react';
 import { Link as ReachLink } from 'react-router-dom';
 
 export const CloudHWM: FC = () => {
@@ -23,7 +22,7 @@ export const CloudHWM: FC = () => {
       <Flex
         w={'100vw'}
         flexGrow={1}
-        //backgroundImage={BackgroundLogo}
+        // backgroundImage={BackgroundLogo}
         backgroundSize={'cover'}
         backgroundPosition={'center center'}
       >
@@ -57,7 +56,9 @@ export const CloudHWM: FC = () => {
                 color={'white'}
                 _hover={{ bg: 'whiteAlpha.500' }}
               >
-                Show me more
+                <Link href="https://www.cloudhwm.com" isExternal>
+                  <Text>Show me more</Text>
+                </Link>
               </Button>
             </Stack>
           </Stack>
@@ -67,7 +68,7 @@ export const CloudHWM: FC = () => {
         <Box
           as={Container}
           display={'flex'}
-          //flexGrow={1}
+          // flexGrow={1}
           maxW="full"
           py={16}
           justifyContent={'space-evenly'}
@@ -75,8 +76,8 @@ export const CloudHWM: FC = () => {
           alignContent={'space-evenly'}
           bg={'pmpurple.3'}
           color={'pmpurple.12'}
-          //border={'1px solid'}
-          //borderColor={'pmpurple.8'}
+          // border={'1px solid'}
+          // borderColor={'pmpurple.8'}
         >
           <Grid
             templateColumns={{
@@ -117,19 +118,19 @@ export const CloudHWM: FC = () => {
                 </Text>
               </Heading>
             </GridItem>
-            {/*<GridItem>*/}
-            {/*    <Heading fontSize="xl" fontWeight="600" fontStyle={'bold'}>*/}
-            {/*        <Link*/}
-            {/*            as={ReachLink}*/}
-            {/*            to="/learn"*/}
-            {/*        >*/}
-            {/*            How to search the NFI Catalog*/}
-            {/*        </Link>*/}
-            {/*        <Text fontSize="lg" fontWeight="400" >*/}
-            {/*            NFIs are transparent identites...*/}
-            {/*        </Text>*/}
-            {/*    </Heading>*/}
-            {/*</GridItem>*/}
+            {/* <GridItem> */}
+            {/*    <Heading fontSize="xl" fontWeight="600" fontStyle={'bold'}> */}
+            {/*        <Link */}
+            {/*            as={ReachLink} */}
+            {/*            to="/learn" */}
+            {/*        > */}
+            {/*            How to search the NFI Catalog */}
+            {/*        </Link> */}
+            {/*        <Text fontSize="lg" fontWeight="400" > */}
+            {/*            NFIs are transparent identites... */}
+            {/*        </Text> */}
+            {/*    </Heading> */}
+            {/* </GridItem> */}
           </Grid>
         </Box>
       </Flex>

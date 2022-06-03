@@ -1,6 +1,6 @@
+import { Box, Flex, Heading, Text } from '@chakra-ui/react';
 import type { FC } from 'react';
 import React from 'react';
-import { Box, Flex, Heading, Text } from '@chakra-ui/react';
 // import { baseImageUrl } from '../../axiosInstance/constants';
 // import {imageRamona} from '../../..//assets/greenshirt'
 // import {imageAndrew} from '../../../assets/pinkShirts'
@@ -54,7 +54,7 @@ import { Box, Flex, Heading, Text } from '@chakra-ui/react';
 //
 interface InterfaceYourPeople {
   texttest?: string;
-  //card: typeof Card: CardProps
+  // card: typeof Card: CardProps
 }
 
 //
@@ -67,9 +67,9 @@ export const YourPeople: FC<InterfaceYourPeople> = () => {
   //     // ]
   return (
     <Flex w={'100%'}>
-      {/*<Flex >*/}
-      {/*    <RoutesRoutes/>*/}
-      {/*</Flex>*/}
+      {/* <Flex > */}
+      {/*    <RoutesRoutes/> */}
+      {/* </Flex> */}
       <Box
         flex={'auto'}
         border={'2px solid'}
@@ -88,8 +88,8 @@ export const YourPeople: FC<InterfaceYourPeople> = () => {
             Your People
           </Heading>
         </Box>
-        {/*<PageForum title={'About Us'} body={'We are a software development couple and loving it! Ramona codes 16 hours a day 7 days a week. Andrew enjoys his evening hours hanging out with the kids.'}/>*/}
-        {/*<PageForum title={' Support Us'}*/}
+        {/* <PageForum title={'About Us'} body={'We are a software development couple and loving it! Ramona codes 16 hours a day 7 days a week. Andrew enjoys his evening hours hanging out with the kids.'}/> */}
+        {/* <PageForum title={' Support Us'} */}
         {/*           body={'    You are the reason we took on this project to protect the Blockchain.\n' +*/}
         {/*               '    You are what we care about.\n' +*/}
         {/*               '    You are what inspires us to keep delivering this product.\n' +*/}
@@ -100,8 +100,8 @@ export const YourPeople: FC<InterfaceYourPeople> = () => {
         {/*               '    Give a validation and support your fellow Papermaster.\n' +*/}
         {/*               '    We enjoy your comments and love building relationships with community.\n' +*/}
         {/*               '    We learn from your comments new ways to improve the service. By commenting, you help us close the feedback loop. Send us some feedback: ramonajenny.n@gmail.com\n' +*/}
-        {/*               '    Link to us from your site. Adding a text link to our site from your site is a vote of confidence. It’s also a great way to share our resources with your visitors.'}/>*/}
-        {/*<PageForum title={'New & Updated Features'} body={'Stories to come...'}/>*/}
+        {/*               '    Link to us from your site. Adding a text link to our site from your site is a vote of confidence. It’s also a great way to share our resources with your visitors.'}/> */}
+        {/* <PageForum title={'New & Updated Features'} body={'Stories to come...'}/> */}
         <Heading
           textAlign={'left'}
           fontSize={'20px'}
@@ -115,33 +115,35 @@ export const YourPeople: FC<InterfaceYourPeople> = () => {
         <Text px={20} pb={5} color={'pmpurple.13'}>
           In the future I hope to make a QR Code or linked Icon of your identity
           page so that you can use it to attached to your name outside of the
-          PaperMasters site.
+          PaperMasters site. Analytics are coming, of course I need data first
+          :)
         </Text>
-        <Heading
-          textAlign={'left'}
-          fontSize={'20px'}
-          fontWeight={'600'}
-          fontStyle={'semi-bold'}
-          px={20}
-          color={'pmpurple.13'}
-        >
-          Support the Project
-        </Heading>
-        <Text px={20} color={'pmpurple.13'}>
-          You are the reason I took on this project to protect the Blockchain. I
-          care about you, you inspire me to keep delivering this product.
-          Without you, the PaperMasters doesn't exist. If you would like to
-          support the effort, here’s some specific ways to help. Spread the word
-          about the papermasters.io. Send a link to a friend. Add our link
-          and/or logo to to your website or your social media sites. Our logo is
-          located at the bottom of this page in the footer. Adding a text link
-          to your PaperMasters Identity page site from your social site is a
-          vote of confidence. It’s also a great way to share PaperMasters
-          resources with your people. Give a Validation or Report and support
-          your fellow PaperMasters. I enjoy your comments and love building
-          relationships with the community. I learn from your comments new ways
-          to improve the site. Send me some feedback: ramonajenny.n@gmail.com.
-        </Text>
+        {/* <Heading */}
+        {/*  textAlign={'left'} */}
+        {/*  fontSize={'20px'} */}
+        {/*  fontWeight={'600'} */}
+        {/*  fontStyle={'semi-bold'} */}
+        {/*  px={20} */}
+        {/*  color={'pmpurple.13'} */}
+        {/* > */}
+        {/*  Support the Project */}
+        {/* </Heading> */}
+        {/* <Text px={20} color={'pmpurple.13'}> */}
+        {/*  You are the reason I took on this project to protect the Blockchain. I */}
+        {/*  care about you, you inspire me to keep delivering this product. */}
+        {/*  Without you, the PaperMasters doesn't exist. If you would like to */}
+        {/*  support the effort, here’s some specific ways to help. Spread the word */}
+        {/*  about papermasters.io. Send a link to a friend. Add our link and/or */}
+        {/*  logo to to your website or your social media sites. Our logo is */}
+        {/*  located at the bottom of this page in the footer. Adding a text link */}
+        {/*  to your PaperMasters Identity page site from your social site is a */}
+        {/*  vote of confidence. It’s also a great way to share PaperMasters */}
+        {/*  resources with your people. Give a Validation or Report and support */}
+        {/*  your fellow PaperMasters. I enjoy your comments and love building */}
+        {/*  relationships with the community. I learn from your comments new ways */}
+        {/*  to improve the site. Feel free to send me some feedback: */}
+        {/*  ramonajenny.n@gmail.com. */}
+        {/* </Text> */}
       </Box>
     </Flex>
   );

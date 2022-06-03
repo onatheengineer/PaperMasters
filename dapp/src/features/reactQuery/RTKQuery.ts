@@ -82,6 +82,11 @@ export interface getMentionsApiInterface {
   Items: getMentionInterface[];
 }
 
+interface queryBCInterface {
+  history: ethers.providers.TransactionResponse[];
+  balance: BigNumber;
+}
+
 export async function fetchEthereumTranastionsMainNet({
   chainIdURL,
   paramsWalletURL,
@@ -97,8 +102,11 @@ export async function fetchEthereumTranastionsMainNet({
   const mainnetHistory = await providerEtherscanMainnet.getHistory(
     paramsWalletURL,
   );
+  const walletBalance = await providerEtherscanMainnet.getBalance(
+    paramsWalletURL,
+  );
   console.log('mainnetHistory:', mainnetHistory);
-  return { data: mainnetHistory };
+  return { data: { history: mainnetHistory, balance: walletBalance } };
 }
 
 // export async function fetchEthereumTranastionsRopsten({
@@ -315,11 +323,11 @@ export const nfiBCApi = createApi({
 export const queryBCApi = createApi({
   reducerPath: 'queryBCApi',
   baseQuery: fakeBaseQuery(),
-  tagTypes: ['etherScanApi', 'ropstenApi'],
+  tagTypes: ['etherScanApi', 'ropstenApi', 'getBalance'],
   endpoints: (builder) => ({
-    getQueryMainnet: builder.query<any, ParamsURLInterface>({
+    getQueryMainnet: builder.query<queryBCInterface, ParamsURLInterface>({
       queryFn: fetchEthereumTranastionsMainNet,
-      providesTags: ['etherScanApi'],
+      providesTags: ['etherScanApi', 'getBalance'],
     }),
     // getQueryRopsten: builder.query<any, ParamsURLInterface>({
     //   queryFn: fetchEthereumTranastionsRopsten,
