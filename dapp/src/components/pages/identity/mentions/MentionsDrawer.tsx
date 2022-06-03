@@ -151,99 +151,101 @@ export const MentionsDrawer: FC<interfaceMentionsDrawer> = ({
               </Flex>
               <Stack spacing="24px">
                 {accountArrArr.length !== 0 &&
-                accountArrArr[0] !== paramsWalletURL ? (
-                  <Box
-                    flex={'max-content'}
-                    mt={'18px'}
-                    // border={'2px solid blue'}
-                    position={'sticky'}
-                  >
-                    <HStack>
-                      <RadioGroup>
-                        <Stack direction="row" spacing={5}>
-                          <Radio
-                            isChecked={radioType === 1}
-                            // color='pmpurple.15'
-                            // bg={'pmgreen.15'}
-                            colorScheme="green"
-                            // value='Positive'
-                            // value={state.radioType}
-                            // value={1}
-                            // onClick={() => {
-                            //     //state.radioType === 1;
-                            // }}
-                            onChange={(e) => {
-                              setRadioType(1);
-                            }}
-                          >
-                            Positive
-                          </Radio>
-                          <Radio
-                            isChecked={radioType === 0}
-                            // color='pmpurple.15'
-                            // bg={'red.600'}
-                            colorScheme="red"
-                            // value={0}
-                            // value={state.radioType}
-                            // value = {0}
-                            onChange={(e) => {
-                              setRadioType(0);
-                            }}
-                          >
-                            Negative
-                          </Radio>
-                          <Radio
-                            isChecked={radioType === -1}
-                            // color='pmpurple.15'
-                            // bg={'pmpurple.6'}
-                            colorScheme="blue"
-                            // value={state.radioType}
-                            // value={'neutral'}
-                            onChange={(e) => {
-                              setRadioType(-1);
-                            }}
-                          >
-                            Neutral
-                          </Radio>
-                        </Stack>
-                      </RadioGroup>
-                    </HStack>
-                    <Textarea
-                      mt={'0px'}
-                      color="pmpurple.13"
-                      border={'1px solid'}
-                      borderColor={'pmpurple.6'}
-                      bg={'pmpurple.2'}
-                      h={'100px'}
-                      id="message body"
-                      ref={firstField}
-                      placeholder="Give a Mention"
-                      value={messageBody}
-                      onChange={(e) => {
-                        setMessageBody(e.currentTarget.value);
-                      }}
-                    />
-                  </Box>
-                ) : accountArrArr[0] !== paramsWalletURL ? (
-                  <Box
-                    color="pmpurple.15"
-                    border={'2px solid'}
-                    borderColor={'pmpurple.6'}
-                    borderRadius={'5px'}
-                    bg={'pmpurple.2'}
-                    id="username"
-                    mt={'18px'}
-                  >
-                    <Text
-                      p={'14px'}
-                      fontSize={'16px'}
-                      fontWeight={'bold'}
-                      color={'pmpurple.13'}
+                  accountArrArr[0] !== paramsWalletURL && (
+                    <Box
+                      flex={'max-content'}
+                      mt={'18px'}
+                      // border={'2px solid blue'}
+                      position={'sticky'}
                     >
-                      Please connect your wallet account.
-                    </Text>
-                  </Box>
-                ) : null}
+                      <HStack>
+                        <RadioGroup>
+                          <Stack direction="row" spacing={5}>
+                            <Radio
+                              isChecked={radioType === 1}
+                              // color='pmpurple.15'
+                              // bg={'pmgreen.15'}
+                              colorScheme="green"
+                              // value='Positive'
+                              // value={state.radioType}
+                              // value={1}
+                              // onClick={() => {
+                              //     //state.radioType === 1;
+                              // }}
+                              onChange={(e) => {
+                                setRadioType(1);
+                              }}
+                            >
+                              Positive
+                            </Radio>
+                            <Radio
+                              isChecked={radioType === 0}
+                              // color='pmpurple.15'
+                              // bg={'red.600'}
+                              colorScheme="red"
+                              // value={0}
+                              // value={state.radioType}
+                              // value = {0}
+                              onChange={(e) => {
+                                setRadioType(0);
+                              }}
+                            >
+                              Negative
+                            </Radio>
+                            <Radio
+                              isChecked={radioType === -1}
+                              // color='pmpurple.15'
+                              // bg={'pmpurple.6'}
+                              colorScheme="blue"
+                              // value={state.radioType}
+                              // value={'neutral'}
+                              onChange={(e) => {
+                                setRadioType(-1);
+                              }}
+                            >
+                              Neutral
+                            </Radio>
+                          </Stack>
+                        </RadioGroup>
+                      </HStack>
+                      <Textarea
+                        mt={'0px'}
+                        color="pmpurple.13"
+                        border={'1px solid'}
+                        borderColor={'pmpurple.6'}
+                        bg={'pmpurple.2'}
+                        h={'100px'}
+                        id="message body"
+                        ref={firstField}
+                        placeholder="Give a Mention"
+                        value={messageBody}
+                        onChange={(e) => {
+                          setMessageBody(e.currentTarget.value);
+                        }}
+                      />
+                    </Box>
+                  )}
+                {accountArrArr.length !== 0 &&
+                  accountArrArr[0] !== paramsWalletURL && (
+                    <Box
+                      color="pmpurple.15"
+                      border={'2px solid'}
+                      borderColor={'pmpurple.6'}
+                      borderRadius={'5px'}
+                      bg={'pmpurple.2'}
+                      id="username"
+                      mt={'18px'}
+                    >
+                      <Text
+                        p={'14px'}
+                        fontSize={'16px'}
+                        fontWeight={'bold'}
+                        color={'pmpurple.13'}
+                      >
+                        Please connect your wallet account.
+                      </Text>
+                    </Box>
+                  )}
               </Stack>
             </Flex>
           </Box>
