@@ -1,5 +1,12 @@
-import { call, put, select, takeLatest } from 'redux-saga/effects';
+import type { PayloadAction } from '@reduxjs/toolkit';
 import axios from 'axios';
+import type { SagaIterator } from 'redux-saga';
+import { call, put, select, takeLatest } from 'redux-saga/effects';
+import Web3 from 'web3';
+
+import MintABI from '../../abiFiles/PaperMastersNFI';
+import { accountBCselectors } from '../accountBC/AccountBCSlice';
+import { NFIReceiptInterface } from '../accountDB/AccountDBSlice.types';
 import {
   accBalance,
   accBalanceErr,
@@ -13,13 +20,7 @@ import {
   mintSucceeded,
   tokenURIAction,
 } from './MintNFISlice';
-import { accountBCselectors } from '../accountBC/AccountBCSlice';
-import MintABI from '../../abiFiles/PaperMastersNFI.json';
-import { PayloadAction } from '@reduxjs/toolkit';
-import { SagaIterator } from 'redux-saga';
 import { MintingNFIStruct } from './mintNFISlice.types';
-import Web3 from 'web3';
-import { NFIReceiptInterface } from '../accountDB/AccountDBSlice.types';
 
 const baseURL = 'https://ociuozqx85.execute-api.us-east-1.amazonaws.com';
 
@@ -58,7 +59,7 @@ function* mintNFISaga({
         )
       ) {
         if (payload.name === null) {
-          //TODO: handle error logging
+          // TODO: handle error logging
           yield put(mintingErr('Name can not be empty'));
           return;
         }
@@ -78,7 +79,7 @@ function* mintNFISaga({
           payload.bgRGB === null ? '' : payload.bgRGB,
         );
         console.table('prepareResult:', prepareResult);
-        //TODO: get fee variable from contract and replace the 'value'
+        // TODO: get fee variable from contract and replace the 'value'
         const mintResult: any = yield call(prepareResult.send, {
           from: requestAccountArr[0],
           value: 100000000000000000,

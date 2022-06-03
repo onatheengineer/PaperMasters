@@ -54,7 +54,7 @@ import {
   allAccountDictionaryDBAction,
   allNFIReceiptDBAction,
 } from '../../features/accountDB/AccountDBSlice';
-import chainIdNetworkJSON from '../../features/JSON/chainId.networks.json';
+import chainIdNetworkJSON from '../../features/JSON/chainId.networks';
 import {
   useGetAllAccountQuery,
   useGetIdentityBCQuery,
@@ -174,13 +174,13 @@ export const Search: FC = () => {
           const nameName = nfiArr[0].name.split('|||')[0];
           name = nameName;
           originDate = nfiArr[0].originDate.toString();
-          profession = nfiArr[0].profession.split('|||')[0];
+          [profession] = nfiArr[0].profession.split('|||');
           if (el.ownerName && el.ownerName.length > 0) {
             name = el.ownerName as string;
           }
         }
       }
-      const chainArr = chainIdNetworkJSON.filter((chainN) => {
+      const chainArr = chainIdNetworkJSON.filter((chainN: any) => {
         return chainN.chainId.toString() === el.chainId;
       });
       const chainName =

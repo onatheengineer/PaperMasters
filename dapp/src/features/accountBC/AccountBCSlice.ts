@@ -1,16 +1,17 @@
+/* eslint-disable no-param-reassign */
+import type { EntityState, PayloadAction } from '@reduxjs/toolkit';
 import {
-  createSlice,
-  PayloadAction,
   createAction,
   createEntityAdapter,
-  EntityState,
+  createSlice,
 } from '@reduxjs/toolkit';
+
+import { RootState } from '../../app/store';
+import { ParamsURLInterface } from '../accountDB/AccountDBSlice.types';
 import {
   BCStruct,
   WalletConnectMetaMaskInterface,
 } from './AccountBCSlice.types';
-import { ParamsURLInterface } from '../accountDB/AccountDBSlice.types';
-import { RootState } from '../../app/store';
 
 export enum accountArrSagaAction {
   unsupportedChain = 'cancelDBConnection',
@@ -146,7 +147,6 @@ export const accountArrMetaMaskAction = createAction(
 export const addressToTokenAction = createAction<string>(
   'ADDRESS_TO_TOKEN_SAGA',
 );
-//TODO: update which action I am passing through
 export const singleStructBCAction =
   createAction<ParamsURLInterface>('STRUCT_BC_SAGA');
 export const allStructBCAction = createAction('ALL_STRUCT_BC_SAGA');

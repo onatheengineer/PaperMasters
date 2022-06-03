@@ -1,31 +1,27 @@
-import * as React from 'react';
-import type { FC } from 'react';
-import { useEffect, useRef } from 'react';
-import { useNavigate } from 'react-router-dom';
 import {
-  Button,
-  useDisclosure,
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalFooter,
-  ModalBody,
-  ModalCloseButton,
   Box,
-  Text,
+  Button,
+  HStack,
   MenuButton,
   MenuItem,
-  HStack,
+  Modal,
+  ModalBody,
+  ModalCloseButton,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  ModalOverlay,
+  Text,
+  useDisclosure,
 } from '@chakra-ui/react';
-import { Link as ReachLink } from 'react-router-dom';
-import { SiSololearn } from 'react-icons/si';
+import type { FC } from 'react';
+import * as React from 'react';
+import { useEffect, useRef } from 'react';
+import { Link as ReachLink, useNavigate } from 'react-router-dom';
 import Sparkle from 'react-sparkle';
+
 import { useAppDispatch } from '../../../app/hooks';
-import {
-  accountArrAction,
-  accountArrMetaMaskAction,
-} from '../../../features/accountBC/AccountBCSlice';
+import { accountArrMetaMaskAction } from '../../../features/accountBC/AccountBCSlice';
 
 export const ModalForIdentNoUseParams: FC = () => {
   const navigate = useNavigate();
@@ -36,17 +32,10 @@ export const ModalForIdentNoUseParams: FC = () => {
 
   useEffect(() => {
     onOpen();
-    //setTimeout(()=>{navigate('/search', { replace: true })
-    //console.log('setTimeout')},10000)
   }, []);
 
   return (
     <>
-      {/*<Box*/}
-      {/*    ref={finalRef}*/}
-      {/*    tabIndex={-1}*/}
-      {/*    aria-label='Focus moved to this box'>*/}
-      {/*</Box>*/}
       <Modal
         finalFocusRef={finalRef}
         isOpen={true}
@@ -74,7 +63,7 @@ export const ModalForIdentNoUseParams: FC = () => {
           </ModalBody>
           <ModalFooter>
             <Button
-              //border={'1px solid blue'}
+              // border={'1px solid blue'}
               mr={'5px'}
               color={'pmpurple.13'}
               bgColor={'pmpurple.3'}
@@ -85,10 +74,6 @@ export const ModalForIdentNoUseParams: FC = () => {
                 dispatch(accountArrMetaMaskAction());
               }}
               _hover={{ color: 'pmpurple.9' }}
-              // _active={{
-              //     color: '#c1aec1',
-              //     transform: 'scale(0.96)'
-              // }}
             >
               <Text
                 _focus={{ boxShadow: 'none' }}
@@ -105,8 +90,6 @@ export const ModalForIdentNoUseParams: FC = () => {
                 overflowPx={0}
                 fadeOutSpeed={30}
                 flicker={false}
-                //newSparkleOnFadeOut={false}
-                //flickerSpeed="fast"
               />
             </Button>
             <Button

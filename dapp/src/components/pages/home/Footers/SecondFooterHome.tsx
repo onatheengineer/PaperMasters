@@ -1,18 +1,18 @@
 import {
   Box,
   chakra,
+  Container,
+  Flex,
   Grid,
   GridItem,
-  Container,
   Heading,
-  Text,
-  Link,
-  Flex,
   HStack,
+  Link,
   Stack,
+  Text,
 } from '@chakra-ui/react';
 import * as React from 'react';
-import { Link as ReachLink, To } from 'react-router-dom';
+import { Link as ReachLink } from 'react-router-dom';
 
 interface FeatureProps {
   heading: string;
@@ -37,21 +37,21 @@ export default function secondFooterHome() {
     >
       <Box
         as={Container}
-        //flexShrink={1}
+        // flexShrink={1}
         py={10}
         px={7}
         maxW="full"
         bg={'pmpurple.1'}
         color={'pmpurple.12'}
-        //border={'1px solid blue'}
+        // border={'1px solid blue'}
         // borderColor={'pmpurple.8'}
       >
         <Grid
-          //border={'1px solid purple'}
+          // border={'1px solid purple'}
           templateColumns={{
             base: 'repeat(1, 1fr)',
             sm: 'repeat(2, 1fr)',
-            //md: 'repeat(2, 1fr)',
+            // md: 'repeat(2, 1fr)',
             lg: 'repeat(3, 1fr)',
           }}
           gap={{ base: '8', sm: '12', md: '16' }}

@@ -1,18 +1,18 @@
 import { Flex, Icon, Link, Menu, MenuButton, Text } from '@chakra-ui/react';
 import type { FC } from 'react';
 import React, { ReactElement, useEffect, useState } from 'react';
-import { IconType } from 'react-icons';
 import { AiOutlineFileSearch } from 'react-icons/ai';
 import { BiBookmarkHeart, BiHomeHeart } from 'react-icons/bi';
 import { FiTrendingUp } from 'react-icons/fi';
 import { GiBookCover, GiFlowerPot } from 'react-icons/gi';
 import { IoMdCheckmarkCircleOutline } from 'react-icons/io';
+import type { IconType } from 'react-icons/lib';
 import { MdOutlineReport, MdOutlineWarningAmber } from 'react-icons/md';
+import type { To } from 'react-router-dom';
 import {
   Link as ReachLink,
   Route,
   Routes,
-  To,
   useLocation,
 } from 'react-router-dom';
 

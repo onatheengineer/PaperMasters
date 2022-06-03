@@ -20,28 +20,22 @@ export const colors = {
     18: '#1a121a',
     19: '#0d090d',
     20: '#000000',
-    //other purples
     21: '#431D53',
     22: '#51414F',
     23: '#442a44',
-    24: '#D8BFD8', //thistle
-    25: '#E6E6FA', //lavender
-    26: '#233067', //indigo
-    27: '#ff5b4d', //Living Coral darker
-    28: '#FF6F61', //Living Coral
-    29: '#ff8a80', //Living Coral lighter
+    24: '#D8BFD8',
+    25: '#E6E6FA',
+    26: '#233067',
+    27: '#ff5b4d',
+    28: '#FF6F61',
+    29: '#ff8a80',
   },
 
   pmgreen: {
-    //complmentary color to pmpurple.9
     1: '#7E9C7E',
-    //inverse color to pmpurple.9
     2: '#638163',
-    //inverse color to pmpurple.13
     3: '#96B496',
-    //complmentary color to pmpurple.13
     4: '#4B694B',
-    //#4B694B shades
     5: '#567956',
     6: '#628962',
     7: '#6f986f',
@@ -52,13 +46,13 @@ export const colors = {
     12: '#bfd1bf',
     13: '#cfddcf',
     14: '#dfe8df',
-    15: '#b4eeb4', //sea green 10
-    16: '#a2d6a2', //sea green 11
-    17: '#90be90', //sea green 12
-    18: '#7da67d', //sea green 13
-    19: '#6c8e6c', //sea green 14
-    20: '#5a775a', //sea green 15
-    21: '#485f48', //sea green 16
-    22: '#364736', //sea green 17
+    15: '#b4eeb4',
+    16: '#a2d6a2',
+    17: '#90be90',
+    18: '#7da67d',
+    19: '#6c8e6c',
+    20: '#5a775a',
+    21: '#485f48',
+    22: '#364736',
   },
 };

@@ -30,7 +30,7 @@ import {
   singleNFIReceiptDBAction,
 } from '../../../features/accountDB/AccountDBSlice';
 import { ParamsURLInterface } from '../../../features/accountDB/AccountDBSlice.types';
-import chainIdNetworks from '../../../features/JSON/chainId.networks.json';
+import chainIdNetworks from '../../../features/JSON/chainId.networks';
 import {
   useGetQueryMainnetQuery,
   useGetSingleAccountQuery,

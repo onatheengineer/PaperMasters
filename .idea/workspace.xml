@@ -4,54 +4,49 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="069ea68a-d74a-44db-aadb-c107c6bc8fb5" name="Changes" comment="creating css and more">
-      <change afterPath="$PROJECT_DIR$/dapp/src/contract/PaperMastersNFI_NFT_old.sol" afterDir="false" />
+    <list default="true" id="d9eab20b-ada3-4978-b53e-04738bfff59d" name="Changes" comment="Example Tests">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dapp/.eslintrc" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/.eslintrc.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dapp/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dapp/src/app/RoutesRoutes.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/app/RoutesRoutes.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dapp/src/components/pages/Analytics.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/components/pages/Analytics.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dapp/src/components/pages/CloudHWM.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/components/pages/CloudHWM.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dapp/src/app/hooks.ts" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/app/hooks.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dapp/src/components/PageForum.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/components/PageForum.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dapp/src/components/avatar/ValidateAvatar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/components/avatar/ValidateAvatar.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dapp/src/components/pages/CommunitySupport.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/components/pages/CommunitySupport.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dapp/src/components/pages/Register.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/components/pages/Register.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dapp/src/components/pages/Search.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/components/pages/Search.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dapp/src/components/pages/home/Footers/Footer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/components/pages/home/Footers/Footer.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dapp/src/components/pages/home/Footers/SecondFooterHome.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/components/pages/home/Footers/SecondFooterHome.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dapp/src/components/pages/home/Home.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/components/pages/home/Home.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dapp/src/components/pages/home/Navbar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/components/pages/home/Navbar.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dapp/src/components/pages/identity/AccountLedger.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/components/pages/identity/AccountLedger.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dapp/src/components/pages/identity/DrawerComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/components/pages/identity/DrawerComponent.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dapp/src/components/pages/identity/Header.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/components/pages/identity/Header.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dapp/src/components/pages/identity/Identity.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/components/pages/identity/Identity.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dapp/src/components/pages/identity/SocialMedia.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/components/pages/identity/SocialMedia.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dapp/src/components/pages/valadationsReaports/ValidationsReports.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/components/pages/valadationsReaports/ValidationsReports.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dapp/src/components/pages/yourPeople/YourPeople.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/components/pages/yourPeople/YourPeople.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dapp/src/contract/PaperMastersNFI.sol" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/contract/PaperMastersNFI.sol" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dapp/src/contract/PaperMastersNFI.test.ts" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/contract/PaperMastersNFI.test.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dapp/src/components/pages/identity/ModalForIdentNoUseParams.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/components/pages/identity/ModalForIdentNoUseParams.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dapp/src/components/pages/identity/mentions/MentionsDrawer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/components/pages/identity/mentions/MentionsDrawer.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dapp/src/components/pages/valadationsReaports/Validate.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/components/pages/valadationsReaports/Validate.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dapp/src/components/theme/colors.ts" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/components/theme/colors.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dapp/src/components/theme/components/Button.ts" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/components/theme/components/Button.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dapp/src/components/theme/components/Heading.ts" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/components/theme/components/Heading.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dapp/src/components/theme/components/Text.ts" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/components/theme/components/Text.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dapp/src/components/theme/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/components/theme/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dapp/src/components/theme/styles.global.ts" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/components/theme/styles.global.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dapp/src/features/accountBC/AccountBCSlice.ts" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/features/accountBC/AccountBCSlice.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dapp/src/features/accountBC/accountBCSaga.ts" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/features/accountBC/accountBCSaga.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dapp/src/features/accountDB/AccountDBSlice.ts" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/features/accountDB/AccountDBSlice.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dapp/src/features/accountDB/accountDBSaga.ts" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/features/accountDB/accountDBSaga.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dapp/src/features/accountDB/mentions/MentionsSlice.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/features/accountDB/mentions/MentionsSlice.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dapp/src/features/accountDB/mentions/mentionsSaga.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/features/accountDB/mentions/mentionsSaga.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dapp/src/features/mintNFI/MintNFIFunctionsSlice.ts" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/features/mintNFI/MintNFIFunctionsSlice.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dapp/src/features/mintNFI/MintNFISlice.ts" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/features/mintNFI/MintNFISlice.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dapp/src/features/mintNFI/mintNFIFunctionsSaga.ts" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/features/mintNFI/mintNFIFunctionsSaga.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dapp/src/features/mintNFI/mintNFISaga.ts" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/features/mintNFI/mintNFISaga.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dapp/src/features/reactQuery/RTKQuery.ts" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/features/reactQuery/RTKQuery.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dapp/webstorm-styled-components" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/webstorm-styled-components" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dapp/webstorm-styled-components/.github/ISSUE_TEMPLATE.md" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/webstorm-styled-components/.github/ISSUE_TEMPLATE.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dapp/webstorm-styled-components/LICENSE.md" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/webstorm-styled-components/LICENSE.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dapp/webstorm-styled-components/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/webstorm-styled-components/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dapp/webstorm-styled-components/src/main/resources/META-INF/CHANGELOG.md" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/webstorm-styled-components/src/main/resources/META-INF/CHANGELOG.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dapp/webstorm-styled-components/testData/completion/attrClassNames.js" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/webstorm-styled-components/testData/completion/attrClassNames.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dapp/webstorm-styled-components/testData/completion/attrClassNamesFunc.js" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/webstorm-styled-components/testData/completion/attrClassNamesFunc.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dapp/webstorm-styled-components/testData/completion/attrClassNamesNestedExpression.js" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/webstorm-styled-components/testData/completion/attrClassNamesNestedExpression.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dapp/webstorm-styled-components/testData/completion/styledComponentsStylesheet.css" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/webstorm-styled-components/testData/completion/styledComponentsStylesheet.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dapp/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/yarn.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dapp/src/features/rootSagas.ts" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/features/rootSagas.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dapp/src/features/toast/ToastSlice.ts" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/features/toast/ToastSlice.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dapp/src/features/toast/useGlobalToast.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/features/toast/useGlobalToast.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dapp/src/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dapp/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/tsconfig.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
-  </component>
-  <component name="FileTemplateManagerImpl">
-    <option name="RECENT_TEMPLATES">
-      <list>
-        <option value="Solidity Contract" />
-      </list>
-    </option>
-  </component>
-  <component name="FormatOnSaveOptions">
-    <option name="myRunOnSave" value="true" />
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -64,329 +59,267 @@
       <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
     </file-type-list>
   </component>
-  <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/dapp/src/App.tsx" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/dapp/src/components/pages/Register.tsx" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/dapp/src/components/pages/Search.tsx" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/dapp/src/components/pages/home/Navbar.test.tsx" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/dapp/src/components/pages/home/Navbar.tsx" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/dapp/src/components/pages/identity/Header.tsx" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/dapp/src/components/pages/identity/Identity.tsx" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/dapp/src/features/accountDB/AccountDBSlice.ts" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/dapp/src/features/accountDB/AccountDBSlice.types.ts" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/dapp/src/features/accountDB/mentions/MentionsSlice.tsx" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/dapp/src/features/reactQuery/RTKQuery.ts" root0="FORCE_HIGHLIGHTING" />
-  </component>
-  <component name="MarkdownSettingsMigration">
-    <option name="stateVersion" value="1" />
-  </component>
-  <component name="OptimizeOnSaveOptions">
-    <option name="myRunOnSave" value="true" />
-  </component>
-  <component name="PackageJsonUpdateNotifier">
-    <dismissed value="$PROJECT_DIR$/truffle/package.json" />
-  </component>
-  <component name="ProblemsViewState">
-    <option name="selectedTabId" value="CurrentFile" />
-  </component>
-  <component name="ProjectId" id="22hJ6GwrA9klC4rLXA5P3KLGunm" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
-    <ConfirmationsSetting value="2" id="Add" />
-  </component>
+  <component name="ProjectId" id="22vSvwRF2gWoEEIPDgCzDZcpbtl" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "//wsl$/Ubuntu/home/ramona/gitrepos/CloudHWM",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "yarn",
-    "ts.external.directory.path": "\\\\wsl$\\Ubuntu\\home\\ramona\\gitrepos\\MintIdentityTPM\\hardhat\\node_modules\\typescript\\lib",
-    "vue.rearranger.settings.migration": "true"
-  }
-}]]></component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File" value="JavaScript" />
+    <property name="js.linters.configure.manually.selectedeslint" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/dapp/src/assets" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.standard" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.selected.package.eslint" value="\\wsl$\Ubuntu\home\user\MintIdentityTPM\dapp\node_modules\eslint" />
+    <property name="node.js.selected.package.standard" value="" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="nodejs_interpreter_path" value="wsl://Ubuntu@/usr/bin/node" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="settings.editor.selected.configurable" value="settings.javascript.linters.eslint" />
+    <property name="ts.external.directory.path" value="\\wsl$\Ubuntu\home\user\MintIdentityTPM\dapp\node_modules\typescript\lib" />
+    <property name="vue.rearranger.settings.migration" value="true" />
+  </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="\\wsl$\Ubuntu\home\ramona\gitrepos\MintIdentityTPM\dapp\src\features\mintNFI" />
-      <recent name="\\wsl$\Ubuntu\home\ramona\gitrepos\MintIdentityTPM\dapp\src" />
-      <recent name="\\wsl$\Ubuntu\home\ramona\gitrepos\MintIdentityTPM\dapp\src\components\pages" />
-      <recent name="\\wsl$\Ubuntu\home\ramona\gitrepos\MintIdentityTPM\dapp\src\abiFiles" />
-      <recent name="\\wsl$\Ubuntu\home\ramona\gitrepos\MintIdentityTPM\hardhat\contracts" />
+      <recent name="\\wsl$\Ubuntu\home\user\MintIdentityTPM\dapp\src\assets" />
+      <recent name="\\wsl$\Ubuntu\home\user\MintIdentityTPM\antd\src\pages" />
+      <recent name="\\wsl$\Ubuntu\home\user\MintIdentityTPM\client\src\contracts" />
+      <recent name="\\wsl$\Ubuntu\home\user\MintIdentityTPM\client\src\store\slices\web3" />
+      <recent name="\\wsl$\Ubuntu\home\user\MintIdentityTPM\client\src\store\slices" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="\\wsl$\Ubuntu\home\ramona\gitrepos\MintIdentityTPM\dapp\src\components\pages\identity" />
-      <recent name="\\wsl$\Ubuntu\home\ramona\gitrepos\MintIdentityTPM\dapp\src\components\pages\valadationsReaports" />
-      <recent name="\\wsl$\Ubuntu\home\ramona\gitrepos\MintIdentityTPM\dapp\src\contract" />
-      <recent name="\\wsl$\Ubuntu\home\ramona\gitrepos\MintIdentityTPM\dapp\src\contractTesting" />
-      <recent name="\\wsl$\Ubuntu\home\ramona\gitrepos\MintIdentityTPM\dapp\src\features" />
+      <recent name="\\wsl$\Ubuntu\home\user\MintIdentityTPM\dapp\src\assets" />
+      <recent name="\\wsl$\Ubuntu\home\user\MintIdentityTPM\antd\src" />
     </key>
-  </component>
-  <component name="RunManager" selected="JavaScript Debug.Unnamed">
-    <configuration name="Unnamed" type="JavascriptDebugType" nameIsGenerated="true" uri="http://localhost:3000">
-      <method v="2" />
-    </configuration>
-    <configuration name="deploy" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
-      <package-json value="$PROJECT_DIR$/truffle/package.json" />
-      <command value="run" />
-      <scripts>
-        <script value="deploy" />
-      </scripts>
-      <node-interpreter value="project" />
-      <envs />
-      <method v="2" />
-    </configuration>
-    <list>
-      <item itemvalue="JavaScript Debug.Unnamed" />
-      <item itemvalue="npm.deploy" />
-    </list>
-    <recent_temporary>
-      <list>
-        <item itemvalue="npm.deploy" />
-      </list>
-    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="069ea68a-d74a-44db-aadb-c107c6bc8fb5" name="Changes" comment="" />
-      <created>1640283709105</created>
+      <changelist id="d9eab20b-ada3-4978-b53e-04738bfff59d" name="Changes" comment="" />
+      <created>1640716801607</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1640283709105</updated>
-      <workItem from="1640283711034" duration="4368000" />
-      <workItem from="1640290500166" duration="3639000" />
-      <workItem from="1640312500047" duration="5089000" />
-      <workItem from="1640470105724" duration="1061000" />
-      <workItem from="1640478395802" duration="74000" />
-      <workItem from="1640478482213" duration="14000" />
-      <workItem from="1640478506820" duration="17000" />
-      <workItem from="1640478534040" duration="23000" />
-      <workItem from="1640478592607" duration="9151000" />
-      <workItem from="1640587544716" duration="44471000" />
-      <workItem from="1640833990090" duration="164000" />
-      <workItem from="1641262411114" duration="19412000" />
-      <workItem from="1641337613309" duration="87618000" />
-      <workItem from="1641598167716" duration="9743000" />
-      <workItem from="1641692006882" duration="65990000" />
-      <workItem from="1641945767884" duration="1636000" />
-      <workItem from="1641947755810" duration="6634000" />
-      <workItem from="1641954839999" duration="84000" />
-      <workItem from="1641955104745" duration="42964000" />
-      <workItem from="1642082248412" duration="44556000" />
-      <workItem from="1642177915455" duration="30231000" />
-      <workItem from="1642226622128" duration="30000" />
-      <workItem from="1642226806815" duration="562000" />
-      <workItem from="1642268357997" duration="20211000" />
-      <workItem from="1642525937561" duration="269970000" />
-      <workItem from="1643234136110" duration="70259000" />
-      <workItem from="1643494358636" duration="67684000" />
-      <workItem from="1643726586443" duration="32539000" />
-      <workItem from="1643822793880" duration="192832000" />
-      <workItem from="1644847472090" duration="132395000" />
-      <workItem from="1645319835351" duration="79427000" />
-      <workItem from="1645678516139" duration="12046000" />
-      <workItem from="1645744416862" duration="22546000" />
-      <workItem from="1646003943279" duration="150603000" />
-      <workItem from="1646629201044" duration="65153000" />
-      <workItem from="1646786612232" duration="218000" />
-      <workItem from="1646794507868" duration="90214000" />
-      <workItem from="1647219202705" duration="152657000" />
-      <workItem from="1647876205432" duration="51143000" />
-      <workItem from="1647970450432" duration="69825000" />
-      <workItem from="1648239552594" duration="4510000" />
-      <workItem from="1648475677721" duration="38545000" />
-      <workItem from="1648572524449" duration="10118000" />
-      <workItem from="1648604052376" duration="25092000" />
-      <workItem from="1648750092672" duration="13227000" />
-      <workItem from="1648859773547" duration="850000" />
-      <workItem from="1648997984656" duration="99210000" />
-      <workItem from="1649249981844" duration="4144000" />
-      <workItem from="1649254182278" duration="24092000" />
-      <workItem from="1649280316993" duration="7435000" />
-      <workItem from="1649287966188" duration="171455000" />
-      <workItem from="1649859865834" duration="33784000" />
-      <workItem from="1649939701321" duration="23505000" />
-      <workItem from="1650141465144" duration="13901000" />
-      <workItem from="1650327707436" duration="3673000" />
-      <workItem from="1650385726667" duration="23017000" />
-      <workItem from="1650474433992" duration="7413000" />
-      <workItem from="1650495188182" duration="2128000" />
-      <workItem from="1650576681092" duration="31864000" />
-      <workItem from="1650992949819" duration="83168000" />
-      <workItem from="1651181599593" duration="30718000" />
-      <workItem from="1651371563000" duration="11430000" />
-      <workItem from="1651408205497" duration="469000" />
-      <workItem from="1651408694738" duration="69000" />
-      <workItem from="1651408864348" duration="540000" />
-      <workItem from="1651409426214" duration="101000" />
-      <workItem from="1651409544846" duration="193000" />
-      <workItem from="1651410139870" duration="23348000" />
-      <workItem from="1651524569193" duration="7571000" />
-      <workItem from="1651542645976" duration="22852000" />
-      <workItem from="1651633009291" duration="151498000" />
-      <workItem from="1652125757794" duration="1354000" />
-      <workItem from="1652128204095" duration="5000" />
-      <workItem from="1652128233487" duration="8000" />
-      <workItem from="1652128386439" duration="241000" />
-      <workItem from="1652132246898" duration="19380000" />
-      <workItem from="1652185763160" duration="44481000" />
-      <workItem from="1652272541479" duration="7955000" />
-      <workItem from="1652289173065" duration="18211000" />
-      <workItem from="1652452970584" duration="1954000" />
-      <workItem from="1652467101026" duration="2000" />
-      <workItem from="1652467250290" duration="3424000" />
-      <workItem from="1652575503961" duration="15549000" />
-      <workItem from="1652980160180" duration="22746000" />
-      <workItem from="1653017306825" duration="627000" />
-      <workItem from="1653017953705" duration="4116000" />
-      <workItem from="1653055644537" duration="29279000" />
-      <workItem from="1653236465120" duration="18072000" />
-      <workItem from="1653334240371" duration="66165000" />
-      <workItem from="1653668704318" duration="1438000" />
-      <workItem from="1653670247363" duration="3924000" />
-      <workItem from="1653930560291" duration="19680000" />
-      <workItem from="1654092476266" duration="1286000" />
-      <workItem from="1654094351033" duration="38864000" />
+      <updated>1640716801607</updated>
+      <workItem from="1640716802931" duration="47863000" />
+      <workItem from="1640996679317" duration="20723000" />
+      <workItem from="1641259006874" duration="12597000" />
+      <workItem from="1641940427550" duration="11030000" />
+      <workItem from="1642049724061" duration="1422000" />
+      <workItem from="1643072723774" duration="612000" />
+      <workItem from="1643560429576" duration="393000" />
+      <workItem from="1643583708328" duration="14843000" />
+      <workItem from="1646270517082" duration="722000" />
+      <workItem from="1648260980141" duration="6349000" />
+      <workItem from="1651194241157" duration="1002000" />
+      <workItem from="1651867100983" duration="15788000" />
+      <workItem from="1652232619856" duration="17745000" />
+      <workItem from="1652583977396" duration="1361000" />
+      <workItem from="1652658890749" duration="1262000" />
+      <workItem from="1652746647377" duration="17231000" />
+      <workItem from="1654129096843" duration="4146000" />
     </task>
-    <task id="LOCAL-00001" summary="testR">
-      <created>1640283820136</created>
+    <task id="LOCAL-00001" summary="tempt">
+      <created>1640717063893</created>
       <option name="number" value="00001" />
       <option name="presentableId" value="LOCAL-00001" />
       <option name="project" value="LOCAL" />
-      <updated>1640283820136</updated>
+      <updated>1640717063893</updated>
     </task>
-    <task id="LOCAL-00002" summary="testR">
-      <created>1640478412041</created>
+    <task id="LOCAL-00002" summary="tempt">
+      <created>1640730496541</created>
       <option name="number" value="00002" />
       <option name="presentableId" value="LOCAL-00002" />
       <option name="project" value="LOCAL" />
-      <updated>1640478412041</updated>
+      <updated>1640730496541</updated>
     </task>
-    <task id="LOCAL-00003" summary="Contract Meta Start">
-      <created>1640716999118</created>
+    <task id="LOCAL-00003" summary="identity">
+      <created>1640743196707</created>
       <option name="number" value="00003" />
       <option name="presentableId" value="LOCAL-00003" />
       <option name="project" value="LOCAL" />
-      <updated>1640716999118</updated>
+      <updated>1640743196707</updated>
     </task>
-    <task id="LOCAL-00004" summary="Contract Meta Start">
-      <created>1640743563051</created>
+    <task id="LOCAL-00004" summary="change name, upgradable">
+      <created>1640755272310</created>
       <option name="number" value="00004" />
       <option name="presentableId" value="LOCAL-00004" />
       <option name="project" value="LOCAL" />
-      <updated>1640743563051</updated>
+      <updated>1640755272310</updated>
     </task>
-    <task id="LOCAL-00005" summary="update name">
-      <created>1640832839737</created>
+    <task id="LOCAL-00005" summary="Revert Upgradable">
+      <created>1640756849002</created>
       <option name="number" value="00005" />
       <option name="presentableId" value="LOCAL-00005" />
       <option name="project" value="LOCAL" />
-      <updated>1640832839737</updated>
+      <updated>1640756849002</updated>
     </task>
-    <task id="LOCAL-00006" summary="update name">
-      <created>1640833031016</created>
+    <task id="LOCAL-00006" summary="Revert Upgradable">
+      <created>1640756872724</created>
       <option name="number" value="00006" />
       <option name="presentableId" value="LOCAL-00006" />
       <option name="project" value="LOCAL" />
-      <updated>1640833031016</updated>
+      <updated>1640756872724</updated>
     </task>
-    <task id="LOCAL-00007" summary="update to functions">
-      <created>1640833206740</created>
+    <task id="LOCAL-00007" summary="Revert Upgradable">
+      <created>1640831484923</created>
       <option name="number" value="00007" />
       <option name="presentableId" value="LOCAL-00007" />
       <option name="project" value="LOCAL" />
-      <updated>1640833206740</updated>
+      <updated>1640831484923</updated>
     </task>
-    <task id="LOCAL-00008" summary="some css garbage">
-      <created>1641422894207</created>
+    <task id="LOCAL-00008" summary="Docker Files Added">
+      <created>1640832046560</created>
       <option name="number" value="00008" />
       <option name="presentableId" value="LOCAL-00008" />
       <option name="project" value="LOCAL" />
-      <updated>1641422894207</updated>
+      <updated>1640832046560</updated>
     </task>
-    <task id="LOCAL-00009" summary="some css garbage">
-      <created>1641587352047</created>
+    <task id="LOCAL-00009" summary="Docker Files Added">
+      <created>1640835559064</created>
       <option name="number" value="00009" />
       <option name="presentableId" value="LOCAL-00009" />
       <option name="project" value="LOCAL" />
-      <updated>1641587352047</updated>
+      <updated>1640835559064</updated>
     </task>
-    <task id="LOCAL-00010" summary="antd pro">
-      <created>1641697717372</created>
+    <task id="LOCAL-00010" summary="server script added">
+      <created>1640837049526</created>
       <option name="number" value="00010" />
       <option name="presentableId" value="LOCAL-00010" />
       <option name="project" value="LOCAL" />
-      <updated>1641697717372</updated>
+      <updated>1640837049526</updated>
     </task>
-    <task id="LOCAL-00011" summary="adding avatar">
-      <created>1641871304558</created>
+    <task id="LOCAL-00011" summary="Identities in Redux">
+      <created>1641422815225</created>
       <option name="number" value="00011" />
       <option name="presentableId" value="LOCAL-00011" />
       <option name="project" value="LOCAL" />
-      <updated>1641871304558</updated>
+      <updated>1641422815225</updated>
     </task>
-    <task id="LOCAL-00012" summary="adding avatar">
-      <created>1641946533700</created>
+    <task id="LOCAL-00012" summary="Started Claim Identity">
+      <created>1641509844117</created>
       <option name="number" value="00012" />
       <option name="presentableId" value="LOCAL-00012" />
       <option name="project" value="LOCAL" />
-      <updated>1641946533700</updated>
+      <updated>1641509844117</updated>
     </task>
-    <task id="LOCAL-00013" summary="web3 working!">
-      <created>1641960583967</created>
+    <task id="LOCAL-00013" summary="placeholder">
+      <created>1651868305633</created>
       <option name="number" value="00013" />
       <option name="presentableId" value="LOCAL-00013" />
       <option name="project" value="LOCAL" />
-      <updated>1641960583967</updated>
+      <updated>1651868305633</updated>
     </task>
-    <task id="LOCAL-00014" summary="creating store">
-      <created>1642559395901</created>
+    <task id="LOCAL-00014" summary="placeholder">
+      <created>1651868456801</created>
       <option name="number" value="00014" />
       <option name="presentableId" value="LOCAL-00014" />
       <option name="project" value="LOCAL" />
-      <updated>1642559395901</updated>
+      <updated>1651868456802</updated>
     </task>
-    <task id="LOCAL-00015" summary="creating store">
-      <created>1642560153205</created>
+    <task id="LOCAL-00015" summary="placeholder">
+      <created>1651878509352</created>
       <option name="number" value="00015" />
       <option name="presentableId" value="LOCAL-00015" />
       <option name="project" value="LOCAL" />
-      <updated>1642560153205</updated>
+      <updated>1651878509352</updated>
     </task>
-    <task id="LOCAL-00016" summary="creating store">
-      <created>1642561057520</created>
+    <task id="LOCAL-00016" summary="placeholder">
+      <created>1651880210268</created>
       <option name="number" value="00016" />
       <option name="presentableId" value="LOCAL-00016" />
       <option name="project" value="LOCAL" />
-      <updated>1642561057520</updated>
+      <updated>1651880210268</updated>
     </task>
-    <task id="LOCAL-00017" summary="creating store">
-      <created>1642562475905</created>
+    <task id="LOCAL-00017" summary="placeholder">
+      <created>1651881658540</created>
       <option name="number" value="00017" />
       <option name="presentableId" value="LOCAL-00017" />
       <option name="project" value="LOCAL" />
-      <updated>1642562475905</updated>
+      <updated>1651881658540</updated>
     </task>
-    <task id="LOCAL-00018" summary="creating css and more">
-      <created>1652309803189</created>
+    <task id="LOCAL-00018" summary="placeholder">
+      <created>1651882556792</created>
       <option name="number" value="00018" />
       <option name="presentableId" value="LOCAL-00018" />
       <option name="project" value="LOCAL" />
-      <updated>1652309803189</updated>
+      <updated>1651882556792</updated>
     </task>
-    <task id="LOCAL-00019" summary="creating css and more">
-      <created>1652309996580</created>
+    <task id="LOCAL-00019" summary="placeholder">
+      <created>1652306735559</created>
       <option name="number" value="00019" />
       <option name="presentableId" value="LOCAL-00019" />
       <option name="project" value="LOCAL" />
-      <updated>1652309996580</updated>
+      <updated>1652306735559</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="placeholder">
+      <created>1652324006027</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1652324006027</updated>
+    </task>
+    <task id="LOCAL-00021" summary="placeholder">
+      <created>1652326188506</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1652326188506</updated>
+    </task>
+    <task id="LOCAL-00022" summary="placeholder">
+      <created>1652326293155</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1652326293155</updated>
+    </task>
+    <task id="LOCAL-00023" summary="placeholder">
+      <created>1652746734985</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1652746734985</updated>
+    </task>
+    <task id="LOCAL-00024" summary="placeholder">
+      <created>1652746993995</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1652746993995</updated>
+    </task>
+    <task id="LOCAL-00025" summary="placeholder">
+      <created>1653010992642</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1653010992642</updated>
+    </task>
+    <task id="LOCAL-00026" summary="Example Tests">
+      <created>1653090752522</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1653090752522</updated>
+    </task>
+    <task id="LOCAL-00027" summary="Example Tests">
+      <created>1653094215799</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1653094215799</updated>
+    </task>
+    <task id="LOCAL-00028" summary="Example Tests">
+      <created>1653099447542</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1653099447542</updated>
+    </task>
+    <option name="localTasksCounter" value="29" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -405,7 +338,7 @@
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
       <map>
-        <entry key="72dd0437-5c26-4bb9-bc79-5c6f2caf7333">
+        <entry key="43c79995-3e80-49c2-b20b-4831c8cdc76d">
           <value>
             <State>
               <option name="SHOW_ONLY_AFFECTED_CHANGES" value="true" />
@@ -418,10 +351,10 @@
                       </list>
                     </value>
                   </entry>
-                  <entry key="roots">
+                  <entry key="structure">
                     <value>
                       <list>
-                        <option value="$PROJECT_DIR$" />
+                        <option value="dir://wsl$/Ubuntu/home/user/MintIdentityTPM/client" />
                       </list>
                     </value>
                   </entry>
@@ -439,33 +372,25 @@
     </option>
     <option name="OPEN_GENERIC_TABS">
       <map>
-        <entry key="72dd0437-5c26-4bb9-bc79-5c6f2caf7333" value="TOOL_WINDOW" />
+        <entry key="43c79995-3e80-49c2-b20b-4831c8cdc76d" value="TOOL_WINDOW" />
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <ignored-roots>
-      <path value="$PROJECT_DIR$/cawfreeDapp/my-react-dapp" />
-      <path value="$PROJECT_DIR$/chakra-ui-navbar" />
-      <path value="$PROJECT_DIR$/dapp/my-react-dapp" />
-      <path value="$PROJECT_DIR$/packageDapp/my-react-dapp" />
-      <path value="$PROJECT_DIR$/testComponents/chakra-ui-navbar" />
-    </ignored-roots>
-    <MESSAGE value="testR" />
-    <MESSAGE value="Contract Meta Start" />
-    <MESSAGE value="update name" />
-    <MESSAGE value="update to functions" />
-    <MESSAGE value="some css garbage" />
-    <MESSAGE value="antd pro" />
-    <MESSAGE value="adding avatar" />
-    <MESSAGE value="web3 working!" />
-    <MESSAGE value="going to dapp" />
-    <MESSAGE value="creating pages" />
-    <MESSAGE value="creating store" />
-    <MESSAGE value="creating storesotre" />
-    <MESSAGE value="creating css and more" />
-    <option name="LAST_COMMIT_MESSAGE" value="creating css and more" />
+    <MESSAGE value="tempt" />
+    <MESSAGE value="identity" />
+    <MESSAGE value="change name, upgradable" />
+    <MESSAGE value="Revert Upgradable" />
+    <MESSAGE value="Docker Files Added" />
+    <MESSAGE value="server script added" />
+    <MESSAGE value="redux" />
+    <MESSAGE value="Identities in Redux" />
+    <MESSAGE value="Started Claim Identity" />
+    <MESSAGE value="Thunk Action Figured out" />
+    <MESSAGE value="placeholder" />
+    <MESSAGE value="Example Tests" />
+    <option name="LAST_COMMIT_MESSAGE" value="Example Tests" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

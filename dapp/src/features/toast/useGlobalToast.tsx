@@ -1,10 +1,11 @@
-import {
+import type {
   CloseAllToastsOptions,
   ToastId,
-  useToast,
   UseToastOptions,
 } from '@chakra-ui/react';
+import { useToast } from '@chakra-ui/react';
 import React, { useEffect } from 'react';
+
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { resetToast } from './ToastSlice';
 

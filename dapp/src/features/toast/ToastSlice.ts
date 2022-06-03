@@ -1,7 +1,7 @@
 /* eslint-disable no-param-reassign */
-import { createAction, createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { RootState } from '../../app/store';
-import { UseToastOptions } from '@chakra-ui/react';
+import type { UseToastOptions } from '@chakra-ui/react';
+import type { PayloadAction } from '@reduxjs/toolkit';
+import { createAction, createSlice } from '@reduxjs/toolkit';
 
 export const toastConfig: UseToastOptions = {
   isClosable: true,

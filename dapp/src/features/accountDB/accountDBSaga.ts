@@ -1,30 +1,31 @@
-import { SagaIterator } from 'redux-saga';
+import type { PayloadAction } from '@reduxjs/toolkit';
 import axios from 'axios';
-import { PayloadAction } from '@reduxjs/toolkit';
-import { call, put, takeEvery, takeLatest, select } from 'redux-saga/effects';
+import { ethers } from 'ethers';
+import type { SagaIterator } from 'redux-saga';
+import { call, put, select, takeLatest } from 'redux-saga/effects';
+
+import { accountBCselectors } from '../accountBC/AccountBCSlice';
+import chainIdNetworks from '../JSON/chainId.networks';
 import {
-  accountArrError,
   accountArrDBAction,
-  userSameAccountBool,
+  accountArrError,
+  accountDBselectors,
+  allAccountDictionaryDB,
+  allAccountDictionaryDBAction,
+  allNFIReceiptDB,
+  allNFIReceiptDBAction,
+  postSingleAccountDictionaryDBAction,
   singleAccountDictionaryDB,
   singleAccountDictionaryDBAction,
-  allAccountDictionaryDBAction,
-  postSingleAccountDictionaryDBAction,
-  singleNFIReceiptDBAction,
-  allNFIReceiptDBAction,
-  allNFIReceiptDB,
   singleNFIReceiptDB,
-  allAccountDictionaryDB,
-  accountDBselectors,
+  singleNFIReceiptDBAction,
+  userSameAccountBool,
 } from './AccountDBSlice';
-import { accountBCselectors } from '../accountBC/AccountBCSlice';
 import {
   AccountDBInterface,
   NFIReceiptInterface,
   ParamsURLInterface,
 } from './AccountDBSlice.types';
-import chainIdNetworks from '../JSON/chainId.networks.json';
-import { ethers } from 'ethers';
 
 const baseURL = 'https://ociuozqx85.execute-api.us-east-1.amazonaws.com';
 
@@ -35,8 +36,8 @@ export function* accountArrDBSaga({
   console.log('payloadDB:', payload);
   try {
     if (payload.paramsWalletURL.length > 0) {
-      const chainIdSupportedArr = chainIdNetworks.filter((el) => {
-        return el.chainId === parseInt(chainIdURL);
+      const chainIdSupportedArr = chainIdNetworks.filter((el: any) => {
+        return el.chainId === parseInt(chainIdURL, 10);
       });
       console.log('chainIdSupportedArr', chainIdSupportedArr[0]);
       const provider = ethers.getDefaultProvider(
@@ -65,10 +66,11 @@ export function* accountArrDBSaga({
         if (
           !Object.prototype.hasOwnProperty.call(getAccountArrAxios.data, 'Item')
         ) {
-          const chainIdSupportedArr = chainIdNetworks.filter((el) => {
-            return el.chainId === parseInt(chainIdURL);
+          const chainIdSupportedArrArr = chainIdNetworks.filter((el: any) => {
+            return el.chainId === parseInt(chainIdURL, 10);
           });
-          if (chainIdSupportedArr.length > 0) {
+          if (chainIdSupportedArrArr.length > 0) {
+            // eslint-disable-next-line camelcase
             const postAccountArr_chainId = yield call(
               axios.post,
               `${baseURL}/account`,
@@ -142,9 +144,8 @@ export function* allAccountDictionaryDBSaga(): SagaIterator {
 export function* singleNFIReceiptDBSaga({
   payload,
 }: PayloadAction<ParamsURLInterface>): SagaIterator {
-  const { chainIdURL, paramsWalletURL } = payload;
   try {
-    //TODO fix lambda and api endpoints
+    // TODO fix lambda and api endpoints
     const { chainIdURL, paramsWalletURL } = payload;
     const getSingleReceiptDB = yield call(
       axios.get,
@@ -163,7 +164,7 @@ export function* singleNFIReceiptDBSaga({
 
 export function* allNFIReceiptDBSaga(): SagaIterator {
   try {
-    //TODO fix lambda and api endpoints
+    // TODO fix lambda and api endpoints
     const getAllReceiptDB = yield call(axios.get, `${baseURL}/receipt`);
     yield put(
       allNFIReceiptDB(getAllReceiptDB.data.Items as NFIReceiptInterface[]),

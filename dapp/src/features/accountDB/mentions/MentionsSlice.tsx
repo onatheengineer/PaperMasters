@@ -1,4 +1,6 @@
-import { createSlice, PayloadAction, createAction } from '@reduxjs/toolkit';
+/* eslint-disable no-param-reassign */
+import type { PayloadAction } from '@reduxjs/toolkit';
+import { createAction, createSlice } from '@reduxjs/toolkit';
 
 export interface mentionsStateDictionaryInterface {
   walletAcc: string;

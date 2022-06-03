@@ -3,9 +3,7 @@ export const Heading = {
   baseStyle: {
     fontWeight: 'bold', // Normally, it is "semibold"
     color: 'pmpurple.13',
-    //textAlign: "center",
   },
-  // 2. We can add a new button size or extend existing
   sizes: {
     xl: {
       h: '36px',

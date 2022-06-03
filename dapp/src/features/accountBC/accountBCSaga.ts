@@ -1,13 +1,13 @@
-import { PayloadAction } from '@reduxjs/toolkit';
+import type { PayloadAction } from '@reduxjs/toolkit';
 import WalletConnect from '@walletconnect/client';
 import QRCodeModal from '@walletconnect/qrcode-modal';
 import axios from 'axios';
 import { ethers } from 'ethers';
-import { SagaIterator } from 'redux-saga';
+import type { SagaIterator } from 'redux-saga';
 import { call, put, takeEvery } from 'redux-saga/effects';
 
 import { accountArrDBAction } from '../accountDB/AccountDBSlice';
-import chainIdNetworks from '../JSON/chainId.networks.json';
+import chainIdNetworks from '../JSON/chainId.networks';
 import { showToast } from '../toast/ToastSlice';
 import {
   accountArr,
@@ -24,109 +24,93 @@ import { WalletConnectMetaMaskInterface } from './AccountBCSlice.types';
 
 const baseURL = 'https://ociuozqx85.execute-api.us-east-1.amazonaws.com';
 
-// export function generateErrorToastOptions(
-//     error: string,
-//     ticketAction: BCAction
-// ): ToastOptions {
-//     const titleIntro = ticketAction
-//         ? `Could not ${ticketAction} tickets`
-//         : "Ticket error";
-//     return {
-//         title: `${titleIntro}: ${error}`,
-//         status: "error",
-//     };
-// }
-
 export function* accountArrSaga({
   payload,
 }: PayloadAction<WalletConnectMetaMaskInterface>): SagaIterator {
   const { chainId, walletAccount } = payload;
-  {
-    try {
-      yield put(accountArrStatus('loading'));
-      yield put(chainIdStatus('loading'));
-      console.log('accArr:', payload.walletAccount);
-      // TODO run api to make sure this is NOT a test accountDB. If test accountDB EXIT saga with Toast error stating to accounts
-      if (payload.walletAccount.length > 0) {
-        const chainIdSupportedArr = chainIdNetworks.filter((el) => {
-          return el.chainId === parseInt(chainId, 10);
-        });
-        const provider = ethers.getDefaultProvider(
-          chainIdSupportedArr[0].name.toLowerCase(),
-          {
-            etherscan: 'RYVBB5ZI138MHIX2JJVWBT6MVTGXJT133Q',
-            infura: 'c97ad56e08674161a95ba16c6f855b6a',
-            alchemy: 'mEUzvPVY6xECwMieu01t9D3fuYyOYGCl',
-            pocket:
-              '329ee9f55d37f7ef7a54f84a4df341d096004450263af1d40cc4650e47e26609',
-          },
-        );
-        console.log('provider', provider);
-        const getBalance = yield Promise.resolve(
-          provider.getBalance(payload.walletAccount[0]),
-        ) as any;
-        console.log('getBalance', getBalance);
-        console.log('getBalanceSTRING', getBalance.toString());
-        const getBalanceDecimal = ethers.utils.formatEther(getBalance);
-        console.log('getBalanceDecimal', getBalanceDecimal);
-        if (!getBalance.isZero()) {
-          // TODO show modal: 'It is free to connect to this site and get a base identity but you do have to first fund your wallet account before an identity page will generate for you'
-          yield put(accountArrStatus('success'));
-          if (chainId) {
-            if (
-              chainIdNetworks.filter(
-                (el) => `${el.chainId}` === payload.chainId,
-              )
-            ) {
-              yield put(accountArr(payload.walletAccount));
-              yield put(chainIdProvider(`${payload.chainId}`));
-              yield put(addressToTokenAction(payload.walletAccount[0]));
-              yield put(chainIdStatus('success'));
-              yield put(chainIdSupportedBool(true)); // these are the chainId's that will get an
-              // identityPage, should be all real accounts that are not TEST accounts
-              yield put(chainIdStatus('yesProvider'));
-            } else {
-              // TODO show modal that they are connecting with an unsupported chain
-              yield put(chainIdSupportedBool(false));
-              yield put(chainIdStatus('notProvider'));
-            }
-            // TODO before calling this action I need to check axios to see if this accountBC is already in the DB
-            const hasAxiosGet = yield call(
-              axios.get,
-              `${baseURL}/account/${payload.chainId}/${payload.walletAccount[0]}`,
-            );
-            console.log('hasAxiosGet', hasAxiosGet);
-            if (
-              !Object.prototype.hasOwnProperty.call(hasAxiosGet.data, 'Item')
-            ) {
-              console.log('hasAxiosGet Does Not Have ACCOUNT', hasAxiosGet);
-              // TODO need to make sure that this actually works
-              yield put(
-                accountArrDBAction({
-                  chainIdURL: `${payload.chainId}`,
-                  paramsWalletURL: payload.walletAccount[0],
-                }),
-              );
-            }
+
+  try {
+    yield put(accountArrStatus('loading'));
+    yield put(chainIdStatus('loading'));
+    console.log('accArr:', payload.walletAccount);
+    // TODO run api to make sure this is NOT a test accountDB. If test accountDB EXIT saga with Toast error stating to accounts
+    if (payload.walletAccount.length > 0) {
+      const chainIdSupportedArr = chainIdNetworks.filter((el: any) => {
+        return el.chainId === parseInt(chainId, 10);
+      });
+      const provider = ethers.getDefaultProvider(
+        chainIdSupportedArr[0].name.toLowerCase(),
+        {
+          etherscan: 'RYVBB5ZI138MHIX2JJVWBT6MVTGXJT133Q',
+          infura: 'c97ad56e08674161a95ba16c6f855b6a',
+          alchemy: 'mEUzvPVY6xECwMieu01t9D3fuYyOYGCl',
+          pocket:
+            '329ee9f55d37f7ef7a54f84a4df341d096004450263af1d40cc4650e47e26609',
+        },
+      );
+      console.log('provider', provider);
+      const getBalance = yield Promise.resolve(
+        provider.getBalance(payload.walletAccount[0]),
+      ) as any;
+      console.log('getBalance', getBalance);
+      console.log('getBalanceSTRING', getBalance.toString());
+      const getBalanceDecimal = ethers.utils.formatEther(getBalance);
+      console.log('getBalanceDecimal', getBalanceDecimal);
+      if (!getBalance.isZero()) {
+        // TODO show modal: 'It is free to connect to this site and get a base identity but you do have to first fund your wallet account before an identity page will generate for you'
+        yield put(accountArrStatus('success'));
+        if (chainId) {
+          if (
+            chainIdNetworks.filter(
+              (el: any) => `${el.chainId}` === payload.chainId,
+            )
+          ) {
+            yield put(accountArr(payload.walletAccount));
+            yield put(chainIdProvider(`${payload.chainId}`));
+            yield put(addressToTokenAction(payload.walletAccount[0]));
+            yield put(chainIdStatus('success'));
+            yield put(chainIdSupportedBool(true)); // these are the chainId's that will get an
+            // identityPage, should be all real accounts that are not TEST accounts
+            yield put(chainIdStatus('yesProvider'));
           } else {
-            yield put(chainIdStatus('failed'));
+            // TODO show modal that they are connecting with an unsupported chain
+            yield put(chainIdSupportedBool(false));
+            yield put(chainIdStatus('notProvider'));
+          }
+          // TODO before calling this action I need to check axios to see if this accountBC is already in the DB
+          const hasAxiosGet = yield call(
+            axios.get,
+            `${baseURL}/account/${payload.chainId}/${payload.walletAccount[0]}`,
+          );
+          console.log('hasAxiosGet', hasAxiosGet);
+          if (!Object.prototype.hasOwnProperty.call(hasAxiosGet.data, 'Item')) {
+            console.log('hasAxiosGet Does Not Have ACCOUNT', hasAxiosGet);
+            // TODO need to make sure that this actually works
+            yield put(
+              accountArrDBAction({
+                chainIdURL: `${payload.chainId}`,
+                paramsWalletURL: payload.walletAccount[0],
+              }),
+            );
           }
         } else {
-          yield put(accountArrStatus('failed'));
-          yield put(
-            showToast({
-              title: 'Connected Wallet Account must have a currency balance',
-              status: 'error',
-            }),
-          );
+          yield put(chainIdStatus('failed'));
         }
+      } else {
+        yield put(accountArrStatus('failed'));
+        yield put(
+          showToast({
+            title: 'Connected Wallet Account must have a currency balance',
+            status: 'error',
+          }),
+        );
       }
-    } catch (e: any) {
-      console.log('accountArrBCSagaErrorERROR:', e);
-      console.error('accountArrBCSagaError:', e.message);
-      yield put(accountArrStatus('failed'));
-      yield put(chainIdProvider(''));
     }
+  } catch (e: any) {
+    console.log('accountArrBCSagaErrorERROR:', e);
+    console.error('accountArrBCSagaError:', e.message);
+    yield put(accountArrStatus('failed'));
+    yield put(chainIdProvider(''));
   }
 }
 

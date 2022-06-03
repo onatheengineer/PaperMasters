@@ -5,12 +5,12 @@ import {
 } from '@reduxjs/toolkit/query/react';
 import { BigNumber, ethers } from 'ethers';
 
-import MintABI from '../../abiFiles/PaperMastersNFI.json';
+import MintABI from '../../abiFiles/PaperMastersNFI';
 import {
   AccountDBInterface,
   ParamsURLInterface,
 } from '../accountDB/AccountDBSlice.types';
-import chainIdNetworks from '../JSON/chainId.networks.json';
+import chainIdNetworks from '../JSON/chainId.networks';
 
 export type MintABIType = keyof typeof MintABI;
 
@@ -91,7 +91,7 @@ export async function fetchEthereumTranastionsMainNet({
   chainIdURL,
   paramsWalletURL,
 }: ParamsURLInterface) {
-  const chainIdSupportedArr = chainIdNetworks.filter((el) => {
+  const chainIdSupportedArr = chainIdNetworks.filter((el: any) => {
     return el.chainId === parseInt(chainIdURL, 10);
   });
   const providerEtherscanMainnet = new ethers.providers.EtherscanProvider(
@@ -139,7 +139,7 @@ export async function fetchEthereumTranastionsMainNet({
 export async function fetchIdentities() {
   const results = await Promise.all(
     Object.keys(MintABI.networks).map(async (chainId): Promise<BCStruct[]> => {
-      const chainIdSupportedArr = chainIdNetworks.filter((el) => {
+      const chainIdSupportedArr = chainIdNetworks.filter((el: any) => {
         return el.chainId === parseInt(chainId, 10);
       });
       // console.log("chainIdSupportedArr", chainIdSupportedArr)
@@ -204,7 +204,7 @@ export async function fetchAddressToToken({
     if (
       Object.prototype.hasOwnProperty.call(MintABI.networks, `${chainIdURL}`)
     ) {
-      const chainIdSupportedArr = chainIdNetworks.filter((el) => {
+      const chainIdSupportedArr = chainIdNetworks.filter((el: any) => {
         return el.chainId === parseInt(chainIdURL, 10);
       });
       const provider = ethers.getDefaultProvider(

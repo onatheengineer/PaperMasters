@@ -1,61 +1,62 @@
-import * as React from 'react';
-import { FC, useEffect, useReducer, useRef, useState } from 'react';
-import moment from 'moment';
 import {
+  AspectRatio,
   Avatar,
+  AvatarBadge,
   AvatarGroup,
   Box,
   Button,
-  Flex,
-  Grid,
-  GridItem,
-  Icon,
-  Image,
-  Link,
-  MenuItem,
-  Stack,
-  Switch,
-  Text,
-  useColorModeValue,
-  HStack,
-  useDisclosure,
-  Tooltip,
-  VStack,
-  Container,
-  AspectRatio,
-  AvatarBadge,
-  Divider,
   Center,
-  InputRightElement,
-  useStyleConfig,
-  TabPanel,
-  TabPanels,
-  TabList,
-  Tabs,
-  Tab,
-  Select,
-  RadioGroup,
-  Radio,
-  Textarea,
+  Container,
+  Divider,
   Drawer,
   DrawerBody,
+  DrawerCloseButton,
+  DrawerContent,
   DrawerFooter,
   DrawerHeader,
   DrawerOverlay,
-  DrawerContent,
-  DrawerCloseButton,
+  Flex,
   FormLabel,
+  Grid,
+  GridItem,
+  Heading,
+  HStack,
+  Icon,
+  Image,
+  Input,
   InputGroup,
   InputLeftAddon,
   InputRightAddon,
-  Input,
-  Heading,
+  InputRightElement,
+  Link,
+  MenuItem,
+  Radio,
+  RadioGroup,
+  Select,
   Spacer,
+  Stack,
+  Switch,
+  Tab,
+  TabList,
+  TabPanel,
+  TabPanels,
+  Tabs,
+  Text,
+  Textarea,
+  Tooltip,
+  useColorModeValue,
+  useDisclosure,
+  useStyleConfig,
+  VStack,
 } from '@chakra-ui/react';
+import moment from 'moment';
+import * as React from 'react';
+import { FC, useEffect, useReducer, useRef, useState } from 'react';
 import { AiOutlineComment } from 'react-icons/ai';
 import { BsCircleFill } from 'react-icons/bs';
-import { useAppDispatch, useAppSelector } from '../../../../app/hooks';
 import Sparkle from 'react-sparkle';
+
+import { useAppDispatch, useAppSelector } from '../../../../app/hooks';
 import {
   postMentionInterface,
   usePostMentionMutation,
@@ -98,18 +99,18 @@ export const MentionsDrawer: FC<interfaceMentionsDrawer> = ({
       chainId: chainIdURL,
       fromChainId: chainIdProviderProvider,
       fromWallet: accountArrArr[0],
-      messageBody: messageBody,
-      radioType: radioType,
+      messageBody,
+      radioType,
       fakeDelete: false,
       replyToMentionId: '',
     };
     postMention(mentionsSubmitStateDictionary);
     setMessageBody('');
-    //onCloseClose();
+    // onCloseClose();
   };
 
   return (
-    //TODO there is a extra scroll bar in this drawer that is not needed
+    // TODO there is a extra scroll bar in this drawer that is not needed
     <Drawer
       size="xl"
       isOpen={isOpenOpen}
@@ -120,7 +121,7 @@ export const MentionsDrawer: FC<interfaceMentionsDrawer> = ({
       <DrawerOverlay />
       <DrawerContent>
         <DrawerCloseButton />
-        {/*this box is supposed to make sparkle work better*/}
+        {/* this box is supposed to make sparkle work better */}
 
         <DrawerHeader color="pmpurple.15" borderBottomWidth="1px">
           Mentions
@@ -132,13 +133,13 @@ export const MentionsDrawer: FC<interfaceMentionsDrawer> = ({
             overflowPx={0}
             fadeOutSpeed={20}
             flicker={false}
-            //newSparkleOnFadeOut={false}
-            //flickerSpeed="fast"
+            // newSparkleOnFadeOut={false}
+            // flickerSpeed="fast"
           />
         </DrawerHeader>
         <DrawerBody>
           <Box
-            //border={'1px solid pink'}
+            // border={'1px solid pink'}
             h={'100%'}
           >
             <Flex h={'100%'} flexDirection={'column'}>
@@ -154,7 +155,7 @@ export const MentionsDrawer: FC<interfaceMentionsDrawer> = ({
                   <Box
                     flex={'max-content'}
                     mt={'18px'}
-                    //border={'2px solid blue'}
+                    // border={'2px solid blue'}
                     position={'sticky'}
                   >
                     <HStack>
@@ -162,12 +163,12 @@ export const MentionsDrawer: FC<interfaceMentionsDrawer> = ({
                         <Stack direction="row" spacing={5}>
                           <Radio
                             isChecked={radioType === 1}
-                            //color='pmpurple.15'
+                            // color='pmpurple.15'
                             // bg={'pmgreen.15'}
                             colorScheme="green"
-                            //value='Positive'
-                            //value={state.radioType}
-                            //value={1}
+                            // value='Positive'
+                            // value={state.radioType}
+                            // value={1}
                             // onClick={() => {
                             //     //state.radioType === 1;
                             // }}
@@ -179,12 +180,12 @@ export const MentionsDrawer: FC<interfaceMentionsDrawer> = ({
                           </Radio>
                           <Radio
                             isChecked={radioType === 0}
-                            //color='pmpurple.15'
-                            //bg={'red.600'}
+                            // color='pmpurple.15'
+                            // bg={'red.600'}
                             colorScheme="red"
-                            //value={0}
-                            //value={state.radioType}
-                            //value = {0}
+                            // value={0}
+                            // value={state.radioType}
+                            // value = {0}
                             onChange={(e) => {
                               setRadioType(0);
                             }}
@@ -196,8 +197,8 @@ export const MentionsDrawer: FC<interfaceMentionsDrawer> = ({
                             // color='pmpurple.15'
                             // bg={'pmpurple.6'}
                             colorScheme="blue"
-                            //value={state.radioType}
-                            //value={'neutral'}
+                            // value={state.radioType}
+                            // value={'neutral'}
                             onChange={(e) => {
                               setRadioType(-1);
                             }}

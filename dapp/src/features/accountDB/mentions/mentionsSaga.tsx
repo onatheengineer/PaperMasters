@@ -1,22 +1,23 @@
-import {
-  call,
-  put,
-  takeEvery,
-  delay,
-  all,
-  takeLatest,
-  select,
-} from 'redux-saga/effects';
+import type { PayloadAction } from '@reduxjs/toolkit';
 import axios from 'axios';
+import type { SagaIterator } from 'redux-saga';
 import {
-  singleMentionAction,
+  all,
+  call,
+  delay,
+  put,
+  select,
+  takeEvery,
+  takeLatest,
+} from 'redux-saga/effects';
+
+import {
+  allMentions,
   allMentionsAction,
   errorMessage,
-  allMentions,
   mentionsStateDictionaryInterface,
+  singleMentionAction,
 } from './MentionsSlice';
-import { PayloadAction } from '@reduxjs/toolkit';
-import { SagaIterator } from 'redux-saga';
 
 const baseURL = 'https://ociuozqx85.execute-api.us-east-1.amazonaws.com';
 

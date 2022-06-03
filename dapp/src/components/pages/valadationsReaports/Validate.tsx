@@ -33,7 +33,8 @@ import {
 import type { FC } from 'react';
 import * as React from 'react';
 import { useEffect, useMemo, useState } from 'react';
-import { ColorChangeHandler, ColorResult, SketchPicker } from 'react-color';
+import type { ColorChangeHandler, ColorResult } from 'react-color';
+import { SketchPicker } from 'react-color';
 import { MdOutlineColorLens } from 'react-icons/md';
 import { useParams } from 'react-router-dom';
 
@@ -111,6 +112,8 @@ export const Validate: FC = () => {
         break;
       case 'comment':
         setColorTextComment(colorSelect);
+        break;
+      default:
         break;
     }
     console.table(colorSelect);

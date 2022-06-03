@@ -1,4 +1,5 @@
-import { createAction, createSlice, PayloadAction } from '@reduxjs/toolkit';
+/* eslint-disable no-param-reassign */
+import { createAction, createSlice } from '@reduxjs/toolkit';
 
 interface FeeState {
   supportDeposit: number;
@@ -18,7 +19,7 @@ const MintNFIFunctionsSlice = createSlice({
   name: 'functions',
   initialState,
   reducers: {
-    //this is the support PM function, then I can visually show it on their page...OR the contract page
+    // this is the support PM function, then I can visually show it on their page...OR the contract page
     supportDeposit(state, action) {
       state.supportDeposit = action.payload;
     },
