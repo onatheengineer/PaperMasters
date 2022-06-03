@@ -4,44 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d9eab20b-ada3-4978-b53e-04738bfff59d" name="Changes" comment="Example Tests">
+    <list default="true" id="d9eab20b-ada3-4978-b53e-04738bfff59d" name="Changes" comment="update for eslint errors">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dapp/src/app/RoutesRoutes.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/app/RoutesRoutes.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dapp/src/app/hooks.ts" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/app/hooks.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dapp/src/components/PageForum.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/components/PageForum.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dapp/src/components/avatar/ValidateAvatar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/components/avatar/ValidateAvatar.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dapp/src/components/pages/CommunitySupport.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/components/pages/CommunitySupport.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dapp/src/components/pages/Register.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/components/pages/Register.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dapp/src/components/pages/Search.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/components/pages/Search.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dapp/src/components/pages/home/Footers/SecondFooterHome.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/components/pages/home/Footers/SecondFooterHome.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dapp/src/components/pages/home/Home.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/components/pages/home/Home.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dapp/src/components/pages/home/Navbar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/components/pages/home/Navbar.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dapp/src/components/pages/identity/Identity.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/components/pages/identity/Identity.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dapp/src/components/pages/identity/ModalForIdentNoUseParams.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/components/pages/identity/ModalForIdentNoUseParams.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dapp/src/components/pages/identity/mentions/MentionsDrawer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/components/pages/identity/mentions/MentionsDrawer.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dapp/src/components/pages/valadationsReaports/Validate.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/components/pages/valadationsReaports/Validate.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dapp/src/components/theme/colors.ts" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/components/theme/colors.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dapp/src/components/theme/components/Button.ts" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/components/theme/components/Button.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dapp/src/components/theme/components/Heading.ts" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/components/theme/components/Heading.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dapp/src/components/theme/components/Text.ts" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/components/theme/components/Text.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dapp/src/components/theme/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/components/theme/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dapp/src/components/theme/styles.global.ts" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/components/theme/styles.global.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dapp/src/features/accountBC/AccountBCSlice.ts" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/features/accountBC/AccountBCSlice.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dapp/src/features/accountBC/accountBCSaga.ts" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/features/accountBC/accountBCSaga.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dapp/src/features/accountDB/AccountDBSlice.ts" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/features/accountDB/AccountDBSlice.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dapp/src/features/accountDB/accountDBSaga.ts" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/features/accountDB/accountDBSaga.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dapp/src/features/accountDB/mentions/MentionsSlice.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/features/accountDB/mentions/MentionsSlice.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dapp/src/features/accountDB/mentions/mentionsSaga.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/features/accountDB/mentions/mentionsSaga.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dapp/src/features/mintNFI/MintNFIFunctionsSlice.ts" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/features/mintNFI/MintNFIFunctionsSlice.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dapp/src/features/mintNFI/MintNFISlice.ts" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/features/mintNFI/MintNFISlice.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dapp/src/features/mintNFI/mintNFIFunctionsSaga.ts" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/features/mintNFI/mintNFIFunctionsSaga.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dapp/src/features/mintNFI/mintNFISaga.ts" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/features/mintNFI/mintNFISaga.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dapp/src/features/reactQuery/RTKQuery.ts" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/features/reactQuery/RTKQuery.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dapp/src/features/rootSagas.ts" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/features/rootSagas.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dapp/src/features/toast/ToastSlice.ts" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/features/toast/ToastSlice.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dapp/src/features/toast/useGlobalToast.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/features/toast/useGlobalToast.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dapp/src/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dapp/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/tsconfig.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dapp/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/Dockerfile" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -121,7 +86,7 @@
       <workItem from="1652583977396" duration="1361000" />
       <workItem from="1652658890749" duration="1262000" />
       <workItem from="1652746647377" duration="17231000" />
-      <workItem from="1654129096843" duration="4146000" />
+      <workItem from="1654129096843" duration="4476000" />
     </task>
     <task id="LOCAL-00001" summary="tempt">
       <created>1640717063893</created>
@@ -319,7 +284,14 @@
       <option name="project" value="LOCAL" />
       <updated>1653099447542</updated>
     </task>
-    <option name="localTasksCounter" value="29" />
+    <task id="LOCAL-00029" summary="update for eslint errors">
+      <created>1654229700197</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1654229700197</updated>
+    </task>
+    <option name="localTasksCounter" value="30" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -390,7 +362,8 @@
     <MESSAGE value="Thunk Action Figured out" />
     <MESSAGE value="placeholder" />
     <MESSAGE value="Example Tests" />
-    <option name="LAST_COMMIT_MESSAGE" value="Example Tests" />
+    <MESSAGE value="update for eslint errors" />
+    <option name="LAST_COMMIT_MESSAGE" value="update for eslint errors" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
