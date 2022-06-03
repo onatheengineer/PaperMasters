@@ -30,6 +30,7 @@ import {
   singleNFIReceiptDBAction,
 } from '../../../features/accountDB/AccountDBSlice';
 import { ParamsURLInterface } from '../../../features/accountDB/AccountDBSlice.types';
+// eslint-disable-next-line import/extensions
 import chainIdNetworks from '../../../features/JSON/chainId.networks.json';
 import {
   useGetQueryMainnetQuery,

@@ -22,7 +22,6 @@ export const Button = {
     },
     _active: {
       bg: 'pmpurple.4',
-      //boxShadow: 'none !important',
       color: 'pmpurple.9',
       transform: 'scale(0.96)',
     },
@@ -70,5 +69,3 @@ export const Button = {
     colorScheme: 'pmpurple.13',
   },
 };
-
-//from F12, direction

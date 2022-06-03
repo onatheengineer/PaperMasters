@@ -27,7 +27,8 @@ import {
 } from 'react-icons/gi';
 import { MdManageAccounts, MdOutlineNaturePeople } from 'react-icons/md';
 import { SiSololearn } from 'react-icons/si';
-import { Link as ReachLink, To } from 'react-router-dom';
+import type { To } from 'react-router-dom';
+import { Link as ReachLink } from 'react-router-dom';
 import Sparkle from 'react-sparkle';
 
 import { useAppDispatch, useAppSelector } from '../../../app/hooks';

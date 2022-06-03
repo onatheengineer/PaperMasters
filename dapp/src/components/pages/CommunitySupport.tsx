@@ -1,7 +1,7 @@
-//import React { useEffect, useState, useRef } from "react";
+import { Box, Flex, Heading } from '@chakra-ui/react';
 import type { FC } from 'react';
 import React from 'react';
-import { Box, Flex, Heading } from '@chakra-ui/react';
+
 import PageForum from '../PageForum';
 
 export const CommunitySupport: FC = () => {
@@ -17,9 +17,6 @@ export const CommunitySupport: FC = () => {
 
   return (
     <Flex w={'100%'}>
-      {/*<Flex >*/}
-      {/*    <RoutesRoutes/>*/}
-      {/*</Flex>*/}
       <Box
         flex={'auto'}
         border={'2px solid'}

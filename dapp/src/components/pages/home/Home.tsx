@@ -8,7 +8,6 @@ import {
 import React, { FC } from 'react';
 
 import BackgroundLogo from '../../../assets/legoLavendarheadercroped.png';
-import SecondFooter from './Footers/SecondFooterHome';
 
 export const Home: FC = () => {
   return (

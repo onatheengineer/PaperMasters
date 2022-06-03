@@ -1,4 +1,3 @@
-import React, { forwardRef, ReactElement, useRef, useState } from 'react';
 import {
   Box,
   Button,
@@ -10,6 +9,7 @@ import {
   StackDivider,
   Text,
 } from '@chakra-ui/react';
+import React, { forwardRef, ReactElement, useRef, useState } from 'react';
 
 interface InterfaceFORUM {
   title: string;
@@ -85,9 +85,6 @@ export const PageForum = forwardRef<HTMLDivElement | null, InterfaceFORUM>(
                   {title}
                 </Text>
               </MenuButton>
-              {/*<Button onClick={() => {*/}
-              {/*    gotoPageRef()*/}
-              {/*}}>Community</Button>*/}
               <Collapse in={isOpen} animateOpacity>
                 <Box
                   p="26px"

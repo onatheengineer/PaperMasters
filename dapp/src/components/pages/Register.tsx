@@ -34,7 +34,8 @@ import {
 import type { FC } from 'react';
 import * as React from 'react';
 import { useEffect, useMemo, useState } from 'react';
-import { ColorChangeHandler, ColorResult, SketchPicker } from 'react-color';
+import type { ColorChangeHandler, ColorResult } from 'react-color';
+import { SketchPicker } from 'react-color';
 import { MdOutlineColorLens } from 'react-icons/md';
 import { Navigate } from 'react-router-dom';
 

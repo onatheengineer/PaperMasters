@@ -1,28 +1,13 @@
+import { takeLatest } from 'redux-saga/effects';
+
 import {
-  call,
-  put,
-  takeEvery,
-  delay,
-  all,
-  takeLatest,
-  select,
-} from 'redux-saga/effects';
-import Web3 from 'web3';
-import {
+  depositsToContractAction,
   mintFeeAction,
   reportNFIFeeAction,
-  depositsToContractAction,
   totalDonationsToPMAction,
   validateNFIFeeAction,
   validationFeeToNFIOwnerAction,
 } from './MintNFIFunctionsSlice';
-import { createAction } from '@reduxjs/toolkit';
-
-//events also bring in Pause, Upause, function pause and unpause
-//also I have an import { call, put, takeEvery, delay, all, takeLatest, select} from 'redux-saga/effects';
-// import Web3 from "web3";
-//
-// event Withdraw
 
 function* depositSaga() {
   try {
