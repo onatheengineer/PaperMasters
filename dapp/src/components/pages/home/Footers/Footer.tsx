@@ -126,12 +126,12 @@ export default function LargeWithLogoCentered() {
               <Link as={ReachLink} to="/search" fontSize={'14px'}>
                 Search
               </Link>
-              <Link as={ReachLink} to="/validate" fontSize={'14px'}>
-                Validate
-              </Link>
-              <Link as={ReachLink} to="/report" fontSize={'14px'}>
-                Report
-              </Link>
+              {/* <Link as={ReachLink} to="/validate" fontSize={'14px'}> */}
+              {/*  Validate */}
+              {/* </Link> */}
+              {/* <Link as={ReachLink} to="/report" fontSize={'14px'}> */}
+              {/*  Report */}
+              {/* </Link> */}
             </Stack>
             <Stack>
               <ListHeader>Community</ListHeader>
