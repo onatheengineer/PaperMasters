@@ -6,6 +6,7 @@ import {
   VStack,
 } from '@chakra-ui/react';
 import React, { FC } from 'react';
+
 import BackgroundLogo from '../../../assets/legoLavendarheadercroped.png';
 import SecondFooter from './Footers/SecondFooterHome';
 
@@ -13,7 +14,7 @@ export const Home: FC = () => {
   return (
     <Flex
       h={'100%'}
-      //border={'1px solid green'}
+      // border={'1px solid green'}
       flexDirection={'column'}
     >
       <Flex
@@ -33,9 +34,8 @@ export const Home: FC = () => {
         >
           <Stack
             maxW={'2xl'}
-            //align={'flex-start'}
             spacing={4}
-            //border={'1px solid blue'}
+            // border={'1px solid blue'}
             justifyContent={'left'}
           >
             <Text
