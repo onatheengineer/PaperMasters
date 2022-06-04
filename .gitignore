@@ -9,7 +9,6 @@ abiFiles
 assets
 
 
-
 #truffle
 truffle/.secret
 truffle/.privateKeyTest
