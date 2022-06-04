@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="bd5141e4-3bb7-4cde-919e-76fee008f78d" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/dapp/webstorm-styled-components" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/webstorm-styled-components" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dapp/webstorm-styled-components/.github/ISSUE_TEMPLATE.md" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/webstorm-styled-components/.github/ISSUE_TEMPLATE.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dapp/webstorm-styled-components/LICENSE.md" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/webstorm-styled-components/LICENSE.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dapp/webstorm-styled-components/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/webstorm-styled-components/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dapp/webstorm-styled-components/src/main/resources/META-INF/CHANGELOG.md" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/webstorm-styled-components/src/main/resources/META-INF/CHANGELOG.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dapp/webstorm-styled-components/testData/completion/attrClassNames.js" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/webstorm-styled-components/testData/completion/attrClassNames.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dapp/webstorm-styled-components/testData/completion/attrClassNamesFunc.js" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/webstorm-styled-components/testData/completion/attrClassNamesFunc.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dapp/webstorm-styled-components/testData/completion/attrClassNamesNestedExpression.js" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/webstorm-styled-components/testData/completion/attrClassNamesNestedExpression.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dapp/webstorm-styled-components/testData/completion/styledComponentsStylesheet.css" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/webstorm-styled-components/testData/completion/styledComponentsStylesheet.css" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GithubPullRequestsUISettings">
+    <option name="selectedUrlAndAccountId">
+      <UrlAndAccount>
+        <option name="accountId" value="7400bea5-9fe1-46e8-884d-af7ffa8b4529" />
+        <option name="url" value="https://github.com/styled-components/webstorm-styled-components.git" />
+      </UrlAndAccount>
+    </option>
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/dapp/src/App.tsx" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/dapp/src/components/pages/Register.tsx" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/dapp/src/components/pages/Search.tsx" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/dapp/src/components/pages/home/Navbar.test.tsx" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/dapp/src/components/pages/home/Navbar.tsx" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/dapp/src/components/pages/identity/Header.tsx" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/dapp/src/components/pages/identity/Identity.tsx" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/dapp/src/features/accountDB/AccountDBSlice.ts" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/dapp/src/features/accountDB/AccountDBSlice.types.ts" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/dapp/src/features/accountDB/mentions/MentionsSlice.tsx" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/dapp/src/features/reactQuery/RTKQuery.ts" root0="FORCE_HIGHLIGHTING" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2A7oV7BoAfe6dj1USuV1SQ83yKs" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;//wsl$/Ubuntu/home/ramona/gitrepos/PaperMasters&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;yarn&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;vcs.Git&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;\\\\wsl$\\Ubuntu\\home\\ramona\\gitrepos\\MintIdentityTPM\\hardhat\\node_modules\\typescript\\lib&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="\\wsl$\Ubuntu\home\ramona\gitrepos\MintIdentityTPM\dapp\src\abiFiles" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="\\wsl$\Ubuntu\home\ramona\gitrepos\MintIdentityTPM\dapp\src\assets" />
+    </key>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="bd5141e4-3bb7-4cde-919e-76fee008f78d" name="Changes" comment="" />
+      <created>1654370005697</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1654370005697</updated>
+      <workItem from="1654370008653" duration="63000" />
+      <workItem from="1654370083046" duration="33000" />
+      <workItem from="1654370145651" duration="285000" />
+      <workItem from="1654371006069" duration="41000" />
+      <workItem from="1654371202018" duration="65000" />
+      <workItem from="1654371282729" duration="2251000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="72dd0437-5c26-4bb9-bc79-5c6f2caf7333">
+          <value>
+            <State />
+          </value>
+        </entry>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>
