@@ -4,27 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bd5141e4-3bb7-4cde-919e-76fee008f78d" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dapp/src/contract/PaperMastersNFI.sol" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dapp/src/contract/PaperMastersNFI.test.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dapp/src/contract/PaperMastersNFI_NFT_old.sol" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dapp/src/contractTesting/one.test.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dapp/webstorm-styled-components" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/webstorm-styled-components" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dapp/webstorm-styled-components/.github/ISSUE_TEMPLATE.md" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/webstorm-styled-components/.github/ISSUE_TEMPLATE.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dapp/webstorm-styled-components/LICENSE.md" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/webstorm-styled-components/LICENSE.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dapp/webstorm-styled-components/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/webstorm-styled-components/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dapp/webstorm-styled-components/src/main/resources/META-INF/CHANGELOG.md" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/webstorm-styled-components/src/main/resources/META-INF/CHANGELOG.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dapp/webstorm-styled-components/testData/completion/attrClassNames.js" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/webstorm-styled-components/testData/completion/attrClassNames.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dapp/webstorm-styled-components/testData/completion/attrClassNamesFunc.js" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/webstorm-styled-components/testData/completion/attrClassNamesFunc.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dapp/webstorm-styled-components/testData/completion/attrClassNamesNestedExpression.js" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/webstorm-styled-components/testData/completion/attrClassNamesNestedExpression.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dapp/webstorm-styled-components/testData/completion/styledComponentsStylesheet.css" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/webstorm-styled-components/testData/completion/styledComponentsStylesheet.css" afterDir="false" />
-    </list>
+    <list default="true" id="bd5141e4-3bb7-4cde-919e-76fee008f78d" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="GithubPullRequestsUISettings">
     <option name="selectedUrlAndAccountId">
@@ -47,16 +34,31 @@
     <setting file="file://$PROJECT_DIR$/dapp/src/features/accountDB/mentions/MentionsSlice.tsx" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/dapp/src/features/reactQuery/RTKQuery.ts" root0="FORCE_HIGHLIGHTING" />
   </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2A7oV7BoAfe6dj1USuV1SQ83yKs" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "last_opened_file_path": "//wsl$/Ubuntu/home/ramona/gitrepos/MintIdentityTPM/dapp/src/abiFiles",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "ts.external.directory.path": "\\\\wsl$\\Ubuntu\\home\\ramona\\gitrepos\\MintIdentityTPM\\hardhat\\node_modules\\typescript\\lib"
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;//wsl$/Ubuntu/home/ramona/gitrepos/PaperMasters&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;yarn&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;\\\\wsl$\\Ubuntu\\home\\ramona\\gitrepos\\MintIdentityTPM\\hardhat\\node_modules\\typescript\\lib&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="\\wsl$\Ubuntu\home\ramona\gitrepos\MintIdentityTPM\dapp\src\abiFiles" />
@@ -65,8 +67,21 @@
       <recent name="\\wsl$\Ubuntu\home\ramona\gitrepos\MintIdentityTPM\dapp\src\assets" />
     </key>
   </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="bd5141e4-3bb7-4cde-919e-76fee008f78d" name="Changes" comment="" />
+      <created>1654370005697</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1654370005697</updated>
+      <workItem from="1654370008653" duration="63000" />
+      <workItem from="1654370083046" duration="103000" />
+    </task>
     <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
