@@ -55,21 +55,21 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;//wsl$/Ubuntu/home/ramona/gitrepos/PaperMasters&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;yarn&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;vcs.Git&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;\\\\wsl$\\Ubuntu\\home\\ramona\\gitrepos\\MintIdentityTPM\\hardhat\\node_modules\\typescript\\lib&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "//wsl$/Ubuntu/home/ramona/gitrepos/PaperMasters",
+    "node.js.detected.package.eslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "yarn",
+    "settings.editor.selected.configurable": "vcs.Git",
+    "ts.external.directory.path": "\\\\wsl$\\Ubuntu\\home\\ramona\\gitrepos\\PaperMasters\\dapp\\node_modules\\typescript\\lib",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="\\wsl$\Ubuntu\home\ramona\gitrepos\MintIdentityTPM\dapp\src\abiFiles" />
@@ -91,7 +91,7 @@
       <workItem from="1654370145651" duration="285000" />
       <workItem from="1654371006069" duration="41000" />
       <workItem from="1654371202018" duration="65000" />
-      <workItem from="1654371282729" duration="2499000" />
+      <workItem from="1654371282729" duration="3620000" />
     </task>
     <servers />
   </component>

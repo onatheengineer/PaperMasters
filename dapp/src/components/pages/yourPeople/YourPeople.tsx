@@ -113,7 +113,7 @@ export const YourPeople: FC<InterfaceYourPeople> = () => {
           New, Updated and Future Features
         </Heading>
         <Text px={20} pb={5} color={'pmpurple.13'}>
-          In the future I hope to make a linked Icon of your identity
+          In the future I hope to make a linked Icon of your identity page so
           page so that you can use it to attached to your name outside of the
           PaperMasters site. Analytics are coming, of course I need data first
           :)
