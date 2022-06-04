@@ -6,14 +6,11 @@
   <component name="ChangeListManager">
     <list default="true" id="bd5141e4-3bb7-4cde-919e-76fee008f78d" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/MintIdentityTPM.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/MintIdentityTPM.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dapp/src/abiFiles/PaperMastersNFI.json" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/abiFiles/PaperMastersNFI.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dapp/src/components/pages/home/Home.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/components/pages/home/Home.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dapp/src/features/accountBC/accountBCSaga.ts" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/features/accountBC/accountBCSaga.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dapp/src/features/mintNFI/mintNFISaga.ts" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/features/mintNFI/mintNFISaga.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dapp/src/react-app-env.d.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dapp/src/setupTests.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dapp/src/contract/PaperMastersNFI.sol" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dapp/src/contract/PaperMastersNFI.test.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dapp/src/contract/PaperMastersNFI_NFT_old.sol" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dapp/src/contractTesting/one.test.ts" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/dapp/webstorm-styled-components" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/webstorm-styled-components" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dapp/webstorm-styled-components/.github/ISSUE_TEMPLATE.md" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/webstorm-styled-components/.github/ISSUE_TEMPLATE.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dapp/webstorm-styled-components/LICENSE.md" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/webstorm-styled-components/LICENSE.md" afterDir="false" />
@@ -23,9 +20,6 @@
       <change beforePath="$PROJECT_DIR$/dapp/webstorm-styled-components/testData/completion/attrClassNamesFunc.js" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/webstorm-styled-components/testData/completion/attrClassNamesFunc.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dapp/webstorm-styled-components/testData/completion/attrClassNamesNestedExpression.js" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/webstorm-styled-components/testData/completion/attrClassNamesNestedExpression.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dapp/webstorm-styled-components/testData/completion/styledComponentsStylesheet.css" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/webstorm-styled-components/testData/completion/styledComponentsStylesheet.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/truffle/build/contracts/Migrations.json" beforeDir="false" afterPath="$PROJECT_DIR$/truffle/build/contracts/Migrations.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/truffle/build/contracts/PaperMastersNFI.json" beforeDir="false" afterPath="$PROJECT_DIR$/truffle/build/contracts/PaperMastersNFI.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/truffle/truffle-config.js" beforeDir="false" afterPath="$PROJECT_DIR$/truffle/truffle-config.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
