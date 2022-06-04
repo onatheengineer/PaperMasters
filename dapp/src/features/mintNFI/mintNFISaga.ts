@@ -26,10 +26,9 @@ import { MintingNFIStruct } from './mintNFISlice.types';
 const baseURL = 'https://ociuozqx85.execute-api.us-east-1.amazonaws.com';
 
 const web3 = new Web3(Web3.givenProvider);
-const NFIContract = new web3.eth.Contract(
-  MintABI.abi as any,
-  MintABI.networks['3'].address,
-);
+const ntw = MintABI.networks as { [cid: string]: { address: string } };
+console.log(ntw);
+const NFIContract = new web3.eth.Contract(MintABI.abi as any, ntw['3'].address);
 
 function* mintNFISaga({
   payload,

@@ -1,3 +1,4 @@
+import detectEthereumProvider from '@metamask/detect-provider';
 import type { PayloadAction } from '@reduxjs/toolkit';
 import WalletConnect from '@walletconnect/client';
 import QRCodeModal from '@walletconnect/qrcode-modal';
@@ -152,12 +153,18 @@ export function* accountArrMetaMaskSaga(): SagaIterator {
         );
       }
     } else {
-      // const provider = await detectEthereumProvider();
+      const provider = new ethers.providers.Web3Provider(
+        window.ethereum,
+        'any',
+      );
+      // const provider = yield call(detectEthereumProvider);
       // const provider = new ethers.providers!.Web3Provider(window.ethereum);
       // console.log('accountArrBCprovider:', provider);
-      const accArr: string[] = yield call(window.ethereum.request, {
-        method: 'eth_requestAccounts',
-      });
+      const accArr: string[] = yield call(
+        provider.send,
+        'eth_requestAccounts',
+        [],
+      );
 
       if (accArr === null) {
         put(

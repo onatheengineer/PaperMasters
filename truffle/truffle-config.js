@@ -46,7 +46,7 @@ module.exports = {
       // },
       ropsten: {
           provider: function() {
-              return new HDWalletProvider('b3dd75968bba439d80769d163ce14fc9', "https://ropsten.infura.io/v3/c97ad56e08674161a95ba16c6f855b6a");
+              return new HDWalletProvider('d57d870e03d8fe5bacda36353179d0e0ccfe952a2b282bd0093c7324dae140e6', "https://ropsten.infura.io/v3/c97ad56e08674161a95ba16c6f855b6a");
           },
           network_id: '3',
       },

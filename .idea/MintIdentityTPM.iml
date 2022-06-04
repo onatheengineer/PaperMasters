@@ -5,6 +5,9 @@
       <excludeFolder url="file://$MODULE_DIR$/temp" />
       <excludeFolder url="file://$MODULE_DIR$/.tmp" />
       <excludeFolder url="file://$MODULE_DIR$/tmp" />
+      <excludeFolder url="file://$MODULE_DIR$/hardhat/artifacts" />
+      <excludeFolder url="file://$MODULE_DIR$/hardhat/cache" />
+      <excludeFolder url="file://$MODULE_DIR$/hardhat/typechain" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

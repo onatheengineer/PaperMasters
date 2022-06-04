@@ -1,3 +1,15 @@
+contract
+contractTesting
+hardhat
+testReactJson
+truffle
+public
+scripts
+abiFiles
+assets
+
+
+
 #truffle
 truffle/.secret
 truffle/.privateKeyTest
