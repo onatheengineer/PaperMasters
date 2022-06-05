@@ -603,8 +603,8 @@ export const Validate: FC = () => {
                     </Modal>
                   )}
                 </Center>
-                <Center>
-                  {giver !== '' ? (
+                {giver !== '' ? (
+                  <Center>
                     <Box
                       border={'1px solid'}
                       borderColor={'pmpurple.13'}
@@ -617,8 +617,8 @@ export const Validate: FC = () => {
                     >
                       <Text as="u">Estimated Gas: {gasPricePrice}</Text>
                     </Box>
-                  ) : null}
-                </Center>
+                  </Center>
+                ) : null}
               </Stack>
             </Box>
           </VStack>
