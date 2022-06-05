@@ -77,7 +77,8 @@
     "build": "react-app-rewired build",
     "test": "react-app-rewired test",
     "eject": "react-scripts eject",
-    "test:watch": "yarn test -- --watch"
+    "test:watch": "yarn test -- --watch",
+    "serve":"serve -s build"
   },
   "browserslist": {
     "production": [
