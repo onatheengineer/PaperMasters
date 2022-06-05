@@ -46,7 +46,24 @@ import {
 } from '../../../features/reactQuery/RTKQuery';
 import { SocialMediaComponent } from './SocialMedia';
 
-function initialState() {
+const initialState = {
+  ownerName: '',
+  ownerEmail: '',
+  ownerDescription: '',
+  linkedin: '',
+  twitter: '',
+  github: '',
+  discord: '',
+  youtube: '',
+  instagram: '',
+  twitch: '',
+  facebook: '',
+  opensea: '',
+  socialButtonGeneric1: '',
+  socialButtonGeneric2: '',
+};
+
+function initialStateold() {
   return {
     ownerName: '',
     ownerEmail: '',
@@ -124,12 +141,14 @@ export const DrawerComponent: FC<ParamsURLInterface> = ({
   const [updateAccountDictionary] = useUpdateAccountDictionaryMutation();
 
   console.log('useGetSingleAccountQueryQu:', useGetSingleAccountQueryQu);
-  console.log('usePostAccountDictionaryMutationMu:', postAccountDictionary);
+  // console.log('usePostAccountDictionaryMutationMu:', postAccountDictionary);
 
   const [state, dispatchAccountProfileDictionary] = useReducer(
     reducer,
-    singleAccountDictionaryDBDB,
     initialState,
+    (initialStatein) => {
+      return initialState;
+    },
   );
   console.log('this is the state in my useReducer:', state);
 
@@ -213,26 +232,31 @@ export const DrawerComponent: FC<ParamsURLInterface> = ({
       chainId: chainIdURL as string,
       walletAccount: paramsWalletURL as string,
       createDate: singleAccountDictionaryDBDB.createDate,
-      ownerName: state.ownerName,
-      ownerEmail: state.ownerEmail,
-      ownerDescription: state.ownerDescription,
+      ownerName: !state.ownerName ? '' : state.ownerName,
+      ownerEmail: !state.ownerEmail ? '' : state.ownerEmail,
+      ownerDescription: !state.ownerDescription ? '' : state.ownerDescription,
       socialMediaLinks: {
-        linkedin: state.linkedin,
-        twitter: state.twitter,
-        github: state.github,
-        instagram: state.instagram,
-        discord: state.discord,
-        facebook: state.facebook,
-        twitch: state.twitch,
-        reddit: state.reddit,
-        youtube: state.youtube,
-        opensea: state.opensea,
-        socialButtonGeneric1: state.socialButtonGeneric1,
-        socialButtonGeneric2: state.socialButtonGeneric2,
+        linkedin: !state.linkedin ? '' : state.linkedin,
+        twitter: !state.twitter ? '' : state.twitter,
+        github: !state.github ? '' : state.github,
+        instagram: !state.instagram ? '' : state.instagram,
+        discord: !state.discord ? '' : state.discord,
+        facebook: !state.facebook ? '' : state.facebook,
+        twitch: !state.twitch ? '' : state.twitch,
+        reddit: !state.reddit ? '' : state.reddit,
+        youtube: !state.youtube ? '' : state.youtube,
+        opensea: !state.opensea ? '' : state.opensea,
+        socialButtonGeneric1: !state.socialButtonGeneric1
+          ? ''
+          : state.socialButtonGeneric1,
+        socialButtonGeneric2: !state.socialButtonGeneric2
+          ? ''
+          : state.socialButtonGeneric2,
       },
       emailValidationNotification: false,
       emailReportNotification: false,
     };
+    console.log(accountProfileDictionary);
     await updateAccountDictionary(accountProfileDictionary);
     onClose();
   };
