@@ -20,7 +20,7 @@ import { SiEthereum } from 'react-icons/si';
 import { Link as ReachLink, Navigate, useParams } from 'react-router-dom';
 
 import { useAppDispatch, useAppSelector } from '../../../app/hooks';
-import bgImage from '../../../assets/legoLavendarheadercroped.png'
+import bgImage from '../../../assets/legoLavendarheadercroped.png';
 import { singleStructBCAction } from '../../../features/accountBC/AccountBCSlice';
 import {
   accountArrDBAction,
