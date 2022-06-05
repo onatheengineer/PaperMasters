@@ -160,11 +160,11 @@ export function* accountArrMetaMaskSaga(): SagaIterator {
       // const provider = yield call(detectEthereumProvider);
       // const provider = new ethers.providers!.Web3Provider(window.ethereum);
       // console.log('accountArrBCprovider:', provider);
-      const accArr: string[] = yield call(
-        provider.send,
-        'eth_requestAccounts',
-        [],
-      );
+
+      console.log(provider);
+      const accArr = yield Promise.resolve(
+        provider.send('eth_requestAccounts', []),
+      ) as any;
 
       if (accArr === null) {
         put(
@@ -177,15 +177,18 @@ export function* accountArrMetaMaskSaga(): SagaIterator {
       }
 
       console.log(
-        "accArr -- remember, Ethers doesn't follow ASCII !!!",
+        "accArr -- remember, ethersjs doesn't follow ASCII !!!",
         accArr,
       );
       const accArrChecksum: string[] = [ethers.utils.getAddress(accArr[0])];
       console.log('accArrChecksum', accArrChecksum);
+
       // TODO note to self - this comes out of the BC as lowercase - it will NOT match MetaMask - think about ASCII - technically .toLowerCase() is a different string
-      const chainId: string = yield call(window.ethereum.request, {
-        method: 'eth_chainId',
-      });
+      // TODO JEST/RTL testing - metamastk might change this again! catch error in analytics
+
+      const chainId: string = yield Promise.resolve(
+        provider.send('eth_chainId', []),
+      ) as any;
       console.log(chainId);
       const chainIdDecimal: number = parseInt(chainId, 16);
       console.log('chainIdDecimal', chainIdDecimal);
@@ -221,7 +224,7 @@ export function* accountArrMetaMaskSaga(): SagaIterator {
 //         }
 //     } catch (e) {
 //         console.error("singleStructBCSaga:", e)
-//         //TODO account for the fact that their might actually be an identity and that the saga failed for another reason
+//         //TODO account for the fact that their might actually be an identity and that the saga failed for another reason - Jest/RTL test needed
 //         yield put(addressHasIdentityBool(false));
 //     }
 // }
@@ -234,7 +237,7 @@ export function* accountArrMetaMaskSaga(): SagaIterator {
 //         const NFIContract = new web3.eth.Contract(MintABI.abi as any, MintABI.networks[payload].address);
 //         console.log("NFIContract:", NFIContract);
 //         const identStructBC = yield call(NFIContract.methods.allIdentityStructs().call);
-//         //TODO the corrected formatt is [[]] coming off the blockchain - BSStruct
+//         //TODO the corrected format is [[]] coming off the blockchain - BSStruct -- arr.Flat() it if needed -- use a functional test!
 //         // identStructBC.map((el: BCStruct)=>{
 //         //     el.walletAccount,
 //         //         el.profession,
@@ -281,7 +284,7 @@ export function* accountArrMetaMaskSaga(): SagaIterator {
 //                 const addressToTokenIDID = yield call(NFIContract.methods.addressToTokenID(paramsWalletURL[0]).call);
 //                 console.log("addresstotokenId:", addressToTokenIDID)
 //                 const addressToTokenIDIDNUMBER = parseInt(addressToTokenIDID)
-//                 //TODO if addresstoTikenID is a string then the below if statement needs changed
+//                 //TODO if addresstoTokenID is a string then the below if statement needs changed - - Jest/RTL test needed!
 //                 if (addressToTokenIDIDNUMBER >= 1) {
 //                     yield put(addressToTokenBool(true));
 //                     yield put(addressToTokenID(addressToTokenIDIDNUMBER));
