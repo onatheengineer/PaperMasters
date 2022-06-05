@@ -8,4 +8,4 @@ RUN yarn install --silent
 COPY . /usr/src/app
 WORKDIR /usr/src/app
 RUN yarn run build
-RUN yarn install -g serve
+RUN yarn global add serve
