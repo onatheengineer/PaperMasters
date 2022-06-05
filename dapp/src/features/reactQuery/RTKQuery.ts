@@ -148,6 +148,7 @@ export async function fetchIdentities() {
       // const rpcSupported = chainIdSupportedArr[0].rpc[0];
       // console.log("rpcsupported", rpcSupported)
       const network = chainIdSupportedArr[0].name.toLowerCase();
+      console.log(network);
       const provider = await ethers.getDefaultProvider(network, {
         etherscan: 'RYVBB5ZI138MHIX2JJVWBT6MVTGXJT133Q',
         infura: 'c97ad56e08674161a95ba16c6f855b6a',
