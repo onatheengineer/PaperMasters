@@ -288,7 +288,7 @@ const DesktopSubNav = ({ label, subLabel, navLink, navIcon }: NavItem) => {
           <HStack>
             {navIcon}
             <Text
-              fontSize={'sm'}
+              fontSize={'md'}
               transition={'all .3s ease'}
               // _groupHover={{ color: 'pmpurple.13' }}
               fontWeight={500}
@@ -296,7 +296,7 @@ const DesktopSubNav = ({ label, subLabel, navLink, navIcon }: NavItem) => {
               {label}
             </Text>
           </HStack>
-          <Text fontSize={'x-small'}>{subLabel}</Text>
+          <Text fontSize={'sm'}>{subLabel}</Text>
         </Box>
       </Stack>
     </Link>
