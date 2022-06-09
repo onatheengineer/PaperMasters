@@ -52,15 +52,23 @@ export const AccountLedger: FC<ParamsURLInterface> = ({
                   flex={'max-content'}
                   w={'100%'}
                   // border={'1px solid red'}
-                  py={'5px'}
+                  // py={'5px'}
                   bgColor={index % 2 === 0 ? 'white' : '#eeeeee'}
                   borderBottom={'1px solid'}
                   borderColor={'pmpurple.13'}
-                  px={2}
+                  // px={2}
                   fontSize={'10pt'}
                 >
-                  <Stack>
-                    <HStack>
+                  <Stack border={'1px solid pink'}>
+                    <Stack
+                      // direction={['column', 'row']}
+                      border={'1px solid green'}
+                      // pt={{ base: '12px', lg: '0px' }}
+                      flexDirection={{
+                        base: 'column',
+                        lg: 'row',
+                      }}
+                    >
                       <Box>
                         <Tooltip
                           label={timeStampFormatted}
@@ -90,7 +98,7 @@ export const AccountLedger: FC<ParamsURLInterface> = ({
                           textAlign={'left'}
                           color={'pmpurple.13'}
                           whiteSpace={'nowrap'}
-                          w={{ base: '250px', sm: 'notset' }}
+                          textOverflow={{ base: 'ellipsis', xl: 'none' }}
                         >
                           <Tag
                             bgColor={'pmpurple.7'}
@@ -103,7 +111,7 @@ export const AccountLedger: FC<ParamsURLInterface> = ({
                         </Text>
                       </Box>
                       <Spacer />
-                      <Box>
+                      <Box border={'1px solid yellow'}>
                         <Text>
                           <Tag
                             fontSize={'9pt'}
@@ -115,45 +123,67 @@ export const AccountLedger: FC<ParamsURLInterface> = ({
                           {valueFormatted}
                         </Text>
                       </Box>
-                    </HStack>
-                    <HStack>
-                      <Text
-                        color={'pmpurple.13'}
-                        whiteSpace={'nowrap'}
-                        fontWeight="400"
+                    </Stack>
+                    <Stack
+                      // direction={['column', 'row']}
+                      border={'1px solid green'}
+                      // pt={{ base: '12px', lg: '0px' }}
+                      flexDirection={{
+                        base: 'column',
+                        lg: 'row',
+                      }}
+                    >
+                      <Box
+                        border={'1px solid blue'}
+                        // pt={{ base: '12px', md: '0px' }}
                       >
-                        <Tag
-                          fontSize={'9pt'}
-                          bgColor={'pmpurple.7'}
-                          color={'white'}
+                        <Text
+                          color={'pmpurple.13'}
+                          whiteSpace={'nowrap'}
+                          fontWeight="400"
                         >
-                          From
-                        </Tag>{' '}
-                        {el.from}
-                      </Text>
+                          <Tag
+                            fontSize={'9pt'}
+                            bgColor={'pmpurple.7'}
+                            color={'white'}
+                          >
+                            From
+                          </Tag>{' '}
+                          {el.from}
+                        </Text>
+                      </Box>
                       <Spacer />
-                      <Text
-                        color={'pmpurple.13'}
-                        whiteSpace={'nowrap'}
-                        fontWeight="400"
+                      <Box
+                        border={'1px solid red'}
+                        // pt={{ base: '12px', lg: '0px' }}
+                        flexDirection={{
+                          base: 'column',
+                          lg: 'row',
+                        }}
                       >
-                        {' '}
-                        <Tag
-                          fontSize={'9pt'}
-                          bgColor={'pmpurple.7'}
-                          color={'white'}
+                        <Text
+                          color={'pmpurple.13'}
+                          whiteSpace={'nowrap'}
+                          fontWeight="400"
                         >
-                          To
-                        </Tag>{' '}
-                        {el.to !== null ? (
-                          el.to
-                        ) : (
-                          <Box display={'inline'} color={'pmpurple.27'}>
-                            Contract Creation
-                          </Box>
-                        )}
-                      </Text>
-                    </HStack>
+                          {' '}
+                          <Tag
+                            fontSize={'9pt'}
+                            bgColor={'pmpurple.7'}
+                            color={'white'}
+                          >
+                            To
+                          </Tag>{' '}
+                          {el.to !== null ? (
+                            el.to
+                          ) : (
+                            <Box display={'inline'} color={'pmpurple.27'}>
+                              Contract Creation
+                            </Box>
+                          )}
+                        </Text>
+                      </Box>
+                    </Stack>
                   </Stack>
                 </Box>
               );

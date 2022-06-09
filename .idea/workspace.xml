@@ -5,9 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bd5141e4-3bb7-4cde-919e-76fee008f78d" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dapp/package-lock.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dapp/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dapp/src/components/pages/identity/AccountLedger.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/components/pages/identity/AccountLedger.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dapp/webstorm-styled-components" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/webstorm-styled-components" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dapp/webstorm-styled-components/.github/ISSUE_TEMPLATE.md" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/webstorm-styled-components/.github/ISSUE_TEMPLATE.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dapp/webstorm-styled-components/LICENSE.md" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/webstorm-styled-components/LICENSE.md" afterDir="false" />
@@ -64,9 +64,11 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "//wsl$/Ubuntu/home/ramona/gitrepos/PaperMasters",
+    "last_opened_file_path": "//wsl$/Ubuntu/home/ramona/gitrepos/GameStopTest",
     "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.standard": "true",
     "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.standard": "",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "yarn",
     "settings.editor.selected.configurable": "vcs.Git",
@@ -97,7 +99,11 @@
       <workItem from="1654370145651" duration="285000" />
       <workItem from="1654371006069" duration="41000" />
       <workItem from="1654371202018" duration="65000" />
-      <workItem from="1654371282729" duration="22702000" />
+      <workItem from="1654371282729" duration="32602000" />
+      <workItem from="1654661985460" duration="248000" />
+      <workItem from="1654705734679" duration="378000" />
+      <workItem from="1654706143939" duration="1178000" />
+      <workItem from="1654786357667" duration="3972000" />
     </task>
     <servers />
   </component>
