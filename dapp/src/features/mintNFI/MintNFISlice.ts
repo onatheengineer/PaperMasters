@@ -19,6 +19,7 @@ const initialStateMint: MintNFI = {
   mintErr: '',
   mintStatusBC: false,
   gasPrice: 0,
+  mintingFee: 100000000000000000,
 };
 
 const initialState: MintState = {
@@ -54,6 +55,9 @@ const MintNFISlice = createSlice({
     accBalance(state, action: PayloadAction<number>) {
       state.mintNFI.accBalance = action.payload;
     },
+    mintingFee(state, action: PayloadAction<number>) {
+      state.mintNFI.mintingFee = action.payload;
+    },
     axiosPOSTReceiptStatus(state, action: PayloadAction<number>) {
       state.axiosPOSTReceiptStatus = action.payload;
     },
@@ -68,6 +72,7 @@ export const {
   accBalanceErr,
   accBalance,
   axiosPOSTReceiptStatus,
+  mintingFee,
 } = MintNFISlice.actions;
 
 // TODO: update which action I am passing through
@@ -76,6 +81,7 @@ export const gasForMintNFIAction = createAction<MintingNFIStruct>(
   'GAS_FOR_MINT_NFI_SAGA',
 );
 export const gasAccBalanceAction = createAction('GAS_ACC_BALANCE');
+export const mintingFeeAction = createAction('GET_MINTING_FEE');
 export const tokenURIAction = createAction('TOKEN_URL');
 
 export const selectors = {
@@ -97,6 +103,8 @@ export const selectors = {
     state.nfi.mintNFI.accBalanceErr,
   accBalanceSelector: (state: RootState): number =>
     state.nfi.mintNFI.accBalance,
+  mintingFeeSelector: (state: RootState): number =>
+    state.nfi.mintNFI.mintingFee,
   axiosPOSTReceiptStatusSelector: (state: RootState): number =>
     state.nfi.axiosPOSTReceiptStatus,
 };
