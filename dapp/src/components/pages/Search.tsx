@@ -30,6 +30,7 @@ import {
   Thead,
   Tooltip,
   Tr,
+  useBreakpoint,
   VStack,
 } from '@chakra-ui/react';
 import type { FC } from 'react';
@@ -144,6 +145,8 @@ export const Search: FC = () => {
   const accountQuery = useGetAllAccountQuery();
   const nfiQuery = useGetIdentityBCQuery();
 
+  const breakpoint = useBreakpoint('base');
+
   type Cols = {
     shortName: string;
     chainId: string;
@@ -232,8 +235,8 @@ export const Search: FC = () => {
     return predatapredata;
   }, [accountQuery, nfiQuery, filterWallets]);
 
-  const columns: Column<Cols>[] = useMemo(
-    () => [
+  const columns: Column<Cols>[] = useMemo(() => {
+    const cols: Column<Cols>[] = [
       {
         Header: (
           <Center>
@@ -384,7 +387,10 @@ export const Search: FC = () => {
           );
         },
       },
-      {
+    ];
+
+    if (breakpoint !== 'base' && breakpoint !== 'sm') {
+      cols.push({
         Header: (
           <Center>
             <Text style={{ whiteSpace: 'nowrap' }}> Profession </Text>
@@ -399,10 +405,10 @@ export const Search: FC = () => {
             </Text>
           </Center>
         ),
-      },
-    ],
-    [],
-  );
+      });
+    }
+    return cols;
+  }, [breakpoint]);
   const handleClear = () => {
     if (filterWallets) {
       setResetPaginationToggle(!resetPaginationToggle);
