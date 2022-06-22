@@ -1122,7 +1122,7 @@ export const Register: FC = () => {
               Below is what your NFI will look like, please make sure you love
               it!
             </Text>
-            <Text>Non-Fungible Identity Minting Fee: {mintingFee}</Text>
+            <Text>Non-Fungible Identity Minting Fee: .05 ETH</Text>
             <Divider color={'pmpurple.8'} />
             <Box p={{ base: 0, xl: 20 }}>
               <AvatarNFI
