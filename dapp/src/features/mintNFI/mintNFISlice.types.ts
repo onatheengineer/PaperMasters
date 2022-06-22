@@ -11,7 +11,6 @@ export interface MintingNFIStruct {
 }
 
 export interface MintNFI {
-  //before minting
   accBalance: number;
   accBalanceErr: string;
   mintSucceeded:
@@ -24,4 +23,5 @@ export interface MintNFI {
   mintErr: string;
   mintStatusBC: boolean;
   gasPrice: number;
+  mintingFee: number;
 }

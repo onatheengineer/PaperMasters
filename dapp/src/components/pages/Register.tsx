@@ -43,6 +43,7 @@ import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import {
   gasAccBalanceAction,
   gasForMintNFIAction,
+  mintingFeeAction,
   mintNFIAction,
 } from '../../features/mintNFI/MintNFISlice';
 import { MintingNFIStruct } from '../../features/mintNFI/mintNFISlice.types';
@@ -64,6 +65,7 @@ export const Register: FC = () => {
   );
   const accountArrArr = useAppSelector((state) => state.accountBC.accountArr);
   const gasPricePrice = useAppSelector((state) => state.nfi.mintNFI.gasPrice);
+  const mintingFee = useAppSelector((state) => state.nfi.mintNFI.mintingFee);
   const mintSucceededSucceeded = useAppSelector(
     (state) => state.nfi.mintNFI.mintSucceeded,
   );
@@ -213,6 +215,10 @@ export const Register: FC = () => {
   };
 
   useEffect(() => {
+    dispatch(mintingFeeAction());
+  }, []);
+
+  useEffect(() => {
     console.log('accountsArr', accountArrArr.length);
     if (accountArrArr.length === 0) {
       dispatch(gasAccBalanceAction());
@@ -232,6 +238,13 @@ export const Register: FC = () => {
   ]);
 
   const [modalDisplayTitle, modalDisplayText] = useMemo(() => {
+    console.log('GO USE MEMO');
+    console.log(
+      accountArrArr,
+      singleNFIReceiptDBDB,
+      useGetSingleIdentityBCQueryQuery,
+      mintSucceededSucceeded,
+    );
     if (accountArrArr.length === 0) {
       setIsModalOpen(true);
       return [
@@ -287,7 +300,6 @@ export const Register: FC = () => {
     useGetSingleIdentityBCQueryQuery,
     mintSucceededSucceeded,
   ]);
-
   if (mintSucceededSucceeded === 'succeeded') {
     return (
       <Navigate to={`/identity/${chainIdProviderProvider}/${accountArrArr}`} />
@@ -1110,6 +1122,7 @@ export const Register: FC = () => {
               Below is what your NFI will look like, please make sure you love
               it!
             </Text>
+            <Text>Non-Fungible Identity Minting Fee: {mintingFee}</Text>
             <Divider color={'pmpurple.8'} />
             <Box p={{ base: 0, xl: 20 }}>
               <AvatarNFI

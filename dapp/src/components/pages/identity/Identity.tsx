@@ -529,7 +529,7 @@ export const Identity: FC = () => {
                 // mx={{xl: '32px'}}
                 borderRadius="15px"
                 ml={{ base: 0, md: 2 }}
-                mt={{ base: '5px', md: 'none' }}
+                mt={{ base: '8px', md: 0 }}
                 bg="white"
                 px="24px"
                 h={'462px'}

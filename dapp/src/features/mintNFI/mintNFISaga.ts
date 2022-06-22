@@ -16,9 +16,12 @@ import {
   gasForMinting,
   gasForMintNFIAction,
   mintingErr,
+  mintingFee,
+  mintingFeeAction,
   mintNFIAction,
   mintStatusBC,
   mintSucceeded,
+  selectors,
   tokenURIAction,
 } from './MintNFISlice';
 import { MintingNFIStruct } from './mintNFISlice.types';
@@ -51,6 +54,9 @@ function* mintNFISaga({
     const chainIdProviderProvider = yield select(
       accountBCselectors.chainIdProviderSelector,
     );
+
+    const mintFee = yield select(selectors.mintingFeeSelector);
+
     if (chainIdStatusStatus === 'yesProvider') {
       if (
         Object.prototype.hasOwnProperty.call(
@@ -67,6 +73,7 @@ function* mintNFISaga({
           yield put(mintingErr('Please Connect Wallet to mint an NFI'));
           return;
         }
+
         const prepareResult = yield call(
           NFIContract.methods.mintNFI,
           payload.name,
@@ -82,7 +89,7 @@ function* mintNFISaga({
         // TODO: get fee variable from contract and replace the 'value'
         const mintResult: any = yield call(prepareResult.send, {
           from: requestAccountArr[0],
-          value: 1,
+          value: mintFee,
         });
         const receiptToDB: NFIReceiptInterface = {
           receipt: mintResult,
@@ -147,6 +154,16 @@ function* mintNFISaga({
     yield put(mintingErr(`${mintFailed.message}, ${mintFailed.name}`));
   }
 }
+function* getMintingFee(): SagaIterator {
+  try {
+    const mintFee: any = yield call(NFIContract.methods.getIdentityFee().call);
+    console.log('MINTINGFEE: ', mintFee);
+    yield put(mintingFee(mintFee));
+  } catch (e: any) {
+    console.log(e);
+    console.log(e.message);
+  }
+}
 
 function* getGasForMintSaga({
   payload,
@@ -154,6 +171,9 @@ function* getGasForMintSaga({
   const requestAccountArr: string[] = yield select(
     accountBCselectors.accountArrSelector,
   );
+
+  const mintFee: number = yield select(selectors.mintingFeeSelector);
+
   const prepareResult = yield call(
     NFIContract.methods.mintNFI,
     payload.name,
@@ -169,7 +189,7 @@ function* getGasForMintSaga({
     const gasMintResult: any = yield call(prepareResult.estimateGas, {
       from: requestAccountArr[0],
       gas: null,
-      value: 1,
+      value: mintFee,
     });
     const getGasPrice = yield call(web3.eth.getGasPrice);
     console.log('estimated gas price getPrice:', getGasPrice);
@@ -213,5 +233,5 @@ export function* watchMintNFISaga(): SagaIterator {
   yield takeLatest(mintNFIAction.type, mintNFISaga);
   yield takeLatest(gasForMintNFIAction.type, getGasForMintSaga);
   yield takeLatest(gasAccBalanceAction.type, gasAccBalanceSaga);
-  yield takeLatest(tokenURIAction.type, tokenURISaga);
+  yield takeLatest(mintingFeeAction.type, getMintingFee);
 }
