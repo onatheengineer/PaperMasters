@@ -7,11 +7,15 @@ import {
   Tag,
   Text,
   Tooltip,
+  VStack,
 } from '@chakra-ui/react';
 import { ethers } from 'ethers';
 import moment from 'moment';
 import * as React from 'react';
 import { FC } from 'react';
+import { AiFillCalendar, AiOutlineTransaction } from 'react-icons/ai';
+import { MdCallReceived } from 'react-icons/md';
+import { SiEthereum } from 'react-icons/si';
 
 import { ParamsURLInterface } from '../../../features/accountDB/AccountDBSlice.types';
 import { useGetQueryMainnetQuery } from '../../../features/reactQuery/RTKQuery';
@@ -34,7 +38,7 @@ export const AccountLedger: FC<ParamsURLInterface> = ({
       flexGrow={1}
       overflow={'none'}
     >
-      <Box w={'100%'} h={'100%'} overflow={'auto'}>
+      <Box w={'100%'} h={'100%'} overflow={'auto'} p={'5px'}>
         <Stack w={'100%'}>
           {getLedger.isSuccess &&
             getLedger.data.history.map((el: any, index: number) => {
@@ -54,126 +58,111 @@ export const AccountLedger: FC<ParamsURLInterface> = ({
                   // border={'1px solid red'}
                   // py={'5px'}
                   bgColor={index % 2 === 0 ? 'white' : '#eeeeee'}
-                  borderBottom={'1px solid'}
-                  borderColor={'pmpurple.13'}
                   // px={2}
                   fontSize={'10pt'}
                 >
-                  <Stack border={'1px solid pink'}>
-                    <Stack
-                      // direction={['column', 'row']}
-                      border={'1px solid green'}
-                      // pt={{ base: '12px', lg: '0px' }}
-                      flexDirection={{
-                        base: 'column',
-                        lg: 'row',
-                      }}
-                    >
-                      <Box>
-                        <Tooltip
-                          label={timeStampFormatted}
-                          aria-label="A tooltip"
-                          bg={'pmpurple.8'}
-                        >
-                          <Text
-                            // pl={"20px"}
-                            // noOfLines={1}
-                            color={'pmpurple.13'}
-                            fontWeight="400"
-                            whiteSpace={'nowrap'}
+                  <Stack w={'100%'}>
+                    <Box w={'100%'}>
+                      <HStack
+                        // direction={['column', 'row']}
+                        // pt={{ base: '12px', lg: '0px' }}
+                        spacing={{ base: 2, md: 5 }}
+                        textAlign={'left'}
+                      >
+                        <Box ml={'0px'} w={'5%'}>
+                          <Tooltip
+                            label={`Transaction ${el.hash}`}
+                            aria-label="A tooltip"
+                            bg={'pmpurple.8'}
                           >
-                            <Tag
-                              fontSize={'9pt'}
-                              bgColor={'pmpurple.13'}
-                              color={'white'}
-                            >
+                            <span>
+                              <AiOutlineTransaction fontSize={'18px'} />
+                            </span>
+                          </Tooltip>
+                        </Box>
+                        <Box ml={'10px'} w={'35%'}>
+                          <HStack>
+                            Icon={<AiFillCalendar fontSize="18px" />}
+                            <Text fontSize="sm" fontWeight="bold">
                               {timeStampShort}
-                            </Tag>
-                          </Text>
-                        </Tooltip>
-                      </Box>
-
-                      <Box>
-                        <Text
-                          textAlign={'left'}
-                          color={'pmpurple.13'}
-                          whiteSpace={'nowrap'}
-                          textOverflow={{ base: 'ellipsis', xl: 'none' }}
-                        >
-                          <Tag
-                            bgColor={'pmpurple.7'}
-                            color={'white'}
-                            fontSize={'9pt'}
-                          >
-                            Tx
-                          </Tag>{' '}
-                          {el.hash}
-                        </Text>
-                      </Box>
-                      <Spacer />
-                      <Box border={'1px solid yellow'}>
-                        <Text>
-                          <Tag
-                            fontSize={'9pt'}
-                            bgColor={'pmpurple.7'}
-                            color={'white'}
-                          >
-                            Amount
-                          </Tag>{' '}
-                          {valueFormatted}
-                        </Text>
-                      </Box>
-                    </Stack>
+                            </Text>
+                          </HStack>
+                        </Box>
+                        <Box w={'60%'}>
+                          <HStack textAlign={'right'}>
+                            {el.from === paramsWalletURL ? (
+                              <Tooltip label={'Payment Sent'}>
+                                <span>
+                                  <MdCallReceived color={'green.100'} />
+                                </span>
+                              </Tooltip>
+                            ) : (
+                              <Tooltip label={'Payment Received'}>
+                                <span>
+                                  <MdCallReceived
+                                    style={{ transform: 'rotate(90deg)' }}
+                                  />
+                                </span>
+                              </Tooltip>
+                            )}
+                            <span>
+                              <SiEthereum fontSize="18px" />
+                            </span>
+                            <Tooltip label={'Transaction Cost'}>
+                              <Text
+                                fontSize="sm"
+                                fontWeight="bold"
+                                textAlign={'right'}
+                              >
+                                {valueFormatted}
+                              </Text>
+                            </Tooltip>
+                          </HStack>
+                        </Box>
+                      </HStack>
+                    </Box>
                     <Stack
                       // direction={['column', 'row']}
-                      border={'1px solid green'}
                       // pt={{ base: '12px', lg: '0px' }}
+                      spacing={0}
                       flexDirection={{
                         base: 'column',
-                        lg: 'row',
                       }}
+                      mb={'5px'}
                     >
                       <Box
-                        border={'1px solid blue'}
-                        // pt={{ base: '12px', md: '0px' }}
+                      // pt={{ base: '12px', md: '0px' }}
                       >
+                        <Text w={'100%'} borderBottom={'1px solid #aaaaaa'}>
+                          From
+                        </Text>
                         <Text
                           color={'pmpurple.13'}
-                          whiteSpace={'nowrap'}
-                          fontWeight="400"
+                          overflowWrap={'break-word'}
+                          fontWeight={
+                            paramsWalletURL === el.from ? '900' : '400'
+                          }
+                          fontSize={'9pt'}
                         >
-                          <Tag
-                            fontSize={'9pt'}
-                            bgColor={'pmpurple.7'}
-                            color={'white'}
-                          >
-                            From
-                          </Tag>{' '}
                           {el.from}
                         </Text>
                       </Box>
-                      <Spacer />
                       <Box
-                        border={'1px solid red'}
                         // pt={{ base: '12px', lg: '0px' }}
                         flexDirection={{
                           base: 'column',
                           lg: 'row',
                         }}
                       >
+                        <Text w={'100%'} borderBottom={'1px solid #aaaaaa'}>
+                          To
+                        </Text>
                         <Text
                           color={'pmpurple.13'}
-                          whiteSpace={'nowrap'}
-                          fontWeight="400"
+                          fontWeight={paramsWalletURL === el.to ? '900' : '400'}
+                          overflowWrap={'break-word'}
+                          fontSize={'9pt'}
                         >
-                          {' '}
-                          <Tag
-                            fontSize={'9pt'}
-                            bgColor={'pmpurple.7'}
-                            color={'white'}
-                          >
-                            To
-                          </Tag>{' '}
                           {el.to !== null ? (
                             el.to
                           ) : (

@@ -5,19 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bd5141e4-3bb7-4cde-919e-76fee008f78d" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dapp/src/components/pages/identity/AccountLedger.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/components/pages/identity/AccountLedger.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dapp/webstorm-styled-components" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/webstorm-styled-components" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dapp/webstorm-styled-components/.github/ISSUE_TEMPLATE.md" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/webstorm-styled-components/.github/ISSUE_TEMPLATE.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dapp/webstorm-styled-components/LICENSE.md" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/webstorm-styled-components/LICENSE.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dapp/webstorm-styled-components/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/webstorm-styled-components/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dapp/webstorm-styled-components/src/main/resources/META-INF/CHANGELOG.md" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/webstorm-styled-components/src/main/resources/META-INF/CHANGELOG.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dapp/webstorm-styled-components/testData/completion/attrClassNames.js" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/webstorm-styled-components/testData/completion/attrClassNames.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dapp/webstorm-styled-components/testData/completion/attrClassNamesFunc.js" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/webstorm-styled-components/testData/completion/attrClassNamesFunc.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dapp/webstorm-styled-components/testData/completion/attrClassNamesNestedExpression.js" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/webstorm-styled-components/testData/completion/attrClassNamesNestedExpression.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dapp/webstorm-styled-components/testData/completion/styledComponentsStylesheet.css" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/webstorm-styled-components/testData/completion/styledComponentsStylesheet.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dapp/src/components/pages/identity/Identity.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/components/pages/identity/Identity.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dapp/src/components/pages/identity/mentions/Mentions.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/components/pages/identity/mentions/Mentions.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,17 +27,17 @@
     </option>
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/dapp/src/App.tsx" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/dapp/src/components/pages/Register.tsx" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/dapp/src/components/pages/Search.tsx" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/dapp/src/components/pages/home/Navbar.test.tsx" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/dapp/src/components/pages/home/Navbar.tsx" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/dapp/src/components/pages/identity/Header.tsx" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/dapp/src/components/pages/identity/Identity.tsx" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/dapp/src/features/accountDB/AccountDBSlice.ts" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/dapp/src/features/accountDB/AccountDBSlice.types.ts" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/dapp/src/features/accountDB/mentions/MentionsSlice.tsx" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/dapp/src/features/reactQuery/RTKQuery.ts" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/dapp/src/components/pages/home/Navbar.tsx" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/dapp/src/features/accountDB/mentions/MentionsSlice.tsx" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/dapp/src/components/pages/Search.tsx" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/dapp/src/features/accountDB/AccountDBSlice.types.ts" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/dapp/src/components/pages/home/Navbar.test.tsx" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/dapp/src/features/accountDB/AccountDBSlice.ts" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/dapp/src/App.tsx" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/dapp/src/components/pages/identity/Header.tsx" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -59,23 +50,11 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "//wsl$/Ubuntu/home/ramona/gitrepos/GameStopTest",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.standard": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.standard": "",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "yarn",
-    "settings.editor.selected.configurable": "vcs.Git",
-    "ts.external.directory.path": "\\\\wsl$\\Ubuntu\\home\\ramona\\gitrepos\\PaperMasters\\dapp\\node_modules\\typescript\\lib",
-    "vue.rearranger.settings.migration": "true"
-  }
-}]]></component>
+  <component name="PropertiesComponent">
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="ts.external.directory.path" value="\\wsl$\Ubuntu\home\user\MintIdentityTPM\dapp\node_modules\typescript\lib" />
+  </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="\\wsl$\Ubuntu\home\ramona\gitrepos\MintIdentityTPM\dapp\src\abiFiles" />
@@ -125,5 +104,6 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
 </project>
