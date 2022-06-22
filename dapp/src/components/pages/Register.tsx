@@ -229,7 +229,6 @@ export const Register: FC = () => {
     website,
     organization,
     uniqueYou,
-    accountArrArr,
   ]);
 
   const [modalDisplayTitle, modalDisplayText] = useMemo(() => {
@@ -278,7 +277,9 @@ export const Register: FC = () => {
     //     setIsModalOpen(true);
     //     return ([" Minted Successful!", 'You did it! You are now a registered PaperMaster, please navigate to your Identity page and update your portfolio.'])
     // };
-    setIsModalOpen(false);
+    if (isModalOpen) {
+      setIsModalOpen(false);
+    }
     return [null, null];
   }, [
     accountArrArr,
