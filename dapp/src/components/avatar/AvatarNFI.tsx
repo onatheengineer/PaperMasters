@@ -219,7 +219,7 @@ export const AvatarNFI: FC<AvatarNFIInterface> = ({
                   mb={'33px'}
                   pb={'0px'}
                   fontSize={'sm'}
-                  color={'pmpurple.13'}
+                  color={'#d3d3d3'}
                 >
                   Origin Date {originDateFormatted}
                 </Text>
