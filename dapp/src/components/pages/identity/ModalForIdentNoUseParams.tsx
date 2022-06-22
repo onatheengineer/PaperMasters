@@ -80,7 +80,7 @@ export const ModalForIdentNoUseParams: FC = () => {
                 fontSize={'14px'}
                 fontWeight={'Bold'}
               >
-                Connect wallet using MetaMask
+                Connect Wallet
               </Text>
               <Sparkle
                 color="#694b69"
@@ -100,7 +100,7 @@ export const ModalForIdentNoUseParams: FC = () => {
               border={'1px solid'}
               borderColor={'pmpurple.8'}
             >
-              Go to Search Page
+              Search Page
             </Button>
           </ModalFooter>
         </ModalContent>
