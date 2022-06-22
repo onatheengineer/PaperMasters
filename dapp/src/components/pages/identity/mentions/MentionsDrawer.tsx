@@ -225,7 +225,7 @@ export const MentionsDrawer: FC<interfaceMentionsDrawer> = ({
                       />
                     </Box>
                   )}
-                {accountArrArr.length !== 0 &&
+                {accountArrArr.length === 0 &&
                   accountArrArr[0] !== paramsWalletURL && (
                     <Box
                       color="pmpurple.15"
