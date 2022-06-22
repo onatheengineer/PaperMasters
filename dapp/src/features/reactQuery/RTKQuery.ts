@@ -97,7 +97,7 @@ export async function fetchEthereumTranastionsMainNet({
     return el.chainId === parseInt(chainIdURL, 10);
   });
   const providerEtherscanMainnet = new ethers.providers.EtherscanProvider(
-    chainIdSupportedArr[0].name.toLowerCase(),
+    chainIdSupportedArr[0].shortName.toLowerCase(),
     'RYVBB5ZI138MHIX2JJVWBT6MVTGXJT133Q',
   );
   console.log('providerEtherscanMainnet', providerEtherscanMainnet);
@@ -119,7 +119,7 @@ export async function fetchEthereumTranastionsMainNet({
 //     return el.chainId === parseInt(chainIdURL, 10);
 //   });
 //   const provider = await ethers.getDefaultProvider(
-//     chainIdSupportedArr[0].name.toLowerCase(),
+//     chainIdSupportedArr[0].shortName.toLowerCase(),
 //     {
 //       etherscan: 'RYVBB5ZI138MHIX2JJVWBT6MVTGXJT133Q',
 //       infura: 'c97ad56e08674161a95ba16c6f855b6a',
@@ -147,7 +147,7 @@ export async function fetchIdentities() {
       // console.log("chainIdSupportedArr", chainIdSupportedArr)
       // const rpcSupported = chainIdSupportedArr[0].rpc[0];
       // console.log("rpcsupported", rpcSupported)
-      const network = chainIdSupportedArr[0].name.toLowerCase();
+      const network = chainIdSupportedArr[0].shortName.toLowerCase();
       console.log(network);
       const provider = await ethers.getDefaultProvider(network, {
         etherscan: 'RYVBB5ZI138MHIX2JJVWBT6MVTGXJT133Q',
@@ -177,7 +177,7 @@ export async function fetchIdentities() {
 //     const chainIdSupportedArr = chainIdNetworks.filter((el) => {
 //         return el.chainId === parseInt(chainIdURL)
 //     });
-//     const provider = ethers.getDefaultProvider(chainIdSupportedArr[0].name.toLowerCase(), {
+//     const provider = ethers.getDefaultProvider(chainIdSupportedArr[0].shortName.toLowerCase(), {
 //         etherscan: 'RYVBB5ZI138MHIX2JJVWBT6MVTGXJT133Q',
 //         infura: 'c97ad56e08674161a95ba16c6f855b6a',
 //         alchemy: 'mEUzvPVY6xECwMieu01t9D3fuYyOYGCl',
@@ -211,7 +211,7 @@ export async function fetchAddressToToken({
         return el.chainId === parseInt(chainIdURL, 10);
       });
       const provider = ethers.getDefaultProvider(
-        chainIdSupportedArr[0].name.toLowerCase(),
+        chainIdSupportedArr[0].shortName.toLowerCase(),
         {
           etherscan: 'RYVBB5ZI138MHIX2JJVWBT6MVTGXJT133Q',
           infura: 'c97ad56e08674161a95ba16c6f855b6a',
@@ -326,7 +326,7 @@ export const nfiBCApi = createApi({
 export const queryBCApi = createApi({
   reducerPath: 'queryBCApi',
   baseQuery: fakeBaseQuery(),
-  tagTypes: ['etherScanApi', 'ropstenApi', 'getBalance'],
+  tagTypes: ['etherScanApi', 'getBalance'],
   endpoints: (builder) => ({
     getQueryMainnet: builder.query<queryBCInterface, ParamsURLInterface>({
       queryFn: fetchEthereumTranastionsMainNet,

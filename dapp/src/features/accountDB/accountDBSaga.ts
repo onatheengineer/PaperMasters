@@ -42,7 +42,7 @@ export function* accountArrDBSaga({
       });
       console.log('chainIdSupportedArr', chainIdSupportedArr[0]);
       const provider = ethers.getDefaultProvider(
-        chainIdSupportedArr[0].name.toLowerCase(),
+        chainIdSupportedArr[0].shortName.toLowerCase(),
         {
           etherscan: 'RYVBB5ZI138MHIX2JJVWBT6MVTGXJT133Q',
           infura: 'c97ad56e08674161a95ba16c6f855b6a',

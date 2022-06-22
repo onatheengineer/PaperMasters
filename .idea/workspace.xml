@@ -6,9 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="bd5141e4-3bb7-4cde-919e-76fee008f78d" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dapp/src/abiFiles/PaperMastersNFI.json" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/abiFiles/PaperMastersNFI.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dapp/src/abiFiles/scenario.json" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/abiFiles/scenario.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dapp/src/components/pages/identity/ModalForIdentNoUseParams.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/components/pages/identity/ModalForIdentNoUseParams.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dapp/src/features/JSON/chainId.json" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/features/JSON/chainId.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dapp/src/features/reactQuery/RTKQuery.ts" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/features/reactQuery/RTKQuery.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

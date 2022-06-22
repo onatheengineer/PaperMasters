@@ -82,7 +82,7 @@ function* mintNFISaga({
         // TODO: get fee variable from contract and replace the 'value'
         const mintResult: any = yield call(prepareResult.send, {
           from: requestAccountArr[0],
-          value: 100000000000000000,
+          value: 1,
         });
         const receiptToDB: NFIReceiptInterface = {
           receipt: mintResult,
@@ -169,7 +169,7 @@ function* getGasForMintSaga({
     const gasMintResult: any = yield call(prepareResult.estimateGas, {
       from: requestAccountArr[0],
       gas: null,
-      value: 100000000000000000,
+      value: 1,
     });
     const getGasPrice = yield call(web3.eth.getGasPrice);
     console.log('estimated gas price getPrice:', getGasPrice);
