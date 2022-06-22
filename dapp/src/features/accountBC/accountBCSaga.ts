@@ -40,8 +40,12 @@ export function* accountArrSaga({
       const chainIdSupportedArr = chainIdNetworks.filter((el: any) => {
         return el.chainId === parseInt(chainId, 10);
       });
+      if (chainIdSupportedArr.length === 0) {
+        yield put(chainIdStatus('failed'));
+        return;
+      }
       const provider = ethers.getDefaultProvider(
-        chainIdSupportedArr[0].name.toLowerCase(),
+        chainIdSupportedArr[0].shortName.toLowerCase(),
         {
           etherscan: 'RYVBB5ZI138MHIX2JJVWBT6MVTGXJT133Q',
           infura: 'c97ad56e08674161a95ba16c6f855b6a',
@@ -152,11 +156,6 @@ export function* accountArrMetaMaskSaga(): SagaIterator {
           }),
         );
       }
-    } else if (window.gamestop !== undefined) {
-      const provider = new ethers.providers.Web3Provider(
-        window.gamestop,
-        'any',
-      );
     } else {
       const provider = new ethers.providers.Web3Provider(
         window.ethereum,
