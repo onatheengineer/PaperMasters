@@ -26,6 +26,8 @@
     </option>
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/dapp/public/favicon.icoZone.Identifier" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/dapp/public/index.html" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/dapp/src/App.tsx" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/dapp/src/components/pages/Register.tsx" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/dapp/src/components/pages/Search.tsx" root0="FORCE_HIGHLIGHTING" />
@@ -33,10 +35,13 @@
     <setting file="file://$PROJECT_DIR$/dapp/src/components/pages/home/Navbar.tsx" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/dapp/src/components/pages/identity/Header.tsx" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/dapp/src/components/pages/identity/Identity.tsx" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/dapp/src/components/pages/identity/mentions/MentionsDrawer.tsx" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/dapp/src/features/accountBC/accountBCSaga.ts" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/dapp/src/features/accountDB/AccountDBSlice.ts" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/dapp/src/features/accountDB/AccountDBSlice.types.ts" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/dapp/src/features/accountDB/mentions/MentionsSlice.tsx" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/dapp/src/features/reactQuery/RTKQuery.ts" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/nginx/conf_prod/default.conf" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -51,12 +56,14 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "last_opened_file_path": "//wsl$/Ubuntu/home/ramona/gitrepos/PaperMasters",
     "node.js.selected.package.tslint": "(autodetect)",
     "ts.external.directory.path": "\\\\wsl$\\Ubuntu\\home\\ramona\\gitrepos\\PaperMasters\\dapp\\node_modules\\typescript\\lib"
   }
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="\\wsl$\Ubuntu\home\ramona\gitrepos\PaperMasters" />
       <recent name="\\wsl$\Ubuntu\home\ramona\gitrepos\MintIdentityTPM\dapp\src\abiFiles" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
