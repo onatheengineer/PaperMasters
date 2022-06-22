@@ -154,9 +154,7 @@ function* mintNFISaga({
     yield put(mintingErr(`${mintFailed.message}, ${mintFailed.name}`));
   }
 }
-
 function* getMintingFee(): SagaIterator {
-  // eslint-disable-next-line no-console
   try {
     const mintFee: any = yield call(NFIContract.methods.getIdentityFee().call);
     yield put(mintingFee(mintFee));
