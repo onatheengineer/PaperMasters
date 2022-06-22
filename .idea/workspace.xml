@@ -5,54 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bd5141e4-3bb7-4cde-919e-76fee008f78d" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/dapp/src/abiFiles/PaperMastersNFI_Truffle.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dapp/src/abiFiles/scenario.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/imx/imx-contracts/contracts/PaperMastersNFI.sol" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dapp/contract/contract/PaperMastersNFI.sol" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/contract/contract/PaperMastersNFI.sol" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dapp/contract/contract/PaperMastersNFI_NFT_old.sol" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/contract/contract/PaperMastersNFI_NFT_old.sol" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dapp/src/abiFiles/PaperMastersNFI.json" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/abiFiles/PaperMastersNFI.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dapp/src/app/RoutesRoutes.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/app/RoutesRoutes.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dapp/src/components/pages/Register.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/components/pages/Register.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dapp/src/components/pages/home/Footers/Footer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/components/pages/home/Footers/Footer.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dapp/src/components/pages/home/Navbar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/components/pages/home/Navbar.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dapp/src/components/pages/identity/AccountLedger.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/components/pages/identity/AccountLedger.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dapp/src/components/pages/identity/Identity.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/components/pages/identity/Identity.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dapp/src/features/JSON/chainData.ts" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/features/JSON/chainData.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dapp/src/features/JSON/chainId.networks.json" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/features/JSON/chainId.networks.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dapp/src/features/JSON/chainId.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/features/JSON/chainId.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dapp/src/features/accountBC/accountBCSaga.ts" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/features/accountBC/accountBCSaga.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dapp/src/features/mintNFI/mintNFISaga.ts" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/features/mintNFI/mintNFISaga.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dapp/webstorm-styled-components" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/webstorm-styled-components" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dapp/webstorm-styled-components/.github/ISSUE_TEMPLATE.md" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/webstorm-styled-components/.github/ISSUE_TEMPLATE.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dapp/webstorm-styled-components/LICENSE.md" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/webstorm-styled-components/LICENSE.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dapp/webstorm-styled-components/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/webstorm-styled-components/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dapp/webstorm-styled-components/src/main/resources/META-INF/CHANGELOG.md" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/webstorm-styled-components/src/main/resources/META-INF/CHANGELOG.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dapp/webstorm-styled-components/testData/completion/attrClassNames.js" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/webstorm-styled-components/testData/completion/attrClassNames.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dapp/webstorm-styled-components/testData/completion/attrClassNamesFunc.js" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/webstorm-styled-components/testData/completion/attrClassNamesFunc.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dapp/webstorm-styled-components/testData/completion/attrClassNamesNestedExpression.js" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/webstorm-styled-components/testData/completion/attrClassNamesNestedExpression.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dapp/webstorm-styled-components/testData/completion/styledComponentsStylesheet.css" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/webstorm-styled-components/testData/completion/styledComponentsStylesheet.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/imx/imx-contracts/.env.example" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/imx/imx-contracts/hardhat.config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/imx/imx-contracts/hardhat.config.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/imx/imx-contracts/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/imx/imx-contracts/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/imx/imx-contracts/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/imx/imx-contracts/yarn.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/truffle/build/contracts/Address.json" beforeDir="false" afterPath="$PROJECT_DIR$/truffle/build/contracts/Address.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/truffle/build/contracts/Context.json" beforeDir="false" afterPath="$PROJECT_DIR$/truffle/build/contracts/Context.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/truffle/build/contracts/ERC165.json" beforeDir="false" afterPath="$PROJECT_DIR$/truffle/build/contracts/ERC165.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/truffle/build/contracts/ERC721.json" beforeDir="false" afterPath="$PROJECT_DIR$/truffle/build/contracts/ERC721.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/truffle/build/contracts/IERC165.json" beforeDir="false" afterPath="$PROJECT_DIR$/truffle/build/contracts/IERC165.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/truffle/build/contracts/IERC721.json" beforeDir="false" afterPath="$PROJECT_DIR$/truffle/build/contracts/IERC721.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/truffle/build/contracts/IERC721Metadata.json" beforeDir="false" afterPath="$PROJECT_DIR$/truffle/build/contracts/IERC721Metadata.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/truffle/build/contracts/IERC721Receiver.json" beforeDir="false" afterPath="$PROJECT_DIR$/truffle/build/contracts/IERC721Receiver.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/truffle/build/contracts/Migrations.json" beforeDir="false" afterPath="$PROJECT_DIR$/truffle/build/contracts/Migrations.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/truffle/build/contracts/Ownable.json" beforeDir="false" afterPath="$PROJECT_DIR$/truffle/build/contracts/Ownable.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/truffle/build/contracts/PaperMastersNFI.json" beforeDir="false" afterPath="$PROJECT_DIR$/truffle/build/contracts/PaperMastersNFI.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/truffle/build/contracts/Strings.json" beforeDir="false" afterPath="$PROJECT_DIR$/truffle/build/contracts/Strings.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/truffle/contracts/PaperMastersNFI.sol" beforeDir="false" afterPath="$PROJECT_DIR$/truffle/contracts/PaperMastersNFI.sol" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/truffle/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/truffle/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/truffle/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/truffle/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/truffle/truffle-config.js" beforeDir="false" afterPath="$PROJECT_DIR$/truffle/truffle-config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dapp/src/components/pages/identity/mentions/Mentions.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/components/pages/identity/mentions/Mentions.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -71,17 +27,17 @@
     </option>
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/dapp/src/App.tsx" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/dapp/src/components/pages/Register.tsx" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/dapp/src/components/pages/Search.tsx" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/dapp/src/components/pages/home/Navbar.test.tsx" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/dapp/src/components/pages/home/Navbar.tsx" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/dapp/src/components/pages/identity/Header.tsx" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/dapp/src/components/pages/identity/Identity.tsx" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/dapp/src/features/accountDB/AccountDBSlice.ts" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/dapp/src/features/accountDB/AccountDBSlice.types.ts" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/dapp/src/features/accountDB/mentions/MentionsSlice.tsx" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/dapp/src/features/reactQuery/RTKQuery.ts" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/dapp/src/components/pages/home/Navbar.tsx" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/dapp/src/features/accountDB/mentions/MentionsSlice.tsx" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/dapp/src/components/pages/Search.tsx" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/dapp/src/features/accountDB/AccountDBSlice.types.ts" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/dapp/src/components/pages/home/Navbar.test.tsx" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/dapp/src/features/accountDB/AccountDBSlice.ts" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/dapp/src/App.tsx" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/dapp/src/components/pages/identity/Header.tsx" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -94,37 +50,19 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "//wsl$/Ubuntu/home/ramona/gitrepos/PaperMasters/dapp/src/abiFiles",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.standard": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.standard": "",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "yarn",
-    "settings.editor.selected.configurable": "preferences.editor",
-    "ts.external.directory.path": "\\\\wsl$\\Ubuntu\\home\\ramona\\gitrepos\\PaperMasters\\dapp\\node_modules\\typescript\\lib",
-    "vue.rearranger.settings.migration": "true"
-  }
-}]]></component>
+  <component name="PropertiesComponent">
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="ts.external.directory.path" value="\\wsl$\Ubuntu\home\user\MintIdentityTPM\dapp\node_modules\typescript\lib" />
+  </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="\\wsl$\Ubuntu\home\ramona\gitrepos\PaperMasters\dapp\src\abiFiles" />
-      <recent name="\\wsl$\Ubuntu\home\ramona\gitrepos\PaperMasters\truffle\contracts" />
-      <recent name="\\wsl$\Ubuntu\home\ramona\gitrepos\PaperMasters\dapp\contract\contract" />
-      <recent name="\\wsl$\Ubuntu\home\ramona\gitrepos\PaperMasters\imx\imx-contracts\contracts" />
       <recent name="\\wsl$\Ubuntu\home\ramona\gitrepos\MintIdentityTPM\dapp\src\abiFiles" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="\\wsl$\Ubuntu\home\ramona\gitrepos\PaperMasters\dapp\contract\contract" />
-      <recent name="\\wsl$\Ubuntu\home\ramona\gitrepos\PaperMasters\dapp" />
-      <recent name="\\wsl$\Ubuntu\home\ramona\gitrepos\PaperMasters\imx" />
       <recent name="\\wsl$\Ubuntu\home\ramona\gitrepos\PaperMasters\dapp\public" />
       <recent name="\\wsl$\Ubuntu\home\ramona\gitrepos\PaperMasters\dapp\src\assets" />
+      <recent name="\\wsl$\Ubuntu\home\ramona\gitrepos\MintIdentityTPM\dapp\src\assets" />
     </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -144,12 +82,7 @@
       <workItem from="1654661985460" duration="248000" />
       <workItem from="1654705734679" duration="378000" />
       <workItem from="1654706143939" duration="1178000" />
-      <workItem from="1654786357667" duration="4900000" />
-      <workItem from="1654796856741" duration="9377000" />
-      <workItem from="1655126455243" duration="2023000" />
-      <workItem from="1655297961179" duration="8156000" />
-      <workItem from="1655732101904" duration="28000000" />
-      <workItem from="1655845425732" duration="6431000" />
+      <workItem from="1654786357667" duration="3972000" />
     </task>
     <servers />
   </component>
@@ -171,5 +104,6 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
 </project>

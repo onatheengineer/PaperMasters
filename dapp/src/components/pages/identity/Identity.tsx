@@ -8,6 +8,7 @@ import {
   Spacer,
   Stack,
   Text,
+  Tooltip,
   useDisclosure,
 } from '@chakra-ui/react';
 import { ethers } from 'ethers';
@@ -452,14 +453,6 @@ export const Identity: FC = () => {
                           >
                             {chainName} Ledger
                           </Text>
-                          <Text
-                            fontSize="15px"
-                            color={'pmpurple.13'}
-                            fontWeight="400"
-                            align={'left'}
-                          >
-                            PaperMasters protect the Blockchain
-                          </Text>
                         </Flex>
                       </Heading>
                       <Spacer />
@@ -478,9 +471,11 @@ export const Identity: FC = () => {
                       >
                         <HStack>
                           Icon={<SiEthereum fontSize="14px" />}
-                          <Text fontSize="sm" fontWeight="bold">
-                            {getBalanceMemo}
-                          </Text>
+                          <Tooltip label={'Account Balance'}>
+                            <Text fontSize="sm" fontWeight="bold">
+                              {getBalanceMemo}
+                            </Text>
+                          </Tooltip>
                         </HStack>
                       </Box>
                     </HStack>
@@ -494,7 +489,7 @@ export const Identity: FC = () => {
               </Stack>
             </Box>
 
-            <Flex w={'100%'} flexDirection={'row'}>
+            <Flex w={'100%'} flexDirection={{ base: 'column', md: 'row' }}>
               <Box
                 h={'462px'}
                 w={{ base: '100%', lg: '38%' }}
@@ -533,7 +528,8 @@ export const Identity: FC = () => {
                 // my="24px"
                 // mx={{xl: '32px'}}
                 borderRadius="15px"
-                ml={2}
+                ml={{ base: 0, md: 2 }}
+                mt={{ base: '5px', md: 'none' }}
                 bg="white"
                 px="24px"
                 h={'462px'}

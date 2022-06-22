@@ -100,9 +100,14 @@ export const SingleMention: FC<singleMentionInterface> = ({ mention }) => {
             // bg={'#f2eef2'}
             color={'pmpurple.13'}
             textAlign={'left'}
+            fontSize={'7pt'}
             borderRadius={'5px'}
           >
-            <Text as={'u'} whiteSpace="nowrap" fontSize={'16px'}>
+            <Text
+              as={'u'}
+              whiteSpace="nowrap"
+              fontSize={{ base: '7pt', md: '16px' }}
+            >
               {mention.fromWallet}
             </Text>
           </Link>
