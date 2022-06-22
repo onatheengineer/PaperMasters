@@ -157,6 +157,7 @@ function* mintNFISaga({
 function* getMintingFee(): SagaIterator {
   try {
     const mintFee: any = yield call(NFIContract.methods.getIdentityFee().call);
+    console.log('MINTINGFEE: ', mintFee);
     yield put(mintingFee(mintFee));
   } catch (e: any) {
     console.log(e);

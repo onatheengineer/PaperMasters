@@ -16,12 +16,14 @@ import {
   accountArrAction,
   accountArrMetaMaskAction,
 } from './features/accountBC/AccountBCSlice';
+import { mintingFeeAction } from './features/mintNFI/MintNFISlice';
 import { useGlobalToast } from './features/toast/useGlobalToast';
 
 function App() {
   const dispatch = useAppDispatch();
   useGlobalToast();
   useEffect(() => {
+    dispatch(mintingFeeAction());
     if (window.ethereum) {
       dispatch(accountArrMetaMaskAction());
       const providerPromise = detectEthereumProvider();
