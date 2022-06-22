@@ -28,26 +28,26 @@ export const AccountLedger: FC<ParamsURLInterface> = ({
   return (
     <Flex
       align="center"
-      // border={'1px solid pink'}
+      border={'1px solid red'}
       h={'90%'}
       w={'100%'}
       flexGrow={1}
-      overflow={'none'}
+      overflow={'auto'}
     >
-      <Box w={'100%'} h={'100%'} overflow={'auto'}>
-        <Stack w={'100%'}>
-          {getLedger.isSuccess &&
-            getLedger.data.history.map((el: any, index: number) => {
-              const timeStampFormatted = moment(el.timestamp * 1000).format(
-                'MMM DD YYYY, hh:mm:ss a',
-              );
-              const timeStampShort = moment(el.timestamp * 1000).format(
-                'MMM DD YYYY',
-              );
-              const valueFormatted =
-                parseFloat(ethers.utils.formatEther(el.value)) +
-                parseFloat(ethers.utils.formatEther(el.gasPrice));
-              return (
+      <Box border={'1px solid green'} w={'100%'} h={'100%'} overflow={'auto'}>
+        {getLedger.isSuccess &&
+          getLedger.data.history.map((el: any, index: number) => {
+            const timeStampFormatted = moment(el.timestamp * 1000).format(
+              'MMM DD YYYY, hh:mm:ss a',
+            );
+            const timeStampShort = moment(el.timestamp * 1000).format(
+              'MMM DD YYYY',
+            );
+            const valueFormatted =
+              parseFloat(ethers.utils.formatEther(el.value)) +
+              parseFloat(ethers.utils.formatEther(el.gasPrice));
+            return (
+              <Stack w={'100%'} p={0} m={0}>
                 <Box
                   flex={'max-content'}
                   w={'100%'}
@@ -59,8 +59,10 @@ export const AccountLedger: FC<ParamsURLInterface> = ({
                   // px={2}
                   fontSize={'10pt'}
                 >
-                  <Stack border={'1px solid pink'}>
+                  <Stack border={'1px solid black'} p={0} m={0}>
                     <Stack
+                      p={0}
+                      m={0}
                       // direction={['column', 'row']}
                       border={'1px solid green'}
                       // pt={{ base: '12px', lg: '0px' }}
@@ -69,7 +71,7 @@ export const AccountLedger: FC<ParamsURLInterface> = ({
                         lg: 'row',
                       }}
                     >
-                      <Box>
+                      <Box p={0} m={0}>
                         <Tooltip
                           label={timeStampFormatted}
                           aria-label="A tooltip"
@@ -93,7 +95,7 @@ export const AccountLedger: FC<ParamsURLInterface> = ({
                         </Tooltip>
                       </Box>
 
-                      <Box>
+                      <Box p={0} m={0}>
                         <Text
                           textAlign={'left'}
                           color={'pmpurple.13'}
@@ -111,7 +113,7 @@ export const AccountLedger: FC<ParamsURLInterface> = ({
                         </Text>
                       </Box>
                       <Spacer />
-                      <Box border={'1px solid yellow'}>
+                      <Box border={'1px solid yellow'} p={0} m={0}>
                         <Text>
                           <Tag
                             fontSize={'9pt'}
@@ -125,6 +127,8 @@ export const AccountLedger: FC<ParamsURLInterface> = ({
                       </Box>
                     </Stack>
                     <Stack
+                      p={0}
+                      m={0}
                       // direction={['column', 'row']}
                       border={'1px solid green'}
                       // pt={{ base: '12px', lg: '0px' }}
@@ -135,6 +139,8 @@ export const AccountLedger: FC<ParamsURLInterface> = ({
                     >
                       <Box
                         border={'1px solid blue'}
+                        p={0}
+                        m={0}
                         // pt={{ base: '12px', md: '0px' }}
                       >
                         <Text
@@ -154,6 +160,8 @@ export const AccountLedger: FC<ParamsURLInterface> = ({
                       </Box>
                       <Spacer />
                       <Box
+                        p={0}
+                        m={0}
                         border={'1px solid red'}
                         // pt={{ base: '12px', lg: '0px' }}
                         flexDirection={{
@@ -186,9 +194,9 @@ export const AccountLedger: FC<ParamsURLInterface> = ({
                     </Stack>
                   </Stack>
                 </Box>
-              );
-            })}
-        </Stack>
+              </Stack>
+            );
+          })}
       </Box>
     </Flex>
   );

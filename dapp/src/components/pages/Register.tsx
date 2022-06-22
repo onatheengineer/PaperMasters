@@ -237,7 +237,7 @@ export const Register: FC = () => {
       setIsModalOpen(true);
       return [
         'Connect Wallet Account for Access',
-        'Please use MetaMask or WalletConnect to connect your wallet.',
+        'Please use MetaMask, GameStop or WalletConnect to connect your wallet.',
       ];
     }
     if (useGetSingleIdentityBCQueryQuery.isSuccess) {

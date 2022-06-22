@@ -152,6 +152,11 @@ export function* accountArrMetaMaskSaga(): SagaIterator {
           }),
         );
       }
+    } else if (window.gamestop !== undefined) {
+      const provider = new ethers.providers.Web3Provider(
+        window.gamestop,
+        'any',
+      );
     } else {
       const provider = new ethers.providers.Web3Provider(
         window.ethereum,

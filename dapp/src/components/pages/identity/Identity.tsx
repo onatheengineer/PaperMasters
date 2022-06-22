@@ -522,7 +522,7 @@ export const Identity: FC = () => {
                     Site Activity
                   </Text>
                   <Divider border={'1px solid'} borderColor={'pmpurple.8'} />
-                  Coming soon...
+                  I'm on it!..ummm, it's going to take a bit :)
                 </Box>
               </Box>
 

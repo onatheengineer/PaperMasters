@@ -163,7 +163,7 @@ export default function LargeWithLogoCentered() {
               <ListHeader>Your People</ListHeader>
               <Link
                 as={ReachLink}
-                to="/identity/3/0xbEc6F6B37CFF8355a046afD2a2EcfEA05c1215F5"
+                to="/identity/1/0x27c1206d52371dA1C2acbEbEDD915999D362FfC3"
                 fontSize={'14px'}
               >
                 About Me

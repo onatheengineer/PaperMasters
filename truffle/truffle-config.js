@@ -19,10 +19,11 @@
  */
 
 const HDWalletProvider = require('@truffle/hdwallet-provider');
-//
+
  const fs = require('fs');
  const mnemonic = fs.readFileSync(".secret").toString().trim();
  const privateKeyTest = fs.readFileSync(".privateKeyTest").toString().trim();
+const mainnetUrl = `https://mainnet.infura.io/v3/c97ad56e08674161a95ba16c6f855b6a`;
 
 module.exports = {
   /**
@@ -37,49 +38,19 @@ module.exports = {
 
   networks: {
       // ropsten: {
-      //     provider: () => new HDWalletProvider(mnemonic, `https://ropsten.infura.io/v3/${c97ad56e08674161a95ba16c6f855b6a}`),
-      //     network_id: 3,       // Ropsten's id
-      //     gas: 5500000,        // Ropsten has a lower block limit than mainnet
-      //     confirmations: 2,    // # of confs to wait between deployments. (default: 0)
-      //     timeoutBlocks: 200,  // # of blocks before a deployment times out  (minimum/default: 50)
-      //     skipDryRun: true     // Skip dry run before migrations? (default: false for public nets )
+      //     provider: function() {
+      //         return new HDWalletProvider('d57d870e03d8fe5bacda36353179d0e0ccfe952a2b282bd0093c7324dae140e6', "https://ropsten.infura.io/v3/c97ad56e08674161a95ba16c6f855b6a");
+      //     },
+      //     network_id: '3',
       // },
-      ropsten: {
-          provider: function() {
-              return new HDWalletProvider('d57d870e03d8fe5bacda36353179d0e0ccfe952a2b282bd0093c7324dae140e6', "https://ropsten.infura.io/v3/c97ad56e08674161a95ba16c6f855b6a");
-          },
-          network_id: '3',
+      mainnet: {
+          provider: () => new HDWalletProvider(privateKeyTest, mainnetUrl),
+          network_id: 1,
+          gas: 5883088,
+          gasPrice: 2000000000
       },
-      test: {
-          provider: function() {
-              return new HDWalletProvider(mnemonic, "http://127.0.0.1:8545/");
-          },
-          network_id: '*',
-      },
-      testnet: {
-          provider: () => {
-              return new HDWalletProvider({
-                  mnemonic,
-                  providerOrUrl: 'https://api.s0.b.hmny.io', // https://api.s0.t.hmny.io for mai  nnet
-                  derivationPath: `m/44'/1023'/0'/0/`
-              });
-          },
-          network_id: 1666700000, // 1666600000 for mainnet
-      },
-      testnetHar: {
-          provider: () => {
-              if (!privateKeyTest.trim()) {
-                  throw new Error(
-                      'Please enter a private key with funds, you can use the default one'
-                  );
-              }
-              return new HDWalletProvider({
-                  privateKeys: [privateKeyTest],
-                  providerOrUrl: 'https://api.s0.b.hmny.io',
-              });
-          },
-          network_id: 1666700000,
-      },
+
+
     // Useful for testing. The `development` name is special - truffle uses it by default
     // if it's defined here and no other network is specified at the command line.
     // You should run a client (like ganache-cli, geth or parity) in a separate terminal
@@ -126,8 +97,8 @@ module.exports = {
   // Configure your compilers
   compilers: {
     solc: {
-      version: "0.8.10",    // Fetch exact version from solc-bin (default: truffle's version)
-      // docker: true,        // Use "0.5.1" you've installed locally with docker (default: false)
+      version: "0.8.12",    // Fetch exact version from solc-bin (default: truffle's version)
+       //docker: true,        // Use "0.5.1" you've installed locally with docker (default: false)
        settings: {          // See the solidity docs for advice about optimization and evmVersion
         optimizer: {
           enabled: false,

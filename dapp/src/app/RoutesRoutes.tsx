@@ -441,7 +441,7 @@ export const RoutesRoutes: FC<InterfaceSidebar> = ({
         <Route path={'/identity/:chainId/:walletAcc'} element={<Identity />} />
         {/* { chainIdProviderProvider === undefined || chainIdProviderProvider === 'undefined' || */}
         {/* chainIdProviderProvider.length === 0 || accountArrArr === undefined || accountArrArr.length === 0 ? */}
-        {/*    <Route path={`/identity/:${chainIdProviderProvider}/:${accountArrArr}`} element={<Navigate replace to= "/identity/3/0xbEc6F6B37CFF8355a046afD2a2EcfEA05c1215F5" />}/> */}
+        {/*    <Route path={`/identity/:${chainIdProviderProvider}/:${accountArrArr}`} element={<Navigate replace to= "/identity/1/0x27c1206d52371dA1C2acbEbEDD915999D362FfC3" />}/> */}
         {/*:  <Route path={`/identity/:${chainIdProviderProvider}/:${accountArrArr}`} element={<Identity/>}/> */}
         {/* } */}
         {/* {addressToTokenBoolBool ? */}

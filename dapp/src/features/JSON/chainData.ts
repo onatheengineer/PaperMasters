@@ -477,21 +477,6 @@ export const chains: IChainData[] = [
     infoURL: 'https://auxilium.global',
   },
   {
-    name: 'Ethereum Testnet Ropsten',
-    chainId: 3,
-    shortName: 'rop',
-    chain: 'ETH',
-    network: 'ropsten',
-    networkId: 3,
-    nativeCurrency: { name: 'Ropsten Ether', symbol: 'ROP', decimals: 18 },
-    rpc: [
-      'https://ropsten.infura.io/v3/${INFURA_API_KEY}',
-      'wss://ropsten.infura.io/ws/v3/${INFURA_API_KEY}',
-    ],
-    faucets: ['https://faucet.ropsten.be?${ADDRESS}'],
-    infoURL: 'https://github.com/ethereum/ropsten',
-  },
-  {
     name: 'RSK Mainnet',
     chainId: 30,
     shortName: 'rsk',
@@ -501,21 +486,6 @@ export const chains: IChainData[] = [
     nativeCurrency: { name: 'RSK Mainnet Ether', symbol: 'RSK', decimals: 18 },
     rpc: ['https://public-node.rsk.co', 'https://mycrypto.rsk.co'],
     faucets: [],
-    infoURL: 'https://rsk.co',
-  },
-  {
-    name: 'RSK Testnet',
-    chainId: 31,
-    shortName: 'trsk',
-    chain: 'RSK',
-    network: 'testnet',
-    networkId: 31,
-    nativeCurrency: { name: 'RSK Testnet Ether', symbol: 'TRSK', decimals: 18 },
-    rpc: [
-      'https://public-node.testnet.rsk.co',
-      'https://mycrypto.testnet.rsk.co',
-    ],
-    faucets: ['https://faucet.testnet.rsk.co'],
     infoURL: 'https://rsk.co',
   },
   {

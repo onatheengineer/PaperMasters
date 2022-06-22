@@ -1,8 +1,8 @@
-// SPDX-License-Identifier: GPL-3.0
-pragma solidity >=0.8.0 <0.9.0;
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.12 <0.9.0;
 
-import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
+import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/token/ERC721/extensions/IERC721Metadata.sol";
 
 contract PaperMastersNFI is ERC721, Ownable {
@@ -28,7 +28,6 @@ contract PaperMastersNFI is ERC721, Ownable {
     mapping(address => uint256) totalIdentities;
     mapping(address => uint256) _supportPMDonations;
 
-    //prevents ren-entry when modifier is added to a function
     bool internal locked;
     modifier noReentrant() {
         require(!locked, "No re-entrancy");
@@ -36,12 +35,12 @@ contract PaperMastersNFI is ERC721, Ownable {
         _;
         locked = false;
     }
-    //    modifier onlyOwner() {
-    //        require(msg.sender == owner, "Message sender must be the contract's owner.");
-    //        _;
-    //    }
+    // modifier onlyOwner() {
+    //     require(msg.sender == owner, "Message sender must be the contract's owner.");
+    //     _;
+    // }
     constructor() ERC721("papermasters.io", "NFI") {
-        _setBaseURI = "www.papermasters.io";
+        _setBaseURI = "www.papermasters.io/identity";
         identityFee = 100000000000000000;
         _dictionaryNFIs.push(identity(block.chainid, address(this), '', '', '', '', '', '', '', '', block.timestamp));
     }
@@ -72,12 +71,20 @@ contract PaperMastersNFI is ERC721, Ownable {
         return _dictionaryNFIs;
     }
 
-    //metadata extension tokenURI, name and symbol
     function tokenURI(uint256 tokenId) public view virtual override returns (string memory) {
-        require(_exists(tokenId), "ERC721Metadata: URI query for nonexistent token");
-        address owner = ownerOf(tokenId);
+        //require(tokenIDtoIdentityStruct(tokenId), "ERC721Metadata: URI query for nonexistent token");
+        //address owner = ownerOf(tokenId);
+        require(tokenId + 1  <= _dictionaryNFIs.length, "Invalid Token ID");
+        identity memory ident = _dictionaryNFIs[tokenId];
+        uint256 chainid = block.chainid;
         string memory baseURI = _baseURI();
-        return bytes(baseURI).length > 0 ? string(abi.encodePacked(baseURI, owner)) : "";
+        return string(bytes.concat(
+                bytes(baseURI),
+                "/",
+                bytes(Strings.toString(chainid)),
+                "/",
+                bytes(Strings.toHexString(uint160(ident.walletAccount), 20))
+            ));
     }
 
     function setBaseURI(string memory changeBaseURI) public onlyOwner {
@@ -94,12 +101,11 @@ contract PaperMastersNFI is ERC721, Ownable {
 
     function setIdentityFee(uint256 val) external onlyOwner {
         identityFee = val;
+        emit identityFeeChanged(val);
     }
+    event identityFeeChanged(uint256 identityFee);
 
-    // Fallback function must be declared as external.
     fallback() external payable {
-        // send / transfer (forwards 2300 gas to this fallback function)
-        // call (forwards all of the gas)
         emit Log(gasleft());
     }
 
@@ -120,7 +126,6 @@ contract PaperMastersNFI is ERC721, Ownable {
     }
 
     function withdraw() external noReentrant onlyOwner {
-        // This forwards all available gas. Be sure to check the return value!
         uint256 amount = address(this).balance;
         (bool success,) = msg.sender.call{value : amount}("");
         require(success, "Transfer failed.");

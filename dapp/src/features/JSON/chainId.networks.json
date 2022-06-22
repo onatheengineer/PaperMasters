@@ -47,100 +47,6 @@
     "slip44": 40
   },
   {
-    "name": "Ropsten",
-    "title": "Ethereum Testnet Ropsten",
-    "chain": "ETH",
-    "network": "testnet",
-    "rpc": ["https://ropsten.infura.io/v3/c97ad56e08674161a95ba16c6f855b6a"],
-    "faucets": [
-      "http://fauceth.komputing.org?chain=3&address=${ADDRESS}",
-      "https://faucet.ropsten.be?${ADDRESS}"
-    ],
-    "nativeCurrency": {
-      "name": "Ropsten Ether",
-      "symbol": "ROP",
-      "decimals": 18
-    },
-    "infoURL": "https://github.com/ethereum/ropsten",
-    "shortName": "rop",
-    "chainId": 3,
-    "networkId": 3,
-    "ens": {
-      "registry": "0x112234455c3a32fd11230c42e7bccd4a84e02010"
-    },
-    "explorers": [
-      {
-        "name": "etherscan",
-        "url": "https://ropsten.etherscan.io",
-        "standard": "EIP3091"
-      }
-    ]
-  },
-  {
-    "name": "Rinkeby",
-    "title": "Ethereum Testnet Rinkeby",
-    "chain": "ETH",
-    "network": "testnet",
-    "rpc": ["https://rinkeby.infura.io/v3/${c97ad56e08674161a95ba16c6f855b6a}"],
-    "faucets": [
-      "http://fauceth.komputing.org?chain=4&address=${ADDRESS}",
-      "https://faucet.rinkeby.io"
-    ],
-    "nativeCurrency": {
-      "name": "Rinkeby Ether",
-      "symbol": "RIN",
-      "decimals": 18
-    },
-    "infoURL": "https://www.rinkeby.io",
-    "shortName": "rin",
-    "chainId": 4,
-    "networkId": 4,
-    "ens": {
-      "registry": "0xe7410170f87102df0055eb195163a03b7f2bff4a"
-    },
-    "explorers": [
-      {
-        "name": "etherscan-rinkeby",
-        "url": "https://rinkeby.etherscan.io",
-        "standard": "EIP3091"
-      }
-    ]
-  },
-  {
-    "name": "Görli",
-    "title": "Ethereum Testnet Görli",
-    "chain": "ETH",
-    "network": "testnet",
-    "rpc": [
-      "https://goerli.infura.io/v3/${c97ad56e08674161a95ba16c6f855b6a}",
-      "https://rpc.goerli.mudit.blog/"
-    ],
-    "faucets": [
-      "http://fauceth.komputing.org?chain=5&address=${ADDRESS}",
-      "https://goerli-faucet.slock.it?address=${ADDRESS}",
-      "https://faucet.goerli.mudit.blog"
-    ],
-    "nativeCurrency": {
-      "name": "Görli Ether",
-      "symbol": "GOR",
-      "decimals": 18
-    },
-    "infoURL": "https://goerli.net/#about",
-    "shortName": "gor",
-    "chainId": 5,
-    "networkId": 5,
-    "ens": {
-      "registry": "0x112234455c3a32fd11230c42e7bccd4a84e02010"
-    },
-    "explorers": [
-      {
-        "name": "etherscan-goerli",
-        "url": "https://goerli.etherscan.io",
-        "standard": "EIP3091"
-      }
-    ]
-  },
-  {
     "name": "ThaiChain",
     "chain": "TCH",
     "rpc": ["https://rpc.dome.cloud"],
@@ -2069,26 +1975,6 @@
     ]
   },
   {
-    "name": "Tao Network",
-    "chain": "TAO",
-    "rpc": [
-      "https://rpc.testnet.tao.network",
-      "http://rpc.testnet.tao.network:8545",
-      "https://rpc.tao.network",
-      "wss://rpc.tao.network"
-    ],
-    "faucets": [],
-    "nativeCurrency": {
-      "name": "Tao",
-      "symbol": "TAO",
-      "decimals": 18
-    },
-    "infoURL": "https://tao.network",
-    "shortName": "tao",
-    "chainId": 558,
-    "networkId": 558
-  },
-  {
     "name": "Karura Network",
     "chain": "KAR",
     "rpc": [],
@@ -2753,29 +2639,6 @@
     "networkId": 1
   },
   {
-    "name": "BON Network",
-    "chain": "BON",
-    "network": "testnet",
-    "rpc": ["http://rpc.boyanet.org:8545", "ws://rpc.boyanet.org:8546"],
-    "faucets": [],
-    "nativeCurrency": {
-      "name": "BOYACoin",
-      "symbol": "BOY",
-      "decimals": 18
-    },
-    "infoURL": "https://boyanet.org",
-    "shortName": "boya",
-    "chainId": 1898,
-    "networkId": 1,
-    "explorers": [
-      {
-        "name": "explorer",
-        "url": "https://explorer.boyanet.org:4001",
-        "standard": "EIP3091"
-      }
-    ]
-  },
-  {
     "name": "EtherGem",
     "chain": "EGEM",
     "rpc": ["https://jsonrpc.egem.io/custom"],
@@ -3437,29 +3300,6 @@
       {
         "name": "CCP Explorer",
         "url": "https://cryptocoinpay.info",
-        "standard": "EIP3091"
-      }
-    ]
-  },
-  {
-    "name": "WAGMI",
-    "chain": "WAGMI",
-    "icon": "wagmi",
-    "rpc": ["https://subnets.avax.network/wagmi/wagmi-chain-testnet/rpc"],
-    "faucets": ["https://faucet.trywagmi.xyz"],
-    "nativeCurrency": {
-      "name": "WAGMI",
-      "symbol": "WGM",
-      "decimals": 18
-    },
-    "infoURL": "https://trywagmi.xyz",
-    "shortName": "WAGMI",
-    "chainId": 11111,
-    "networkId": 11111,
-    "explorers": [
-      {
-        "name": "WAGMI Explorer",
-        "url": "https://subnets.avax.network/wagmi/wagmi-chain-testnet/explorer",
         "standard": "EIP3091"
       }
     ]
@@ -5092,28 +4932,6 @@
     "shortName": "hmy-s3",
     "chainId": 1666600003,
     "networkId": 1666600003
-  },
-  {
-    "name": "Harmony Testnet Shard 0",
-    "chain": "Harmony",
-    "rpc": ["https://api.s0.b.hmny.io"],
-    "faucets": ["https://faucet.pops.one"],
-    "nativeCurrency": {
-      "name": "ONE",
-      "symbol": "ONE",
-      "decimals": 18
-    },
-    "infoURL": "https://www.harmony.one/",
-    "shortName": "hmy-b-s0",
-    "chainId": 1666700000,
-    "networkId": 1666700000,
-    "explorers": [
-      {
-        "name": "Harmony Testnet Block Explorer",
-        "url": "https://explorer.pops.one",
-        "standard": "EIP3091"
-      }
-    ]
   },
   {
     "name": "DataHopper",
