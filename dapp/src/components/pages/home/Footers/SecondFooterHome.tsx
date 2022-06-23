@@ -90,11 +90,7 @@ export default function secondFooterHome() {
             </Text>
 
             <Text fontSize="md" fontWeight="400">
-              Let us all keep the Blockchain beautiful, validating and reporting
-              a wallet address helps your fellow Blockchainers known that a
-              wallet address is safe, or not safe, to conduct business with.
-              These Validations and Reports are Non-Fungible Tokens permanently
-              attached to wallet addresses.
+              Let us all keep the Blockchain beautiful! Validating and reporting a wallet address helps your fellow Blockchainers know whether it is safe or not to conduct business with that wallet address. These Validations and Reports are Non-Fungible Tokens permanently attached to wallet addresses.
             </Text>
           </Stack>
         </Grid>

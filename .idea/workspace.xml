@@ -5,9 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bd5141e4-3bb7-4cde-919e-76fee008f78d" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dapp/src/features/JSON/chainId.json" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/features/JSON/chainId.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dapp/src/features/reactQuery/RTKQuery.ts" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/features/reactQuery/RTKQuery.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dapp/src/components/pages/CommunitySupport.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/components/pages/CommunitySupport.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dapp/src/components/pages/Register.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/components/pages/Register.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dapp/src/components/pages/home/Footers/SecondFooterHome.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/components/pages/home/Footers/SecondFooterHome.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nginx/conf_prod/default.conf" beforeDir="false" afterPath="$PROJECT_DIR$/nginx/conf_prod/default.conf" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -56,9 +57,14 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "WebServerToolWindowFactoryState": "false",
     "last_opened_file_path": "//wsl$/Ubuntu/home/ramona/gitrepos/PaperMasters",
+    "node.js.detected.package.eslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
-    "ts.external.directory.path": "\\\\wsl$\\Ubuntu\\home\\ramona\\gitrepos\\PaperMasters\\dapp\\node_modules\\typescript\\lib"
+    "nodejs_package_manager_path": "yarn",
+    "ts.external.directory.path": "\\\\wsl$\\Ubuntu\\home\\ramona\\gitrepos\\PaperMasters\\dapp\\node_modules\\typescript\\lib",
+    "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
   <component name="RecentsManager">
@@ -90,6 +96,7 @@
       <workItem from="1654705734679" duration="378000" />
       <workItem from="1654706143939" duration="1178000" />
       <workItem from="1654786357667" duration="3972000" />
+      <workItem from="1656005014365" duration="71000" />
     </task>
     <servers />
   </component>
