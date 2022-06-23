@@ -66,7 +66,7 @@ export const CommunitySupport: FC = () => {
           title={'What is NFI Protection and Validation?'}
           subtitle={'Protecting our Community'}
           body={
-            'Validating and reporting a wallet address helps your fellow Blockchainers to determine if it is safe or not to conduct business with that wallet address.'
+            'Let us all keep the Blockchain beautiful! Validating and reporting a wallet address helps your fellow Blockchainers to determine if it is safe or not to conduct business with that wallet address. These Validations and Reports are Non-Fungible Tokens permanently attached to wallet addresses. '
           }
         />
         <PageForum
@@ -75,6 +75,27 @@ export const CommunitySupport: FC = () => {
           body={
             'Go to the search page and type in a Chain Id of the wallet account you wish to add, then add the wallet account number, remember account ' +
             'addresses are at least 26 characters'
+          }
+        />
+        <PageForum
+          title={'Cookies Policy'}
+          subtitle={'Authentication'}
+          body={
+            <span>
+              I use cookies to verify your account and determine analytics.
+              Security site and product integrity <br /> I may use Cookies to
+              keep your account and data safe and secure.
+              <br /> <h5 style={{ fontWeight: 650 }}>Advertising</h5> Nope, not
+              interested, also I will never sell your information. <br />
+              <h5 style={{ fontWeight: 650 }}> Site features and services </h5>I
+              may use cookies to enable help me increase functionality of the
+              site to provide a better user experience.{' '}
+              <h5 style={{ fontWeight: 650 }}>Performance </h5>I am use cookies
+              to provide you with the best experience possible.
+              <h5 style={{ fontWeight: 650 }}> Analytics and research </h5>I use
+              cookies to better understand how people use the site so that it
+              can improve it.
+            </span>
           }
         />
       </Box>
