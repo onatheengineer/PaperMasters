@@ -90,7 +90,10 @@ export default function secondFooterHome() {
             </Text>
 
             <Text fontSize="md" fontWeight="400">
-              Validating and reporting a wallet address helps your fellow Blockchainers to determine if it is safe or not to conduct business with that wallet address.            </Text>
+              Validating and reporting a wallet address helps your fellow
+              Blockchainers to determine if it is safe or not to conduct
+              business with that wallet address.{' '}
+            </Text>
           </Stack>
         </Grid>
       </Box>
