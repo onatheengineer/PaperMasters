@@ -353,46 +353,47 @@ export const Register: FC = () => {
               <GridItem colSpan={1}>
                 <Popover>
                   <PopoverTrigger>
-                    <Button
-                      w={'100%'}
-                      mt={'32px'}
-                      bg={bgRGB.hex}
-                      h="2.00rem"
-                      size="mg"
-                      rounded={'md'}
-                      borderStyle={'solid'}
-                      border={'1px'}
-                      borderColor={'pmpurple.4'}
-                      _hover={{
-                        transform: 'translateY(-2px)',
-                        boxShadow: 'lg',
-                      }}
-                      onClick={() => {
-                        setWhichColorField('colorBG');
-                      }}
-                    >
-                      <Text px={'20px'} color={'pmpurple.10'}>
-                        {' '}
-                        Set NFI Background Color{' '}
-                      </Text>
-                      {/* <MdOutlineColorLens fontSize={'20px'} color={"#9c7e9c"}/> */}
-                      <InputRightElement
-                        m="3px"
-                        textAlign={'center'}
-                        children={
-                          <Button
-                            bg="pmpurple.9"
-                            size="xs"
-                            onClick={() => {
-                              setbgRGB(defaultColorBG);
-                            }}
-                          >
-                            {' '}
-                            Reset Color
-                          </Button>
-                        }
-                      />
-                    </Button>
+                    <Flex>
+                      <Button
+                        w={'100%'}
+                        mt={'32px'}
+                        bg={bgRGB.hex}
+                        h="2.00rem"
+                        size="mg"
+                        rounded={'md'}
+                        borderStyle={'solid'}
+                        border={'1px'}
+                        borderColor={'pmpurple.4'}
+                        _hover={{
+                          transform: 'translateY(-2px)',
+                          boxShadow: 'lg',
+                        }}
+                        onClick={() => {
+                          setWhichColorField('colorBG');
+                        }}
+                      >
+                        <Text px={'20px'} color={'pmpurple.10'}>
+                          Set NFI Background Color
+                        </Text>
+                        {/* <MdOutlineColorLens fontSize={'20px'} color={"#9c7e9c"}/> */}
+                        <InputRightElement
+                          m="3px"
+                          textAlign={'center'}
+                          children={
+                            <Button
+                              bg="pmpurple.9"
+                              size="xs"
+                              onClick={() => {
+                                setbgRGB(defaultColorBG);
+                              }}
+                            >
+                              {' '}
+                              Reset Color
+                            </Button>
+                          }
+                        />
+                      </Button>
+                    </Flex>
                   </PopoverTrigger>
                   <Portal>
                     <PopoverContent
