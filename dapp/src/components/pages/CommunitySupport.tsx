@@ -66,7 +66,7 @@ export const CommunitySupport: FC = () => {
           title={'What is NFI Protection and Validation?'}
           subtitle={'Protecting our Community'}
           body={
-            'Let us all keep the Blockchain beautiful. Validating and reporting a wallet address helps your fellow Blockchainers know whether it is safe or not to conduct business with that wallet address. These Validations and Reports are Non-Fungible Tokens permanently attached to wallet addresses.'
+            'Validating and reporting a wallet address helps your fellow Blockchainers to determine if it is safe or not to conduct business with that wallet address.'
           }
         />
         <PageForum

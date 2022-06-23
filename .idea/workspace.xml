@@ -6,9 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="bd5141e4-3bb7-4cde-919e-76fee008f78d" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/dapp/src/components/pages/CommunitySupport.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/components/pages/CommunitySupport.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dapp/src/components/pages/Register.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/components/pages/Register.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dapp/src/components/pages/home/Footers/SecondFooterHome.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/components/pages/home/Footers/SecondFooterHome.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nginx/conf_prod/default.conf" beforeDir="false" afterPath="$PROJECT_DIR$/nginx/conf_prod/default.conf" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -96,7 +94,7 @@
       <workItem from="1654705734679" duration="378000" />
       <workItem from="1654706143939" duration="1178000" />
       <workItem from="1654786357667" duration="3972000" />
-      <workItem from="1656005014365" duration="71000" />
+      <workItem from="1656005014365" duration="232000" />
     </task>
     <servers />
   </component>
