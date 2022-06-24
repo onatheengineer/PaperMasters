@@ -1,6 +1,5 @@
 services:
   pmsite:
-    image: "node:14.18.2"
     container_name: pmsite
     restart: always
     build:
