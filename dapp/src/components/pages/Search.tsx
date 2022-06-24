@@ -435,9 +435,21 @@ export const Search: FC = () => {
         }),
       );
     } else {
-      navigate(
-        `/identity/${initialRefChain.current?.value}/${initialRef.current?.value}`,
-      );
+      const blockchains = chainIdNetworkJSON.filter((el) => {
+        return el.chainId.toString() === initialRefChain.current?.value;
+      });
+      if (blockchains.length > 0) {
+        navigate(
+          `/identity/${initialRefChain.current?.value}/${initialRef.current?.value}`,
+        );
+      } else {
+        dispatch(
+          showToast({
+            title: 'Chain Id not supported.',
+            status: 'error',
+          }),
+        );
+      }
     }
   };
 
