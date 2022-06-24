@@ -25,7 +25,6 @@ function App() {
   useEffect(() => {
     dispatch(mintingFeeAction());
     if (window.ethereum) {
-      dispatch(accountArrMetaMaskAction());
       const providerPromise = detectEthereumProvider();
       console.log('this is provider:', providerPromise);
       providerPromise.then((provider: any) => {
