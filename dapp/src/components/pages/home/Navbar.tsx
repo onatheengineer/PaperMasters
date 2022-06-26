@@ -34,6 +34,7 @@ import Sparkle from 'react-sparkle';
 import { useAppDispatch, useAppSelector } from '../../../app/hooks';
 import PMLogoFull from '../../../assets/icons/PMLogoFull';
 import { accountArrMetaMaskAction } from '../../../features/accountBC/AccountBCSlice';
+import { ConnectWallet } from './ConnectWallet';
 
 interface NavItem {
   label: string;
@@ -146,10 +147,6 @@ const MobileNavItem = ({ label, children, navLink, navIcon }: NavItem) => {
     (state) => state.accountBC.chainIdProvider,
   );
   const accountArrArr = useAppSelector((state) => state.accountBC.accountArr);
-  // const navLinkModified =
-  //   navLink === '/identity'
-  //     ? `/identity/${chainIdProviderProvider}/${accountArrArr}`
-  //     : navLink;
   return (
     <Stack spacing={0} onClick={children && onToggle}>
       <HStack spacing={0}>
@@ -168,15 +165,6 @@ const MobileNavItem = ({ label, children, navLink, navIcon }: NavItem) => {
                 <Text>{label}</Text>
               </HStack>
             </Text>
-            {/* {children && ( */}
-            {/*    <Icon */}
-            {/*        as={ChevronDownIcon} */}
-            {/*        transition={'all .25s ease-in-out'} */}
-            {/*        transform={isOpen ? 'rotate(180deg)' : ''} */}
-            {/*        w={6} */}
-            {/*        h={6} */}
-            {/*    /> */}
-            {/* )} */}
           </Flex>
         ) : (
           <Flex
@@ -189,25 +177,11 @@ const MobileNavItem = ({ label, children, navLink, navIcon }: NavItem) => {
             }}
           >
             <Text fontWeight={400} color={'pmpurple.13'}>
-              {/* <Link */}
-              {/* as={ReachLink} */}
-              {/* to={navLink as To} */}
-              {/* > */}
               <HStack>
                 {navIcon}
                 <Text>{label}</Text>
               </HStack>
-              {/* </Link> */}
             </Text>
-            {/* {children && ( */}
-            {/*    <Icon */}
-            {/*        as={ChevronDownIcon} */}
-            {/*        transition={'all .25s ease-in-out'} */}
-            {/*        transform={isOpen ? 'rotate(180deg)' : ''} */}
-            {/*        w={6} */}
-            {/*        h={6} */}
-            {/*    /> */}
-            {/* )} */}
           </Flex>
         )}
       </HStack>
@@ -287,12 +261,7 @@ const DesktopSubNav = ({ label, subLabel, navLink, navIcon }: NavItem) => {
         <Box>
           <HStack>
             {navIcon}
-            <Text
-              fontSize={'md'}
-              transition={'all .3s ease'}
-              // _groupHover={{ color: 'pmpurple.13' }}
-              fontWeight={500}
-            >
+            <Text fontSize={'md'} transition={'all .3s ease'} fontWeight={500}>
               {label}
             </Text>
           </HStack>
@@ -453,82 +422,7 @@ export const Navbar: FC = () => {
             <DesktopNav />
           </Flex>
         </Flex>
-        <Stack
-          flex={{ base: 1, lg: 'none' }}
-          justify={'flex-end'}
-          direction={'row'}
-          spacing={6}
-          // border={'1px solid green'}
-        >
-          {/* this box in necessary for sparkle to work correctly */}
-          <Box>
-            {accountArrArr.length === 0 ? (
-              <Tooltip
-                hasArrow
-                label="Your wallet plug-in is waiting for you to make a move"
-                placement={'bottom-end'}
-                border={'1px solid #694b69'}
-                borderRadius={'3px'}
-                bg="pmpurple.5"
-                color="pmpurple.13"
-                m={'-10px'}
-              >
-                <Box
-                  style={{ position: 'relative' }}
-                  // border={'1px solid red'}
-                >
-                  <Button
-                    role={'connectWallet'}
-                    display={{ base: 'inline-flex', md: 'inline-flex' }}
-                    fontSize={'md'}
-                    fontWeight={400}
-                    color={'pmpurple.13'}
-                    // bg={'pmpurple.2'}
-                    // href={'#'}
-                    _hover={{
-                      bg: 'pmpurple.2',
-                    }}
-                    onClick={() => {
-                      dispatch(accountArrMetaMaskAction());
-                    }}
-                  >
-                    <HStack>
-                      {/* <SiSololearn fontSize={'16px'}/> */}
-                      <Text>Connect Wallet</Text>
-                    </HStack>
-                  </Button>
-                  <Sparkle
-                    color="#694b69"
-                    count={15}
-                    minSize={5}
-                    maxSize={10}
-                    overflowPx={0}
-                    fadeOutSpeed={20}
-                    flicker={false}
-                    // newSparkleOnFadeOut={false}
-                    // flickerSpeed="fast"
-                  />
-                </Box>
-              </Tooltip>
-            ) : (
-              <Box
-                display={{ base: 'inline-flex', md: 'inline-flex' }}
-                fontSize={'md'}
-                fontWeight={400}
-                color={'pmpurple.8'}
-                // href={'#'}
-                //         _hover={{
-                //             bg: 'pmpurple.3',
-                // }}
-              >
-                <HStack>
-                  {/* <SiSololearn fontSize={'16px'}/> */}
-                  <Text>Connected</Text>
-                </HStack>
-              </Box>
-            )}
-          </Box>
-        </Stack>
+        <ConnectWallet />
       </Flex>
       <Collapse in={isOpen} animateOpacity>
         <MobileNav />

@@ -1,4 +1,4 @@
-//this is sending to the BC from my register page
+// this is sending to the BC from my register page
 export interface MintingNFIStruct {
   name: string;
   email: string;

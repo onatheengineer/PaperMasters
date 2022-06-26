@@ -1,4 +1,5 @@
 import { expectSaga } from 'redux-saga-test-plan';
+
 import { logErrorToastSaga, sendToAnalytics } from './logErrorToastSaga';
 import { ToastOptions } from './ToastSlice';
 

@@ -1,35 +1,36 @@
-import { SagaIterator } from 'redux-saga';
-import axios from 'axios';
 import { PayloadAction } from '@reduxjs/toolkit';
-import { call, put, takeEvery, takeLatest, select } from 'redux-saga/effects';
+import axios from 'axios';
+import { ethers } from 'ethers';
+import { SagaIterator } from 'redux-saga';
+import { call, put, select, takeEvery, takeLatest } from 'redux-saga/effects';
+import { expectSaga } from 'redux-saga-test-plan';
+
+import { accountBCselectors } from '../accountBC/AccountBCSlice';
+import chainIdNetworks from '../JSON/chainId.networks.json';
 import {
-  accountArrError,
+  allAccountDictionaryDBSaga,
+  allNFIReceiptDBSaga,
+  postSingleAccountDictionaryDBSaga,
+  singleAccountDictionaryDBSaga,
+  singleNFIReceiptDBSaga,
+} from './accountDBSaga';
+import {
   accountArrDBAction,
-  userSameAccountBool,
+  accountArrError,
+  accountDBselectors,
+  allAccountDictionaryDB,
+  allAccountDictionaryDBAction,
+  allNFIReceiptDB,
+  allNFIReceiptDBAction,
+  postSingleAccountDictionaryDBAction,
   singleAccountDictionaryDB,
   singleAccountDictionaryDBAction,
-  allAccountDictionaryDBAction,
-  postSingleAccountDictionaryDBAction,
-  singleNFIReceiptDBAction,
-  allNFIReceiptDBAction,
-  allNFIReceiptDB,
   singleNFIReceiptDB,
-  allAccountDictionaryDB,
-  accountDBselectors,
+  singleNFIReceiptDBAction,
+  userSameAccountBool,
 } from './AccountDBSlice';
-import { accountBCselectors } from '../accountBC/AccountBCSlice';
 import {
   AccountDBInterface,
   NFIReceiptInterface,
   ParamsURLInterface,
 } from './AccountDBSlice.types';
-import chainIdNetworks from '../JSON/chainId.networks.json';
-import { ethers } from 'ethers';
-import { expectSaga } from 'redux-saga-test-plan';
-import {
-  singleAccountDictionaryDBSaga,
-  postSingleAccountDictionaryDBSaga,
-  allAccountDictionaryDBSaga,
-  singleNFIReceiptDBSaga,
-  allNFIReceiptDBSaga,
-} from './accountDBSaga';
