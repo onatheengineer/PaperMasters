@@ -76,9 +76,9 @@ export default function secondFooterHome() {
             </Text>
             <Text fontSize="md" fontWeight="400">
               Providing fellow Blockchainers with a reputable reputation found
-              on your PaperMasters identity page including a live account
-              ledger, any past contracts you helped create and mentions by your
-              fellow Blockchains provides the way you need to authenticate that
+              on your PaperMasters Identity page, including a live account
+              ledger, any past contracts you helped create, and links to your
+              social media pages, provides the way you need to authenticate that
               you are the honest trustworthy person the rest of us know you are.
             </Text>
           </Stack>
@@ -90,11 +90,10 @@ export default function secondFooterHome() {
             </Text>
 
             <Text fontSize="md" fontWeight="400">
-              Let us all keep the Blockchain beautiful! Validating and reporting
-              a wallet address helps your fellow Blockchainers to determine if
-              it is safe or not to conduct business with that wallet address.
-              These Validations and Reports are Non-Fungible Tokens permanently
-              attached to wallet addresses.
+              Let us all keep the Blockchain beautiful! By using the Mentions
+              feature found on the Identity page, you can vaidate or report a
+              wallet address. This helps your fellow Blockchainers determine if
+              it is safe to conduct business with that wallet address.
             </Text>
           </Stack>
         </Grid>
