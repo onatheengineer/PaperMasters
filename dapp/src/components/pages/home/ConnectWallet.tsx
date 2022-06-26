@@ -157,6 +157,14 @@ export const ConnectWallet = () => {
                   Coinbase
                 </MenuItem>
                 <MenuItem
+                  placeholder=" GameStop"
+                  onClick={() => {
+                    dispatch(accountArrMetaMaskAction());
+                  }}
+                >
+                  GameStop
+                </MenuItem>
+                <MenuItem
                   placeholder="MetaMask"
                   onClick={() => {
                     dispatch(accountArrMetaMaskAction());
@@ -171,14 +179,6 @@ export const ConnectWallet = () => {
                   }}
                 >
                   WalletConnect
-                </MenuItem>
-                <MenuItem
-                  placeholder=" GameStop"
-                  onClick={() => {
-                    dispatch(accountArrMetaMaskAction());
-                  }}
-                >
-                  GameStop
                 </MenuItem>
                 <Sparkle
                   color="#694b69"
