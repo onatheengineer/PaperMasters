@@ -5,7 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bd5141e4-3bb7-4cde-919e-76fee008f78d" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/dapp/src/components/pages/home/ConnectWallet.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dapp/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dapp/src/features/accountDB/accountDBSaga.test.ts" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/features/accountDB/accountDBSaga.test.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dapp/src/features/mintNFI/mintNFISlice.types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/features/mintNFI/mintNFISlice.types.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dapp/src/features/toast/logErrorToastSaga.test.ts" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/features/toast/logErrorToastSaga.test.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dapp/src/features/toast/logErrorToastSaga.ts" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/features/toast/logErrorToastSaga.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dapp/src/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dapp/webstorm-styled-components" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dapp/yarn.lock" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -52,18 +61,18 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "//wsl$/Ubuntu/home/ramona/gitrepos/PaperMasters",
-    "node.js.detected.package.eslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "yarn",
-    "ts.external.directory.path": "\\\\wsl$\\Ubuntu\\home\\ramona\\gitrepos\\PaperMasters\\dapp\\node_modules\\typescript\\lib",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;//wsl$/Ubuntu/home/ramona/gitrepos/PaperMasters&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;yarn&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;\\\\wsl$\\Ubuntu\\home\\ramona\\gitrepos\\PaperMasters\\dapp\\node_modules\\typescript\\lib&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="\\wsl$\Ubuntu\home\ramona\gitrepos\PaperMasters" />

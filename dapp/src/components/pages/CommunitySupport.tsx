@@ -56,17 +56,21 @@ export const CommunitySupport: FC = () => {
           title={'Benefits of becoming a PaperMaster?'}
           subtitle={'Account Integrity'}
           body={
-            'Providing fellow Blockchainers with a reputable reputation is vital to ' +
-            'keeping the community safe so no accounts get hurt. Being a PaperMaster helps validate your integrity and support of honest ' +
-            'business transactions by sending them to your PaperMasters identity page with a live account ledger, any past contracts you ' +
-            'helped create and mentions by your fellow Blockchains showing that you are the honest trustworthy person you are telling them you are.'
+            '   Providing fellow Blockchainers with a reputable reputation found\n' +
+            '              on your PaperMasters Identity page, including a live account\n' +
+            '              ledger, any past contracts you helped create, and links to your\n' +
+            '              social media pages, provides the way you need to authenticate that\n' +
+            '              you are the honest trustworthy person the rest of us know you are.'
           }
         />
         <PageForum
           title={'What is NFI Protection and Validation?'}
           subtitle={'Protecting our Community'}
           body={
-            'Let us all keep the Blockchain beautiful! Validating and reporting a wallet address helps your fellow Blockchainers to determine if it is safe or not to conduct business with that wallet address. These Validations and Reports are Non-Fungible Tokens permanently attached to wallet addresses. '
+            '     Let us all keep the Blockchain beautiful! By using the Mentions\n' +
+            '              feature found on the Identity page, you can vaidate or report a\n' +
+            '              wallet address. This helps your fellow Blockchainers determine if it is safe to conduct\n' +
+            '              business with that wallet address.'
           }
         />
         <PageForum

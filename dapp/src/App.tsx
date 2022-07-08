@@ -32,7 +32,7 @@ function App() {
         provider.on('accountsChanged', (accounts: any) => {
           console.log('accountDB changed!');
           dispatch(accountArr([]));
-          dispatch(accountArrMetaMaskAction());
+
           window.location.reload();
         });
         provider.on('chainChanged', (chainId: any) => {

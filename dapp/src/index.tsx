@@ -2,7 +2,7 @@ import './index.css';
 
 import { ChakraProvider } from '@chakra-ui/react';
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
@@ -17,7 +17,10 @@ console.log(theme);
 
 const queryClient = new QueryClient();
 
-ReactDOM.render(
+const container = document.getElementById('root');
+const root = createRoot(container!);
+
+root.render(
   <React.StrictMode>
     <BrowserRouter>
       <ChakraProvider theme={theme}>
@@ -31,8 +34,6 @@ ReactDOM.render(
       </ChakraProvider>
     </BrowserRouter>
   </React.StrictMode>,
-
-  document.getElementById('root'),
 );
 
 // If you want your app to work offline and load faster, you can change
