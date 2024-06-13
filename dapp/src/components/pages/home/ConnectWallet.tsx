@@ -114,7 +114,6 @@ export const ConnectWallet = () => {
                 as={Button}
                 fontSize={'md'}
                 fontWeight={400}
-                placeholder="Connect Wallet"
                 role={'connectWallet'}
                 display={{ base: 'inline-flex', md: 'inline-flex' }}
                 // bg={'pmpurple.2'}
@@ -141,7 +140,6 @@ export const ConnectWallet = () => {
               />
               <MenuList>
                 <MenuItem
-                  placeholder="Injected"
                   onClick={() => {
                     dispatch(accountArrMetaMaskAction());
                   }}
@@ -149,7 +147,6 @@ export const ConnectWallet = () => {
                   Injected
                 </MenuItem>
                 <MenuItem
-                  placeholder="Coinbase"
                   onClick={() => {
                     dispatch(accountArrMetaMaskAction());
                   }}
@@ -157,7 +154,6 @@ export const ConnectWallet = () => {
                   Coinbase
                 </MenuItem>
                 <MenuItem
-                  placeholder=" GameStop"
                   onClick={() => {
                     dispatch(accountArrMetaMaskAction());
                   }}
@@ -165,7 +161,6 @@ export const ConnectWallet = () => {
                   GameStop
                 </MenuItem>
                 <MenuItem
-                  placeholder="MetaMask"
                   onClick={() => {
                     dispatch(accountArrMetaMaskAction());
                   }}
@@ -173,7 +168,6 @@ export const ConnectWallet = () => {
                   MetaMask
                 </MenuItem>
                 <MenuItem
-                  placeholder="WalletConnect"
                   onClick={() => {
                     dispatch(accountArrMetaMaskAction());
                   }}

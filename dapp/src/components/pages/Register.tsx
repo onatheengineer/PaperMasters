@@ -430,7 +430,6 @@ export const Register: FC = () => {
                       borderColor={'pmpurple.4'}
                       id="name"
                       pl={'62px'}
-                      placeholder="name, company"
                       isDisabled={submitButtonClicked}
                       onChange={nameHandler}
                       color={'pmpurple.15'}

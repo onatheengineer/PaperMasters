@@ -4,17 +4,20 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bd5141e4-3bb7-4cde-919e-76fee008f78d" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/dapp/src/components/pages/home/ConnectWallet.tsx" afterDir="false" />
+    <list default="true" id="bd5141e4-3bb7-4cde-919e-76fee008f78d" name="Changes" comment="package updates">
+      <change afterPath="$PROJECT_DIR$/dapp/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dapp/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dapp/src/features/accountDB/accountDBSaga.test.ts" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/features/accountDB/accountDBSaga.test.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dapp/src/features/mintNFI/mintNFISlice.types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/features/mintNFI/mintNFISlice.types.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dapp/src/features/toast/logErrorToastSaga.test.ts" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/features/toast/logErrorToastSaga.test.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dapp/src/features/toast/logErrorToastSaga.ts" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/features/toast/logErrorToastSaga.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dapp/src/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dapp/webstorm-styled-components" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dapp/yarn.lock" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dapp/src/app/RoutesRoutes.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/app/RoutesRoutes.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dapp/src/components/PageForum.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/components/PageForum.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dapp/src/components/pages/CloudHWM.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dapp/src/components/pages/Register.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/components/pages/Register.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dapp/src/components/pages/home/ConnectWallet.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/components/pages/home/ConnectWallet.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dapp/src/components/pages/home/Footers/Footer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/components/pages/home/Footers/Footer.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dapp/src/components/pages/home/Navbar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/components/pages/home/Navbar.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dapp/src/components/pages/yourPeople/YourPeople.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/components/pages/yourPeople/YourPeople.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,7 +36,6 @@
     </option>
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/dapp/public/favicon.icoZone.Identifier" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/dapp/public/index.html" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/dapp/src/App.tsx" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/dapp/src/components/pages/Register.tsx" root0="FORCE_HIGHLIGHTING" />
@@ -53,6 +55,9 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
+  <component name="PackageJsonUpdateNotifier">
+    <dismissed value="$PROJECT_DIR$/dapp/package.json" />
+  </component>
   <component name="ProjectId" id="2A7oV7BoAfe6dj1USuV1SQ83yKs" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
@@ -63,13 +68,15 @@
   </component>
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;//wsl$/Ubuntu/home/ramona/gitrepos/PaperMasters&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/ramonaniederhausern/Projects/PaperMasters&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;yarn&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;\\\\wsl$\\Ubuntu\\home\\ramona\\gitrepos\\PaperMasters\\dapp\\node_modules\\typescript\\lib&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;/Users/ramonaniederhausern/Projects/PaperMasters/dapp/node_modules/typescript/lib&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
@@ -83,6 +90,14 @@
       <recent name="\\wsl$\Ubuntu\home\ramona\gitrepos\PaperMasters\dapp\src\assets" />
       <recent name="\\wsl$\Ubuntu\home\ramona\gitrepos\MintIdentityTPM\dapp\src\assets" />
     </key>
+  </component>
+  <component name="RunManager">
+    <configuration default="true" type="docker-deploy" factoryName="dockerfile" temporary="true">
+      <deployment type="dockerfile">
+        <settings />
+      </deployment>
+      <method v="2" />
+    </configuration>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -103,6 +118,9 @@
       <workItem from="1654706143939" duration="1178000" />
       <workItem from="1654786357667" duration="3972000" />
       <workItem from="1656005014365" duration="14837000" />
+      <workItem from="1718128695311" duration="1296000" />
+      <workItem from="1718140097261" duration="7524000" />
+      <workItem from="1718211619877" duration="2672000" />
     </task>
     <servers />
   </component>
@@ -127,6 +145,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="responsive" />
-    <option name="LAST_COMMIT_MESSAGE" value="responsive" />
+    <MESSAGE value="package updates" />
+    <option name="LAST_COMMIT_MESSAGE" value="package updates" />
   </component>
 </project>

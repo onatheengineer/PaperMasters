@@ -87,11 +87,6 @@ const NAV_ITEMS: Array<NavItem> = [
   //     navLink: '/analytics'
   // },
   {
-    label: 'CloudHWM',
-    navIcon: <GiHeatHaze fontSize={'16px'} />,
-    navLink: '/cloudhwm',
-  },
-  {
     label: 'Community',
     navIcon: <SiSololearn fontSize={'16px'} />,
     children: [

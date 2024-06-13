@@ -17,7 +17,6 @@ import {
 } from 'react-router-dom';
 
 import Analytics from '../components/pages/Analytics';
-import CloudHWM from '../components/pages/CloudHWM';
 import CommunitySupport from '../components/pages/CommunitySupport';
 import Home from '../components/pages/home/Home';
 import Identity from '../components/pages/identity/Identity';
@@ -457,7 +456,6 @@ export const RoutesRoutes: FC<InterfaceSidebar> = ({
         <Route path={'/communitysupport'} element={<CommunitySupport />} />
         {/* <Route path={'/news'} element={<News/>}/> */}
         {/* <Route path={'/security'} element={<Security/>}/> */}
-        <Route path={'/CloudHWM'} element={<CloudHWM />} />
         <Route path={'/yourpeople'} element={<YourPeople />} />
       </Routes>
     </Flex>

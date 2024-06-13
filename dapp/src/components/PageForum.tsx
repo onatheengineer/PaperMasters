@@ -71,7 +71,6 @@ export const PageForum = forwardRef<HTMLDivElement | null, InterfaceFORUM>(
                 color="#5c415c"
                 size="md"
                 textAlign={'left'}
-                square={'full'}
                 variant={'link'}
                 cursor={'pointer'}
                 _hover={{ color: '#906e90' }}

@@ -136,9 +136,6 @@ export default function LargeWithLogoCentered() {
             <Stack>
               <ListHeader>Community</ListHeader>
               {/* <Link as={ReachLink} to="/learn">Learning Center</Link> */}
-              <Link as={ReachLink} to="/cloudhwm" fontSize={'14px'}>
-                CloudHWM
-              </Link>
               {/* <Link as={ReachLink} to="/">Future Stories</Link> */}
               {/* <Link as={ReachLink} to="/analytics" fontSize={'14px'}> */}
               {/*  Analytics */}
@@ -357,7 +354,6 @@ export default function LargeWithLogoCentered() {
 //                             <Link as={ReachLink} to="/">Search</Link>
 //                             <Link as={ReachLink} to="/">Validation</Link>
 //                             <Link as={ReachLink} to="/">Report</Link>
-//                             <Link as={ReachLink} to="/">CloudHWM</Link>
 //                         </VStack>
 //                         <Spacer/>
 //
