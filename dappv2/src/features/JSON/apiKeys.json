@@ -1,0 +1,57 @@
+// Use the mainnet
+const network = "homestead";
+
+// Specify your own API keys
+// Each is optional, and if you omit it the default
+// API key for that service will be used.
+const provider = ethers.getDefaultProvider(network, {
+//Etherscan homestead, ropsten, rinkeby, goerli and kovan
+//provider = new EtherscanProvider(null, 'RYVBB5ZI138MHIX2JJVWBT6MVTGXJT133Q');
+//provider = new EtherscanProvider("homestead", apiKey);
+etherscan: 'RYVBB5ZI138MHIX2JJVWBT6MVTGXJT133Q',
+
+//Infura homestead, ropsten, rinkeby, goerli, kovan, matic, maticmum, optimism, optimism-kovan, arbitrum and arbitrum-rinkeby.
+//endpoints:
+// 'https://mainnet.infura.io/v3/c97ad56e08674161a95ba16c6f855b6a'
+infura: {
+projectId: 'c97ad56e08674161a95ba16c6f855b6a',
+projectSecret: 'b3dd75968bba439d80769d163ce14fc9',
+},
+
+//Alchemy homestead, ropsten, rinkeby, goerli, kovan, matic, maticmum, optimism, optimism-kovan, arbitrum and arbitrum-rinkeby.
+alchemy: 'mEUzvPVY6xECwMieu01t9D3fuYyOYGCl',
+//endpoints:
+// 'https://eth-mainnet.alchemyapi.io/v2/mEUzvPVY6xECwMieu01t9D3fuYyOYGCl'
+
+//pochet gateway homestead
+// https://eth-mainnet.gateway.pokt.network/v1/lb/6241ead37fec60003a0bd795
+pocket: {
+applicationId: '329ee9f55d37f7ef7a54f84a4df341d096004450263af1d40cc4650e47e26609',
+applicationSecretKey: 'efdef876fc22bbd3068e3ba4066f3bd5'
+},
+
+//ankr homestead, matic and arbitrum
+//ankr: YOUR_ANKR_API_KEY
+// https://rpc.ankr.com/eth
+//https://rpc.ankr.com/avalanche
+
+
+//
+// export interface IChainData {
+//     name: string;
+//     chainId: number;
+//     shortName: string;
+//     chain: string;
+//     network: string;
+//     networkId: number;
+//     nativeCurrency: {
+//         name: string;
+//         symbol: string;
+//         decimals: number;
+//     };
+//     rpc: string[];
+//     faucets: string[];
+//     infoURL: string;
+// }
+
+
