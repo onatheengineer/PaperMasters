@@ -5,19 +5,46 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bd5141e4-3bb7-4cde-919e-76fee008f78d" name="Changes" comment="package updates">
-      <change afterPath="$PROJECT_DIR$/dapp/package-lock.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dappv2/public/PMlogo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dappv2/public/PMlogo.png:Zone.Identifier" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dappv2/public/PaperMastersLogo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dappv2/public/PaperMastersLogo.png:Zone.Identifier" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dappv2/public/PaperMastersLogoGIMP.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dappv2/public/PaperMastersLogoGIMP.png:Zone.Identifier" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dappv2/public/android-chrome-192x192.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dappv2/public/android-chrome-512x512.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dappv2/public/apple-touch-icon.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dappv2/public/favicon-16x16.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dappv2/public/favicon-32x32.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dappv2/public/favicon.ico:Zone.Identifier" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dappv2/public/favicon.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dappv2/public/favicon.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dappv2/public/index.html:Zone.Identifier" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dappv2/public/legoLavendar.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dappv2/public/legoLavendar.png:Zone.Identifier" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dappv2/public/legoLavendarheadercroped.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dappv2/public/legoLavendarheadercroped.png:Zone.Identifier" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dappv2/public/logo192.png:Zone.Identifier" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dappv2/public/logo512.png:Zone.Identifier" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dappv2/public/manifest.json:Zone.Identifier" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dappv2/public/profileLego.jpeg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dappv2/public/profileLego.jpeg:Zone.Identifier" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dappv2/public/robots.txt:Zone.Identifier" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dappv2/public/site.webmanifest" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dapp/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dapp/src/app/RoutesRoutes.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/app/RoutesRoutes.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dapp/src/components/PageForum.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/components/PageForum.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dapp/src/components/pages/CloudHWM.tsx" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/dapp/src/components/pages/Register.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/components/pages/Register.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dapp/src/components/pages/home/ConnectWallet.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/components/pages/home/ConnectWallet.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dapp/src/components/pages/home/Footers/Footer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/components/pages/home/Footers/Footer.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dapp/src/components/pages/home/Navbar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/components/pages/home/Navbar.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dapp/src/components/pages/yourPeople/YourPeople.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/components/pages/yourPeople/YourPeople.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dapp/src/components/pages/Search.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/components/pages/Search.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dapp/src/components/pages/identity/DrawerComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/components/pages/identity/DrawerComponent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dapp/src/components/pages/identity/SocialMedia.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/components/pages/identity/SocialMedia.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dapp/src/components/pages/identity/mentions/ReplyMentions.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/components/pages/identity/mentions/ReplyMentions.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dapp/src/utils/IdentityEntryModal.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/utils/IdentityEntryModal.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dappv2/public/favicon.ico" beforeDir="false" afterPath="$PROJECT_DIR$/dappv2/public/favicon.ico" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dappv2/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/dappv2/public/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dappv2/public/logo192.png" beforeDir="false" afterPath="$PROJECT_DIR$/dappv2/public/logo192.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dappv2/public/logo512.png" beforeDir="false" afterPath="$PROJECT_DIR$/dappv2/public/logo512.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dappv2/src/components/pages/Register.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/dappv2/src/components/pages/Register.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dappv2/src/components/pages/identity/DrawerComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/dappv2/src/components/pages/identity/DrawerComponent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,16 +52,25 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="main" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GithubPullRequestsUISettings">
-    <option name="selectedUrlAndAccountId">
-      <UrlAndAccount>
-        <option name="accountId" value="7400bea5-9fe1-46e8-884d-af7ffa8b4529" />
-        <option name="url" value="https://github.com/styled-components/webstorm-styled-components.git" />
-      </UrlAndAccount>
-    </option>
-  </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "ramonajenny"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/ramonajenny/PaperMasters.git",
+    "accountId": "50a9dacc-0ad3-4740-be6e-820d76a415fd"
+  }
+}]]></component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/dapp/public/index.html" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/dapp/src/App.tsx" root0="FORCE_HIGHLIGHTING" />
@@ -58,6 +94,9 @@
   <component name="PackageJsonUpdateNotifier">
     <dismissed value="$PROJECT_DIR$/dapp/package.json" />
   </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 8
+}</component>
   <component name="ProjectId" id="2A7oV7BoAfe6dj1USuV1SQ83yKs" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
@@ -66,22 +105,28 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/ramonaniederhausern/Projects/PaperMasters&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;yarn&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;/Users/ramonaniederhausern/Projects/PaperMasters/dapp/node_modules/typescript/lib&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "dappv2",
+    "last_opened_file_path": "/Users/ona/Projects/PaperMasters/dappv2/public",
+    "node.js.detected.package.eslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_interpreter_path": "/Users/ona/.nvm/versions/node/v20.14.0/bin/node",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "project.propVCSSupport.CommitDialog",
+    "ts.external.directory.path": "/Users/ona/Projects/PaperMasters/dapp/node_modules/typescript/lib",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/dappv2/public" />
+      <recent name="$PROJECT_DIR$/dappv2" />
+      <recent name="$PROJECT_DIR$/dappv2/src" />
       <recent name="\\wsl$\Ubuntu\home\ramona\gitrepos\PaperMasters" />
       <recent name="\\wsl$\Ubuntu\home\ramona\gitrepos\MintIdentityTPM\dapp\src\abiFiles" />
     </key>
@@ -98,6 +143,13 @@
       </deployment>
       <method v="2" />
     </configuration>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-js-predefined-1d06a55b98c1-0b3e54e931b4-JavaScript-WS-241.17890.13" />
+      </set>
+    </attachedChunks>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -121,7 +173,35 @@
       <workItem from="1718128695311" duration="1296000" />
       <workItem from="1718140097261" duration="7524000" />
       <workItem from="1718211619877" duration="2672000" />
+      <workItem from="1718406943163" duration="192000" />
+      <workItem from="1718407141494" duration="8244000" />
+      <workItem from="1718416950818" duration="14484000" />
     </task>
+    <task id="LOCAL-00001" summary="package updates">
+      <option name="closed" value="true" />
+      <created>1718452771651</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1718452771651</updated>
+    </task>
+    <task id="LOCAL-00002" summary="package updates">
+      <option name="closed" value="true" />
+      <created>1718452897867</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1718452897867</updated>
+    </task>
+    <task id="LOCAL-00003" summary="package updates">
+      <option name="closed" value="true" />
+      <created>1718453079154</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1718453079154</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -144,6 +224,7 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
+    <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <MESSAGE value="responsive" />
     <MESSAGE value="package updates" />
     <option name="LAST_COMMIT_MESSAGE" value="package updates" />

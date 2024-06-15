@@ -354,6 +354,8 @@ export const Register: FC = () => {
                 <Popover>
                   <PopoverTrigger>
                     <Flex>
+                      <InputGroup size="md">
+
                       <Button
                         w={'100%'}
                         mt={'32px'}
@@ -376,7 +378,9 @@ export const Register: FC = () => {
                           Set NFI Background Color
                         </Text>
                         {/* <MdOutlineColorLens fontSize={'20px'} color={"#9c7e9c"}/> */}
-                        <InputRightElement
+
+                        <Box
+                          as='button'
                           m="3px"
                           textAlign={'center'}
                           children={
@@ -392,7 +396,10 @@ export const Register: FC = () => {
                             </Button>
                           }
                         />
+
                       </Button>
+
+                              </InputGroup>
                     </Flex>
                   </PopoverTrigger>
                   <Portal>
