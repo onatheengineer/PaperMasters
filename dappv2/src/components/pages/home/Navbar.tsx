@@ -76,7 +76,7 @@ const NAV_ITEMS: Array<NavItem> = [
     ],
   },
   {
-    label: 'Search',
+    label: 'Search/Add Wallets',
     navIcon: <MdOutlineNaturePeople fontSize={'16px'} fontWeight={'bolder'} />,
     navLink: '/search',
   },

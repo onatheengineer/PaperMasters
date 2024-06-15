@@ -5,46 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bd5141e4-3bb7-4cde-919e-76fee008f78d" name="Changes" comment="package updates">
-      <change afterPath="$PROJECT_DIR$/dappv2/public/PMlogo.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dappv2/public/PMlogo.png:Zone.Identifier" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dappv2/public/PaperMastersLogo.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dappv2/public/PaperMastersLogo.png:Zone.Identifier" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dappv2/public/PaperMastersLogoGIMP.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dappv2/public/PaperMastersLogoGIMP.png:Zone.Identifier" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dappv2/public/android-chrome-192x192.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dappv2/public/android-chrome-512x512.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dappv2/public/apple-touch-icon.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dappv2/public/favicon-16x16.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dappv2/public/favicon-32x32.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dappv2/public/favicon.ico:Zone.Identifier" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dappv2/public/favicon.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dappv2/public/favicon.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dappv2/public/index.html:Zone.Identifier" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dappv2/public/legoLavendar.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dappv2/public/legoLavendar.png:Zone.Identifier" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dappv2/public/legoLavendarheadercroped.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dappv2/public/legoLavendarheadercroped.png:Zone.Identifier" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dappv2/public/logo192.png:Zone.Identifier" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dappv2/public/logo512.png:Zone.Identifier" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dappv2/public/manifest.json:Zone.Identifier" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dappv2/public/profileLego.jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dappv2/public/profileLego.jpeg:Zone.Identifier" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dappv2/public/robots.txt:Zone.Identifier" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dappv2/public/site.webmanifest" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dapp/src/components/pages/Register.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/components/pages/Register.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dapp/src/components/pages/Search.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/components/pages/Search.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dapp/src/components/pages/identity/DrawerComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/components/pages/identity/DrawerComponent.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dapp/src/components/pages/identity/SocialMedia.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/components/pages/identity/SocialMedia.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dapp/src/components/pages/identity/mentions/ReplyMentions.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/components/pages/identity/mentions/ReplyMentions.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dapp/src/utils/IdentityEntryModal.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/dapp/src/utils/IdentityEntryModal.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dappv2/public/favicon.ico" beforeDir="false" afterPath="$PROJECT_DIR$/dappv2/public/favicon.ico" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dappv2/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/dappv2/public/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dappv2/public/logo192.png" beforeDir="false" afterPath="$PROJECT_DIR$/dappv2/public/logo192.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dappv2/public/logo512.png" beforeDir="false" afterPath="$PROJECT_DIR$/dappv2/public/logo512.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dappv2/src/components/pages/Register.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/dappv2/src/components/pages/Register.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dappv2/src/components/pages/identity/DrawerComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/dappv2/src/components/pages/identity/DrawerComponent.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dappv2/src/components/pages/Search.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/dappv2/src/components/pages/Search.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dappv2/src/components/pages/home/Navbar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/dappv2/src/components/pages/home/Navbar.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dappv2/src/features/reactQuery/RTKQuery.ts" beforeDir="false" afterPath="$PROJECT_DIR$/dappv2/src/features/reactQuery/RTKQuery.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -175,7 +139,7 @@
       <workItem from="1718211619877" duration="2672000" />
       <workItem from="1718406943163" duration="192000" />
       <workItem from="1718407141494" duration="8244000" />
-      <workItem from="1718416950818" duration="14484000" />
+      <workItem from="1718416950818" duration="19418000" />
     </task>
     <task id="LOCAL-00001" summary="package updates">
       <option name="closed" value="true" />
@@ -201,7 +165,15 @@
       <option name="project" value="LOCAL" />
       <updated>1718453079154</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="package updates">
+      <option name="closed" value="true" />
+      <created>1718479636578</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1718479636578</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

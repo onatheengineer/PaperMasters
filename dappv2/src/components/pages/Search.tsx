@@ -429,8 +429,8 @@ export const Search: FC = () => {
       dispatch(
           showToast({
             title:
-                'You need to connect your own account before you can add ' +
-                'someone elses wallet account',
+                'You need to connect your own address before you can add ' +
+                'someone elses wallet address',
             status: 'error',
           }),
       );
@@ -490,7 +490,7 @@ export const Search: FC = () => {
             </Text>
           </Center>
         </Box>
-
+    <Center>
         <Box justifyItems={'end'} justifyContent={'right'} py={4}>
           <Box>
             <HStack justifyContent={'end'} mr={6}>
@@ -586,7 +586,7 @@ export const Search: FC = () => {
             </Box>
           </Box>
         </Box>
-
+    </Center>
         <Box
           // border={'1px solid red'}
           h={'100%'}

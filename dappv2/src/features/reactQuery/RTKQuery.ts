@@ -102,10 +102,10 @@ export async function fetchEthereumTranastionsMainNet({
   );
   console.log('providerEtherscanMainnet', providerEtherscanMainnet);
   const mainnetHistory = await providerEtherscanMainnet.getHistory(
-    paramsWalletURL,
+    paramsWalletURL
   );
   const walletBalance = await providerEtherscanMainnet.getBalance(
-    paramsWalletURL,
+    paramsWalletURL
   );
   console.log('mainnetHistory:', mainnetHistory);
   return { data: { history: mainnetHistory, balance: walletBalance } };
@@ -137,7 +137,6 @@ export async function fetchEthereumTranastionsMainNet({
 //   console.log('ropstenHistory:', ropstenHistory);
 //   return { data: ropstenHistory };
 // }
-
 export async function fetchIdentities() {
   const results = await Promise.all(
     Object.keys(MintABI.networks).map(async (chainId): Promise<BCStruct[]> => {
