@@ -158,9 +158,11 @@ export async function fetchIdentities() {
       });
       console.log('provider TESTfetchIdentities:', provider);
       const ntw = MintABI.networks as { [cid: string]: { address: string } };
+      // @ts-ignore
       const NFIContract = new ethers.Contract(
         ntw[chainId].address,
         MintABI.abi,
+          // @ts-ignore
         provider,
       );
       console.log('NFIContract:', NFIContract);
@@ -224,6 +226,7 @@ export async function fetchAddressToToken({
       const NFIContract = new ethers.Contract(
         ntw[chainIdURL].address,
         MintABI.abi,
+          // @ts-ignore
         provider,
       );
       console.log('NFIContract:', NFIContract);
